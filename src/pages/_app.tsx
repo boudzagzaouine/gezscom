@@ -5,6 +5,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import type { AppProps } from "next/app";
 
 import store, { persistor } from "config/store";
+import { Notifications } from "components/Notifications";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -37,7 +38,10 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="theme-color" content="#317EFB" />
       </Head>
       <PersistGate loading={null} persistor={persistor}>
-        <Component {...pageProps} />
+        <>
+          <Notifications />
+          <Component {...pageProps} />
+        </>
       </PersistGate>
     </Provider>
   );
