@@ -1,10 +1,13 @@
-import Head from 'next/head'
-import type { AppProps } from 'next/app'
 import 'styles/globals.css'
+import Head from 'next/head'
+import { Provider } from 'react-redux'
+import type { AppProps } from 'next/app'
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+import store from 'config/store'
+
+export default function App({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <Provider store={store}>
       <Head>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -33,6 +36,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <meta name="theme-color" content="#317EFB" />
       </Head>
       <Component {...pageProps} />
-    </>
+    </Provider>
   )
 }
