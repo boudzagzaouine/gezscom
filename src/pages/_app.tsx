@@ -1,9 +1,10 @@
-import 'styles/globals.css'
-import Head from 'next/head'
-import { Provider } from 'react-redux'
-import type { AppProps } from 'next/app'
+import "styles/globals.css";
+import Head from "next/head";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import type { AppProps } from "next/app";
 
-import store from 'config/store'
+import store, { persistor } from "config/store";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -35,7 +36,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="apple-touch-icon" href="/apple-icon.png"></link>
         <meta name="theme-color" content="#317EFB" />
       </Head>
-      <Component {...pageProps} />
+      <PersistGate loading={null} persistor={persistor}>
+        <Component {...pageProps} />
+      </PersistGate>
     </Provider>
-  )
+  );
 }
