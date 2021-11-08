@@ -1,4 +1,9 @@
-import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit';
+import {
+  configureStore,
+  ThunkAction,
+  Action,
+  combineReducers,
+} from "@reduxjs/toolkit";
 
 import {
   persistStore,
@@ -9,13 +14,13 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
-import counterReducer from 'features/counter/counterSlice';
+import counterReducer from "features/counter/counterSlice";
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   version: 1,
   storage,
 };
@@ -25,7 +30,7 @@ export function makeStore() {
   //     reducer: { counter: counterReducer },
   //   });
   const rootReducer = combineReducers({
-    counter: counterReducer
+    counter: counterReducer,
   });
   const persistedReducer = persistReducer(persistConfig, rootReducer);
   const store = configureStore({
@@ -41,7 +46,7 @@ export function makeStore() {
 }
 
 const store = makeStore();
-export const persistor = persistStore(store)
+export const persistor = persistStore(store);
 
 export type AppState = ReturnType<typeof store.getState>;
 
