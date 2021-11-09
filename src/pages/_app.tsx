@@ -3,11 +3,12 @@ import Head from "next/head";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import type { AppProps } from "next/app";
+import type { FC } from "react";
 
 import store, { persistor } from "config/store";
 import { Notifications } from "components/Notifications";
 
-export default function App({ Component, pageProps }: AppProps) {
+const App: FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <Provider store={store}>
       <Head>
@@ -46,3 +47,5 @@ export default function App({ Component, pageProps }: AppProps) {
     </Provider>
   );
 }
+
+export default App;
