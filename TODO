@@ -1,5 +1,5 @@
-[ ] Tailwind
-[ ] Internationalisation
-[ ] Intégration Firebase
+[x] Internationalisation
 [ ] polymorphic components (https://www.benmvp.com/blog/polymorphic-react-components-typescript/)
+[ ] Tailwind
+[ ] Intégration Firebase
 [ ] Exemple pour la formation

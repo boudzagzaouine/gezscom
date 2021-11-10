@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from 'next-i18next';
 
 import { useAppSelector, useAppDispatch } from "hooks";
 import {
@@ -14,11 +15,13 @@ function Counter() {
   const dispatch = useAppDispatch();
   const count = useAppSelector(selectCount);
   const [incrementAmount, setIncrementAmount] = useState("2");
+  const { t } = useTranslation('common');
 
   const incrementValue = Number(incrementAmount) || 0;
 
   return (
     <div>
+      {t('h1')}
       <div>
         <button
           aria-label="Decrement value"

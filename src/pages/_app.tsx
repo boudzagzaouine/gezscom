@@ -2,6 +2,7 @@ import "styles/globals.css";
 import Head from "next/head";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import { appWithTranslation } from 'next-i18next';
 import type { AppProps } from "next/app";
 import type { FC } from "react";
 
@@ -48,4 +49,4 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
   );
 }
 
-export default App;
+export default appWithTranslation(App);

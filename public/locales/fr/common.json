@@ -1,0 +1,8 @@
+{
+  "h1": "Exemple simple",
+  "change-locale": "Changer la langue",
+  "to-second-page": "Deuxieme page",
+  "error-with-status": "Erreur {{statusCode}} est survenue",
+  "error-without-status": "Erreur inconue",
+  "title": "Accueil | next-i18next"
+}
