@@ -10,13 +10,25 @@ This project use :
 ## Start learning
 Next.js gives you the best developer experience with all the features you need for production: hybrid static & server rendering, TypeScript support, smart bundling, route pre-fetching, and more. No config needed. [`Start learning`](https://nextjs.org/learn/basics/create-nextjs-app?utm_source=next-site&utm_medium=homepage-cta&utm_campaign=next-website)
 
-## How to use
+
+## Install dependencies
 
 ```bash
-# install dependencies
 yarn
-# run project on mode dev
+```
+
+## run project
+### Env dev
+```bash
 yarn dev
+```
+
+### Env Production
+```bash
+# build project
+yarn build
+# start the project
+yarn start
 ```
 
 ## Deploy your own
