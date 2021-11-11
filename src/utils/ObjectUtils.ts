@@ -8,7 +8,7 @@ export class ObjectUtils {
       typeof obj.then === "function"
     );
   }
-  static isFunction(obj: any): boolean {
+  static isFunction(obj: any): obj is Function {
     return _.isFunction(obj);
   }
 }

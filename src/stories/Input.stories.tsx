@@ -1,14 +1,13 @@
 import React from "react";
 import { Input } from "components";
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import type { InputProps } from "components/types";
 
 export default {
   title: "UI/Input",
   component: Input,
 } as ComponentMeta<typeof Input>;
 
-const Template: ComponentStory<typeof Input> = (args: InputProps) => (
+const Template: ComponentStory<typeof Input> = (args) => (
   <Input {...args} />
 );
 

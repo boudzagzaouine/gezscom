@@ -1,12 +1,13 @@
+import type { AnchorProps, LinkProps } from "components/types";
 import NLink from "next/link";
 import type { FC } from "react";
-import type { AnchorProps, LinkProps } from "components/types";
 
-export const Link: FC<LinkProps> = ({
+export const Link = <C extends React.ElementType = "a">({
   href,
-  as: Component = "a",
+  as,
   ...props
-}) => {
+}: LinkProps<C>) => {
+  const Component = as || "a";
   return (
     <NLink href={href}>
       <Component {...props} />

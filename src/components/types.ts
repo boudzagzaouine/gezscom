@@ -1,48 +1,88 @@
+import type { LinkProps as NLinkProps } from "next/link";
 import type {
   AnchorHTMLAttributes,
   ButtonHTMLAttributes,
   ElementType,
-  FormHTMLAttributes,
-  HTMLAttributes,
-  InputHTMLAttributes,
   LabelHTMLAttributes,
   OptionHTMLAttributes,
   ReactNode,
 } from "react";
 import type {
+  Control,
   FieldValues,
-  RegisterOptions,
   SubmitHandler,
+  UseControllerProps,
+  UseFormProps,
+  UseFormReturn,
 } from "react-hook-form";
-import type { UrlObject } from "url";
+import type { ExtendableProps } from "utils/types";
 
-export interface ViewProps<T extends HTMLElement = HTMLElement>
-  extends HTMLAttributes<T> {
-  as?: ElementType;
-  col?: boolean;
-  row?: boolean;
-}
+// Source: https://github.com/emotion-js/emotion/blob/master/packages/styled-base/types/helper.d.ts
+// A more precise version of just React.ComponentPropsWithoutRef on its own
+export type PropsOf<
+  C extends keyof JSX.IntrinsicElements | React.JSXElementConstructor<any>
+> = JSX.LibraryManagedAttributes<C, React.ComponentPropsWithoutRef<C>>;
 
-export type TextElement =
-  | string
-  | HTMLSpanElement
-  | HTMLDivElement
-  | HTMLParagraphElement
-  | HTMLHeadingElement
-  | HTMLElement;
+type AsProp<C extends React.ElementType> = {
+  /**
+   * An override of the default HTML tag. Can also be another React component.
+   */
+  as?: C;
+};
 
-export interface TextProps<T extends HTMLElement = HTMLElement>
-  extends HTMLAttributes<T> {
-  as?: ElementType;
-}
+/**
+ * Allows for inheriting the props from the specified element type so that
+ * props like children, className & style work, as well as element-specific
+ * attributes like aria roles. The component (`C`) must be passed in.
+ */
+export type InheritableElementProps<
+  C extends React.ElementType,
+  Props = {}
+> = ExtendableProps<PropsOf<C>, Props>;
 
-declare type Url = string | UrlObject;
+/**
+ * A more sophisticated version of `InheritableElementProps` where
+ * the passed in `as` prop will determine which props can be included
+ */
+export type PolymorphicComponentProps<
+  C extends React.ElementType,
+  Props = {}
+> = InheritableElementProps<C, Props & AsProp<C>>;
+/**
+ * Utility type to extract the `ref` prop from a polymorphic component
+ */
+export type PolymorphicRef<
+  C extends React.ElementType
+> = React.ComponentPropsWithRef<C>["ref"];
+/**
+ * A wrapper of `PolymorphicComponentProps` that also includes the `ref`
+ * prop for the polymorphic component
+ */
+export type PolymorphicComponentPropsWithRef<
+  C extends React.ElementType,
+  Props = {}
+> = PolymorphicComponentProps<C, Props> & { ref?: PolymorphicRef<C> };
 
-export interface LinkProps<T extends HTMLAnchorElement = HTMLAnchorElement>
-  extends Omit<AnchorHTMLAttributes<T>, "href"> {
-  href: Url;
-  as?: ElementType;
-}
+export type ViewProps<C extends ElementType> = PolymorphicComponentProps<
+  C,
+  {
+    col?: boolean;
+    row?: boolean;
+  }
+>;
+
+export type TextProps<C extends ElementType> = PolymorphicComponentProps<
+  C,
+  {
+    children?: ReactNode;
+  }
+>;
+
+export type LinkProps<C extends ElementType> = PolymorphicComponentProps<
+  C,
+  Omit<NLinkProps, "as">
+>;
+
 export interface AnchorProps<T extends HTMLAnchorElement = HTMLAnchorElement>
   extends AnchorHTMLAttributes<T> {}
 
@@ -56,23 +96,17 @@ export type ValueType =
 export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {}
 export interface OptionProps extends OptionHTMLAttributes<HTMLOptionElement> {}
 
-export type FormControlElement =
-  | string
-  | HTMLInputElement
-  | HTMLSelectElement
-  | HTMLTextAreaElement;
+export type FormControlProps<
+  C extends ElementType
+> = PolymorphicComponentPropsWithRef<
+  C,
+  {
+    value?: ValueType;
+    defaultValue?: ValueType;
+  }
+>;
 
-export interface FormControlProps
-  extends Omit<
-    InputHTMLAttributes<HTMLInputElement>,
-    "value" | "defaultValue"
-  > {
-  value?: ValueType;
-  defaultValue?: ValueType;
-  as?: ElementType;
-}
-
-export interface InputProps extends FormControlProps {
+export type InputProps<C extends ElementType> = FormControlProps<C> & {
   label?: string;
   inputClass?: string;
   labelClass?: string;
@@ -80,31 +114,27 @@ export interface InputProps extends FormControlProps {
   append?: ReactNode;
   row?: boolean;
   meta?: FieldMetaProps;
-}
-export interface FieldProps extends InputProps {
-  rules?: Exclude<
-    RegisterOptions,
-    "valueAsNumber" | "valueAsDate" | "setValueAs"
-  >;
-}
+};
+
+export type FieldProps<
+  C extends ElementType,
+  TValues extends FieldValues
+> = InputProps<C> & UseControllerProps<TValues>;
+
 export interface FieldMetaProps {
   touched: boolean;
   invalid?: boolean;
   error?: string;
 }
 
-export interface ErrorProps extends ViewProps {
+export interface ErrorProps extends LabelProps {
   meta?: FieldMetaProps;
 }
-
-export interface FormProps<T extends FieldValues = FieldValues>
-  extends Omit<FormHTMLAttributes<HTMLFormElement>, "onSubmit"> {
-  defaultValues: T;
+export type FormProps<T extends FieldValues> = UseFormProps<T> & {
+  children: React.ReactNode;
   onSubmit?: SubmitHandler<T>;
-}
-
-export interface ButtonProps
-    extends ButtonHTMLAttributes<HTMLButtonElement> {
+};
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   confirm?: string;
   variant?: string;
   size?: string;
@@ -112,3 +142,5 @@ export interface ButtonProps
   backgroundColor?: string;
   primary?: boolean;
 }
+
+export type { FieldValues, SubmitHandler, Control, UseFormReturn };

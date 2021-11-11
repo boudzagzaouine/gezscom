@@ -1,6 +1,8 @@
-import { useCallback } from "react";
-import { Form, Field, Text, Button } from "components";
 import type { ComponentMeta } from "@storybook/react";
+import { Button, Field, Form, Text } from "components";
+import type { UseFormReturn } from "components/types";
+import { useWatch } from "hooks";
+import { useCallback } from "react";
 
 export default {
   title: "Exemples/Form",
@@ -23,8 +25,8 @@ const defaultValues: Contact = {
 
 let counter = 0;
 export function ExampleForm() {
+  const onSubmit = useCallback((data: Contact) => console.log(data), []);
   counter++;
-  const onSubmit = useCallback((data) => void console.log(data), []);
 
   return (
     <>
@@ -69,37 +71,56 @@ export function ExampleForm() {
   );
 }
 
-/*
 export function ExampleInteractiveForm() {
+  const onSubmit = useCallback((data: Contact) => void console.log(data), []);
   counter++;
-  const onSubmit = useCallback(
-     (data) => void console.log(data),
-      [],
-  );
 
   return (
     <>
       <Text as="h1">Smart Form Component {counter}</Text>
       <Form defaultValues={defaultValues} onSubmit={onSubmit}>
-        {({control}) => {
-          const firstName = useWatch({control, name: "firstName"});
+        {({ control }: UseFormReturn<Contact>) => {
+          const firstName = useWatch({ control, name: "firstName" });
           return (
             <>
-              {firstName}
-              <Field label="Prénom" name="firstName" rules={{ required: "ce champ est obligatoire", maxLength: {value: 10, message: "max len 10"}}} />
-              <Field label="Nom" name="lastName" rules={{ required: true, minLength: {value: 5, message: "min len 5"}}} />
-              <Field as="select" label="Genre" name="genre"  rules={{ required: true }}>
-                <option></option>  
-                <option value="H">Homme</option>  
-                <option value="F">Femme</option>  
+              <Field
+                label="Prénom"
+                name="firstName"
+                rules={{
+                  required: "ce champ est obligatoire",
+                  maxLength: { value: 10, message: "max len 10" },
+                }}
+              />
+              <Text> {firstName}</Text>
+              <Field
+                label="Nom"
+                name="lastName"
+                rules={{
+                  required: true,
+                  minLength: { value: 5, message: "min len 5" },
+                }}
+              />
+              <Field
+                as="select"
+                label="Genre"
+                name="genre"
+                rules={{ required: true }}
+              >
+                <option></option>
+                <option value="H">Homme</option>
+                <option value="F">Femme</option>
               </Field>
-              <Field type="checkbox" append={<Text>Accepter les conditions</Text>} name="conditions" rules={{ required: true }} />
+              <Field
+                type="checkbox"
+                append={<Text>Accepter les conditions</Text>}
+                name="conditions"
+                rules={{ required: true }}
+              />
               <Button type="submit">Submit</Button>
-
             </>
-        )}}
+          );
+        }}
       </Form>
     </>
   );
 }
-*/

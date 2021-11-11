@@ -1,29 +1,27 @@
-import { forwardRef } from "react";
 import classNames from "classnames";
-
 import { Form } from "components/Form";
+import type { InputProps, PolymorphicRef } from "components/types";
 import { View } from "components/View";
+import { forwardRef } from "react";
 import { StringUtils } from "utils/StringUtils";
-import type { FC } from "react";
-import type { InputProps, FormControlElement } from "components/types";
 
-export const Input: FC<InputProps> = forwardRef<FormControlElement, InputProps>(
-  (
+export const Input = forwardRef(
+  <C extends React.ElementType = "input">(
     {
-      id = StringUtils.uniqueId(),
       label,
       meta,
       prepend,
       append,
       row,
       inputClass = "",
-      className = "",
       labelClass = "",
       ...props
-    },
-    ref
+    }: InputProps<C>,
+    ref?: PolymorphicRef<C>
   ) => {
     const { as: asComponent = "input", type } = props;
+    const id = props.id || StringUtils.uniqueId();
+    const className = props.className || "";
     const isInput = asComponent === "input";
     let isCheckbox = false;
     let isRadio = false;
