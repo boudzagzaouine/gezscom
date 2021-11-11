@@ -1,6 +1,9 @@
-import type { FC } from "react";
 import type { TextProps } from "components/types";
 
-export const Text: FC<TextProps> = ({ as: Component = "span", ...props }) => {
+export const Text = <C extends React.ElementType = "span">({
+  as,
+  ...props
+}: TextProps<C>) => {
+  const Component = as || "span";
   return <Component {...props} />;
 };

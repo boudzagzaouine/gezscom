@@ -25,6 +25,7 @@ module.exports = {
       ...config,
       node: {
         ...config.node,
+        //bugfix next-i18n
         fs: "empty",
       },
     };

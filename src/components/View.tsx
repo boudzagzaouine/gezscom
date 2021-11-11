@@ -1,28 +1,35 @@
 import classNames from "classnames";
-import type { FC } from "react";
-import type { ViewProps } from 'components/types';
+import type { ViewProps } from "components/types";
 
-export const View: FC<ViewProps> = ({
+export const View = <C extends React.ElementType = "div">({
   row,
   col,
   className,
-  as: Component = 'div',
+  as,
   ...props
-}) => (
-  <Component
-    {...props}
-    className={classNames(
-      {
-        "flex flex-row": row,
-        "flex flex-col": col,
-      },
-      className
-    )}
-  />
-);
+}: ViewProps<C>) => {
+  const Component = as || "div";
+  return (
+    <Component
+      {...props}
+      className={classNames(
+        {
+          "flex flex-row": row,
+          "flex flex-col": col,
+        },
+        className
+      )}
+    />
+  );
+};
 
-export const Row: FC<ViewProps> = ({ ...props }) => <View {...props} row />;
-
-export const Col: FC<ViewProps> = ({ className, ...props }) => (
-  <View {...props} col />
-);
+type ViewPropsWithoutColRow<C extends React.ElementType> = Omit<
+  ViewProps<C>,
+  "col" | "row"
+>;
+export const Row = <C extends React.ElementType = "div">(
+  props: ViewPropsWithoutColRow<C>
+) => <View {...props} row />;
+export const Col = <C extends React.ElementType = "div">(
+  props: ViewPropsWithoutColRow<C>
+) => <View {...props} col />;
