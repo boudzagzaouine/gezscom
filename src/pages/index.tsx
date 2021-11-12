@@ -1,19 +1,25 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-
+import { Col, Form, Head, Link, Text, View } from "components";
 import Counter from "features/counter/Counter";
+import type { NextPage } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "hooks";
+
 
 const IndexPage: NextPage = () => {
+  const { t } = useTranslation("common");
   return (
-    <div>
-      <Head>
-        <title>Redux Toolkit</title>
-      </Head>
-      <header>
+    <Col>
+      <Head title={t("title")} />
+      <View as="header">
+        <Text as="h1">
+          <Link href="wall">{t("wall-link")}</Link>
+        </Text>
+      </View>
+      <View as="main">
         <Counter />
-      </header>
-    </div>
+      </View>
+      <Form.Control as="input" href="wefwe" />
+    </Col>
   );
 };
 

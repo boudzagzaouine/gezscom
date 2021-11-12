@@ -10,7 +10,7 @@ export const Field = forwardRef(
     TValues extends FieldValues = FieldValues
   >(
     props: FieldProps<C, TValues>,
-    _ref?: PolymorphicRef<C>
+    ref?: PolymorphicRef<C>
   ) => {
     const { t } = useTranslation("common");
     const { field, fieldState, formState } = useController(props);
@@ -27,6 +27,6 @@ export const Field = forwardRef(
       error,
       invalid: fieldState.invalid,
     };
-    return <Input {...field} meta={meta} {...props} />;
+    return <Input {...props} {...field} meta={meta} ref={ref} />;
   }
 );
