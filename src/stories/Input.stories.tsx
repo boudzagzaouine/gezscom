@@ -15,6 +15,7 @@ export const InputText = Template.bind({});
 InputText.args = {
   name: "email",
   label: "Email",
+  row: true
 };
 
 export const Checkbox = Template.bind({});

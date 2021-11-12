@@ -1,7 +1,7 @@
 import { Head, Image, Link, Text, View } from "components";
 import { NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "hooks";
+import { useTranslation } from "hooks/translate";
 
 const WallPage: NextPage = () => {
   const { t } = useTranslation(["wall", "common"]);

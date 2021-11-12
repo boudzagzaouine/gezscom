@@ -1,5 +1,6 @@
 import { Col, Row, Text } from "components";
-import { useAppDispatch, useAppSelector, useTranslation } from "hooks";
+import { useAppDispatch, useAppSelector } from "hooks";
+import { useTranslation } from "hooks/translate";
 import { useState } from "react";
 import {
   decrement,
