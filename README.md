@@ -6,6 +6,7 @@ This project use :
 - [`react-hook-form`](https://react-hook-form.com/)
 - [`next-i18next`]()
 - [`next-pwa`](https://github.com/shadowwalker/next-pwa) to create a progressive web app (PWA) powered by [Workbox](https://developers.google.com/web/tools/workbox/)
+- [`tailwind`] PostCSS 7 compatibility build (https://tailwindcss.com/docs/installation#post-css-7-compatibility-build)
 
 ## Start learning
 Next.js gives you the best developer experience with all the features you need for production: hybrid static & server rendering, TypeScript support, smart bundling, route pre-fetching, and more. No config needed. [`Start learning`](https://nextjs.org/learn/basics/create-nextjs-app?utm_source=next-site&utm_medium=homepage-cta&utm_campaign=next-website)
