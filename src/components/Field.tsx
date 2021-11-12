@@ -1,6 +1,7 @@
 import { Input } from "components/Input";
 import type { FieldProps, PolymorphicRef, FieldValues } from "components/types";
-import { useController, useTranslation } from "hooks";
+import { useTranslation } from "hooks/translate";
+import { useController } from "hooks/form";
 import { forwardRef } from "react";
 
 //TODO validation avec typescript du nom du champ `name`

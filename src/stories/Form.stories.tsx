@@ -1,7 +1,7 @@
 import type { ComponentMeta } from "@storybook/react";
 import { Button, Field, Form, Text } from "components";
 import type { UseFormReturn } from "components/types";
-import { useWatch } from "hooks";
+import { useWatch } from "hooks/form";
 import { useCallback } from "react";
 
 export default {

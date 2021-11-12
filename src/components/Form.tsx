@@ -8,7 +8,7 @@ import type {
   PolymorphicRef,
   SubmitHandler
 } from "components/types";
-import { useForm } from "hooks";
+import { useForm } from "hooks/form";
 import type { FC } from "react";
 import { forwardRef } from "react";
 import { FormProvider } from "react-hook-form";
