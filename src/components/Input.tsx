@@ -33,12 +33,12 @@ export const Input = forwardRef(
       }
     }
     const inputClassName = classNames(
-      `focus:ring-indigo-500 focus:border-indigo-500 border-gray-300`,
-      isRadio || isCheckbox
-        ? "rounded h-4 w-4"
-        : "block w-full sm:text-sm shadow-sm",
-      { "border-red-400": meta?.invalid },
-      prepend && !(isRadio || isCheckbox) ? "rounded-r-md" : "rounded-md",
+      `with-border`,
+      // isRadio || isCheckbox
+      //   ? "rounded h-4 w-4"
+      //   : "block w-full sm:text-sm shadow-sm",
+      // { "border-red-400": meta?.invalid },
+      // prepend && !(isRadio || isCheckbox) ? "rounded-r-md" : "rounded-md",
       inputClass
     );
     const labelClassName = classNames(
