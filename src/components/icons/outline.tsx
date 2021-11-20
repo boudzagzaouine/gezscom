@@ -1,1 +1,3 @@
-export * from "@heroicons/react/outline";
+export {
+    BellIcon
+} from "@heroicons/react/outline";

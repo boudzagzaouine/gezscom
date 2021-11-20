@@ -21,6 +21,7 @@ const customWithPWA = [
 
 const IMAGE_HOST_DOMAINS = [
   "picsum.photos",
+  "i.pravatar.cc"
 ];
 
 const nextConfig = {

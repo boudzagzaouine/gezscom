@@ -6,15 +6,15 @@ import Document, {
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx);
-    console.log('initial props : ', initialProps);
+    // console.log('initial props : ', initialProps);
     return { ...initialProps };
   }
 
   render() {
     return (
-      <Html className="h-full bg-gray-100">
+      <Html >
         <Head />
-        <body className="h-full">
+        <body className="#f0f2f5">
           <Main />
           <NextScript />
         </body>

@@ -9,7 +9,7 @@ const IndexPage: NextPage = () => {
   return (
     <Col>
       <Head title={t("title")} />
-      <View as="header">
+      <View>
         <Text as="h1">
           <Link href="wall">{t("wall-link")}</Link>
         </Text>

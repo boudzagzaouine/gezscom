@@ -34,9 +34,13 @@ yarn start
 
 ## Deploy your own
 
+[deploy with Firebase](https://github.com/vercel/next.js/tree/canary/examples/with-firebase-hosting)
+
+
 Deploy the project using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example)([Documentation](https://nextjs.org/docs/deployment)) :
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/progressive-web-app&project-name=progressive-web-app&repository-name=progressive-web-app)
+
 
 
 ## Documentation
