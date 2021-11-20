@@ -20,6 +20,7 @@ const WallPage: NextPage = () => {
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
+      layout: 'empty',
       ...(await serverSideTranslations(locale, ["common", "wall"])),
       // Will be passed to the page component as props
     },

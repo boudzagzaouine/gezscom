@@ -8,3 +8,4 @@ export * from "./Link";
 export * from "./Text";
 export * from "./View";
 export * from "./Notifications";
+export * from "@headlessui/react";

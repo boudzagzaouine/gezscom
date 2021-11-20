@@ -38,3 +38,11 @@ Deploy the project using [Vercel](https://vercel.com?utm_source=github&utm_mediu
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/progressive-web-app&project-name=progressive-web-app&repository-name=progressive-web-app)
 
+
+## Documentation
+- https://nextjs.org/learn/basics/create-nextjs-app?utm_source=next-site&utm_medium=homepage-cta&utm_campaign=next-website
+- https://redux-toolkit.js.org/
+- https://github.com/rt2zz/redux-persist/blob/master/README.md
+- https://github.com/isaachinman/next-i18next
+- https://github.com/type-challenges/type-challenges
+- https://www.benmvp.com/blog/polymorphic-react-components-typescript/

@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import type { ViewProps } from "components/types";
+import { FC } from "react";
 
 export const View = <C extends React.ElementType = "div">({
   row,
@@ -30,6 +31,9 @@ type ViewPropsWithoutColRow<C extends React.ElementType> = Omit<
 export const Row = <C extends React.ElementType = "div">(
   props: ViewPropsWithoutColRow<C>
 ) => <View {...props} row />;
+
 export const Col = <C extends React.ElementType = "div">(
   props: ViewPropsWithoutColRow<C>
 ) => <View {...props} col />;
+
+export const Footer: FC<ViewProps<'footer'>> = props => <View as='footer' {...props} />
