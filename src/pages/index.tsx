@@ -1,9 +1,8 @@
 import { Col, Form, Head, Link, Text, View } from "components";
 import Counter from "features/counter/Counter";
+import { useTranslation } from "hooks/translate";
 import type { NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "hooks/translate";
-
 
 const IndexPage: NextPage = () => {
   const { t } = useTranslation("common");

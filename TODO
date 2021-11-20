@@ -1,4 +1,4 @@
-[x] Internationalisation
+[x] Internationalisation (https://github.com/isaachinman/next-i18next)
 [x] polymorphic components (https://www.benmvp.com/blog/polymorphic-react-components-typescript/)
 [ ] Tailwind
 [ ] Intégration Firebase
