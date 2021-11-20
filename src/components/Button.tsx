@@ -15,13 +15,14 @@ const calculClass = ({variant, full}: ButtonProps) => {
 
 export const Button: FC<ButtonProps> = ({
   label,
+  variant='primary',
   children = label,
   ...props
 }) => {
 
   return (
     <button
-      className={calculClass(props)}
+      className={calculClass({...props, variant})}
       {...props}
     >
       {children}
