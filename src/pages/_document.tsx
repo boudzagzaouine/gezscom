@@ -12,9 +12,9 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html >
+      <Html className="h-full" >
         <Head />
-        <body className="#f0f2f5">
+        <body className="h-full">
           <Main />
           <NextScript />
         </body>

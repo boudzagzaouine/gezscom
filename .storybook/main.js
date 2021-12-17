@@ -14,30 +14,20 @@ module.exports = {
       },
     },
   ],
-  presets: [path.resolve(__dirname, "./next-preset.js")],
-  // typescript: {
-  //   reactDocgen: "react-docgen-typescript",
-  //   reactDocgenTypescriptOptions: {
-  //     compilerOptions: {
-  //       allowSyntheticDefaultImports: true,
-  //       esModuleInterop: true,
-  //     },
-  //     shouldExtractLiteralValuesFromEnum: true,
-  //     propFilter: (prop) =>
-  //       prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
-  //   },
-  // },
-  webpackFinal: (config) => {
-    return {
-      ...config,
-      node: {
-        ...config.node,
-        //bugfix next-i18n
-        fs: "empty",
-      },
-    };
+  framework: "@storybook/react",
+  core: {
+    builder: "webpack5",
   },
-  // "core": {
-  //   "builder": "webpack5"
-  // },
+  webpack: (config, { isServer }) => {
+    if (config?.resolve) {
+      if (!isServer && config.resolve.fallback) {
+        config.resolve.fallback.fs = false;
+      }
+      config.resolve.modules = [
+        path.resolve(__dirname, "../src"),
+        "node_modules",
+      ];
+    }
+    return config;
+  },
 };
