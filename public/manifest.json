@@ -1,6 +1,6 @@
 {
-  "name": "Boowme webapp",
-  "short_name": "Boowme",
+  "name": "PWA",
+  "short_name": "pwa",
   "theme_color": "#ffffff",
   "background_color": "#004740",
   "display": "fullscreen",

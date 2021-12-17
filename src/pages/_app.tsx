@@ -11,8 +11,8 @@ import "styles/globals.css";
 import "styles/custom.css";
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
-  console.log('comp ', Component);
-  console.log('page props : ', pageProps);
+  // console.log("comp ", Component);
+  // console.log("page props : ", pageProps);
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
@@ -26,7 +26,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
             />
             <meta name="description" content="Description" />
             <meta name="keywords" content="Keywords" />
-            <title>BOOWME</title>
+            <title>PWA Example</title>
 
             <link rel="manifest" href="/manifest.json" />
             <link

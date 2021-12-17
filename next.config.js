@@ -13,8 +13,6 @@ const customWithPWA = [
       disable: __DEV__,
       dest: 'public',
       runtimeCaching,
-      // quick fix bad-precaching-response #288
-      buildExcludes: [/middleware-manifest.json$/]
       },
   },
 ];
