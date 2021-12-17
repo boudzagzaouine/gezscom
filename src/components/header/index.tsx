@@ -8,7 +8,7 @@ import {
   Transition,
   View
 } from "components";
-import { BellIcon, MenuIcon, XIcon } from "components/icons/outline";
+import { BellIcon, XIcon, MenuIcon } from "components/icons/outline";
 import { Fragment } from "react";
 
 const user = {
@@ -30,12 +30,12 @@ const userNavigation = [
   { name: "Sign out", href: "#" },
 ];
 
-interface HeaderProps {
-  user?: {};
-  onLogin: () => void;
-  onLogout: () => void;
-  onCreateAccount: () => void;
-}
+// interface HeaderProps {
+//   user?: {};
+//   onLogin: () => void;
+//   onLogout: () => void;
+//   onCreateAccount: () => void;
+// }
 
 export const Header = () => (
   <Disclosure as="nav" className="bg-gray-800">

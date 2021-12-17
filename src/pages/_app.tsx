@@ -7,8 +7,8 @@ import type { AppProps } from "next/app";
 import type { FC } from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import "assets/styles/globals.css";
-import "assets/styles/custom.css";
+import "styles/globals.css";
+import "styles/custom.css";
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
   console.log('comp ', Component);

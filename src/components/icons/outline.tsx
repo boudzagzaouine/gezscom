@@ -1,3 +1,3 @@
 export {
-    BellIcon
+    BellIcon, XIcon, MenuIcon
 } from "@heroicons/react/outline";

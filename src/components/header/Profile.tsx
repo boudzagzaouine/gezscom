@@ -1,5 +1,4 @@
 import { Menu, Popover, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/solid";
 import { View } from "components";
 import { Avatar } from "components/Avatar";
 import { Fragment } from "react";
@@ -395,7 +394,6 @@ const solutions = [
 export function Profile2() {
   return (
       <Popover className="relative">
-        {({ open }) => (
           <>
             <Popover.Button
               as={Fragment}
@@ -455,7 +453,6 @@ export function Profile2() {
               </Popover.Panel>
             </Transition>
           </>
-        )}
       </Popover>
   )
 }
