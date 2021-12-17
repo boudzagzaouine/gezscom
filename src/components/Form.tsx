@@ -37,7 +37,7 @@ const Option: FC<OptionProps> = (props) => <option {...props} />;
 
 const Error: FC<ErrorProps> = ({ meta, ...props }) => {
   return meta && meta.touched && meta.error ? (
-    <Label className="block text-sm font-medium text-red-400" {...props}>
+    <Label className="mb-0" {...props}>
       {meta.error}
     </Label>
   ) : null;

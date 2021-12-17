@@ -5,15 +5,16 @@ import type {
   ElementType,
   LabelHTMLAttributes,
   OptionHTMLAttributes,
-  ReactNode,
+  ReactNode
 } from "react";
+import React from "react";
 import type {
   Control,
   FieldValues,
   SubmitHandler,
   UseControllerProps,
   UseFormProps,
-  UseFormReturn,
+  UseFormReturn
 } from "react-hook-form";
 import type { ExtendableProps } from "utils/types";
 
@@ -65,7 +66,7 @@ export type PolymorphicComponentPropsWithRef<
 
 export type LayoutProps = {
   children: React.ReactNode;
-  name?: 'main' | 'centered' | 'empty';
+  name?: "main" | "centered" | "empty";
 };
 
 export type ViewProps<C extends ElementType> = PolymorphicComponentProps<
@@ -83,7 +84,7 @@ export type TextProps<C extends ElementType> = PolymorphicComponentProps<
   }
 >;
 
-export type LinkProps<C extends ElementType> = PolymorphicComponentProps<
+export type LinkProps<C extends ElementType = "a"> = PolymorphicComponentProps<
   C,
   Omit<NLinkProps, "as">
 >;
@@ -141,11 +142,19 @@ export type FormProps<T extends FieldValues> = UseFormProps<T> & {
 };
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   confirm?: string;
-  variant?: string;
+  variant?: 'primary' | 'secondary';
   size?: string;
   label?: string;
   backgroundColor?: string;
-  primary?: boolean;
+  full?: boolean;
 }
 
 export type { FieldValues, SubmitHandler, Control, UseFormReturn };
+
+export type Url = NLinkProps["href"];
+
+export type MenuBarItemProps<C extends ElementType = "a"> = LinkProps<C> & {
+  icon?: React.ReactElement;
+  title?: string;
+  badge?: number;
+};
