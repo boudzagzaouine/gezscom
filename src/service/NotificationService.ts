@@ -1,17 +1,8 @@
 import { Subject } from "rxjs";
-import type { Subscription } from "rxjs";
 import { Constants } from "config/Constants";
-
-export enum NotificationType {
-  SUCCESS = "success",
-  ERROR = "error",
-  SESSION_EXPIRED = "session_expired",
-}
-export interface Notification {
-  type: NotificationType;
-  message?: string;
-  status?: number;
-}
+import { NotificationType } from "service/types";
+import type { Subscription } from "rxjs";
+import type { Notification } from "service/types";
 class NotificationService {
   private subject = new Subject<Notification>();
 

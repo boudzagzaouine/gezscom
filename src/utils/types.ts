@@ -11,3 +11,5 @@ export type ExtendableProps<
 > = OverrideProps & Omit<ExtendedProps, keyof OverrideProps>;
 
 declare type Url = string | UrlObject;
+
+export type ObjectIterator = (value: any, key: any) => void;

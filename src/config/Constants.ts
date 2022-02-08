@@ -1,4 +1,5 @@
 export class Constants {
+  static API_PREFIX = "https://app.frimakers.com/api/v1/";
   static CONTENT_TYPE = "Content-Type";
   static MULTIPART_FORM_DATA = "multipart/form-data";
   static VERSION = process.env.VERSION;

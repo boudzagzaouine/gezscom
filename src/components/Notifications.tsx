@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { notificationService } from "service/NotificationService";
 import type { FC } from "react";
-import type { Notification } from "service/NotificationService";
+import type { Notification } from "service/types";
 
 export const Notifications: FC = () => {
   useEffect(() => {
