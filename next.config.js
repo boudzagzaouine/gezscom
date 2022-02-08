@@ -23,6 +23,9 @@ const IMAGE_HOST_DOMAINS = [
 ];
 
 const nextConfig = {
+  experimental: {
+    outputStandalone: true,
+  },
   reactStrictMode: true,
   images: {
     domains: IMAGE_HOST_DOMAINS,

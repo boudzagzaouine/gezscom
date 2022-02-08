@@ -32,6 +32,35 @@ yarn build
 yarn start
 ```
 
+## Using Docker and Makefile
+
+### Development environment - for doing testing
+
+```
+make build-development
+make start-development
+```
+
+Open http://localhost:3001
+
+### Staging environment - for doing UAT testing
+
+```
+make build-staging
+make start-staging
+```
+
+Open http://localhost:3002
+
+### Production environment - for users
+
+```
+make build-production
+make start-production
+```
+
+Open http://localhost:3003
+
 ## Deploy your own
 
 [deploy with Firebase](https://github.com/vercel/next.js/tree/canary/examples/with-firebase-hosting)
