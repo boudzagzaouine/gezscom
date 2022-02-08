@@ -3,6 +3,7 @@ import {
   ThunkAction,
   Action,
   combineReducers,
+  StoreEnhancer,
 } from "@reduxjs/toolkit";
 
 import {
@@ -16,8 +17,21 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { createOffline } from "@redux-offline/redux-offline";
+import offlineConfig from "@redux-offline/redux-offline/lib/defaults";
+import customOfflineConfig from "config/offline";
 
 import counterReducer from "features/counter/counterSlice";
+
+const {
+  middleware: offlineMiddleware,
+  enhanceReducer: offlineEnhanceReducer,
+  enhanceStore: offlineEnhanceStore,
+} = createOffline({
+  ...offlineConfig,
+  persist: undefined,
+  ...customOfflineConfig,
+});
 
 const persistConfig = {
   key: "root",
@@ -32,16 +46,17 @@ export function makeStore() {
   const rootReducer = combineReducers({
     counter: counterReducer,
   });
-  const persistedReducer = persistReducer(persistConfig, rootReducer);
+  const persistedReducer = persistReducer(persistConfig, offlineEnhanceReducer(rootReducer));
   const store = configureStore({
     reducer: persistedReducer,
+    enhancers: [offlineEnhanceStore as StoreEnhancer],
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
-      }),
-  });
+      }).concat(offlineMiddleware),
+    });
   return store;
 }
 

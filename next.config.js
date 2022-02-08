@@ -27,6 +27,14 @@ const nextConfig = {
   images: {
     domains: IMAGE_HOST_DOMAINS,
   },
+  async rewrites() {
+    return [
+      {
+        source: "/frimake/api/:path*",
+        destination: "https://app.frimakers.com/api/v1/:path*",
+      },
+    ];
+  },
   i18n,
 };
 
