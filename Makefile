@@ -1,3 +1,5 @@
+current_dir = $(shell pwd)
+
 .PHONY: build-development
 build-development: ## Build the development docker image.
 	docker compose -f docker/development/docker-compose.yml build
@@ -33,3 +35,8 @@ start-production: ## Start the production docker container.
 .PHONY: stop-production
 stop-production: ## Stop the production docker container.
 	docker compose -f docker/production/docker-compose.yml down
+
+.PHONY: docker
+docker: ## start docker dev env
+	docker run --rm -it -v $(current_dir):/home/app -w /home/app \
+	--name node-docker -u node -p 3000:3000 -p 6006:6006 node:17-alpine /bin/sh

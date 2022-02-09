@@ -3,7 +3,6 @@ const withPWA = require('next-pwa')
 const runtimeCaching = require('next-pwa/cache')
 const { i18n } = require('./next-i18next.config')
 
-
 const __DEV__ = process.env.NODE_ENV === "development";
 
 const customWithPWA = [
@@ -33,8 +32,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/frimake/api/:path*",
-        destination: "https://app.frimakers.com/api/v1/:path*",
+        source: "/main/api/:path*",
+        destination: `${process.env.API_URL}/:path*`,
       },
     ];
   },

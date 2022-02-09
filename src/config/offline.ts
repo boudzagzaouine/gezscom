@@ -1,4 +1,4 @@
-import { apiHttp } from "service/http";
+import { api } from "service/http";
 import type { HttpRequestConfig } from "service/types";
 
 const effect = (effect: HttpRequestConfig, action: any) => {
@@ -9,7 +9,7 @@ const effect = (effect: HttpRequestConfig, action: any) => {
       ...draft,
     };
   }
-  return apiHttp.request(draft);
+  return api.request(draft);
 };
 const discard = (error: any, _action: any, _retries: any) => {
   const status = error?.status || error?.response?.status || 503;

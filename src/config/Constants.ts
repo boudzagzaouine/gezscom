@@ -1,5 +1,5 @@
 export class Constants {
-  static API_PREFIX = "/frimake/api";
+  static API_PREFIX = "/main/api";
   static CONTENT_TYPE = "Content-Type";
   static MULTIPART_FORM_DATA = "multipart/form-data";
   static VERSION = process.env.VERSION;
