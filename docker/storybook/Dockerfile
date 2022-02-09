@@ -7,15 +7,22 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
-# 2. Storybook image, copy all the files and run storybook
-FROM node:17-alpine AS runner
+# 2. Rebuild the source code only when needed
+FROM node:17-alpine AS builder
 WORKDIR /app
-
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-EXPOSE 6006
+RUN yarn build-storybook
 
-ENV PORT 6006
+# 3. Storybook image, copy all the files and run storybook
+FROM node:17-alpine AS runner
+WORKDIR /app
 
-CMD ["yarn", "storybook"]
+COPY --from=builder /app/storybook-static ./storybook-static
+
+EXPOSE 8080
+
+ENV PORT 8080
+
+CMD ["npx", "http-server", "./storybook-static"]
