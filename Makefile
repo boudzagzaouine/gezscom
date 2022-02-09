@@ -36,6 +36,18 @@ start-production: ## Start the production docker container.
 stop-production: ## Stop the production docker container.
 	docker compose -f docker/production/docker-compose.yml down
 
+.PHONY: build-storybook
+build-storybook: ## Build the storybook docker image.
+	docker compose -f docker/storybook/docker-compose.yml build
+
+.PHONY: start-storybook
+start-storybook: ## Start the storybook docker container.
+	docker compose -f docker/storybook/docker-compose.yml up -d
+
+.PHONY: stop-storybook
+stop-storybook: ## Stop the storybook docker container.
+	docker compose -f docker/storybook/docker-compose.yml down
+
 .PHONY: docker
 docker: ## start docker dev env
 	docker run --rm -it -v $(current_dir):/home/app -w /home/app \
