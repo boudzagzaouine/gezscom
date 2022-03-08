@@ -23,6 +23,7 @@ const Control = forwardRef(
   ) => {
     const Component = as || "input";
     const { value, defaultValue } = props;
+    // console.log('log control ? ', props);
     let additionalProps = {};
     if (value !== undefined && value !== null) {
       additionalProps = { checked: "true" === `${value}` };
@@ -49,7 +50,9 @@ export const Form = <T extends FieldValues = FieldValues>({
   onSubmit,
 }: FormProps<T>) => {
   const methods = useForm<T>({ defaultValues });
-  const defaultOnSubmit: SubmitHandler<T> = (_data) => {};
+  const defaultOnSubmit: SubmitHandler<T> = (data) => {
+    console.log('No onSubmit method defined on Form ? ', data);
+  };
   const { handleSubmit } = methods;
 
   return (
