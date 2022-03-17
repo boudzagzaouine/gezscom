@@ -1,8 +1,8 @@
 import type { ComponentMeta } from "@storybook/react";
 import { Button, Field, Form, Text } from "components";
-import type { UseFormReturn } from "components/types";
+import { MultiSelect } from "components/MultiSelect";
 import { useWatch } from "hooks/form";
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 export default {
   title: "Exemples/Form",
@@ -15,12 +15,14 @@ interface Contact {
   lastName?: string;
   genre?: string;
   conditions?: boolean;
+  qualities?: string[]
 }
 const defaultValues: Contact = {
   firstName: "",
   lastName: "",
   // 'genre': '',
   conditions: false,
+  qualities: ['3', '1']
 };
 
 let counter = 0;
@@ -88,9 +90,25 @@ export function ThemeForm() {
   );
 }
 
+const QUALITIES = [
+  { id: "1", label: "q1" },
+  { id: "2", label: "q2" },
+  { id: "3", label: "q3" },
+  { id: "4", label: "q4" },
+];
+
 export function ExampleForm() {
-  const onSubmit = useCallback((data: Contact) => console.log(data), []);
   counter++;
+  const firstNameEl = useRef<HTMLInputElement>(null);
+  console.log("ref ? ", firstNameEl);
+  const onSubmit = useCallback(
+    (data: Contact) => 
+      console.log("datd ? ", data, "ref ? ", firstNameEl.current),
+    []
+  );
+  useEffect(() => {
+    firstNameEl.current?.focus();
+  }, [firstNameEl]);
 
   return (
     <>
@@ -99,6 +117,7 @@ export function ExampleForm() {
         <Field
           label="Prénom"
           name="firstName"
+          ref={firstNameEl}
           rules={{
             required: "ce champ est obligatoire",
             maxLength: { value: 10, message: "max len 10" },
@@ -109,7 +128,7 @@ export function ExampleForm() {
           name="lastName"
           rules={{
             required: true,
-            minLength: { value: 5, message: "min len 5" },
+            minLength: 5,
           }}
         />
         <Field
@@ -122,6 +141,14 @@ export function ExampleForm() {
           <option value="H">Homme</option>
           <option value="F">Femme</option>
         </Field>
+        <Field
+          label="Qualities"
+          name="qualities"
+          as={MultiSelect}
+          options={QUALITIES}
+          rules={{required: true, minLength: 2}}
+        />
+
         <Field
           type="checkbox"
           label="Accepter les conditions"
@@ -143,8 +170,9 @@ export function ExampleInteractiveForm() {
     <>
       <Text as="h1">Smart Form Component {counter}</Text>
       <Form defaultValues={defaultValues} onSubmit={onSubmit}>
-        {({ control }: UseFormReturn<Contact>) => {
+        {({ control, watch }) => {
           const firstName = useWatch({ control, name: "firstName" });
+          const lastName = watch("lastName");
           return (
             <>
               <Field
@@ -164,6 +192,7 @@ export function ExampleInteractiveForm() {
                   minLength: { value: 5, message: "min len 5" },
                 }}
               />
+              <Text>{lastName}</Text>
               <Field
                 as="select"
                 label="Genre"

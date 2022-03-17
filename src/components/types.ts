@@ -137,8 +137,9 @@ export interface ErrorProps extends LabelProps {
   meta?: FieldMetaProps;
 }
 export type FormProps<T extends FieldValues> = UseFormProps<T> & {
-  children: React.ReactNode;
+  children: React.ReactNode | ((methods: UseFormReturn<T>) => React.ReactElement);
   onSubmit?: SubmitHandler<T>;
+  resetOnSuccessfulSubmit?: boolean;
 };
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   confirm?: string;
