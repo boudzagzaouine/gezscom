@@ -6,10 +6,10 @@ import type {
   LabelProps,
   OptionProps,
   PolymorphicRef,
-  SubmitHandler
+  SubmitHandler,
 } from "components/types";
 import { useForm } from "hooks/form";
-import type { FC } from "react";
+import { FC, useCallback, useEffect } from "react";
 import { forwardRef } from "react";
 import { FormProvider } from "react-hook-form";
 import { ObjectUtils } from "utils/ObjectUtils";
@@ -23,6 +23,7 @@ const Control = forwardRef(
   ) => {
     const Component = as || "input";
     const { value, defaultValue } = props;
+    // console.log('log control ? ', props);
     let additionalProps = {};
     if (value !== undefined && value !== null) {
       additionalProps = { checked: "true" === `${value}` };
@@ -44,12 +45,30 @@ const Error: FC<ErrorProps> = ({ meta, ...props }) => {
 };
 
 export const Form = <T extends FieldValues = FieldValues>({
-  defaultValues,
   children,
   onSubmit,
+  resetOnSuccessfulSubmit = true,
+  ...useFormProps
 }: FormProps<T>) => {
-  const methods = useForm<T>({ defaultValues });
-  const defaultOnSubmit: SubmitHandler<T> = (_data) => {};
+  const methods = useForm<T>(useFormProps);
+  const { defaultValues } = useFormProps;
+  const { reset, formState } = methods;
+  useEffect(() => {
+    if (defaultValues) {
+      // console.log("reset form ?", defaultValues);
+      reset(defaultValues);
+    }
+  }, [defaultValues]);
+  useEffect(() => {
+    if (resetOnSuccessfulSubmit && formState.isSubmitSuccessful) {
+      // console.log("reset form with : ", defaultValues);
+      reset(defaultValues);
+    }
+  }, [formState.isSubmitSuccessful]);
+
+  const defaultOnSubmit: SubmitHandler<T> = useCallback((data) => {
+    console.log("No onSubmit method defined on Form ? ", data);
+  }, []);
   const { handleSubmit } = methods;
 
   return (

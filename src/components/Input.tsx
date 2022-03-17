@@ -2,10 +2,10 @@ import classNames from "classnames";
 import { Form } from "components/Form";
 import type { InputProps, PolymorphicRef } from "components/types";
 import { View } from "components/View";
-import { forwardRef } from "react";
+import { forwardRef, memo } from "react";
 import { StringUtils } from "utils/StringUtils";
 
-export const Input = forwardRef(
+export const Input = memo(forwardRef(
   <C extends React.ElementType = "input">(
     {
       label,
@@ -32,6 +32,7 @@ export const Input = forwardRef(
         isCheckbox = true;
       }
     }
+    // console.log('render input ? ', label);
     const inputClassName = classNames(
       `with-border`,
       // isRadio || isCheckbox
@@ -75,4 +76,4 @@ export const Input = forwardRef(
       </View>
     );
   }
-);
+));
