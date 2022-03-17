@@ -10,6 +10,7 @@
   "dependencies": {
     "@headlessui/react": "^1.4.2",
     "@heroicons/react": "^1.0.5",
+    "@hookform/resolvers": "^2.8.8",
     "@redux-offline/redux-offline": "^2.6.0",
     "@reduxjs/toolkit": "^1.6.2",
     "axios": "^0.26.0",
@@ -23,7 +24,8 @@
     "react-hook-form": "^7.19.1",
     "react-redux": "^7.2.6",
     "redux-persist": "^6.0.0",
-    "rxjs": "^7.4.0"
+    "rxjs": "^7.4.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",
