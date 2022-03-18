@@ -64,9 +64,11 @@ export type PolymorphicComponentPropsWithRef<
   Props = {}
 > = PolymorphicComponentProps<C, Props> & { ref?: PolymorphicRef<C> };
 
+export type LayoutName = "main" | "centered" | "empty";
+
 export type LayoutProps = {
   children: React.ReactNode;
-  name?: "main" | "centered" | "empty";
+  name?: LayoutName;
 };
 
 export type ViewProps<C extends ElementType> = PolymorphicComponentProps<

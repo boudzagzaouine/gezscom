@@ -4,15 +4,34 @@ import store, { persistor } from "config/store";
 import Layout from "layouts";
 import { appWithTranslation } from "next-i18next";
 import type { AppProps } from "next/app";
-import type { FC } from "react";
+import type { FC, ReactElement, ReactNode } from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import "styles/globals.css";
 import "styles/custom.css";
+import { NextPage } from "next";
+import { LayoutName } from "components/types";
 
-const App: FC<AppProps> = ({ Component, pageProps }) => {
+type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactNode;
+  layout?: LayoutName;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+const getDefaultLayout = (name?: LayoutName) => {
+  return function layout(page: ReactElement): ReactNode {
+    return <Layout name={name}>{page}</Layout>;
+  };
+};
+
+const App: FC<AppPropsWithLayout> = ({ Component, pageProps }) => {
   // console.log("comp ", Component);
   // console.log("page props : ", pageProps);
+  const getLayout = Component.getLayout ?? getDefaultLayout(Component.layout || pageProps.layout);
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
@@ -44,10 +63,12 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
             <link rel="apple-touch-icon" href="/apple-icon.png"></link>
             <meta name="theme-color" content="#317EFB" />
           </Head>
-          <Layout name={pageProps.layout}>
-            <Notifications />
-            <Component {...pageProps} />
-          </Layout>
+          {getLayout(
+            <>
+              <Notifications />
+              <Component {...pageProps} />
+            </>
+          )}
         </>
       </PersistGate>
     </Provider>
