@@ -5,7 +5,10 @@ import type {
   ElementType,
   LabelHTMLAttributes,
   OptionHTMLAttributes,
-  ReactNode
+  ReactNode,
+  TableHTMLAttributes,
+  TdHTMLAttributes,
+  ThHTMLAttributes
 } from "react";
 import React from "react";
 import type {
@@ -64,9 +67,11 @@ export type PolymorphicComponentPropsWithRef<
   Props = {}
 > = PolymorphicComponentProps<C, Props> & { ref?: PolymorphicRef<C> };
 
+export type LayoutName = "main" | "centered" | "empty";
+
 export type LayoutProps = {
   children: React.ReactNode;
-  name?: "main" | "centered" | "empty";
+  name?: LayoutName;
 };
 
 export type ViewProps<C extends ElementType> = PolymorphicComponentProps<
@@ -149,6 +154,21 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   backgroundColor?: string;
   full?: boolean;
 }
+
+export type TableProps = {
+  thead?: React.ReactNode;
+} & TableHTMLAttributes<HTMLTableElement>;
+export type TrProps = {
+  variant?: string;
+  className?: string;
+  children?: React.ReactNode;
+};
+export type ThProps = {
+  action?: boolean;
+} & ThHTMLAttributes<HTMLTableCaptionElement>;
+export type TdProps = {
+  action?: boolean;
+} & TdHTMLAttributes<HTMLTableDataCellElement>;
 
 export type { FieldValues, SubmitHandler, Control, UseFormReturn };
 
