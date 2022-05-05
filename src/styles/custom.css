@@ -1,0 +1,144 @@
+.bg-pink-800 {
+    background-color: rgb(157 23 77);
+}
+
+.border-pink-900 {
+    border-color: rgb(131 24 67);
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: 400;
+    margin: 20px 0;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+:root {
+    --sub-gray: rgb(245, 245, 245);
+}
+
+.nav-horiz {
+    float: left;
+}
+
+.nav-horiz h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.nav-horiz img {
+    float: left;
+    width: 100%;
+    margin: 61px 0;
+}
+
+.nav-horiz li,
+.nav-horiz h2 {
+    color: rgb(245, 245, 255);
+    float: left;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.nav-horiz li {
+    cursor: pointer;
+    background-color: transparent;
+    font-size: 13px;
+}
+
+.li-active {
+    border-left: 3px solid #bbf;
+    background-color: rgb(22 78 99 / var(--tw-bg-opacity)) !important;
+}
+
+.li-free {
+    border-left: none;
+}
+
+.nav-horiz li .icon {
+    float: left;
+    margin: 0 12px;
+}
+
+.nav-horiz li .text {
+    float: left;
+    margin-left: 10px;
+}
+
+.tab-list {}
+
+.tab-list td,
+.tab-list th {
+    padding: 6px 0 6px 5px;
+    text-align: left;
+}
+
+.tab-list td {}
+
+.tab-list figure {
+    display: flex;
+    align-items: center;
+}
+
+.tab-list figure img {
+    width: 50px;
+    border-radius: 50%;
+    float: left;
+}
+
+.tab-list figure figcaption {
+    float: left;
+    width: 100%;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.tab-list tbody tr:nth-child(2n + 1) {
+    background-color: var(--sub-gray);
+}
+
+.mp-8 {
+    padding: 2rem;
+}
+
+
+/*******************************************************************/
+
+.block-buttons {
+    position: relative;
+}
+
+.block-buttons ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 111;
+    background-color: rgb(250, 250, 228);
+    border: 1px solid rgb(210, 220, 248);
+}
+
+.block-buttons ul li {
+    color: black;
+    float: left;
+    width: 100%;
+    padding: 10px 0;
+    cursor: pointer;
+    background-color: transparent;
+    font-size: 13px;
+}
+
+.block-buttons ul li .icon {
+    float: left;
+    margin: 0 12px;
+}
+
+.block-buttons ul li .text {
+    float: left;
+    margin-left: 10px;
+}

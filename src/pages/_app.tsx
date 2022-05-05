@@ -10,8 +10,8 @@ import type { AppProps } from "next/app";
 import type { FC, ReactElement, ReactNode } from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import "styles/custom.css";
 import "styles/globals.css";
+import "styles/custom.css";
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;

@@ -1,0 +1,11 @@
+export const INPUT: number = 0
+export const TEXTAREA: number = 1
+export const SELECT: number = 2
+export const HIDDEN: number = 3
+export const LABEL = -1
+export const REQUEST_SAVE = 4
+export const REQUEST_EDIT = 5
+export const REQUEST_DELETE = 6
+export const PAYMENT_CHOICE = ['CHECK', 'ESPECE', 'CARTE']
+export const ICOTERM = ['CTP', 'CIP', 'DAP', 'DDP']
+export const DEVISE = ['MAD', 'EUR', 'DLR', 'YEN']
