@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { ChangeEventHandler, useState } from 'react'
-import { useFetchClientsQuery } from '../../service/redux/CrudApi'
+import { useFetchClientsQuery } from '../../config/rtk'
 import { REQUEST_EDIT, REQUEST_SAVE } from '../../tools/consts'
 import { c0, Client } from '../../tools/types'
 import Bcyan from '../../widgets/Bcyan'

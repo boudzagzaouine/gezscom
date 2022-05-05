@@ -19,7 +19,8 @@ import {
 import storage from "redux-persist/lib/storage";
 import { createOffline } from "@redux-offline/redux-offline";
 import offlineConfig from "@redux-offline/redux-offline/lib/defaults";
-import customOfflineConfig from "config/offline";
+import customOfflineConfig from "./offline";
+import { crudApi } from './rtk'
 
 import counterReducer from "features/counter/counterSlice";
 
@@ -45,6 +46,7 @@ export function makeStore() {
   //   });
   const rootReducer = combineReducers({
     counter: counterReducer,
+    [crudApi.reducerPath]: crudApi.reducer,
   });
   const persistedReducer = persistReducer(persistConfig, offlineEnhanceReducer(rootReducer));
   const store = configureStore({
@@ -55,7 +57,7 @@ export function makeStore() {
         serializableCheck: {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
-      }).concat(offlineMiddleware),
+      }).concat([crudApi.middleware, offlineMiddleware]),
     });
   return store;
 }

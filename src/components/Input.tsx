@@ -23,6 +23,8 @@ export const Input = memo(forwardRef(
     const id = props.id || StringUtils.uniqueId();
     const className = props.className || "";
     const isInput = asComponent === "input";
+    const isTextArea = asComponent === "textarea";
+    const isSelect = asComponent === "select";
     let isCheckbox = false;
     let isRadio = false;
     if (isInput) {
@@ -34,7 +36,11 @@ export const Input = memo(forwardRef(
     }
     // console.log('render input ? ', label);
     const inputClassName = classNames(
-      `with-border`,
+      `border outline-slate-200 float-left rounded w-full`,
+      {
+        "py-8": isTextArea,
+        "py-2": isInput || isSelect
+      },
       // isRadio || isCheckbox
       //   ? "rounded h-4 w-4"
       //   : "block w-full sm:text-sm shadow-sm",
@@ -43,12 +49,12 @@ export const Input = memo(forwardRef(
       inputClass
     );
     const labelClassName = classNames(
-      `block text-sm font-medium text-gray-700`,
+      `w-full block font-medium text-gray-700 sm:mt-px sm:pt-2`,
       { "ml-2": isRadio || isCheckbox },
       labelClass
     );
-    const containerClassName = classNames("col-span-6", className);
-    const inputWrapperClassName = classNames("mt-1 flex rounded-md", {
+    const containerClassName = classNames("sm:grid sm:grid-cols-4 sm:gap-4 sm:items-start sm:pt-5 w-full", className);
+    const inputWrapperClassName = classNames("mt-1 sm:mt-0 sm:col-span-2", {
       "items-center": isRadio || isCheckbox,
     });
 

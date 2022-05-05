@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { useDeleteClientMutation } from '../service/redux/CrudApi'
+import { useDeleteClientMutation } from '../config/rtk'
 //@ts-ignore
 import styles from '../styles/Home.module.css'
 import { Num } from '../tools/types'

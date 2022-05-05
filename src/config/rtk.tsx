@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { Client } from '../../tools/types'
+import { Client } from '../tools/types'
 
 export const crudApi = createApi({
     reducerPath: 'crud-api',

@@ -114,9 +114,13 @@ export type FormControlProps<
   {
     value?: ValueType;
     defaultValue?: ValueType;
+    options?: Option[]
   }
 >;
-
+export type Option = string | {
+  id: string;
+  label?: string;
+};
 export type InputProps<C extends ElementType> = FormControlProps<C> & {
   label?: string;
   inputClass?: string;

@@ -1,26 +1,21 @@
-import axios from 'axios'
-import Link from 'next/link'
-import React, { FC, InputHTMLAttributes, ReactNode } from 'react'
-import { useForm } from 'react-hook-form'
+import React from 'react'
 import {
     useAddClientMutation,
     useEditClientMutation,
-} from '../../../service/redux/CrudApi'
+} from 'config/rtk'
 import {
     DEVISE,
     ICOTERM,
-    INPUT,
     PAYMENT_CHOICE,
     REQUEST_EDIT,
     REQUEST_SAVE,
-    SELECT,
-    TEXTAREA,
 } from '../../../tools/consts'
-import { c0, Client, ColsClient } from '../../../tools/types'
+import { Client } from '../../../tools/types'
 import Bcyan from '../../../widgets/Bcyan'
 import Bred from '../../../widgets/Bred'
 import Icon from '../../../widgets/Icon'
 import View from '../../../widgets/View'
+import { Field, Form } from 'components'
 
 type FormClientManagerProp = {
     closed: () => void
@@ -34,64 +29,8 @@ const FormClientManager = ({
 }: FormClientManagerProp) => {
     const [save] = useAddClientMutation()
     const [edit] = useEditClientMutation()
-    const { register, handleSubmit, reset } = useForm<Client>({
-        defaultValues: client,
-    })
-    type LineProp = {
-        label: string
-        sels: string[]
-        input: ColsClient
-        type: number
-    }
-    const Line = ({ label, input, sels, type }: LineProp) => {
-        const clas: string =
-            'border outline-slate-200 float-left rounded w-full'
-        return (
-            <div className="sm:grid sm:grid-cols-4 sm:gap-4 sm:items-start sm:pt-5 w-full">
-                <label
-                    htmlFor="first-name"
-                    className="w-full block font-medium text-gray-700 sm:mt-px sm:pt-2"
-                >
-                    {label}
-                </label>
-                <div className="mt-1 sm:mt-0 sm:col-span-2">
-                    {type == INPUT ? (
-                        <>
-                            <input
-                                type="text"
-                                {...register(input)}
-                                autoComplete="given-name"
-                                className={'py-2 ' + clas}
-                            />
-                        </>
-                    ) : type == TEXTAREA ? (
-                        <>
-                            <textarea
-                                {...register(input)}
-                                autoComplete="given-name"
-                                className={'py-8 ' + clas}
-                            ></textarea>
-                        </>
-                    ) : type == SELECT ? (
-                        <>
-                            <select
-                                {...register(input)}
-                                className={'py-2 ' + clas}
-                            >
-                                {sels.map((op) => (
-                                    <option key={op} value={op}>
-                                        {op}
-                                    </option>
-                                ))}
-                            </select>
-                        </>
-                    ) : (
-                        <></>
-                    )}
-                </div>
-            </div>
-        )
-    }
+    const onSubmit = request == REQUEST_SAVE ? save : (request == REQUEST_EDIT ? edit : undefined);
+
     const Avatar = () => {
         return (
             <div className="sm:grid w-full sm:pt-5">
@@ -125,98 +64,73 @@ const FormClientManager = ({
             </div>
         )
     }
-    const noReq = () => {}
     return (
         <View>
             <div className="float-left w-full text-xs">
-                <form
-                    onSubmit={handleSubmit(
-                        request == REQUEST_SAVE
-                            ? save
-                            : request == REQUEST_EDIT
-                            ? edit
-                            : noReq
-                    )}
-                >
+                <Form defaultValues={client} onSubmit={onSubmit}>
                     <h1>Nom & Prénom du client request={request}</h1>
                     <div className="float-left w-5/6">
                         <div className="float-left w-1/2">
                             {request == REQUEST_EDIT && (
-                                <input type="text" {...register('id')} />
+                                <Field type="text" name="id" />
                             )}
-                            <Line
+                            <Field
                                 label="Nom du client"
-                                input="design"
-                                sels={[]}
-                                type={INPUT}
+                                name="design"
                             />
-                            <Line
+                            <Field
                                 label="concat"
-                                input="concat"
-                                sels={[]}
-                                type={INPUT}
+                                name="concat"
                             />
-                            <Line
+                            <Field
                                 label="email"
-                                input="email"
-                                sels={[]}
-                                type={INPUT}
+                                name="email"
                             />
-                            <Line
+                            <Field
                                 label="tel"
-                                input="tel"
-                                sels={[]}
-                                type={INPUT}
+                                name="tel"
                             />
-                            <Line
+                            <Field
                                 label="device"
-                                input="device"
-                                sels={DEVISE}
-                                type={SELECT}
+                                name="device"
+                                options={DEVISE}
+                                as="select"
                             />
-                            <Line
+                            <Field
                                 label="adresse de livraison"
-                                input="adrLiv"
-                                sels={[]}
-                                type={TEXTAREA}
+                                name="adrLiv"
+                                as="textarea"
                             />
                         </div>
                         <div className="float-left w-1/2">
-                            <Line
+                            <Field
                                 label="Mode de payment"
-                                input="paymentChoice"
-                                sels={PAYMENT_CHOICE}
-                                type={SELECT}
+                                name="paymentChoice"
+                                options={PAYMENT_CHOICE}
+                                as="select"
                             />
-                            <Line
+                            <Field
                                 label="incoterm"
-                                input="incoterm"
-                                sels={ICOTERM}
-                                type={SELECT}
+                                name="incoterm"
+                                options={ICOTERM}
+                                as="select"
                             />
-                            <Line
+                            <Field
                                 label="adresse de facturation"
-                                input="adrFact"
-                                sels={[]}
-                                type={TEXTAREA}
+                                name="adrFact"
+                                as="textarea"
                             />
-                            <Line
+                            <Field
                                 label="bank"
-                                input="bank"
-                                sels={[]}
-                                type={INPUT}
+                                name="bank"
                             />
-                            <Line
+                            <Field
                                 label="rib"
-                                input="rib"
-                                sels={[]}
-                                type={INPUT}
+                                name="rib"
                             />
-                            <Line
+                            <Field
                                 label="swift"
-                                input="swift"
-                                sels={[]}
-                                type={INPUT}
+                                name="swift"
                             />
                         </div>
                     </div>
@@ -228,7 +142,6 @@ const FormClientManager = ({
                             className="float-left"
                             onClick={() => {
                                 setTimeout(() => {
-                                    reset(c0)
                                     closed()
                                 }, 500)
                             }}
@@ -238,11 +151,7 @@ const FormClientManager = ({
                         {request == REQUEST_SAVE && (
                             <Bcyan
                                 className="float-left"
-                                onClick={() => {
-                                    setTimeout(() => {
-                                        reset(c0)
-                                    }, 500)
-                                }}
+                                type='submit'
                             >
                                 <Icon i="save" cl="float-left" />{' '}
                                 <span className="px-2 float-left">&&</span>
@@ -250,11 +159,10 @@ const FormClientManager = ({
                             </Bcyan>
                         )}
                     </div>
-                </form>
+                </Form>
                 <Bred
                     className="float-right"
                     onClick={() => {
-                        reset(c0)
                         closed()
                     }}
                 >
