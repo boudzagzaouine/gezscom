@@ -33,7 +33,7 @@ const App: FC<AppPropsWithLayout> = ({ Component, pageProps }) => {
   // console.log("page props : ", pageProps);
   const getLayout =
     Component.getLayout ??
-    getDefaultLayout(Component.layout || pageProps.layout);
+    getDefaultLayout(Component.layout ?? pageProps.layout);
 
   return (
     <Provider store={store}>
