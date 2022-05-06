@@ -1,6 +1,9 @@
 import Document, {
-    DocumentContext, Head, Html, Main,
-    NextScript
+  DocumentContext,
+  Head,
+  Html,
+  Main,
+  NextScript,
 } from "next/document";
 
 class MyDocument extends Document {
@@ -12,7 +15,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html className="h-full bg-gray-100" >
+      <Html className="h-full bg-gray-100">
         <Head />
         <body className="h-full">
           <Main />

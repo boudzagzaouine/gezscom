@@ -6,7 +6,7 @@ import {
   Menu,
   Text,
   Transition,
-  View
+  View,
 } from "widgets";
 import { BellIcon, XIcon, MenuIcon } from "widgets/icons/outline";
 import { Fragment } from "react";

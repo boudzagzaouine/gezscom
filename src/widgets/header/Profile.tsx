@@ -1,149 +1,148 @@
 import { Menu, Popover, Transition } from "@headlessui/react";
 import { View } from "widgets";
-import { Avatar } from "widgets/Avatar";
+import { Avatar } from "widgets/AvatarProfil";
 import { Fragment } from "react";
-
 
 export function Profile() {
   return (
-      <Menu as="div" className="relative inline-block text-left ">
-        <div>
-          <Menu.Button as={Fragment}>
-            <a href="#">
-                <Avatar image="https://i.pravatar.cc/300" />
-                </a>
-          </Menu.Button>
-        </div>
-        <Transition
-          as={Fragment}
-          enter="transition ease-out duration-100"
-          enterFrom="transform opacity-0 scale-95"
-          enterTo="transform opacity-100 scale-100"
-          leave="transition ease-in duration-75"
-          leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
-        >
-          <Menu.Items className="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <div className="px-1 py-1 ">
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active ? 'bg-violet-500 text-white' : 'text-gray-900'
-                    } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                  >
-                    {active ? (
-                      <EditActiveIcon
-                        className="w-5 h-5 mr-2"
-                        aria-hidden="true"
-                      />
-                    ) : (
-                      <EditInactiveIcon
-                        className="w-5 h-5 mr-2"
-                        aria-hidden="true"
-                      />
-                    )}
-                    Edit
-                  </button>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active ? 'bg-violet-500 text-white' : 'text-gray-900'
-                    } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                  >
-                    {active ? (
-                      <DuplicateActiveIcon
-                        className="w-5 h-5 mr-2"
-                        aria-hidden="true"
-                      />
-                    ) : (
-                      <DuplicateInactiveIcon
-                        className="w-5 h-5 mr-2"
-                        aria-hidden="true"
-                      />
-                    )}
-                    Duplicate
-                  </button>
-                )}
-              </Menu.Item>
-            </div>
-            <div className="px-1 py-1">
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active ? 'bg-violet-500 text-white' : 'text-gray-900'
-                    } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                  >
-                    {active ? (
-                      <ArchiveActiveIcon
-                        className="w-5 h-5 mr-2"
-                        aria-hidden="true"
-                      />
-                    ) : (
-                      <ArchiveInactiveIcon
-                        className="w-5 h-5 mr-2"
-                        aria-hidden="true"
-                      />
-                    )}
-                    Archive
-                  </button>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active ? 'bg-violet-500 text-white' : 'text-gray-900'
-                    } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                  >
-                    {active ? (
-                      <MoveActiveIcon
-                        className="w-5 h-5 mr-2"
-                        aria-hidden="true"
-                      />
-                    ) : (
-                      <MoveInactiveIcon
-                        className="w-5 h-5 mr-2"
-                        aria-hidden="true"
-                      />
-                    )}
-                    Move
-                  </button>
-                )}
-              </Menu.Item>
-            </div>
-            <div className="px-1 py-1">
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active ? 'bg-violet-500 text-white' : 'text-gray-900'
-                    } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                  >
-                    {active ? (
-                      <DeleteActiveIcon
-                        className="w-5 h-5 mr-2 text-violet-400"
-                        aria-hidden="true"
-                      />
-                    ) : (
-                      <DeleteInactiveIcon
-                        className="w-5 h-5 mr-2 text-violet-400"
-                        aria-hidden="true"
-                      />
-                    )}
-                    Delete
-                  </button>
-                )}
-              </Menu.Item>
-            </div>
-          </Menu.Items>
-        </Transition>
-      </Menu>
-  )
+    <Menu as="div" className="relative inline-block text-left ">
+      <div>
+        <Menu.Button as={Fragment}>
+          <a href="#">
+            <Avatar image="https://i.pravatar.cc/300" />
+          </a>
+        </Menu.Button>
+      </div>
+      <Transition
+        as={Fragment}
+        enter="transition ease-out duration-100"
+        enterFrom="transform opacity-0 scale-95"
+        enterTo="transform opacity-100 scale-100"
+        leave="transition ease-in duration-75"
+        leaveFrom="transform opacity-100 scale-100"
+        leaveTo="transform opacity-0 scale-95"
+      >
+        <Menu.Items className="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div className="px-1 py-1 ">
+            <Menu.Item>
+              {({ active }) => (
+                <button
+                  className={`${
+                    active ? "bg-violet-500 text-white" : "text-gray-900"
+                  } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                >
+                  {active ? (
+                    <EditActiveIcon
+                      className="w-5 h-5 mr-2"
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <EditInactiveIcon
+                      className="w-5 h-5 mr-2"
+                      aria-hidden="true"
+                    />
+                  )}
+                  Edit
+                </button>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <button
+                  className={`${
+                    active ? "bg-violet-500 text-white" : "text-gray-900"
+                  } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                >
+                  {active ? (
+                    <DuplicateActiveIcon
+                      className="w-5 h-5 mr-2"
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <DuplicateInactiveIcon
+                      className="w-5 h-5 mr-2"
+                      aria-hidden="true"
+                    />
+                  )}
+                  Duplicate
+                </button>
+              )}
+            </Menu.Item>
+          </div>
+          <div className="px-1 py-1">
+            <Menu.Item>
+              {({ active }) => (
+                <button
+                  className={`${
+                    active ? "bg-violet-500 text-white" : "text-gray-900"
+                  } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                >
+                  {active ? (
+                    <ArchiveActiveIcon
+                      className="w-5 h-5 mr-2"
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <ArchiveInactiveIcon
+                      className="w-5 h-5 mr-2"
+                      aria-hidden="true"
+                    />
+                  )}
+                  Archive
+                </button>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <button
+                  className={`${
+                    active ? "bg-violet-500 text-white" : "text-gray-900"
+                  } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                >
+                  {active ? (
+                    <MoveActiveIcon
+                      className="w-5 h-5 mr-2"
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <MoveInactiveIcon
+                      className="w-5 h-5 mr-2"
+                      aria-hidden="true"
+                    />
+                  )}
+                  Move
+                </button>
+              )}
+            </Menu.Item>
+          </div>
+          <div className="px-1 py-1">
+            <Menu.Item>
+              {({ active }) => (
+                <button
+                  className={`${
+                    active ? "bg-violet-500 text-white" : "text-gray-900"
+                  } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                >
+                  {active ? (
+                    <DeleteActiveIcon
+                      className="w-5 h-5 mr-2 text-violet-400"
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <DeleteInactiveIcon
+                      className="w-5 h-5 mr-2 text-violet-400"
+                      aria-hidden="true"
+                    />
+                  )}
+                  Delete
+                </button>
+              )}
+            </Menu.Item>
+          </div>
+        </Menu.Items>
+      </Transition>
+    </Menu>
+  );
 }
 
 function EditInactiveIcon(props: any) {
@@ -161,7 +160,7 @@ function EditInactiveIcon(props: any) {
         strokeWidth="2"
       />
     </svg>
-  )
+  );
 }
 
 function EditActiveIcon(props: any) {
@@ -179,7 +178,7 @@ function EditActiveIcon(props: any) {
         strokeWidth="2"
       />
     </svg>
-  )
+  );
 }
 
 function DuplicateInactiveIcon(props: any) {
@@ -203,7 +202,7 @@ function DuplicateInactiveIcon(props: any) {
         strokeWidth="2"
       />
     </svg>
-  )
+  );
 }
 
 function DuplicateActiveIcon(props: any) {
@@ -227,7 +226,7 @@ function DuplicateActiveIcon(props: any) {
         strokeWidth="2"
       />
     </svg>
-  )
+  );
 }
 
 function ArchiveInactiveIcon(props: any) {
@@ -258,7 +257,7 @@ function ArchiveInactiveIcon(props: any) {
       />
       <path d="M8 12H12" stroke="#A78BFA" strokeWidth="2" />
     </svg>
-  )
+  );
 }
 
 function ArchiveActiveIcon(props: any) {
@@ -289,7 +288,7 @@ function ArchiveActiveIcon(props: any) {
       />
       <path d="M8 12H12" stroke="#A78BFA" strokeWidth="2" />
     </svg>
-  )
+  );
 }
 
 function MoveInactiveIcon(props: any) {
@@ -304,7 +303,7 @@ function MoveInactiveIcon(props: any) {
       <path d="M16 4L8 12" stroke="#A78BFA" strokeWidth="2" />
       <path d="M8 6H4V16H14V12" stroke="#A78BFA" strokeWidth="2" />
     </svg>
-  )
+  );
 }
 
 function MoveActiveIcon(props: any) {
@@ -319,7 +318,7 @@ function MoveActiveIcon(props: any) {
       <path d="M16 4L8 12" stroke="#C4B5FD" strokeWidth="2" />
       <path d="M8 6H4V16H14V12" stroke="#C4B5FD" strokeWidth="2" />
     </svg>
-  )
+  );
 }
 
 function DeleteInactiveIcon(props: any) {
@@ -342,7 +341,7 @@ function DeleteInactiveIcon(props: any) {
       <path d="M3 6H17" stroke="#A78BFA" strokeWidth="2" />
       <path d="M8 6V4H12V6" stroke="#A78BFA" strokeWidth="2" />
     </svg>
-  )
+  );
 }
 
 function DeleteActiveIcon(props: any) {
@@ -365,96 +364,92 @@ function DeleteActiveIcon(props: any) {
       <path d="M3 6H17" stroke="#C4B5FD" strokeWidth="2" />
       <path d="M8 6V4H12V6" stroke="#C4B5FD" strokeWidth="2" />
     </svg>
-  )
+  );
 }
-
-
 
 const solutions = [
   {
-    name: 'Insights',
-    description: 'Measure actions your users take',
-    href: '##',
+    name: "Insights",
+    description: "Measure actions your users take",
+    href: "##",
     icon: IconOne,
   },
   {
-    name: 'Automations',
-    description: 'Create your own targeted content',
-    href: '##',
+    name: "Automations",
+    description: "Create your own targeted content",
+    href: "##",
     icon: IconTwo,
   },
   {
-    name: 'Reports',
-    description: 'Keep track of your growth',
-    href: '##',
+    name: "Reports",
+    description: "Keep track of your growth",
+    href: "##",
     icon: IconThree,
   },
-]
+];
 
 export function Profile2() {
   return (
-      <Popover className="relative">
-          <>
-            <Popover.Button
-              as={Fragment}
-            >
-              <a href="#">
-                <Avatar image="https://i.pravatar.cc/300" />
+    <Popover className="relative">
+      <>
+        <Popover.Button as={Fragment}>
+          <a href="#">
+            <Avatar image="https://i.pravatar.cc/300" />
+          </a>
+        </Popover.Button>
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-200"
+          enterFrom="opacity-0 translate-y-1"
+          enterTo="opacity-100 translate-y-0"
+          leave="transition ease-in duration-150"
+          leaveFrom="opacity-100 translate-y-0"
+          leaveTo="opacity-0 translate-y-1"
+        >
+          <Popover.Panel className="absolute z-10 w-screen max-w-sm px-4 mt-3 transform -translate-x-1/2 left-1/2 sm:px-0 lg:max-w-3xl">
+            <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
+              <div className="relative grid gap-8 bg-white p-7 lg:grid-cols-2">
+                {solutions.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                  >
+                    <div className="flex items-center justify-center flex-shrink-0 w-10 h-10 text-white sm:h-12 sm:w-12">
+                      <item.icon aria-hidden="true" />
+                    </div>
+                    <div className="ml-4">
+                      <p className="text-sm font-medium text-gray-900">
+                        {item.name}
+                      </p>
+                      <p className="text-sm text-gray-500">
+                        {item.description}
+                      </p>
+                    </div>
+                  </a>
+                ))}
+              </div>
+              <div className="p-4 bg-gray-50">
+                <a
+                  href="##"
+                  className="flow-root px-2 py-2 transition duration-150 ease-in-out rounded-md hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                >
+                  <span className="flex items-center">
+                    <span className="text-sm font-medium text-gray-900">
+                      Documentation
+                    </span>
+                  </span>
+                  <span className="block text-sm text-gray-500">
+                    Start integrating products and tools
+                  </span>
                 </a>
-            </Popover.Button>
-            <Transition
-              as={Fragment}
-              enter="transition ease-out duration-200"
-              enterFrom="opacity-0 translate-y-1"
-              enterTo="opacity-100 translate-y-0"
-              leave="transition ease-in duration-150"
-              leaveFrom="opacity-100 translate-y-0"
-              leaveTo="opacity-0 translate-y-1"
-            >
-              <Popover.Panel className="absolute z-10 w-screen max-w-sm px-4 mt-3 transform -translate-x-1/2 left-1/2 sm:px-0 lg:max-w-3xl">
-                <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                  <div className="relative grid gap-8 bg-white p-7 lg:grid-cols-2">
-                    {solutions.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                      >
-                        <div className="flex items-center justify-center flex-shrink-0 w-10 h-10 text-white sm:h-12 sm:w-12">
-                          <item.icon aria-hidden="true" />
-                        </div>
-                        <div className="ml-4">
-                          <p className="text-sm font-medium text-gray-900">
-                            {item.name}
-                          </p>
-                          <p className="text-sm text-gray-500">
-                            {item.description}
-                          </p>
-                        </div>
-                      </a>
-                    ))}
-                  </div>
-                  <div className="p-4 bg-gray-50">
-                    <a
-                      href="##"
-                      className="flow-root px-2 py-2 transition duration-150 ease-in-out rounded-md hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                    >
-                      <span className="flex items-center">
-                        <span className="text-sm font-medium text-gray-900">
-                          Documentation
-                        </span>
-                      </span>
-                      <span className="block text-sm text-gray-500">
-                        Start integrating products and tools
-                      </span>
-                    </a>
-                  </div>
-                </div>
-              </Popover.Panel>
-            </Transition>
-          </>
-      </Popover>
-  )
+              </div>
+            </div>
+          </Popover.Panel>
+        </Transition>
+      </>
+    </Popover>
+  );
 }
 
 function IconOne() {
@@ -487,7 +482,7 @@ function IconOne() {
         strokeWidth="2"
       />
     </svg>
-  )
+  );
 }
 
 function IconTwo() {
@@ -513,7 +508,7 @@ function IconTwo() {
         strokeWidth="2"
       />
     </svg>
-  )
+  );
 }
 
 function IconThree() {
@@ -533,10 +528,8 @@ function IconThree() {
       <rect x="29" y="16" width="2" height="20" fill="#FB923C" />
       <rect x="33" y="12" width="2" height="24" fill="#FB923C" />
     </svg>
-  )
+  );
 }
-
-
 
 export const Example = () => {
   return (

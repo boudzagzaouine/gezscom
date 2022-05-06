@@ -1,7 +1,7 @@
 const withPlugins = require(`next-compose-plugins`);
-const withPWA = require('next-pwa')
-const runtimeCaching = require('next-pwa/cache')
-const { i18n } = require('./next-i18next.config')
+const withPWA = require("next-pwa");
+const runtimeCaching = require("next-pwa/cache");
+const { i18n } = require("./next-i18next.config");
 
 const __DEV__ = process.env.NODE_ENV === "development";
 
@@ -10,16 +10,13 @@ const customWithPWA = [
   {
     pwa: {
       disable: __DEV__,
-      dest: 'public',
+      dest: "public",
       runtimeCaching,
-      },
+    },
   },
 ];
 
-const IMAGE_HOST_DOMAINS = [
-  "picsum.photos",
-  "i.pravatar.cc"
-];
+const IMAGE_HOST_DOMAINS = ["picsum.photos", "i.pravatar.cc"];
 
 const nextConfig = {
   experimental: {

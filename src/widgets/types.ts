@@ -8,7 +8,7 @@ import type {
   ReactNode,
   TableHTMLAttributes,
   TdHTMLAttributes,
-  ThHTMLAttributes
+  ThHTMLAttributes,
 } from "react";
 import React from "react";
 import type {
@@ -17,7 +17,7 @@ import type {
   SubmitHandler,
   UseControllerProps,
   UseFormProps,
-  UseFormReturn
+  UseFormReturn,
 } from "react-hook-form";
 import type { ExtendableProps } from "utils/types";
 
@@ -55,9 +55,8 @@ export type PolymorphicComponentProps<
 /**
  * Utility type to extract the `ref` prop from a polymorphic component
  */
-export type PolymorphicRef<
-  C extends React.ElementType
-> = React.ComponentPropsWithRef<C>["ref"];
+export type PolymorphicRef<C extends React.ElementType> =
+  React.ComponentPropsWithRef<C>["ref"];
 /**
  * A wrapper of `PolymorphicComponentProps` that also includes the `ref`
  * prop for the polymorphic component
@@ -107,20 +106,21 @@ export type ValueType =
 export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {}
 export interface OptionProps extends OptionHTMLAttributes<HTMLOptionElement> {}
 
-export type FormControlProps<
-  C extends ElementType
-> = PolymorphicComponentPropsWithRef<
-  C,
-  {
-    value?: ValueType;
-    defaultValue?: ValueType;
-    options?: Option[]
-  }
->;
-export type Option = string | {
-  id: string;
-  label?: string;
-};
+export type FormControlProps<C extends ElementType> =
+  PolymorphicComponentPropsWithRef<
+    C,
+    {
+      value?: ValueType;
+      defaultValue?: ValueType;
+      options?: Option[];
+    }
+  >;
+export type Option =
+  | string
+  | {
+      id: string;
+      label?: string;
+    };
 export type InputProps<C extends ElementType> = FormControlProps<C> & {
   label?: string;
   inputClass?: string;
@@ -146,13 +146,15 @@ export interface ErrorProps extends LabelProps {
   meta?: FieldMetaProps;
 }
 export type FormProps<T extends FieldValues> = UseFormProps<T> & {
-  children: React.ReactNode | ((methods: UseFormReturn<T>) => React.ReactElement);
+  children:
+    | React.ReactNode
+    | ((methods: UseFormReturn<T>) => React.ReactElement);
   onSubmit?: SubmitHandler<T>;
   resetOnSuccessfulSubmit?: boolean;
 };
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   confirm?: string;
-  variant?: 'primary' | 'secondary';
+  variant?: "primary" | "secondary";
   size?: string;
   label?: string;
   backgroundColor?: string;

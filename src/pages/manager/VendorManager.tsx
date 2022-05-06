@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const VendorManager = () => {
-    return <div>VendorManager</div>
-}
+  return <div>VendorManager</div>;
+};
 
-export default VendorManager
+export default VendorManager;

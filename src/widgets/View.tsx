@@ -36,4 +36,6 @@ export const Col = <C extends React.ElementType = "div">(
   props: ViewPropsWithoutColRow<C>
 ) => <View {...props} col />;
 
-export const Footer: FC<ViewProps<'footer'>> = props => <View as='footer' {...props} />
+export const Footer: FC<ViewProps<"footer">> = (props) => (
+  <View as="footer" {...props} />
+);

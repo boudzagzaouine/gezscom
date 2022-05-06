@@ -7,7 +7,7 @@ import {
   HttpRequestConfig,
   HttpResponse,
   Notification,
-  NotificationType
+  NotificationType,
 } from "service/types";
 import { ObjectUtils } from "utils/ObjectUtils";
 import { offlineService } from "service/TogglerService";
@@ -91,7 +91,9 @@ export class HttpService {
     });
   }
 
-  request<T = any, R = HttpResponse<T>, D = any>(config: HttpRequestConfig<D>): Promise<R> {
+  request<T = any, R = HttpResponse<T>, D = any>(
+    config: HttpRequestConfig<D>
+  ): Promise<R> {
     let c = config;
     c = this.enhanceHeaders(c);
     c = this.handleFormData(c);
@@ -146,21 +148,31 @@ export class HttpService {
       }),
     };
   }
-  private handleFormData<D = any>(config: HttpRequestConfig<D>): HttpRequestConfig<D> {
+  private handleFormData<D = any>(
+    config: HttpRequestConfig<D>
+  ): HttpRequestConfig<D> {
     return onRequestSuccess(config);
   }
 
-  static appendHeaders<D = any>(config: HttpRequestConfig<D> = {}, newHeaders = {}) {
+  static appendHeaders<D = any>(
+    config: HttpRequestConfig<D> = {},
+    newHeaders = {}
+  ) {
     const { headers = {} } = config;
     return Object.assign({}, headers, newHeaders);
   }
-  static getHeaderValue<D = any>(config: HttpRequestConfig<D> = {}, key: string) {
+  static getHeaderValue<D = any>(
+    config: HttpRequestConfig<D> = {},
+    key: string
+  ) {
     const { headers = {} } = config;
     return headers[key];
   }
 }
 
-function onRequestSuccess<D = any>(config: HttpRequestConfig<D>): HttpRequestConfig<D> {
+function onRequestSuccess<D = any>(
+  config: HttpRequestConfig<D>
+): HttpRequestConfig<D> {
   try {
     let { data, headers = {} } = config;
     const contentType = headers[Constants.CONTENT_TYPE] || "";
@@ -178,7 +190,7 @@ function onRequestSuccess<D = any>(config: HttpRequestConfig<D>): HttpRequestCon
     console.warn("Interceptors onRequestSuccess Error : ", error);
   }
   return config;
-};
+}
 
 const onResponseSuccess = <T = any>(
   response: HttpResponse<T>,

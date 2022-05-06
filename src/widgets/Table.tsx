@@ -22,25 +22,28 @@ const Table = ({ thead, children, className, ...props }: TableProps) => {
   );
 };
 
-const Tr = (props: TrProps) => (<tr {...props} />);
+const Tr = (props: TrProps) => <tr {...props} />;
 
 const Th = ({ className, ...props }: ThProps) => {
   return (
     <th
       scope="col"
       {...props}
-      className={classNames(className, "sticky top-0 z-10 border-b border-gray-300 bg-gray-50 bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8")}
+      className={classNames(
+        className,
+        "sticky top-0 z-10 border-b border-gray-300 bg-gray-50 bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8"
+      )}
     />
   );
 };
 
-const Td = ({className, action = false, ...props }: TdProps) => {
+const Td = ({ className, action = false, ...props }: TdProps) => {
   return (
     <td
       {...props}
       className={classNames(
         className,
-        {'relative text-right font-medium sm:pr-6': action},
+        { "relative text-right font-medium sm:pr-6": action },
         "whitespace-nowrap px-3 py-4 text-sm text-gray-500 hidden lg:table-cell"
       )}
     />

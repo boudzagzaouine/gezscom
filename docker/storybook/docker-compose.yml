@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   storybook:
@@ -7,4 +7,4 @@ services:
       dockerfile: docker/storybook/Dockerfile
     image: storybook
     ports:
-      - '8080:8080'
+      - "8080:8080"

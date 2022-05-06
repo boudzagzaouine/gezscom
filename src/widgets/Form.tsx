@@ -32,11 +32,14 @@ const Control = forwardRef(
       additionalProps = { defaultChecked: "true" === `${defaultValue}` };
     }
     if (isSelect && options) {
-      const selectOptions = options.map(option => {
-        const optionValue = typeof option === 'string' ? option : option.id;
-        const optionLabel = typeof option === 'string' ? option : option.label ?? option.id;
+      const selectOptions = options.map((option) => {
+        const optionValue = typeof option === "string" ? option : option.id;
+        const optionLabel =
+          typeof option === "string" ? option : option.label ?? option.id;
         return (
-          <Option key={optionValue} value={optionValue}>{optionLabel}</Option>
+          <Option key={optionValue} value={optionValue}>
+            {optionLabel}
+          </Option>
         );
       });
       additionalProps["children"] = selectOptions;

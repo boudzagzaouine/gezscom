@@ -8,7 +8,7 @@ const WallPage: NextPage = () => {
   return (
     <View>
       <Head title="Wall" />
-      <View as="footer" >
+      <View as="footer">
         <Text>{t("wall-intro")}</Text>
         <Image src="/images/logo.jpg" height={144} width={144} alt="username" />
         <Link href="/">{t("back", { ns: "common" })}</Link>
@@ -20,7 +20,7 @@ const WallPage: NextPage = () => {
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
-      layout: 'empty',
+      layout: "empty",
       ...(await serverSideTranslations(locale, ["common", "wall"])),
       // Will be passed to the page component as props
     },

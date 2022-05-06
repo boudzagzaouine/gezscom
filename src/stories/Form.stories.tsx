@@ -15,14 +15,14 @@ interface Contact {
   lastName?: string;
   genre?: string;
   conditions?: boolean;
-  qualities?: string[]
+  qualities?: string[];
 }
 const defaultValues: Contact = {
   firstName: "",
   lastName: "",
   // 'genre': '',
   conditions: false,
-  qualities: ['3', '1']
+  qualities: ["3", "1"],
 };
 
 let counter = 0;
@@ -102,7 +102,7 @@ export function ExampleForm() {
   const firstNameEl = useRef<HTMLInputElement>(null);
   console.log("ref ? ", firstNameEl);
   const onSubmit = useCallback(
-    (data: Contact) => 
+    (data: Contact) =>
       console.log("datd ? ", data, "ref ? ", firstNameEl.current),
     []
   );
@@ -146,7 +146,7 @@ export function ExampleForm() {
           name="qualities"
           as={MultiSelect}
           options={QUALITIES}
-          rules={{required: true, minLength: 2}}
+          rules={{ required: true, minLength: 2 }}
         />
 
         <Field

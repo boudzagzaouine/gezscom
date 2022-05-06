@@ -12,7 +12,7 @@ export const MenuBarItem = <C extends React.ElementType = "a">({
   return (
     <Link href={href} className={`is_icon ${className}`} {...props}>
       {icon}
-      {badge && (<Text>{badge}</Text>)}
+      {badge && <Text>{badge}</Text>}
     </Link>
   );
 };

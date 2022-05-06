@@ -7,15 +7,13 @@ export default {
   component: Input,
 } as ComponentMeta<typeof Input>;
 
-const Template: ComponentStory<typeof Input> = (args) => (
-  <Input {...args} />
-);
+const Template: ComponentStory<typeof Input> = (args) => <Input {...args} />;
 
 export const InputText = Template.bind({});
 InputText.args = {
   name: "email",
   label: "Email",
-  row: true
+  row: true,
 };
 
 export const Checkbox = Template.bind({});

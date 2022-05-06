@@ -5,8 +5,8 @@ export default NextAuth({
   // https://next-auth.js.org/configuration/providers/oauth
   providers: [
     KeycloakProvider({
-      clientId: process.env.KEYCLOAK_ID ?? '',
-      clientSecret: process.env.KEYCLOAK_SECRET ?? '',
+      clientId: process.env.KEYCLOAK_ID ?? "",
+      clientSecret: process.env.KEYCLOAK_SECRET ?? "",
       issuer: process.env.KEYCLOAK_ISSUER,
     }),
   ],
@@ -25,8 +25,8 @@ export default NextAuth({
     },
     session({ session, token }) {
       // Send properties to the client, like an access_token from a provider.
-      session.accessToken = token.accessToken
-      return session
+      session.accessToken = token.accessToken;
+      return session;
     },
   },
-})
+});
