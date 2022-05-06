@@ -1,5 +1,5 @@
 import React from "react";
-import { Input } from "components";
+import { Input } from "widgets";
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
 
 export default {

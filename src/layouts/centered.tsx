@@ -1,5 +1,5 @@
-import { View } from "components";
-import type { LayoutProps } from "components/types";
+import { View } from "widgets";
+import type { LayoutProps } from "widgets/types";
 import type { FC } from "react";
 import React from "react";
 

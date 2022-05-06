@@ -1,6 +1,6 @@
-import { MenuBarItem } from "components/header/MenuBarItem";
-import { HomeIcon, LockIcon, WallIcon } from "components/icons";
-import { View } from "components/View";
+import { MenuBarItem } from "widgets/header/MenuBarItem";
+import { HomeIcon, LockIcon, WallIcon } from "widgets/icons";
+import { View } from "widgets/View";
 import { Profile } from "./Profile";
 
 export function MenuBar() {

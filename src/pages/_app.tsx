@@ -1,6 +1,6 @@
-import { Head } from "components";
-import { Notifications } from "components/Notifications";
-import { LayoutName } from "components/types";
+import { Head } from "widgets";
+import { Notifications } from "widgets/Notifications";
+import { LayoutName } from "widgets/types";
 import store, { persistor } from "config/store";
 import Layout from "layouts";
 import { NextPage } from "next";
@@ -49,17 +49,17 @@ const App: FC<AppPropsWithLayout> = ({ Component, pageProps }) => {
               />
               <meta name="description" content="Description" />
               <meta name="keywords" content="Keywords" />
-              <title>PWA Example</title>
+              <title>GESCOM</title>
 
               <link rel="manifest" href="/manifest.json" />
               <link
-                href="/icons/favicon-16x16.png"
+                href="/icons/icon-16x16.png"
                 rel="icon"
                 type="image/png"
                 sizes="16x16"
               />
               <link
-                href="/icons/favicon-32x32.png"
+                href="/icons/icon-32x32.png"
                 rel="icon"
                 type="image/png"
                 sizes="32x32"

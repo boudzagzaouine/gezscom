@@ -1,4 +1,4 @@
-import { Col, Row, Text } from "components";
+import { Col, Row, Text } from "widgets";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { useTranslation } from "hooks/translate";
 import { useState } from "react";

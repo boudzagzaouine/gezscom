@@ -1,4 +1,4 @@
-import type { TextProps } from "components/types";
+import type { TextProps } from "widgets/types";
 
 export const Text = <C extends React.ElementType = "span">({
   as,

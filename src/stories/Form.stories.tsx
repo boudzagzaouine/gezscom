@@ -1,6 +1,6 @@
 import type { ComponentMeta } from "@storybook/react";
-import { Button, Field, Form, Text } from "components";
-import { MultiSelect } from "components/MultiSelect";
+import { Button, Field, Form, Text } from "widgets";
+import { MultiSelect } from "widgets/MultiSelect";
 import { useWatch } from "hooks/form";
 import { useCallback, useEffect, useRef } from "react";
 

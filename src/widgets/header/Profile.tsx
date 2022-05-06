@@ -1,6 +1,6 @@
 import { Menu, Popover, Transition } from "@headlessui/react";
-import { View } from "components";
-import { Avatar } from "components/Avatar";
+import { View } from "widgets";
+import { Avatar } from "widgets/Avatar";
 import { Fragment } from "react";
 
 

@@ -34,14 +34,14 @@ const NavVert = () => {
         },
         {
             icon: 'home',
-            text: 'eeeeeeeeee',
-            link: '/',
-            active: route.pathname == '/ee',
+            text: 'test',
+            link: '/Test',
+            active: route.pathname == '/Test',
         },
         {
             icon: 'home',
-            text: 'eeeeeeeeee',
-            link: '/',
+            text: 'liste des icons',
+            link: '/documentation/ListIcons',
             active: route.pathname == '/ee',
         },
         {
@@ -81,14 +81,15 @@ const NavVert = () => {
             active: route.pathname == '/ee',
         },
     ]
-
+    
+    
     return (
-        <ul className="nav-horiz bg-cyan-800">
-            <h2 className="bg-cyan-900">GESTION COMMERCIAL </h2>
+        <ul className="nav-horiz bg-[#2B5173]">
+            <h2 className="bg-[#000] bg-opacity-10 text-[#fff] w-full float-left py-2.5">GESTION COMMERCIAL </h2>
             {menuVert.map((item) => (
                 <li
                     key={item.icon}
-                    className={item.active ? 'li-active' : 'li-free'}
+                    className={'cursor-pointer text-sm text-[#fff] w-full float-left py-2.5 '+(item.active ? 'border-l-2 border-white bg-opacity-10 bg-[#000]' : 'border-l-0 bg-transparent')}
                 >
                     <Link href={item.link}>
                         <a>
@@ -100,7 +101,9 @@ const NavVert = () => {
                     </Link>
                 </li>
             ))}
-            <img src="/images/logo.png" alt="" />
+           <div className="w-full flex justify-center py-5 float-left">
+           <img src="/images/logo-4.png" alt=""  />
+           </div>
         </ul>
     )
 }

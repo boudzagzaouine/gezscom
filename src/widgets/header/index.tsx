@@ -7,8 +7,8 @@ import {
   Text,
   Transition,
   View
-} from "components";
-import { BellIcon, XIcon, MenuIcon } from "components/icons/outline";
+} from "widgets";
+import { BellIcon, XIcon, MenuIcon } from "widgets/icons/outline";
 import { Fragment } from "react";
 
 const user = {

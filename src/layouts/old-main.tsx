@@ -1,7 +1,7 @@
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import classNames from "classnames";
-import { LayoutProps } from "components/types";
+import { LayoutProps } from "widgets/types";
 import { FC, Fragment } from "react";
 
 const user = {

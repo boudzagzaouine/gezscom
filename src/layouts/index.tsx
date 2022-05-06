@@ -1,4 +1,4 @@
-import type { LayoutProps } from "components/types";
+import type { LayoutProps } from "widgets/types";
 import Centered from "layouts/centered";
 import Main from "layouts/main";
 import React, { FC, Fragment } from "react";

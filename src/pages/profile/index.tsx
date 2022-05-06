@@ -1,4 +1,4 @@
-import { Button, View } from "components";
+import { Button, View } from "widgets";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 function logout() {

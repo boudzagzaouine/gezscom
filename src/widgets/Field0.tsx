@@ -1,5 +1,5 @@
-import { Input } from "components/Input";
-import type { FieldProps, FieldValues, PolymorphicRef } from "components/types";
+import { Input } from "widgets/Input";
+import type { FieldProps, FieldValues, PolymorphicRef } from "widgets/types";
 import { useController } from "hooks/form";
 import { useTranslation } from "hooks/translate";
 import { forwardRef, ReactElement, useMemo } from "react";

@@ -1,4 +1,4 @@
-import { Col, Form, Head, Link, Text, View } from "components";
+import { Col, Form, Head, Link, Text, View } from "widgets";
 import Counter from "features/counter/Counter";
 import { useTranslation } from "hooks/translate";
 import type { NextPage } from "next";

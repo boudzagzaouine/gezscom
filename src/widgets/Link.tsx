@@ -1,4 +1,4 @@
-import type { AnchorProps, LinkProps } from "components/types";
+import type { AnchorProps, LinkProps } from "widgets/types";
 import NLink from "next/link";
 import type { FC } from "react";
 

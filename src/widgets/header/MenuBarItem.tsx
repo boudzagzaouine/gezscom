@@ -1,6 +1,6 @@
-import { Text } from "components/Text";
-import { Link } from "components/Link";
-import { MenuBarItemProps } from "components/types";
+import { Text } from "widgets/Text";
+import { Link } from "widgets/Link";
+import { MenuBarItemProps } from "widgets/types";
 
 export const MenuBarItem = <C extends React.ElementType = "a">({
   href,

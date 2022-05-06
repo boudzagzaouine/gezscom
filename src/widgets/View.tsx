@@ -1,27 +1,39 @@
-import React, { ReactNode } from 'react'
-import cn from 'classnames'
-interface ViewProps {
-    children: ReactNode
-}
-const calculClass = ({ className }: any) => {
-    return cn('bg-white float-left w-full mp-8 shadow-lg', className)
-}
-/*
+import classNames from "classnames";
+import type { ViewProps } from "widgets/types";
+import { FC } from "react";
 
-const Input: FC<InputHTMLAttributes<HTMLInputElement>> = ({
- className,
+export const View = <C extends React.ElementType = "div">({
+  row,
+  col,
+  className,
+  as,
   ...props
-}) => {
+}: ViewProps<C>) => {
+  const Component = as || "div";
   return (
-    <input className={calculClass({className})} {...props} />
-    );
+    <Component
+      {...props}
+      className={classNames(
+        {
+          "flex flex-row": row,
+          "flex flex-col": col,
+        },
+        className
+      )}
+    />
+  );
 };
-   
-export default Input
-*/
-const View = ({ children }: ViewProps) => {
-    const c: string = ''
-    return <section className={calculClass({ c })}>{children}</section>
-}
 
-export default View
+type ViewPropsWithoutColRow<C extends React.ElementType> = Omit<
+  ViewProps<C>,
+  "col" | "row"
+>;
+export const Row = <C extends React.ElementType = "div">(
+  props: ViewPropsWithoutColRow<C>
+) => <View {...props} row />;
+
+export const Col = <C extends React.ElementType = "div">(
+  props: ViewPropsWithoutColRow<C>
+) => <View {...props} col />;
+
+export const Footer: FC<ViewProps<'footer'>> = props => <View as='footer' {...props} />

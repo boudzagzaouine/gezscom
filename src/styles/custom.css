@@ -32,34 +32,16 @@ body {
     margin-bottom: 10px;
 }
 
-.nav-horiz img {
-    float: left;
-    width: 100%;
-    margin: 61px 0;
-}
+.nav-horiz img {}
 
 .nav-horiz li,
-.nav-horiz h2 {
-    color: rgb(245, 245, 255);
-    float: left;
-    width: 100%;
-    padding: 10px 0;
-}
+.nav-horiz h2 {}
 
-.nav-horiz li {
-    cursor: pointer;
-    background-color: transparent;
-    font-size: 13px;
-}
+.nav-horiz li {}
 
-.li-active {
-    border-left: 3px solid #bbf;
-    background-color: rgb(22 78 99 / var(--tw-bg-opacity)) !important;
-}
+.li-active {}
 
-.li-free {
-    border-left: none;
-}
+.li-free {}
 
 .nav-horiz li .icon {
     float: left;

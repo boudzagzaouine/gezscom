@@ -7,7 +7,7 @@ import type {
   OptionProps,
   PolymorphicRef,
   SubmitHandler,
-} from "components/types";
+} from "widgets/types";
 import { useForm } from "hooks/form";
 import { FC, useCallback, useEffect } from "react";
 import { forwardRef } from "react";

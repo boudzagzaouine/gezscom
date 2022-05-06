@@ -14,8 +14,8 @@ import { Client } from '../../../tools/types'
 import Bcyan from '../../../widgets/Bcyan'
 import Bred from '../../../widgets/Bred'
 import Icon from '../../../widgets/Icon'
-import View from '../../../widgets/View'
-import { Field, Form } from 'components'
+import Section from '../../../widgets/Section'
+import { Field, Form } from 'widgets'
 
 type FormClientManagerProp = {
     closed: () => void
@@ -65,7 +65,7 @@ const FormClientManager = ({
         )
     }
     return (
-        <View>
+        <Section>
             <div className="float-left w-full text-xs">
                 <Form defaultValues={client} onSubmit={onSubmit}>
                     <h1>Nom & Prénom du client request={request}</h1>
@@ -169,7 +169,7 @@ const FormClientManager = ({
                     <Icon i="cancel" cl="" />
                 </Bred>
             </div>
-        </View>
+        </Section>
     )
 }
 

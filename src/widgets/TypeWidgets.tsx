@@ -5,6 +5,7 @@ import type {
     ElementType,
     LabelHTMLAttributes,
     OptionHTMLAttributes,
+    ReactElement,
     ReactNode,
     TableHTMLAttributes,
     TdHTMLAttributes,
@@ -192,3 +193,8 @@ export type MenuBarItemProps<C extends ElementType = 'a'> = LinkProps<C> & {
     title?: string
     badge?: number
 }
+export type MenuItems={
+    icon:ReactElement<any, any>
+    text:string 
+    action:()=>void
+    }

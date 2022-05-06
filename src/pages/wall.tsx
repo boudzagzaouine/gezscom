@@ -1,4 +1,4 @@
-import { Head, Image, Link, Text, View } from "components";
+import { Head, Image, Link, Text, View } from "widgets";
 import { NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "hooks/translate";

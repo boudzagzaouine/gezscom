@@ -1,12 +1,15 @@
+import { ArchiveIcon, BanIcon, ClipboardListIcon, DuplicateIcon, PencilAltIcon, TrashIcon } from '@heroicons/react/solid'
+import Mitems from 'components/Mitems'
 import Link from 'next/link'
 import { ChangeEventHandler, useState } from 'react'
+import { MenuItems } from 'widgets/TypeWidgets'
 import { useFetchClientsQuery } from '../../config/rtk'
 import { REQUEST_EDIT, REQUEST_SAVE } from '../../tools/consts'
 import { c0, Client } from '../../tools/types'
 import Bcyan from '../../widgets/Bcyan'
-import Button from '../../widgets/Button'
+import Button from '../../widgets/Boton'
 import Icon from '../../widgets/Icon'
-import View from '../../widgets/View'
+import Section from '../../widgets/Section'
 import FormClientManager from './formulaires/FormClientManager'
 
 const ClientManager = () => {
@@ -33,9 +36,19 @@ const ClientManager = () => {
     const [client0, setClient0] = useState(c0)
     const [request0, setRequest0] = useState(REQUEST_SAVE)
     const { data = [], isFetching, refetch } = useFetchClientsQuery()
-    const [button,setButton]=useState("")
-   //const [clients,setClients]=useState(data.content)
-   
+    const showFormulaire=(client:Client)=>{
+        setClient0(client)
+        setForm(true)
+        setRequest0(REQUEST_EDIT)
+    }
+   const menu=(client:Client):MenuItems[]=>{
+       return [
+    {"icon":<ClipboardListIcon className="mr-3 h-8 w-8 text-green-300 group-hover:text-gray-500" aria-hidden="true" />,"text":"Détail","action":()=>{showFormulaire(client)}},
+    {"icon":<PencilAltIcon className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500" aria-hidden="true" />,"text":"Modifier","action":()=>{alert("fofo")}},
+    {"icon":<TrashIcon className="mr-3 h-8 w-8 text-rose-900 group-hover:text-gray-500" aria-hidden="true" />,"text":"Supprimer","action":()=>{alert("fofo")}},
+    {"icon":<ArchiveIcon className="mr-3 h-8 w-8 text-gray-800 group-hover:text-gray-500" aria-hidden="true" />,"text":"Archiver","action":()=>{alert("fofo")}},
+]
+}
     return (
         <>
             {form && (
@@ -50,7 +63,7 @@ const ClientManager = () => {
                 />
             )}
             {!form && (
-                <View>
+                <Section>
                     <div className="float-left w-full">
                         <Bcyan
                             className="float-left"
@@ -108,48 +121,16 @@ const ClientManager = () => {
                                         </td>
                                         <td>{client.incoterm}</td>
                                         <td>{client.paymentChoice}</td>
-                                        <td  className="block-buttons">
-                                            <Button
-                                                className="to-transparent text-black border-transparent"
-                                                onClick={() => {
-                                                    setButton(client.id)
-                                                }}
-                                            >
-                                                <Icon i="dots-vetical" cl="" />
-                                            </Button>
-                                            
-                                          {button==client.id &&  <ul>
-                                            <li  onClick={() => {
-                                                    setClient0(client)
-                                                    setForm(true)
-                                                    setRequest0(REQUEST_EDIT)
-                                                }}>
-                  <span className="icon">
-                                <Icon i="save" cl="" />
-                            </span>
-                            <span className="text">coco</span>
-                </li>
-                <li>
-                  <span className="icon">
-                                <Icon i="save" cl="" />
-                            </span>
-                            <span className="text">coco</span>
-                </li>
-                <li>
-                  <span className="icon">
-                                <Icon i="save" cl="" />
-                            </span>
-                            <span className="text">coco</span>
-                </li>
-
-</ul>}
+                                        <td>
+                                        <Mitems menu={menu(client)} />
                                         </td>
+                                     
                                     </tr>
                                 ))
                             }
                         </tbody>
                     </table>
-                </View>
+                </Section>
             )}
         </>
     )

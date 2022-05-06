@@ -1,4 +1,4 @@
-import { LockClosedIcon, HomeIcon as RHomeIcon } from "components/icons/solid";
+import { LockClosedIcon, HomeIcon as RHomeIcon } from "widgets/icons/solid";
 
 export const HomeIcon = () => <RHomeIcon />;
 
