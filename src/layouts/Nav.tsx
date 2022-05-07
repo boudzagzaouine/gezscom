@@ -86,7 +86,7 @@ export default function Nav() {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="/images/avatar.png"
+                        src="/images/empty-avatar.png"
                         alt=""
                       />
                     </Menu.Button>

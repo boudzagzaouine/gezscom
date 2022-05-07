@@ -56,7 +56,7 @@ export const crudApi = createApi({
         query(id: Num) {
           //  if (confirm(`do you want delete Client number ${id.id} ?`))
           return {
-            url: `/clients/del/${id.id}`,
+            url: `/clients/${id.id}`,
             method: "DELETE",
           };
           // else return
@@ -72,8 +72,8 @@ export const crudApi = createApi({
           query(id: Num) {
             //  if (confirm(`do you want delete Client number ${id.id} ?`))
             return {
-              url: `/clients/archive/${id.id}`,
-              method: "PUT",
+              url: `/clients/${id.id}/archive`,
+              method: "PATCH",
             };
             // else return
           },

@@ -50,7 +50,7 @@ export const Input = memo(
         inputClass
       );
       const labelClassName = classNames(
-        `w-full block font-medium text-gray-700 sm:mt-px sm:pt-2`,
+        `w-full block font-medium text-gray-700 sm:mt-px sm:pt-2 `,
         { "ml-2": isRadio || isCheckbox },
         labelClass
       );
@@ -58,7 +58,7 @@ export const Input = memo(
         "sm:grid sm:grid-cols-4 sm:gap-4 sm:items-start sm:pt-5 w-full",
         className
       );
-      const inputWrapperClassName = classNames("mt-1 sm:mt-0 sm:col-span-2", {
+      const inputWrapperClassName = classNames(" disabled:border disabled:border-pink-300 mt-1 sm:mt-0 sm:col-span-2", {
         "items-center": isRadio || isCheckbox,
       });
 

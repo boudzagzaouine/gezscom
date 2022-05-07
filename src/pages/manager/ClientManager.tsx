@@ -145,12 +145,12 @@ const ClientManager = () => {
             </Bcyan>
 
             <div className="float-right">
-              <Button className="bg-white float-left border border-r-0 p-3 rounded-l-lg">
+              <Button className="bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg">
                 <Icon i="search" cl="" />
               </Button>
               <input
                 type="text"
-                className="py-3 border outline-slate-200 float-left border-l-0 rounded-r-lg w-96"
+                className="py-3 border outline-[#ddd] border-[#ddd] float-left border-l-0 rounded-r-lg w-96"
               />
             </div>
           </div>

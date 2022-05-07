@@ -90,7 +90,7 @@ const FormClientManager = ({
             <Avatar />
           </div>
           <div className="float-left w-full mt-5">
-            <Bcyan
+           {!disabled &&  <Bcyan
               className="float-left"
               onClick={() => {
                 setTimeout(() => {
@@ -103,7 +103,8 @@ const FormClientManager = ({
                 aria-hidden="true"
               />
             </Bcyan>
-            {request == REQUEST_SAVE && (
+            }
+            {!disabled && request == REQUEST_SAVE && (
               <Bcyan className="float-left" type="submit">
                 <Icon i="save" cl="float-left" />{" "}
                 <span className="px-2 float-left">&&</span>
