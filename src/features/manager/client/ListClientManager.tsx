@@ -56,6 +56,12 @@ const ListClientManager = () => {
         setForm(true);
         setRequest0(REQUEST_EDIT);
       };
+      const FormAsAdd = () => {
+        setDisabled(false);
+        setClient0(c0);
+        setForm(true);
+        setRequest0(REQUEST_SAVE);
+      };
       const FormAsEdit = (client: Client) => {
         setDisabled(true);
         showFormulaire(client);
@@ -154,8 +160,9 @@ const ListClientManager = () => {
                 <Bcyan
                   className="float-left"
                   onClick={() => {
-                    setClient0(c0);
-                    setForm(true);
+                    //setClient0(c0);
+                    //setForm(true);
+                    FormAsAdd()
                   }}
                 >
                   <UserAddIcon className={STYLE_ICON} aria-hidden="true" />
