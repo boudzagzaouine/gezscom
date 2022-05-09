@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const PackingManager = () => {
-  return (
-    <div>PackingManager</div>
-  )
-}
+  return <div>PackingManager</div>;
+};
 
-export default PackingManager
+export default PackingManager;

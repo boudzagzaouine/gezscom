@@ -6,15 +6,20 @@ import {
   PAYMENT_CHOICE,
   REQUEST_EDIT,
   REQUEST_SAVE,
-} from "../../../tools/consts";
-import { Client } from "../../../tools/types";
-import Bcyan from "../../../widgets/Bcyan";
-import Bred from "../../../widgets/Bred";
-import Icon from "../../../widgets/Icon";
-import Section from "../../../widgets/Section";
+} from "tools/consts";
+import { STYLE_ICON } from "tools/constStyle";
+import { Client } from "tools/types";
+import Bcyan from "widgets/Bcyan";
+import Bred from "widgets/Bred";
+import Section from "widgets/Section";
 import { Field, Form } from "widgets";
 import Avatar from "widgets/Avatar";
-import { PencilAltIcon, SaveIcon, XCircleIcon } from "@heroicons/react/solid";
+import {
+  PencilAltIcon,
+  SaveIcon,
+  UserAddIcon,
+  XCircleIcon,
+} from "@heroicons/react/solid";
 
 type FormClientManagerProp = {
   closed: () => void;
@@ -90,25 +95,29 @@ const FormClientManager = ({
             <Avatar />
           </div>
           <div className="float-left w-full mt-5">
-           {!disabled &&  <Bcyan
-              className="float-left"
-              onClick={() => {
-                setTimeout(() => {
-                  closed();
-                }, 500);
-              }}
-            >
-              <SaveIcon
-                className="h-8 w-8 text-[#fff] group-hover:text-gray-500"
-                aria-hidden="true"
-              />
-            </Bcyan>
-            }
+            {!disabled && (
+              <Bcyan
+                className="float-left"
+                onClick={() => {
+                  setTimeout(() => {
+                    closed();
+                  }, 500);
+                }}
+              >
+                <SaveIcon className={STYLE_ICON} aria-hidden="true" />
+              </Bcyan>
+            )}
             {!disabled && request == REQUEST_SAVE && (
               <Bcyan className="float-left" type="submit">
-                <Icon i="save" cl="float-left" />{" "}
+                <SaveIcon
+                  className="h-8 w-8 text-[#fff] group-hover:text-gray-500  float-left"
+                  aria-hidden="true"
+                />{" "}
                 <span className="px-2 float-left">&&</span>
-                <Icon i="user-add" cl="float-left" />
+                <UserAddIcon
+                  className="h-8 w-8 text-[#fff] group-hover:text-gray-500 float-left"
+                  aria-hidden="true"
+                />
               </Bcyan>
             )}
           </div>
@@ -119,10 +128,7 @@ const FormClientManager = ({
             closed();
           }}
         >
-          <XCircleIcon
-            className="h-8 w-8 text-[#fff] group-hover:text-gray-500"
-            aria-hidden="true"
-          />
+          <XCircleIcon className={STYLE_ICON} aria-hidden="true" />
         </Bred>
         {disabled && (
           <Bcyan
@@ -131,10 +137,7 @@ const FormClientManager = ({
               setDisabled(false);
             }}
           >
-            <PencilAltIcon
-              className="h-8 w-8 text-[#fff] group-hover:text-gray-500"
-              aria-hidden="true"
-            />
+            <PencilAltIcon className={STYLE_ICON} aria-hidden="true" />
           </Bcyan>
         )}
       </div>

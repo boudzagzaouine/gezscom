@@ -58,9 +58,12 @@ export const Input = memo(
         "sm:grid sm:grid-cols-4 sm:gap-4 sm:items-start sm:pt-5 w-full",
         className
       );
-      const inputWrapperClassName = classNames(" disabled:border disabled:border-pink-300 mt-1 sm:mt-0 sm:col-span-2", {
-        "items-center": isRadio || isCheckbox,
-      });
+      const inputWrapperClassName = classNames(
+        " disabled:border disabled:border-pink-300 mt-1 sm:mt-0 sm:col-span-2",
+        {
+          "items-center": isRadio || isCheckbox,
+        }
+      );
 
       const labelUi = label ? (
         <Form.Label htmlFor={id} className={labelClassName}>

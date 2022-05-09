@@ -1,24 +1,23 @@
 import { TrashIcon } from "@heroicons/react/outline";
-import { ArchiveIcon, XCircleIcon } from "@heroicons/react/solid";
+import { ArchiveIcon, ReplyIcon, XCircleIcon } from "@heroicons/react/solid";
 import axios from "axios";
 import React, { forwardRef, Ref, useRef, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { setTimeout } from "timers";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useArchiveClientMutation } from "../config/rtk";
+import { useRestoreClientMutation } from "../config/rtk";
 import Modal from "./Modal";
-type ArchiveClientPorp = {
+type RestoreClientPorp = {
   id: string;
 };
-const ArchiveClient = ({ id }: ArchiveClientPorp, ref: Ref<void>) => {
+const RestoreClient = ({ id }: RestoreClientPorp, ref: Ref<void>) => {
   const [id0, setId0] = useState(id);
   //@ts-ignore
   const { register, handleSubmit } = useForm<string>({
     defaultValues: { id0 },
   });
-  const [archive] = useArchiveClientMutation();
+  const [restore] = useRestoreClientMutation();
   const [showModal, setShowModal] = React.useState(false);
   const openModal = (i: string) => {
     setId0(i);
@@ -28,20 +27,20 @@ const ArchiveClient = ({ id }: ArchiveClientPorp, ref: Ref<void>) => {
     //@ts-ignore
     ref.current = openModal;
   });
-  const archiveTemp = () => {
+  const restoreTemp = () => {
     axios
-      .patch("http://localhost:1000/api/v1/clients/" + id0 + "/archive")
+      .patch("http://localhost:1000/api/v1/clients/" + id0 + "/restore")
       .then(() => {});
   };
   return (
     <>
-      <Modal title={"archivage"} show={showModal}>
+      <Modal title={"restoration"} show={showModal}>
         <div>
-          <h2>archivage du client num: {id0}</h2>
+          <h2>restoration du client num: {id0}</h2>
           <form
             onSubmit={
               //@ts-ignore
-              handleSubmit(archiveTemp)
+              handleSubmit(restoreTemp)
             }
           >
             {" "}
@@ -55,7 +54,7 @@ const ArchiveClient = ({ id }: ArchiveClientPorp, ref: Ref<void>) => {
                 }, 500);
               }}
             >
-              <ArchiveIcon
+              <ReplyIcon
                 className="h-8 w-8 text-[#fff] group-hover:text-gray-500"
                 aria-hidden="true"
               />
@@ -75,4 +74,4 @@ const ArchiveClient = ({ id }: ArchiveClientPorp, ref: Ref<void>) => {
   );
 };
 
-export default forwardRef(ArchiveClient);
+export default forwardRef(RestoreClient);

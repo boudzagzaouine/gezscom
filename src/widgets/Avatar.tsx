@@ -5,7 +5,7 @@ const Avatar = () => {
         <div className="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
           <div className="space-y-1 text-center">
             <img
-              src="/images/empty-avatar.png"
+              src="/images/empty-contact.png"
               className="w-24 h-24 inline-block"
             />
             <div className="text-sm text-gray-600">
