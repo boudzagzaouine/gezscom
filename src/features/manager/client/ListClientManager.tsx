@@ -1,9 +1,9 @@
 import { ArchiveIcon, ClipboardListIcon, PencilAltIcon, ReplyIcon, TrashIcon, UserAddIcon } from '@heroicons/react/solid';
-import ArchiveClient from 'components/ArchiveClient';
-import DeleteClient from 'components/DeleteClient';
-import Mitems from 'components/Mitems';
-import Pagin from 'components/Pagin';
-import RestoreClient from 'components/RestoreClient';
+import ArchiveClient from 'components/manager/client/ArchiveClient';
+import DeleteClient from 'components/manager/client/DeleteClient';
+import Mitems from 'widgets/Mitems';
+import Pagin from 'widgets/Pagin';
+import RestoreClient from 'components/manager/client/RestoreClient';
 import { usePaginationClientsQuery } from 'config/rtk';
 import React, { useRef, useState } from 'react'
 import { REQUEST_EDIT, REQUEST_SAVE } from 'tools/consts';

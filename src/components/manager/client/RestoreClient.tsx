@@ -6,8 +6,8 @@ import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useRestoreClientMutation } from "../config/rtk";
-import Modal from "./Modal";
+import { useRestoreClientMutation } from "../../../config/rtk";
+import Modal from "../../../widgets/Modal";
 type RestoreClientPorp = {
   id: string;
 };
