@@ -198,3 +198,13 @@ export type MenuItems = {
   text: string;
   action: () => void;
 };
+export interface MenuNavTabs{
+  name:string 
+  featured:ReactElement<any, any>
+}
+export interface NavType{
+  name:string 
+  href:string 
+  current:boolean
+  visible:boolean
+}

@@ -1,26 +1,49 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 //npm install @headlessui/react
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import Link from "next/link";
+import { NavType } from "widgets/TypeWidgets";
+import { CLIENT_MANAGER, HOME, PURCHASE_MANAGER, VENDOR_MANAGER } from "tools/consts";
 
-const navigation = [
-  { name: "Home", href: "/", current: true },
-  { name: "crud", href: "/crud", current: false },
-  { name: "formulaire", href: "/backfromsaisie", current: false },
-  { name: "test", href: "/Test", current: false },
-];
+
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }
-
-export default function Nav() {
+type NavProps={
+  selected:number
+}
+export default function Nav({selected}:NavProps) {
+  //selected==CLIENT_MANAGER?navClient:selected==VENDOR_MANAGER?navVendor:selected==PURCHASE_MANAGER?navPurchase:
+  const navigation:NavType[] = [
+    { name: "Home", href: "/", current: true , visible:selected==HOME },
+    { name: "crud", href: "/crud", current: false , visible:selected==HOME },
+    { name: "formulaire", href: "/backfromsaisie", current: false , visible:selected==HOME },
+    { name: "test", href: "/Test", current: false , visible:selected==HOME },
+  
+    { name: "Clients", href: "/manager/client/ClientManager", current: true , visible:selected==CLIENT_MANAGER },
+    { name: "Commandes Clients", href: "/manager/client/CommandeClientManager", current: false , visible:selected==CLIENT_MANAGER },
+    { name: "Soldes Commandes", href: "/manager/client/SoldeCommandeClientManager", current: false , visible:selected==CLIENT_MANAGER },
+  
+    { name: "Fournisseurs", href: "/manager/vendor/VendorManager", current: true , visible:selected==VENDOR_MANAGER },
+    { name: "Commandes Fournisseurs", href: "/manager/vendor/CommandeVendor", current: false , visible:selected==VENDOR_MANAGER },
+    { name: "Matières premieres", href: "/manager/vendor/RawMaterielManager", current: false , visible:selected==VENDOR_MANAGER },
+    { name: "Gestion des Com Fourn", href: "/manager/vendor/CommandeVendorManager", current: false , visible:selected==VENDOR_MANAGER },
+    
+  
+    { name: "Réception", href: "/manager/purchase/Reception", current: true , visible:selected==PURCHASE_MANAGER },
+    { name: "Bon de retour", href: "/manager/purchase/RightOfReturn", current: false , visible:selected==PURCHASE_MANAGER },
+    { name: "état du stock", href: "/manager/purchase/StockStatus", current: false , visible:selected==PURCHASE_MANAGER },
+    { name: "historique des entrées sorties", href: "/manager/purchase/InputOutputHistory", current: false , visible:selected==PURCHASE_MANAGER },
+  ]
   return (
     <Disclosure as="nav" className="bg-gray-800">
+     
       {({ open }) => (
         <>
+        
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -50,7 +73,7 @@ export default function Nav() {
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <Link
+                 item.visible?  <Link
                         key={item.name}
                         href={item.href}
                         aria-current={item.current ? "page" : undefined}
@@ -65,7 +88,7 @@ export default function Nav() {
                         >
                           {item.name}
                         </a>
-                      </Link>
+                      </Link>:<></>
                     ))}
                   </div>
                 </div>
@@ -167,6 +190,7 @@ export default function Nav() {
               ))}
             </div>
           </Disclosure.Panel>
+          
         </>
       )}
     </Disclosure>

@@ -20,6 +20,7 @@ import {
   UserAddIcon,
   XCircleIcon,
 } from "@heroicons/react/solid";
+import ListCommandeClient from "./ListCommandeClient";
 
 type FormClientManagerProp = {
   closed: () => void;
@@ -141,6 +142,7 @@ const FormClientManager = ({
           </Bcyan>
         )}
       </div>
+      <ListCommandeClient id={client.id} />
     </Section>
   );
 };

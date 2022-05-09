@@ -10,3 +10,7 @@ export const PAGE_SIZE = 3;
 export const PAYMENT_CHOICE = ["", "CHECK", "ESPECE", "CARTE"];
 export const ICOTERM = ["", "CTP", "CIP", "DAP", "DDP"];
 export const DEVISE = ["", "MAD", "EUR", "DLR", "YEN"];
+export const HOME=7
+export const CLIENT_MANAGER=8
+ export  const VENDOR_MANAGER=9 
+ export  const PURCHASE_MANAGER=10
