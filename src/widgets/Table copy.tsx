@@ -4,13 +4,21 @@ import { TableProps, TdProps, ThProps, TrProps } from "./types";
 
 const Table = ({ thead, children, className, ...props }: TableProps) => {
   return (
-         <table
+    <div className="mt-8 flex flex-col">
+      <div className="-my-2 -mx-4 sm:-mx-6 lg:-mx-8">
+        <div className="inline-block min-w-full py-2 align-middle">
+          <div className="shadow-sm ring-1 ring-black ring-opacity-5">
+            <table
               {...props}
-              className={classNames(className, "tab-list float-left w-full mt-8")}
+              className={classNames(className, "min-w-full border-separate")}
             >
               <thead className="bg-gray-50">{thead}</thead>
               <tbody className="bg-white">{children}</tbody>
             </table>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
@@ -23,7 +31,7 @@ const Th = ({ className, ...props }: ThProps) => {
       {...props}
       className={classNames(
         className,
-        " top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 "
+        "sticky top-0 z-10 border-b border-gray-300 bg-gray-50 bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8"
       )}
     />
   );

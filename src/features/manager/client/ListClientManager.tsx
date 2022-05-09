@@ -15,7 +15,7 @@ import Icon from 'widgets/Icon';
 import Section from 'widgets/Section';
 import { MenuItems } from 'widgets/TypeWidgets';
 import FormClientManager from './FormClientManager';
-
+import Table from 'widgets/Table';
 const ListClientManager = () => {
     const search = (key: string, obj: Client[]): Client[] => {
         const clientsearch: Client[] = obj.filter((o: Client) => {
@@ -171,7 +171,59 @@ const ListClientManager = () => {
                   />
                 </div>
               </div>
-              <table className="tab-list float-left w-full mt-8">
+              <Table className="tab-list float-left w-full mt-8"
+        thead={
+          <tr>
+                  <Table.th>nom client</Table.th>
+                  <Table.th>id</Table.th>
+                  <Table.th>contact</Table.th>
+                  <Table.th>Icoterm</Table.th>
+                  <Table.th>Mode règlement</Table.th>
+                  <Table.th></Table.th>
+          </tr>
+        }
+      >
+                  {
+                      /*{list.map((person, idx) => (
+          <tr key={idx}>
+            <Table.Table.td>
+              <div className="text-gray-900">{person.id}</div>
+            </Table.Table.td>
+          
+          </tr>
+        ))}*/
+                    //@ts-ignore
+                    data.content?.map((client) => (
+                      //   data?.map((client) => (
+                      <tr key={client.id}>
+                        <Table.td>
+                          <figure>
+                            <img src={"/images/empty-avatar.png"} alt="" />
+                            <figcaption>
+                              <span>{client.design}</span>
+                              &nbsp;&nbsp;
+                              <span>{client.concat}</span>
+                            </figcaption>
+                          </figure>
+                        </Table.td>
+                        <Table.td>{client.id}</Table.td>
+                        <Table.td>
+                          <ul>
+                            <li>{client.tel}</li>
+                            <li>{client.email}</li>
+                          </ul>
+                        </Table.td>
+                        <Table.td>{client.incoterm}</Table.td>
+                        <Table.td>{client.paymentChoice}</Table.td>
+                        <Table.td>
+                          <Mitems menu={menu(client)} />
+                        </Table.td>
+                      </tr>
+                    ))
+                  }
+                </Table>
+   
+          {/*     <table className="tab-list float-left w-full mt-8">
                 <tr>
                   <th>nom client</th>
                   <th>id</th>
@@ -213,7 +265,7 @@ const ListClientManager = () => {
                   }
                 </tbody>
               </table>
-    
+     */}
               <Pagin load={loadPage} />
             </Section>
           )}
