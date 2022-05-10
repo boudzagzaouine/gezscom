@@ -39,8 +39,8 @@ export const Input = memo(
       const inputClassName = classNames(
         `border outline-slate-200 float-left rounded w-full`,
         {
-          "py-8": isTextArea,
-          "py-2": isInput || isSelect,
+          "py-3": isTextArea,
+          "py-1": isInput || isSelect,
         },
         // isRadio || isCheckbox
         //   ? "rounded h-4 w-4"
@@ -50,12 +50,12 @@ export const Input = memo(
         inputClass
       );
       const labelClassName = classNames(
-        `w-full block font-medium text-gray-700 sm:mt-px sm:pt-2 `,
+        `w-full block font-medium text-gray-700 sm:mt-px sm:pt-1 `,
         { "ml-2": isRadio || isCheckbox },
         labelClass
       );
       const containerClassName = classNames(
-        "sm:grid sm:grid-cols-4 sm:gap-4 sm:items-start sm:pt-5 w-full",
+        "sm:grid sm:grid-cols-4 sm:gap-4 sm:items-start sm:pt-1 w-full",
         className
       );
       const inputWrapperClassName = classNames(

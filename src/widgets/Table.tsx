@@ -6,7 +6,7 @@ const Table = ({ thead, children, className, ...props }: TableProps) => {
   return (
          <table
               {...props}
-              className={classNames(className, "tab-list float-left w-full mt-8")}
+              className={classNames(className, "tab-list float-left w-full")}
             >
               <thead className="bg-gray-50">{thead}</thead>
               <tbody className="bg-white">{children}</tbody>

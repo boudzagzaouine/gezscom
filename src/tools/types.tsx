@@ -16,6 +16,7 @@ export interface Client {
   bank: string;
   rib: string;
   swift: string;
+  commandes:Commande[]
 }
 export type ColsClient =
   | "design"
@@ -46,7 +47,17 @@ export const c0: Client = {
   bank: "",
   rib: "",
   swift: "",
+  commandes:[]
 };
+
+export interface Commande {
+id:string
+idClient:string
+date:Date
+season:string
+amount:string
+}
+
 
 export interface Chaine {
   val: string;

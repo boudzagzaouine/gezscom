@@ -1,27 +1,41 @@
+import { BriefcaseIcon, ClipboardListIcon, TagIcon, TruckIcon } from '@heroicons/react/solid'
 import React from 'react'
+import { Client } from 'tools/types'
 import NavTabs from 'widgets/NavTabs'
 import {MenuNavTabs} from 'widgets/TypeWidgets'
-
+import AdressLivraisons from './AdressLivraisons'
+import ArticlesClients from './ArticlesClients'
+import ListCommandes from './ListCommandes'
+import SoldesCommandes from './SoldesCommandes'
         type ListCommandeClientProps={
-            id:string
+            client:Client
         }
-const ListCommandeClient = ({id}:ListCommandeClientProps) => {
+        const color="text-[#2B5173]"
+        const style_icon="mr-3 h-8 w-8 group-hover:text-gray-500 float-left "+color
+        const style_span="mt-px "+color
+const ListCommandeClient = ({client}:ListCommandeClientProps) => {
+  //
+  //
     const  commanndes: MenuNavTabs[]= [
         {
-          name: 'coco',
-          featured: (<div className="bg-[#f00]">women</div>),
+          id:1,
+          name: (<><BriefcaseIcon className={style_icon} aria-hidden="true" /><span className={style_span}>Commandes Clients</span></>),
+          featured: (<ListCommandes client={client}/>),
         },
         {
-            name: 'fofo',
-            featured: (<div className="bg-[#0f0]">men</div>),
+          id:2,
+            name:(<><ClipboardListIcon className={style_icon} aria-hidden="true" /><span className={style_span}>Soldes Commandes</span></>),
+            featured: (<SoldesCommandes client={client}/>),
           },
           {
-            name: 'ffsdfofo',
-            featured: (<div className="bg-[#0f0]">mjjjjen</div>),
+            id:3,
+            name: (<><TagIcon className={style_icon} aria-hidden="true" /><span className={style_span}>Articles Clients</span></>),
+            featured: (<ArticlesClients client={client}/>),
           },
           {
-            name: 'fogggfo',
-            featured: (<div className="bg-[#0f0]">mhhhen</div>),
+            id:4,
+            name: (<><TruckIcon className={style_icon} aria-hidden="true" /><span className={style_span}>Adresses de livraisons</span></>),
+            featured: (<AdressLivraisons client={client}/>),
           },
             ] 
   return (

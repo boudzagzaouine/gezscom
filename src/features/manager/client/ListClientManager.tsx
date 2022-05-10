@@ -191,21 +191,14 @@ const ListClientManager = () => {
         }
       >
                   {
-                      /*{list.map((person, idx) => (
-          <tr key={idx}>
-            <Table.Table.td>
-              <div className="text-gray-900">{person.id}</div>
-            </Table.Table.td>
-          
-          </tr>
-        ))}*/
+                   
                     //@ts-ignore
                     data.content?.map((client) => (
                       //   data?.map((client) => (
                       <tr key={client.id}>
                         <Table.td>
                           <figure>
-                            <img src={"/images/empty-avatar.png"} alt="" />
+                            <img src={"/images/empty-contact.png"} alt="" />
                             <figcaption>
                               <span>{client.design}</span>
                               &nbsp;&nbsp;
@@ -247,7 +240,7 @@ const ListClientManager = () => {
                       <tr key={client.id}>
                         <td>
                           <figure>
-                            <img src={"/images/empty-avatar.png"} alt="" />
+                            <img src={"/images/empty-contact.png"} alt="" />
                             <figcaption>
                               <span>{client.design}</span>
                               &nbsp;&nbsp;

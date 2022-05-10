@@ -4,7 +4,7 @@ interface SectionProps {
   children: ReactNode;
 }
 const calculClass = ({ className }: any) => {
-  return cn("bg-white float-left w-full mp-8 shadow-lg", className);
+  return cn("bg-white float-left w-full h-full mp-8 shadow-lg", className);
 };
 /*
 

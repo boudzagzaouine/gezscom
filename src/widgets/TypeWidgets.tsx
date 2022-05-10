@@ -20,6 +20,7 @@ import type {
   UseFormProps,
   UseFormReturn,
 } from "react-hook-form";
+import { Client } from "tools/types";
 import type { UrlObject } from "url";
 
 /**
@@ -199,7 +200,8 @@ export type MenuItems = {
   action: () => void;
 };
 export interface MenuNavTabs{
-  name:string 
+  id:number
+  name:ReactElement<any, any> 
   featured:ReactElement<any, any>
 }
 export interface NavType{
@@ -207,4 +209,7 @@ export interface NavType{
   href:string 
   current:boolean
   visible:boolean
+}
+export type ListClientsProps={
+  client:Client
 }

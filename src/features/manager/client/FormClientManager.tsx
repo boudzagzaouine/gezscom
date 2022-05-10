@@ -44,7 +44,7 @@ const FormClientManager = ({
     <Section>
       <div className="float-left w-full text-xs">
         <Form defaultValues={client} onSubmit={onSubmit}>
-          <h1>Nom & Prénom du client request={request}</h1>
+          <h1 className="mb-2">Nom & Prénom du client</h1>
           <div className="float-left w-5/6">
             <div className="float-left w-1/2">
               {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
@@ -95,7 +95,7 @@ const FormClientManager = ({
           <div className="float-left w-1/6">
             <Avatar />
           </div>
-          <div className="float-left w-full mt-5">
+          <div className="float-left w-full mt-1">
             {!disabled && (
               <Bcyan
                 className="float-left"
@@ -142,7 +142,7 @@ const FormClientManager = ({
           </Bcyan>
         )}
       </div>
-      <ListCommandeClient id={client.id} />
+      <ListCommandeClient client={client} />
     </Section>
   );
 };
