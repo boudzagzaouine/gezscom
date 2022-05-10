@@ -2,18 +2,15 @@ import { BriefcaseIcon, ClipboardListIcon, TagIcon, TruckIcon } from '@heroicons
 import React from 'react'
 import { Client } from 'tools/types'
 import NavTabs from 'widgets/NavTabs'
-import {MenuNavTabs} from 'widgets/TypeWidgets'
+import {ListClientsProps, MenuNavTabs} from 'widgets/TypeWidgets'
 import AdressLivraisons from './AdressLivraisons'
 import ArticlesClients from './ArticlesClients'
 import ListCommandes from './ListCommandes'
 import SoldesCommandes from './SoldesCommandes'
-        type ListCommandeClientProps={
-            client:Client
-        }
-        const color="text-[#2B5173]"
+       const color="text-[#2B5173]"
         const style_icon="mr-3 h-8 w-8 group-hover:text-gray-500 float-left "+color
         const style_span="mt-px "+color
-const ListCommandeClient = ({client}:ListCommandeClientProps) => {
+const ListCommandeClient = ({client}:ListClientsProps) => {
   //
   //
     const  commanndes: MenuNavTabs[]= [
