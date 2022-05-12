@@ -12,7 +12,7 @@ type NatabsProps={
     tab:MenuNavTabs[]
 }
 const NavTabs = ({tab}:NatabsProps) => {
-  const [selected,setSelected]=useState(-1)
+  const [selected,setSelected]=useState(1)
     return (
         <div className="bg-white w-full float-left h-52 mt-2">
              <ul className="float-left">

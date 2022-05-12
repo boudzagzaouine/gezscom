@@ -55,7 +55,7 @@ export const Input = memo(
         labelClass
       );
       const containerClassName = classNames(
-        "sm:grid sm:grid-cols-4 sm:gap-4 sm:items-start sm:pt-1 w-full",
+        "sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:pt-1 pl-2 w-full",
         className
       );
       const inputWrapperClassName = classNames(

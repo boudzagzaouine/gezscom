@@ -42,15 +42,16 @@ const ListClientManager = () => {
       const [client0, setClient0] = useState(c0);
       const [request0, setRequest0] = useState(REQUEST_SAVE);
       const [page, setPage] = useState(0);
+      const loadPage = (p: number) => {
+        setPage(p);
+        refetch();
+      };
       const { data = [], isFetching, refetch } = usePaginationClientsQuery(page);
       const [disabled, setDisabled] = useState(true);
       const del = useRef(null);
       const archive = useRef(null);
       const restore = useRef(null);
-      const loadPage = (p: number) => {
-        setPage(p);
-        refetch();
-      };
+      
       const showFormulaire = (client: Client) => {
         setClient0(client);
         setForm(true);
@@ -223,49 +224,7 @@ const ListClientManager = () => {
                   }
                 </Table>
    
-          {/*     <table className="tab-list float-left w-full mt-8">
-                <tr>
-                  <th>nom client</th>
-                  <th>id</th>
-                  <th>contact</th>
-                  <th>Icoterm</th>
-                  <th>Mode règlement</th>
-                  <th></th>
-                </tr>
-                <tbody>
-                  {
-                    //@ts-ignore
-                    data.content?.map((client) => (
-                      //   data?.map((client) => (
-                      <tr key={client.id}>
-                        <td>
-                          <figure>
-                            <img src={"/images/empty-contact.png"} alt="" />
-                            <figcaption>
-                              <span>{client.design}</span>
-                              &nbsp;&nbsp;
-                              <span>{client.concat}</span>
-                            </figcaption>
-                          </figure>
-                        </td>
-                        <td>{client.id}</td>
-                        <td>
-                          <ul>
-                            <li>{client.tel}</li>
-                            <li>{client.email}</li>
-                          </ul>
-                        </td>
-                        <td>{client.incoterm}</td>
-                        <td>{client.paymentChoice}</td>
-                        <td>
-                          <Mitems menu={menu(client)} />
-                        </td>
-                      </tr>
-                    ))
-                  }
-                </tbody>
-              </table>
-     */}
+          
               <Pagin load={loadPage} />
             </Section>
           )}

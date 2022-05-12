@@ -2,7 +2,7 @@ const Avatar = () => {
   return (
     <div className="sm:grid w-full sm:pt-5">
       <div className="mt-1 sm:mt-0 sm:col-span-2">
-        <div className="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+        <div className="max-w-lg flex justify-center p-2 mt-2 ml-6 border-2 border-gray-300 border-dashed rounded-md">
           <div className="space-y-1 text-center">
             <img
               src="/images/empty-contact.png"

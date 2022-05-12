@@ -25,7 +25,7 @@ import type { ExtendableProps } from "utils/types";
 // A more precise version of just React.ComponentPropsWithoutRef on its own
 export type PropsOf<
   C extends keyof JSX.IntrinsicElements | React.JSXElementConstructor<any>
-> = JSX.LibraryManagedAttributes<C, React.ComponentPropsWithoutRef<C>>;
+  > = JSX.LibraryManagedAttributes<C, React.ComponentPropsWithoutRef<C>>;
 
 type AsProp<C extends React.ElementType> = {
   /**
@@ -42,7 +42,7 @@ type AsProp<C extends React.ElementType> = {
 export type InheritableElementProps<
   C extends React.ElementType,
   Props = {}
-> = ExtendableProps<PropsOf<C>, Props>;
+  > = ExtendableProps<PropsOf<C>, Props>;
 
 /**
  * A more sophisticated version of `InheritableElementProps` where
@@ -51,7 +51,7 @@ export type InheritableElementProps<
 export type PolymorphicComponentProps<
   C extends React.ElementType,
   Props = {}
-> = InheritableElementProps<C, Props & AsProp<C>>;
+  > = InheritableElementProps<C, Props & AsProp<C>>;
 /**
  * Utility type to extract the `ref` prop from a polymorphic component
  */
@@ -64,7 +64,7 @@ export type PolymorphicRef<C extends React.ElementType> =
 export type PolymorphicComponentPropsWithRef<
   C extends React.ElementType,
   Props = {}
-> = PolymorphicComponentProps<C, Props> & { ref?: PolymorphicRef<C> };
+  > = PolymorphicComponentProps<C, Props> & { ref?: PolymorphicRef<C> };
 
 export type LayoutName = "main" | "centered" | "empty";
 
@@ -94,7 +94,7 @@ export type LinkProps<C extends ElementType = "a"> = PolymorphicComponentProps<
 >;
 
 export interface AnchorProps<T extends HTMLAnchorElement = HTMLAnchorElement>
-  extends AnchorHTMLAttributes<T> {}
+  extends AnchorHTMLAttributes<T> { }
 
 export type ValueType =
   | string
@@ -103,8 +103,8 @@ export type ValueType =
   | undefined
   | boolean;
 
-export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {}
-export interface OptionProps extends OptionHTMLAttributes<HTMLOptionElement> {}
+export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> { }
+export interface OptionProps extends OptionHTMLAttributes<HTMLOptionElement> { }
 
 export type FormControlProps<C extends ElementType> =
   PolymorphicComponentPropsWithRef<
@@ -113,14 +113,16 @@ export type FormControlProps<C extends ElementType> =
       value?: ValueType;
       defaultValue?: ValueType;
       options?: Option[];
+      optionKeyName?: string
+      optionLabelName?: string
     }
   >;
 export type Option =
   | string
   | {
-      id: string;
-      label?: string;
-    };
+    id: string;
+    label?: string;
+  };
 export type InputProps<C extends ElementType> = FormControlProps<C> & {
   label?: string;
   inputClass?: string;
@@ -134,7 +136,7 @@ export type InputProps<C extends ElementType> = FormControlProps<C> & {
 export type FieldProps<
   C extends ElementType,
   TValues extends FieldValues
-> = InputProps<C> & UseControllerProps<TValues>;
+  > = InputProps<C> & UseControllerProps<TValues>;
 
 export interface FieldMetaProps {
   touched: boolean;
@@ -147,8 +149,8 @@ export interface ErrorProps extends LabelProps {
 }
 export type FormProps<T extends FieldValues> = UseFormProps<T> & {
   children:
-    | React.ReactNode
-    | ((methods: UseFormReturn<T>) => React.ReactElement);
+  | React.ReactNode
+  | ((methods: UseFormReturn<T>) => React.ReactElement);
   onSubmit?: SubmitHandler<T>;
   resetOnSuccessfulSubmit?: boolean;
 };

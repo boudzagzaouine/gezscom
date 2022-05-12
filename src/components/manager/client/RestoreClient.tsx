@@ -34,7 +34,7 @@ const RestoreClient = ({ id }: RestoreClientPorp, ref: Ref<void>) => {
   };
   return (
     <>
-      <Modal title={"restoration"} show={showModal}>
+      <Modal title={"restoration"} show={showModal} format={2}>
         <div>
           <h2>restoration du client num: {id0}</h2>
           <form

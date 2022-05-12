@@ -1,8 +1,11 @@
+import ListAllCommandes from 'features/manager/client/ListAllCommandes'
 import React from 'react'
 
 const CommandeClientManager = () => {
   return (
-    <div>CommandeClientManager</div>
+    <div>
+      <ListAllCommandes />
+    </div>
   )
 }
 

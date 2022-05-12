@@ -37,6 +37,8 @@ export default function Nav({selected}:NavProps) {
     { name: "Bon de retour", href: "/manager/purchase/RightOfReturn", current: false , visible:selected==PURCHASE_MANAGER },
     { name: "état du stock", href: "/manager/purchase/StockStatus", current: false , visible:selected==PURCHASE_MANAGER },
     { name: "historique des entrées sorties", href: "/manager/purchase/InputOutputHistory", current: false , visible:selected==PURCHASE_MANAGER },
+
+    
   ]
   return (
     <Disclosure as="nav" className="bg-gray-800">

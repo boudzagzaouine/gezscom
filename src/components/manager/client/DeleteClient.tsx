@@ -32,7 +32,7 @@ const DeleteClient = ({ id }: DeleteClientPorp, ref: Ref<void>) => {
   };
   return (
     <>
-      <Modal title={"suppression"} show={showModal}>
+      <Modal title={"suppression"} show={showModal} format={2}>
         <div>
           <h2>suppression de client num: {id0}</h2>
           <form

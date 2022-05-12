@@ -18,7 +18,7 @@ const Label: FC<LabelProps> = (props) => <label {...props} />;
 
 const Control = forwardRef(
   <C extends React.ElementType = "input">(
-    { as, options, ...props }: FormControlProps<C>,
+    { as, options, optionKeyName = "id", optionLabelName = "label", ...props }: FormControlProps<C>,
     ref?: PolymorphicRef<C>
   ) => {
     const Component = as || "input";
@@ -31,11 +31,17 @@ const Control = forwardRef(
     } else if (defaultValue !== undefined && defaultValue !== null) {
       additionalProps = { defaultChecked: "true" === `${defaultValue}` };
     }
+  //  options =["op&", " op2"] 
+    /*
+    */
     if (isSelect && options) {
       const selectOptions = options.map((option) => {
-        const optionValue = typeof option === "string" ? option : option.id;
-        const optionLabel =
-          typeof option === "string" ? option : option.label ?? option.id;
+        if (!option)
+        return null;
+        //@ts-ignore
+        const optionValue = typeof option === "string" ? option : option[optionKeyName];
+        //@ts-ignore
+        const optionLabel = typeof option === "string" ? option : option[optionLabelName] ?? option.id;
         return (
           <Option key={optionValue} value={optionValue}>
             {optionLabel}

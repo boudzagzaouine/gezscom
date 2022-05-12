@@ -35,7 +35,7 @@ export type ColsClient =
   | "swift";
 export const c0: Client = {
   id: "",
-  design: "",
+  design: "coco",
   concat: "",
   image: "",
   email: "",
@@ -54,24 +54,44 @@ export const c0: Client = {
 
 export interface Commande {
 id:string
-idClient:string
 date:Date
 season:string
 amount:string
+client:Client
+idClient:string
 }
 export const cm0:Commande={
   id:"",
-  idClient:"",
-  date:new Date(),
+date:new Date(),
 amount:"",
-season:""
+season:"",
+client:c0,
+idClient:""
+}
+export const getCm0= (cl:Client):Commande=>{
+  return {
+  id:"",
+  date:new Date(),
+  amount:"",
+  season:"",
+  client:cl,
+  idClient:cl.id
+  }
+  
+}
+export const  getClient=(id: string, obj: Client[]) :Client|undefined=>{
+  const apr = obj?.find(
+    (o:Client) => { return o.id === id; }
+  );
+  return apr;
 }
 
 export interface AdressLiv {
+  adress:string
   id:string
 	country:string
 	city:string
-	adress:string
+	
 }
 export interface Chaine {
   val: string;

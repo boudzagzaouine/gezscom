@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { PAGE_SIZE } from "tools/consts";
-import { Client } from "../tools/types";
+import { Client, Commande } from "../tools/types";
 
 export const crudApi = createApi({
   reducerPath: "crud-api",
@@ -106,8 +106,101 @@ export const crudApi = createApi({
       /*****************************************************************************/
       /*****************************************************************************/
       /*****************************************************************************/
+      fetchCommandes: builder.query<Commande[], number | void>({
+        query() {
+          return "/commandes";
+        },
+        providesTags: (result) =>
+          result
+            ? [
+                //@ts-ignore
+                ...result.content.map(({ id }) => ({
+                  //      ...result.map(({ id }) => ({
+                  type: "Commande" as const,
+                  id,
+                })),
+                { type: "Commande", id: "LIST" },
+              ]
+            : [{ type: "Commande", id: "LIST" }],
+      }),
+      paginationCommandes: builder.query<Commande[], number | void>({
+        query(page: number) {
+          return "/commandes?page=" + page + "&size=" + PAGE_SIZE;
+        },
+        providesTags: (result) =>
+          result
+            ? [
+                //@ts-ignore
+                ...result.content.map(({ id }) => ({
+                  //      ...result.map(({ id }) => ({
+                  type: "Commande" as const,
+                  id,
+                })),
+                { type: "Commande", id: "LIST" },
+              ]
+            : [{ type: "Commande", id: "LIST" }],
+      }),
+      fetchOneCommande: builder.query<Commande, string>({
+        query: (id) => `/commandes/${id}`,
+        //@ts-ignore
+        providesTags: (result, error, id) => [{ type: "Commande", id }],
+      }),
+      addCommande: builder.mutation<Commande, Partial<Commande>>({
+        query: (body) => ({
+          url: "/Commandes",
+          method: "POST",
+          body,
+        }),
+         //@ts-ignore
+        invalidatesTags: ["Commande"],
+      }),
+      editCommande: builder.mutation<
+        Commande,
+        Partial<Commande> & Pick<Commande, "id">
+      >({
+        query: (body) => ({
+          url: `/commandes/${body.id}`,
+          method: "PUT",
+          body,
+        }),
+      }),
+      deleteCommande: builder.mutation<{ success: boolean; id: number }, number>({
+        //@ts-ignore
+        query(id: Num) {
+          //  if (confirm(`do you want delete Commande number ${id.id} ?`))
+          return {
+            url: `/commandes/${id.id}`,
+            method: "DELETE",
+          };
+          // else return
+        },
+        //@ts-ignore
+        invalidatesTags: (result, error, id) => [
+          { type: "Commande", id },
+          { type: "Commande", id: "LIST" },
+        ],
+      }),
+      archiveCommande: builder.mutation<
+        Commande,
+        Partial<Commande> & Pick<Commande, "id">
+      >({
+        query: (id) => ({
+          url: `/commandes/${id}/archive`,
+          method: "PUT",
+        }),
+      }),
+      restoreCommande: builder.mutation<
+        Commande,
+        Partial<Commande> & Pick<Commande, "id">
+      >({
+        query: (id) => ({
+          url: `/commandes/${id}/restore`,
+          method: "PUT",
+        }),
+      }),
     };
   },
+ 
 });
 
 export const {
@@ -121,6 +214,14 @@ export const {
   useRestoreClientMutation,
   /*******************************************************/
   /*******************************************************/
+  useFetchCommandesQuery,
+  usePaginationCommandesQuery,
+  useFetchOneCommandeQuery,
+  useAddCommandeMutation,
+  useEditCommandeMutation,
+  useDeleteCommandeMutation,
+  useArchiveCommandeMutation,
+  useRestoreCommandeMutation,
   /***********useMaMethodAfficjageQuery********************************************/
   /***********useMaMethodeOperationMutaion********************************************/
 } = crudApi;
