@@ -7,5 +7,6 @@ export * from "./Input";
 export * from "./Link";
 export * from "./Text";
 export * from "./View";
+export * from "./Table";
 export * from "./Notifications";
 export * from "@headlessui/react";

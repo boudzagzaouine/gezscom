@@ -10,9 +10,11 @@ import React, { useState } from "react";
 import { arc0, Commande ,ArticleCommande} from "tools/types";
 import { Field, Form } from "widgets";
 import Bcyan from "widgets/Bcyan";
+import Bedit from "widgets/Bedit";
 import Mitems from "widgets/Mitems";
 import Pagin from "widgets/Pagin";
 import Table from "widgets/Table";
+import FormArticleCommande from "./FormArticleCommande";
 const style_add_line = "bg-[#dfdfdf] cursor-pointer";
 type ArticlesCommandeProps={
   commande:Commande
@@ -25,16 +27,31 @@ const ArticlesCommande = ({commande}:ArticlesCommandeProps) => {
   }; */
   //@ts-ignore
   const { data = [], isFetching, refetch } = usePaginationArticleCommandesQuery(0);
+  const [selectedIdCommande,setSelectedIdCommande]=useState("new")
   const [formArt,setFormArt]=useState(false)
+  const close=()=>{
+    setFormArt(false)
+    setSelectedIdCommande("new")
+  }
+  const open=(id:string)=>{
+    setFormArt(true)
+    setSelectedIdCommande(id)
+  }
   const articles:ArticleCommande[]=commande.articleCommandes
- // const [saveArticle] = useAddArticleCommandeMutation()
-    const saveArticle=(art:ArticleCommande)=>{
-    art.idCommande=commande.id
-     axios.post('http://localhost:1000/api/v1/articlecommandes/post',art).then(()=>{
-      refetch()
-     })
-   } 
-  return (
+ // const [addArticle] = useAddArticleCommandeMutation()
+ const addArticle=(art:ArticleCommande)=>{
+  art.idCommande=commande.id
+   axios.post('http://localhost:1000/api/v1/articlecommandes/post',art).then(()=>{
+    refetch()
+   })
+ } 
+ const editArticle=(art:ArticleCommande)=>{
+  art.idCommande=commande.id
+   axios.put('http://localhost:1000/api/v1/articlecommandes/put/'+art.id,art).then(()=>{
+    refetch()
+   })
+ } 
+return (
     <div>
       <Table
         className="tab-list float-left w-full mt-8"
@@ -54,53 +71,29 @@ const ArticlesCommande = ({commande}:ArticlesCommandeProps) => {
           //@ts-ignore
           data.content?.map((article) => (
          // articles?.map((article) => (
-          article.idCommande==commande.id && <tr key={article.id}>
+          article.idCommande==commande.id && <>
+          <tr key={article.id}>
               <Table.td>{article.id}</Table.td>
               <Table.td>{article.idCommande} </Table.td>
               <Table.td>{article.design} </Table.td>
               <Table.td>{article.qte}</Table.td>
               <Table.td>{article.portion}</Table.td>
               <Table.td>{article.pu}</Table.td>
-              <Table.td></Table.td>
+              <Table.td>
+                <Bedit onClick={()=>{
+                  open(article.id)
+                }} />
+              </Table.td>
             </tr>
+            {selectedIdCommande==article.id && formArt && <FormArticleCommande articleCommande={article} close={close} saveArticle={editArticle}/>}
+          </>
           ))
         }
-       { formArt &&  <tr className="relative">
-<div className="absolute left-0 top-0">
-<Form defaultValues={arc0} onSubmit={saveArticle}>
-            <Table.td>
-              <Field name="design" placeholder="design" />
-            </Table.td>
-            <Table.td>
-              <Field name="qte" placeholder="qte" />
-            </Table.td>
-            <Table.td>
-              <Field name="portion" placeholder="portion" />
-            </Table.td>
-            <Table.td>
-              <Field name="pu" placeholder="pu" />
-             </Table.td>
-            <Table.td>
-            <div className="float-left w-full">
-                 <Bcyan>
-                ajouter
-              </Bcyan></div>
-            </Table.td>
-          </Form>
-          <Table.td>
-          <div className="float-right w-full">
-                 <Bcyan className="absolute right-0" onClick={() => {
-            setFormArt(false)
-          }}>
-               fermer
-              </Bcyan></div>
-              </Table.td>
-</div>
-        </tr>}
+        {selectedIdCommande=="new" && formArt && <FormArticleCommande articleCommande={arc0} close={close} saveArticle={addArticle}/>}
         {
           !formArt && <tr
           onClick={() => {
-            setFormArt(true)
+            open("new")
           }}
         >
           <Table.td className={style_add_line}>ajouter une ligne</Table.td>

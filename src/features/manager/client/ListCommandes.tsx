@@ -2,6 +2,7 @@ import { DocumentAddIcon } from "@heroicons/react/solid";
 import React, { useRef, useState } from "react";
 import { getCm, getCm0 } from "tools/types";
 import Bcyan from "widgets/Bcyan";
+import Bedit from "widgets/Bedit";
 import Table from "widgets/Table";
 import { ListClientsProps } from "widgets/TypeWidgets";
 import FormCommande from "./FormCommande";
@@ -46,7 +47,7 @@ const ListCommandes = ({ client }: ListClientsProps) => {
             <Table.td>{commande.season}</Table.td>
             <Table.td>{commande.amount}</Table.td>
             <Table.td>
-            <Bcyan
+           {/*  <Bcyan
         className="float-left mt-2"
         onClick={() => {
           //@ts-ignore
@@ -54,7 +55,12 @@ const ListCommandes = ({ client }: ListClientsProps) => {
         }}
       >
        ...
-      </Bcyan>
+      </Bcyan> */}
+      <Bedit   className="float-left mt-2"
+        onClick={() => {
+          //@ts-ignore
+          refCom.current(getCm(client,commande));
+        }}/>
             </Table.td>
           </tr>
         ))}

@@ -10,7 +10,7 @@ const calculClass = ({ className }: ButtonProps) => {
 };
 /*""*/
 
-const Bcyan: FC<ButtonProps> = ({
+const Bedit: FC<ButtonProps> = ({
   label,
   children = label,
   className,
@@ -23,4 +23,4 @@ const Bcyan: FC<ButtonProps> = ({
   );
 };
 
-export default Bcyan;
+export default Bedit;

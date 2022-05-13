@@ -126,7 +126,7 @@ const FormClientManager = ({
           </div>
         </Form>
         <Bred
-          className="float-right"
+          className="float-right b-ajust"
           onClick={() => {
             closed();
           }}
