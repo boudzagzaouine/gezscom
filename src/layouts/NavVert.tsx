@@ -3,54 +3,59 @@ import { useRouter } from "next/router";
 import React, { forwardRef, Ref } from "react";
 import { CLIENT_MANAGER, PURCHASE_MANAGER, VENDOR_MANAGER } from "tools/consts";
 import Icon from "../widgets/Icon";
-type NavVertProps={
-  updateSel:(s:number)=>void
-}
-const NavVert = ({updateSel}:NavVertProps) => {
+type NavVertProps = {
+  updateSel: (s: number) => void;
+};
+const NavVert = ({ updateSel }: NavVertProps) => {
   const route = useRouter();
   // console.clear()
   console.log("rr =" + route.pathname);
- 
+
   const menuVert = [
-    {id:7,
+    {
+      id: 7,
       icon: "home",
       text: "Acceuil",
       link: "/",
       active: route.pathname == "/",
     },
-    {id:CLIENT_MANAGER,
+    {
+      id: CLIENT_MANAGER,
       icon: "user-circle",
       text: "Gestion de Clients",
       link: "/manager/client/ClientManager",
       active: route.pathname == "/manager/client/ClientManager",
     },
-    {id:VENDOR_MANAGER,
+    {
+      id: VENDOR_MANAGER,
       icon: "truck",
       text: "Gestion de Fournisseurs",
       link: "/manager/vendor/VendorManager",
       active: route.pathname == "/manager/vendor/VendorManager",
     },
-    {id:PURCHASE_MANAGER,
+    {
+      id: PURCHASE_MANAGER,
       icon: "shopping-bag",
       text: "gestion d'achats",
       link: "/manager/purchase/Reception",
       active: route.pathname == "/manager/purchase/Reception",
     },
-    {id:11,
+    {
+      id: 11,
       icon: "home",
       text: "test",
       link: "/Test",
       active: route.pathname == "/Test",
     },
-    {id:12,
+    {
+      id: 12,
       icon: "home",
       text: "liste des icons",
       link: "/documentation/ListIcons",
       active: route.pathname == "/ee",
     },
-   
   ];
- 
+
   return (
     <ul className="nav-horiz bg-[#2B5173]">
       <h2 className="bg-[#000] bg-opacity-10 text-[#fff] w-full float-left py-2.5">
@@ -65,7 +70,7 @@ const NavVert = ({updateSel}:NavVertProps) => {
               ? "border-l-2 border-white bg-opacity-10 bg-[#000]"
               : "border-l-0 bg-transparent")
           }
-          onClick={()=>updateSel(item.id)}
+          onClick={() => updateSel(item.id)}
         >
           <Link href={item.link}>
             <a>

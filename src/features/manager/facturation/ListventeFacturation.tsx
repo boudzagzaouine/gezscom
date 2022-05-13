@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const ListventeFacturation = () => {
-  return (
-    <div>ListventeFacturation</div>
-  )
-}
+  return <div>ListventeFacturation</div>;
+};
 
-export default ListventeFacturation
+export default ListventeFacturation;

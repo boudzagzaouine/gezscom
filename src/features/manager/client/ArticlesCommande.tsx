@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const ArticlesCommande = () => {
-  return (
-    <div>ArticlesCommande</div>
-  )
-}
+  return <div>ArticlesCommande</div>;
+};
 
-export default ArticlesCommande
+export default ArticlesCommande;

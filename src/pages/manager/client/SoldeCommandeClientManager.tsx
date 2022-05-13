@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const SoldeCommandeClientManager = () => {
-  return (
-    <div>SoldeCommandeClientManager</div>
-  )
-}
+  return <div>SoldeCommandeClientManager</div>;
+};
 
-export default SoldeCommandeClientManager
+export default SoldeCommandeClientManager;

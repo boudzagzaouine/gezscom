@@ -15,85 +15,105 @@
   }
   ```
 */
-import { Fragment, useState } from 'react'
-import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
-import { MenuIcon, QuestionMarkCircleIcon, SearchIcon, ShoppingBagIcon, XIcon } from '@heroicons/react/outline'
+import { Fragment, useState } from "react";
+import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
+import {
+  MenuIcon,
+  QuestionMarkCircleIcon,
+  SearchIcon,
+  ShoppingBagIcon,
+  XIcon,
+} from "@heroicons/react/outline";
 
-const currencies = ['CAD', 'USD', 'AUD', 'EUR', 'GBP']
+const currencies = ["CAD", "USD", "AUD", "EUR", "GBP"];
 const navigation = {
   categories: [
     {
-      name: 'Women',
+      name: "Women",
       featured: [
         {
-          name: 'New Arrivals',
-          href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg',
-          imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
+          name: "New Arrivals",
+          href: "#",
+          imageSrc:
+            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg",
+          imageAlt:
+            "Models sitting back to back, wearing Basic Tee in black and bone.",
         },
         {
-          name: 'Basic Tees',
-          href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg',
-          imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
+          name: "Basic Tees",
+          href: "#",
+          imageSrc:
+            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg",
+          imageAlt:
+            "Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.",
         },
         {
-          name: 'Accessories',
-          href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-03.jpg',
-          imageAlt: 'Model wearing minimalist watch with black wristband and white watch face.',
+          name: "Accessories",
+          href: "#",
+          imageSrc:
+            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-03.jpg",
+          imageAlt:
+            "Model wearing minimalist watch with black wristband and white watch face.",
         },
         {
-          name: 'Carry',
-          href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-04.jpg',
-          imageAlt: 'Model opening tan leather long wallet with credit card pockets and cash pouch.',
+          name: "Carry",
+          href: "#",
+          imageSrc:
+            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-04.jpg",
+          imageAlt:
+            "Model opening tan leather long wallet with credit card pockets and cash pouch.",
         },
       ],
     },
     {
-      name: 'Men',
+      name: "Men",
       featured: [
         {
-          name: 'New Arrivals',
-          href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-01.jpg',
-          imageAlt: 'Hats and sweaters on wood shelves next to various colors of t-shirts on hangers.',
-        },
-        {
-          name: 'Basic Tees',
-          href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-02.jpg',
-          imageAlt: 'Model wearing light heather gray t-shirt.',
-        },
-        {
-          name: 'Accessories',
-          href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-03.jpg',
+          name: "New Arrivals",
+          href: "#",
+          imageSrc:
+            "https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-01.jpg",
           imageAlt:
-            'Grey 6-panel baseball hat with black brim, black mountain graphic on front, and light heather gray body.',
+            "Hats and sweaters on wood shelves next to various colors of t-shirts on hangers.",
         },
         {
-          name: 'Carry',
-          href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-04.jpg',
-          imageAlt: 'Model putting folded cash into slim card holder olive leather wallet with hand stitching.',
+          name: "Basic Tees",
+          href: "#",
+          imageSrc:
+            "https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-02.jpg",
+          imageAlt: "Model wearing light heather gray t-shirt.",
+        },
+        {
+          name: "Accessories",
+          href: "#",
+          imageSrc:
+            "https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-03.jpg",
+          imageAlt:
+            "Grey 6-panel baseball hat with black brim, black mountain graphic on front, and light heather gray body.",
+        },
+        {
+          name: "Carry",
+          href: "#",
+          imageSrc:
+            "https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-04.jpg",
+          imageAlt:
+            "Model putting folded cash into slim card holder olive leather wallet with hand stitching.",
         },
       ],
     },
   ],
   pages: [
-    { name: 'Company', href: '#' },
-    { name: 'Stores', href: '#' },
+    { name: "Company", href: "#" },
+    { name: "Stores", href: "#" },
   ],
-}
+};
 
-function classNames(...classes:any[]) {
-  return classes.filter(Boolean).join(' ')
+function classNames(...classes: any[]) {
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function ListTest() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="bg-white">
@@ -143,8 +163,10 @@ export default function ListTest() {
                           key={category.name}
                           className={({ selected }) =>
                             classNames(
-                              selected ? 'text-indigo-600 border-indigo-600' : 'text-gray-900 border-transparent',
-                              'flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium'
+                              selected
+                                ? "text-indigo-600 border-indigo-600"
+                                : "text-gray-900 border-transparent",
+                              "flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium"
                             )
                           }
                         >
@@ -155,18 +177,34 @@ export default function ListTest() {
                   </div>
                   <Tab.Panels as={Fragment}>
                     {navigation.categories.map((category) => (
-                      <Tab.Panel key={category.name} className="px-4 py-6 space-y-12">
+                      <Tab.Panel
+                        key={category.name}
+                        className="px-4 py-6 space-y-12"
+                      >
                         <div className="grid grid-cols-2 gap-x-4 gap-y-10">
                           {category.featured.map((item) => (
                             <div key={item.name} className="group relative">
                               <div className="aspect-w-1 aspect-h-1 rounded-md bg-gray-100 overflow-hidden group-hover:opacity-75">
-                                <img src={item.imageSrc} alt={item.imageAlt} className="object-center object-cover" />
+                                <img
+                                  src={item.imageSrc}
+                                  alt={item.imageAlt}
+                                  className="object-center object-cover"
+                                />
                               </div>
-                              <a href={item.href} className="mt-6 block text-sm font-medium text-gray-900">
-                                <span className="absolute z-10 inset-0" aria-hidden="true" />
+                              <a
+                                href={item.href}
+                                className="mt-6 block text-sm font-medium text-gray-900"
+                              >
+                                <span
+                                  className="absolute z-10 inset-0"
+                                  aria-hidden="true"
+                                />
                                 {item.name}
                               </a>
-                              <p aria-hidden="true" className="mt-1 text-sm text-gray-500">
+                              <p
+                                aria-hidden="true"
+                                className="mt-1 text-sm text-gray-500"
+                              >
                                 Shop now
                               </p>
                             </div>
@@ -180,7 +218,10 @@ export default function ListTest() {
                 <div className="border-t border-gray-200 py-6 px-4 space-y-6">
                   {navigation.pages.map((page) => (
                     <div key={page.name} className="flow-root">
-                      <a href={page.href} className="-m-2 p-2 block font-medium text-gray-900">
+                      <a
+                        href={page.href}
+                        className="-m-2 p-2 block font-medium text-gray-900"
+                      >
                         {page.name}
                       </a>
                     </div>
@@ -189,12 +230,18 @@ export default function ListTest() {
 
                 <div className="border-t border-gray-200 py-6 px-4 space-y-6">
                   <div className="flow-root">
-                    <a href="#" className="-m-2 p-2 block font-medium text-gray-900">
+                    <a
+                      href="#"
+                      className="-m-2 p-2 block font-medium text-gray-900"
+                    >
                       Create an account
                     </a>
                   </div>
                   <div className="flow-root">
-                    <a href="#" className="-m-2 p-2 block font-medium text-gray-900">
+                    <a
+                      href="#"
+                      className="-m-2 p-2 block font-medium text-gray-900"
+                    >
                       Sign in
                     </a>
                   </div>
@@ -287,10 +334,16 @@ export default function ListTest() {
               </form>
 
               <div className="flex items-center space-x-6">
-                <a href="#" className="text-sm font-medium text-white hover:text-gray-100">
+                <a
+                  href="#"
+                  className="text-sm font-medium text-white hover:text-gray-100"
+                >
                   Sign in
                 </a>
-                <a href="#" className="text-sm font-medium text-white hover:text-gray-100">
+                <a
+                  href="#"
+                  className="text-sm font-medium text-white hover:text-gray-100"
+                >
                   Create an account
                 </a>
               </div>
@@ -326,9 +379,9 @@ export default function ListTest() {
                                   <Popover.Button
                                     className={classNames(
                                       open
-                                        ? 'border-indigo-600 text-indigo-600'
-                                        : 'border-transparent text-gray-700 hover:text-gray-800',
-                                      'relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px'
+                                        ? "border-indigo-600 text-indigo-600"
+                                        : "border-transparent text-gray-700 hover:text-gray-800",
+                                      "relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px"
                                     )}
                                   >
                                     {category.name}
@@ -346,13 +399,19 @@ export default function ListTest() {
                                 >
                                   <Popover.Panel className="absolute top-full inset-x-0 text-sm text-gray-500">
                                     {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
-                                    <div className="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true" />
+                                    <div
+                                      className="absolute inset-0 top-1/2 bg-white shadow"
+                                      aria-hidden="true"
+                                    />
 
                                     <div className="relative bg-white">
                                       <div className="max-w-7xl mx-auto px-8">
                                         <div className="grid grid-cols-4 gap-y-10 gap-x-8 py-16">
                                           {category.featured.map((item) => (
-                                            <div key={item.name} className="group relative">
+                                            <div
+                                              key={item.name}
+                                              className="group relative"
+                                            >
                                               <div className="aspect-w-1 aspect-h-1 rounded-md bg-gray-100 overflow-hidden group-hover:opacity-75">
                                                 <img
                                                   src={item.imageSrc}
@@ -360,11 +419,20 @@ export default function ListTest() {
                                                   className="object-center object-cover"
                                                 />
                                               </div>
-                                              <a href={item.href} className="mt-4 block font-medium text-gray-900">
-                                                <span className="absolute z-10 inset-0" aria-hidden="true" />
+                                              <a
+                                                href={item.href}
+                                                className="mt-4 block font-medium text-gray-900"
+                                              >
+                                                <span
+                                                  className="absolute z-10 inset-0"
+                                                  aria-hidden="true"
+                                                />
                                                 {item.name}
                                               </a>
-                                              <p aria-hidden="true" className="mt-1">
+                                              <p
+                                                aria-hidden="true"
+                                                className="mt-1"
+                                              >
                                                 Shop now
                                               </p>
                                             </div>
@@ -404,7 +472,10 @@ export default function ListTest() {
                     </button>
 
                     {/* Search */}
-                    <a href="#" className="ml-2 p-2 text-gray-400 hover:text-gray-500">
+                    <a
+                      href="#"
+                      className="ml-2 p-2 text-gray-400 hover:text-gray-500"
+                    >
                       <span className="sr-only">Search</span>
                       <SearchIcon className="w-6 h-6" aria-hidden="true" />
                     </a>
@@ -421,29 +492,48 @@ export default function ListTest() {
                   </a>
 
                   <div className="flex-1 flex items-center justify-end">
-                    <a href="#" className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block">
+                    <a
+                      href="#"
+                      className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block"
+                    >
                       Search
                     </a>
 
                     <div className="flex items-center lg:ml-8">
                       {/* Help */}
-                      <a href="#" className="p-2 text-gray-400 hover:text-gray-500 lg:hidden">
+                      <a
+                        href="#"
+                        className="p-2 text-gray-400 hover:text-gray-500 lg:hidden"
+                      >
                         <span className="sr-only">Help</span>
-                        <QuestionMarkCircleIcon className="w-6 h-6" aria-hidden="true" />
+                        <QuestionMarkCircleIcon
+                          className="w-6 h-6"
+                          aria-hidden="true"
+                        />
                       </a>
-                      <a href="#" className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block">
+                      <a
+                        href="#"
+                        className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block"
+                      >
                         Help
                       </a>
 
                       {/* Cart */}
                       <div className="ml-4 flow-root lg:ml-8">
-                        <a href="#" className="group -m-2 p-2 flex items-center">
+                        <a
+                          href="#"
+                          className="group -m-2 p-2 flex items-center"
+                        >
                           <ShoppingBagIcon
                             className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
                             aria-hidden="true"
                           />
-                          <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
-                          <span className="sr-only">items in cart, view bag</span>
+                          <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
+                            0
+                          </span>
+                          <span className="sr-only">
+                            items in cart, view bag
+                          </span>
                         </a>
                       </div>
                     </div>
@@ -455,5 +545,5 @@ export default function ListTest() {
         </nav>
       </header>
     </div>
-  )
+  );
 }

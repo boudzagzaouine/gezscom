@@ -4,9 +4,9 @@ type ModalProps = {
   children: ReactNode;
   title: string;
   show: boolean;
-  format:number
+  format: String;
 };
-const Modal = ({ children, title, show,format }: ModalProps) => {
+const Modal = ({ children, title, show, format }: ModalProps) => {
   const [showModal, setShowModal] = React.useState(show);
   const open = () => {
     //setShowModal(true);
@@ -15,13 +15,15 @@ const Modal = ({ children, title, show,format }: ModalProps) => {
     //@ts-ignore
     // ref.current = open;
     setShowModal(show);
-  });//
+  }); //
   return (
     <>
       {showModal && (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className={'relative w-full my-6 mx-auto max-w-'+format+'xl'}>
+            <div
+              className={"relative w-full my-6 mx-auto max-w-" + format + "xl"}
+            >
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}

@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { PAGE_SIZE } from "tools/consts";
-import { Client, Commande } from "../tools/types";
+import { Article, Client, Commande } from "../tools/types";
 
 export const crudApi = createApi({
   reducerPath: "crud-api",
@@ -20,14 +20,14 @@ export const crudApi = createApi({
         providesTags: (result) =>
           result
             ? [
-                //@ts-ignore
-                ...result.content.map(({ id }) => ({
-                  //      ...result.map(({ id }) => ({
-                  type: "Client" as const,
-                  id,
-                })),
-                { type: "Client", id: "LIST" },
-              ]
+              //@ts-ignore
+              ...result.content.map(({ id }) => ({
+                //      ...result.map(({ id }) => ({
+                type: "Client" as const,
+                id,
+              })),
+              { type: "Client", id: "LIST" },
+            ]
             : [{ type: "Client", id: "LIST" }],
       }),
       paginationClients: builder.query<Client[], number | void>({
@@ -37,14 +37,14 @@ export const crudApi = createApi({
         providesTags: (result) =>
           result
             ? [
-                //@ts-ignore
-                ...result.content.map(({ id }) => ({
-                  //      ...result.map(({ id }) => ({
-                  type: "Client" as const,
-                  id,
-                })),
-                { type: "Client", id: "LIST" },
-              ]
+              //@ts-ignore
+              ...result.content.map(({ id }) => ({
+                //      ...result.map(({ id }) => ({
+                type: "Client" as const,
+                id,
+              })),
+              { type: "Client", id: "LIST" },
+            ]
             : [{ type: "Client", id: "LIST" }],
       }),
 
@@ -113,14 +113,14 @@ export const crudApi = createApi({
         providesTags: (result) =>
           result
             ? [
-                //@ts-ignore
-                ...result.content.map(({ id }) => ({
-                  //      ...result.map(({ id }) => ({
-                  type: "Commande" as const,
-                  id,
-                })),
-                { type: "Commande", id: "LIST" },
-              ]
+              //@ts-ignore
+              ...result.content.map(({ id }) => ({
+                //      ...result.map(({ id }) => ({
+                type: "Commande" as const,
+                id,
+              })),
+              { type: "Commande", id: "LIST" },
+            ]
             : [{ type: "Commande", id: "LIST" }],
       }),
       paginationCommandes: builder.query<Commande[], number | void>({
@@ -130,14 +130,14 @@ export const crudApi = createApi({
         providesTags: (result) =>
           result
             ? [
-                //@ts-ignore
-                ...result.content.map(({ id }) => ({
-                  //      ...result.map(({ id }) => ({
-                  type: "Commande" as const,
-                  id,
-                })),
-                { type: "Commande", id: "LIST" },
-              ]
+              //@ts-ignore
+              ...result.content.map(({ id }) => ({
+                //      ...result.map(({ id }) => ({
+                type: "Commande" as const,
+                id,
+              })),
+              { type: "Commande", id: "LIST" },
+            ]
             : [{ type: "Commande", id: "LIST" }],
       }),
       fetchOneCommande: builder.query<Commande, string>({
@@ -151,7 +151,7 @@ export const crudApi = createApi({
           method: "POST",
           body,
         }),
-         //@ts-ignore
+        //@ts-ignore
         invalidatesTags: ["Commande"],
       }),
       editCommande: builder.mutation<
@@ -164,7 +164,10 @@ export const crudApi = createApi({
           body,
         }),
       }),
-      deleteCommande: builder.mutation<{ success: boolean; id: number }, number>({
+      deleteCommande: builder.mutation<
+        { success: boolean; id: number },
+        number
+      >({
         //@ts-ignore
         query(id: Num) {
           //  if (confirm(`do you want delete Commande number ${id.id} ?`))
@@ -198,9 +201,108 @@ export const crudApi = createApi({
           method: "PUT",
         }),
       }),
+
+      /*****************************************************************************/
+      /*****************************************************************************/
+      /*****************************************************************************/
+      fetchArticles: builder.query<Article[], number | void>({
+        query() {
+          return "/articles";
+        },
+        providesTags: (result) =>
+          result
+            ? [
+              //@ts-ignore
+              ...result.content.map(({ id }) => ({
+                //      ...result.map(({ id }) => ({
+                type: "Article" as const,
+                id,
+              })),
+              { type: "Article", id: "LIST" },
+            ]
+            : [{ type: "Article", id: "LIST" }],
+      }),
+      paginationArticles: builder.query<Article[], number | void>({
+        query(page: number) {
+          return "/articles?page=" + page + "&size=" + PAGE_SIZE;
+        },
+        providesTags: (result) =>
+          result
+            ? [
+              //@ts-ignore
+              ...result.content.map(({ id }) => ({
+                //      ...result.map(({ id }) => ({
+                type: "Article" as const,
+                id,
+              })),
+              { type: "Article", id: "LIST" },
+            ]
+            : [{ type: "Article", id: "LIST" }],
+      }),
+      fetchOneArticle: builder.query<Article, String>({
+        query: (id) => `/articles/${id}`,
+        //@ts-ignore
+        providesTags: (result, error, id) => [{ type: "Article", id }],
+      }),
+      addArticle: builder.mutation<Article, Partial<Article>>({
+        query: (body) => ({
+          url: "/articles",
+          method: "POST",
+          body,
+        }),
+        //@ts-ignore
+        invalidatesTags: ["Article"],
+      }),
+      editArticle: builder.mutation<
+        Article,
+        Partial<Article> & Pick<Article, "id">
+      >({
+        query: (body) => ({
+          url: `/articles/${body.id}`,
+          method: "PUT",
+          body,
+        }),
+      }),
+      deleteArticle: builder.mutation<
+        { success: boolean; id: String },
+        number
+      >({
+        //@ts-ignore
+        query(id: String) {
+          //  if (confirm(`do you want delete Commande number ${id.id} ?`))
+          return {
+            url: `/articles/${id.id}`,
+            method: "DELETE",
+          };
+          // else return
+        },
+        //@ts-ignore
+        invalidatesTags: (result, error, id) => [
+          { type: "Article", id },
+          { type: "Article", id: "LIST" },
+        ],
+      }),
+      archiveArticle: builder.mutation<
+        Article,
+        Partial<Article> & Pick<Article, "id">
+      >({
+        query: (id) => ({
+          url: `/articles/${id}/archive`,
+          method: "PUT",
+        }),
+      }),
+      restoreArticle: builder.mutation<
+        Article,
+        Partial<Article> & Pick<Article, "id">
+      >({
+        query: (id) => ({
+          url: `/articles/${id}/restore`,
+          method: "PUT",
+        }),
+      }),
+
     };
   },
- 
 });
 
 export const {
@@ -222,6 +324,16 @@ export const {
   useDeleteCommandeMutation,
   useArchiveCommandeMutation,
   useRestoreCommandeMutation,
+  /*******************************************************/
+  /*******************************************************/
+  useFetchArticlesQuery,
+  usePaginationArticlesQuery,
+  useFetchOneArticleQuery,
+  useAddArticleMutation,
+  useEditArticleMutation,
+  useDeleteArticleMutation,
+  useArchiveArticleMutation,
+  useRestoreArticleMutation,
   /***********useMaMethodAfficjageQuery********************************************/
   /***********useMaMethodeOperationMutaion********************************************/
 } = crudApi;

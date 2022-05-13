@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const RightOfReturn = () => {
-  return (
-    <div>RightOfReturn</div>
-  )
-}
+  return <div>RightOfReturn</div>;
+};
 
-export default RightOfReturn
+export default RightOfReturn;

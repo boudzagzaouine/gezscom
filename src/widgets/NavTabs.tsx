@@ -1,33 +1,37 @@
+import { Fragment, useState } from "react";
+import { Popover, Transition } from "@headlessui/react";
+import { MenuNavTabs } from "./TypeWidgets";
 
-import { Fragment, useState} from 'react'
-import { Popover, Transition } from '@headlessui/react'
-import { MenuNavTabs } from './TypeWidgets'
-
-
- 
-function classNames(...classes:any[]) {
-  return classes.filter(Boolean).join(' ')
+function classNames(...classes: any[]) {
+  return classes.filter(Boolean).join(" ");
 }
-type NatabsProps={
-    tab:MenuNavTabs[]
-}
-const NavTabs = ({tab}:NatabsProps) => {
-  const [selected,setSelected]=useState(1)
-    return (
-        <div className="bg-white w-full float-left h-52 mt-2">
-             <ul className="float-left">
-             {tab.map((t)=>(
-               <li className={'float-left cursor-pointer py-2 px-3 border-[#CECFD0]  flex items-center '+(selected==t.id?'border-t border-r border-l':'border-b')} onClick={()=>{setSelected(t.id)}}>{t.name}</li>
-             ))}  
-             </ul> 
-        <div className="bg-white w-full float-left h-5/6 overflow-auto">
-        {tab.map((t)=>(
-               selected==t.id && t.featured
-             ))} 
-        </div>  
-        </div>
-      )
-    
-}
+type NatabsProps = {
+  tab: MenuNavTabs[];
+};
+const NavTabs = ({ tab }: NatabsProps) => {
+  const [selected, setSelected] = useState(1);
+  return (
+    <div className="bg-white w-full float-left h-52 mt-2">
+      <ul className="float-left">
+        {tab.map((t) => (
+          <li
+            className={
+              "float-left cursor-pointer py-2 px-3 border-[#CECFD0]  flex items-center " +
+              (selected == t.id ? "border-t border-r border-l" : "border-b")
+            }
+            onClick={() => {
+              setSelected(t.id);
+            }}
+          >
+            {t.name}
+          </li>
+        ))}
+      </ul>
+      <div className="bg-white w-full float-left h-5/6 overflow-auto">
+        {tab.map((t) => selected == t.id && t.featured)}
+      </div>
+    </div>
+  );
+};
 
-export default NavTabs
+export default NavTabs;
