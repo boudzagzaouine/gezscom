@@ -4,13 +4,13 @@ import { TableProps, TdProps, ThProps, TrProps } from "./types";
 
 const Table = ({ thead, children, className, ...props }: TableProps) => {
   return (
-         <table
-              {...props}
-              className={classNames(className, "tab-list float-left w-full")}
-            >
-              <thead className="bg-gray-50">{thead}</thead>
-              <tbody className="bg-white">{children}</tbody>
-            </table>
+    <table
+      {...props}
+      className={classNames(className, "tab-list float-left w-full")}
+    >
+      <thead className="bg-gray-50">{thead}</thead>
+      <tbody className="bg-white">{children}</tbody>
+    </table>
   );
 };
 

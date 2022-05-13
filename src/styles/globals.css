@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.react-datepickerzz {
+    position: absolute !important;
+    right: 0 !important;
+}

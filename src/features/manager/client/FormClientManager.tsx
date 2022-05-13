@@ -47,7 +47,9 @@ const FormClientManager = ({
           <h1 className="mb-2">Nom & Prénom du client</h1>
           <div className="float-left w-5/6">
             <div className="float-left w-1/2">
-              {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
+              {request == REQUEST_EDIT && (
+                <Field label="id du client" name="id" />
+              )}
               <Field label="Nom du client" name="design" disabled={disabled} />
               <Field label="concat" name="concat" disabled={disabled} />
               <Field label="email" name="email" disabled={disabled} />
@@ -142,7 +144,7 @@ const FormClientManager = ({
           </Bcyan>
         )}
       </div>
-      <ListCommandeClient client={client} />
+      {client.id!="" && <ListCommandeClient client={client} />}
     </Section>
   );
 };

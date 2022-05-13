@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const CommandeVendorManager = () => {
-  return (
-    <div>CommandeVendorManager</div>
-  )
-}
+  return <div>CommandeVendorManager</div>;
+};
 
-export default CommandeVendorManager
+export default CommandeVendorManager;

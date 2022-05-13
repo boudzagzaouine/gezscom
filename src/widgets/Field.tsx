@@ -44,6 +44,6 @@ export const Field = forwardRef(
         invalid: fieldState.invalid,
       };
     }, [fieldState?.error?.message, fieldState?.error?.type]);
-    return <Input {...field} meta={meta} ref={forwardedRef}  {...props}  />;
+    return <Input {...field} meta={meta} ref={forwardedRef} {...props} />;
   }
 );

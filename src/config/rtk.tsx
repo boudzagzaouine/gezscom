@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { PAGE_SIZE } from "tools/consts";
-import { Client, Commande } from "../tools/types";
+import { ArticleCommande, Client, Commande } from "../tools/types";
 
 export const crudApi = createApi({
   reducerPath: "crud-api",
@@ -147,11 +147,11 @@ export const crudApi = createApi({
       }),
       addCommande: builder.mutation<Commande, Partial<Commande>>({
         query: (body) => ({
-          url: "/Commandes",
+          url: "/commandes/post",
           method: "POST",
           body,
         }),
-         //@ts-ignore
+        //@ts-ignore
         invalidatesTags: ["Commande"],
       }),
       editCommande: builder.mutation<
@@ -164,7 +164,10 @@ export const crudApi = createApi({
           body,
         }),
       }),
-      deleteCommande: builder.mutation<{ success: boolean; id: number }, number>({
+      deleteCommande: builder.mutation<
+        { success: boolean; id: number },
+        number
+      >({
         //@ts-ignore
         query(id: Num) {
           //  if (confirm(`do you want delete Commande number ${id.id} ?`))
@@ -198,9 +201,120 @@ export const crudApi = createApi({
           method: "PUT",
         }),
       }),
+      /**************************************************************************************************************/
+      /**************************************************************************************************************/
+      /**************************************************************************************************************/
+      fetchArticleCommandes: builder.query<ArticleCommande[], number | void>({
+        query() {
+          return "/articlecommandes";
+        },
+        providesTags: (result) =>
+          result
+            ? [
+                //@ts-ignore
+                ...result.content.map(({ id }) => ({
+                  //      ...result.map(({ id }) => ({
+                  type: "ArticleCommande" as const,
+                  id,
+                })),
+                { type: "ArticleCommande", id: "LIST" },
+              ]
+            : [{ type: "ArticleCommande", id: "LIST" }],
+      }),
+      fetchArticleCommandesByIdCommande: builder.query<ArticleCommande[], string | void>({
+        query(id) {
+          return `/articlecommandes/idcom/${id}`;
+        },
+        providesTags: (result) =>
+          result
+            ? [
+                //@ts-ignore
+                ...result.content?.map(({ id }) => ({
+                  //      ...result.map(({ id }) => ({
+                  type: "ArticleCommande" as const,
+                  id,
+                })),
+                { type: "ArticleCommande", id: "LIST" },
+              ]
+            : [{ type: "ArticleCommande", id: "LIST" }],
+      }),
+      paginationArticleCommandes: builder.query<
+        ArticleCommande[],
+        number | void
+      >({
+        query(page: number) {
+          return "/articlecommandes?page=" + page + "&size=" + PAGE_SIZE;
+        },
+        providesTags: (result) =>
+          result
+            ? [
+                //@ts-ignore
+                ...result.content.map(({ id }) => ({
+                  //      ...result.map(({ id }) => ({
+                  type: "ArticleCommande" as const,
+                  id,
+                })),
+                { type: "ArticleCommande", id: "LIST" },
+              ]
+            : [{ type: "ArticleCommande", id: "LIST" }],
+      }),
+      fetchOneArticleCommande: builder.query<ArticleCommande, string>({
+        query: (id) => `/articleCommandes/${id}`,
+       }),
+      addArticleCommande: builder.mutation<
+        ArticleCommande,
+        Partial<ArticleCommande>
+      >({
+        query: (body) => ({
+          url: "/articlecommandes/post",
+          method: "POST",
+          body,
+        }),
+      }),
+      editArticleCommande: builder.mutation<
+        ArticleCommande,
+        Partial<ArticleCommande> & Pick<ArticleCommande, "id">
+      >({
+        query: (body) => ({
+          url: `/articleCommandes/${body.id}`,
+          method: "PUT",
+          body,
+        }),
+      }),
+      deleteArticleCommande: builder.mutation<
+        { success: boolean; id: number },
+        number
+      >({
+        //@ts-ignore
+        query(id: Num) {
+          //  if (confirm(`do you want delete ArticleCommande number ${id.id} ?`))
+          return {
+            url: `/articleCommandes/${id.id}`,
+            method: "DELETE",
+          };
+          // else return
+        },
+      }),
+      archiveArticleCommande: builder.mutation<
+        ArticleCommande,
+        Partial<ArticleCommande> & Pick<ArticleCommande, "id">
+      >({
+        query: (id) => ({
+          url: `/articleCommandes/${id}/archive`,
+          method: "PUT",
+        }),
+      }),
+      restoreArticleCommande: builder.mutation<
+        ArticleCommande,
+        Partial<ArticleCommande> & Pick<ArticleCommande, "id">
+      >({
+        query: (id) => ({
+          url: `/articleCommandes/${id}/restore`,
+          method: "PUT",
+        }),
+      }),
     };
   },
- 
 });
 
 export const {
@@ -224,4 +338,13 @@ export const {
   useRestoreCommandeMutation,
   /***********useMaMethodAfficjageQuery********************************************/
   /***********useMaMethodeOperationMutaion********************************************/
+  useFetchArticleCommandesQuery,
+  useFetchArticleCommandesByIdCommandeQuery,
+  usePaginationArticleCommandesQuery,
+  useFetchOneArticleCommandeQuery,
+  useAddArticleCommandeMutation,
+  useEditArticleCommandeMutation,
+  useDeleteArticleCommandeMutation,
+  useArchiveArticleCommandeMutation,
+  useRestoreArticleCommandeMutation,
 } = crudApi;

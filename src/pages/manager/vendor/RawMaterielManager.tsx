@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const RawMaterielManager = () => {
-  return (
-    <div>RawMaterielManager</div>
-  )
-}
+  return <div>RawMaterielManager</div>;
+};
 
-export default RawMaterielManager
+export default RawMaterielManager;

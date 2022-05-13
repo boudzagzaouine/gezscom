@@ -199,17 +199,17 @@ export type MenuItems = {
   text: string;
   action: () => void;
 };
-export interface MenuNavTabs{
-  id:number
-  name:ReactElement<any, any> 
-  featured:ReactElement<any, any>
+export interface MenuNavTabs {
+  id: number;
+  name: ReactElement<any, any>;
+  featured: ReactElement<any, any>;
 }
-export interface NavType{
-  name:string 
-  href:string 
-  current:boolean
-  visible:boolean
+export interface NavType {
+  name: string;
+  href: string;
+  current: boolean;
+  visible: boolean;
 }
-export type ListClientsProps={
-  client:Client
-}
+export type ListClientsProps = {
+  client: Client;
+};

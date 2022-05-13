@@ -1,10 +1,8 @@
-import React from 'react'
-import { ListClientsProps } from 'widgets/TypeWidgets'
+import React from "react";
+import { ListClientsProps } from "widgets/TypeWidgets";
 
-const SoldesCommandes = ({client}:ListClientsProps) => {
-  return (
-    <div>SoldesCommandes</div>
-  )
-}
+const SoldesCommandes = ({ client }: ListClientsProps) => {
+  return <div>SoldesCommandes</div>;
+};
 
-export default SoldesCommandes
+export default SoldesCommandes;

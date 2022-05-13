@@ -35,7 +35,7 @@ const ArchiveClient = ({ id }: ArchiveClientPorp, ref: Ref<void>) => {
   };
   return (
     <>
-      <Modal title={"archivage"} show={showModal} format={2}>
+      <Modal title={"archivage"} show={showModal} format={3}>
         <div>
           <h2>archivage du client num: {id0}</h2>
           <form
