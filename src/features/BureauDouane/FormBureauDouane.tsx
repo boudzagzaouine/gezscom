@@ -12,7 +12,8 @@ import Mitems from 'widgets/Mitems';
 import { ArchiveIcon, ClipboardListIcon, PencilAltIcon, ReplyIcon, TrashIcon } from "@heroicons/react/outline";
 import axios from "axios";
 
-//zzzzz
+//zzzzzgit 
+//qqqq
 type FormBureauDouaneProps = {
     bureauDouane: Article;
     disable: boolean;
