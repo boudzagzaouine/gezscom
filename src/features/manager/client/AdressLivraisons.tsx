@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import Table from "widgets/Table";
 import { ListClientsProps } from "widgets/TypeWidgets";
 
-const AdressLivraisons = ({ client }: ListClientsProps) => {
-  const [adressLivs, setAdressLivs] = useState(client.adressLivs);
+const AdressLivraisons = ({ idClient }: ListClientsProps) => {
+  const [adressLivs, setAdressLivs] = useState(idClient);
   return (
     <>
-      <Table
+      {/* <Table
         className="tab-list float-left w-full mt-2"
         thead={
           <tr>
@@ -25,7 +25,7 @@ const AdressLivraisons = ({ client }: ListClientsProps) => {
             <Table.td>{commande.adress}</Table.td>
           </tr>
         ))}
-      </Table>
+      </Table> */}
     </>
   );
 };

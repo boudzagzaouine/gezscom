@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { forwardRef, Ref, useRef, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
+import Bcancel from "widgets/Bcancel";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import { useDeleteClientMutation } from "../../../config/rtk";
@@ -22,6 +23,9 @@ const DeleteClient = ({ id }: DeleteClientPorp, ref: Ref<void>) => {
     setId0(i);
     setShowModal(true);
   };
+  const close=()=>{
+    setShowModal(false);
+  }
   useEffect(() => {
     //@ts-ignore
     ref.current = openModal;
@@ -32,7 +36,7 @@ const DeleteClient = ({ id }: DeleteClientPorp, ref: Ref<void>) => {
   };
   return (
     <>
-      <Modal title={"suppression"} show={showModal} format={2}>
+      <Modal title={"suppression"} show={showModal} format={5} close={close}>
         <div>
           <h2>suppression de client num: {id0}</h2>
           <form
@@ -48,24 +52,19 @@ const DeleteClient = ({ id }: DeleteClientPorp, ref: Ref<void>) => {
               className="mt-2 float-right"
               onClick={() => {
                 setTimeout(() => {
-                  setShowModal(false);
+                  close();
                 }, 500);
               }}
             >
-              <TrashIcon
-                className="h-8 w-8 text-[#fff] group-hover:text-gray-500"
-                aria-hidden="true"
-              />
+            Supprimer
             </Bcyan>
-            <Bred
+            <Bcancel
               className="mt-2 float-right"
               onClick={() => {
-                setShowModal(false);
+                close();
               }}
-            >
-              <XCircleIcon className={STYLE_ICON} aria-hidden="true" />
-            </Bred>
-          </form>
+            />
+             </form>
         </div>
       </Modal>
     </>

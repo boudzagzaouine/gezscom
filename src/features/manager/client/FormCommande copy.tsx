@@ -14,7 +14,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Bsave from "widgets/Bsave";
 import Bcancel from "widgets/Bcancel";
-import { openClients } from "components/manager/client/openClient";
 type CommandProps = {
   command: Commande;
 };
@@ -22,17 +21,31 @@ type CommandProps = {
 const FormCommande = ({ command }: CommandProps, ref: Ref<void>) => {
   const [showModal, setShowModal] = React.useState(false);
   const [command0, setCommand0] = useState(command);
-  const clients:Client[]=openClients()
+  const { data = [], isFetching, refetch } = useFetchClientsQuery();
+  //@ts-ignore
+  const [clients, setClients] = useState(data?.content);
+  //@ts-ignore
+  const [idClients, setidClients] = useState(clients?.map((x) => x.design));
+  const [save] = useAddCommandeMutation();
+  const [startDate, setStartDate] = useState(new Date());
+  const [isOpen, setIsOpen] = useState(false);
+  const handleChange = (e: Date) => {
+    // alert(e)
+    setStartDate(e);
+    setTimeout(() => {
+      setIsOpen(!isOpen);
+    }, 1000);
+  };
   const openModal = (c: Commande) => {
     setCommand0(c);
     setShowModal(true);
   };
-  const save=()=>{}
   const close=()=>{
     setShowModal(false);
   }
   useEffect(() => {
-   //@ts-ignore
+    /*  setAdressLivs(client.adressLivs) */
+    //@ts-ignore
     ref.current = openModal;
   });
   const commanndes: MenuNavTabs[] = [
@@ -47,16 +60,22 @@ const FormCommande = ({ command }: CommandProps, ref: Ref<void>) => {
       featured: <ArticlesCommande idCommande={command0.id} />,
     },
   ];
-    return (
+  if(command0.idClient!=""&&command0.client.id==""){
+    //@ts-ignore
+    command0.client=getClient(command0.idClient,data.content)
+  }
+  return (
     <Modal title={command0.id===""?"Nouvelle commande":"Mise à jour de la commande"} 
     show={showModal} format={5} close={close}>
       <Form defaultValues={command0} onSubmit={save}>
         {({ watch }) => {
-          
           //@ts-ignore
           const idClient = watch("idClient");
-          const client: Client =c0;
-          const adressLivs: string[] =["","gogo","jojo"];
+          const client1: Client | undefined =
+            command0.idClient != ""
+              ? command0.client
+              : getClient(idClient, clients);
+          const adressLivs1: string[] =["","gogo","jojo"];
           console.log(idClient);
           return (
             <>
@@ -65,7 +84,7 @@ const FormCommande = ({ command }: CommandProps, ref: Ref<void>) => {
                 {command0.idClient != "" ? (
                   <>
                     <Field type="hidden" name="idClient" />
-                    <Field label="Client" value={client} />
+                    <Field label="Client" value={command0.client.design} />
                   </>
                 ) : (
                   <Field
@@ -78,13 +97,27 @@ const FormCommande = ({ command }: CommandProps, ref: Ref<void>) => {
                 )}
                 <Field label="id" name="id"  />
                 <Field label="Date Commande" name="date" type="date"  />
-             </div>
+               {/*  <Field
+                  label="Date de commande"
+                  name="dateo"
+                  value={startDate}
+                  onFocus={() => {
+                    setIsOpen(true);
+                  }}
+                  onBlur={() => {
+                    setIsOpen(false);
+                  }}
+                /> */}
+                {/* <div className="float-left w-full relative">
+{isOpen && <DatePicker selected={startDate} onChange={()=>{handleChange(startDate)}} inline />}
+</div> */}
+              </div>
               <div className="float-left w-1/2">
                 <Field
                   label="Adress de livraison"
                   name="adrLiv"
                   as="select"
-                  options={adressLivs}
+                  options={adressLivs1}
                 />
                 <Field label="Saison" name="season" />
               </div>
@@ -103,7 +136,7 @@ const FormCommande = ({ command }: CommandProps, ref: Ref<void>) => {
           close();
         }}
       />
-     <NavTabs tab={commanndes} />     
+     {command0.id!="" && <NavTabs tab={commanndes} />}      
     </Modal>
   );
 };

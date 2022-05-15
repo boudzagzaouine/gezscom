@@ -4,7 +4,8 @@ import {
   useFetchArticleCommandesByIdCommandeQuery,
   useFetchArticleCommandesQuery,
   usePaginationArticleCommandesQuery,
-  useAddArticleCommandeMutation
+  useAddArticleCommandeMutation,
+  useEditArticleCommandeMutation
 } from "config/rtk";
 import React, { useState } from "react";
 import { arc0, Commande ,ArticleCommande} from "tools/types";
@@ -17,16 +18,16 @@ import Table from "widgets/Table";
 import FormArticleCommande from "./FormArticleCommande";
 const style_add_line = "bg-[#dfdfdf] cursor-pointer";
 type ArticlesCommandeProps={
-  commande:Commande
+  idCommande:string
 }
-const ArticlesCommande = ({commande}:ArticlesCommandeProps) => {
+const ArticlesCommande = ({idCommande}:ArticlesCommandeProps) => {
  /*  const [page, setPage] = useState(0);
   const loadPage = (p: number) => {
     setPage(p);
     refetch();
   }; */
   //@ts-ignore
-  const { data = [], isFetching, refetch } = usePaginationArticleCommandesQuery(0);
+  const { data = [], isFetching, refetch } = useFetchArticleCommandesByIdCommandeQuery(idCommande);
   const [selectedIdCommande,setSelectedIdCommande]=useState("new")
   const [formArt,setFormArt]=useState(false)
   const close=()=>{
@@ -37,9 +38,9 @@ const ArticlesCommande = ({commande}:ArticlesCommandeProps) => {
     setFormArt(true)
     setSelectedIdCommande(id)
   }
-  const articles:ArticleCommande[]=commande.articleCommandes
- // const [addArticle] = useAddArticleCommandeMutation()
- const addArticle=(art:ArticleCommande)=>{
+  const [save]=useAddArticleCommandeMutation();
+  const [edit]=useEditArticleCommandeMutation();
+/* const addArticle=(art:ArticleCommande)=>{
   art.idCommande=commande.id
    axios.post('http://localhost:1000/api/v1/articlecommandes/post',art).then(()=>{
     refetch()
@@ -50,7 +51,7 @@ const ArticlesCommande = ({commande}:ArticlesCommandeProps) => {
    axios.put('http://localhost:1000/api/v1/articlecommandes/put/'+art.id,art).then(()=>{
     refetch()
    })
- } 
+ } */
 return (
     <div>
       <Table
@@ -71,7 +72,7 @@ return (
           //@ts-ignore
           data.content?.map((article) => (
          // articles?.map((article) => (
-          article.idCommande==commande.id && <>
+           <>
           <tr key={article.id}>
               <Table.td>{article.id}</Table.td>
               <Table.td>{article.idCommande} </Table.td>
@@ -85,11 +86,11 @@ return (
                 }} />
               </Table.td>
             </tr>
-            {selectedIdCommande==article.id && formArt && <FormArticleCommande articleCommande={article} close={close} saveArticle={editArticle}/>}
+            {selectedIdCommande==article.id && formArt && <FormArticleCommande articleCommande={article} close={close} saveArticle={edit}/>}
           </>
           ))
         }
-        {selectedIdCommande=="new" && formArt && <FormArticleCommande articleCommande={arc0} close={close} saveArticle={addArticle}/>}
+        {selectedIdCommande=="new" && formArt && <FormArticleCommande articleCommande={arc0} close={close} saveArticle={save}/>}
         {
           !formArt && <tr
           onClick={() => {

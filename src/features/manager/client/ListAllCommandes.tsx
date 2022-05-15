@@ -1,11 +1,13 @@
 import { DocumentAddIcon } from "@heroicons/react/solid";
+import { openClients } from "components/manager/client/OpenClient";
 import {
   useFetchCommandesQuery,
   usePaginationCommandesQuery,
 } from "config/rtk";
 import React, { useRef, useState } from "react";
-import { c0, cm0, getCm0 } from "tools/types";
+import { c0, Client, cm0, getCm, getCm0, getCm2 } from "tools/types";
 import Bcyan from "widgets/Bcyan";
+import Bedit from "widgets/Bedit";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
 import Table from "widgets/Table";
@@ -29,10 +31,7 @@ const ListAllCommandes = () => {
           refCom.current(getCm0(c0));
         }}
       >
-        <DocumentAddIcon
-          className="h-8 w-8 text-white group-hover:text-gray-500"
-          aria-hidden="true"
-        />
+        Nouvelle commande
       </Bcyan>
       <FormCommande command={getCm0(c0)} ref={refCom} />
       <Table
@@ -44,6 +43,9 @@ const ListAllCommandes = () => {
             <Table.th>Date</Table.th>
             <Table.th>Saison</Table.th>
             <Table.th>Montant</Table.th>
+            <Table.th>
+            
+            </Table.th>
           </tr>
         }
       >
@@ -56,6 +58,13 @@ const ListAllCommandes = () => {
               <Table.td>{commande.date}</Table.td>
               <Table.td>{commande.season}</Table.td>
               <Table.td>{commande.amount}</Table.td>
+              <Table.td>
+              <Bedit   className="float-left mt-2"
+        onClick={() => {
+          //@ts-ignore
+          refCom.current(getCm2(commande));
+        }}/>
+              </Table.td>
             </tr>
           ))
         }

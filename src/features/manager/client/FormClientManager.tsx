@@ -21,6 +21,10 @@ import {
   XCircleIcon,
 } from "@heroicons/react/solid";
 import ListCommandeClient from "./ListCommandeClient";
+import Bsave from "widgets/Bsave";
+import Bcancel from "widgets/Bcancel";
+import Bupdate from "widgets/Bupdate";
+import Xclose from "widgets/Xclose";
 
 type FormClientManagerProp = {
   closed: () => void;
@@ -39,9 +43,9 @@ const FormClientManager = ({
   const onSubmit =
     request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit : undefined;
   const [disabled, setDisabled] = useState(disable);
-
   return (
     <Section>
+      <Xclose close={closed} />
       <div className="float-left w-full text-xs">
         <Form defaultValues={client} onSubmit={onSubmit}>
           <h1 className="mb-2">Nom & Prénom du client</h1>
@@ -99,18 +103,17 @@ const FormClientManager = ({
           </div>
           <div className="float-left w-full mt-1">
             {!disabled && (
-              <Bcyan
-                className="float-left"
+              <Bsave
+                className="float-right b-ajust-r"
                 onClick={() => {
                   setTimeout(() => {
                     closed();
                   }, 500);
                 }}
-              >
-                <SaveIcon className={STYLE_ICON} aria-hidden="true" />
-              </Bcyan>
+              />
+               
             )}
-            {!disabled && request == REQUEST_SAVE && (
+            {/* !disabled && request == REQUEST_SAVE && (
               <Bcyan className="float-left" type="submit">
                 <SaveIcon
                   className="h-8 w-8 text-[#fff] group-hover:text-gray-500  float-left"
@@ -122,29 +125,26 @@ const FormClientManager = ({
                   aria-hidden="true"
                 />
               </Bcyan>
-            )}
+            ) */}
           </div>
         </Form>
-        <Bred
-          className="float-right b-ajust"
+        {!disabled && <Bcancel
+          className={'float-right b-ajust '+(request ==REQUEST_SAVE && 'b-ajustf')}
           onClick={() => {
-            closed();
+            setDisabled(true);
           }}
-        >
-          <XCircleIcon className={STYLE_ICON} aria-hidden="true" />
-        </Bred>
+        />}
+        
         {disabled && (
-          <Bcyan
+          <Bupdate
             className="float-right"
             onClick={() => {
               setDisabled(false);
             }}
-          >
-            <PencilAltIcon className={STYLE_ICON} aria-hidden="true" />
-          </Bcyan>
-        )}
+          />
+           )}
       </div>
-      {client.id!="" && <ListCommandeClient client={client} />}
+      {client.id!="" && <ListCommandeClient idClient={client.id} />}
     </Section>
   );
 };

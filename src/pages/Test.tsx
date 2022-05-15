@@ -1,14 +1,16 @@
-import ListTest from "features/manager/client/ListTest";
-import { useRef } from "react";
-import Section from "widgets/Section";
+import TestArticleCommande from 'features/tests/client/TestArticleCommande'
+import TestClient from 'features/tests/client/TestClient'
+import TestCommande from 'features/tests/client/TestCommande'
+import React from 'react'
 
-export default function Test() {
-  const modal = useRef(null);
+const Test = () => {
   return (
     <>
-      <Section>
-        
-      </Section>
+    {/* <TestClient /> */}
+    {/* <TestCommande /> */}
+    <TestArticleCommande />
     </>
-  );
+  )
 }
+
+export default Test

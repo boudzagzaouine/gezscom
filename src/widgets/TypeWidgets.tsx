@@ -211,5 +211,5 @@ export interface NavType {
   visible: boolean;
 }
 export type ListClientsProps = {
-  client: Client;
+  idClient: string;
 };

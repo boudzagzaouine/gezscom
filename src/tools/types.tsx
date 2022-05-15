@@ -16,10 +16,8 @@ export interface Client {
   bank: string;
   rib: string;
   swift: string;
-  commandes: Commande[];
-  adressLivs: AdressLiv[];
 }
-export type ColsClient =
+/*export type ColsClient =
   | "design"
   | "concat"
   | "image"
@@ -32,7 +30,7 @@ export type ColsClient =
   | "adrFact"
   | "bank"
   | "rib"
-  | "swift";
+  | "swift";*/
 export const c0: Client = {
   id: "",
   design: "",
@@ -48,9 +46,7 @@ export const c0: Client = {
   bank: "",
   rib: "",
   swift: "",
-  commandes: [],
-  adressLivs: [],
-};
+ };
 
 export interface Commande {
   id: string;
@@ -60,8 +56,7 @@ export interface Commande {
   client: Client;
   idClient: string;
   adrLiv: string;
-  articleCommandes: ArticleCommande[];
-}
+ }
 export const cm0: Commande = {
   id: "",
   date: new Date(),
@@ -70,7 +65,6 @@ export const cm0: Commande = {
   client: c0,
   idClient: "",
   adrLiv: "",
-  articleCommandes: [],
 };
 export const getCm0 = (cl: Client): Commande => {
   return {
@@ -81,7 +75,6 @@ export const getCm0 = (cl: Client): Commande => {
     client: cl,
     idClient: cl.id,
     adrLiv: "",
-    articleCommandes: [],
   };
 };
 export const getCm = (cl: Client,cm:Commande): Commande => {
@@ -93,8 +86,26 @@ export const getCm = (cl: Client,cm:Commande): Commande => {
     client: cl,
     idClient: cm.idClient,
     adrLiv: cm.adrLiv,
-    articleCommandes: cm.articleCommandes,
   };
+};
+export const initSel=(tab:string[])=>{
+  tab.unshift("")
+  return tab
+  }
+  export const initSelObj=(tab:Client[],t0:Object)=>{
+    tab.unshift(c0)
+    return tab
+    }
+    export const getCm2 = (cm:Commande): Commande => {
+  return {
+    id: cm.id,
+    date: cm.date,
+    amount: cm.amount,
+    season: cm.season,
+    client: c0,
+    idClient: cm.idClient,
+    adrLiv: cm.adrLiv,
+    };
 };
 export const getClient = (id: string, obj: Client[]): Client | undefined => {
   const apr = obj?.find((o: Client) => {
@@ -108,6 +119,7 @@ export interface AdressLiv {
   id: string;
   country: string;
   city: string;
+  idClient:string;
 }
 export interface ArticleCommande {
   id: string;

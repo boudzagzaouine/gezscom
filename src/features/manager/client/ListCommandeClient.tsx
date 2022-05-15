@@ -13,7 +13,7 @@ import AdressLivraisons from "./AdressLivraisons";
 import ArticlesClients from "./ArticlesClients";
 import ListCommandes from "./ListCommandes";
 import SoldesCommandes from "./SoldesCommandes";
-const ListCommandeClient = ({ client }: ListClientsProps) => {
+const ListCommandeClient = ({ idClient }: ListClientsProps) => {
   //
   //
   const commanndes: MenuNavTabs[] = [
@@ -25,7 +25,7 @@ const ListCommandeClient = ({ client }: ListClientsProps) => {
           <span className={style_span}>Commandes Clients</span>
         </>
       ),
-      featured: <ListCommandes client={client} />,
+      featured: <ListCommandes idClient={idClient} />,
     },
     {
       id: 2,
@@ -35,7 +35,7 @@ const ListCommandeClient = ({ client }: ListClientsProps) => {
           <span className={style_span}>Soldes Commandes</span>
         </>
       ),
-      featured: <SoldesCommandes client={client} />,
+      featured: <SoldesCommandes idClient={idClient} />,
     },
     {
       id: 3,
@@ -45,7 +45,7 @@ const ListCommandeClient = ({ client }: ListClientsProps) => {
           <span className={style_span}>Articles Clients</span>
         </>
       ),
-      featured: <ArticlesClients client={client} />,
+      featured: <ArticlesClients idClient={idClient} />,
     },
     {
       id: 4,
@@ -55,7 +55,7 @@ const ListCommandeClient = ({ client }: ListClientsProps) => {
           <span className={style_span}>Adresses de livraisons</span>
         </>
       ),
-      featured: <AdressLivraisons client={client} />,
+      featured: <AdressLivraisons idClient={idClient} />,
     },
   ];
   return (

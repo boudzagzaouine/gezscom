@@ -5,6 +5,7 @@ import React, { forwardRef, Ref, useRef, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { setTimeout } from "timers";
 import { STYLE_ICON } from "tools/constStyle";
+import Bcancel from "widgets/Bcancel";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import { useArchiveClientMutation } from "../../../config/rtk";
@@ -24,6 +25,9 @@ const ArchiveClient = ({ id }: ArchiveClientPorp, ref: Ref<void>) => {
     setId0(i);
     setShowModal(true);
   };
+  const close=()=>{
+    setShowModal(false);
+  }
   useEffect(() => {
     //@ts-ignore
     ref.current = openModal;
@@ -35,7 +39,7 @@ const ArchiveClient = ({ id }: ArchiveClientPorp, ref: Ref<void>) => {
   };
   return (
     <>
-      <Modal title={"archivage"} show={showModal} format={3}>
+      <Modal title={"archivage"} show={showModal} format={5} close={close}>
         <div>
           <h2>archivage du client num: {id0}</h2>
           <form
@@ -51,24 +55,19 @@ const ArchiveClient = ({ id }: ArchiveClientPorp, ref: Ref<void>) => {
               className="mt-2 float-right"
               onClick={() => {
                 setTimeout(() => {
-                  setShowModal(false);
+                  close();
                 }, 500);
               }}
             >
-              <ArchiveIcon
-                className="h-8 w-8 text-[#fff] group-hover:text-gray-500"
-                aria-hidden="true"
-              />
+             Archiver
             </Bcyan>
           </form>
-          <Bred
+          <Bcancel
             className="mt-2 float-right"
             onClick={() => {
-              setShowModal(false);
+              close();
             }}
-          >
-            <XCircleIcon className={STYLE_ICON} aria-hidden="true" />
-          </Bred>
+          />
         </div>
       </Modal>
     </>

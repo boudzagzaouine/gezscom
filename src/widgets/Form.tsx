@@ -42,7 +42,7 @@ const Control = forwardRef(
      */
     if (isSelect && options) {
       const selectOptions = options.map((option) => {
-        if (!option) return null;
+      //  if (!option) return null;
         //@ts-ignore
         const optionValue =
           typeof option === "string" ? option : option[optionKeyName];
@@ -102,7 +102,7 @@ export const Form = <T extends FieldValues = FieldValues>({
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit || defaultOnSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit || defaultOnSubmit)} className="float-right">
         {ObjectUtils.isFunction(children) ? children(methods) : children}
       </form>
     </FormProvider>

@@ -173,7 +173,7 @@ const ListClientManager = () => {
                 FormAsAdd();
               }}
             >
-              <UserAddIcon className={STYLE_ICON} aria-hidden="true" />
+              Nouveau client
             </Bcyan>
 
             <div className="float-right">

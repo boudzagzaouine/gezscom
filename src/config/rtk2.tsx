@@ -13,22 +13,53 @@ export const crudApi = createApi({
   tagTypes: ["Client", "UNAUTHORIZED", "UNKNOWN_ERROR"],
   endpoints(builder) {
     return {
-      fetchClients: builder.query<Client[], void>({
-        query: () => `/clients`,
+      fetchClients: builder.query<Client[], number | void>({
+        query() {
+          return "/clients";
+        },
+        providesTags: (result) =>
+          result
+            ? [
+                //@ts-ignore
+                ...result.content.map(({ id }) => ({
+                  //      ...result.map(({ id }) => ({
+                  type: "Client" as const,
+                  id,
+                })),
+                { type: "Client", id: "LIST" },
+              ]
+            : [{ type: "Client", id: "LIST" }],
       }),
-      paginationClients: builder.query<Client[], number>({
-        query: (page) => `/clients?page=${page}&size=${PAGE_SIZE}`,
+      paginationClients: builder.query<Client[], number | void>({
+        query(page: number) {
+          return "/clients?page=" + page + "&size=" + PAGE_SIZE;
+        },
+        providesTags: (result) =>
+          result
+            ? [
+                //@ts-ignore
+                ...result.content.map(({ id }) => ({
+                  //      ...result.map(({ id }) => ({
+                  type: "Client" as const,
+                  id,
+                })),
+                { type: "Client", id: "LIST" },
+              ]
+            : [{ type: "Client", id: "LIST" }],
       }),
+
       fetchOneClient: builder.query<Client, string>({
         query: (id) => `/clients/${id}`,
-     }),
+        providesTags: (result, error, id) => [{ type: "Client", id }],
+      }),
       addClient: builder.mutation<Client, Partial<Client>>({
         query: (body) => ({
           url: "/clients",
           method: "POST",
           body,
         }),
-       }),
+        invalidatesTags: ["Client"],
+      }),
       editClient: builder.mutation<
         Client,
         Partial<Client> & Pick<Client, "id">
@@ -47,7 +78,13 @@ export const crudApi = createApi({
             url: `/clients/${id.id}`,
             method: "DELETE",
           };
-       }}),
+          // else return
+        },
+        invalidatesTags: (result, error, id) => [
+          { type: "Client", id },
+          { type: "Client", id: "LIST" },
+        ],
+      }),
       archiveClient: builder.mutation<
         Client,
         Partial<Client> & Pick<Client, "id">
@@ -69,24 +106,57 @@ export const crudApi = createApi({
       /*****************************************************************************/
       /*****************************************************************************/
       /*****************************************************************************/
-      fetchCommandes: builder.query<Commande[], void>({
-        query: () => `/commandes`,
+      fetchCommandes: builder.query<Commande[], number | void>({
+        query() {
+          return "/commandes";
+        },
+        providesTags: (result) =>
+          result
+            ? [
+                //@ts-ignore
+                ...result.content.map(({ id }) => ({
+                  //      ...result.map(({ id }) => ({
+                  type: "Commande" as const,
+                  id,
+                })),
+                { type: "Commande", id: "LIST" },
+              ]
+            : [{ type: "Commande", id: "LIST" }],
       }),
-      paginationCommandes: builder.query<Commande[], number>({
-        query: (page) => `/commandes?page=${page}&size=${PAGE_SIZE}`,
+      paginationCommandes: builder.query<Commande[], number | void>({
+        query(page: number) {
+          return "/commandes?page=" + page + "&size=" + PAGE_SIZE;
+        },
+        providesTags: (result) =>
+          result
+            ? [
+                //@ts-ignore
+                ...result.content.map(({ id }) => ({
+                  //      ...result.map(({ id }) => ({
+                  type: "Commande" as const,
+                  id,
+                })),
+                { type: "Commande", id: "LIST" },
+              ]
+            : [{ type: "Commande", id: "LIST" }],
       }),
-      fetchcommandesByIdClient: builder.query<Commande[], string>({
+      FetchcommandesByIdClient: builder.query<Commande[], string>({
         query: (idClient) => `/commandes/idclient/${idClient}`,
       }),
       fetchOneCommande: builder.query<Commande, string>({
         query: (id) => `/commandes/${id}`,
-     }),
+        //@ts-ignore
+        providesTags: (result, error, id) => [{ type: "Commande", id }],
+      }),
       addCommande: builder.mutation<Commande, Partial<Commande>>({
         query: (body) => ({
-          url: `/commandes`,
+          url: "/commandes/post",
           method: "POST",
           body,
-        })}),
+        }),
+        //@ts-ignore
+        invalidatesTags: ["Commande"],
+      }),
       editCommande: builder.mutation<
         Commande,
         Partial<Commande> & Pick<Commande, "id">
@@ -103,12 +173,19 @@ export const crudApi = createApi({
       >({
         //@ts-ignore
         query(id: Num) {
-         return {
+          //  if (confirm(`do you want delete Commande number ${id.id} ?`))
+          return {
             url: `/commandes/${id.id}`,
             method: "DELETE",
-          }
-       },
-       }),
+          };
+          // else return
+        },
+        //@ts-ignore
+        invalidatesTags: (result, error, id) => [
+          { type: "Commande", id },
+          { type: "Commande", id: "LIST" },
+        ],
+      }),
       archiveCommande: builder.mutation<
         Commande,
         Partial<Commande> & Pick<Commande, "id">
@@ -130,15 +207,63 @@ export const crudApi = createApi({
       /**************************************************************************************************************/
       /**************************************************************************************************************/
       /**************************************************************************************************************/
-      fetchArticleCommandes: builder.query<ArticleCommande[], void>({
-        query:()=>`/articlecommandes`
-        }),
+      fetchArticleCommandes: builder.query<ArticleCommande[], number | void>({
+        query() {
+          return "/articlecommandes";
+        },
+        providesTags: (result) =>
+          result
+            ? [
+                //@ts-ignore
+                ...result.content.map(({ id }) => ({
+                  //      ...result.map(({ id }) => ({
+                  type: "ArticleCommande" as const,
+                  id,
+                })),
+                { type: "ArticleCommande", id: "LIST" },
+              ]
+            : [{ type: "ArticleCommande", id: "LIST" }],
+      }),
       fetchArticleCommandesByIdCommande: builder.query<ArticleCommande[], string>({
         query: (idcom) => `/articlecommandes/idcom/${idcom}`,
       }),
-      paginationArticleCommandes: builder.query<ArticleCommande[],number>({
-        query:(page)=>`/articlecommandes?page=${page}&size=${PAGE_SIZE}`,
-        }),
+      fetchArticleCommandesByIdCommande2: builder.query<any[], string | void>({
+        query(coco) {
+          return "/articlecommandes/idcom/"+coco;
+        },
+        providesTags: (result) =>
+          result
+            ? [
+                //@ts-ignore
+                ...result.content?.map(({ id }) => ({
+                  //      ...result.map(({ id }) => ({
+                  type: "ArticleCommande" as const,
+                  id,
+                })),
+                { type: "ArticleCommande", id: "LIST" },
+              ]
+            : [{ type: "ArticleCommande", id: "LIST" }],
+      }),
+      paginationArticleCommandes: builder.query<
+        ArticleCommande[],
+        number | void
+      >({
+        query(page: number) {
+          return "/articlecommandes?page=" + page + "&size=" + PAGE_SIZE;
+        },
+        providesTags: (result) =>
+          result
+            ? [
+                //@ts-ignore
+                ...result.content.map(({ id }) => ({
+                  //      ...result.map(({ id }) => ({
+                  type: "ArticleCommande" as const,
+                  id,
+                })),
+                { type: "ArticleCommande", id: "LIST" },
+              ]
+            : [{ type: "ArticleCommande", id: "LIST" }],
+      }),
       fetchOneArticleCommande: builder.query<ArticleCommande, string>({
         query: (id) => `/articleCommandes/${id}`,
        }),
@@ -147,7 +272,7 @@ export const crudApi = createApi({
         Partial<ArticleCommande>
       >({
         query: (body) => ({
-          url: `/articlecommandes`,
+          url: "/articlecommandes/post",
           method: "POST",
           body,
         }),
