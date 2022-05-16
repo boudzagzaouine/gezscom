@@ -20,7 +20,7 @@ import {
   export default function TestArticleCommande() {
    //@ts-ignore
   // const { data = [], isFetching, refetch } =  useFetchArticleCommandesQuery();
-    const { data = [], isFetching, refetch } =  useFetchArticleCommandesByIdCommandeQuery("f671c45b-07e2-4d7b-af32-3c4983cefeba");
+    const { data = [], isFetching, refetch } =  useFetchArticleCommandesByIdCommandeQuery("9cdc7135-8bda-4513-ba66-43b000a22f4b");
     //@ts-ignore
     const [cls,setCls]=useState<Client[]>(data.content)
     const reload=()=>{

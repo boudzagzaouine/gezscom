@@ -53,7 +53,7 @@ const ListClientManager = () => {
     setPage(p);
     refetch();
   };
-  const { data = [], isFetching, refetch } = usePaginationClientsQuery(page);
+  const { data = [], refetch } = usePaginationClientsQuery(page);
   const [disabled, setDisabled] = useState(true);
   const del = useRef(null);
   const archive = useRef(null);

@@ -1,29 +1,28 @@
 
 import { 
-   useFetchCommandesQuery,
-    usePaginationCommandesQuery,
-    useFetchcommandesByIdClientQuery,
-    useFetchOneCommandeQuery,
-    useAddCommandeMutation,
-    useEditCommandeMutation,
-    useDeleteCommandeMutation,
-    useArchiveCommandeMutation,
-    useRestoreCommandeMutation,
+  useFetchAdressLivsQuery,
+  usePaginationAdressLivsQuery,
+  useFetchAdressLivsByIdClientQuery,
+  useFetchOneAdressLivQuery,
+  useAddAdressLivMutation,
+  useEditAdressLivMutation,
+  useDeleteAdressLivMutation,
+  useArchiveAdressLivMutation,
+  useRestoreAdressLivMutation,
     } from "config/rtk";
   import ListTest from "features/manager/client/ListTest";
   import { useRef, useState } from "react";
-  import { Commande,cm0 } from "tools/types";
+  import { AdressLiv,cm0 } from "tools/types";
   import Section from "widgets/Section";
   import { Field, Form } from "widgets";
   import Bsave from "widgets/Bsave";
   import { dematerialize } from "rxjs";
-  export default function TestCommande() {
+  export default function TestAdressLiv() {
     const go:boolean=true
     const close:boolean=false
     //@ts-ignore
-    const cm1:Commande={"id":"43cc3483-1e96-4f00-acce-c2091ba498e3","date":"2022-05-14T17:10:19.091+00:00","season":"saison 5215","amount":10430.0,"idClient":"bae9ef60-b3ea-4934-81e8-2c6dd3498fb3","adrLiv":""};
-    //const { data = [], isFetching, refetch } =  usePaginationCommandesQuery(0);
-    const { data = [], refetch } =  useFetchcommandesByIdClientQuery("42e8d8ec-ac63-455e-badc-08ec7feb3b3b");
+   const { data = [], isFetching, refetch } =  usePaginationAdressLivsQuery(0);
+   // const { data = [], refetch } =  useFetchAdressLivsByIdClientQuery("a5bec75c-753b-4dce-9e93-d3b4a08de6f3");
     //@ts-ignore
     const [cls,setCls]=useState<Client[]>(data.content)
     const reload=()=>{
@@ -33,8 +32,8 @@ import {
   setCls(data.content)
   }, 200);
   }
-    const [save]=useAddCommandeMutation();
-    const [edit]=useEditCommandeMutation();
+    const [save]=useAddAdressLivMutation();
+    const [edit]=useEditAdressLivMutation();
     console.log(data)
     return (
       <>
@@ -42,24 +41,25 @@ import {
         go &&   <Section>
         <table className="float-left w-full">
           <thead>
-            <tr><th>id</th><th>id client</th><th>saison</th></tr>
+            <tr><th>id</th><th>id client</th><th>adress</th></tr>
           </thead>
           <tbody>
             {
             //@ts-ignore
-            data?.map((d:Commande)=>(
+            data.content?.map((d:AdressLiv)=>(
+       //     data?.map((d:AdressLiv)=>(
               <tr key={d.id}>
                 <td>{d.id}</td>
                 <td>{d.idClient}</td>
-                <td>{d.season}</td>
+                <td>{d.adress}</td>
               </tr>
             ))}
           </tbody>
         </table>
-        <Form defaultValues={cm0} onSubmit={edit}>
+        <Form defaultValues={cm0} onSubmit={save}>
                   <Field label="id" name="id"  />
                   <Field label="idClient" name="idClient"  />
-                   <Field label="season" name="season"  />
+                   <Field label="adress" name="adress"  />
                    <Bsave onClick={()=>{
                      setTimeout(() => {
                        refetch()

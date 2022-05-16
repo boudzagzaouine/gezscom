@@ -1,8 +1,8 @@
 import { BriefcaseIcon, SaveIcon, XCircleIcon } from "@heroicons/react/solid";
-import { useAddCommandeMutation, useFetchClientsQuery } from "config/rtk";
-import React, { forwardRef, Ref, useEffect, useState } from "react";
+import { useAddCommandeMutation, useEditCommandeMutation, useFetchClientsQuery } from "config/rtk";
+import React, { ChangeEvent, forwardRef, Ref, useEffect, useRef, useState } from "react";
 import { STYLE_ICON, style_icon, style_span } from "tools/constStyle";
-import { AdressLiv, c0, Client, Commande, getClient, initSel, initSelObj } from "tools/types";
+import { AdressLiv, c0,adr0, Client, Commande} from "tools/types";
 import { Field, Form } from "widgets";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
@@ -14,24 +14,37 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Bsave from "widgets/Bsave";
 import Bcancel from "widgets/Bcancel";
-import { openClients } from "components/manager/client/openClient";
+import { openClients } from "components/manager/client/openClients";
+import { openAdressLivByIdClient } from "components/manager/client/openAdressLivByIdClient";
+import { openOneClient } from "components/manager/client/openOneClient";
+import {  openAdressLivs } from "components/manager/client/openAdressLivs";
 type CommandProps = {
   command: Commande;
+  client:Client
+  clients:Client[]
+  refetch:()=>void
 };
 
-const FormCommande = ({ command }: CommandProps, ref: Ref<void>) => {
+const FormCommande = ({ command,client,clients,refetch }: CommandProps, ref: Ref<void>) => {
   const [showModal, setShowModal] = React.useState(false);
   const [command0, setCommand0] = useState(command);
-  const clients:Client[]=openClients()
-  const openModal = (c: Commande) => {
+  const [idClient,setIdClient]=useState<string>("")
+  const [client0,setClient0]=useState<Client>(client)
+  console.log("teqsttt client ="+JSON.stringify(client))
+  //const clients:Client[]=openClients()
+  const openModal = (c: Commande,cl:Client) => {
     setCommand0(c);
+    setClient0(cl)
     setShowModal(true);
   };
-  const save=()=>{}
+    const [add]=useAddCommandeMutation();
+    const [edit]=useEditCommandeMutation();
+  const save=command0.id==""?add:edit
   const close=()=>{
     setShowModal(false);
   }
   useEffect(() => {
+  //  setClient(openClient)
    //@ts-ignore
     ref.current = openModal;
   });
@@ -47,55 +60,78 @@ const FormCommande = ({ command }: CommandProps, ref: Ref<void>) => {
       featured: <ArticlesCommande idCommande={command0.id} />,
     },
   ];
+  const fieldIdClient = useRef(null)
+  const fieldAdressLiv = useRef(null)
+ 
     return (
     <Modal title={command0.id===""?"Nouvelle commande":"Mise à jour de la commande"} 
     show={showModal} format={5} close={close}>
+      
       <Form defaultValues={command0} onSubmit={save}>
-        {({ watch }) => {
-          
-          //@ts-ignore
-          const idClient = watch("idClient");
-          const client: Client =c0;
-          const adressLivs: string[] =["","gogo","jojo"];
-          console.log(idClient);
-          return (
+    
             <>
               <div className="float-left w-1/2">
-                <Field type="hidden" name="idClient" />
+                
+                <Field type="hidden" name="idClient" value={client0?.id} ref={fieldIdClient}/>
+                <Field type="hidden" name="id" value={command0.id} />
                 {command0.idClient != "" ? (
                   <>
-                    <Field type="hidden" name="idClient" />
-                    <Field label="Client" value={client} />
+                   <Field label="client0" value={client0?.design} />
                   </>
                 ) : (
                   <Field
                     label="Client"
-                    name="idClient"
+                    name="cococo"
                     as="select"
-                    options={[c0,...clients]}
-                    optionLabelName="design"
-                  />
+                    onChange={
+                      (e:ChangeEvent<HTMLSelectElement>)=>{
+                        let c:Client = JSON.parse(e.target.value)
+                        setClient0(c)
+                        //@ts-ignore
+                        fieldIdClient.current.value=c.id
+                      }
+                    }
+                  >
+                  {[c0,...clients||[]].map((c:Client)=>(
+                    <option value={JSON.stringify(c)}>{c.design}</option>
+                  ))}
+                  </Field>
+                  
                 )}
-                <Field label="id" name="id"  />
                 <Field label="Date Commande" name="date" type="date"  />
              </div>
               <div className="float-left w-1/2">
+              <Field type="hidden" name="adrLiv" ref={fieldAdressLiv} />
                 <Field
                   label="Adress de livraison"
-                  name="adrLiv"
+                  name="adrLiv555"
                   as="select"
-                  options={adressLivs}
+                  optionLabelName="adress"
+                  optionKeyName="adress"
+                  options={[adr0,...client0?.adressLivs||[]]}
+                  onChange={
+                    (e:ChangeEvent<HTMLSelectElement>)=>{
+                      //@ts-ignore
+                      fieldAdressLiv.current.value=e.target.value+""
+                    }
+                  }
                 />
+               {/*   {[adr0,...client0?.adressLivs||[]].map((c:AdressLiv)=>(
+                    <option value={JSON.stringify(c)}>{c.adress}</option>
+                  ))}
+                  </Field> */}
                 <Field label="Saison" name="season" />
               </div>
               <Bsave className="float-right mt-2 b-ajust-r" onClick={() => {
+                
           setTimeout(() => {
+            refetch()
             close();
           }, 600);
         }} />
               </>
-          );
-        }}
+          
+  
       </Form>
       <Bcancel
         className="float-right mt-2 b-ajust"
@@ -103,7 +139,7 @@ const FormCommande = ({ command }: CommandProps, ref: Ref<void>) => {
           close();
         }}
       />
-     <NavTabs tab={commanndes} />     
+     {command0.id!="" && <NavTabs tab={commanndes} /> }
     </Modal>
   );
 };

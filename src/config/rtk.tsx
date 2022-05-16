@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { PAGE_SIZE } from "tools/consts";
-import { ArticleCommande, Client, Commande } from "../tools/types";
+import { AdressLiv, ArticleCommande, Client, Commande } from "../tools/types";
 
 export const crudApi = createApi({
   reducerPath: "crud-api",
@@ -13,6 +13,9 @@ export const crudApi = createApi({
   tagTypes: ["Client", "UNAUTHORIZED", "UNKNOWN_ERROR"],
   endpoints(builder) {
     return {
+      /*****************************************************************************/
+      /*********************************CLIENT**************************************/
+      /*****************************************************************************/
       fetchClients: builder.query<Client[], void>({
         query: () => `/clients`,
       }),
@@ -66,9 +69,68 @@ export const crudApi = createApi({
           method: "PUT",
         }),
       }),
-      /*****************************************************************************/
-      /*****************************************************************************/
-      /*****************************************************************************/
+       /*****************************************************************************/
+      /*********************************AdressLiv***********************************/
+     /*****************************************************************************/
+      fetchAdressLivs: builder.query<AdressLiv[], void>({
+        query: () => `/adressLivs`,
+      }),
+      paginationAdressLivs: builder.query<AdressLiv[], number>({
+        query: (page) => `/adressLivs?page=${page}&size=${PAGE_SIZE}`,
+      }),
+      fetchAdressLivsByIdClient: builder.query<AdressLiv[], string>({
+        query: (idClient) => `/adressLivs/idclient/${idClient}`,
+      }),
+      fetchOneAdressLiv: builder.query<AdressLiv, string>({
+        query: (id) => `/adressLivs/${id}`,
+     }),
+      addAdressLiv: builder.mutation<AdressLiv, Partial<AdressLiv>>({
+        query: (body) => ({
+          url: "/adressLivs/post",
+          method: "POST",
+          body,
+        }),
+       }),
+      editAdressLiv: builder.mutation<
+        AdressLiv,
+        Partial<AdressLiv> & Pick<AdressLiv, "id">
+      >({
+        query: (body) => ({
+          url: `/adressLivs/put/${body.id}`,
+          method: "PUT",
+          body,
+        }),
+      }),
+      deleteAdressLiv: builder.mutation<{ success: boolean; id: number }, number>({
+        //@ts-ignore
+        query(id: Num) {
+          //  if (confirm(`do you want delete AdressLiv number ${id.id} ?`))
+          return {
+            url: `/adressLivs/${id.id}`,
+            method: "DELETE",
+          };
+       }}),
+      archiveAdressLiv: builder.mutation<
+        AdressLiv,
+        Partial<AdressLiv> & Pick<AdressLiv, "id">
+      >({
+        query: (id) => ({
+          url: `/adressLivs/${id}/archive`,
+          method: "PUT",
+        }),
+      }),
+      restoreAdressLiv: builder.mutation<
+        AdressLiv,
+        Partial<AdressLiv> & Pick<AdressLiv, "id">
+      >({
+        query: (id) => ({
+          url: `/adressLivs/${id}/restore`,
+          method: "PUT",
+        }),
+      }),
+        /****************************************************************************/
+       /*************************COMMANDE*******************************************/
+      /****************************************************************************/
       fetchCommandes: builder.query<Commande[], void>({
         query: () => `/commandes`,
       }),
@@ -127,8 +189,8 @@ export const crudApi = createApi({
           method: "PUT",
         }),
       }),
-      /**************************************************************************************************************/
-      /**************************************************************************************************************/
+        /**************************************************************************************************************/
+       /*******************************************ARTICLE COMMANDE***************************************************/
       /**************************************************************************************************************/
       fetchArticleCommandes: builder.query<ArticleCommande[], void>({
         query:()=>`/articlecommandes`
@@ -197,8 +259,11 @@ export const crudApi = createApi({
     };
   },
 });
-
+ /***********useMaMethodAfficjageQuery********************************************/
+/***********useMaMethodeOperationMutaion*****************************************/
 export const {
+  /******************CLIENT********************************/
+  /*******************************************************/
   useFetchClientsQuery,
   usePaginationClientsQuery,
   useFetchOneClientQuery,
@@ -207,7 +272,18 @@ export const {
   useDeleteClientMutation,
   useArchiveClientMutation,
   useRestoreClientMutation,
+   /******************AdressLiv****************************/
   /*******************************************************/
+  useFetchAdressLivsQuery,
+  usePaginationAdressLivsQuery,
+  useFetchAdressLivsByIdClientQuery,
+  useFetchOneAdressLivQuery,
+  useAddAdressLivMutation,
+  useEditAdressLivMutation,
+  useDeleteAdressLivMutation,
+  useArchiveAdressLivMutation,
+  useRestoreAdressLivMutation,
+  /******************COMMANDE******************************/
   /*******************************************************/
   useFetchCommandesQuery,
   usePaginationCommandesQuery,
@@ -218,8 +294,8 @@ export const {
   useDeleteCommandeMutation,
   useArchiveCommandeMutation,
   useRestoreCommandeMutation,
-  /***********useMaMethodAfficjageQuery********************************************/
-  /***********useMaMethodeOperationMutaion********************************************/
+  /************ARTICLECOMMANDE*****************************/
+  /*******************************************************/
   useFetchArticleCommandesQuery,
   useFetchArticleCommandesByIdCommandeQuery,
   usePaginationArticleCommandesQuery,

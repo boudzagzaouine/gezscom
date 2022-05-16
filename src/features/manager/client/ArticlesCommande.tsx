@@ -30,6 +30,8 @@ const ArticlesCommande = ({idCommande}:ArticlesCommandeProps) => {
   const { data = [], isFetching, refetch } = useFetchArticleCommandesByIdCommandeQuery(idCommande);
   const [selectedIdCommande,setSelectedIdCommande]=useState("new")
   const [formArt,setFormArt]=useState(false)
+  const arc1:ArticleCommande=arc0 
+  arc1.idCommande=idCommande
   const close=()=>{
     setFormArt(false)
     setSelectedIdCommande("new")
@@ -40,19 +42,7 @@ const ArticlesCommande = ({idCommande}:ArticlesCommandeProps) => {
   }
   const [save]=useAddArticleCommandeMutation();
   const [edit]=useEditArticleCommandeMutation();
-/* const addArticle=(art:ArticleCommande)=>{
-  art.idCommande=commande.id
-   axios.post('http://localhost:1000/api/v1/articlecommandes/post',art).then(()=>{
-    refetch()
-   })
- } 
- const editArticle=(art:ArticleCommande)=>{
-  art.idCommande=commande.id
-   axios.put('http://localhost:1000/api/v1/articlecommandes/put/'+art.id,art).then(()=>{
-    refetch()
-   })
- } */
-return (
+  return (
     <div>
       <Table
         className="tab-list float-left w-full mt-8"
@@ -70,7 +60,7 @@ return (
       >
         {
           //@ts-ignore
-          data.content?.map((article) => (
+          data?.map((article) => (
          // articles?.map((article) => (
            <>
           <tr key={article.id}>
@@ -86,11 +76,11 @@ return (
                 }} />
               </Table.td>
             </tr>
-            {selectedIdCommande==article.id && formArt && <FormArticleCommande articleCommande={article} close={close} saveArticle={edit}/>}
+            {selectedIdCommande==article.id && formArt && <FormArticleCommande articleCommande={article}  close={close} saveArticle={edit} refetch={refetch}/>}
           </>
           ))
         }
-        {selectedIdCommande=="new" && formArt && <FormArticleCommande articleCommande={arc0} close={close} saveArticle={save}/>}
+        {selectedIdCommande=="new" && formArt && <FormArticleCommande articleCommande={arc1}  close={close} saveArticle={save} refetch={refetch}/>}
         {
           !formArt && <tr
           onClick={() => {

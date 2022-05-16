@@ -1,8 +1,15 @@
-import React from "react";
-import { ListClientsProps } from "widgets/TypeWidgets";
+import React from 'react'
+type ArticlesClientsProps={
+    idClient:string
+}
+const ArticlesClients = ({idClient}:ArticlesClientsProps) => {
+  return (
+    <div>
+        <h1>
+        ArticlesClients idclient = {idClient}
+        </h1>
+    </div>
+  )
+}
 
-const ArticlesClients = ({ client }: ListClientsProps) => {
-  return <div>ArticlesClients</div>;
-};
-
-export default ArticlesClients;
+export default ArticlesClients

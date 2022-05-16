@@ -9,15 +9,16 @@ type FormArticleCommandeProp={
     articleCommande:ArticleCommande
     saveArticle:(art:ArticleCommande)=>void
     close:()=>void
+    refetch:()=>void
 }
-const FormArticleCommande = ({articleCommande,saveArticle,close}:FormArticleCommandeProp) => {
+const FormArticleCommande = ({articleCommande,saveArticle,close,refetch}:FormArticleCommandeProp) => {
     
   return (
     <>
     <tr className="relative">
 <div className="absolute left-0 top-0 bg-[#ccc]">
 <Form defaultValues={articleCommande} onSubmit={saveArticle}>
-            <Table.td>
+           <Table.td>
               <Field name="design" placeholder="design" />
             </Table.td>
             <Table.td>
@@ -31,7 +32,11 @@ const FormArticleCommande = ({articleCommande,saveArticle,close}:FormArticleComm
              </Table.td>
             <Table.td>
             <div className="float-right w-full">
-                 <Bsave />
+                 <Bsave onClick={()=>{
+                   setTimeout(() => {
+                    refetch()
+                   }, 500);
+                 }} />
                </div>
             </Table.td>
           </Form>

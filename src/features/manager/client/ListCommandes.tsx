@@ -1,7 +1,8 @@
 import { DocumentAddIcon } from "@heroicons/react/solid";
+import { openClients } from "components/manager/client/openClients";
 import { useFetchcommandesByIdClientQuery } from "config/rtk";
 import React, { useRef, useState } from "react";
-import { c0, cm0, getCm, getCm0 } from "tools/types";
+import {  cm0 } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import Bedit from "widgets/Bedit";
 import Table from "widgets/Table";
@@ -10,6 +11,7 @@ import FormCommande from "./FormCommande";
 
 const ListCommandes = ({ idClient }: ListClientsProps) => {
   const { data = [], refetch } =  useFetchcommandesByIdClientQuery(idClient)
+  
  const refCom = useRef(null);
   return (
     <>
