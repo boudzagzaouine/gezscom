@@ -4,7 +4,7 @@ import { REQUEST_EDIT, REQUEST_SAVE, VILLE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
-import { useAddArticleMutation, useArchiveArticleMutation, useDeleteArticleMutation, useEditArticleMutation, useFetchOneArticleQuery, useRestoreArticleMutation, useFetchArticlesQuery, useFetchBureauDouanesQuery, useFetchOneBureauDouaneQuery, useEditBureauDouaneMutation, useDeleteBureauDouaneMutation, useArchiveBureauDouaneMutation, useRestoreBureauDouaneMutation, useFetchDeclarantsQuery, useAddDeclarantMutation, useEditDeclarantMutation, useDeleteDeclarantMutation, useArchiveDeclarantMutation, useRestoreDeclarantMutation } from "config/rtk";
+import { useAddArticleMutation, useArchiveArticleMutation, useDeleteArticleMutation, useEditArticleMutation, useFetchOneArticleQuery, useRestoreArticleMutation, useFetchArticlesQuery, useFetchBureauDouanesQuery, useFetchOneBureauDouaneQuery, useEditBureauDouaneMutation, useDeleteBureauDouaneMutation, useArchiveBureauDouaneMutation, useRestoreBureauDouaneMutation, useFetchDeclarantsQuery, useAddDeclarantMutation, useEditDeclarantMutation, useDeleteDeclarantMutation, useArchiveDeclarantMutation, useRestoreDeclarantMutation, usePaginationDeclarantsQuery } from "config/rtk";
 import classNames from "classnames";
 import Table from "widgets/Table";
 import { MenuItems } from 'widgets/TypeWidgets';
@@ -29,7 +29,7 @@ const FormDeclarant = ({
     declarant,
     disable,
 }: FormDeclarantProps, ref: Ref<void>) => {
-    const { data = [], isFetching, refetch } = useFetchDeclarantsQuery()
+    const { data = [], isFetching, refetch } = usePaginationDeclarantsQuery(0);
     const [declarant1, setDeclarant1] = useState<Declarant>(declarant0);
     const [request, setRequest] = useState(REQUEST_SAVE)
 
@@ -51,7 +51,7 @@ const FormDeclarant = ({
 
     const closed = () => {
         setShow(false);
-        setDisabled(false);
+        setDisabled(true);
     }
 
     const del = useRef(null);
@@ -158,7 +158,10 @@ const FormDeclarant = ({
                     <RestoreDeclarant id={""} ref={restore} />
                     <h1>Nouveau Declarant</h1>
                     <div className='float-left w-full'>
-                        <button className='bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left' onClick={() => { open(declarant0) }}>Nouveau Declarant</button>
+                        <button className='bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left' onClick={() => {
+                            setDisabled(false)
+                            open(declarant0)
+                        }}>Nouveau Declarant</button>
                         <div className='float-right'>
                             <button className='bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg'>
                                 <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
@@ -196,11 +199,11 @@ const FormDeclarant = ({
                 </section>
             )}
 
-            <Modal show={show} title="Nouvelle Famille Article" format={classNames("5")} close={closed}>
+            <Modal show={show} title="Nouveau Declarant" format={+classNames("5")} close={closed}>
                 <div className="float-left w-full">
                     <Form defaultValues={declarant1} onSubmit={request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? updateDeclarant : void_}>
                         <div className="float-left w-full">
-                            <Field label="Designation" name="design" disabled={disabled} required="required" />
+                            <Field className="sm:grid-cols-6 sm:gap-6" label="Designation" name="design" disabled={disabled} required="required" />
 
                             <div className="float-left w-full">
                                 <div className="float-left w-1/2">
@@ -213,13 +216,13 @@ const FormDeclarant = ({
                                 </div>
                             </div>
                         </div>
-                        {!disabled && <><Bcyan onClick={() => {
+                        {!disabled && <><Bcyan className="m-4 mt-10" onClick={() => {
                             setShow(true);
                         }}>
                             Sauvegarder et Nouveau
                         </Bcyan>
 
-                            <Bcyan
+                            <Bcyan className="m-4 mt-10"
                                 type="submit"
                                 onClick={() => {
                                     setTimeout(() => {
@@ -233,7 +236,7 @@ const FormDeclarant = ({
                     </Form>
 
                     <div>
-                        {disabled && <Bcyan className="float-right"
+                        {disabled && <Bcyan className="float-right m-4 mt-10"
                             onClick={() => {
                                 setDisabled(false)
                             }}>
@@ -242,7 +245,7 @@ const FormDeclarant = ({
                         {!disabled && <Bcyan className="float-right"
                             onClick={() => {
                                 setDisabled(false);
-                                setShow(false);
+                                //setShow(false);
                             }}>
                             Annuler
                         </Bcyan>}

@@ -30,11 +30,11 @@ const DeleteIncoterm = ({ id, refetch }: DeleteIncotermPorp, ref: Ref<void>) => 
   });
   const [showModal, setShowModal] = React.useState(false);
   const delTemp = () => {
-    axios.delete("http://localhost:1000/api/v1/incoterm/" + id0).then(() => { });
+    axios.delete("http://localhost:1000/api/v1/incoterms/" + id0).then(() => { });
   };
   return (
     <>
-      <Modal title={"suppression"} show={showModal} format={classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal title={"suppression"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
         <div>
           <h2>suppression d'incoterm num: {id0}</h2>
           <form
@@ -55,19 +55,16 @@ const DeleteIncoterm = ({ id, refetch }: DeleteIncotermPorp, ref: Ref<void>) => 
                 }, 500);
               }}
             >
-              <TrashIcon
-                className="h-8 w-8 text-[#fff] group-hover:text-gray-500"
-                aria-hidden="true"
-              />
+              Supprimer
             </Bcyan>
-            <Bred
+            <Bcyan
               className="mt-2 float-right"
               onClick={() => {
                 setShowModal(false);
               }}
             >
-              <XCircleIcon className={STYLE_ICON} aria-hidden="true" />
-            </Bred>
+              Annuler
+            </Bcyan>
           </form>
         </div>
       </Modal>

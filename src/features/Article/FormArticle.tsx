@@ -4,7 +4,7 @@ import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import { Form, Field, Button } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
-import { useAddArticleMutation, useEditArticleMutation, useFetchArticlesQuery } from "config/rtk";
+import { useAddArticleMutation, useEditArticleMutation, useFetchArticlesQuery, usePaginationArticlesQuery } from "config/rtk";
 import classNames from "classnames";
 import Table from "widgets/Table";
 import { MenuItems } from 'widgets/TypeWidgets';
@@ -25,7 +25,13 @@ const FormArticle = ({
     disable,
 }: FormArticleProps, ref: Ref<void>) => {
 
-    const { data = [], isFetching, refetch } = useFetchArticlesQuery()
+    const [page, setPage] = useState(0);
+    const loadPage = (p: number) => {
+        setPage(p);
+        refetch();
+    };
+
+    const { data = [], isFetching, refetch } = usePaginationArticlesQuery(0);
     const [article1, setArticle1] = useState<Article>(article0);
     const [request, setRequest] = useState(REQUEST_SAVE);
 
@@ -51,14 +57,8 @@ const FormArticle = ({
 
     const closed = () => {
         setShow(false);
-        setDisabled(false);
+        setDisabled(true);
     }
-
-    const [page, setPage] = useState(0);
-    const loadPage = (p: number) => {
-        setPage(p);
-        refetch();
-    };
 
     const showFormulaire = (article: Article) => {
         setArticle1(article);
@@ -152,7 +152,10 @@ const FormArticle = ({
                     <RestoreArticle id={""} ref={restore} />
                     <h1>Nouvelle Famille Article</h1>
                     <div className='float-left w-full'>
-                        <button className='bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left' onClick={() => { open(article0) }}>Nouvelle Famille Article</button>
+                        <button className='bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left' onClick={() => {
+                            setDisabled(false)
+                            open(article0)
+                        }}>Nouvelle Famille Article</button>
                         <div className="float-right">
                             <Button className="bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg">
                                 <Icon i="search" cl="" />
@@ -192,11 +195,11 @@ const FormArticle = ({
 
                 </section>
             )}
-            <Modal show={show} title="Nouvelle Famille Article" format={classNames("5")} close={closed}>
+            <Modal show={show} title="Nouvelle Famille Article" format={+classNames("5")} close={closed}>
                 <div className="float-left w-full">
                     <Form defaultValues={article1} onSubmit={request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? updateArticle : void_}>
                         <div className="float-left w-full">
-                            <Field label="Designation" name="design" disabled={disabled} />
+                            <Field className="sm:grid-cols-6 sm:gap-6" label="Designation" name="design" disabled={disabled} />
 
                             <div className="float-left w-full">
                                 <div className="float-left w-1/2">
@@ -207,13 +210,13 @@ const FormArticle = ({
                                 </div>
                             </div>
                         </div>
-                        {!disabled && <><Bcyan onClick={() => {
+                        {!disabled && <><Bcyan className="m-4 mt-10" onClick={() => {
                             setShow(true);
                         }}>
                             Sauvegarder et Nouveau
                         </Bcyan>
 
-                            <Bcyan
+                            <Bcyan className="m-4 mt-10"
                                 type="submit"
                                 onClick={() => {
                                     setTimeout(() => {
@@ -227,7 +230,7 @@ const FormArticle = ({
                     </Form>
 
                     <div>
-                        {disabled && <Bcyan className="float-right"
+                        {disabled && <Bcyan className="float-right m-4 mt-10"
                             onClick={() => {
                                 setDisabled(false)
                             }}>
@@ -236,7 +239,7 @@ const FormArticle = ({
                         {!disabled && <Bcyan className="float-right"
                             onClick={() => {
                                 setDisabled(false);
-                                setShow(false);
+                                //setShow(false);
                             }}>
                             Annuler
                         </Bcyan>}

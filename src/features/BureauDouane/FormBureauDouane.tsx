@@ -4,7 +4,7 @@ import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
-import { useFetchBureauDouanesQuery, useEditBureauDouaneMutation, useDeleteBureauDouaneMutation, useArchiveBureauDouaneMutation, useRestoreBureauDouaneMutation, useAddBureauDouaneMutation } from "config/rtk";
+import { useFetchBureauDouanesQuery, useEditBureauDouaneMutation, useDeleteBureauDouaneMutation, useArchiveBureauDouaneMutation, useRestoreBureauDouaneMutation, useAddBureauDouaneMutation, usePaginationBureauDouanesQuery } from "config/rtk";
 import classNames from "classnames";
 import Table from "widgets/Table";
 import { MenuItems } from 'widgets/TypeWidgets';
@@ -28,7 +28,7 @@ const FormBureauDouane = ({
     bureauDouane,
     disable,
 }: FormBureauDouaneProps, ref: Ref<void>) => {
-    const { data = [], isFetching, refetch } = useFetchBureauDouanesQuery()
+    const { data = [], isFetching, refetch } = usePaginationBureauDouanesQuery(0);
     const [bureauDouane1, setBureauDouane1] = useState<BureauDouane>(bureauDouane0);
     const [request, setRequest] = useState(REQUEST_SAVE)
 
@@ -49,7 +49,7 @@ const FormBureauDouane = ({
 
     const closed = () => {
         setShow(false);
-        setDisabled(false);
+        setDisabled(true);
     }
 
     const del = useRef(null);
@@ -155,7 +155,10 @@ const FormBureauDouane = ({
                     <RestoreBureauDouane id={""} ref={restore} />
                     <h1>Nouveau Bureau Douane</h1>
                     <div className='float-left w-full'>
-                        <button className='bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left' onClick={() => { open(bureauDouane0) }}>Nouveau Bureau Douane</button>
+                        <button className='bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left' onClick={() => {
+                            setDisabled(false)
+                            open(bureauDouane0)
+                        }}>Nouveau Bureau Douane</button>
                         <div className='float-right'>
                             <button className='bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg'>
                                 <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
@@ -193,11 +196,11 @@ const FormBureauDouane = ({
                 </section>
             )}
 
-            <Modal show={show} title="Nouvelle Famille Article" format={classNames("5")} close={closed}>
+            <Modal show={show} title="Nouveau Bureau Douane" format={+classNames("5")} close={closed}>
                 <div className="float-left w-full">
                     <Form defaultValues={bureauDouane1} onSubmit={request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? updateBureauDouane : void_}>
                         <div className="float-left w-full">
-                            <Field label="Code" name="code" disabled={disabled} />
+                            <Field className="sm:grid-cols-6 sm:gap-6" label="Code" name="code" disabled={disabled} />
 
                             <div className="float-left w-full">
                                 <div className="float-left w-1/2">
@@ -205,13 +208,13 @@ const FormBureauDouane = ({
                                 </div>
                             </div>
                         </div>
-                        {!disabled && <><Bcyan onClick={() => {
+                        {!disabled && <><Bcyan className="m-4 mt-10" onClick={() => {
                             setShow(true);
                         }}>
                             Sauvegarder et Nouveau
                         </Bcyan>
 
-                            <Bcyan
+                            <Bcyan className="m-4 mt-10"
                                 type="submit"
                                 onClick={() => {
                                     setTimeout(() => {
@@ -225,7 +228,7 @@ const FormBureauDouane = ({
                     </Form>
 
                     <div>
-                        {disabled && <Bcyan className="float-right"
+                        {disabled && <Bcyan className="float-right m-4 mt-10"
                             onClick={() => {
                                 setDisabled(false)
                             }}>
@@ -234,7 +237,7 @@ const FormBureauDouane = ({
                         {!disabled && <Bcyan className="float-right"
                             onClick={() => {
                                 setDisabled(false);
-                                setShow(false);
+                                //setShow(false);
                             }}>
                             Annuler
                         </Bcyan>}

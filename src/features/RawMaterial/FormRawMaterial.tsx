@@ -4,7 +4,7 @@ import { FAMILLE, REQUEST_EDIT, REQUEST_SAVE, UNIT, VILLE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
-import { useAddArticleMutation, useArchiveArticleMutation, useDeleteArticleMutation, useEditArticleMutation, useFetchOneArticleQuery, useRestoreArticleMutation, useFetchArticlesQuery, useFetchBureauDouanesQuery, useFetchOneBureauDouaneQuery, useEditBureauDouaneMutation, useDeleteBureauDouaneMutation, useArchiveBureauDouaneMutation, useRestoreBureauDouaneMutation, useFetchDeclarantsQuery, useAddDeclarantMutation, useEditDeclarantMutation, useDeleteDeclarantMutation, useArchiveDeclarantMutation, useRestoreDeclarantMutation, useFetchPayementModesQuery, useAddPayementModeMutation, useEditPayementModeMutation, useArchivePayementModeMutation, useRestorePayementModeMutation, useDeletePayementModeMutation, useAddRawMaterialMutation, useFetchRawMaterialsQuery, useEditRawMaterialMutation, useDeleteRawMaterialMutation, useArchiveRawMaterialMutation, useRestoreRawMaterialMutation } from "config/rtk";
+import { useAddArticleMutation, useArchiveArticleMutation, useDeleteArticleMutation, useEditArticleMutation, useFetchOneArticleQuery, useRestoreArticleMutation, useFetchArticlesQuery, useFetchBureauDouanesQuery, useFetchOneBureauDouaneQuery, useEditBureauDouaneMutation, useDeleteBureauDouaneMutation, useArchiveBureauDouaneMutation, useRestoreBureauDouaneMutation, useFetchDeclarantsQuery, useAddDeclarantMutation, useEditDeclarantMutation, useDeleteDeclarantMutation, useArchiveDeclarantMutation, useRestoreDeclarantMutation, useFetchPayementModesQuery, useAddPayementModeMutation, useEditPayementModeMutation, useArchivePayementModeMutation, useRestorePayementModeMutation, useDeletePayementModeMutation, useAddRawMaterialMutation, useFetchRawMaterialsQuery, useEditRawMaterialMutation, useDeleteRawMaterialMutation, useArchiveRawMaterialMutation, useRestoreRawMaterialMutation, usePaginationRawMaterialsQuery } from "config/rtk";
 import classNames from "classnames";
 import Table from "widgets/Table";
 import { MenuItems } from 'widgets/TypeWidgets';
@@ -16,11 +16,6 @@ import ArchiveRawMaterial from "./Methods/ArchiveRawMaterial";
 import RestoreRawMaterial from "./Methods/RestoreRawMaterial";
 import Pagin from "widgets/Pagin";
 
-/*
-git add . 
-git commit -m "un commontaire"
-git push
-*/
 type FormRawMaterialProps = {
     rawMaterial: RawMaterial;
     disable: boolean;
@@ -29,12 +24,29 @@ const FormRawMaterial = ({
     rawMaterial,
     disable,
 }: FormRawMaterialProps, ref: Ref<void>) => {
-    const { data = [], isFetching, refetch } = useFetchRawMaterialsQuery()
+
+    const [page, setPage] = useState(0);
+    const loadPage = (p: number) => {
+        setPage(p);
+        refetch();
+    };
+    const { data = [], isFetching, refetch } = usePaginationRawMaterialsQuery(0);
+    //useFetchRawMaterialsQuery();
     const [rawMaterial1, setRawMaterial1] = useState<RawMaterial>(rawMaterial0);
     const [request, setRequest] = useState(REQUEST_SAVE)
 
     const [save] = useAddRawMaterialMutation();
 
+    const [updateRawMaterial] = useEditRawMaterialMutation();
+    /*  const save = () => {
+         alert("save")
+     }
+     const updateRawMaterial = () => {
+         alert("updateRawMaterial")
+     }
+     const vid = () => {
+         alert("vid")
+     } */
     const [form, setForm] = useState(false);
 
     const [disabled, setDisabled] = useState(true);
@@ -51,18 +63,12 @@ const FormRawMaterial = ({
 
     const closed = () => {
         setShow(false);
-        setDisabled(false);
+        setDisabled(true);
     }
 
     const del = useRef(null);
     const archive = useRef(null);
     const restore = useRef(null);
-
-    const [page, setPage] = useState(0);
-    const loadPage = (p: number) => {
-        setPage(p);
-        refetch();
-    };
 
     const showFormulaire = (rawMaterial: RawMaterial) => {
         setRawMaterial1(rawMaterial);
@@ -77,10 +83,6 @@ const FormRawMaterial = ({
 
 
     const void_ = () => { }
-
-
-    const [updateRawMaterial] = useEditRawMaterialMutation();
-
 
     const menu = (rawMaterial: RawMaterial): MenuItems[] => {
         return ([
@@ -155,9 +157,12 @@ const FormRawMaterial = ({
                     <DeleteRawMaterial id={""} ref={del} refetch={refetch} />
                     <ArchiveRawMaterial id={""} ref={archive} />
                     <RestoreRawMaterial id={""} ref={restore} />
-                    <h1>Nouvelle Matière Première </h1>
+                    <h1>Nouvelle Famille Matière Première </h1>
                     <div className='float-left w-full'>
-                        <button className='bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left' onClick={() => { open(rawMaterial0) }}>Nouvelle Matière Première</button>
+                        <button className='bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left' onClick={() => {
+                            setDisabled(false)
+                            open(rawMaterial0)
+                        }}>Nouvelle Matière Première</button>
                         <div className='float-right'>
                             <button className='bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg'>
                                 <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
@@ -201,45 +206,45 @@ const FormRawMaterial = ({
                 </section>
             )}
 
-            <Modal show={show} title="Nouvelle Famille Matière première" format={classNames("5")} close={closed}>
+            <Modal show={show} title="Nouvelle Famille Matière première" format={+classNames("5")} close={closed}>
                 <div className="float-left w-full">
                     <Form defaultValues={rawMaterial1} onSubmit={request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? updateRawMaterial : void_}>
                         <div className="float-left w-full">
-                            <Field label="Designation" name="design" disabled={disabled} required="required" />
-
                             <div className="float-left w-full">
-                                <div className="float-left w-1/2">
-                                    <Field label="Nomenclature" name="nomenclature" disabled={disabled} required="required" />
-                                    <Field
-                                        label="Famille"
-                                        name="famille"
-                                        options={FAMILLE}
-                                        as="select"
-                                        disabled={disabled}
-                                        required="required" />
-                                </div>
-                                <div className="float-left w-full">
-                                    <div className="float-left w-1/2">
-                                        <Field
-                                            label="Unité De Mesure"
-                                            name="MeasureUnit"
-                                            options={UNIT}
-                                            as="select"
-                                            disabled={disabled}
-                                            required="required"
-                                        />
-                                        <Field label="Taus de pertes" name="tauxPertes" disabled={disabled} required="required" />
-                                    </div>
-                                </div>
+                                <Field className="sm:grid-cols-6 sm:gap-6" label="Designation" name="design" disabled={disabled} />
+                            </div>
+                            <div className="float-left w-1/2">
+                                <Field label="Nomenclature" name="nomenclature" disabled={disabled} />
+                            </div>
+                            <div className="float-left w-1/2">
+                                <Field
+                                    label="Famille"
+                                    name="family"
+                                    options={FAMILLE}
+                                    as="select"
+                                    disabled={disabled}
+                                />
+                            </div>
+                            <div className="float-left w-1/2">
+                                <Field
+                                    label="Unité De Mesure"
+                                    name="measureUnit"
+                                    options={UNIT}
+                                    as="select"
+                                    disabled={disabled}
+                                />
+                            </div>
+                            <div className="float-left w-1/2">
+                                <Field label="Taux de pertes" name="tauxPertes" disabled={disabled} required="required" />
                             </div>
                         </div>
-                        {!disabled && <><Bcyan onClick={() => {
+                        {!disabled && <><Bcyan className="m-4 mt-10" onClick={() => {
                             setShow(true);
                         }}>
                             Sauvegarder et Nouveau
                         </Bcyan>
 
-                            <Bcyan
+                            <Bcyan className="m-4 mt-10"
                                 type="submit"
                                 onClick={() => {
                                     setTimeout(() => {
@@ -249,11 +254,12 @@ const FormRawMaterial = ({
                                 }}
                             >
                                 Sauvegarder
-                            </Bcyan></>}
+                            </Bcyan></>
+                        }
                     </Form>
 
                     <div>
-                        {disabled && <Bcyan className="float-right"
+                        {disabled && <Bcyan className="float-right m-4 mt-10"
                             onClick={() => {
                                 setDisabled(false)
                             }}>
@@ -261,21 +267,18 @@ const FormRawMaterial = ({
                         </Bcyan>}
                         {!disabled && <Bcyan className="float-right"
                             onClick={() => {
-                                setDisabled(false);
-                                setShow(false);
+                                setDisabled(true);
+                                // setShow(false);
                             }}>
                             Annuler
                         </Bcyan>}
                     </div>
-                </div>
-            </Modal>
+                </div >
+            </Modal >
         </>
     );
 
 };
-
-
-
 
 
 export default forwardRef(FormRawMaterial);

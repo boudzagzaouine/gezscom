@@ -56,19 +56,16 @@ const DeleteRegimeDouanier = ({ id, refetch }: DeleteRegimeDouanierPorp, ref: Re
                 }, 500);
               }}
             >
-              <TrashIcon
-                className="h-8 w-8 text-[#fff] group-hover:text-gray-500"
-                aria-hidden="true"
-              />
+              Supprimer
             </Bcyan>
-            <Bred
+            <Bcyan
               className="mt-2 float-right"
               onClick={() => {
                 setShowModal(false);
               }}
             >
-              <XCircleIcon className={STYLE_ICON} aria-hidden="true" />
-            </Bred>
+              Annuler
+            </Bcyan>
           </form>
         </div>
       </Modal>

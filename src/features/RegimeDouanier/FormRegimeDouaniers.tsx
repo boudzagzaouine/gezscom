@@ -4,7 +4,7 @@ import { REQUEST_EDIT, REQUEST_SAVE, VILLE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
-import { useAddArticleMutation, useArchiveArticleMutation, useDeleteArticleMutation, useEditArticleMutation, useFetchOneArticleQuery, useRestoreArticleMutation, useFetchArticlesQuery, useFetchBureauDouanesQuery, useFetchOneBureauDouaneQuery, useEditBureauDouaneMutation, useDeleteBureauDouaneMutation, useArchiveBureauDouaneMutation, useRestoreBureauDouaneMutation, useFetchDeclarantsQuery, useAddDeclarantMutation, useEditDeclarantMutation, useDeleteDeclarantMutation, useArchiveDeclarantMutation, useRestoreDeclarantMutation, useFetchPayementModesQuery, useAddPayementModeMutation, useEditPayementModeMutation, useArchivePayementModeMutation, useRestorePayementModeMutation, useDeletePayementModeMutation, useFetchRegimeDouaniersQuery, useAddRegimeDouanierMutation, useEditRegimeDouanierMutation, useDeleteRegimeDouanierMutation, useArchiveRegimeDouanierMutation, useRestoreRegimeDouanierMutation } from "config/rtk";
+import { useAddArticleMutation, useArchiveArticleMutation, useDeleteArticleMutation, useEditArticleMutation, useFetchOneArticleQuery, useRestoreArticleMutation, useFetchArticlesQuery, useFetchBureauDouanesQuery, useFetchOneBureauDouaneQuery, useEditBureauDouaneMutation, useDeleteBureauDouaneMutation, useArchiveBureauDouaneMutation, useRestoreBureauDouaneMutation, useFetchDeclarantsQuery, useAddDeclarantMutation, useEditDeclarantMutation, useDeleteDeclarantMutation, useArchiveDeclarantMutation, useRestoreDeclarantMutation, useFetchPayementModesQuery, useAddPayementModeMutation, useEditPayementModeMutation, useArchivePayementModeMutation, useRestorePayementModeMutation, useDeletePayementModeMutation, useFetchRegimeDouaniersQuery, useAddRegimeDouanierMutation, useEditRegimeDouanierMutation, useDeleteRegimeDouanierMutation, useArchiveRegimeDouanierMutation, useRestoreRegimeDouanierMutation, usePaginationRegimeDouaniersQuery } from "config/rtk";
 import classNames from "classnames";
 import Table from "widgets/Table";
 import { MenuItems } from 'widgets/TypeWidgets';
@@ -16,11 +16,6 @@ import ArchiveRegimeDouanier from "./Methods/ArchiveRegimeDouanier";
 import RestoreRegimeDouanier from "./Methods/RestoreRegimeDouanier";
 import Pagin from "widgets/Pagin";
 
-/*
-git add . 
-git commit -m "un commontaire"
-git push
-*/
 type FormRegimeDouanierProps = {
     regimeDouanier: RegimeDouanier;
     disable: boolean;
@@ -29,7 +24,7 @@ const FormRegimeDouanier = ({
     regimeDouanier,
     disable,
 }: FormRegimeDouanierProps, ref: Ref<void>) => {
-    const { data = [], isFetching, refetch } = useFetchRegimeDouaniersQuery()
+    const { data = [], isFetching, refetch } = usePaginationRegimeDouaniersQuery(0);
     const [regimeDouanier1, setRegimeDouanier1] = useState<PayementMode>(payementMode0);
     const [request, setRequest] = useState(REQUEST_SAVE)
 
@@ -51,7 +46,7 @@ const FormRegimeDouanier = ({
 
     const closed = () => {
         setShow(false);
-        setDisabled(false);
+        setDisabled(true);
     }
 
 
@@ -159,7 +154,10 @@ const FormRegimeDouanier = ({
                     <RestoreRegimeDouanier id={""} ref={restore} />
                     <h1>Nouveau Régime Douanier  </h1>
                     <div className='float-left w-full'>
-                        <button className='bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left' onClick={() => { open(regimeDouanier0) }}>Nouveau Régime Douanier</button>
+                        <button className='bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left' onClick={() => {
+                            setDisabled(false)
+                            open(regimeDouanier0)
+                        }}>Nouveau Régime Douanier</button>
                         <div className='float-right'>
                             <button className='bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg'>
                                 <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
@@ -185,7 +183,7 @@ const FormRegimeDouanier = ({
                                 return (
                                     //@ts-ignore
                                     <tr key={regimeDouanier.id}>
-                                        <Table.td>{regimeDouanier.num}</Table.td>
+                                        <Table.td>{regimeDouanier.code}</Table.td>
                                         <Table.td>{regimeDouanier.design}</Table.td>
                                         <Table.td className='cursor-pointer'><Mitems menu={menu(regimeDouanier)} /></Table.td>
                                     </tr>
@@ -197,11 +195,11 @@ const FormRegimeDouanier = ({
                 </section>
             )}
 
-            <Modal show={show} title="Nouveau Régime Douanier" format={classNames("5")} close={closed}>
+            <Modal show={show} title="Nouveau Régime Douanier" format={+classNames("5")} close={closed}>
                 <div className="float-left w-full">
                     <Form defaultValues={regimeDouanier1} onSubmit={request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? updateRegimeDouanier : void_}>
                         <div className="float-left w-full">
-                            <Field label="Code" name="code" disabled={disabled} required="required" />
+                            <Field className="sm:grid-cols-6 sm:gap-6" label="Code" name="code" disabled={disabled} required="required" />
 
                             <div className="float-left w-full">
                                 <div className="float-left w-1/2">
@@ -210,13 +208,13 @@ const FormRegimeDouanier = ({
                                 </div>
                             </div>
                         </div>
-                        {!disabled && <><Bcyan onClick={() => {
+                        {!disabled && <><Bcyan className="m-4 mt-10" onClick={() => {
                             setShow(true);
                         }}>
                             Sauvegarder et Nouveau
                         </Bcyan>
 
-                            <Bcyan
+                            <Bcyan className="m-4 mt-10"
                                 type="submit"
                                 onClick={() => {
                                     setTimeout(() => {
@@ -230,7 +228,7 @@ const FormRegimeDouanier = ({
                     </Form>
 
                     <div>
-                        {disabled && <Bcyan className="float-right"
+                        {disabled && <Bcyan className="float-right m-4 mt-10"
                             onClick={() => {
                                 setDisabled(false)
                             }}>
@@ -239,7 +237,7 @@ const FormRegimeDouanier = ({
                         {!disabled && <Bcyan className="float-right"
                             onClick={() => {
                                 setDisabled(false);
-                                setShow(false);
+                                //setShow(false);
                             }}>
                             Annuler
                         </Bcyan>}

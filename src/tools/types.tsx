@@ -110,79 +110,93 @@ export const article0: Article = {
 };
 
 export interface UnitMeasure {
+  id: String,
   design: String;
   symbole: String;
   decimal: number;
 }
 
 export const unitMeasure0: UnitMeasure = {
+  id: "",
   design: "",
   symbole: "",
   decimal: 0,
 };
 
 export interface BureauDouane {
+  id: String;
   code: String;
   design: String;
 }
 
 export const bureauDouane0: BureauDouane = {
+  id: "",
   code: "",
   design: "",
 };
 
 export interface Declarant {
+  id: String;
   design: String;
   ville: String;
 }
 
 export const declarant0: Declarant = {
+  id: "",
   design: "",
   ville: "",
 };
 
 export interface Incoterm {
+  id: String,
   code: String;
   design: String;
 }
 
 export const incoterm0: Incoterm = {
+  id: "",
   code: "",
   design: "",
 };
 
 export interface PayementMode {
+  id: String;
   code: String;
   design: String;
 }
 
 export const payementMode0: PayementMode = {
+  id: "",
   code: "",
   design: "",
 };
 
 export interface RegimeDouanier {
-  num: String;
+  id: String;
+  code: String;
   design: String;
 }
 
 export const regimeDouanier0: RegimeDouanier = {
-  num: "",
+  id: "",
+  code: "",
   design: "",
 };
 
 export interface RawMaterial {
+  id: string
   design: String;
   nomenclature: String;
   family: String;
   tauxPertes: number;
-  measureUnit: UnitMeasure[];
+  measureUnit: String;
 }
 
 export const rawMaterial0: RawMaterial = {
+  id: "",
   design: "",
   nomenclature: "",
   family: "",
   tauxPertes: 0,
-  measureUnit: [],
+  measureUnit: "",
 };

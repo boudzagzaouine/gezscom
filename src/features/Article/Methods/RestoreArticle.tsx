@@ -55,20 +55,17 @@ const RestoreArticle = ({ id }: RestoreArticlePorp, ref: Ref<void>) => {
                 }, 500);
               }}
             >
-              <ReplyIcon
-                className="h-8 w-8 text-[#fff] group-hover:text-gray-500"
-                aria-hidden="true"
-              />
+              Restorer
             </Bcyan>
           </form>
-          <Bred
+          <Bcyan
             className="mt-2 float-right"
             onClick={() => {
               setShowModal(false);
             }}
           >
-            <XCircleIcon className={STYLE_ICON} aria-hidden="true" />
-          </Bred>
+            Annuler
+          </Bcyan>
         </div>
       </Modal>
     </>

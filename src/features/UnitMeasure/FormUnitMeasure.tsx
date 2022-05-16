@@ -5,7 +5,7 @@ import { DECIMAL, REQUEST_EDIT, REQUEST_SAVE, VILLE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
-import { useAddArticleMutation, useArchiveArticleMutation, useDeleteArticleMutation, useEditArticleMutation, useFetchOneArticleQuery, useRestoreArticleMutation, useFetchArticlesQuery, useFetchBureauDouanesQuery, useFetchOneBureauDouaneQuery, useEditBureauDouaneMutation, useDeleteBureauDouaneMutation, useArchiveBureauDouaneMutation, useRestoreBureauDouaneMutation, useFetchDeclarantsQuery, useAddDeclarantMutation, useEditDeclarantMutation, useDeleteDeclarantMutation, useArchiveDeclarantMutation, useRestoreDeclarantMutation, useFetchPayementModesQuery, useAddPayementModeMutation, useEditPayementModeMutation, useArchivePayementModeMutation, useRestorePayementModeMutation, useDeletePayementModeMutation, useFetchRegimeDouaniersQuery, useAddRegimeDouanierMutation, useEditRegimeDouanierMutation, useDeleteRegimeDouanierMutation, useArchiveRegimeDouanierMutation, useRestoreRegimeDouanierMutation, useFetchUnitMeasuresQuery, useEditUnitMeasureMutation, useArchiveUnitMeasureMutation, useRestoreUnitMeasureMutation, useDeleteUnitMeasureMutation, useAddUnitMeasureMutation } from "config/rtk";
+import { useAddArticleMutation, useArchiveArticleMutation, useDeleteArticleMutation, useEditArticleMutation, useFetchOneArticleQuery, useRestoreArticleMutation, useFetchArticlesQuery, useFetchBureauDouanesQuery, useFetchOneBureauDouaneQuery, useEditBureauDouaneMutation, useDeleteBureauDouaneMutation, useArchiveBureauDouaneMutation, useRestoreBureauDouaneMutation, useFetchDeclarantsQuery, useAddDeclarantMutation, useEditDeclarantMutation, useDeleteDeclarantMutation, useArchiveDeclarantMutation, useRestoreDeclarantMutation, useFetchPayementModesQuery, useAddPayementModeMutation, useEditPayementModeMutation, useArchivePayementModeMutation, useRestorePayementModeMutation, useDeletePayementModeMutation, useFetchRegimeDouaniersQuery, useAddRegimeDouanierMutation, useEditRegimeDouanierMutation, useDeleteRegimeDouanierMutation, useArchiveRegimeDouanierMutation, useRestoreRegimeDouanierMutation, useFetchUnitMeasuresQuery, useEditUnitMeasureMutation, useArchiveUnitMeasureMutation, useRestoreUnitMeasureMutation, useDeleteUnitMeasureMutation, useAddUnitMeasureMutation, usePaginationUnitMeasuresQuery } from "config/rtk";
 import classNames from "classnames";
 import Table from "widgets/Table";
 import { MenuItems } from 'widgets/TypeWidgets';
@@ -29,7 +29,7 @@ const FormUnitMeasure = ({
     unitMeasure,
     disable,
 }: FormUnitMeasureProps, ref: Ref<void>) => {
-    const { data = [], isFetching, refetch } = useFetchUnitMeasuresQuery()
+    const { data = [], isFetching, refetch } = usePaginationUnitMeasuresQuery(0);
     const [unitMeasure1, setUnitMeasure1] = useState<UnitMeasure>(unitMeasure0);
     const [request, setRequest] = useState(REQUEST_SAVE)
 
@@ -51,7 +51,7 @@ const FormUnitMeasure = ({
 
     const closed = () => {
         setShow(false);
-        setDisabled(false);
+        setDisabled(true);
     }
 
     const del = useRef(null);
@@ -71,7 +71,7 @@ const FormUnitMeasure = ({
         setRequest(REQUEST_EDIT);
     };
 
-    const FormAsEdit = (regimeDouanier: RegimeDouanier) => {
+    const FormAsEdit = (unitMeasure: UnitMeasure) => {
         setDisabled(true);
         showFormulaire(unitMeasure);
     };
@@ -158,9 +158,12 @@ const FormUnitMeasure = ({
                     <DeleteUnitMeasure id={""} ref={del} refetch={refetch} />
                     <ArchiveUnitMeasure id={""} ref={archive} />
                     <RestoreUnitMeasure id={""} ref={restore} />
-                    <h1>Nouvelle Unité de Mesure Régime </h1>
+                    <h1>Nouvelle Unité de Mesure </h1>
                     <div className='float-left w-full'>
-                        <button className='bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left' onClick={() => { open(unitMeasure0) }}>Nouvelle Unité de Mesure Régime</button>
+                        <button className='bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left' onClick={() => {
+                            setDisabled(false)
+                            open(unitMeasure0)
+                        }}>Nouvelle Unité de Mesure</button>
                         <div className='float-right'>
                             <button className='bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg'>
                                 <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
@@ -200,34 +203,36 @@ const FormUnitMeasure = ({
                 </section>
             )}
 
-            <Modal show={show} title="Nouveau Régime Douanier" format={classNames("5")} close={closed}>
+            <Modal show={show} title="Nouveau Régime Douanier" format={+classNames("5")} close={closed}>
                 <div className="float-left w-full">
                     <Form defaultValues={unitMeasure1} onSubmit={request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? updateUnitMeasure : void_}>
                         <div className="float-left w-full">
-                            <Field label="Designation" name="design" disabled={disabled} required="required" />
-
                             <div className="float-left w-full">
-                                <div className="float-left w-1/2">
-                                    <Field label="Symbole" name="symbole" disabled={disabled} required="required" />
-                                    <Field
-                                        label="Decimal"
-                                        name="decimal"
-                                        options={DECIMAL}
-                                        as="select"
-                                        disabled={disabled}
-                                        required="required"
-                                    />
 
-                                </div>
+                                <Field className="sm:grid-cols-6 sm:gap-6" label="Designation" name="design" disabled={disabled} required="required" />
+                            </div>
+                            <div className="float-left w-1/2">
+                                <Field label="Symbole" name="symbole" disabled={disabled} required="required" />
+                            </div>
+                            <div className="float-left w-1/2">
+                                <Field
+                                    label="Decimal"
+                                    name="decimal"
+                                    options={DECIMAL}
+                                    as="select"
+                                    disabled={disabled}
+                                    required="required"
+                                />
+
                             </div>
                         </div>
-                        {!disabled && <><Bcyan onClick={() => {
+                        {!disabled && <><Bcyan className="m-4 mt-10" onClick={() => {
                             setShow(true);
                         }}>
                             Sauvegarder et Nouveau
                         </Bcyan>
 
-                            <Bcyan
+                            <Bcyan className="m-4 mt-10"
                                 type="submit"
                                 onClick={() => {
                                     setTimeout(() => {
@@ -241,7 +246,7 @@ const FormUnitMeasure = ({
                     </Form>
 
                     <div>
-                        {disabled && <Bcyan className="float-right"
+                        {disabled && <Bcyan className="float-right m-4 mt-10"
                             onClick={() => {
                                 setDisabled(false)
                             }}>
@@ -250,13 +255,13 @@ const FormUnitMeasure = ({
                         {!disabled && <Bcyan className="float-right"
                             onClick={() => {
                                 setDisabled(false);
-                                setShow(false);
+                                //setShow(false);
                             }}>
                             Annuler
                         </Bcyan>}
                     </div>
                 </div>
-            </Modal>
+            </Modal >
         </>
     );
 

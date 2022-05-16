@@ -4,7 +4,7 @@ import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
-import { useAddArticleMutation, useArchiveArticleMutation, useDeleteArticleMutation, useEditArticleMutation, useFetchOneArticleQuery, useRestoreArticleMutation, useFetchArticlesQuery, useFetchBureauDouanesQuery, useFetchOneBureauDouaneQuery, useEditBureauDouaneMutation, useDeleteBureauDouaneMutation, useArchiveBureauDouaneMutation, useRestoreBureauDouaneMutation, useFetchIncotermsQuery, useAddIncotermMutation, useEditIncotermMutation, useDeleteIncotermMutation, useArchiveIncotermMutation, useRestoreIncotermMutation } from "config/rtk";
+import { useAddArticleMutation, useArchiveArticleMutation, useDeleteArticleMutation, useEditArticleMutation, useFetchOneArticleQuery, useRestoreArticleMutation, useFetchArticlesQuery, useFetchBureauDouanesQuery, useFetchOneBureauDouaneQuery, useEditBureauDouaneMutation, useDeleteBureauDouaneMutation, useArchiveBureauDouaneMutation, useRestoreBureauDouaneMutation, useFetchIncotermsQuery, useAddIncotermMutation, useEditIncotermMutation, useDeleteIncotermMutation, useArchiveIncotermMutation, useRestoreIncotermMutation, usePaginationIncotermsQuery } from "config/rtk";
 import classNames from "classnames";
 import Table from "widgets/Table";
 import { MenuItems } from 'widgets/TypeWidgets';
@@ -15,11 +15,7 @@ import ArchiveIncoterm from "./Methods/ArchiveIncoterm";
 import RestoreIncoterm from "./Methods/RestoreIncoterm";
 import DeleteIncoterm from "./Methods/DeleteIncoterm";
 
-/*
-git add . 
-git commit -m "un commontaire"
-git push
-*/
+
 type FormIncotermProps = {
     incoterm: Incoterm;
     disable: boolean;
@@ -28,7 +24,7 @@ const FormIncoterm = ({
     incoterm,
     disable,
 }: FormIncotermProps, ref: Ref<void>) => {
-    const { data = [], isFetching, refetch } = useFetchIncotermsQuery()
+    const { data = [], isFetching, refetch } = usePaginationIncotermsQuery(0);
     const [incoterm1, setIncoterm1] = useState<Incoterm>(incoterm0);
     const [request, setRequest] = useState(REQUEST_SAVE)
 
@@ -49,7 +45,7 @@ const FormIncoterm = ({
 
     const closed = () => {
         setShow(false);
-        setDisabled(false);
+        setDisabled(true);
     }
 
     const del = useRef(null);
@@ -155,7 +151,10 @@ const FormIncoterm = ({
                     <RestoreIncoterm id={""} ref={restore} />
                     <h1>Nouveau Incoterm</h1>
                     <div className='float-left w-full'>
-                        <button className='bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left' onClick={() => { open(incoterm0) }}>Nouveau Incoterm</button>
+                        <button className='bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left' onClick={() => {
+                            setDisabled(false)
+                            open(incoterm0)
+                        }}>Nouveau Incoterm</button>
                         <div className='float-right'>
                             <button className='bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg'>
                                 <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
@@ -193,11 +192,11 @@ const FormIncoterm = ({
                 </section>
             )}
 
-            <Modal show={show} title="Nouvelle Famille Article" format={classNames("5")} close={closed}>
+            <Modal show={show} title="Nouveau Icoterm" format={+classNames("5")} close={closed}>
                 <div className="float-left w-full">
                     <Form defaultValues={incoterm1} onSubmit={request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? updateIncoterm : void_}>
                         <div className="float-left w-full">
-                            <Field label="Code" name="code" disabled={disabled} required="required" />
+                            <Field className="sm:grid-cols-6 sm:gap-6" label="Code" name="code" disabled={disabled} required="required" />
 
                             <div className="float-left w-full">
                                 <div className="float-left w-1/2">
@@ -205,13 +204,13 @@ const FormIncoterm = ({
                                 </div>
                             </div>
                         </div>
-                        {!disabled && <><Bcyan onClick={() => {
+                        {!disabled && <><Bcyan className="m-4 mt-10" onClick={() => {
                             setShow(true);
                         }}>
                             Sauvegarder et Nouveau
                         </Bcyan>
 
-                            <Bcyan
+                            <Bcyan className="m-4 mt-10"
                                 type="submit"
                                 onClick={() => {
                                     setTimeout(() => {
@@ -225,7 +224,7 @@ const FormIncoterm = ({
                     </Form>
 
                     <div>
-                        {disabled && <Bcyan className="float-right"
+                        {disabled && <Bcyan className="float-right m-4 mt-10"
                             onClick={() => {
                                 setDisabled(false)
                             }}>
@@ -234,7 +233,7 @@ const FormIncoterm = ({
                         {!disabled && <Bcyan className="float-right"
                             onClick={() => {
                                 setDisabled(false);
-                                setShow(false);
+                                //setShow(false);
                             }}>
                             Annuler
                         </Bcyan>}

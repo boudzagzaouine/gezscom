@@ -4,7 +4,7 @@ import { REQUEST_EDIT, REQUEST_SAVE, VILLE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
-import { useAddArticleMutation, useArchiveArticleMutation, useDeleteArticleMutation, useEditArticleMutation, useFetchOneArticleQuery, useRestoreArticleMutation, useFetchArticlesQuery, useFetchBureauDouanesQuery, useFetchOneBureauDouaneQuery, useEditBureauDouaneMutation, useDeleteBureauDouaneMutation, useArchiveBureauDouaneMutation, useRestoreBureauDouaneMutation, useFetchDeclarantsQuery, useAddDeclarantMutation, useEditDeclarantMutation, useDeleteDeclarantMutation, useArchiveDeclarantMutation, useRestoreDeclarantMutation, useFetchPayementModesQuery, useAddPayementModeMutation, useEditPayementModeMutation, useArchivePayementModeMutation, useRestorePayementModeMutation, useDeletePayementModeMutation } from "config/rtk";
+import { useAddArticleMutation, useArchiveArticleMutation, useDeleteArticleMutation, useEditArticleMutation, useFetchOneArticleQuery, useRestoreArticleMutation, useFetchArticlesQuery, useFetchBureauDouanesQuery, useFetchOneBureauDouaneQuery, useEditBureauDouaneMutation, useDeleteBureauDouaneMutation, useArchiveBureauDouaneMutation, useRestoreBureauDouaneMutation, useFetchDeclarantsQuery, useAddDeclarantMutation, useEditDeclarantMutation, useDeleteDeclarantMutation, useArchiveDeclarantMutation, useRestoreDeclarantMutation, useFetchPayementModesQuery, useAddPayementModeMutation, useEditPayementModeMutation, useArchivePayementModeMutation, useRestorePayementModeMutation, useDeletePayementModeMutation, usePaginationPayementModesQuery } from "config/rtk";
 import classNames from "classnames";
 import Table from "widgets/Table";
 import { MenuItems } from 'widgets/TypeWidgets';
@@ -16,11 +16,6 @@ import ArchivePayementMode from "./Methods/ArchivePayementMode";
 import RestorePayementMode from "./Methods/RestorePayementMode";
 import Pagin from "widgets/Pagin";
 
-/*
-git add . 
-git commit -m "un commontaire"
-git push
-*/
 type FormPayementModeProps = {
     payementMode: PayementMode;
     disable: boolean;
@@ -29,7 +24,7 @@ const FormPayementMode = ({
     payementMode,
     disable,
 }: FormPayementModeProps, ref: Ref<void>) => {
-    const { data = [], isFetching, refetch } = useFetchPayementModesQuery()
+    const { data = [], isFetching, refetch } = usePaginationPayementModesQuery(0);
     const [payementMode1, setPayementMode1] = useState<PayementMode>(payementMode0);
     const [request, setRequest] = useState(REQUEST_SAVE)
 
@@ -50,7 +45,7 @@ const FormPayementMode = ({
 
     const closed = () => {
         setShow(false);
-        setDisabled(false);
+        setDisabled(true);
     }
 
     const del = useRef(null);
@@ -156,7 +151,10 @@ const FormPayementMode = ({
                     <RestorePayementMode id={""} ref={restore} />
                     <h1>Nouveau Mode de Réglement </h1>
                     <div className='float-left w-full'>
-                        <button className='bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left' onClick={() => { open(payementMode0) }}>Nouveau Mode de Réglement</button>
+                        <button className='bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left' onClick={() => {
+                            setDisabled(false)
+                            open(payementMode0)
+                        }}>Nouveau Mode de Réglement</button>
                         <div className='float-right'>
                             <button className='bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg'>
                                 <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
@@ -181,7 +179,7 @@ const FormPayementMode = ({
                             data.content?.map((payementMode: PayementMode) => {
                                 return (
                                     //@ts-ignore
-                                    <tr key={declarant.id}>
+                                    <tr key={payementMode.id}>
                                         <Table.td>{payementMode.code}</Table.td>
                                         <Table.td>{payementMode.design}</Table.td>
                                         <Table.td className='cursor-pointer'><Mitems menu={menu(payementMode)} /></Table.td>
@@ -194,30 +192,25 @@ const FormPayementMode = ({
                 </section>
 
             )}
-            <Modal show={show} title="Nouvelle Famille Article" format={classNames("5")} close={closed}>
+            <Modal show={show} title="Nouveau Mode De Réglement" format={+classNames("5")} close={closed}>
                 <div className="float-left w-full">
                     <Form defaultValues={payementMode1} onSubmit={request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? updatePayementMode : void_}>
                         <div className="float-left w-full">
-                            <Field label="Designation" name="design" disabled={disabled} required="required" />
+                            <Field className="sm:grid-cols-6 sm:gap-6" label="Code" name="code" disabled={disabled} required="required" />
 
                             <div className="float-left w-full">
                                 <div className="float-left w-1/2">
-                                    <Field
-                                        label="Ville"
-                                        name="ville"
-                                        options={VILLE}
-                                        as="select"
-                                        disabled={disabled} required="required" />
+                                    <Field label="Designation" name="design" disabled={disabled} required="required" />
                                 </div>
                             </div>
                         </div>
-                        {!disabled && <><Bcyan onClick={() => {
+                        {!disabled && <><Bcyan className="m-4 mt-10" onClick={() => {
                             setShow(true);
                         }}>
                             Sauvegarder et Nouveau
                         </Bcyan>
 
-                            <Bcyan
+                            <Bcyan className="m-4 mt-10"
                                 type="submit"
                                 onClick={() => {
                                     setTimeout(() => {
@@ -231,7 +224,7 @@ const FormPayementMode = ({
                     </Form>
 
                     <div>
-                        {disabled && <Bcyan className="float-right"
+                        {disabled && <Bcyan className="float-right m-4 mt-10"
                             onClick={() => {
                                 setDisabled(false)
                             }}>
@@ -240,7 +233,7 @@ const FormPayementMode = ({
                         {!disabled && <Bcyan className="float-right"
                             onClick={() => {
                                 setDisabled(false);
-                                setShow(false);
+                                //setShow(false);
                             }}>
                             Annuler
                         </Bcyan>}

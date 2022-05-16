@@ -56,20 +56,17 @@ const ArchiveRawMaterial = ({ id }: ArchiveRawMaterialPorp, ref: Ref<void>) => {
                 }, 500);
               }}
             >
-              <ArchiveIcon
-                className="h-8 w-8 text-[#fff] group-hover:text-gray-500"
-                aria-hidden="true"
-              />
+              Archiver
             </Bcyan>
           </form>
-          <Bred
+          <Bcyan
             className="mt-2 float-right"
             onClick={() => {
               setShowModal(false);
             }}
           >
-            <XCircleIcon className={STYLE_ICON} aria-hidden="true" />
-          </Bred>
+            Annuler
+          </Bcyan>
         </div>
       </Modal>
     </>

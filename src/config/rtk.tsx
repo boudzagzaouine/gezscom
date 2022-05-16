@@ -10,7 +10,7 @@ export const crudApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Client", "UNAUTHORIZED", "UNKNOWN_ERROR"],
+  tagTypes: ["RawMaterial", "Client", "UNAUTHORIZED", "UNKNOWN_ERROR"],
   endpoints(builder) {
     return {
       fetchClients: builder.query<Client[], number | void>({

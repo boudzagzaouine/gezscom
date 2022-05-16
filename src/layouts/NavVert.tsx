@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { forwardRef, Ref, useState } from "react";
+import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
 import { BUREAU_DOUANE, CLIENT_MANAGER, DECLARANT, DECLARANT_GES, FAMILLE_ARTICLE, FAMILLE_MATIERE_PREMIERE, INCOTERM_GES, MODE_PAYEMENT, PURCHASE_MANAGER, REGIME_DOUANIER, UNIT_MEASURE, VENDOR_MANAGER } from "tools/consts";
 import Icon from "../widgets/Icon";
 type NavVertProps = {
@@ -119,6 +119,14 @@ const NavVert = ({ updateSel }: NavVertProps) => {
 
   ];
 
+  const prev = useRef(false);
+
+  useEffect(() => {
+
+    prev.current = sous;
+
+  }, []);
+
   return (
     <ul className="nav-horiz bg-[#2B5173]">
       <h2 className="bg-[#000] bg-opacity-10 text-[#fff] w-full float-left py-2.5">
@@ -134,8 +142,8 @@ const NavVert = ({ updateSel }: NavVertProps) => {
               : "border-l-0 bg-transparent")
           }
           onClick={() => {
-            updateSel(item.id)
-            setSous(!sous)
+            updateSel(item.id);
+            setSous(!prev.current);
           }}
         >
           <Link href={item.link}>
