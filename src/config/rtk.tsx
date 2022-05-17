@@ -205,44 +205,19 @@ export const crudApi = createApi({
       /*****************************************************************************/
       /*****************************************************************************/
       /*****************************************************************************/
-      fetchArticles: builder.query<Article[], number | void>({
-        query() {
-          return "/articles";
-        },
-        providesTags: (result) =>
-          result
-            ? [
-              //@ts-ignore
-              ...result.content.map(({ id }) => ({
-                //      ...result.map(({ id }) => ({
-                type: "Article" as const,
-                id,
-              })),
-              { type: "Article", id: "LIST" },
-            ]
-            : [{ type: "Article", id: "LIST" }],
+
+
+      /*****************************************************************************/
+      /*********************************Article**************************************/
+      /*****************************************************************************/
+      fetchArticles: builder.query<Article[], void>({
+        query: () => `/articles`,
       }),
-      paginationArticles: builder.query<Article[], number | void>({
-        query(page: number) {
-          return "/articles?page=" + page + "&size=" + PAGE_SIZE;
-        },
-        providesTags: (result) =>
-          result
-            ? [
-              //@ts-ignore
-              ...result.content.map(({ id }) => ({
-                //      ...result.map(({ id }) => ({
-                type: "Article" as const,
-                id,
-              })),
-              { type: "Article", id: "LIST" },
-            ]
-            : [{ type: "Article", id: "LIST" }],
+      paginationArticles: builder.query<Article[], number>({
+        query: (page) => `/articles?page=${page}&size=${PAGE_SIZE}`,
       }),
-      fetchOneArticle: builder.query<Article, String>({
+      fetchOneArticle: builder.query<Article, string>({
         query: (id) => `/articles/${id}`,
-        //@ts-ignore
-        providesTags: (result, error, id) => [{ type: "Article", id }],
       }),
       addArticle: builder.mutation<Article, Partial<Article>>({
         query: (body) => ({
@@ -250,8 +225,6 @@ export const crudApi = createApi({
           method: "POST",
           body,
         }),
-        //@ts-ignore
-        invalidatesTags: ["Article"],
       }),
       editArticle: builder.mutation<
         Article,
@@ -263,24 +236,15 @@ export const crudApi = createApi({
           body,
         }),
       }),
-      deleteArticle: builder.mutation<
-        { success: boolean; id: String },
-        number
-      >({
+      deleteArticle: builder.mutation<{ success: boolean; id: number }, number>({
         //@ts-ignore
-        query(id: String) {
-          //  if (confirm(`do you want delete Commande number ${id.id} ?`))
+        query(id: Num) {
+          //  if (confirm(`do you want delete Client number ${id.id} ?`))
           return {
             url: `/articles/${id.id}`,
             method: "DELETE",
           };
-          // else return
-        },
-        //@ts-ignore
-        invalidatesTags: (result, error, id) => [
-          { type: "Article", id },
-          { type: "Article", id: "LIST" },
-        ],
+        }
       }),
       archiveArticle: builder.mutation<
         Article,
@@ -301,48 +265,19 @@ export const crudApi = createApi({
         }),
       }),
 
-      /*****************************************************************************/
-      /*****************************************************************************/
-      /*****************************************************************************/
 
-      fetchBureauDouanes: builder.query<BureauDouane[], number | void>({
-        query() {
-          return "/bureauDouanes";
-        },
-        providesTags: (result) =>
-          result
-            ? [
-              //@ts-ignore
-              ...result.content.map(({ id }) => ({
-                //      ...result.map(({ id }) => ({
-                type: "BureauDouane" as const,
-                id,
-              })),
-              { type: "BureauDouane", id: "LIST" },
-            ]
-            : [{ type: "BureauDouane", id: "LIST" }],
+
+      /*****************************************************************************/
+      /*********************************BureauDouane**************************************/
+      /*****************************************************************************/
+      fetchBureauDouanes: builder.query<BureauDouane[], void>({
+        query: () => `/bureauDouanes`,
       }),
-      paginationBureauDouanes: builder.query<BureauDouane[], number | void>({
-        query(page: number) {
-          return "bureauDouanes?page=" + page + "&size=" + PAGE_SIZE;
-        },
-        providesTags: (result) =>
-          result
-            ? [
-              //@ts-ignore
-              ...result.content.map(({ id }) => ({
-                //      ...result.map(({ id }) => ({
-                type: "BureauDouane" as const,
-                id,
-              })),
-              { type: "BureauDouane", id: "LIST" },
-            ]
-            : [{ type: "BureauDouane", id: "LIST" }],
+      paginationBureauDouanes: builder.query<BureauDouane[], number>({
+        query: (page) => `/bureauDouanes?page=${page}&size=${PAGE_SIZE}`,
       }),
-      fetchOneBureauDouane: builder.query<BureauDouane, String>({
+      fetchOneBureauDouane: builder.query<BureauDouane, string>({
         query: (id) => `/bureauDouanes/${id}`,
-        //@ts-ignore
-        providesTags: (result, error, id) => [{ type: "BureauDouane", id }],
       }),
       addBureauDouane: builder.mutation<BureauDouane, Partial<BureauDouane>>({
         query: (body) => ({
@@ -350,8 +285,6 @@ export const crudApi = createApi({
           method: "POST",
           body,
         }),
-        //@ts-ignore
-        invalidatesTags: ["BureauDouane"],
       }),
       editBureauDouane: builder.mutation<
         BureauDouane,
@@ -363,24 +296,15 @@ export const crudApi = createApi({
           body,
         }),
       }),
-      deleteBureauDouane: builder.mutation<
-        { success: boolean; id: String },
-        number
-      >({
+      deleteBureauDouane: builder.mutation<{ success: boolean; id: number }, number>({
         //@ts-ignore
-        query(id: String) {
-          //  if (confirm(`do you want delete Commande number ${id.id} ?`))
+        query(id: Num) {
+          //  if (confirm(`do you want delete Client number ${id.id} ?`))
           return {
             url: `/bureauDouanes/${id.id}`,
             method: "DELETE",
           };
-          // else return
-        },
-        //@ts-ignore
-        invalidatesTags: (result, error, id) => [
-          { type: "BureauDouane", id },
-          { type: "BureauDouane", id: "LIST" },
-        ],
+        }
       }),
       archiveBureauDouane: builder.mutation<
         BureauDouane,
@@ -403,451 +327,16 @@ export const crudApi = createApi({
 
 
       /*****************************************************************************/
+      /*********************************Declarant**************************************/
       /*****************************************************************************/
-      /*****************************************************************************/
-
-      fetchPayementModes: builder.query<PayementMode[], number | void>({
-        query() {
-          return "/payementModes";
-        },
-        providesTags: (result) =>
-          result
-            ? [
-              //@ts-ignore
-              ...result.content.map(({ id }) => ({
-                //      ...result.map(({ id }) => ({
-                type: "PayementMode" as const,
-                id,
-              })),
-              { type: "PayementMode", id: "LIST" },
-            ]
-            : [{ type: "PayementMode", id: "LIST" }],
+      fetchDeclarants: builder.query<Declarant[], void>({
+        query: () => `/declarants`,
       }),
-      paginationPayementModes: builder.query<PayementMode[], number | void>({
-        query(page: number) {
-          return "payementModes?page=" + page + "&size=" + PAGE_SIZE;
-        },
-        providesTags: (result) =>
-          result
-            ? [
-              //@ts-ignore
-              ...result.content.map(({ id }) => ({
-                //      ...result.map(({ id }) => ({
-                type: "PayementMode" as const,
-                id,
-              })),
-              { type: "PayementMode", id: "LIST" },
-            ]
-            : [{ type: "PayementMode", id: "LIST" }],
+      paginationDeclarants: builder.query<Declarant[], number>({
+        query: (page) => `/declarants?page=${page}&size=${PAGE_SIZE}`,
       }),
-      fetchOnePayementMode: builder.query<PayementMode, String>({
-        query: (id) => `/payementModes/${id}`,
-        //@ts-ignore
-        providesTags: (result, error, id) => [{ type: "PayementMode", id }],
-      }),
-      addPayementMode: builder.mutation<PayementMode, Partial<PayementMode>>({
-        query: (body) => ({
-          url: "/payementModes",
-          method: "POST",
-          body,
-        }),
-        //@ts-ignore
-        invalidatesTags: ["PayementMode"],
-      }),
-      editPayementMode: builder.mutation<
-        PayementMode,
-        Partial<PayementMode> & Pick<PayementMode, "id">
-      >({
-        query: (body) => ({
-          url: `/payementModes/${body.id}`,
-          method: "PUT",
-          body,
-        }),
-      }),
-      deletePayementMode: builder.mutation<
-        { success: boolean; id: String },
-        number
-      >({
-        //@ts-ignore
-        query(id: String) {
-          //  if (confirm(`do you want delete Commande number ${id.id} ?`))
-          return {
-            url: `/payementModes/${id.id}`,
-            method: "DELETE",
-          };
-          // else return
-        },
-        //@ts-ignore
-        invalidatesTags: (result, error, id) => [
-          { type: "PayementMode", id },
-          { type: "PayementMode", id: "LIST" },
-        ],
-      }),
-      archivePayementMode: builder.mutation<
-        PayementMode,
-        Partial<PayementMode> & Pick<PayementMode, "id">
-      >({
-        query: (id) => ({
-          url: `/payementModes/${id}/archive`,
-          method: "PUT",
-        }),
-      }),
-      restorePayementMode: builder.mutation<
-        PayementMode,
-        Partial<PayementMode> & Pick<PayementMode, "id">
-      >({
-        query: (id) => ({
-          url: `/payementModes/${id}/restore`,
-          method: "PUT",
-        }),
-      }),
-
-
-      /*****************************************************************************/
-      /*****************************************************************************/
-      /*****************************************************************************/
-
-      fetchRawMaterials: builder.query<RawMaterial[], number | void>({
-        query() {
-          return "/rawMaterials";
-        },
-        providesTags: (result) =>
-          result
-            ? [
-              //@ts-ignore
-              ...result.content.map(({ id }) => ({
-                //      ...result.map(({ id }) => ({
-                type: "RawMaterial" as const,
-                id,
-              })),
-              { type: "RawMaterial", id: "LIST" },
-            ]
-            : [{ type: "RawMaterial", id: "LIST" }],
-      }),
-      paginationRawMaterials: builder.query<RawMaterial[], number | void>({
-        query(page: number) {
-          return "rawMaterials?page=" + page + "&size=" + PAGE_SIZE;
-        },
-        providesTags: (result) =>
-          result
-            ? [
-              //@ts-ignore
-              ...result.content.map(({ id }) => ({
-                //      ...result.map(({ id }) => ({
-                type: "RawMaterial" as const,
-                id,
-              })),
-              { type: "RawMaterial", id: "LIST" },
-            ]
-            : [{ type: "RawMaterial", id: "LIST" }],
-      }),
-      fetchOneRawMaterial: builder.query<RawMaterial, String>({
-        query: (id) => `/rawMaterials/${id}`,
-        //@ts-ignore
-        providesTags: (result, error, id) => [{ type: "RawMaterial", id }],
-      }),
-      addRawMaterial: builder.mutation<RawMaterial, Partial<RawMaterial>>({
-        query: (body) => ({
-          url: "/rawMaterials",
-          method: "POST",
-          body,
-        }),
-        //@ts-ignore
-        invalidatesTags: ["RawMaterial"],
-      }),
-      editRawMaterial: builder.mutation<
-        RawMaterial,
-        Partial<RawMaterial> & Pick<RawMaterial, "id">
-      >({
-        query: (body) => ({
-          url: `/rawMaterials/${body.id}`,
-          method: "PUT",
-          body,
-        }),
-      }),
-      deleteRawMaterial: builder.mutation<
-        { success: boolean; id: String },
-        number
-      >({
-        //@ts-ignore
-        query(id: String) {
-          //  if (confirm(`do you want delete Commande number ${id.id} ?`))
-          return {
-            url: `/rawMaterials/${id.id}`,
-            method: "DELETE",
-          };
-          // else return
-        },
-        //@ts-ignore
-        invalidatesTags: (result, error, id) => [
-          { type: "RawMaterial", id },
-          { type: "RawMaterial", id: "LIST" },
-        ],
-      }),
-      archiveRawMaterial: builder.mutation<
-        RawMaterial,
-        Partial<RawMaterial> & Pick<RawMaterial, "id">
-      >({
-        query: (id) => ({
-          url: `/rawMaterials/${id}/archive`,
-          method: "PUT",
-        }),
-      }),
-      restoreRawMaterial: builder.mutation<
-        RawMaterial,
-        Partial<RawMaterial> & Pick<RawMaterial, "id">
-      >({
-        query: (id) => ({
-          url: `/rawMaterials/${id}/restore`,
-          method: "PUT",
-        }),
-      }),
-
-
-      /*****************************************************************************/
-      /*****************************************************************************/
-      /*****************************************************************************/
-
-      fetchRegimeDouaniers: builder.query<RegimeDouanier[], number | void>({
-        query() {
-          return "/regimeDouaniers";
-        },
-        providesTags: (result) =>
-          result
-            ? [
-              //@ts-ignore
-              ...result.content.map(({ id }) => ({
-                //      ...result.map(({ id }) => ({
-                type: "RegimeDouanier" as const,
-                id,
-              })),
-              { type: "RegimeDouanier", id: "LIST" },
-            ]
-            : [{ type: "RegimeDouanier", id: "LIST" }],
-      }),
-      paginationRegimeDouaniers: builder.query<RegimeDouanier[], number | void>({
-        query(page: number) {
-          return "regimeDouaniers?page=" + page + "&size=" + PAGE_SIZE;
-        },
-        providesTags: (result) =>
-          result
-            ? [
-              //@ts-ignore
-              ...result.content.map(({ id }) => ({
-                //      ...result.map(({ id }) => ({
-                type: "RegimeDouanier" as const,
-                id,
-              })),
-              { type: "RegimeDouanier", id: "LIST" },
-            ]
-            : [{ type: "RegimeDouanier", id: "LIST" }],
-      }),
-      fetchOneRegimeDouanier: builder.query<RegimeDouanier, String>({
-        query: (id) => `/regimeDouaniers/${id}`,
-        //@ts-ignore
-        providesTags: (result, error, id) => [{ type: "RegimeDouanier", id }],
-      }),
-      addRegimeDouanier: builder.mutation<RegimeDouanier, Partial<RegimeDouanier>>({
-        query: (body) => ({
-          url: "/regimeDouaniers",
-          method: "POST",
-          body,
-        }),
-        //@ts-ignore
-        invalidatesTags: ["RegimeDouanier"],
-      }),
-      editRegimeDouanier: builder.mutation<
-        RegimeDouanier,
-        Partial<RegimeDouanier> & Pick<RegimeDouanier, "id">
-      >({
-        query: (body) => ({
-          url: `/regimeDouaniers/${body.id}`,
-          method: "PUT",
-          body,
-        }),
-      }),
-      deleteRegimeDouanier: builder.mutation<
-        { success: boolean; id: String },
-        number
-      >({
-        //@ts-ignore
-        query(id: String) {
-          //  if (confirm(`do you want delete Commande number ${id.id} ?`))
-          return {
-            url: `/regimeDouaniers/${id.id}`,
-            method: "DELETE",
-          };
-          // else return
-        },
-        //@ts-ignore
-        invalidatesTags: (result, error, id) => [
-          { type: "RegimeDouanier", id },
-          { type: "RegimeDouanier", id: "LIST" },
-        ],
-      }),
-      archiveRegimeDouanier: builder.mutation<
-        RegimeDouanier,
-        Partial<RegimeDouanier> & Pick<RegimeDouanier, "id">
-      >({
-        query: (id) => ({
-          url: `/regimeDouaniers/${id}/archive`,
-          method: "PUT",
-        }),
-      }),
-      restoreRegimeDouanier: builder.mutation<
-        RegimeDouanier,
-        Partial<RegimeDouanier> & Pick<RegimeDouanier, "id">
-      >({
-        query: (id) => ({
-          url: `/regimeDouaniers/${id}/restore`,
-          method: "PUT",
-        }),
-      }),
-
-
-      /*****************************************************************************/
-      /*****************************************************************************/
-      /*****************************************************************************/
-
-      fetchUnitMeasures: builder.query<UnitMeasure[], number | void>({
-        query() {
-          return "/unitMeasures";
-        },
-        providesTags: (result) =>
-          result
-            ? [
-              //@ts-ignore
-              ...result.content.map(({ id }) => ({
-                //      ...result.map(({ id }) => ({
-                type: "UnitMeasure" as const,
-                id,
-              })),
-              { type: "UnitMeasure", id: "LIST" },
-            ]
-            : [{ type: "UnitMeasure", id: "LIST" }],
-      }),
-      paginationUnitMeasures: builder.query<UnitMeasure[], number | void>({
-        query(page: number) {
-          return "unitMeasures?page=" + page + "&size=" + PAGE_SIZE;
-        },
-        providesTags: (result) =>
-          result
-            ? [
-              //@ts-ignore
-              ...result.content.map(({ id }) => ({
-                //      ...result.map(({ id }) => ({
-                type: "UnitMeasure" as const,
-                id,
-              })),
-              { type: "UnitMeasure", id: "LIST" },
-            ]
-            : [{ type: "UnitMeasure", id: "LIST" }],
-      }),
-      fetchOneUnitMeasure: builder.query<UnitMeasure, String>({
-        query: (id) => `/unitMeasures/${id}`,
-        //@ts-ignore
-        providesTags: (result, error, id) => [{ type: "UnitMeasure", id }],
-      }),
-      addUnitMeasure: builder.mutation<UnitMeasure, Partial<UnitMeasure>>({
-        query: (body) => ({
-          url: "/unitMeasures",
-          method: "POST",
-          body,
-        }),
-        //@ts-ignore
-        invalidatesTags: ["UnitMeasure"],
-      }),
-      editUnitMeasure: builder.mutation<
-        UnitMeasure,
-        Partial<UnitMeasure> & Pick<UnitMeasure, "id">
-      >({
-        query: (body) => ({
-          url: `/unitMeasures/${body.id}`,
-          method: "PUT",
-          body,
-        }),
-      }),
-      deleteUnitMeasure: builder.mutation<
-        { success: boolean; id: String },
-        number
-      >({
-        //@ts-ignore
-        query(id: String) {
-          //  if (confirm(`do you want delete Commande number ${id.id} ?`))
-          return {
-            url: `/unitMeasures/${id.id}`,
-            method: "DELETE",
-          };
-          // else return
-        },
-        //@ts-ignore
-        invalidatesTags: (result, error, id) => [
-          { type: "UnitMeasure", id },
-          { type: "UnitMeasure", id: "LIST" },
-        ],
-      }),
-      archiveUnitMeasure: builder.mutation<
-        UnitMeasure,
-        Partial<UnitMeasure> & Pick<UnitMeasure, "id">
-      >({
-        query: (id) => ({
-          url: `/unitMeasures/${id}/archive`,
-          method: "PUT",
-        }),
-      }),
-      restoreUnitMeasure: builder.mutation<
-        UnitMeasure,
-        Partial<UnitMeasure> & Pick<UnitMeasure, "id">
-      >({
-        query: (id) => ({
-          url: `/unitMeasures/${id}/restore`,
-          method: "PUT",
-        }),
-      }),
-
-
-      /*****************************************************************************/
-      /*****************************************************************************/
-      /*****************************************************************************/
-
-      fetchDeclarants: builder.query<Declarant[], number | void>({
-        query() {
-          return "/declarants";
-        },
-        providesTags: (result) =>
-          result
-            ? [
-              //@ts-ignore
-              ...result.content.map(({ id }) => ({
-                //      ...result.map(({ id }) => ({
-                type: "Declarant" as const,
-                id,
-              })),
-              { type: "Declarant", id: "LIST" },
-            ]
-            : [{ type: "Declarant", id: "LIST" }],
-      }),
-      paginationDeclarants: builder.query<Declarant[], number | void>({
-        query(page: number) {
-          return "declarants?page=" + page + "&size=" + PAGE_SIZE;
-        },
-        providesTags: (result) =>
-          result
-            ? [
-              //@ts-ignore
-              ...result.content.map(({ id }) => ({
-                //      ...result.map(({ id }) => ({
-                type: "Declarant" as const,
-                id,
-              })),
-              { type: "Declarant", id: "LIST" },
-            ]
-            : [{ type: "Declarant", id: "LIST" }],
-      }),
-      fetchOneDeclarant: builder.query<Declarant, String>({
+      fetchOneDeclarant: builder.query<Declarant, string>({
         query: (id) => `/declarants/${id}`,
-        //@ts-ignore
-        providesTags: (result, error, id) => [{ type: "Declarant", id }],
       }),
       addDeclarant: builder.mutation<Declarant, Partial<Declarant>>({
         query: (body) => ({
@@ -855,8 +344,6 @@ export const crudApi = createApi({
           method: "POST",
           body,
         }),
-        //@ts-ignore
-        invalidatesTags: ["Declarant"],
       }),
       editDeclarant: builder.mutation<
         Declarant,
@@ -868,24 +355,15 @@ export const crudApi = createApi({
           body,
         }),
       }),
-      deleteDeclarant: builder.mutation<
-        { success: boolean; id: String },
-        number
-      >({
+      deleteDeclarant: builder.mutation<{ success: boolean; id: number }, number>({
         //@ts-ignore
-        query(id: String) {
-          //  if (confirm(`do you want delete Commande number ${id.id} ?`))
+        query(id: Num) {
+          //  if (confirm(`do you want delete Client number ${id.id} ?`))
           return {
             url: `/declarants/${id.id}`,
             method: "DELETE",
           };
-          // else return
-        },
-        //@ts-ignore
-        invalidatesTags: (result, error, id) => [
-          { type: "Declarant", id },
-          { type: "Declarant", id: "LIST" },
-        ],
+        }
       }),
       archiveDeclarant: builder.mutation<
         Declarant,
@@ -908,47 +386,16 @@ export const crudApi = createApi({
 
 
       /*****************************************************************************/
+      /*********************************Incoterm**************************************/
       /*****************************************************************************/
-      /*****************************************************************************/
-
-      fetchIncoterms: builder.query<Incoterm[], number | void>({
-        query() {
-          return "/incoterms";
-        },
-        providesTags: (result) =>
-          result
-            ? [
-              //@ts-ignore
-              ...result.content.map(({ id }) => ({
-                //      ...result.map(({ id }) => ({
-                type: "Incoterm" as const,
-                id,
-              })),
-              { type: "Incoterm", id: "LIST" },
-            ]
-            : [{ type: "Incoterm", id: "LIST" }],
+      fetchIncoterms: builder.query<Incoterm[], void>({
+        query: () => `/incoterms`,
       }),
-      paginationIncoterms: builder.query<Incoterm[], number | void>({
-        query(page: number) {
-          return "incoterms?page=" + page + "&size=" + PAGE_SIZE;
-        },
-        providesTags: (result) =>
-          result
-            ? [
-              //@ts-ignore
-              ...result.content.map(({ id }) => ({
-                //      ...result.map(({ id }) => ({
-                type: "Incoterm" as const,
-                id,
-              })),
-              { type: "Incoterm", id: "LIST" },
-            ]
-            : [{ type: "Incoterm", id: "LIST" }],
+      paginationIncoterms: builder.query<Incoterm[], number>({
+        query: (page) => `/incoterms?page=${page}&size=${PAGE_SIZE}`,
       }),
-      fetchOneIncoterm: builder.query<Incoterm, String>({
+      fetchOneIncoterm: builder.query<Incoterm, string>({
         query: (id) => `/incoterms/${id}`,
-        //@ts-ignore
-        providesTags: (result, error, id) => [{ type: "Incoterm", id }],
       }),
       addIncoterm: builder.mutation<Incoterm, Partial<Incoterm>>({
         query: (body) => ({
@@ -956,8 +403,6 @@ export const crudApi = createApi({
           method: "POST",
           body,
         }),
-        //@ts-ignore
-        invalidatesTags: ["Incoterm"],
       }),
       editIncoterm: builder.mutation<
         Incoterm,
@@ -969,24 +414,15 @@ export const crudApi = createApi({
           body,
         }),
       }),
-      deleteIncoterm: builder.mutation<
-        { success: boolean; id: String },
-        number
-      >({
+      deleteIncoterm: builder.mutation<{ success: boolean; id: number }, number>({
         //@ts-ignore
-        query(id: String) {
-          //  if (confirm(`do you want delete Commande number ${id.id} ?`))
+        query(id: Num) {
+          //  if (confirm(`do you want delete Client number ${id.id} ?`))
           return {
             url: `/incoterms/${id.id}`,
             method: "DELETE",
           };
-          // else return
-        },
-        //@ts-ignore
-        invalidatesTags: (result, error, id) => [
-          { type: "Incoterm", id },
-          { type: "Incoterm", id: "LIST" },
-        ],
+        }
       }),
       archiveIncoterm: builder.mutation<
         Incoterm,
@@ -1003,6 +439,243 @@ export const crudApi = createApi({
       >({
         query: (id) => ({
           url: `/incoterms/${id}/restore`,
+          method: "PUT",
+        }),
+      }),
+
+
+      /*****************************************************************************/
+      /*********************************PayementMode**************************************/
+      /*****************************************************************************/
+      fetchPayementModes: builder.query<PayementMode[], void>({
+        query: () => `/payementModes`,
+      }),
+      paginationPayementModes: builder.query<PayementMode[], number>({
+        query: (page) => `/payementModes?page=${page}&size=${PAGE_SIZE}`,
+      }),
+      fetchOnePayementMode: builder.query<PayementMode, string>({
+        query: (id) => `/payementModes/${id}`,
+      }),
+      addPayementMode: builder.mutation<PayementMode, Partial<PayementMode>>({
+        query: (body) => ({
+          url: "/payementModes",
+          method: "POST",
+          body,
+        }),
+      }),
+      editPayementMode: builder.mutation<
+        PayementMode,
+        Partial<PayementMode> & Pick<PayementMode, "id">
+      >({
+        query: (body) => ({
+          url: `/payementModes/${body.id}`,
+          method: "PUT",
+          body,
+        }),
+      }),
+      deletePayementMode: builder.mutation<{ success: boolean; id: number }, number>({
+        //@ts-ignore
+        query(id: Num) {
+          //  if (confirm(`do you want delete Client number ${id.id} ?`))
+          return {
+            url: `/payementModes/${id.id}`,
+            method: "DELETE",
+          };
+        }
+      }),
+      archivePayementMode: builder.mutation<
+        PayementMode,
+        Partial<PayementMode> & Pick<PayementMode, "id">
+      >({
+        query: (id) => ({
+          url: `/payementModes/${id}/archive`,
+          method: "PUT",
+        }),
+      }),
+      restorePayementMode: builder.mutation<
+        PayementMode,
+        Partial<PayementMode> & Pick<PayementMode, "id">
+      >({
+        query: (id) => ({
+          url: `/payementModes/${id}/restore`,
+          method: "PUT",
+        }),
+      }),
+
+
+      /*****************************************************************************/
+      /*********************************RawMaterial**************************************/
+      /*****************************************************************************/
+      fetchRawMaterials: builder.query<RawMaterial[], void>({
+        query: () => `/rawMaterials`,
+      }),
+      paginationRawMaterials: builder.query<RawMaterial[], number>({
+        query: (page) => `/rawMaterials?page=${page}&size=${PAGE_SIZE}`,
+      }),
+      fetchOneRawMaterial: builder.query<RawMaterial, string>({
+        query: (id) => `/rawMaterials/${id}`,
+      }),
+      addRawMaterial: builder.mutation<RawMaterial, Partial<RawMaterial>>({
+        query: (body) => ({
+          url: "/rawMaterials",
+          method: "POST",
+          body,
+        }),
+      }),
+      editRawMaterial: builder.mutation<
+        RawMaterial,
+        Partial<RawMaterial> & Pick<RawMaterial, "id">
+      >({
+        query: (body) => ({
+          url: `/rawMaterials/${body.id}`,
+          method: "PUT",
+          body,
+        }),
+      }),
+      deleteRawMaterial: builder.mutation<{ success: boolean; id: number }, number>({
+        //@ts-ignore
+        query(id: Num) {
+          //  if (confirm(`do you want delete Client number ${id.id} ?`))
+          return {
+            url: `/rawMaterials/${id.id}`,
+            method: "DELETE",
+          };
+        }
+      }),
+      archiveRawMaterial: builder.mutation<
+        RawMaterial,
+        Partial<RawMaterial> & Pick<RawMaterial, "id">
+      >({
+        query: (id) => ({
+          url: `/rawMaterials/${id}/archive`,
+          method: "PUT",
+        }),
+      }),
+      restoreRawMaterial: builder.mutation<
+        RawMaterial,
+        Partial<RawMaterial> & Pick<RawMaterial, "id">
+      >({
+        query: (id) => ({
+          url: `/rawMaterials/${id}/restore`,
+          method: "PUT",
+        }),
+      }),
+
+
+      /*****************************************************************************/
+      /*********************************RegimeDouanier**************************************/
+      /*****************************************************************************/
+      fetchRegimeDouaniers: builder.query<RegimeDouanier[], void>({
+        query: () => `/regimeDouaniers`,
+      }),
+      paginationRegimeDouaniers: builder.query<RegimeDouanier[], number>({
+        query: (page) => `/regimeDouaniers?page=${page}&size=${PAGE_SIZE}`,
+      }),
+      fetchOneRegimeDouanier: builder.query<RegimeDouanier, string>({
+        query: (id) => `/regimeDouaniers/${id}`,
+      }),
+      addRegimeDouanier: builder.mutation<RegimeDouanier, Partial<RegimeDouanier>>({
+        query: (body) => ({
+          url: "/regimeDouaniers",
+          method: "POST",
+          body,
+        }),
+      }),
+      editRegimeDouanier: builder.mutation<
+        RegimeDouanier,
+        Partial<RegimeDouanier> & Pick<RegimeDouanier, "id">
+      >({
+        query: (body) => ({
+          url: `/regimeDouaniers/${body.id}`,
+          method: "PUT",
+          body,
+        }),
+      }),
+      deleteRegimeDouanier: builder.mutation<{ success: boolean; id: number }, number>({
+        //@ts-ignore
+        query(id: Num) {
+          //  if (confirm(`do you want delete Client number ${id.id} ?`))
+          return {
+            url: `/regimeDouaniers/${id.id}`,
+            method: "DELETE",
+          };
+        }
+      }),
+      archiveRegimeDouanier: builder.mutation<
+        RegimeDouanier,
+        Partial<RegimeDouanier> & Pick<RegimeDouanier, "id">
+      >({
+        query: (id) => ({
+          url: `/regimeDouaniers/${id}/archive`,
+          method: "PUT",
+        }),
+      }),
+      restoreRegimeDouanier: builder.mutation<
+        RegimeDouanier,
+        Partial<RegimeDouanier> & Pick<RegimeDouanier, "id">
+      >({
+        query: (id) => ({
+          url: `/regimeDouaniers/${id}/restore`,
+          method: "PUT",
+        }),
+      }),
+
+
+
+      /*****************************************************************************/
+      /*********************************UnitMeasure**************************************/
+      /*****************************************************************************/
+      fetchUnitMeasures: builder.query<UnitMeasure[], void>({
+        query: () => `/unitMeasures`,
+      }),
+      paginationUnitMeasures: builder.query<UnitMeasure[], number>({
+        query: (page) => `/unitMeasures?page=${page}&size=${PAGE_SIZE}`,
+      }),
+      fetchOneUnitMeasure: builder.query<UnitMeasure, string>({
+        query: (id) => `/unitMeasures/${id}`,
+      }),
+      addUnitMeasure: builder.mutation<UnitMeasure, Partial<UnitMeasure>>({
+        query: (body) => ({
+          url: "/unitMeasures",
+          method: "POST",
+          body,
+        }),
+      }),
+      editUnitMeasure: builder.mutation<
+        UnitMeasure,
+        Partial<UnitMeasure> & Pick<UnitMeasure, "id">
+      >({
+        query: (body) => ({
+          url: `/unitMeasures/${body.id}`,
+          method: "PUT",
+          body,
+        }),
+      }),
+      deleteUnitMeasure: builder.mutation<{ success: boolean; id: number }, number>({
+        //@ts-ignore
+        query(id: Num) {
+          //  if (confirm(`do you want delete Client number ${id.id} ?`))
+          return {
+            url: `/unitMeasures/${id.id}`,
+            method: "DELETE",
+          };
+        }
+      }),
+      archiveUnitMeasure: builder.mutation<
+        UnitMeasure,
+        Partial<UnitMeasure> & Pick<UnitMeasure, "id">
+      >({
+        query: (id) => ({
+          url: `/unitMeasures/${id}/archive`,
+          method: "PUT",
+        }),
+      }),
+      restoreUnitMeasure: builder.mutation<
+        UnitMeasure,
+        Partial<UnitMeasure> & Pick<UnitMeasure, "id">
+      >({
+        query: (id) => ({
+          url: `/unitMeasures/${id}/restore`,
           method: "PUT",
         }),
       }),
