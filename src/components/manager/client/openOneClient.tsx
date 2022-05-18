@@ -1,8 +1,16 @@
-import { useFetchOneClientQuery } from "config/rtk";
-import { Client } from "tools/types";
-export const openOneClient =(id:string):Client =>{
+import { useAddClientMutation, useEditClientMutation, useFetchOneClientQuery } from "config/rtk";
+import { Client} from "tools/types";
+export type OpenOneClientProp={
+  data:Client
+  refetch:()=>void
+  save:()=>void
+  edit:()=>void
+}
+export const openOneClient =(id:string):OpenOneClientProp =>{
   const { data = [], refetch } = useFetchOneClientQuery(id);
-  refetch()
+  const [save]=useAddClientMutation();
+  const [edit]=useEditClientMutation();
   //@ts-ignore
-  return data;
+  const out:OpenOneClientProp={data,refetch,save,edit}
+  return out;
 }

@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { getSession, signIn } from "next-auth/react";
 
 const IndexPage: NextPage = () => {
-  useEffect(()=>{
+  /*useEffect(()=>{
         
     const securePage = async () =>{
         const session = await getSession()
@@ -20,7 +20,7 @@ const IndexPage: NextPage = () => {
         
     }
    securePage() 
-})
+})*/
   const { t } = useTranslation("common");
   return (
     <Col>

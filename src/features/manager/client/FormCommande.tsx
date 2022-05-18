@@ -15,6 +15,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Bsave from "widgets/Bsave";
 import Bcancel from "widgets/Bcancel";
 import { OpenClientProp, openClients } from "components/manager/client/openClients";
+import { openOneClient, OpenOneClientProp } from "components/manager/client/openOneClient";
 
 type CommandProps = {
   command: Commande;
@@ -29,11 +30,12 @@ const FormCommande = ({ command,client,clients,refetchList }: CommandProps, ref:
   //const {refetch}=useFetchClientsQuery()
   const [showModal, setShowModal] = React.useState(false);
   const [command0, setCommand0] = useState(command);
- const [client0,setClient0]=useState<Client>(client)
-  console.log("teqsttt client ="+JSON.stringify(client))
-  const clientsToOpen: OpenClientProp = openClients();
-    const clientJson: ClientJson = clientsToOpen.data
-    //const clients: Client[] = clientJson.content
+ 
+ // console.log("teqsttt client ="+JSON.stringify(client))
+  const clientsToOpen: OpenOneClientProp = openOneClient(client?.id);
+    const client1: Client = clientsToOpen.data
+    const [client0,setClient0]=useState<Client>(client1)
+    //const clients111: Client[] = clientJson.content
     const refetchClient:()=>void=clientsToOpen.refetch
   const openModal = (c: Commande,cl:Client) => {
     setCommand0(c);
@@ -81,17 +83,21 @@ const FormCommande = ({ command,client,clients,refetchList }: CommandProps, ref:
       <Form defaultValues={command0} onSubmit={save}>
           <>
           <Bcyan onClick={()=>{
-            refetch()
-            //alert(JSON.stringify(command0))
+             alert("avent :"+JSON.stringify(client0))
             }} >
-            recharger
+           avant
           </Bcyan>
+         
           <Bcyan onClick={()=>{
-            refetch()
-            //alert(JSON.stringify(command0))
+            refetchClient()
+            setClient0(client1)
+            setTimeout(() => {
+              alert("apers : "+JSON.stringify(client0))
+            }, 500);
             }} >
             recharger
           </Bcyan>
+         
               <div className="float-left w-1/2">
                 
                 <Field type="hidden" name="idClient" value={client0?.id} ref={fieldIdClient}/>

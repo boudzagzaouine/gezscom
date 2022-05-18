@@ -19,8 +19,9 @@ function classNames(...classes: any[]) {
 }
 type NavProps = {
   selected: number;
+  loading:boolean
 };
-export default  function Nav({ selected }: NavProps) {
+export default  function Nav({ selected ,loading}: NavProps) {
   //selected==CLIENT_MANAGER?navClient:selected==VENDOR_MANAGER?navVendor:selected==PURCHASE_MANAGER?navPurchase:
   const navigation: NavType[] = [
     { name: "Home", href: "/", current: true, visible: selected == HOME },
@@ -102,24 +103,8 @@ export default  function Nav({ selected }: NavProps) {
       visible: selected == PURCHASE_MANAGER,
     },
   ];
+ 
   
-  //@ts-ignore
- // const { data: session, status } = useSession()
-   const securePage = async () =>{
-    const session = await getSession()
-    if(!session){
-        signIn("keycloak")
-    }else{
-      console.log(session)
-    } }
-
-    const logout = async (): Promise<void> => {
-      const session = await getSession()
-    
-      if(session){
-          signOut({callbackUrl:'/',redirect:true})
-     }
-    };
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -224,14 +209,15 @@ export default  function Nav({ selected }: NavProps) {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                         <a
-                            href="#"
+                        <a
+                            href="api/auth/signin"
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
-                            onClick={()=>{
-                              securePage()
+                            onClick={(e:any)=>{
+                              e.preventDefault()
+                              signIn("keycloak")
                               /* signIn("keycloak")
                             window.location.href='/' */
                             }}
@@ -242,13 +228,14 @@ export default  function Nav({ selected }: NavProps) {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                       <a
-                            href="#"
+                      <a
+                            href="api/auth/signout"
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
-                            onClick={()=>{
+                            onClick={(e:any)=>{
+                              e.preventDefault()
                              // signOut()
                            /*  logout()
                             setTimeout(() => {
