@@ -8,7 +8,7 @@ import { refetchAdressLivs } from 'components/manager/client/refetchAdressLivs';
 import { refetchClient } from 'components/manager/client/refetchClient';
 type FormAdressLivraisonsProp={
     adressLiv:AdressLiv
-    saveAdressLiv:(art:AdressLiv)=>void
+      saveAdressLiv:(art:AdressLiv)=>void
     close:()=>void
     refetch:()=>void
 }
@@ -24,7 +24,7 @@ const FormAdressLivraisons = ({adressLiv,saveAdressLiv,close,refetch}:FormAdress
 {/* <Table.td>cf45d616-39c6-4317-96dd-da3b82ee13d8</Table.td> */}
     <Table.td><span className="block float-left py-2.5" >XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span> </Table.td>
             <Table.td>
-              <Field name="country" placeholder="country" />
+                  <Field name="country" placeholder="country" />
             </Table.td>
              <Table.td>
               <Field name="city" placeholder="city" />
