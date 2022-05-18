@@ -4,10 +4,10 @@ import { declarant0 } from 'tools/types';
 import FormDeclarant from 'features/Declarant/FormDeclarant';
 
 export default function NewArticle() {
-    const form = useRef(null)
+    const form = useRef(null);
     return (
         <div>
-            <FormDeclarant declarant={declarant0} disable={true} ref={form} />
+            <FormDeclarant ref={form} />
         </div>
     );
 };

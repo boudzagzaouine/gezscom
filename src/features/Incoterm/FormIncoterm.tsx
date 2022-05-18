@@ -4,7 +4,7 @@ import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
-import { useAddArticleMutation, useArchiveArticleMutation, useDeleteArticleMutation, useEditArticleMutation, useFetchOneArticleQuery, useRestoreArticleMutation, useFetchArticlesQuery, useFetchBureauDouanesQuery, useFetchOneBureauDouaneQuery, useEditBureauDouaneMutation, useDeleteBureauDouaneMutation, useArchiveBureauDouaneMutation, useRestoreBureauDouaneMutation, useFetchIncotermsQuery, useAddIncotermMutation, useEditIncotermMutation, useDeleteIncotermMutation, useArchiveIncotermMutation, useRestoreIncotermMutation, usePaginationIncotermsQuery } from "config/rtk";
+import { useAddIncotermMutation, useEditIncotermMutation, usePaginationIncotermsQuery } from "config/rtk";
 import classNames from "classnames";
 import Table from "widgets/Table";
 import { MenuItems } from 'widgets/TypeWidgets';
@@ -16,14 +16,7 @@ import RestoreIncoterm from "./Methods/RestoreIncoterm";
 import DeleteIncoterm from "./Methods/DeleteIncoterm";
 
 
-type FormIncotermProps = {
-    incoterm: Incoterm;
-    disable: boolean;
-};
-const FormIncoterm = ({
-    incoterm,
-    disable,
-}: FormIncotermProps, ref: Ref<void>) => {
+const FormIncoterm = (ref: Ref<void>) => {
     const { data = [], isFetching, refetch } = usePaginationIncotermsQuery(0);
     const [incoterm1, setIncoterm1] = useState<Incoterm>(incoterm0);
     const [request, setRequest] = useState(REQUEST_SAVE)
@@ -233,7 +226,7 @@ const FormIncoterm = ({
                         {!disabled && <Bcyan className="float-right"
                             onClick={() => {
                                 setDisabled(false);
-                                //setShow(false);
+                                setShow(false);
                             }}>
                             Annuler
                         </Bcyan>}

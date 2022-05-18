@@ -10,20 +10,13 @@ import Table from "widgets/Table";
 import { MenuItems } from 'widgets/TypeWidgets';
 import Mitems from 'widgets/Mitems';
 import { ArchiveIcon, ClipboardListIcon, PencilAltIcon, ReplyIcon, TrashIcon } from "@heroicons/react/outline";
-import axios from "axios";
 import DeleteRawMaterial from "./Methods/DeleteRawMaterial";
 import ArchiveRawMaterial from "./Methods/ArchiveRawMaterial";
 import RestoreRawMaterial from "./Methods/RestoreRawMaterial";
 import Pagin from "widgets/Pagin";
 
-type FormRawMaterialProps = {
-    rawMaterial: RawMaterial;
-    disable: boolean;
-};
-const FormRawMaterial = ({
-    rawMaterial,
-    disable,
-}: FormRawMaterialProps, ref: Ref<void>) => {
+
+const FormRawMaterial = (ref: Ref<void>) => {
 
     const [page, setPage] = useState(0);
     const loadPage = (p: number) => {
@@ -38,15 +31,7 @@ const FormRawMaterial = ({
     const [save] = useAddRawMaterialMutation();
 
     const [updateRawMaterial] = useEditRawMaterialMutation();
-    /*  const save = () => {
-         alert("save")
-     }
-     const updateRawMaterial = () => {
-         alert("updateRawMaterial")
-     }
-     const vid = () => {
-         alert("vid")
-     } */
+
     const [form, setForm] = useState(false);
 
     const [disabled, setDisabled] = useState(true);
@@ -268,7 +253,7 @@ const FormRawMaterial = ({
                         {!disabled && <Bcyan className="float-right"
                             onClick={() => {
                                 setDisabled(true);
-                                // setShow(false);
+                                setShow(false);
                             }}>
                             Annuler
                         </Bcyan>}

@@ -4,7 +4,7 @@ import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import { Form, Field, Button } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
-import { useAddArticleMutation, useEditArticleMutation, useFetchArticlesQuery, usePaginationArticlesQuery } from "config/rtk";
+import { useAddArticleMutation, useEditArticleMutation, usePaginationArticlesQuery } from "config/rtk";
 import classNames from "classnames";
 import Table from "widgets/Table";
 import { MenuItems } from 'widgets/TypeWidgets';
@@ -16,14 +16,7 @@ import RestoreArticle from "./Methods/RestoreArticle";
 import Pagin from "widgets/Pagin";
 import Icon from "widgets/Icon";
 
-type FormArticleProps = {
-    article: Article;
-    disable: boolean;
-};
-const FormArticle = ({
-    article,
-    disable,
-}: FormArticleProps, ref: Ref<void>) => {
+const FormArticle = (ref: Ref<void>) => {
 
     const [page, setPage] = useState(0);
     const loadPage = (p: number) => {
@@ -239,7 +232,7 @@ const FormArticle = ({
                         {!disabled && <Bcyan className="float-right"
                             onClick={() => {
                                 setDisabled(false);
-                                //setShow(false);
+                                setShow(false);
                             }}>
                             Annuler
                         </Bcyan>}

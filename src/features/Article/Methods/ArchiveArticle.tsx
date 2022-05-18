@@ -25,7 +25,7 @@ const ArchiveArticle = ({ id }: ArchiveArticlePorp, ref: Ref<void>) => {
     setId0(i);
     setShowModal(true);
   };
-  useEffect(() => {
+  /*useEffect(() => {
     //@ts-ignore
     ref.current = openModal;
   });
@@ -33,16 +33,16 @@ const ArchiveArticle = ({ id }: ArchiveArticlePorp, ref: Ref<void>) => {
     axios
       .patch("http://localhost:1000/api/v1/articles/" + id0 + "/archive")
       .then(() => { });
-  };
+  };*/
   return (
     <>
-      <Modal title={"archivage"} show={showModal} format={classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal title={"archivage"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
         <div>
           <h2>archivage d'article num: {id0}</h2>
           <form
             onSubmit={
               //@ts-ignore
-              handleSubmit(archiveTemp)
+              handleSubmit(archive)
             }
           >
             {" "}

@@ -16,19 +16,8 @@ import ArchiveDeclarant from "./Methods/ArchiveDeclarant";
 import RestoreDeclarant from "./Methods/RestoreDeclarant";
 import Pagin from "widgets/Pagin";
 
-/*
-git add . 
-git commit -m "un commontaire"
-git push
-*/
-type FormDeclarantProps = {
-    declarant: Declarant;
-    disable: boolean;
-};
-const FormDeclarant = ({
-    declarant,
-    disable,
-}: FormDeclarantProps, ref: Ref<void>) => {
+
+const FormDeclarant = (ref: Ref<void>) => {
     const { data = [], isFetching, refetch } = usePaginationDeclarantsQuery(0);
     const [declarant1, setDeclarant1] = useState<Declarant>(declarant0);
     const [request, setRequest] = useState(REQUEST_SAVE)
@@ -245,7 +234,7 @@ const FormDeclarant = ({
                         {!disabled && <Bcyan className="float-right"
                             onClick={() => {
                                 setDisabled(false);
-                                //setShow(false);
+                                setShow(false);
                             }}>
                             Annuler
                         </Bcyan>}

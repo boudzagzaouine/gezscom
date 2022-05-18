@@ -28,20 +28,20 @@ const RestoreArticle = ({ id }: RestoreArticlePorp, ref: Ref<void>) => {
     //@ts-ignore
     ref.current = openModal;
   });
-  const restoreTemp = () => {
+  /*const restoreTemp = () => {
     axios
       .patch("http://localhost:1000/api/v1/articles/" + id0 + "/restore")
       .then(() => { });
-  };
+  };*/
   return (
     <>
-      <Modal title={"restoration"} show={showModal} format={classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal title={"restoration"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
         <div>
           <h2>restoration d'article num: {id0}</h2>
           <form
             onSubmit={
               //@ts-ignore
-              handleSubmit(restoreTemp)
+              handleSubmit(restore)
             }
           >
             {" "}

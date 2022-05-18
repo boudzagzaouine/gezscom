@@ -16,19 +16,8 @@ import ArchiveUnitMeasure from "./Methods/ArchiveUnitMeasure";
 import RestoreUnitMeasure from "./Methods/RestoreUnitMeasure";
 import Pagin from "widgets/Pagin";
 
-/*
-git add . 
-git commit -m "un commontaire"
-git push
-*/
-type FormUnitMeasureProps = {
-    unitMeasure: UnitMeasure;
-    disable: boolean;
-};
-const FormUnitMeasure = ({
-    unitMeasure,
-    disable,
-}: FormUnitMeasureProps, ref: Ref<void>) => {
+
+const FormUnitMeasure = (ref: Ref<void>) => {
     const { data = [], isFetching, refetch } = usePaginationUnitMeasuresQuery(0);
     const [unitMeasure1, setUnitMeasure1] = useState<UnitMeasure>(unitMeasure0);
     const [request, setRequest] = useState(REQUEST_SAVE)
@@ -255,7 +244,7 @@ const FormUnitMeasure = ({
                         {!disabled && <Bcyan className="float-right"
                             onClick={() => {
                                 setDisabled(false);
-                                //setShow(false);
+                                setShow(false);
                             }}>
                             Annuler
                         </Bcyan>}

@@ -16,14 +16,8 @@ import ArchivePayementMode from "./Methods/ArchivePayementMode";
 import RestorePayementMode from "./Methods/RestorePayementMode";
 import Pagin from "widgets/Pagin";
 
-type FormPayementModeProps = {
-    payementMode: PayementMode;
-    disable: boolean;
-};
-const FormPayementMode = ({
-    payementMode,
-    disable,
-}: FormPayementModeProps, ref: Ref<void>) => {
+
+const FormPayementMode = (ref: Ref<void>) => {
     const { data = [], isFetching, refetch } = usePaginationPayementModesQuery(0);
     const [payementMode1, setPayementMode1] = useState<PayementMode>(payementMode0);
     const [request, setRequest] = useState(REQUEST_SAVE)
@@ -233,7 +227,7 @@ const FormPayementMode = ({
                         {!disabled && <Bcyan className="float-right"
                             onClick={() => {
                                 setDisabled(false);
-                                //setShow(false);
+                                setShow(false);
                             }}>
                             Annuler
                         </Bcyan>}
