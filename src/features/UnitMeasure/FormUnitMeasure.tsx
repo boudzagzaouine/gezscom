@@ -17,7 +17,12 @@ import RestoreUnitMeasure from "./Methods/RestoreUnitMeasure";
 import Pagin from "widgets/Pagin";
 
 
-const FormUnitMeasure = (ref: Ref<void>) => {
+type FormUnitMeasureProps = {
+    unitMeasure: UnitMeasure;
+};
+const FormUnitMeasure = ({
+    unitMeasure
+}: FormUnitMeasureProps, ref: Ref<void>) => {
     const { data = [], isFetching, refetch } = usePaginationUnitMeasuresQuery(0);
     const [unitMeasure1, setUnitMeasure1] = useState<UnitMeasure>(unitMeasure0);
     const [request, setRequest] = useState(REQUEST_SAVE)

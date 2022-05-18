@@ -30,9 +30,9 @@ const DeleteArticle = ({ id, refetch }: DeleteArticlePorp, ref: Ref<void>) => {
   });
   const [showModal, setShowModal] = React.useState(false);
 
-  /*const delTemp = () => {
+  const delTemp = () => {
     axios.delete("http://localhost:1000/api/v1/articles/" + id0).then(() => { });
-  };*/
+  };
   return (
     <>
       <Modal title={"suppression"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
@@ -41,7 +41,7 @@ const DeleteArticle = ({ id, refetch }: DeleteArticlePorp, ref: Ref<void>) => {
           <form
             onSubmit={
               //@ts-ignore
-              handleSubmit(del)
+              handleSubmit(delTemp)
             }
           >
             {" "}

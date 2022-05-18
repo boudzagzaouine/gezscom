@@ -16,7 +16,12 @@ import RestoreIncoterm from "./Methods/RestoreIncoterm";
 import DeleteIncoterm from "./Methods/DeleteIncoterm";
 
 
-const FormIncoterm = (ref: Ref<void>) => {
+type FormIncotermProps = {
+    incoterm: Incoterm;
+};
+const FormIncoterm = ({
+    incoterm
+}: FormIncotermProps, ref: Ref<void>) => {
     const { data = [], isFetching, refetch } = usePaginationIncotermsQuery(0);
     const [incoterm1, setIncoterm1] = useState<Incoterm>(incoterm0);
     const [request, setRequest] = useState(REQUEST_SAVE)

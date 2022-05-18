@@ -36,7 +36,7 @@ const ArchiveRawMaterial = ({ id }: ArchiveRawMaterialPorp, ref: Ref<void>) => {
   };
   return (
     <>
-      <Modal title={"archivage"} show={showModal} format={classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal title={"archivage"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
         <div>
           <h2>archivage du matière première num: {id0}</h2>
           <form

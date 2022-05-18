@@ -15,8 +15,12 @@ import ArchiveRawMaterial from "./Methods/ArchiveRawMaterial";
 import RestoreRawMaterial from "./Methods/RestoreRawMaterial";
 import Pagin from "widgets/Pagin";
 
-
-const FormRawMaterial = (ref: Ref<void>) => {
+type FormRawMaterialProps = {
+    rawMaterial: RawMaterial;
+};
+const FormRawMaterial = ({
+    rawMaterial
+}: FormRawMaterialProps, ref: Ref<void>) => {
 
     const [page, setPage] = useState(0);
     const loadPage = (p: number) => {

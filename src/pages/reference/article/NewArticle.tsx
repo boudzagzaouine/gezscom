@@ -1,11 +1,12 @@
 import React, { useRef } from 'react';
 import FormArticle from 'features/Article/FormArticle';
+import { article0 } from 'tools/types';
 
 export default function NewArticle() {
     const form = useRef(null)
     return (
         <div>
-            <FormArticle ref={form} />
+            <FormArticle article={article0} ref={form} />
         </div>
     );
 };

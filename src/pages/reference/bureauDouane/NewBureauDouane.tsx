@@ -6,7 +6,7 @@ export default function NewArticle() {
     const form = useRef(null)
     return (
         <div>
-            <FormBureauDouane ref={form} />
+            <FormBureauDouane bureauDouane={bureauDouane0} ref={form} />
         </div>
     );
 };

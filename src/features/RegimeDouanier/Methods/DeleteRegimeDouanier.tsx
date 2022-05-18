@@ -35,7 +35,7 @@ const DeleteRegimeDouanier = ({ id, refetch }: DeleteRegimeDouanierPorp, ref: Re
   };
   return (
     <>
-      <Modal title={"suppression"} show={showModal} format={classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal title={"suppression"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
         <div>
           <h2>suppression du régime douanier num: {id0}</h2>
           <form

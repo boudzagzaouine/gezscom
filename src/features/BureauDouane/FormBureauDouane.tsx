@@ -15,8 +15,12 @@ import ArchiveBureauDouane from "./Methods/ArchiveBureauDouane";
 import RestoreBureauDouane from "./Methods/RestoreBureauDouane";
 import Pagin from "widgets/Pagin";
 
-
-const FormBureauDouane = (ref: Ref<void>) => {
+type FormBureauDouaneProps = {
+    bureauDouane: BureauDouane;
+};
+const FormBureauDouane = ({
+    bureauDouane
+}: FormBureauDouaneProps, ref: Ref<void>) => {
     const { data = [], isFetching, refetch } = usePaginationBureauDouanesQuery(0);
     const [bureauDouane1, setBureauDouane1] = useState<BureauDouane>(bureauDouane0);
     const [request, setRequest] = useState(REQUEST_SAVE)

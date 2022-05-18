@@ -35,7 +35,7 @@ const RestoreRegimeDouanier = ({ id }: RestoreRegimeDouanierPorp, ref: Ref<void>
   };
   return (
     <>
-      <Modal title={"restoration"} show={showModal} format={classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal title={"restoration"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
         <div>
           <h2>restoration du régime douanier num: {id0}</h2>
           <form

@@ -6,7 +6,7 @@ export default function NewRegimeDouanier() {
     const form = useRef(null)
     return (
         <div>
-            <FormRegimeDouaniers ref={form} />
+            <FormRegimeDouaniers regimeDouanier={regimeDouanier0} ref={form} />
         </div>
     );
 };

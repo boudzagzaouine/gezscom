@@ -5,7 +5,7 @@ export default function NewUnitMeasure() {
     const form = useRef(null)
     return (
         <div>
-            <FormUnitMeasure ref={form} />
+            <FormUnitMeasure unitMeasure={unitMeasure0} ref={form} />
         </div>
     );
 };

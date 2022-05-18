@@ -36,7 +36,7 @@ const ArchiveUnitMeasure = ({ id }: ArchiveUnitMeasurePorp, ref: Ref<void>) => {
   };
   return (
     <>
-      <Modal title={"archivage"} show={showModal} format={classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal title={"archivage"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
         <div>
           <h2>archivage d'unité de mesure num: {id0}</h2>
           <form

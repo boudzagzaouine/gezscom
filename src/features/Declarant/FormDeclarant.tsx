@@ -10,14 +10,17 @@ import Table from "widgets/Table";
 import { MenuItems } from 'widgets/TypeWidgets';
 import Mitems from 'widgets/Mitems';
 import { ArchiveIcon, ClipboardListIcon, PencilAltIcon, ReplyIcon, TrashIcon } from "@heroicons/react/outline";
-import axios from "axios";
 import DeleteDeclarant from "./Methods/DeleteDeclarant";
 import ArchiveDeclarant from "./Methods/ArchiveDeclarant";
 import RestoreDeclarant from "./Methods/RestoreDeclarant";
 import Pagin from "widgets/Pagin";
 
-
-const FormDeclarant = (ref: Ref<void>) => {
+type FormDeclarantProps = {
+    declarant: Declarant;
+};
+const FormDeclarant = ({
+    declarant
+}: FormDeclarantProps, ref: Ref<void>) => {
     const { data = [], isFetching, refetch } = usePaginationDeclarantsQuery(0);
     const [declarant1, setDeclarant1] = useState<Declarant>(declarant0);
     const [request, setRequest] = useState(REQUEST_SAVE)
@@ -64,9 +67,7 @@ const FormDeclarant = (ref: Ref<void>) => {
         showFormulaire(declarant);
     };
 
-
     const void_ = () => { }
-
 
 
     const [updateDeclarant] = useEditDeclarantMutation();

@@ -16,7 +16,12 @@ import ArchiveRegimeDouanier from "./Methods/ArchiveRegimeDouanier";
 import RestoreRegimeDouanier from "./Methods/RestoreRegimeDouanier";
 import Pagin from "widgets/Pagin";
 
-const FormRegimeDouanier = (ref: Ref<void>) => {
+type FormRegimeDouanierProps = {
+    regimeDouanier: RegimeDouanier;
+};
+const FormRegimeDouanier = ({
+    regimeDouanier
+}: FormRegimeDouanierProps, ref: Ref<void>) => {
     const { data = [], isFetching, refetch } = usePaginationRegimeDouaniersQuery(0);
     const [regimeDouanier1, setRegimeDouanier1] = useState<PayementMode>(payementMode0);
     const [request, setRequest] = useState(REQUEST_SAVE)

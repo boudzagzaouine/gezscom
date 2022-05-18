@@ -16,7 +16,12 @@ import RestoreArticle from "./Methods/RestoreArticle";
 import Pagin from "widgets/Pagin";
 import Icon from "widgets/Icon";
 
-const FormArticle = (ref: Ref<void>) => {
+type FormArticleProps = {
+    article: Article;
+};
+const FormArticle = ({
+    article
+}: FormArticleProps, ref: Ref<void>) => {
 
     const [page, setPage] = useState(0);
     const loadPage = (p: number) => {

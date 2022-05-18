@@ -35,7 +35,7 @@ const DeleteRawMaterial = ({ id, refetch }: DeleteRawMaterialPorp, ref: Ref<void
   };
   return (
     <>
-      <Modal title={"suppression"} show={showModal} format={classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal title={"suppression"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
         <div>
           <h2>suppression de matière première num: {id0}</h2>
           <form

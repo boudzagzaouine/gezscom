@@ -36,7 +36,7 @@ const ArchiveDeclarant = ({ id }: ArchiveDeclarantProps, ref: Ref<void>) => {
   };
   return (
     <>
-      <Modal title={"archivage"} show={showModal} format={classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal title={"archivage"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
         <div>
           <h2>archivage de déclarant num: {id0}</h2>
           <form

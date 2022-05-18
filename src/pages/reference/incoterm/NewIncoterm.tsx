@@ -8,7 +8,7 @@ export default function NewIncoterm() {
     return (
         <div>
 
-            <FormIncoterm ref={form} />
+            <FormIncoterm incoterm={incoterm0} ref={form} />
         </div>
     );
 };
