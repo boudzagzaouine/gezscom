@@ -6,7 +6,7 @@ export default function NewArticle() {
     const form = useRef(null)
     return (
         <div>
-            <FormBureauDouane bureauDouane={bureauDouane0} disable={true} ref={form} />
+            <FormBureauDouane ref={form} />
         </div>
     );
 };

@@ -6,7 +6,7 @@ export default function NewIncoterm() {
     const form = useRef(null)
     return (
         <div>
-            <FormRawMaterial rawMaterial={rawMaterial0} disable={true} ref={form} />
+            <FormRawMaterial ref={form} />
         </div>
     );
 };
