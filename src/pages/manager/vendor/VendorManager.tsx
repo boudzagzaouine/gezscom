@@ -1,7 +1,12 @@
+import ListFournisseurManager from "features/Fournisseur/ListFournisseurManager";
 import React from "react";
 
 const VendorManager = () => {
-  return <div>VendorManager</div>;
+  return (
+    <>
+    <ListFournisseurManager/>
+    </>
+  )
 };
 
 export default VendorManager;

@@ -1,9 +1,16 @@
-import { useFetchAdressLivsQuery } from "config/rtk";
-import { AdressLiv } from "tools/types";
-
-export const openAdressLivs =():AdressLiv[] =>{
+import { useAddAdressLivMutation, useEditAdressLivMutation, useFetchAdressLivsQuery } from "config/rtk";
+import { AdressLivJson } from "tools/types";
+export type openAdressLivProps={
+  data:AdressLivJson
+  refetch:()=>void
+  save:()=>void
+  edit:()=>void
+}
+export const openAdressLivs =():openAdressLivProps =>{
   const { data = [], refetch } = useFetchAdressLivsQuery();
-  refetch()
+  const [save]=useAddAdressLivMutation();
+  const [edit]=useEditAdressLivMutation();
   //@ts-ignore
-  return data.content;
+  const out:openAdressLivProps={data,refetch,save,edit}
+  return out;
 }

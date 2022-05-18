@@ -11,6 +11,8 @@ import {
   PURCHASE_MANAGER,
   VENDOR_MANAGER,
 } from "tools/consts";
+import { signOut,signIn, getSession, useSession } from "next-auth/react";
+import axios from "axios";
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
@@ -18,18 +20,18 @@ function classNames(...classes: any[]) {
 type NavProps = {
   selected: number;
 };
-export default function Nav({ selected }: NavProps) {
+export default  function Nav({ selected }: NavProps) {
   //selected==CLIENT_MANAGER?navClient:selected==VENDOR_MANAGER?navVendor:selected==PURCHASE_MANAGER?navPurchase:
   const navigation: NavType[] = [
     { name: "Home", href: "/", current: true, visible: selected == HOME },
-    { name: "crud", href: "/crud", current: false, visible: selected == HOME },
+    /* { name: "crud", href: "/crud", current: false, visible: selected == HOME },
     {
       name: "formulaire",
       href: "/backfromsaisie",
       current: false,
       visible: selected == HOME,
     },
-    { name: "test", href: "/Test", current: false, visible: selected == HOME },
+    { name: "test", href: "/Test", current: false, visible: selected == HOME }, */
 
     {
       name: "Clients",
@@ -100,6 +102,25 @@ export default function Nav({ selected }: NavProps) {
       visible: selected == PURCHASE_MANAGER,
     },
   ];
+  
+  //@ts-ignore
+ // const { data: session, status } = useSession()
+   const securePage = async () =>{
+    const session = await getSession()
+    if(!session){
+        signIn("keycloak")
+    }else{
+      console.log(session)
+    } }
+
+    const logout = async (): Promise<void> => {
+      const session = await getSession()
+    
+      if(session){
+          signOut({callbackUrl:'/',redirect:true})
+     }
+    };
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -203,25 +224,38 @@ export default function Nav({ selected }: NavProps) {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <a
+                         <a
                             href="#"
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
+                            onClick={()=>{
+                              securePage()
+                              /* signIn("keycloak")
+                            window.location.href='/' */
+                            }}
                           >
-                            Settings
+                            sign in
                           </a>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <a
+                       <a
                             href="#"
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
+                            onClick={()=>{
+                             // signOut()
+                           /*  logout()
+                            setTimeout(() => {
+                              window.location.href='/'
+                            }, 500);*/
+                            signOut({callbackUrl:'/',redirect:true})
+                            }}
                           >
                             Sign out
                           </a>

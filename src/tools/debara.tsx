@@ -54,3 +54,24 @@ export const getCm0 = (cl: Client): Commande => {
   | "bank"
   | "rib"
   | "swift";
+  const search = (key: string, obj: Client[]): Client[] => {
+    const clientsearch: Client[] = obj.filter((o: Client) => {
+      return (
+        o.id.match(key) != null ||
+        o.design.match(key) != null ||
+        o.contact.match(key) != null ||
+        o.image.match(key) != null ||
+        o.email.match(key) != null ||
+        o.tel.match(key) != null ||
+        o.device.match(key) != null ||
+        o.adrLiv.match(key) != null ||
+        o.incoterm.match(key) != null ||
+        o.paymentChoice.match(key) != null ||
+        o.adrFact.match(key) != null ||
+        o.bank.match(key) != null ||
+        o.rib.match(key) != null ||
+        o.swift.match(key) != null
+      );
+    });
+    return clientsearch;
+  };

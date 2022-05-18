@@ -13,7 +13,11 @@ import AdressLivraisons from "./AdressLivraisons";
 import ArticlesClients from "./ArticlesClients";
 import ListCommandes from "./ListCommandes";
 import SoldesCommandes from "./SoldesCommandes";
-const ListCommandeClient = ({ idClient }: ListClientsProps) => {
+type ListCommandeClientProps={
+  client:Client
+  refetch:()=>void
+}
+const ListCommandeClient = ({ client,refetch }: ListCommandeClientProps) => {
   //
   //
   const commanndes: MenuNavTabs[] = [
@@ -25,7 +29,7 @@ const ListCommandeClient = ({ idClient }: ListClientsProps) => {
           <span className={style_span}>Commandes Clients</span>
         </>
       ),
-      featured: <ListCommandes idClient={idClient} />,
+      featured: <ListCommandes client={client} refetchParent={refetch} />,
     },
     {
       id: 2,
@@ -35,7 +39,7 @@ const ListCommandeClient = ({ idClient }: ListClientsProps) => {
           <span className={style_span}>Soldes Commandes</span>
         </>
       ),
-      featured: <SoldesCommandes idClient={idClient} />,
+      featured: <SoldesCommandes idClient={client.id} />,
     },
     {
       id: 3,
@@ -45,7 +49,7 @@ const ListCommandeClient = ({ idClient }: ListClientsProps) => {
           <span className={style_span}>Articles Clients</span>
         </>
       ),
-      featured: <ArticlesClients idClient={idClient} />,
+      featured: <ArticlesClients idClient={client.id} />,
     },
     {
       id: 4,
@@ -55,7 +59,7 @@ const ListCommandeClient = ({ idClient }: ListClientsProps) => {
           <span className={style_span}>Adresses de livraisons</span>
         </>
       ),
-      featured: <AdressLivraisons idClient={idClient} />,
+      featured: <AdressLivraisons idClient={client.id} refetchParent={refetch} />,
     },
   ];
   return (

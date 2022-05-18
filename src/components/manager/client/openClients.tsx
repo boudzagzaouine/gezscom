@@ -1,8 +1,16 @@
-import { useFetchClientsQuery } from "config/rtk";
-import { Client } from "tools/types";
-export const openClients =():Client[] =>{
+import { useAddClientMutation, useEditClientMutation, useFetchClientsQuery } from "config/rtk";
+import { ClientJson } from "tools/types";
+export type OpenClientProp={
+  data:ClientJson
+  refetch:()=>void
+  save:()=>void
+  edit:()=>void
+}
+export const openClients =():OpenClientProp =>{
   const { data = [], refetch } = useFetchClientsQuery();
-  refetch()
+  const [save]=useAddClientMutation();
+  const [edit]=useEditClientMutation();
   //@ts-ignore
-  return data.content;
+  const out:OpenClientProp={data,refetch,save,edit}
+  return out;
 }

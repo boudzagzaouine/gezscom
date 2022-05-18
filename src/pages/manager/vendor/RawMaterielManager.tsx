@@ -1,7 +1,12 @@
-import React from "react";
+import ListAllMatierePremiere from 'features/Fournisseur/ListAllMatierePremiere'
+import React from 'react'
 
 const RawMaterielManager = () => {
-  return <div>RawMaterielManager</div>;
-};
+  return (
+    <>
+    <ListAllMatierePremiere/>
+    </>
+  )
+}
 
-export default RawMaterielManager;
+export default RawMaterielManager

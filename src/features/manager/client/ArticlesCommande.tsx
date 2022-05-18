@@ -8,6 +8,7 @@ import {
   useEditArticleCommandeMutation
 } from "config/rtk";
 import React, { useState } from "react";
+import { style_add_line } from "tools/constStyle";
 import { arc0, Commande ,ArticleCommande} from "tools/types";
 import { Field, Form } from "widgets";
 import Bcyan from "widgets/Bcyan";
@@ -16,7 +17,7 @@ import Mitems from "widgets/Mitems";
 import Pagin from "widgets/Pagin";
 import Table from "widgets/Table";
 import FormArticleCommande from "./FormArticleCommande";
-const style_add_line = "bg-[#dfdfdf] cursor-pointer";
+
 type ArticlesCommandeProps={
   idCommande:string
 }

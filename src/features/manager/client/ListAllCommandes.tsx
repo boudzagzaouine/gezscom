@@ -1,12 +1,12 @@
 import { DocumentAddIcon } from "@heroicons/react/solid";
-import { openClients } from "components/manager/client/openClients";
+import { OpenClientProp, openClients } from "components/manager/client/openClients";
 import {
   useFetchCommandesQuery,
   usePaginationCommandesQuery,
 } from "config/rtk";
 import React, { useRef, useState } from "react";
 import { getClient } from "tools/Methodes";
-import { c0, Client, cm0 } from "tools/types";
+import { c0, Client, ClientJson, cm0, Commande } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import Bedit from "widgets/Bedit";
 import Pagin from "widgets/Pagin";
@@ -22,21 +22,27 @@ const ListAllCommandes = () => {
     refetch();
   };
   const { data = [], isFetching, refetch } = usePaginationCommandesQuery(page);
-  const clients:Client[]=openClients();
+  
+  const clientsToOpen: OpenClientProp = openClients();
+    const clientJson: ClientJson = clientsToOpen.data
+    const clients: Client[] = clientJson.content
+    const refetchClient:()=>void=clientsToOpen.refetch
   const [client,setClient]=useState<Client>(c0)
   const refCom = useRef(null);
+  const cm1:Commande=cm0 
+  cm1.idClient=""
   return (
     <Section>
-      <Bcyan
+     {clients?.length!=0 &&  <Bcyan
         className="float-left mt-2"
         onClick={() => {
           //@ts-ignore
-          refCom.current(cm0);
+          refCom.current(cm1);
         }}
       >
         Nouvelle commande
-      </Bcyan>
-      <FormCommande command={cm0} client={client}  clients={clients||[]} refetch={refetch} ref={refCom} />
+      </Bcyan>}
+      <FormCommande command={cm1} client={client}  clients={clients||[]} refetchList={refetch} ref={refCom} />
       <Table
         className="tab-list float-left w-full mt-2"
         thead={

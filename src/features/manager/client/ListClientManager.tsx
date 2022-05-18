@@ -24,27 +24,6 @@ import { MenuItems } from "widgets/TypeWidgets";
 import FormClientManager from "./FormClientManager";
 import Table from "widgets/Table";
 const ListClientManager = () => {
-  const search = (key: string, obj: Client[]): Client[] => {
-    const clientsearch: Client[] = obj.filter((o: Client) => {
-      return (
-        o.id.match(key) != null ||
-        o.design.match(key) != null ||
-        o.concat.match(key) != null ||
-        o.image.match(key) != null ||
-        o.email.match(key) != null ||
-        o.tel.match(key) != null ||
-        o.device.match(key) != null ||
-        o.adrLiv.match(key) != null ||
-        o.incoterm.match(key) != null ||
-        o.paymentChoice.match(key) != null ||
-        o.adrFact.match(key) != null ||
-        o.bank.match(key) != null ||
-        o.rib.match(key) != null ||
-        o.swift.match(key) != null
-      );
-    });
-    return clientsearch;
-  };
   const [form, setForm] = useState(false);
   const [client0, setClient0] = useState(c0);
   const [request0, setRequest0] = useState(REQUEST_SAVE);
@@ -156,6 +135,7 @@ const ListClientManager = () => {
             setRequest0(REQUEST_SAVE);
             refetch();
           }}
+          refetch={refetch}
           disable={disabled}
         />
       )}
@@ -175,7 +155,6 @@ const ListClientManager = () => {
             >
               Nouveau client
             </Bcyan>
-
             <div className="float-right">
               <Button className="bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg">
                 <Icon i="search" cl="" />
@@ -210,7 +189,7 @@ const ListClientManager = () => {
                       <figcaption>
                         <span>{client.design}</span>
                         &nbsp;&nbsp;
-                        <span>{client.concat}</span>
+                        <span>{client.contact}</span>
                       </figcaption>
                     </figure>
                   </Table.td>

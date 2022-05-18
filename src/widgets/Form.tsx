@@ -102,7 +102,7 @@ export const Form = <T extends FieldValues = FieldValues>({
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit || defaultOnSubmit)} className="float-right">
+      <form onSubmit={handleSubmit(onSubmit || defaultOnSubmit)} className="float-right w-full">
         {ObjectUtils.isFunction(children) ? children(methods) : children}
       </form>
     </FormProvider>

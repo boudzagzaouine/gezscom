@@ -1,8 +1,8 @@
 import { BriefcaseIcon, SaveIcon, XCircleIcon } from "@heroicons/react/solid";
-import { useAddCommandeMutation, useEditCommandeMutation, useFetchClientsQuery } from "config/rtk";
+import { useAddCommandeMutation, useEditCommandeMutation, useFetchAdressLivsByIdClientQuery, useFetchClientsQuery, useFetchOneClientQuery } from "config/rtk";
 import React, { ChangeEvent, forwardRef, Ref, useEffect, useRef, useState } from "react";
 import { STYLE_ICON, style_icon, style_span } from "tools/constStyle";
-import { AdressLiv, c0,adr0, Client, Commande} from "tools/types";
+import { AdressLiv, c0,adr0, Client, Commande, ClientJson} from "tools/types";
 import { Field, Form } from "widgets";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
@@ -14,24 +14,27 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Bsave from "widgets/Bsave";
 import Bcancel from "widgets/Bcancel";
-import { openClients } from "components/manager/client/openClients";
-import { openAdressLivByIdClient } from "components/manager/client/openAdressLivByIdClient";
-import { openOneClient } from "components/manager/client/openOneClient";
-import {  openAdressLivs } from "components/manager/client/openAdressLivs";
+import { OpenClientProp, openClients } from "components/manager/client/openClients";
+
 type CommandProps = {
   command: Commande;
   client:Client
   clients:Client[]
-  refetch:()=>void
+  refetchList:()=>void
+ 
 };
 
-const FormCommande = ({ command,client,clients,refetch }: CommandProps, ref: Ref<void>) => {
+const FormCommande = ({ command,client,clients,refetchList }: CommandProps, ref: Ref<void>) => {
+  const {refetch}=useFetchAdressLivsByIdClientQuery(client?.id)
+  //const {refetch}=useFetchClientsQuery()
   const [showModal, setShowModal] = React.useState(false);
   const [command0, setCommand0] = useState(command);
-  const [idClient,setIdClient]=useState<string>("")
-  const [client0,setClient0]=useState<Client>(client)
+ const [client0,setClient0]=useState<Client>(client)
   console.log("teqsttt client ="+JSON.stringify(client))
-  //const clients:Client[]=openClients()
+  const clientsToOpen: OpenClientProp = openClients();
+    const clientJson: ClientJson = clientsToOpen.data
+    //const clients: Client[] = clientJson.content
+    const refetchClient:()=>void=clientsToOpen.refetch
   const openModal = (c: Commande,cl:Client) => {
     setCommand0(c);
     setClient0(cl)
@@ -44,6 +47,7 @@ const FormCommande = ({ command,client,clients,refetch }: CommandProps, ref: Ref
     setShowModal(false);
   }
   useEffect(() => {
+    refetch()
   //  setClient(openClient)
    //@ts-ignore
     ref.current = openModal;
@@ -62,14 +66,32 @@ const FormCommande = ({ command,client,clients,refetch }: CommandProps, ref: Ref
   ];
   const fieldIdClient = useRef(null)
   const fieldAdressLiv = useRef(null)
- 
+ if(client0==undefined && client?.id!=""){
+   
+   refetch()
+   setTimeout(() => {
+    setClient0(client)  
+   }, 200);
+   
+  }
     return (
     <Modal title={command0.id===""?"Nouvelle commande":"Mise à jour de la commande"} 
     show={showModal} format={5} close={close}>
       
       <Form defaultValues={command0} onSubmit={save}>
-    
-            <>
+          <>
+          <Bcyan onClick={()=>{
+            refetch()
+            //alert(JSON.stringify(command0))
+            }} >
+            recharger
+          </Bcyan>
+          <Bcyan onClick={()=>{
+            refetch()
+            //alert(JSON.stringify(command0))
+            }} >
+            recharger
+          </Bcyan>
               <div className="float-left w-1/2">
                 
                 <Field type="hidden" name="idClient" value={client0?.id} ref={fieldIdClient}/>
@@ -92,7 +114,7 @@ const FormCommande = ({ command,client,clients,refetch }: CommandProps, ref: Ref
                       }
                     }
                   >
-                  {[c0,...clients||[]].map((c:Client)=>(
+                  {[c0,...clients||[]]?.map((c:Client)=>(
                     <option value={JSON.stringify(c)}>{c.design}</option>
                   ))}
                   </Field>
@@ -125,7 +147,7 @@ const FormCommande = ({ command,client,clients,refetch }: CommandProps, ref: Ref
               <Bsave className="float-right mt-2 b-ajust-r" onClick={() => {
                 
           setTimeout(() => {
-            refetch()
+            refetchList()
             close();
           }, 600);
         }} />

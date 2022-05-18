@@ -4,10 +4,10 @@ import { LayoutName } from "widgets/types";
 import store, { persistor } from "config/store";
 import Layout from "layouts";
 import { NextPage } from "next";
-import { SessionProvider } from "next-auth/react";
+import { getSession, SessionProvider, signIn ,useSession} from "next-auth/react";
 import { appWithTranslation } from "next-i18next";
 import type { AppProps } from "next/app";
-import type { FC, ReactElement, ReactNode } from "react";
+import { FC, ReactElement, ReactNode, useEffect } from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import "styles/globals.css";
@@ -29,6 +29,21 @@ const getDefaultLayout = (name?: LayoutName) => {
 };
 
 const App: FC<AppPropsWithLayout> = ({ Component, pageProps }) => {
+  
+  /* useEffect(()=>{
+        
+    const securePage = async () =>{
+        const session = await getSession()
+        if(!session){
+            signIn("keycloak")
+        }else{
+          console.log(session)
+        }
+
+        
+    }
+   securePage() 
+}) */
   // console.log("comp ", Component);
   // console.log("page props : ", pageProps);
   const getLayout =

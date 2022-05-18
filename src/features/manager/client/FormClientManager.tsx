@@ -31,12 +31,14 @@ type FormClientManagerProp = {
   client: Client;
   request: number;
   disable: boolean;
+  refetch:()=>void
 };
 const FormClientManager = ({
   closed,
   client,
   request,
   disable,
+  refetch,
 }: FormClientManagerProp) => {
   const [save] = useAddClientMutation();
   const [edit] = useEditClientMutation();
@@ -48,14 +50,14 @@ const FormClientManager = ({
       <Xclose close={closed} />
       <div className="float-left w-full text-xs">
         <Form defaultValues={client} onSubmit={onSubmit}>
-          <h1 className="mb-2">Nom & Prénom du client</h1>
+          <h1 className="mb-4">Nom & Prénom du client</h1>
           <div className="float-left w-5/6">
             <div className="float-left w-1/2">
               {request == REQUEST_EDIT && (
                 <Field label="id du client" name="id" />
               )}
               <Field label="Nom du client" name="design" disabled={disabled} />
-              <Field label="concat" name="concat" disabled={disabled} />
+              <Field label="contact" name="contact" disabled={disabled} />
               <Field label="email" name="email" disabled={disabled} />
               <Field label="tel" name="tel" disabled={disabled} />
               <Field
@@ -144,7 +146,7 @@ const FormClientManager = ({
           />
            )}
       </div>
-      {client.id!="" && <ListCommandeClient idClient={client.id} />}
+      {client.id!="" && <ListCommandeClient client={client} refetch={refetch} />}
     </Section>
   );
 };

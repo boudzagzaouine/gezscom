@@ -1,7 +1,10 @@
-import React from "react";
+import ListAllCommandes from 'features/Fournisseur/ListAllCommandes'
+import React from 'react'
 
 const CommandeVendor = () => {
-  return <div>CommandeVendor</div>;
-};
+  return (
+    <div><ListAllCommandes/></div>
+  )
+}
 
-export default CommandeVendor;
+export default CommandeVendor
