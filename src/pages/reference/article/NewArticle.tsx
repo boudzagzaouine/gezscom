@@ -6,7 +6,7 @@ export default function NewArticle() {
     const form = useRef(null)
     return (
         <div>
-            <FormArticle article={article0} disable={true} ref={form} />
+            <FormArticle article={article0}  ref={form} />
         </div>
     );
 };

@@ -23,11 +23,9 @@ git push
 */
 type FormDeclarantProps = {
     declarant: Declarant;
-    disable: boolean;
 };
 const FormDeclarant = ({
-    declarant,
-    disable,
+    declarant
 }: FormDeclarantProps, ref: Ref<void>) => {
     const { data = [], isFetching, refetch } = usePaginationDeclarantsQuery(0);
     const [declarant1, setDeclarant1] = useState<Declarant>(declarant0);
@@ -245,7 +243,7 @@ const FormDeclarant = ({
                         {!disabled && <Bcyan className="float-right"
                             onClick={() => {
                                 setDisabled(false);
-                                //setShow(false);
+                                setShow(false);
                             }}>
                             Annuler
                         </Bcyan>}

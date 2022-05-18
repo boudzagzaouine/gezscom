@@ -23,11 +23,9 @@ git push
 */
 type FormUnitMeasureProps = {
     unitMeasure: UnitMeasure;
-    disable: boolean;
 };
 const FormUnitMeasure = ({
-    unitMeasure,
-    disable,
+    unitMeasure
 }: FormUnitMeasureProps, ref: Ref<void>) => {
     const { data = [], isFetching, refetch } = usePaginationUnitMeasuresQuery(0);
     const [unitMeasure1, setUnitMeasure1] = useState<UnitMeasure>(unitMeasure0);
@@ -255,7 +253,7 @@ const FormUnitMeasure = ({
                         {!disabled && <Bcyan className="float-right"
                             onClick={() => {
                                 setDisabled(false);
-                                //setShow(false);
+                                setShow(false);
                             }}>
                             Annuler
                         </Bcyan>}

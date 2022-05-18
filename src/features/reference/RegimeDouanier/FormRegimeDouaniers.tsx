@@ -18,11 +18,9 @@ import Pagin from "widgets/Pagin";
 
 type FormRegimeDouanierProps = {
     regimeDouanier: RegimeDouanier;
-    disable: boolean;
 };
 const FormRegimeDouanier = ({
-    regimeDouanier,
-    disable,
+    regimeDouanier
 }: FormRegimeDouanierProps, ref: Ref<void>) => {
     const { data = [], isFetching, refetch } = usePaginationRegimeDouaniersQuery(0);
     const [regimeDouanier1, setRegimeDouanier1] = useState<PayementMode>(payementMode0);
@@ -237,7 +235,7 @@ const FormRegimeDouanier = ({
                         {!disabled && <Bcyan className="float-right"
                             onClick={() => {
                                 setDisabled(false);
-                                //setShow(false);
+                                setShow(false);
                             }}>
                             Annuler
                         </Bcyan>}

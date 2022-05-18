@@ -7,7 +7,7 @@ export default function NewPayementMode() {
     return (
         <div>
 
-            <FormPayementMode payementMode={payementMode0} disable={true} ref={form} />
+            <FormPayementMode payementMode={payementMode0}  ref={form} />
         </div>
     );
 };

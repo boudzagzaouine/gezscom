@@ -7,7 +7,7 @@ export default function NewArticle() {
     const form = useRef(null)
     return (
         <div>
-            <FormDeclarant declarant={declarant0} disable={true} ref={form} />
+            <FormDeclarant declarant={declarant0}  ref={form} />
         </div>
     );
 };

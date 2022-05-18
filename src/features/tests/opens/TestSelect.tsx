@@ -1,12 +1,12 @@
 import  Section  from 'widgets/Section';
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import { OpenClientProp, openClients } from 'components/manager/client/openClients'
 import { Client, ClientJson ,c0, AdressLivJson, AdressLiv, cm0, adr0} from 'tools/types';
 import { Field, Form } from 'widgets';
 import Bsave from 'widgets/Bsave';
 import { openAdressLivProps, openAdressLivs } from 'components/manager/client/openAdressLivs';
 import Bcyan from 'widgets/Bcyan';
-const TestOpenClient = () => {
+const TestSelect = () => {
     const clientsToOpen: OpenClientProp = openClients();
     const clientJson: ClientJson = clientsToOpen.data
     const clients: Client[] = clientJson.content
@@ -22,26 +22,24 @@ const TestOpenClient = () => {
     const editAdressLiv=adressLivsToOpen.edit
     return (
         <Section>
-       <div className="float-left w-1/2">  
-       <table className="float-left w-full">
-          <thead>
-            <tr><th>id</th><th>design</th><th>email</th></tr>
-          </thead>
-          <tbody>
-            {
-            //@ts-ignore
-          clients?.map((d:Client)=>(
-              <tr key={d.id}>
-                <td>{d.id}</td>
-                <td>{d.design}</td>
-                <td>{d.email}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <Form defaultValues={c0} onSubmit={editClient}>
+       <div className="float-left w-full">  
+       <Form defaultValues={c0} onSubmit={editClient}>
                   <Field label="id" name="id"  />
                   <Field label="design " name="design"  />
+                  <Field
+                    label="Client"
+                    name="cococo"
+                    as="select"
+                    onChange={
+                      (e:ChangeEvent<HTMLSelectElement>)=>{
+                        let c:Client = JSON.parse(e.target.value)
+                        }
+                    }
+                  >
+                  {[c0,...clients||[]]?.map((c:Client)=>(
+                    <option value={JSON.stringify(c)}>{c.design}</option>
+                  ))}
+                  </Field>
                    <Field label="email" name="email"  />
                    <Bsave onClick={()=>{
                      setTimeout(() => {
@@ -52,39 +50,9 @@ const TestOpenClient = () => {
              </Form>
             <Bcyan onClick={()=>{refetchClient()}}>reload</Bcyan>
         </div>
-       <div className="float-left w-1/2">
-       <table className="float-left w-full">
-          <thead>
-            <tr><th>id</th><th>adress</th></tr>
-          </thead>
-          <tbody>
-            {
-            //@ts-ignore
-            adressLivs?.map((d:AdressLiv)=>(
-       //     data?.map((d:AdressLiv)=>(
-              <tr key={d.id}>
-                <td>{d.id}</td>
-               <td>{d.adress}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <Form defaultValues={adr0} onSubmit={saveAdressLiv}>
-                  <Field label="id" name="id"  />
-                  <Field label="adress" name="adress"  />
-                   <Bsave onClick={()=>{
-                     setTimeout(() => {
-                       refetchAdressLiv()
-                     }, 600);
-                   }} />
-     
-             </Form>
-            
-  
-       </div>
-          </Section>   
+       </Section>   
       
     )
 }
 
-export default TestOpenClient
+export default TestSelect

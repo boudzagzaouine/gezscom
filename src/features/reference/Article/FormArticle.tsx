@@ -18,11 +18,10 @@ import Icon from "widgets/Icon";
 
 type FormArticleProps = {
     article: Article;
-    disable: boolean;
+    
 };
 const FormArticle = ({
-    article,
-    disable,
+    article
 }: FormArticleProps, ref: Ref<void>) => {
 
     const [page, setPage] = useState(0);

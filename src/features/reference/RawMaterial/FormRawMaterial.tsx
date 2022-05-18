@@ -18,11 +18,9 @@ import Pagin from "widgets/Pagin";
 
 type FormRawMaterialProps = {
     rawMaterial: RawMaterial;
-    disable: boolean;
 };
 const FormRawMaterial = ({
-    rawMaterial,
-    disable,
+    rawMaterial
 }: FormRawMaterialProps, ref: Ref<void>) => {
 
     const [page, setPage] = useState(0);
@@ -268,7 +266,7 @@ const FormRawMaterial = ({
                         {!disabled && <Bcyan className="float-right"
                             onClick={() => {
                                 setDisabled(true);
-                                // setShow(false);
+                                setShow(false);
                             }}>
                             Annuler
                         </Bcyan>}

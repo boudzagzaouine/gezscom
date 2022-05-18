@@ -18,11 +18,9 @@ import DeleteIncoterm from "./Methods/DeleteIncoterm";
 
 type FormIncotermProps = {
     incoterm: Incoterm;
-    disable: boolean;
 };
 const FormIncoterm = ({
-    incoterm,
-    disable,
+    incoterm
 }: FormIncotermProps, ref: Ref<void>) => {
     const { data = [], isFetching, refetch } = usePaginationIncotermsQuery(0);
     const [incoterm1, setIncoterm1] = useState<Incoterm>(incoterm0);
@@ -233,7 +231,7 @@ const FormIncoterm = ({
                         {!disabled && <Bcyan className="float-right"
                             onClick={() => {
                                 setDisabled(false);
-                                //setShow(false);
+                                setShow(false);
                             }}>
                             Annuler
                         </Bcyan>}

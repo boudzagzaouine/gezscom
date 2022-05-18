@@ -9,6 +9,7 @@ import DatePicker from "react-datepicker";
 import {OpenClientProp,openClients} from 'components/manager/client/openClients'
 import "react-datepicker/dist/react-datepicker.css";  
 import TestOpenClient from 'features/tests/opens/TestOpenClient'
+import TestSelect from 'features/tests/opens/TestSelect'
   
 const Test = () => {
   const [startDate, setStartDate] = useState(new Date());  
@@ -21,7 +22,8 @@ const Test = () => {
     {/* <TestArticleCommande /> */}
     {/* <TestAdressLiv /> */}
     {/* <DatePicker selected={startDate} onChange={(date:Date) =>   setStartDate(date)} /> */}  
-    <TestOpenClient />
+    {/* <TestOpenClient /> */}
+    <TestSelect />
     </>
   )
 }

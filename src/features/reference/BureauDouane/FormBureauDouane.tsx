@@ -15,18 +15,12 @@ import ArchiveBureauDouane from "./Methods/ArchiveBureauDouane";
 import RestoreBureauDouane from "./Methods/RestoreBureauDouane";
 import Pagin from "widgets/Pagin";
 
-/*
-git add . 
-git commit -m "un commontaire"
-git push
-*/
+
 type FormBureauDouaneProps = {
     bureauDouane: BureauDouane;
-    disable: boolean;
 };
 const FormBureauDouane = ({
-    bureauDouane,
-    disable,
+    bureauDouane
 }: FormBureauDouaneProps, ref: Ref<void>) => {
     const { data = [], isFetching, refetch } = usePaginationBureauDouanesQuery(0);
     const [bureauDouane1, setBureauDouane1] = useState<BureauDouane>(bureauDouane0);
@@ -237,7 +231,7 @@ const FormBureauDouane = ({
                         {!disabled && <Bcyan className="float-right"
                             onClick={() => {
                                 setDisabled(false);
-                                //setShow(false);
+                                setShow(false);
                             }}>
                             Annuler
                         </Bcyan>}
