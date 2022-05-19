@@ -1,20 +1,14 @@
-import { TrashIcon } from "@heroicons/react/outline";
-import { XCircleIcon } from "@heroicons/react/solid";
 import axios from "axios";
-import React, { forwardRef, Ref, useRef, useEffect, useState } from "react";
+import React, { forwardRef, Ref, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { STYLE_ICON } from "tools/constStyle";
 import Bcancel from "widgets/Bcancel";
 import Bcyan from "widgets/Bcyan";
-import Bred from "widgets/Bred";
-import { useDeleteFournisseurMutation } from "config/rtk";
 import Modal from "widgets/Modal";
 type DeleteFournisseurPorp = {
   refetch:() => void,
   id: string;
 };
 const DeleteFournisseur = ({ id,refetch }: DeleteFournisseurPorp, ref: Ref<void>) => {
-  const [del] = useDeleteFournisseurMutation();
   const [id0, setId0] = useState(id);
   //@ts-ignore
   const { register, handleSubmit } = useForm<string>({

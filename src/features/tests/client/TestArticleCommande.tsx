@@ -10,7 +10,7 @@ import {
   useArchiveArticleCommandeMutation,
   useRestoreArticleCommandeMutation
     } from "config/rtk";
-  import ListTest from "features/manager/client/ListTest";
+  
   import { useRef, useState } from "react";
   import { ArticleCommande,arc0 } from "tools/types";
   import Section from "widgets/Section";

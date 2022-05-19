@@ -36,7 +36,7 @@ const RestoreTransporteur = ({ id }: RestoreTransporteurPorp, ref: Ref<void>) =>
     };
     return (
         <>
-            <Modal title={"restoration"} show={showModal} format={5} close={close}  close={close}>
+            <Modal title={"restoration"} show={showModal} format={5} close={close}  >
                 <div>
                     <h2>restoration du transporteur num: {id0}</h2>
                     <form

@@ -4,8 +4,6 @@ import React, { ChangeEvent, forwardRef, Ref, useEffect, useRef, useState } from
 import { STYLE_ICON, style_icon, style_span } from "tools/constStyle";
 import { AdressLiv, c0,adr0, Client, Commande, ClientJson} from "tools/types";
 import { Field, Form } from "widgets";
-import Bcyan from "widgets/Bcyan";
-import Bred from "widgets/Bred";
 import Modal from "widgets/Modal";
 import NavTabs from "widgets/NavTabs";
 import { MenuNavTabs } from "widgets/TypeWidgets";
@@ -14,8 +12,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Bsave from "widgets/Bsave";
 import Bcancel from "widgets/Bcancel";
+import { openAdressLivByIdClient, openAdressLivByIdClientProps } from "components/manager/client/openAdressLivByIdClient";
 import { OpenClientProp, openClients } from "components/manager/client/openClients";
-import { openOneClient, OpenOneClientProp } from "components/manager/client/openOneClient";
 
 type CommandProps = {
   command: Commande;
@@ -26,17 +24,17 @@ type CommandProps = {
 };
 
 const FormCommande = ({ command,client,clients,refetchList }: CommandProps, ref: Ref<void>) => {
-  const {refetch}=useFetchAdressLivsByIdClientQuery(client?.id)
-  //const {refetch}=useFetchClientsQuery()
-  const [showModal, setShowModal] = React.useState(false);
+
+ const [showModal, setShowModal] = React.useState(false);
   const [command0, setCommand0] = useState(command);
- 
- // console.log("teqsttt client ="+JSON.stringify(client))
-  const clientsToOpen: OpenOneClientProp = openOneClient(client?.id);
-    const client1: Client = clientsToOpen.data
-    const [client0,setClient0]=useState<Client>(client1)
-    //const clients111: Client[] = clientJson.content
-    const refetchClient:()=>void=clientsToOpen.refetch
+     const [client0,setClient0]=useState<Client>(client)
+    const adressLivsToOpen: openAdressLivByIdClientProps = openAdressLivByIdClient(client0?.id);
+    const adressLivs: AdressLiv[] =adressLivsToOpen.data
+    const refetchAdressLiv:()=>void=adressLivsToOpen.refetch
+    const clientsToOpen: OpenClientProp = openClients();
+    const clients1: Client[] = clientsToOpen.data.content
+  const {refetch}=useFetchAdressLivsByIdClientQuery(client?.id)
+   const refetchClient:()=>void=clientsToOpen.refetch
   const openModal = (c: Commande,cl:Client) => {
     setCommand0(c);
     setClient0(cl)
@@ -49,9 +47,9 @@ const FormCommande = ({ command,client,clients,refetchList }: CommandProps, ref:
     setShowModal(false);
   }
   useEffect(() => {
-    refetch()
-  //  setClient(openClient)
-   //@ts-ignore
+    refetchAdressLiv()
+    refetchClient()
+    //@ts-ignore
     ref.current = openModal;
   });
   const commanndes: MenuNavTabs[] = [
@@ -70,7 +68,7 @@ const FormCommande = ({ command,client,clients,refetchList }: CommandProps, ref:
   const fieldAdressLiv = useRef(null)
  if(client0==undefined && client?.id!=""){
    
-   refetch()
+   refetchAdressLiv()
    setTimeout(() => {
     setClient0(client)  
    }, 200);
@@ -82,21 +80,7 @@ const FormCommande = ({ command,client,clients,refetchList }: CommandProps, ref:
       
       <Form defaultValues={command0} onSubmit={save}>
           <>
-          <Bcyan onClick={()=>{
-             alert("avent :"+JSON.stringify(client0))
-            }} >
-           avant
-          </Bcyan>
-         
-          <Bcyan onClick={()=>{
-            refetchClient()
-            setClient0(client1)
-            setTimeout(() => {
-              alert("apers : "+JSON.stringify(client0))
-            }, 500);
-            }} >
-            recharger
-          </Bcyan>
+        
          
               <div className="float-left w-1/2">
                 
@@ -120,7 +104,7 @@ const FormCommande = ({ command,client,clients,refetchList }: CommandProps, ref:
                       }
                     }
                   >
-                  {[c0,...clients||[]]?.map((c:Client)=>(
+                  {[c0,...clients1||[]]?.map((c:Client)=>(
                     <option value={JSON.stringify(c)}>{c.design}</option>
                   ))}
                   </Field>
@@ -136,7 +120,7 @@ const FormCommande = ({ command,client,clients,refetchList }: CommandProps, ref:
                   as="select"
                   optionLabelName="adress"
                   optionKeyName="adress"
-                  options={[adr0,...client0?.adressLivs||[]]}
+                  options={[adr0,...adressLivs||[]]}
                   onChange={
                     (e:ChangeEvent<HTMLSelectElement>)=>{
                       //@ts-ignore

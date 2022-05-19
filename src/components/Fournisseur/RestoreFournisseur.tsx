@@ -1,7 +1,6 @@
-import { TrashIcon } from "@heroicons/react/outline";
-import { ArchiveIcon, ReplyIcon, XCircleIcon } from "@heroicons/react/solid";
+import {  ReplyIcon, XCircleIcon } from "@heroicons/react/solid";
 import axios from "axios";
-import React, { forwardRef, Ref, useRef, useEffect, useState } from "react";
+import React, { forwardRef, Ref,  useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
@@ -17,7 +16,6 @@ const RestoreFournisseur = ({ id }: RestoreFournisseurPorp, ref: Ref<void>) => {
   const { register, handleSubmit } = useForm<string>({
     defaultValues: { id0 },
   });
-  const [restore] = useRestoreFournisseurMutation();
   const [showModal, setShowModal] = React.useState(false);
   const openModal = (i: string) => {
     setId0(i);

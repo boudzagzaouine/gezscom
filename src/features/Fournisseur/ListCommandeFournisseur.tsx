@@ -1,7 +1,7 @@
 import { BriefcaseIcon, ClipboardListIcon } from '@heroicons/react/solid';
 import { style_icon, style_span } from 'tools/constStyle';
 import ListCommandes from './ListCommandes'
-import { ListFournisseursProps, ListMatierePremiereProps, MenuNavTabs } from 'widgets/TypeWidgets';
+import { ListFournisseursProps,  MenuNavTabs } from 'widgets/TypeWidgets';
 import ListMatierePremiere from './ListMatierePremiere';
 import NavTabs from 'widgets/NavTabs';
 import NavTabsHeight from 'widgets/NavTabsHeight';

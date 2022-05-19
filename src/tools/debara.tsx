@@ -1,4 +1,13 @@
-export const getCm0 = (cl: Client): Commande => {
+import React from 'react'
+
+const debara = () => {
+  return (
+    <div>debara</div>
+  )
+}
+
+export default debara
+/* export const getCm0 = (cl: Client): Commande => {
     return {
       id: "",
       date: new Date(),
@@ -75,3 +84,4 @@ export const getCm0 = (cl: Client): Commande => {
     });
     return clientsearch;
   };
+ */

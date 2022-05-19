@@ -7,7 +7,7 @@ import { AdressLiv, Article, ArticleCommande, BureauDouane, Client, Commande, Pa
 export const crudApi = createApi({
   reducerPath: "crud-api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:1000/api/v1",
+    baseUrl:process.env.NEXT_PUBLIC_URL,
     prepareHeaders(headers) {
       return headers;
     },

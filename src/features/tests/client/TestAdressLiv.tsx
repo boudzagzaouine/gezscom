@@ -10,7 +10,7 @@ import {
   useArchiveAdressLivMutation,
   useRestoreAdressLivMutation,
     } from "config/rtk";
-  import ListTest from "features/manager/client/ListTest";
+  
   import { useRef, useState } from "react";
   import { AdressLiv,cm0 } from "tools/types";
   import Section from "widgets/Section";

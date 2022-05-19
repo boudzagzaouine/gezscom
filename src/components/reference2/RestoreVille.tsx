@@ -36,7 +36,7 @@ const RestoreVille = ({ id }: RestoreVillePorp, ref: Ref<void>) => {
     };
     return (
         <>
-            <Modal title={"restoration"} show={showModal} format={5} close={close} close={close}>
+            <Modal title={"restoration"} show={showModal} format={5}  close={close}>
                 <div>
                     <h2>restoration du Ville num: {id0}</h2>
                     <form

@@ -1,12 +1,9 @@
-import { DocumentAddIcon } from "@heroicons/react/solid";
-import { openClients } from "components/manager/client/openClients";
 import { useFetchcommandesByIdClientQuery } from "config/rtk";
 import React, { useRef, useState } from "react";
 import {  Client, cm0, Commande } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import Bedit from "widgets/Bedit";
 import Table from "widgets/Table";
-import { ListClientsProps } from "widgets/TypeWidgets";
 import FormCommande from "./FormCommande";
 type ListCommandesProp={
   client:Client

@@ -10,7 +10,7 @@ import {
     useArchiveCommandeMutation,
     useRestoreCommandeMutation,
     } from "config/rtk";
-  import ListTest from "features/manager/client/ListTest";
+  
   import { useRef, useState } from "react";
   import { Commande,cm0 } from "tools/types";
   import Section from "widgets/Section";

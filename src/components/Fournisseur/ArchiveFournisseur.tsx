@@ -1,13 +1,13 @@
 import { ArchiveIcon, XCircleIcon } from "@heroicons/react/solid";
 import axios from "axios";
-//import { useArchiveFournisseurMutation } from "config/rtk";
+import { useArchiveFournisseurMutation } from "config/rtk";
 import React, { forwardRef, Ref, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import Modal from "widgets/Modal";
-
+//merge final
 type ArchiveFournisseurProp={
     id:String;
 };
@@ -17,7 +17,7 @@ const ArchiveFournisseur=( {id}: ArchiveFournisseurProp, ref:Ref<void>)=>{
     const{ register, handleSubmit} =useForm<string>({
         defaultValues: {id0},
     });
-   // const [archive]=useArchiveFournisseurMutation();
+    const [archive]=useArchiveFournisseurMutation();
     const [showModal, setShowModal]=React.useState(false);
     const openModal=(i:string)=>{
         setId0(i);

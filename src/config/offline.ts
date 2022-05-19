@@ -1,6 +1,6 @@
 import { api } from "service/http";
 import type { HttpRequestConfig } from "service/types";
-
+//
 const effect = (effect: HttpRequestConfig, action: any) => {
   let draft = effect;
   if (action?.payload !== undefined && action?.payload !== null) {

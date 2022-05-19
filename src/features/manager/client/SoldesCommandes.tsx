@@ -1,7 +1,9 @@
 import React from "react";
-import { ListClientsProps } from "widgets/TypeWidgets";
-
-const SoldesCommandes = ({ client }: ListClientsProps) => {
+import { Client } from "tools/types";
+type soldProps={
+  idClient:string
+}
+const SoldesCommandes = ({ idClient }: soldProps) => {
   return <div>SoldesCommandes</div>;
 };
 

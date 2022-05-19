@@ -133,6 +133,7 @@ function ListDeviseManager() {
     };
     const imputFocus = useRef()
     const handle = () => {
+        //@ts-ignore
         imputFocus.current.focus()
     }
     

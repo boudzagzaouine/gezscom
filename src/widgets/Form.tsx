@@ -31,7 +31,8 @@ const Control = forwardRef(
     const isSelect = Component === "select";
     const { value, defaultValue } = props;
     // console.log('log control ? ', props);
-    let additionalProps: Partial<FormControlProps> = {};
+    //@ts-ignore
+    let additionalProps: Partial<FormControlProps<any>> = {};
     if (value !== undefined && value !== null) {
       additionalProps = { checked: "true" === `${value}` };
     } else if (defaultValue !== undefined && defaultValue !== null) {
@@ -41,11 +42,10 @@ const Control = forwardRef(
     /*
      */
     if (isSelect && options) {
-      const selectOptions = options.map((option) => {
+      const selectOptions = options.map((option:any) => {
       //  if (!option) return null;
         //@ts-ignore
-        const optionValue =
-          typeof option === "string" ? option : option[optionKeyName];
+        const optionValue =typeof option === "string" ? option : option[optionKeyName];
         //@ts-ignore
         const optionLabel =
           typeof option === "string"
@@ -59,6 +59,7 @@ const Control = forwardRef(
       });
       additionalProps["children"] = selectOptions;
     }
+    //@ts-ignore
     return <Component ref={ref} {...additionalProps} {...props} />;
   }
 );
