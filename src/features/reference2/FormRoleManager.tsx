@@ -1,18 +1,14 @@
-import {
-    PencilAltIcon
-} from "@heroicons/react/solid";
 import { useAddRoleMutation, useEditRoleMutation } from "config/rtk";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
     REQUEST_EDIT,
     REQUEST_SAVE
 } from "tools/consts";
-import { STYLE_ICON } from "tools/constStyle";
+import { Role } from 'tools/types';
 import { Field, Form } from "widgets";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import Section from "widgets/Section";
-import { Role } from 'tools/types';
 type FormRoleManagerProp = {
     closed: () => void;
     Role: Role;
@@ -33,32 +29,37 @@ const FormRoleManager = ({
     const [disabled, setDisabled] = useState(disable);
     const text = "nouveau"
     const text1 = "modifier"
+    const imputFocus = useRef(null)
+    useEffect(() => {
+        /*  @ts-ignore*/
+        imputFocus.current.focus()
+    }, [])
     return (
         <Section>
             <div className="float-left w-full text-xs">
                 {/*  @ts-ignore*/}
                 <Form defaultValues={Role} onSubmit={onSubmit}>
                     {request == REQUEST_SAVE ? <h1 className="mb-2">{text} role </h1> : <h1 className="mb-2">{text1} role </h1>}
-               
+
                     <div className="float-left w-5/6">
                         <div className="float-left w-1/2">
                             {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
-                            <Field style={{ margin: ".4rem" }} label="designation" name="designation" disabled={disabled} />
-                            <fieldset style={{ background: "none", border: "2px solid black" }} >
-                                <legend style={{ padding: "10px" }}>fonctionalités</legend>
+                            <Field ref={imputFocus} style={{ margin: ".4rem" }} label="designation" name="designation" disabled={disabled} />
+                            <fieldset className="border-2 border-black-600 p-5"  >
+                                <legend className="p-5">fonctionalités</legend>
                                 <div className="ml-8 p-4">
-                                    <div >
-                                 <input
-                                    id="gestions_des_clients"
-                                    nombre-colonnes="2"
-                                    type="checkbox"
-                                    className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                                 />
-                                    <label htmlFor="gestions_des_clients" className="font-medium text-gray-700">gestions des clients</label>
-                                
-                                    </div>
-                                    <ul>
-                                        <li className="ml-8">
+                                    <div className=" float-left">
+                                        <div >
+                                            <input
+                                                id="gestions_des_clients"
+                                                nombre-colonnes="2"
+                                                type="checkbox"
+                                                className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                            />
+                                            <label htmlFor="gestions_des_clients" className="font-medium text-gray-700">gestions des clients</label>
+
+                                        </div>
+                                        <div className="ml-8">
                                             <input
                                                 id="supression_clients"
                                                 nombre-colonnes="2"
@@ -66,8 +67,8 @@ const FormRoleManager = ({
                                                 className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                                             />
                                             <label htmlFor="supression_clients" className="font-medium text-gray-700">supression clients</label>
-                                        </li>
-                                        <li className="ml-8">
+                                        </div>
+                                        <div className="ml-8">
                                             <input
                                                 id="supression_commande_clients"
                                                 nombre-colonnes="2"
@@ -75,19 +76,17 @@ const FormRoleManager = ({
                                                 className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                                             />
                                             <label htmlFor="supression_commande_clients" className="font-medium text-gray-700">supression commande  client</label>
-                                        </li>
-                                    </ul>
-                                    <div className="mt-4">
-                                        <input
-                                            id="gestions des fournisseur"
-                                            nombre-colonnes="2"
-                                            type="checkbox"
-                                            className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                                        />
-                                        <label htmlFor="gestions des fournisseur" className="font-medium text-gray-700">gestions des fournisseur</label>
                                         </div>
-                                    <ul>
-                                        <li className="ml-8">
+                                        <div className="mt-4">
+                                            <input
+                                                id="gestions des fournisseur"
+                                                nombre-colonnes="2"
+                                                type="checkbox"
+                                                className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                            />
+                                            <label htmlFor="gestions des fournisseur" className="font-medium text-gray-700">gestions des fournisseur</label>
+                                        </div>
+                                        <div className="ml-8">
                                             <input
                                                 id="supression fournisseur"
                                                 nombre-colonnes="2"
@@ -95,8 +94,8 @@ const FormRoleManager = ({
                                                 className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                                             />
                                             <label htmlFor="supression fournisseur" className="font-medium text-gray-700">supression fournisseur</label>
-                                        </li>
-                                        <li className="ml-8">
+                                        </div>
+                                        <div className="ml-8">
                                             <input
                                                 id="supression commande  fournisseur"
                                                 nombre-colonnes="2"
@@ -104,19 +103,44 @@ const FormRoleManager = ({
                                                 className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                                             />
                                             <label htmlFor="supression commande  fournisseur" className="font-medium text-gray-700">supression commande  fournisseur</label>
-                                        </li>
-                                    </ul>
-                                    <div className="mt-4">
-                                        <input
-                                            id="gestions d'achats"
-                                            nombre-colonnes="2"
-                                            type="checkbox"
-                                            className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                                        />
-                                        <label htmlFor="gestions d'achats" className="font-medium text-gray-700">gestions d'achats</label>
-                                    </div>
-                                    <ul>
-                                        <li className="ml-8">
+                                        </div>
+                                        <div className="mt-4">
+                                            <input
+                                                id="gestions des dums et decharge"
+                                                nombre-colonnes="2"
+                                                type="checkbox"
+                                                className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                            />
+                                            <label htmlFor="gestions des dums et decharge" className="font-medium text-gray-700">gestions des dums et decharge</label>
+                                        </div>
+                                        <div className="ml-8">
+                                            <input
+                                                id="supression dums"
+                                                nombre-colonnes="2"
+                                                type="checkbox"
+                                                className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                            />
+                                            <label htmlFor="supression dums" className="font-medium text-gray-700">supression dums</label>
+                                        </div>
+                                        <div className="ml-8">
+                                            <input
+                                                id="supression decharge"
+                                                nombre-colonnes="2"
+                                                type="checkbox"
+                                                className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                            />
+                                            <label htmlFor="supression decharge" className="font-medium text-gray-700">supression decharge</label>
+                                        </div>
+                                        <div className="mt-4">
+                                            <input
+                                                id="gestions d'achats"
+                                                nombre-colonnes="2"
+                                                type="checkbox"
+                                                className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                            />
+                                            <label htmlFor="gestions d'achats" className="font-medium text-gray-700">gestions d'achats</label>
+                                        </div>
+                                        <div className="ml-8">
                                             <input
                                                 id="supression bon d'achats"
                                                 nombre-colonnes="2"
@@ -124,8 +148,8 @@ const FormRoleManager = ({
                                                 className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                                             />
                                             <label htmlFor="supression bon d'achats" className="font-medium text-gray-700">supression bon d'achats</label>
-                                        </li>
-                                        <li className="ml-8">
+                                        </div>
+                                        <div className="ml-8">
                                             <input
                                                 id="supression bon de retours"
                                                 nombre-colonnes="2"
@@ -133,9 +157,8 @@ const FormRoleManager = ({
                                                 className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                                             />
                                             <label htmlFor="supression bon de retours" className="font-medium text-gray-700">supression bon de retours</label>
-                                        </li>
-                                    </ul>
-                                 <div>
+                                        </div>
+
                                         <div className="mt-4">
                                             <input
                                                 id="gestions des production"
@@ -145,26 +168,28 @@ const FormRoleManager = ({
                                             />
                                             <label htmlFor="gestions des production" className="font-medium text-gray-700">gestions des production</label>
                                         </div>
-                                        <ul>
-                                            <li className="ml-8">
-                                                <input
-                                                    id="supression fiche de production"
-                                                    nombre-colonnes="2"
-                                                    type="checkbox"
-                                                    className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                                                />
-                                                <label htmlFor="supression fiche de production" className="font-medium text-gray-700">supression fiche de production</label>
-                                            </li>
-                                            <li className="ml-8">
-                                                <input
-                                                    id="supression article"
-                                                    nombre-colonnes="2"
-                                                    type="checkbox"
-                                                    className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                                                />
-                                                <label htmlFor="supression article" className="font-medium text-gray-700">supression article</label>
-                                            </li>
-                                        </ul>
+
+
+                                        <div className="ml-8">
+                                            <input
+                                                id="supression fiche de production"
+                                                nombre-colonnes="2"
+                                                type="checkbox"
+                                                className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                            />
+                                            <label htmlFor="supression fiche de production" className="font-medium text-gray-700">supression fiche de production</label>
+                                        </div>
+                                        <div className="ml-8">
+                                            <input
+                                                id="supression article"
+                                                nombre-colonnes="2"
+                                                type="checkbox"
+                                                className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                            />
+                                            <label htmlFor="supression article" className="font-medium text-gray-700">supression article</label>
+                                        </div>
+                                    </div>
+                                    <div className=" float-right">
                                         <div className="mt-4">
                                             <input
                                                 id="vente et facturation"
@@ -174,17 +199,15 @@ const FormRoleManager = ({
                                             />
                                             <label htmlFor="vente et facturation" className="font-medium text-gray-700">vente et facturation</label>
                                         </div>
-                                        <ul>
-                                            <li className="ml-8">
-                                                <input
-                                                    id="supression de facturation"
-                                                    nombre-colonnes="2"
-                                                    type="checkbox"
-                                                    className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                                                />
-                                                <label htmlFor="supression de facturation" className="font-medium text-gray-700">supression de facturation</label>
-                                            </li>
-                                            </ul>
+                                        <div className="ml-8">
+                                            <input
+                                                id="supression de facturation"
+                                                nombre-colonnes="2"
+                                                type="checkbox"
+                                                className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                            />
+                                            <label htmlFor="supression de facturation" className="font-medium text-gray-700">supression de facturation</label>
+                                        </div>
                                         <div className="mt-4">
                                             <input
                                                 id="gestions des utilisateurs"
@@ -194,17 +217,24 @@ const FormRoleManager = ({
                                             />
                                             <label htmlFor="gestions des utilisateurs" className="font-medium text-gray-700">gestions des utilisateurs</label>
                                         </div>
-                                        <ul>
-                                            <li className="ml-8">
-                                                <input
-                                                    id="supression de utilisateur"
-                                                    nombre-colonnes="2"
-                                                    type="checkbox"
-                                                    className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                                                />
-                                                <label htmlFor="supression de utilisateur" className="font-medium text-gray-700">supression de utilisateur</label>
-                                            </li>
-                                        </ul>
+                                        <div className="ml-8">
+                                            <input
+                                                id="supression de utilisateur"
+                                                nombre-colonnes="2"
+                                                type="checkbox"
+                                                className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                            />
+                                            <label htmlFor="supression de utilisateur" className="font-medium text-gray-700">supression de utilisateur</label>
+                                        </div>
+                                        <div className="ml-8">
+                                            <input
+                                                id="supression de utilisateur"
+                                                nombre-colonnes="2"
+                                                type="checkbox"
+                                                className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                            />
+                                            <label htmlFor="supression de utilisateur" className="font-medium text-gray-700">supression de role</label>
+                                        </div>
                                         <div className="mt-4">
                                             <input
                                                 id="gestions des colissage"
@@ -214,17 +244,16 @@ const FormRoleManager = ({
                                             />
                                             <label htmlFor="gestions des colissage" className="font-medium text-gray-700">gestions des colissage</label>
                                         </div>
-                                        <ul>
-                                            <li className="ml-8">
-                                                <input
-                                                    id="supression de fiche colissage"
-                                                    nombre-colonnes="2"
-                                                    type="checkbox"
-                                                    className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                                                />
-                                                <label htmlFor="supression de fiche colissage" className="font-medium text-gray-700">supression de fiche colissage</label>
-                                            </li>
-                                        </ul>
+
+                                        <div className="ml-8">
+                                            <input
+                                                id="supression de fiche colissage"
+                                                nombre-colonnes="2"
+                                                type="checkbox"
+                                                className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                            />
+                                            <label htmlFor="supression de fiche colissage" className="font-medium text-gray-700">supression de fiche colissage</label>
+                                        </div>
                                         <div className="mt-4">
                                             <input
                                                 id="gestions des table"
@@ -243,10 +272,9 @@ const FormRoleManager = ({
                                             />
                                             <label htmlFor="Editions des En-tete" className="font-medium text-gray-700">Editions des En-tete</label>
                                         </div>
+                                    </div>
+
                                 </div>
-                                
-                                </div>
-                             
                             </fieldset>
                         </div>
                     </div>
@@ -289,7 +317,7 @@ const FormRoleManager = ({
                     </Bcyan>
                 )}
             </div>
-        </Section>
+        </Section >
     );
 };
 

@@ -5,17 +5,16 @@ import DeleteRole from 'components/reference2/DeleteRole';
 import RestoreRole from 'components/reference2/RestoreRole';
 import { usePaginationRolesQuery } from 'config/rtk';
 import React, { useRef, useState } from 'react';
-import { REQUEST_SAVE } from 'tools/consts';
-import Section from 'widgets/Section';
-import { MenuItems } from 'widgets/TypeWidgets';
-import { REQUEST_EDIT } from 'tools/consts';
+import { REQUEST_EDIT, REQUEST_SAVE } from 'tools/consts';
 import { r0, Role } from 'tools/types';
 import Bcyan from 'widgets/Bcyan';
 import { Button } from 'widgets/Button';
 import Icon from 'widgets/Icon';
 import Mitems from 'widgets/Mitems';
 import Pagin from 'widgets/Pagin';
+import Section from 'widgets/Section';
 import Table from 'widgets/Table';
+import { MenuItems } from 'widgets/TypeWidgets';
 import FormRoleManager from './FormRoleManager';
 function ListRoleManager() {
     const search = (key: string, obj: Role[]): Role[] => {

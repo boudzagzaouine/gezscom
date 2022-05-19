@@ -2,7 +2,7 @@ import {
     PencilAltIcon
 } from "@heroicons/react/solid";
 import { useAddTypeMutation, useEditTypeMutation } from "config/rtk";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
     REQUEST_EDIT,
     REQUEST_SAVE
@@ -33,17 +33,22 @@ const FormTypeManager = ({
     const [disabled, setDisabled] = useState(disable);
     const text = "nouveau"
     const text1 = "modifier"
+    const imputFocus = useRef(null)
+    useEffect(() => {
+        /*  @ts-ignore*/
+        imputFocus.current.focus()
+    }, [])
     return (
         <Section>
             <div className="float-left w-full text-xs">
                 {/*  @ts-ignore*/}
                 <Form defaultValues={Type} onSubmit={onSubmit}>
                     {request == REQUEST_SAVE ? <h1 className="mb-2">{text} type </h1> : <h1 className="mb-2">{text1} type </h1>}
-            
+
                     <div className="float-left w-5/6">
                         <div className="float-left w-1/2">
                             {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
-                            <Field label="designation" name="designation" disabled={disabled} />
+                            <Field ref={imputFocus} label="designation" name="designation" disabled={disabled} />
                         </div>
                     </div>
                     <div className="float-left w-full mt-1">
