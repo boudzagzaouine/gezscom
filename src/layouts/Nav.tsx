@@ -210,14 +210,14 @@ export default  function Nav({ selected ,loading}: NavProps) {
                       <Menu.Item>
                         {({ active }) => (
                         <a
-                            href="api/auth/signin"
+                            href="/api/auth/signin"
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                             onClick={(e:any)=>{
-                              e.preventDefault()
-                              signIn("keycloak")
+                              //e.preventDefault()
+                              //signIn("keycloak")
                               /* signIn("keycloak")
                             window.location.href='/' */
                             }}
@@ -229,7 +229,7 @@ export default  function Nav({ selected ,loading}: NavProps) {
                       <Menu.Item>
                         {({ active }) => (
                       <a
-                            href="api/auth/signout"
+                            href="/api/auth/signout"
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
