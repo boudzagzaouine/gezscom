@@ -32,11 +32,11 @@ function ListUtilisateur({setEstAjt,setShowUser,setModifier,setUsername}:ListUti
     };
     const { data = [], isFetching, refetch } = usePaginationClientsQuery(page);
     useEffect(() => {
-      axios.get(URL_API_SEC+"/user")
+    /*   axios.get(URL_API_SEC+"/user")
         .then((rep) => {
           setUsers(rep.data)
           console.log(rep.data)
-        })
+        }) */
     }, [])
  
     const FromDetails = (u:any) => {

@@ -32,7 +32,7 @@ const Layout =   ({ children }: LayoutProps) => {
     }else{
       setLoading(false)
       setTimeout(() => {
-        signIn("keycloak")
+     //   signIn("keycloak")
       }, 200);
     } 
     //const token = await getToken()
@@ -60,7 +60,7 @@ const Layout =   ({ children }: LayoutProps) => {
     return (
       <>
         <Nav selected={selected} loading={true} />
-        {loading && session && status === "authenticated" && block()}
+        { loading && session && status === "authenticated" &&  block()}
        {/*  {loading && session && <section className="bg-slate-100 float-left w-full">
           <div className="w-1/6 float-left">
             <NavVert updateSel={updateSel} />
@@ -69,10 +69,12 @@ const Layout =   ({ children }: LayoutProps) => {
   
         </section>}
         {loading && !session && <img src="/images/wait.gif" className="w-1/4 float-left" alt="" />}
-        {!loading  && !session && <div><h1>gescom</h1></div> } */}
+        {!loading  && !session && <div><h1>gescom</h1></div> } 
+        
+        */}
       </>
     );
-  
+  //
 };
 
 export default Layout;

@@ -44,13 +44,13 @@ const NavVert = ({ updateSel }: NavVertProps) => {
       active: route.pathname == "/manager/vendor/VendorManager",
       sous: []
     },
-    {id:USER_MANAGER,
+    /* {id:USER_MANAGER,
       icon: "user-circle",
       text: "Gestion Utilisateur",
       link: "/gestionutilisateur/GestionUtilisateur",
       active: route.pathname == "/gestionutilisateur/GestionUtilisateur",
       sous:[]
-    },
+    }, */
     {
       id: PURCHASE_MANAGER,
       icon: "shopping-bag",
