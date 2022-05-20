@@ -6,9 +6,9 @@ export default nextAuth ({
         
   providers : [
           KeycloakProvider({
-                  clientId:"client",
-                  clientSecret:"Jun7YoJV2teiXyQvhRaTn11JeuneSr4w",
-                  issuer: "http://localhost:4002/realms/gescom"
+                  clientId:process.env.NEXT_API_CLIENT||"",
+                  clientSecret:process.env.NEXT_API_SEC||"",
+                  issuer: process.env.NEXT_URL_API_KEY
           }),
           
                
