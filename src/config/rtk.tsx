@@ -1,13 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { PAGE_SIZE } from "tools/consts";
-import { AdressLiv, Article, ArticleCommande, BureauDouane, Client, Commande, PayementMode, RawMaterial, RegimeDouanier,Declarant, Incoterm,  UnitMeasure,
-  Devise, Pays, Transporteur, Ville, Role, Type, Document, CommandeFournisseur, Fournisseur, LigneDeCommande, MatierePremiere 
+import {
+  AdressLiv, Article, ArticleCommande, BureauDouane, Client, Commande, PayementMode, RawMaterial, RegimeDouanier, Declarant, Incoterm, UnitMeasure,
+  Devise, Pays, Transporteur, Ville, Role, Type, Document, CommandeFournisseur, Fournisseur, LigneDeCommande, MatierePremiere
 } from "tools/types";
 
 export const crudApi = createApi({
   reducerPath: "crud-api",
   baseQuery: fetchBaseQuery({
-    baseUrl:process.env.NEXT_PUBLIC_URL,
+    baseUrl: process.env.NEXT_PUBLIC_URL,
     prepareHeaders(headers) {
       return headers;
     },
@@ -26,14 +27,14 @@ export const crudApi = createApi({
       }),
       fetchOneClient: builder.query<Client, string>({
         query: (id) => `/clients/${id}`,
-     }),
+      }),
       addClient: builder.mutation<Client, Partial<Client>>({
         query: (body) => ({
           url: "/clients",
           method: "POST",
           body,
         }),
-       }),
+      }),
       editClient: builder.mutation<
         Client,
         Partial<Client> & Pick<Client, "id">
@@ -52,7 +53,8 @@ export const crudApi = createApi({
             url: `/clients/${id.id}`,
             method: "DELETE",
           };
-       }}),
+        }
+      }),
       archiveClient: builder.mutation<
         Client,
         Partial<Client> & Pick<Client, "id">
@@ -71,9 +73,9 @@ export const crudApi = createApi({
           method: "PUT",
         }),
       }),
-       /*****************************************************************************/
+      /*****************************************************************************/
       /*********************************AdressLiv***********************************/
-     /*****************************************************************************/
+      /*****************************************************************************/
       fetchAdressLivs: builder.query<AdressLiv[], void>({
         query: () => `/adressLivs`,
       }),
@@ -85,14 +87,14 @@ export const crudApi = createApi({
       }),
       fetchOneAdressLiv: builder.query<AdressLiv, string>({
         query: (id) => `/adressLivs/${id}`,
-     }),
+      }),
       addAdressLiv: builder.mutation<AdressLiv, Partial<AdressLiv>>({
         query: (body) => ({
           url: "/adressLivs/post",
           method: "POST",
           body,
         }),
-       }),
+      }),
       editAdressLiv: builder.mutation<
         AdressLiv,
         Partial<AdressLiv> & Pick<AdressLiv, "id">
@@ -111,7 +113,8 @@ export const crudApi = createApi({
             url: `/adressLivs/${id.id}`,
             method: "DELETE",
           };
-       }}),
+        }
+      }),
       archiveAdressLiv: builder.mutation<
         AdressLiv,
         Partial<AdressLiv> & Pick<AdressLiv, "id">
@@ -130,8 +133,8 @@ export const crudApi = createApi({
           method: "PUT",
         }),
       }),
-        /****************************************************************************/
-       /*************************COMMANDE*******************************************/
+      /****************************************************************************/
+      /*************************COMMANDE*******************************************/
       /****************************************************************************/
       fetchCommandes: builder.query<Commande[], void>({
         query: () => `/commandes`,
@@ -144,13 +147,14 @@ export const crudApi = createApi({
       }),
       fetchOneCommande: builder.query<Commande, string>({
         query: (id) => `/commandes/${id}`,
-     }),
+      }),
       addCommande: builder.mutation<Commande, Partial<Commande>>({
         query: (body) => ({
           url: `/commandes`,
           method: "POST",
           body,
-        })}),
+        })
+      }),
       editCommande: builder.mutation<
         Commande,
         Partial<Commande> & Pick<Commande, "id">
@@ -167,12 +171,12 @@ export const crudApi = createApi({
       >({
         //@ts-ignore
         query(id: Num) {
-         return {
+          return {
             url: `/commandes/${id.id}`,
             method: "DELETE",
           }
-       },
-       }),
+        },
+      }),
       archiveCommande: builder.mutation<
         Commande,
         Partial<Commande> & Pick<Commande, "id">
@@ -191,18 +195,19 @@ export const crudApi = createApi({
           method: "PUT",
         }),
       }),
-       /*****************************************************************************/
+      /*****************************************************************************/
       /*******************************ARTICLE***************************************/
       /*****************************************************************************/
       fetchArticles: builder.query<Article[], number | void>({
         query() {
           return "/articles";
-        }  }),
+        }
+      }),
       paginationArticles: builder.query<Article[], number | void>({
         query(page: number) {
           return "/articles?page=" + page + "&size=" + PAGE_SIZE;
         },
-         }),
+      }),
       fetchOneArticle: builder.query<Article, String>({
         query: (id) => `/articles/${id}`,
       }),
@@ -235,7 +240,7 @@ export const crudApi = createApi({
             method: "DELETE",
           };
         },
-       }),
+      }),
       archiveArticle: builder.mutation<
         Article,
         Partial<Article> & Pick<Article, "id">
@@ -254,20 +259,20 @@ export const crudApi = createApi({
           method: "PUT",
         }),
       }),
-  /*****************************************************************************/
- /*********************BUREAU DOUANE*******************************************/
-/*****************************************************************************/
+      /*****************************************************************************/
+      /*********************BUREAU DOUANE*******************************************/
+      /*****************************************************************************/
 
       fetchBureauDouanes: builder.query<BureauDouane[], number | void>({
         query() {
           return "/bureauDouanes";
         },
-          }),
+      }),
       paginationBureauDouanes: builder.query<BureauDouane[], number | void>({
         query(page: number) {
           return "bureauDouanes?page=" + page + "&size=" + PAGE_SIZE;
         },
-          }),
+      }),
       fetchOneBureauDouane: builder.query<BureauDouane, String>({
         query: (id) => `/bureauDouanes/${id}`,
       }),
@@ -294,14 +299,14 @@ export const crudApi = createApi({
       >({
         //@ts-ignore
         query(id: String) {
-         return {
-           //@ts-ignore
+          return {
+            //@ts-ignore
             url: `/bureauDouanes/${id.id}`,
             method: "DELETE",
           };
           // else return
         },
-        }),
+      }),
       archiveBureauDouane: builder.mutation<
         BureauDouane,
         Partial<BureauDouane> & Pick<BureauDouane, "id">
@@ -320,19 +325,19 @@ export const crudApi = createApi({
           method: "PUT",
         }),
       }),
-  /*****************************************************************************/
+      /*****************************************************************************/
       /****************************PAYMENT MODE*************************************************/
       /*****************************************************************************/
       fetchPayementModes: builder.query<PayementMode[], number | void>({
         query() {
           return "/payementModes";
         },
-         }),
+      }),
       paginationPayementModes: builder.query<PayementMode[], number | void>({
         query(page: number) {
           return "payementModes?page=" + page + "&size=" + PAGE_SIZE;
         },
-         }),
+      }),
       fetchOnePayementMode: builder.query<PayementMode, String>({
         query: (id) => `/payementModes/${id}`,
         //@ts-ignore
@@ -344,7 +349,7 @@ export const crudApi = createApi({
           method: "POST",
           body,
         }),
-       }),
+      }),
       editPayementMode: builder.mutation<
         PayementMode,
         Partial<PayementMode> & Pick<PayementMode, "id">
@@ -369,7 +374,7 @@ export const crudApi = createApi({
           };
           // else return
         },
-     }),
+      }),
       archivePayementMode: builder.mutation<
         PayementMode,
         Partial<PayementMode> & Pick<PayementMode, "id">
@@ -388,7 +393,7 @@ export const crudApi = createApi({
           method: "PUT",
         }),
       }),
-         /*****************************************************************************/
+      /*****************************************************************************/
       /**********************MATERIAL*******************************************************/
       /*****************************************************************************/
 
@@ -396,12 +401,12 @@ export const crudApi = createApi({
         query() {
           return "/rawMaterials";
         },
-     }),
+      }),
       paginationRawMaterials: builder.query<RawMaterial[], number | void>({
         query(page: number) {
           return "rawMaterials?page=" + page + "&size=" + PAGE_SIZE;
         },
-         }),
+      }),
       fetchOneRawMaterial: builder.query<RawMaterial, String>({
         query: (id) => `/rawMaterials/${id}`,
       }),
@@ -411,7 +416,7 @@ export const crudApi = createApi({
           method: "POST",
           body,
         }),
-     }),
+      }),
       editRawMaterial: builder.mutation<
         RawMaterial,
         Partial<RawMaterial> & Pick<RawMaterial, "id">
@@ -436,7 +441,7 @@ export const crudApi = createApi({
           };
           // else return
         },
-       }),
+      }),
       archiveRawMaterial: builder.mutation<
         RawMaterial,
         Partial<RawMaterial> & Pick<RawMaterial, "id">
@@ -464,12 +469,12 @@ export const crudApi = createApi({
         query() {
           return "/regimeDouaniers";
         },
-       }),
+      }),
       paginationRegimeDouaniers: builder.query<RegimeDouanier[], number | void>({
         query(page: number) {
           return "regimeDouaniers?page=" + page + "&size=" + PAGE_SIZE;
         },
-           }),
+      }),
       fetchOneRegimeDouanier: builder.query<RegimeDouanier, String>({
         query: (id) => `/regimeDouaniers/${id}`,
       }),
@@ -504,7 +509,7 @@ export const crudApi = createApi({
           };
           // else return
         },
-       }),
+      }),
       archiveRegimeDouanier: builder.mutation<
         RegimeDouanier,
         Partial<RegimeDouanier> & Pick<RegimeDouanier, "id">
@@ -523,7 +528,7 @@ export const crudApi = createApi({
           method: "PUT",
         }),
       }),
-     /*****************************************************************************/
+      /*****************************************************************************/
       /************************UNITE MESURE*****************************************************/
       /*****************************************************************************/
 
@@ -531,12 +536,12 @@ export const crudApi = createApi({
         query() {
           return "/unitMeasures";
         },
-         }),
+      }),
       paginationUnitMeasures: builder.query<UnitMeasure[], number | void>({
         query(page: number) {
           return "unitMeasures?page=" + page + "&size=" + PAGE_SIZE;
         },
-        }),
+      }),
       fetchOneUnitMeasure: builder.query<UnitMeasure, String>({
         query: (id) => `/unitMeasures/${id}`,
         //@ts-ignore
@@ -604,12 +609,12 @@ export const crudApi = createApi({
         query() {
           return "/declarants";
         },
-          }),
+      }),
       paginationDeclarants: builder.query<Declarant[], number | void>({
         query(page: number) {
           return "declarants?page=" + page + "&size=" + PAGE_SIZE;
         },
-         }),
+      }),
       fetchOneDeclarant: builder.query<Declarant, String>({
         query: (id) => `/declarants/${id}`,
         //@ts-ignore
@@ -646,7 +651,7 @@ export const crudApi = createApi({
           };
           // else return
         },
-       }),
+      }),
       archiveDeclarant: builder.mutation<
         Declarant,
         Partial<Declarant> & Pick<Declarant, "id">
@@ -675,12 +680,12 @@ export const crudApi = createApi({
         query() {
           return "/incoterms";
         },
-         }),
+      }),
       paginationIncoterms: builder.query<Incoterm[], number | void>({
         query(page: number) {
           return "incoterms?page=" + page + "&size=" + PAGE_SIZE;
         },
-          }),
+      }),
       fetchOneIncoterm: builder.query<Incoterm, String>({
         query: (id) => `/incoterms/${id}`,
         //@ts-ignore
@@ -692,7 +697,7 @@ export const crudApi = createApi({
           method: "POST",
           body,
         }),
-       }),
+      }),
       editIncoterm: builder.mutation<
         Incoterm,
         Partial<Incoterm> & Pick<Incoterm, "id">
@@ -717,7 +722,7 @@ export const crudApi = createApi({
           };
           // else return
         },
-        }),
+      }),
       archiveIncoterm: builder.mutation<
         Incoterm,
         Partial<Incoterm> & Pick<Incoterm, "id">
@@ -737,7 +742,7 @@ export const crudApi = createApi({
         }),
       }),
 
-  /********************************************************************************************* */
+      /********************************************************************************************* */
       /********************************Transporteur************************************************************* */
       /********************************************************************************************* */
       fetchTransporteurs: builder.query<Transporteur[], void>({
@@ -791,7 +796,7 @@ export const crudApi = createApi({
       >({
         query: (id) => ({
           url: `/transporteurs/${id}/archive`,
-          method: "PUT",
+          method: "PATCH",
         }),
       }),
       restoreTransporteur: builder.mutation<
@@ -821,7 +826,7 @@ export const crudApi = createApi({
           method: "POST",
           body,
         }),
-       }),
+      }),
       editDocument: builder.mutation<
 
         Document,
@@ -857,7 +862,7 @@ export const crudApi = createApi({
       >({
         query: (id) => ({
           url: `/documents/${id}/archive`,
-          method: "PUT",
+          method: "PATCH",
         }),
       }),
       restoreDocument: builder.mutation<
@@ -913,7 +918,7 @@ export const crudApi = createApi({
           };
           // else return
         },
-       }),
+      }),
       archiveDevise: builder.mutation<
         Devise,
         //@ts-ignore
@@ -921,7 +926,7 @@ export const crudApi = createApi({
       >({
         query: (id) => ({
           url: `/devises/${id}/archive`,
-          method: "PUT",
+          method: "PATCH",
         }),
       }),
       restoreDevise: builder.mutation<
@@ -980,7 +985,7 @@ export const crudApi = createApi({
       >({
         query: (id) => ({
           url: `/pays/${id}/archive`,
-          method: "PUT",
+          method: "PATCH",
         }),
       }),
       restorePays: builder.mutation<
@@ -1045,7 +1050,7 @@ export const crudApi = createApi({
       >({
         query: (id) => ({
           url: `/villes/${id}/archive`,
-          method: "PUT",
+          method: "PATCH",
         }),
       }),
       restoreVille: builder.mutation<
@@ -1113,7 +1118,7 @@ export const crudApi = createApi({
       >({
         query: (id) => ({
           url: `/types/${id}/archive`,
-          method: "PUT",
+          method: "PATCH",
         }),
       }),
       restoreType: builder.mutation<
@@ -1180,7 +1185,7 @@ export const crudApi = createApi({
       >({
         query: (id) => ({
           url: `/roles/${id}/archive`,
-          method: "PUT",
+          method: "PATCH",
         }),
       }),
       restoreRole: builder.mutation<
@@ -1205,7 +1210,7 @@ export const crudApi = createApi({
       }),
 
       addFournisseur: builder.mutation<Fournisseur, Partial<Fournisseur>>({
-        query: (body)=>({
+        query: (body) => ({
           url: "/fournisseurs",
           method: "POST",
           body,
@@ -1213,9 +1218,9 @@ export const crudApi = createApi({
       }),
 
       editFournisseur: builder.mutation<Fournisseur, Partial<Fournisseur> & Pick<Fournisseur, "id">>({
-        query:(body)=> ({
-          url:`/fournisseurs/${body.id}`,
-          method:"PUT",
+        query: (body) => ({
+          url: `/fournisseurs/${body.id}`,
+          method: "PUT",
           body,
         }),
       }),
@@ -1223,12 +1228,13 @@ export const crudApi = createApi({
       deleteFournisseur: builder.mutation<{ success: boolean; id: number }, number>({
         //@ts-ignore
         query(id: Num) {
-        
+
           return {
             url: `/fournisseurs/${id.id}`,
             method: "DELETE",
-          };        
-        }}),
+          };
+        }
+      }),
 
       archiveFournisseur: builder.mutation<Fournisseur, Partial<Fournisseur> & Pick<Fournisseur, "id">>({
         query: (id) => ({
@@ -1251,11 +1257,11 @@ export const crudApi = createApi({
       /*******************************************************/
       /******************CommandeFournisseur******************/
       fetchCommandesFournisseur: builder.query<CommandeFournisseur[], void>({
-        query:()=>"/commandeFournisseurs",
+        query: () => "/commandeFournisseurs",
       }),
 
-      paginationCommandesFournisseur: builder.query<CommandeFournisseur[], number >({
-        query:(page) =>`/commandeFournisseurs?page=${page}&size=${PAGE_SIZE}`,
+      paginationCommandesFournisseur: builder.query<CommandeFournisseur[], number>({
+        query: (page) => `/commandeFournisseurs?page=${page}&size=${PAGE_SIZE}`,
       }),
 
       fetchOneCommandeFournisseur: builder.query<CommandeFournisseur, string>({
@@ -1263,8 +1269,8 @@ export const crudApi = createApi({
         //@ts-ignore
       }),
 
-      fetchCommandesFournisseurByIdFournisseur:builder.query<CommandeFournisseur[],string>({
-        query:(idFournisseur)=>`/commandeFournisseurs/idfournisseurs/${idFournisseur}`,
+      fetchCommandesFournisseurByIdFournisseur: builder.query<CommandeFournisseur[], string>({
+        query: (idFournisseur) => `/commandeFournisseurs/idfournisseurs/${idFournisseur}`,
       }),
 
       addCommandeFournisseur: builder.mutation<CommandeFournisseur, Partial<CommandeFournisseur>>({
@@ -1276,7 +1282,7 @@ export const crudApi = createApi({
       }),
 
       editCommandeFournisseur: builder.mutation<
-      CommandeFournisseur,
+        CommandeFournisseur,
         Partial<CommandeFournisseur> & Pick<CommandeFournisseur, "id">
       >({
         query: (body) => ({
@@ -1293,10 +1299,11 @@ export const crudApi = createApi({
             url: `/commandeFournisseurs/${id.id}`,
             method: "DELETE",
           };
-        }}),
+        }
+      }),
 
       archiveCommandeFournisseur: builder.mutation<
-      CommandeFournisseur,
+        CommandeFournisseur,
         Partial<CommandeFournisseur> & Pick<CommandeFournisseur, "id">
       >({
         query: (id) => ({
@@ -1306,7 +1313,7 @@ export const crudApi = createApi({
       }),
 
       restoreCommandeFournisseur: builder.mutation<
-      CommandeFournisseur,
+        CommandeFournisseur,
         Partial<CommandeFournisseur> & Pick<CommandeFournisseur, "id">
       >({
         query: (id) => ({
@@ -1317,20 +1324,20 @@ export const crudApi = createApi({
       /*******************************************************/
       /*******************************************************/
       /******************MatierePremiere******************/
-      fetchMatierePremiere: builder.query<MatierePremiere[],void>({
-        query:()=> "/matieresPremiere",
+      fetchMatierePremiere: builder.query<MatierePremiere[], void>({
+        query: () => "/matieresPremiere",
       }),
 
-      paginationMatierePremiere: builder.query<MatierePremiere[], number >({
-        query:(page)=> `/matieresPremiere?page=${page}&size=${PAGE_SIZE}`,
+      paginationMatierePremiere: builder.query<MatierePremiere[], number>({
+        query: (page) => `/matieresPremiere?page=${page}&size=${PAGE_SIZE}`,
       }),
 
       fetchOneMatierePremiere: builder.query<MatierePremiere, string>({
         query: (id) => `/matieresPremiere/${id}`,
       }),
 
-      fetchMatierePremiereByIdFournisseur:builder.query<MatierePremiere[],string>({
-        query:(idFournisseur)=>`/matieresPremiere/idfournisseurs/${idFournisseur}`,
+      fetchMatierePremiereByIdFournisseur: builder.query<MatierePremiere[], string>({
+        query: (idFournisseur) => `/matieresPremiere/idfournisseurs/${idFournisseur}`,
       }),
 
       addMatierePremiere: builder.mutation<MatierePremiere, Partial<MatierePremiere>>({
@@ -1342,7 +1349,7 @@ export const crudApi = createApi({
       }),
 
       editMatierePremiere: builder.mutation<
-      MatierePremiere,
+        MatierePremiere,
         Partial<MatierePremiere> & Pick<MatierePremiere, "id">
       >({
         query: (body) => ({
@@ -1359,10 +1366,11 @@ export const crudApi = createApi({
             url: `/matieresPremiere/${id.id}`,
             method: "DELETE",
           };
-        }}),
+        }
+      }),
 
       archiveMatierePremiere: builder.mutation<
-      MatierePremiere,
+        MatierePremiere,
         Partial<MatierePremiere> & Pick<MatierePremiere, "id">
       >({
         query: (id) => ({
@@ -1372,7 +1380,7 @@ export const crudApi = createApi({
       }),
 
       restoreMatierePremiere: builder.mutation<
-      MatierePremiere,
+        MatierePremiere,
         Partial<MatierePremiere> & Pick<MatierePremiere, "id">
       >({
         query: (id) => ({
@@ -1383,24 +1391,24 @@ export const crudApi = createApi({
       /*******************************************************/
       /*******************************************************/
       /******************LigneDeCommande******************/
-      fetchLigneDeCommande: builder.query<LigneDeCommande[],void>({
-        query:()=> "/lignesDecommand",
+      fetchLigneDeCommande: builder.query<LigneDeCommande[], void>({
+        query: () => "/lignesDecommand",
       }),
 
-      paginationLigneDeCommande: builder.query<LigneDeCommande[], number >({
-        query:(page)=> `/lignesDecommand?page=${page}&size=${PAGE_SIZE}`,
+      paginationLigneDeCommande: builder.query<LigneDeCommande[], number>({
+        query: (page) => `/lignesDecommand?page=${page}&size=${PAGE_SIZE}`,
       }),
 
       fetchOneLigneDeCommande: builder.query<LigneDeCommande, string>({
         query: (id) => `/lignesDecommand/${id}`,
       }),
 
-      fetchLigneDeCommandeByIdCommandeFournisseur:builder.query<LigneDeCommande[],string>({
-        query:(idCommandeFournisseur)=>`/lignesDecommand/idcommandefournisseur/${idCommandeFournisseur}`,
+      fetchLigneDeCommandeByIdCommandeFournisseur: builder.query<LigneDeCommande[], string>({
+        query: (idCommandeFournisseur) => `/lignesDecommand/idcommandefournisseur/${idCommandeFournisseur}`,
       }),
 
-      fetchLigneDeCommandeByIdMatierePremiere:builder.query<LigneDeCommande[],string>({
-        query:(idMatierePremiere)=>`/lignesDecommand/idmatierepremiere/${idMatierePremiere}`,
+      fetchLigneDeCommandeByIdMatierePremiere: builder.query<LigneDeCommande[], string>({
+        query: (idMatierePremiere) => `/lignesDecommand/idmatierepremiere/${idMatierePremiere}`,
       }),
 
       addLigneDeCommande: builder.mutation<LigneDeCommande, Partial<LigneDeCommande>>({
@@ -1412,7 +1420,7 @@ export const crudApi = createApi({
       }),
 
       editLigneDeCommande: builder.mutation<
-      LigneDeCommande,
+        LigneDeCommande,
         Partial<LigneDeCommande> & Pick<LigneDeCommande, "id">
       >({
         query: (body) => ({
@@ -1429,10 +1437,11 @@ export const crudApi = createApi({
             url: `/lignesDecommand/${id.id}`,
             method: "DELETE",
           };
-        }}),
+        }
+      }),
 
       archiveLigneDeCommande: builder.mutation<
-      LigneDeCommande,
+        LigneDeCommande,
         Partial<LigneDeCommande> & Pick<LigneDeCommande, "id">
       >({
         query: (id) => ({
@@ -1442,7 +1451,7 @@ export const crudApi = createApi({
       }),
 
       restoreLigneDeCommande: builder.mutation<
-      LigneDeCommande,
+        LigneDeCommande,
         Partial<LigneDeCommande> & Pick<LigneDeCommande, "id">
       >({
         query: (id) => ({
@@ -1451,20 +1460,20 @@ export const crudApi = createApi({
         }),
       }),
       /**************************************************************************************************************/
-       /*******************************************ARTICLE COMMANDE***************************************************/
+      /*******************************************ARTICLE COMMANDE***************************************************/
       /**************************************************************************************************************/
       fetchArticleCommandes: builder.query<ArticleCommande[], void>({
-        query:()=>`/articlecommandes`
-        }),
+        query: () => `/articlecommandes`
+      }),
       fetchArticleCommandesByIdCommande: builder.query<ArticleCommande[], string>({
         query: (idcom) => `/articlecommandes/idcom/${idcom}`,
       }),
-      paginationArticleCommandes: builder.query<ArticleCommande[],number>({
-        query:(page)=>`/articlecommandes?page=${page}&size=${PAGE_SIZE}`,
-        }),
+      paginationArticleCommandes: builder.query<ArticleCommande[], number>({
+        query: (page) => `/articlecommandes?page=${page}&size=${PAGE_SIZE}`,
+      }),
       fetchOneArticleCommande: builder.query<ArticleCommande, string>({
         query: (id) => `/articleCommandes/${id}`,
-       }),
+      }),
       addArticleCommande: builder.mutation<
         ArticleCommande,
         Partial<ArticleCommande>
@@ -1520,7 +1529,7 @@ export const crudApi = createApi({
     };
   },
 });
- /***********useMaMethodAfficjageQuery********************************************/
+/***********useMaMethodAfficjageQuery********************************************/
 /***********useMaMethodeOperationMutaion*****************************************/
 export const {
   /******************CLIENT********************************/
@@ -1533,7 +1542,7 @@ export const {
   useDeleteClientMutation,
   useArchiveClientMutation,
   useRestoreClientMutation,
-   /******************AdressLiv****************************/
+  /******************AdressLiv****************************/
   /*******************************************************/
   useFetchAdressLivsQuery,
   usePaginationAdressLivsQuery,
@@ -1698,7 +1707,7 @@ export const {
   useDeleteRoleMutation,
   useArchiveRoleMutation,
   useRestoreRoleMutation,
-    /*******************************************************/
+  /*******************************************************/
   /*******************************************************/
   /******************Fournisseur**************************/
   useFetchFournisseursQuery,

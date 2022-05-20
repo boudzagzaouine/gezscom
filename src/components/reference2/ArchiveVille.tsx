@@ -30,11 +30,7 @@ const ArchiveVille = ({ id }: ArchiveVillePorp, ref: Ref<void>) => {
         //@ts-ignore
         ref.current = openModal;
     });
-    const archiveTemp = () => {
-        axios
-            .patch("http://localhost:1000/api/v1/villes/" + id0 + "/archive")
-            .then(() => { });
-    };
+ 
     return (
         <>
             <Modal title={"archivage"} show={showModal} format={5} close={close}>
@@ -43,7 +39,7 @@ const ArchiveVille = ({ id }: ArchiveVillePorp, ref: Ref<void>) => {
                     <form
                         onSubmit={
                             //@ts-ignore
-                            handleSubmit(archiveTemp)
+                            handleSubmit(archive)
                         }
                     >
                         {" "}
