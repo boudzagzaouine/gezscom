@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { usePaginationClientsQuery } from 'config/rtk';
 import Pagin from 'widgets/Pagin';
+import { URL_API_SEC } from 'tools/consts';
 
 type ListUtilisateurProps={
   setEstAjt:(b:boolean)=>void
@@ -31,7 +32,7 @@ function ListUtilisateur({setEstAjt,setShowUser,setModifier,setUsername}:ListUti
     };
     const { data = [], isFetching, refetch } = usePaginationClientsQuery(page);
     useEffect(() => {
-      axios.get("http://localhost:4002/user")
+      axios.get(URL_API_SEC+"/user")
         .then((rep) => {
           setUsers(rep.data)
           console.log(rep.data)
@@ -57,7 +58,7 @@ function ListUtilisateur({setEstAjt,setShowUser,setModifier,setUsername}:ListUti
 
             console.log(u.username)
             // DELETE request using axios inside useEffect React hook
-            axios.delete("http://localhost:4002/user/delete/" + u.username).then(
+            axios.delete(URL_API_SEC+"/user/delete/" + u.username).then(
             (response) => {
                 console.log("Record Deleted Successfully");
             }, (error) => {

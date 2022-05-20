@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react'
 import Section from "../../widgets/Section"
 import { XIcon } from '@heroicons/react/solid';
 import { DotsHorizontalIcon } from '@heroicons/react/outline';
-import { ROLE } from 'tools/consts';
+import { ROLE, URL_API_SEC } from 'tools/consts';
 import { useForm } from "react-hook-form";
 import { Input } from 'widgets';
 import { useRef } from 'react';
@@ -35,7 +35,7 @@ function NouvelUtilisateur({setEstAjt}:NouvelUtilisateurProps) {
                     role:data.role,
             }
             console.log(newUser)
-            axios.post('http://localhost:4002/user/creer', newUser)
+            axios.post(URL_API_SEC+'/user/creer', newUser)
               .then(function (response) {
                 console.log(response);
               })

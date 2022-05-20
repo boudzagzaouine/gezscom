@@ -40,3 +40,4 @@ export const LIST_FAMILLE_MATIERE_PREMIERE=["", "energetiques", "metalliques", "
 export const ORIGINE=["", "Maroc", "France", "Canada", "Italie"]
 
 export const ROLE = ["","Admin","User"];
+export const URL_API_SEC=process.env.NEXT_URL_API_SEC

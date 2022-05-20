@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react'
 import Section from "../../widgets/Section"
 import { SearchIcon, XIcon } from '@heroicons/react/solid';
 import { DotsHorizontalIcon } from '@heroicons/react/outline';
-import { ROLE } from 'tools/consts';
+import { ROLE, URL_API_SEC } from 'tools/consts';
 import {ClipboardListIcon } from '@heroicons/react/solid';
 import NavTabs from 'widgets/NavTabs';
 import {  MenuNavTabs } from 'widgets/TypeWidgets';
@@ -21,7 +21,7 @@ function ConsulterUtilisateur({setShowUser,estModifier,setModifier,username}:Con
     const [user,setUser] = useState<Users>(u0);
     const onSubmit = (data:any) => console.log(data);
     useEffect(() => {
-        axios.get("http://localhost:4002/user/"+username)
+        axios.get(URL_API_SEC+"/user/"+username)
           .then((rep) => {
             setUser(rep.data)
             console.log(rep.data)
