@@ -336,8 +336,7 @@ export const {
   useEditClientMutation,
   useDeleteClientMutation,
   useArchiveClientMutation,
-  useRestoreClientMutation,
-  
+  useRestoreClientMutation,  
 } = crudClient;
 export const openClients =():OpenClientProp =>{
   const { data = [], refetch } = useFetchClientsQuery();
