@@ -10,7 +10,6 @@ type AdressLivraisonsProps={
   refetchParent:()=>void
 }
 const AdressLivraisons = ({ idClient ,refetchParent}: AdressLivraisonsProps) => {
-  const { data = [], refetch } =  useFetchAdressLivsByIdClientQuery(idClient);
   const [formArt,setFormArt]=useState(false)
   const [selectedIdCommande,setSelectedIdCommande]=useState("new")
   const close=()=>{
@@ -21,8 +20,6 @@ const AdressLivraisons = ({ idClient ,refetchParent}: AdressLivraisonsProps) => 
     setFormArt(true)
     setSelectedIdCommande(id)
   }
-  const [save]=useAddAdressLivMutation();
-  const [edit]=useEditAdressLivMutation();
   const refetchAll=()=>{
     refetch() 
     refetchParent()

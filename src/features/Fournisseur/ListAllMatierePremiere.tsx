@@ -165,7 +165,7 @@ const ListAllMatierePremiere = () => {
                   ))
                 }
                 </Table>
-                <Pagin load={loadPage} visibled={data.content?.length > 0} />
+                <Pagin load={loadPage} />
     </Section>
   )
 }
