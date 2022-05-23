@@ -95,6 +95,10 @@ export interface Chaine {
   val: string;
 }
 
+export interface ArticleJson {
+  content: Article[]
+}
+
 export interface Article {
   id: String,
   design: String;
@@ -108,6 +112,10 @@ export const article0: Article = {
   nomenclature: "",
   tauxPertes: 0,
 };
+
+export interface UnitMeasureJson {
+  content: UnitMeasure[]
+}
 
 export interface UnitMeasure {
   id: String,
@@ -123,6 +131,10 @@ export const unitMeasure0: UnitMeasure = {
   decimal: 0,
 };
 
+export interface BureauDouaneJson {
+  content: BureauDouane[]
+}
+
 export interface BureauDouane {
   id: String;
   code: String;
@@ -134,6 +146,10 @@ export const bureauDouane0: BureauDouane = {
   code: "",
   design: "",
 };
+
+export interface DeclarantJson {
+  content: Declarant[]
+}
 
 export interface Declarant {
   id: String;
@@ -147,6 +163,10 @@ export const declarant0: Declarant = {
   ville: "",
 };
 
+export interface IncotermJson {
+  content: Incoterm[]
+}
+
 export interface Incoterm {
   id: String,
   code: String;
@@ -158,6 +178,10 @@ export const incoterm0: Incoterm = {
   code: "",
   design: "",
 };
+
+export interface PayementModeJson {
+  content: PayementMode[]
+}
 
 export interface PayementMode {
   id: String;
@@ -171,6 +195,10 @@ export const payementMode0: PayementMode = {
   design: "",
 };
 
+export interface RegimeDouanierJson {
+  content: RegimeDouanier[]
+}
+
 export interface RegimeDouanier {
   id: String;
   code: String;
@@ -182,6 +210,10 @@ export const regimeDouanier0: RegimeDouanier = {
   code: "",
   design: "",
 };
+
+export interface RawMaterialJson {
+  content: RawMaterial[]
+}
 
 export interface RawMaterial {
   id: string

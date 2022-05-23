@@ -1,5 +1,5 @@
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
-import { Article, article0, BureauDouane, bureauDouane0, Declarant, declarant0, PayementMode, payementMode0, RawMaterial, rawMaterial0 } from "tools/types";
+import { Article, article0, BureauDouane, bureauDouane0, Declarant, declarant0, PayementMode, payementMode0, RawMaterial, rawMaterial0, RawMaterialJson } from "tools/types";
 import { FAMILLE, REQUEST_EDIT, REQUEST_SAVE, UNIT, VILLE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
@@ -14,6 +14,8 @@ import DeleteRawMaterial from "./Methods/DeleteRawMaterial";
 import ArchiveRawMaterial from "./Methods/ArchiveRawMaterial";
 import RestoreRawMaterial from "./Methods/RestoreRawMaterial";
 import Pagin from "widgets/Pagin";
+import { openRawMaterials } from "config/rtk/rtkRawMaterial";
+import { OpenRawMaterialProp } from "./Methods/openRawMaterials";
 
 type FormRawMaterialProps = {
     rawMaterial: RawMaterial;
@@ -22,19 +24,28 @@ const FormRawMaterial = ({
     rawMaterial
 }: FormRawMaterialProps, ref: Ref<void>) => {
 
+    const rawMaterialsToOpen: OpenRawMaterialProp = openRawMaterials();
+    const rawMaterialJson: RawMaterialJson = rawMaterialsToOpen.data;
+    const rawMaterials: RawMaterial[] = rawMaterialJson.content;
+    const refetchRawMaterial: () => void = rawMaterialsToOpen.refetch;
+    const saveRawMaterial = rawMaterialsToOpen.save;
+    const editRawMaterial = rawMaterialsToOpen.edit;
+
+
     const [page, setPage] = useState(0);
     const loadPage = (p: number) => {
         setPage(p);
-        refetch();
+        refetchRawMaterial();
     };
-    const { data = [], isFetching, refetch } = usePaginationRawMaterialsQuery(0);
+
+    //const { data = [], isFetching, refetch } = usePaginationRawMaterialsQuery(0);
     //useFetchRawMaterialsQuery();
     const [rawMaterial1, setRawMaterial1] = useState<RawMaterial>(rawMaterial0);
     const [request, setRequest] = useState(REQUEST_SAVE)
 
-    const [save] = useAddRawMaterialMutation();
+    //const [save] = useAddRawMaterialMutation();
 
-    const [updateRawMaterial] = useEditRawMaterialMutation();
+    //const [updateRawMaterial] = useEditRawMaterialMutation();
 
     const [form, setForm] = useState(false);
 
@@ -143,7 +154,7 @@ const FormRawMaterial = ({
         <>
             {!form && (
                 <section className='bg-white float-left w-full h-full mp-8 shadow-lg'>
-                    <DeleteRawMaterial id={""} ref={del} refetch={refetch} />
+                    <DeleteRawMaterial id={""} ref={del} refetch={refetchRawMaterial} />
                     <ArchiveRawMaterial id={""} ref={archive} />
                     <RestoreRawMaterial id={""} ref={restore} />
                     <h1>Nouvelle Famille Matière Première </h1>
@@ -176,7 +187,7 @@ const FormRawMaterial = ({
                             </tr>}
                     >
                         {//@ts-ignore
-                            data.content?.map((rawMaterial: RawMaterial) => {
+                            rawMaterials?.map((rawMaterial: RawMaterial) => {
                                 return (
                                     //@ts-ignore
                                     <tr key={rawMaterial.id}>
@@ -191,13 +202,13 @@ const FormRawMaterial = ({
                             })
                         }
                     </Table>
-                    <Pagin load={loadPage} />
+                    <Pagin load={loadPage} visibled={rawMaterials.length > 0} />
                 </section>
             )}
 
             <Modal show={show} title="Nouvelle Famille Matière première" format={+classNames("5")} close={closed}>
                 <div className="float-left w-full">
-                    <Form defaultValues={rawMaterial1} onSubmit={request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? updateRawMaterial : void_}>
+                    <Form defaultValues={rawMaterial1} onSubmit={request == REQUEST_SAVE ? saveRawMaterial : request == REQUEST_EDIT ? editRawMaterial : void_}>
                         <div className="float-left w-full">
                             <div className="float-left w-full">
                                 <Field className="sm:grid-cols-6 sm:gap-6" label="Designation" name="design" disabled={disabled} />
@@ -237,7 +248,7 @@ const FormRawMaterial = ({
                                 type="submit"
                                 onClick={() => {
                                     setTimeout(() => {
-                                        refetch()
+                                        refetchRawMaterial()
                                         closed();
                                     }, 500);
                                 }}

@@ -23,6 +23,14 @@ import customOfflineConfig from "./offline";
 import { crudApi } from "./rtk";
 
 import counterReducer from "features/counter/counterSlice";
+import { crudBureauDouane } from "./rtk/rtkBureauDouane";
+import { crudArticle } from "./rtk/rtkArticle";
+import { crudRegimeDouanier } from "./rtk/rtkRegimeDouanier";
+import { crudRawMaterial } from "./rtk/rtkRawMaterial";
+import { crudDeclarant } from "./rtk/rtkDeclarant";
+import { crudIncoterm } from "./rtk/rtkIncoterm";
+import { crudPayementMode } from "./rtk/rtkPayementMode";
+import { crudUnitMeasure } from "./rtk/rtkUnitMeasure";
 
 const {
   middleware: offlineMiddleware,
@@ -47,6 +55,15 @@ export function makeStore() {
   const rootReducer = combineReducers({
     counter: counterReducer,
     [crudApi.reducerPath]: crudApi.reducer,
+    [crudArticle.reducerPath]: crudArticle.reducer,
+    [crudBureauDouane.reducerPath]: crudBureauDouane.reducer,
+    [crudRegimeDouanier.reducerPath]: crudRegimeDouanier.reducer,
+    [crudRawMaterial.reducerPath]: crudRawMaterial.reducer,
+    [crudDeclarant.reducerPath]: crudDeclarant.reducer,
+    [crudIncoterm.reducerPath]: crudIncoterm.reducer,
+    [crudPayementMode.reducerPath]: crudPayementMode.reducer,
+    [crudUnitMeasure.reducerPath]: crudUnitMeasure.reducer,
+
   });
   const persistedReducer = persistReducer(
     persistConfig,
@@ -60,7 +77,7 @@ export function makeStore() {
         serializableCheck: {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
-      }).concat([crudApi.middleware, offlineMiddleware]),
+      }).concat([crudApi.middleware, offlineMiddleware]).concat([crudArticle.middleware, offlineMiddleware]).concat([crudBureauDouane.middleware, offlineMiddleware]).concat([crudDeclarant.middleware, offlineMiddleware]).concat([crudIncoterm.middleware, offlineMiddleware]).concat([crudIncoterm.middleware, offlineMiddleware]).concat([crudPayementMode.middleware, offlineMiddleware]).concat([crudRawMaterial.middleware, offlineMiddleware]).concat([crudRegimeDouanier.middleware, offlineMiddleware]).concat([crudUnitMeasure.middleware, offlineMiddleware]),
   });
   return store;
 }

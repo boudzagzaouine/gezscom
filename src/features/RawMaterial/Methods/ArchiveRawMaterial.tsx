@@ -29,11 +29,11 @@ const ArchiveRawMaterial = ({ id }: ArchiveRawMaterialPorp, ref: Ref<void>) => {
     //@ts-ignore
     ref.current = openModal;
   });
-  const archiveTemp = () => {
+  /*const archiveTemp = () => {
     axios
       .patch("http://localhost:1000/api/v1/rawMaterials/" + id0 + "/archive")
       .then(() => { });
-  };
+  };*/
   return (
     <>
       <Modal title={"archivage"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
@@ -42,7 +42,7 @@ const ArchiveRawMaterial = ({ id }: ArchiveRawMaterialPorp, ref: Ref<void>) => {
           <form
             onSubmit={
               //@ts-ignore
-              handleSubmit(archiveTemp)
+              handleSubmit(archive)
             }
           >
             {" "}

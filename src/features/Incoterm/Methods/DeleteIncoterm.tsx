@@ -29,9 +29,9 @@ const DeleteIncoterm = ({ id, refetch }: DeleteIncotermPorp, ref: Ref<void>) => 
     ref.current = openModal;
   });
   const [showModal, setShowModal] = React.useState(false);
-  const delTemp = () => {
+  /*const delTemp = () => {
     axios.delete("http://localhost:1000/api/v1/incoterms/" + id0).then(() => { });
-  };
+  };*/
   return (
     <>
       <Modal title={"suppression"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
@@ -40,7 +40,7 @@ const DeleteIncoterm = ({ id, refetch }: DeleteIncotermPorp, ref: Ref<void>) => 
           <form
             onSubmit={
               //@ts-ignore
-              handleSubmit(delTemp)
+              handleSubmit(del)
             }
           >
             {" "}

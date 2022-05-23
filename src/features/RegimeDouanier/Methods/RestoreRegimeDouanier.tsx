@@ -28,11 +28,11 @@ const RestoreRegimeDouanier = ({ id }: RestoreRegimeDouanierPorp, ref: Ref<void>
     //@ts-ignore
     ref.current = openModal;
   });
-  const restoreTemp = () => {
+  /*const restoreTemp = () => {
     axios
       .patch("http://localhost:1000/api/v1/regimeDouaniers/" + id0 + "/restore")
       .then(() => { });
-  };
+  };*/
   return (
     <>
       <Modal title={"restoration"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
@@ -41,7 +41,7 @@ const RestoreRegimeDouanier = ({ id }: RestoreRegimeDouanierPorp, ref: Ref<void>
           <form
             onSubmit={
               //@ts-ignore
-              handleSubmit(restoreTemp)
+              handleSubmit(restore)
             }
           >
             {" "}

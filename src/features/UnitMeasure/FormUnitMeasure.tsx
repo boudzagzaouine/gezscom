@@ -1,11 +1,11 @@
 
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
-import { Article, article0, BureauDouane, bureauDouane0, Declarant, declarant0, PayementMode, payementMode0, RegimeDouanier, regimeDouanier0, UnitMeasure, unitMeasure0 } from "tools/types";
+import { UnitMeasure, unitMeasure0, UnitMeasureJson } from "tools/types";
 import { DECIMAL, REQUEST_EDIT, REQUEST_SAVE, VILLE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
-import { useAddArticleMutation, useArchiveArticleMutation, useDeleteArticleMutation, useEditArticleMutation, useFetchOneArticleQuery, useRestoreArticleMutation, useFetchArticlesQuery, useFetchBureauDouanesQuery, useFetchOneBureauDouaneQuery, useEditBureauDouaneMutation, useDeleteBureauDouaneMutation, useArchiveBureauDouaneMutation, useRestoreBureauDouaneMutation, useFetchDeclarantsQuery, useAddDeclarantMutation, useEditDeclarantMutation, useDeleteDeclarantMutation, useArchiveDeclarantMutation, useRestoreDeclarantMutation, useFetchPayementModesQuery, useAddPayementModeMutation, useEditPayementModeMutation, useArchivePayementModeMutation, useRestorePayementModeMutation, useDeletePayementModeMutation, useFetchRegimeDouaniersQuery, useAddRegimeDouanierMutation, useEditRegimeDouanierMutation, useDeleteRegimeDouanierMutation, useArchiveRegimeDouanierMutation, useRestoreRegimeDouanierMutation, useFetchUnitMeasuresQuery, useEditUnitMeasureMutation, useArchiveUnitMeasureMutation, useRestoreUnitMeasureMutation, useDeleteUnitMeasureMutation, useAddUnitMeasureMutation, usePaginationUnitMeasuresQuery } from "config/rtk";
+import { useEditUnitMeasureMutation, useAddUnitMeasureMutation, usePaginationUnitMeasuresQuery } from "config/rtk";
 import classNames from "classnames";
 import Table from "widgets/Table";
 import { MenuItems } from 'widgets/TypeWidgets';
@@ -15,6 +15,8 @@ import DeleteUnitMeasure from "./Methods/DeleteUnitMeasure";
 import ArchiveUnitMeasure from "./Methods/ArchiveUnitMeasure";
 import RestoreUnitMeasure from "./Methods/RestoreUnitMeasure";
 import Pagin from "widgets/Pagin";
+import { openUnitMeasures } from "config/rtk/rtkUnitMeasure";
+import { OpenUnitMeasureProp } from "./Methods/openUnitMeasures";
 
 
 type FormUnitMeasureProps = {
@@ -23,11 +25,20 @@ type FormUnitMeasureProps = {
 const FormUnitMeasure = ({
     unitMeasure
 }: FormUnitMeasureProps, ref: Ref<void>) => {
-    const { data = [], isFetching, refetch } = usePaginationUnitMeasuresQuery(0);
+
+    const unitMeasuresToOpen: OpenUnitMeasureProp = openUnitMeasures();
+    const unitMeasureJson: UnitMeasureJson = unitMeasuresToOpen.data;
+    const unitMeasures: UnitMeasure[] = unitMeasureJson.content;
+    const refetchUnitMeasure: () => void = unitMeasuresToOpen.refetch;
+    const saveUnitMeasure = unitMeasuresToOpen.save;
+    const editUnitMeasure = unitMeasuresToOpen.edit;
+
+
+    //const { data = [], isFetching, refetch } = usePaginationUnitMeasuresQuery(0);
     const [unitMeasure1, setUnitMeasure1] = useState<UnitMeasure>(unitMeasure0);
     const [request, setRequest] = useState(REQUEST_SAVE)
 
-    const [save] = useAddUnitMeasureMutation();
+    //const [save] = useAddUnitMeasureMutation();
 
     const [form, setForm] = useState(false);
 
@@ -56,7 +67,7 @@ const FormUnitMeasure = ({
     const [page, setPage] = useState(0);
     const loadPage = (p: number) => {
         setPage(p);
-        refetch();
+        refetchUnitMeasure();
     };
 
     const showFormulaire = (unitMeasure: UnitMeasure) => {
@@ -74,7 +85,7 @@ const FormUnitMeasure = ({
 
     const void_ = () => { }
 
-    const [updateUnitMeasure] = useEditUnitMeasureMutation();
+    //const [updateUnitMeasure] = useEditUnitMeasureMutation();
 
 
 
@@ -149,7 +160,7 @@ const FormUnitMeasure = ({
         <>
             {!form && (
                 <section className='bg-white float-left w-full h-full mp-8 shadow-lg'>
-                    <DeleteUnitMeasure id={""} ref={del} refetch={refetch} />
+                    <DeleteUnitMeasure id={""} ref={del} refetch={refetchUnitMeasure} />
                     <ArchiveUnitMeasure id={""} ref={archive} />
                     <RestoreUnitMeasure id={""} ref={restore} />
                     <h1>Nouvelle Unité de Mesure </h1>
@@ -180,7 +191,7 @@ const FormUnitMeasure = ({
                             </tr>}
                     >
                         {//@ts-ignore
-                            data.content?.map((unitMeasure: UnitMeasure) => {
+                            unitMeasures?.map((unitMeasure: UnitMeasure) => {
                                 return (
                                     //@ts-ignore
                                     <tr key={unitMeasure.id}>
@@ -193,13 +204,13 @@ const FormUnitMeasure = ({
                             })
                         }
                     </Table>
-                    <Pagin load={loadPage} />
+                    <Pagin load={loadPage} visibled={unitMeasures.length > 0} />
                 </section>
             )}
 
             <Modal show={show} title="Nouveau Régime Douanier" format={+classNames("5")} close={closed}>
                 <div className="float-left w-full">
-                    <Form defaultValues={unitMeasure1} onSubmit={request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? updateUnitMeasure : void_}>
+                    <Form defaultValues={unitMeasure1} onSubmit={request == REQUEST_SAVE ? saveUnitMeasure : request == REQUEST_EDIT ? editUnitMeasure : void_}>
                         <div className="float-left w-full">
                             <div className="float-left w-full">
 
@@ -230,7 +241,7 @@ const FormUnitMeasure = ({
                                 type="submit"
                                 onClick={() => {
                                     setTimeout(() => {
-                                        refetch()
+                                        refetchUnitMeasure()
                                         closed();
                                     }, 500);
                                 }}

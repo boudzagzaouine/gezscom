@@ -1,5 +1,5 @@
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
-import { Article, article0, BureauDouane, bureauDouane0, Declarant, declarant0 } from "tools/types";
+import { Article, article0, BureauDouane, bureauDouane0, Declarant, declarant0, DeclarantJson } from "tools/types";
 import { REQUEST_EDIT, REQUEST_SAVE, VILLE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
@@ -14,6 +14,8 @@ import DeleteDeclarant from "./Methods/DeleteDeclarant";
 import ArchiveDeclarant from "./Methods/ArchiveDeclarant";
 import RestoreDeclarant from "./Methods/RestoreDeclarant";
 import Pagin from "widgets/Pagin";
+import { OpenDeclarantProp } from "./Methods/openDeclarants";
+import { openDeclarants } from "config/rtk/rtkDeclarant";
 
 type FormDeclarantProps = {
     declarant: Declarant;
@@ -21,11 +23,20 @@ type FormDeclarantProps = {
 const FormDeclarant = ({
     declarant
 }: FormDeclarantProps, ref: Ref<void>) => {
-    const { data = [], isFetching, refetch } = usePaginationDeclarantsQuery(0);
+
+    const declarantsToOpen: OpenDeclarantProp = openDeclarants();
+    const declarantJson: DeclarantJson = declarantsToOpen.data;
+    const declarants: Declarant[] = declarantJson.content;
+    const refetchDeclarant: () => void = declarantsToOpen.refetch;
+    const saveDeclarant = declarantsToOpen.save;
+    const editDeclarant = declarantsToOpen.edit;
+
+
+    //const { data = [], isFetching, refetch } = usePaginationDeclarantsQuery(0);
     const [declarant1, setDeclarant1] = useState<Declarant>(declarant0);
     const [request, setRequest] = useState(REQUEST_SAVE)
 
-    const [save] = useAddDeclarantMutation();
+    //const [save] = useAddDeclarantMutation();
 
     const [form, setForm] = useState(false);
 
@@ -53,7 +64,7 @@ const FormDeclarant = ({
     const [page, setPage] = useState(0);
     const loadPage = (p: number) => {
         setPage(p);
-        refetch();
+        refetchDeclarant();
     };
 
     const showFormulaire = (declarant: Declarant) => {
@@ -70,7 +81,7 @@ const FormDeclarant = ({
     const void_ = () => { }
 
 
-    const [updateDeclarant] = useEditDeclarantMutation();
+    //const [updateDeclarant] = useEditDeclarantMutation();
 
 
     const menu = (declarant: Declarant): MenuItems[] => {
@@ -143,7 +154,7 @@ const FormDeclarant = ({
         <>
             {!form && (
                 <section className='bg-white float-left w-full h-full mp-8 shadow-lg'>
-                    <DeleteDeclarant id={""} ref={del} refetch={refetch} />
+                    <DeleteDeclarant id={""} ref={del} refetch={refetchDeclarant} />
                     <ArchiveDeclarant id={""} ref={archive} />
                     <RestoreDeclarant id={""} ref={restore} />
                     <h1>Nouveau Declarant</h1>
@@ -173,7 +184,7 @@ const FormDeclarant = ({
                             </tr>}
                     >
                         {//@ts-ignore
-                            data.content?.map((declarant: Declarant) => {
+                            declarants?.map((declarant: Declarant) => {
                                 return (
                                     //@ts-ignore
                                     <tr key={declarant.id}>
@@ -185,13 +196,13 @@ const FormDeclarant = ({
                             })
                         }
                     </Table>
-                    <Pagin load={loadPage} />
+                    <Pagin load={loadPage} visibled={declarants.length > 0} />
                 </section>
             )}
 
             <Modal show={show} title="Nouveau Declarant" format={+classNames("5")} close={closed}>
                 <div className="float-left w-full">
-                    <Form defaultValues={declarant1} onSubmit={request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? updateDeclarant : void_}>
+                    <Form defaultValues={declarant1} onSubmit={request == REQUEST_SAVE ? saveDeclarant : request == REQUEST_EDIT ? editDeclarant : void_}>
                         <div className="float-left w-full">
                             <Field className="sm:grid-cols-6 sm:gap-6" label="Designation" name="design" disabled={disabled} required="required" />
 
@@ -216,7 +227,7 @@ const FormDeclarant = ({
                                 type="submit"
                                 onClick={() => {
                                     setTimeout(() => {
-                                        refetch()
+                                        refetchDeclarant()
                                         closed();
                                     }, 500);
                                 }}

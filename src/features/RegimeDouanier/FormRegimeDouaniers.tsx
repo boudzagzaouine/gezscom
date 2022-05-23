@@ -1,5 +1,5 @@
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
-import { Article, article0, BureauDouane, bureauDouane0, Declarant, declarant0, PayementMode, payementMode0, RegimeDouanier, regimeDouanier0 } from "tools/types";
+import { Article, article0, BureauDouane, bureauDouane0, Declarant, declarant0, PayementMode, payementMode0, RegimeDouanier, regimeDouanier0, RegimeDouanierJson } from "tools/types";
 import { REQUEST_EDIT, REQUEST_SAVE, VILLE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
@@ -15,6 +15,8 @@ import DeleteRegimeDouanier from "./Methods/DeleteRegimeDouanier";
 import ArchiveRegimeDouanier from "./Methods/ArchiveRegimeDouanier";
 import RestoreRegimeDouanier from "./Methods/RestoreRegimeDouanier";
 import Pagin from "widgets/Pagin";
+import { openRegimeDouaniers } from "config/rtk/rtkRegimeDouanier";
+import { OpenRegimeDouanierProp } from "./Methods/openRegimeDouaniers";
 
 type FormRegimeDouanierProps = {
     regimeDouanier: RegimeDouanier;
@@ -22,11 +24,19 @@ type FormRegimeDouanierProps = {
 const FormRegimeDouanier = ({
     regimeDouanier
 }: FormRegimeDouanierProps, ref: Ref<void>) => {
-    const { data = [], isFetching, refetch } = usePaginationRegimeDouaniersQuery(0);
+
+    const regimeDouaniersToOpen: OpenRegimeDouanierProp = openRegimeDouaniers();
+    const regimeDouanierJson: RegimeDouanierJson = regimeDouaniersToOpen.data;
+    const regimeDouaniers: RegimeDouanier[] = regimeDouanierJson.content;
+    const refetchRegimeDouanier: () => void = regimeDouaniersToOpen.refetch;
+    const saveRegimeDouanier = regimeDouaniersToOpen.save;
+    const editRegimeDouanier = regimeDouaniersToOpen.edit;
+
+    //const { data = [], isFetching, refetch } = usePaginationRegimeDouaniersQuery(0);
     const [regimeDouanier1, setRegimeDouanier1] = useState<PayementMode>(payementMode0);
     const [request, setRequest] = useState(REQUEST_SAVE)
 
-    const [save] = useAddRegimeDouanierMutation();
+    //const [save] = useAddRegimeDouanierMutation();
 
     const [form, setForm] = useState(false);
 
@@ -55,7 +65,7 @@ const FormRegimeDouanier = ({
     const [page, setPage] = useState(0);
     const loadPage = (p: number) => {
         setPage(p);
-        refetch();
+        refetchRegimeDouanier();
     };
 
     const showFormulaire = (regimeDouanier: RegimeDouanier) => {
@@ -74,7 +84,7 @@ const FormRegimeDouanier = ({
     const void_ = () => { }
 
 
-    const [updateRegimeDouanier] = useEditRegimeDouanierMutation();
+    //const [updateRegimeDouanier] = useEditRegimeDouanierMutation();
 
 
     const menu = (regimeDouanier: RegimeDouanier): MenuItems[] => {
@@ -147,7 +157,7 @@ const FormRegimeDouanier = ({
         <>
             {!form && (
                 <section className='bg-white float-left w-full h-full mp-8 shadow-lg'>
-                    <DeleteRegimeDouanier id={""} ref={del} refetch={refetch} />
+                    <DeleteRegimeDouanier id={""} ref={del} refetch={refetchRegimeDouanier} />
                     <ArchiveRegimeDouanier id={""} ref={archive} />
                     <RestoreRegimeDouanier id={""} ref={restore} />
                     <h1>Nouveau Régime Douanier  </h1>
@@ -177,7 +187,7 @@ const FormRegimeDouanier = ({
                             </tr>}
                     >
                         {//@ts-ignore
-                            data.content?.map((regimeDouanier: RegimeDouanier) => {
+                            regimeDouaniers?.map((regimeDouanier: RegimeDouanier) => {
                                 return (
                                     //@ts-ignore
                                     <tr key={regimeDouanier.id}>
@@ -189,13 +199,13 @@ const FormRegimeDouanier = ({
                             })
                         }
                     </Table>
-                    <Pagin load={loadPage} />
+                    <Pagin load={loadPage} visibled={regimeDouaniers.length > 0} />
                 </section>
             )}
 
             <Modal show={show} title="Nouveau Régime Douanier" format={+classNames("5")} close={closed}>
                 <div className="float-left w-full">
-                    <Form defaultValues={regimeDouanier1} onSubmit={request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? updateRegimeDouanier : void_}>
+                    <Form defaultValues={regimeDouanier1} onSubmit={request == REQUEST_SAVE ? saveRegimeDouanier : request == REQUEST_EDIT ? editRegimeDouanier : void_}>
                         <div className="float-left w-full">
                             <Field className="sm:grid-cols-6 sm:gap-6" label="Code" name="code" disabled={disabled} required="required" />
 
@@ -216,7 +226,7 @@ const FormRegimeDouanier = ({
                                 type="submit"
                                 onClick={() => {
                                     setTimeout(() => {
-                                        refetch()
+                                        refetchRegimeDouanier()
                                         closed();
                                     }, 500);
                                 }}
