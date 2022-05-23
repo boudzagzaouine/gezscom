@@ -42,10 +42,10 @@ export default nextAuth ({
   //   KeycloakProvider({
   //     // clientId: process.env.KEYCLOAK_ID ?? "client",
   //     // clientSecret: process.env.KEYCLOAK_SECRET ?? "vJHaEwb4ZBeGpe1FenBfbwlMZG7SMVGZ",
-  //     // issuer: process.env.KEYCLOAK_ISSUER,http://localhost:8080/auth/realms/Gescom
+  //     // issuer: process.env.KEYCLOAK_ISSUER,http://gescom-kc.frimakers.com/auth/realms/Gescom
   //     clientId: "client",
   //     clientSecret: "r9p2O8LH5rdMK8jJ0HHbRZLI7Tnf7zF3",
-  //     issuer:"http://localhost:8080/realms/gescom"
+  //     issuer:"http://gescom-kc.frimakers.com/realms/gescom"
 
 
       

@@ -32,7 +32,7 @@ const ArchiveType = ({ id }: ArchiveTypePorp, ref: Ref<void>) => {
     });
     const archiveTemp = () => {
         axios
-            .patch("http://localhost:1000/api/v1/types/" + id0 + "/archive")
+            .patch("https://gescom-api.frimakers.com/api/v1/types/" + id0 + "/archive")
             .then(() => { });
     };
     return (

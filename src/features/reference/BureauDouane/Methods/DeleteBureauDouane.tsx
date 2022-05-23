@@ -30,7 +30,7 @@ const DeleteBureauDouane = ({ id, refetch }: DeleteBureauDouaneProps, ref: Ref<v
   });
   const [showModal, setShowModal] = React.useState(false);
   const delTemp = () => {
-    axios.delete("http://localhost:1000/api/v1/bureauDouanes/" + id0).then(() => { });
+    axios.delete("https://gescom-api.frimakers.com/api/v1/bureauDouanes/" + id0).then(() => { });
   };
   return (
     <>

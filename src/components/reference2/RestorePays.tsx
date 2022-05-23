@@ -31,7 +31,7 @@ const RestorePays = ({ id }: RestorePaysPorp, ref: Ref<void>) => {
     });
     const restoreTemp = () => {
         axios
-            .patch("http://localhost:1000/api/v1/pays/" + id0 + "/restore")
+            .patch("https://gescom-api.frimakers.com/api/v1/pays/" + id0 + "/restore")
             .then(() => { });
     };
     return (
