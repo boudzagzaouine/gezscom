@@ -20,7 +20,7 @@ export const crudClient = createApi({
       /*********************************CLIENT**************************************/
       /*****************************************************************************/
       fetchClients: builder.query<Client[], void>({
-        query: () => `/clients`,
+           query: () => `/clients`,
       }),
       paginationClients: builder.query<Client[], number>({
         query: (page) => `/clients?page=${page}&size=${PAGE_SIZE}`,
