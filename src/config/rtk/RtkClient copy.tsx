@@ -13,13 +13,13 @@ export const crudClient = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Client", "UNAUTHORIZED", "UNKNOWN_ERROR"],
+    tagTypes: ["Client", "UNAUTHORIZED", "UNKNOWN_ERROR"],
   endpoints(builder) {
     return {
       /*****************************************************************************/
       /*********************************CLIENT**************************************/
       /*****************************************************************************/
-      fetchClients: builder.query<Client[], void>({
+        fetchClients: builder.query<Client[], void>({
            query: () => `/clients`,
       }),
       paginationClients: builder.query<Client[], number>({
