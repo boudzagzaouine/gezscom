@@ -2,22 +2,29 @@ import { TrashIcon } from '@heroicons/react/outline';
 import { ArchiveIcon, ClipboardListIcon, PencilAltIcon, ReplyIcon } from '@heroicons/react/solid';
 import ArchiveRole from 'components/reference2/ArchiveRole';
 import DeleteRole from 'components/reference2/DeleteRole';
+import { OpenRoleProp } from 'components/reference2/openRole';
 import RestoreRole from 'components/reference2/RestoreRole';
 import { usePaginationRolesQuery } from 'config/rtk';
+import { openRoles } from 'config/rtk/rtkRole';
 import React, { useRef, useState } from 'react';
-import { REQUEST_SAVE } from 'tools/consts';
-import Section from 'widgets/Section';
-import { MenuItems } from 'widgets/TypeWidgets';
-import { REQUEST_EDIT } from 'tools/consts';
-import { r0, Role } from 'tools/types';
+import { REQUEST_EDIT, REQUEST_SAVE } from 'tools/consts';
+import { r0, Role, RoleJson } from 'tools/types';
 import Bcyan from 'widgets/Bcyan';
 import { Button } from 'widgets/Button';
 import Icon from 'widgets/Icon';
 import Mitems from 'widgets/Mitems';
 import Pagin from 'widgets/Pagin';
+import Section from 'widgets/Section';
 import Table from 'widgets/Table';
+import { MenuItems } from 'widgets/TypeWidgets';
 import FormRoleManager from './FormRoleManager';
 function ListRoleManager() {
+    const rolesToOpen: OpenRoleProp = openRoles();
+    const roleJson: RoleJson = rolesToOpen.data
+    const roles: Role[] = roleJson.content
+    const refetchRole: () => void = rolesToOpen.refetch
+    const saveRole = rolesToOpen.save
+    const editRole = rolesToOpen.edit
     const search = (key: string, obj: Role[]): Role[] => {
         const rolesearch: Role[] = obj.filter(
             (o: Role) => {
@@ -157,7 +164,7 @@ function ListRoleManager() {
                                 FormAsAdd()
                             }}
                         >
-                           ajouter role
+                            ajouter role
                         </Bcyan>
 
                         <div className="float-right">
@@ -181,17 +188,15 @@ function ListRoleManager() {
                         }
                     >
                         {
-
-                            //@ts-ignore
-                            data.content?.map((Role) => (
-                                //   data?.map((client) => (
+                            roles?.map((Role) => (
+                                //   data?.map((role) => (
                                 <tr key={Role.id}>
                                     <Table.td>
                                         {Role.id}
                                     </Table.td>
                                     <Table.td>
-                                                <span>{Role.designation}</span>
-                                            
+                                        <span>{Role.designation}</span>
+
                                     </Table.td>
                                     <Table.td>
                                         <span>{Role.nbrUtilisateur}</span>
@@ -207,7 +212,7 @@ function ListRoleManager() {
                     </Table>
 
 
-                    <Pagin load={loadPage} />
+                    <Pagin load={loadPage} visibled={roles?.length > 0} />
                 </Section>
             )}
         </>

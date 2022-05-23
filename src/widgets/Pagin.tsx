@@ -4,6 +4,9 @@ import { PAGE_SIZE } from "tools/consts";
 type PaginProps = {
   load: (page: number) => void;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> v_ismail
   visibled: boolean
 };
 const Pagin = ({ load, visibled }: PaginProps) => {

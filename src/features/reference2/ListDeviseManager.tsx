@@ -2,23 +2,30 @@ import { TrashIcon } from '@heroicons/react/outline';
 import { ArchiveIcon, ClipboardListIcon, PencilAltIcon, ReplyIcon } from '@heroicons/react/solid';
 import ArchiveDevise from 'components/reference2/ArchiveDevise';
 import DeleteDevise from 'components/reference2/DeleteDevise';
+import { OpenDeviseProp } from 'components/reference2/OpenDevise';
 import RestoreDevise from 'components/reference2/RestoreDevise';
 import { usePaginationDevisesQuery } from 'config/rtk';
+import { openDevises } from 'config/rtk/rtkDevise';
 import React, { useRef, useState } from 'react';
-
-import { REQUEST_SAVE } from 'tools/consts';
-import Section from 'widgets/Section';
-import { MenuItems } from 'widgets/TypeWidgets';
-import { REQUEST_EDIT } from 'tools/consts';
-import { Devise, v0 } from 'tools/types';
+import { REQUEST_EDIT, REQUEST_SAVE } from 'tools/consts';
+import { Devise, DeviseJson, v0 } from 'tools/types';
 import Bcyan from 'widgets/Bcyan';
 import { Button } from 'widgets/Button';
 import Icon from 'widgets/Icon';
 import Mitems from 'widgets/Mitems';
 import Pagin from 'widgets/Pagin';
+import Section from 'widgets/Section';
 import Table from 'widgets/Table';
+import { MenuItems } from 'widgets/TypeWidgets';
 import FormDeviseManager from './FormDevise';
+
 function ListDeviseManager() {
+    const devisesToOpen: OpenDeviseProp = openDevises();
+    const deviseJson: DeviseJson = devisesToOpen.data
+    const devises: Devise[] = deviseJson.content
+    const refetchDevise: () => void = devisesToOpen.refetch
+    const saveDevise = devisesToOpen.save
+    const editDevise = devisesToOpen.edit
     const search = (key: string, obj: Devise[]): Devise[] => {
         const Devisesearch: Devise[] = obj.filter(
             (o: Devise) => {
@@ -29,7 +36,7 @@ function ListDeviseManager() {
         );
         return Devisesearch
     }
-   
+
     const [form, setForm] = useState(false)
     const [Devise0, setDevise0] = useState(v0)
     const [requesv0, setRequesv0] = useState(REQUEST_SAVE)
@@ -136,12 +143,12 @@ function ListDeviseManager() {
         //@ts-ignore
         imputFocus.current.focus()
     }
-    
+
     return (
         <>
             {form && (
                 <FormDeviseManager imputFocus={imputFocus}
-               
+
                     request={requesv0}
                     Devise={Devise0}
                     closed={() => {
@@ -166,7 +173,7 @@ function ListDeviseManager() {
                                 //setForm(true);
                                 FormAsAdd()
                             }}
-                  
+
 
                         >
                             ajouter devise
@@ -196,8 +203,8 @@ function ListDeviseManager() {
                         {
 
                             //@ts-ignore
-                            data.content?.map((Devise) => (
-                                //   data?.map((client) => (
+                            devises?.map((Devise) => (
+                                //   data?.map((devise) => (
                                 <tr key={Devise.id}>
                                     <Table.td>
                                         {Devise.id}
@@ -214,7 +221,7 @@ function ListDeviseManager() {
                     </Table>
 
 
-                    <Pagin load={loadPage} />
+                    <Pagin load={loadPage} visibled={devises?.length > 0} />
                 </Section>
             )}
         </>

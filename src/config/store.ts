@@ -1,3 +1,10 @@
+import { crudVille } from './rtk/rtkVille';
+import { crudType } from './rtk/rtkType';
+import { crudTransporteur } from './rtk/rtkTransporteur';
+import { crudRole } from './rtk/rtkRole';
+import { crudPays } from './rtk/rtkPays';
+import { crudDocument } from './rtk/rtkDocument';
+import { crudDevise } from './rtk/rtkDevise';
 import {
   configureStore,
   ThunkAction,
@@ -60,6 +67,7 @@ export function makeStore() {
     counter: counterReducer,
     [crudApi.reducerPath]: crudApi.reducer,
 <<<<<<< HEAD
+<<<<<<< HEAD
     [crudArticle.reducerPath]: crudArticle.reducer,
     [crudBureauDouane.reducerPath]: crudBureauDouane.reducer,
     [crudRegimeDouanier.reducerPath]: crudRegimeDouanier.reducer,
@@ -72,6 +80,15 @@ export function makeStore() {
     [crudClient.reducerPath]: crudClient.reducer,
 >>>>>>> develop
 
+=======
+    [crudDevise.reducerPath]: crudDevise.reducer,
+    [crudDocument.reducerPath]: crudDocument.reducer,
+    [crudPays.reducerPath]: crudPays.reducer,
+    [crudRole.reducerPath]: crudRole.reducer,
+    [crudTransporteur.reducerPath]: crudTransporteur.reducer,
+    [crudType.reducerPath]: crudType.reducer,
+    [crudVille.reducerPath]: crudVille.reducer,
+>>>>>>> v_ismail
   });
   const persistedReducer = persistReducer(
     persistConfig,

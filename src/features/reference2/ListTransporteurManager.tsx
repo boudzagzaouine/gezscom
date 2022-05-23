@@ -2,30 +2,37 @@ import { TrashIcon } from '@heroicons/react/outline';
 import { ArchiveIcon, ClipboardListIcon, PencilAltIcon, ReplyIcon } from '@heroicons/react/solid';
 import ArchiveTransporteur from 'components/reference2/ArchiveTransporteur';
 import DeleteTransporteur from 'components/reference2/DeleteTransporteur';
+import { OpenTransporteurProp } from 'components/reference2/OpenTransporteur';
 import RestoreTransporteur from 'components/reference2/RestoreTransporteur';
 import { usePaginationTransporteursQuery } from 'config/rtk';
+import { openTransporteurs } from 'config/rtk/rtkTransporteur';
 import React, { useRef, useState } from 'react';
-import { REQUEST_SAVE } from 'tools/consts';
-import Section from 'widgets/Section';
-import { MenuItems } from 'widgets/TypeWidgets';
-import { REQUEST_EDIT } from 'tools/consts';
-import { t0, Transporteur } from 'tools/types';
+import { REQUEST_EDIT, REQUEST_SAVE } from 'tools/consts';
+import { t0, Transporteur, TransporteurJson } from 'tools/types';
 import Bcyan from 'widgets/Bcyan';
 import { Button } from 'widgets/Button';
 import Icon from 'widgets/Icon';
 import Mitems from 'widgets/Mitems';
 import Pagin from 'widgets/Pagin';
+import Section from 'widgets/Section';
 import Table from 'widgets/Table';
+import { MenuItems } from 'widgets/TypeWidgets';
 import FormTransporteurManager from './FormTransporteurManager';
 function ListTransporteurManager() {
+    const transporteursToOpen: OpenTransporteurProp = openTransporteurs();
+    const transporteurJson: TransporteurJson = transporteursToOpen.data
+    const transporteurs: Transporteur[] = transporteurJson.content
+    const refetchTransporteur: () => void = transporteursToOpen.refetch
+    const saveTransporteur = transporteursToOpen.save
+    const editTransporteur = transporteursToOpen.edit
     const search = (key: string, obj: Transporteur[]): Transporteur[] => {
-        const clientsearch: Transporteur[] = obj.filter(
+        const transporteursearch: Transporteur[] = obj.filter(
             (o: Transporteur) => {
                 return o.id.match(key) != null ||
                     o.designation.match(key) != null
             }
         );
-        return clientsearch
+        return transporteursearch
     }
     const [form, setForm] = useState(false)
     const [Transporteur0, setTransporteur0] = useState(t0)
@@ -152,7 +159,7 @@ function ListTransporteurManager() {
                         <Bcyan
                             className="float-left"
                             onClick={() => {
-                                //setClient0(c0);
+                                //setTransporteur0(c0);
                                 //setForm(true);
                                 FormAsAdd()
                             }}
@@ -182,8 +189,8 @@ function ListTransporteurManager() {
                         {
 
                             //@ts-ignore
-                            data.content?.map((Transporteur) => (
-                                //   data?.map((client) => (
+                            transporteurs?.map((Transporteur) => (
+                                //   data?.map((transporteur) => (
                                 <tr key={Transporteur.id}>
                                     <Table.td>
                                         {Transporteur.id}
@@ -202,7 +209,7 @@ function ListTransporteurManager() {
                     </Table>
 
 
-                    <Pagin load={loadPage} />
+                    <Pagin load={loadPage} visibled={transporteurs?.length > 0}/>
                 </Section>
             )}
         </>
