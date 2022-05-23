@@ -31,7 +31,7 @@ const ArchiveFournisseur=( {id}: ArchiveFournisseurProp, ref:Ref<void>)=>{
         ref.current=openModal;
     });
     const archiveTemp=()=>{
-        axios.patch("http://localhost:1000/api/v1/fournisseurs/" + id0 + "/archive").then(()=>{});
+        axios.patch("https://gescom.frimakers-api.com//api/v1/fournisseurs/" + id0 + "/archive").then(()=>{});
     };
     return(
         <>

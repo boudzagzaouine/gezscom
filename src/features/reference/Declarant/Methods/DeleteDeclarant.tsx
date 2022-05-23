@@ -30,7 +30,7 @@ const DeleteDeclarant = ({ id, refetch }: DeleteDeclarantPorp, ref: Ref<void>) =
   });
   const [showModal, setShowModal] = React.useState(false);
   const delTemp = () => {
-    axios.delete("http://localhost:1000/api/v1/declarants/" + id0).then(() => { });
+    axios.delete("https://gescom-api.frimakers.com/api/v1/declarants/" + id0).then(() => { });
   };
   return (
     <>

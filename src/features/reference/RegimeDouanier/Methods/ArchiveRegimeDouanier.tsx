@@ -31,7 +31,7 @@ const ArchiveRegimeDouanier = ({ id }: ArchiveRegimeDouanierPorp, ref: Ref<void>
   });
   const archiveTemp = () => {
     axios
-      .patch("http://localhost:1000/api/v1/regimeDouaniers/" + id0 + "/archive")
+      .patch("https://gescom-api.frimakers.com//api/v1/regimeDouaniers/" + id0 + "/archive")
       .then(() => { });
   };
   return (
