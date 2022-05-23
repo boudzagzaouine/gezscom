@@ -212,7 +212,7 @@ function ListTypeManager() {
                     </Table>
 
 
-                    <Pagin load={loadPage} visibled={types.length > 0} />
+                    <Pagin load={loadPage} visibled={types?.length > 0} />
                 </Section>
             )}
         </>

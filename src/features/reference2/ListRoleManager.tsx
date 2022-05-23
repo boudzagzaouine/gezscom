@@ -188,8 +188,6 @@ function ListRoleManager() {
                         }
                     >
                         {
-
-                            //@ts-ignore
                             roles?.map((Role) => (
                                 //   data?.map((role) => (
                                 <tr key={Role.id}>
@@ -214,7 +212,7 @@ function ListRoleManager() {
                     </Table>
 
 
-                    <Pagin load={loadPage} visibled={roles.length > 0} />
+                    <Pagin load={loadPage} visibled={roles?.length > 0} />
                 </Section>
             )}
         </>

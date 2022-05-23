@@ -207,7 +207,7 @@ function ListPaysManager() {
                     </Table>
 
 
-                    <Pagin load={loadPage} visibled={pays.length > 0} />
+                    <Pagin load={loadPage} visibled={pays?.length > 0} />
                 </Section>
             )}
         </>

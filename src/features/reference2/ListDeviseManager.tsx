@@ -221,7 +221,7 @@ function ListDeviseManager() {
                     </Table>
 
 
-                    <Pagin load={loadPage} visibled={devises.length > 0} />
+                    <Pagin load={loadPage} visibled={devises?.length > 0} />
                 </Section>
             )}
         </>

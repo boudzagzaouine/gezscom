@@ -209,7 +209,7 @@ function ListTransporteurManager() {
                     </Table>
 
 
-                    <Pagin load={loadPage} visibled={transporteurs.length > 0}/>
+                    <Pagin load={loadPage} visibled={transporteurs?.length > 0}/>
                 </Section>
             )}
         </>

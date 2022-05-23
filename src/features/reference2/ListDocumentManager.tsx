@@ -209,7 +209,7 @@ function ListDocumentManager() {
                     </Table>
 
 
-                    <Pagin load={loadPage} visibled={documents.length > 0}/>
+                    <Pagin load={loadPage} visibled={documents?.length > 0}/>
                 </Section>
             )}
         </>
