@@ -2,9 +2,9 @@ name: push gescom to Docker Hub
 
 on:
   push:
-      branches: [ develop ]
+      branches: [ v_hamza ]
   pull_request:
-      branches: [ develop ]
+      branches: [ v_hamza ]
       
 jobs:
 
