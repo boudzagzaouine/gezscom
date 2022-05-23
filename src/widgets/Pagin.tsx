@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { PAGE_SIZE } from "tools/consts";
 type PaginProps = {
   load: (page: number) => void;
+  visibled: boolean
 };
 const Pagin = ({ load }: PaginProps) => {
   const [init, setInit] = useState(0);

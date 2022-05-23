@@ -1,24 +1,30 @@
 import { TrashIcon } from '@heroicons/react/outline';
-import { ArchiveIcon, ClipboardListIcon, PencilAltIcon, ReplyIcon, UserAddIcon } from '@heroicons/react/solid';
+import { ArchiveIcon, ClipboardListIcon, PencilAltIcon, ReplyIcon } from '@heroicons/react/solid';
 import ArchiveVille from 'components/reference2/ArchiveVille';
-import DeleteVille from  'components/reference2/DeleteVille';
+import DeleteVille from 'components/reference2/DeleteVille';
+import { OpenVilleProp } from 'components/reference2/OpenVille';
 import RestoreVille from 'components/reference2/RestoreVille';
 import { usePaginationVillesQuery } from 'config/rtk';
+import { openVilles } from 'config/rtk/rtkVille';
 import React, { useRef, useState } from 'react';
-import { REQUEST_SAVE } from 'tools/consts';
-import Section from 'widgets/Section';
-import { MenuItems } from 'widgets/TypeWidgets';
-import { REQUEST_EDIT } from 'tools/consts';
-import { STYLE_ICON } from 'tools/constStyle';
-import { i0, Ville } from 'tools/types';
+import { REQUEST_EDIT, REQUEST_SAVE } from 'tools/consts';
+import { i0, Ville, VilleJson } from 'tools/types';
 import Bcyan from 'widgets/Bcyan';
 import { Button } from 'widgets/Button';
 import Icon from 'widgets/Icon';
 import Mitems from 'widgets/Mitems';
 import Pagin from 'widgets/Pagin';
+import Section from 'widgets/Section';
 import Table from 'widgets/Table';
+import { MenuItems } from 'widgets/TypeWidgets';
 import FormVilleManager from './FormVilleManager';
 function ListVilleManager() {
+    const villesToOpen: OpenVilleProp = openVilles();
+    const villeJson: VilleJson = villesToOpen.data
+    const villes: Ville[] = villeJson.content
+    const refetchVille: () => void = villesToOpen.refetch
+    const saveVille = villesToOpen.save
+    const editVille = villesToOpen.edit
     const search = (key: string, obj: Ville[]): Ville[] => {
         const Villesearch: Ville[] = obj.filter(
             (o: Ville) => {
@@ -184,8 +190,8 @@ function ListVilleManager() {
                         {
 
                             //@ts-ignore
-                            data.content?.map((Ville) => (
-                                //   data?.map((client) => (
+                            villes?.map((Ville) => (
+                                //   data?.map((ville) => (
                                 <tr key={Ville.id}>
                                     <Table.td>
                                         {Ville.id}
@@ -208,7 +214,7 @@ function ListVilleManager() {
                     </Table>
 
 
-                    <Pagin load={loadPage} />
+                    <Pagin load={loadPage} visibled={villes.length > 0} />
                 </Section>
             )}
         </>

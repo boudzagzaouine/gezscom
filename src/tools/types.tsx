@@ -4,6 +4,28 @@ export type Num = {
 export interface ClientJson{
   content:Client[]
 }
+
+export interface TransporteurJson {
+  content: Transporteur[]
+}
+export interface DeviseJson{
+  content:Devise[]
+}
+export interface PaysJson {
+  content: Pays[]
+}
+export interface DocumentJson {
+  content: Document[]
+}
+export interface RoleJson {
+  content: Role[]
+}
+export interface TypeJson {
+  content: Type[]
+}
+export interface VilleJson {
+  content: Ville[]
+}
 export interface Client {
   id: string;
   design: string;

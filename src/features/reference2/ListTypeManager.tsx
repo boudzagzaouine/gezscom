@@ -1,32 +1,38 @@
 import { TrashIcon } from '@heroicons/react/outline';
-import { ArchiveIcon, ClipboardListIcon, PencilAltIcon, ReplyIcon, UserAddIcon } from '@heroicons/react/solid';
+import { ArchiveIcon, ClipboardListIcon, PencilAltIcon, ReplyIcon } from '@heroicons/react/solid';
 import ArchiveType from 'components/reference2/ArchiveType';
 import DeleteType from 'components/reference2/DeleteType';
+import { OpenTypeProp } from 'components/reference2/OpenType';
 import RestoreType from 'components/reference2/RestoreType';
 import { usePaginationTypesQuery } from 'config/rtk';
+import { openTypes } from 'config/rtk/rtkType';
 import React, { useRef, useState } from 'react';
-import { REQUEST_SAVE } from 'tools/consts';
-import Section from 'widgets/Section';
-import { MenuItems } from 'widgets/TypeWidgets';
-import { REQUEST_EDIT } from 'tools/consts';
-import { d0, Type } from 'tools/types';
-import { STYLE_ICON } from 'tools/constStyle';
+import { REQUEST_EDIT, REQUEST_SAVE } from 'tools/consts';
+import { d0, Type, TypeJson } from 'tools/types';
 import Bcyan from 'widgets/Bcyan';
 import { Button } from 'widgets/Button';
 import Icon from 'widgets/Icon';
 import Mitems from 'widgets/Mitems';
 import Pagin from 'widgets/Pagin';
+import Section from 'widgets/Section';
 import Table from 'widgets/Table';
+import { MenuItems } from 'widgets/TypeWidgets';
 import FormTypeManager from './FormTypeManager';
 function ListTypeManager() {
+    const typesToOpen: OpenTypeProp = openTypes();
+    const typeJson: TypeJson = typesToOpen.data
+    const types: Type[] = typeJson.content
+    const refetchType: () => void = typesToOpen.refetch
+    const saveType = typesToOpen.save
+    const editType = typesToOpen.edit
     const search = (key: string, obj: Type[]): Type[] => {
-        const clientsearch: Type[] = obj.filter(
+        const typesearch: Type[] = obj.filter(
             (o: Type) => {
                 return o.id.match(key) != null ||
                     o.designation.match(key) != null
             }
         );
-        return clientsearch
+        return typesearch
     }
     const [form, setForm] = useState(false)
     const [Documend0, setDocumend0] = useState(d0)
@@ -183,8 +189,8 @@ function ListTypeManager() {
                         {
 
                             //@ts-ignore
-                            data.content?.map((Type) => (
-                                //   data?.map((client) => (
+                            types?.map((Type) => (
+                                //   data?.map((type) => (
                                 <tr key={Type.id}>
                                     <Table.td>
                                         {Type.id}
@@ -206,7 +212,7 @@ function ListTypeManager() {
                     </Table>
 
 
-                    <Pagin load={loadPage} />
+                    <Pagin load={loadPage} visibled={types.length > 0} />
                 </Section>
             )}
         </>

@@ -1,3 +1,10 @@
+import { crudVille } from './rtk/rtkVille';
+import { crudType } from './rtk/rtkType';
+import { crudTransporteur } from './rtk/rtkTransporteur';
+import { crudRole } from './rtk/rtkRole';
+import { crudPays } from './rtk/rtkPays';
+import { crudDocument } from './rtk/rtkDocument';
+import { crudDevise } from './rtk/rtkDevise';
 import {
   configureStore,
   ThunkAction,
@@ -47,6 +54,13 @@ export function makeStore() {
   const rootReducer = combineReducers({
     counter: counterReducer,
     [crudApi.reducerPath]: crudApi.reducer,
+    [crudDevise.reducerPath]: crudDevise.reducer,
+    [crudDocument.reducerPath]: crudDocument.reducer,
+    [crudPays.reducerPath]: crudPays.reducer,
+    [crudRole.reducerPath]: crudRole.reducer,
+    [crudTransporteur.reducerPath]: crudTransporteur.reducer,
+    [crudType.reducerPath]: crudType.reducer,
+    [crudVille.reducerPath]: crudVille.reducer,
   });
   const persistedReducer = persistReducer(
     persistConfig,
