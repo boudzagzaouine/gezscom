@@ -34,7 +34,7 @@ const ArchiveClient = ({ id }: ArchiveClientPorp, ref: Ref<void>) => {
   });
   const archiveTemp = () => {
     axios
-      .patch("https://gescom-api.frimakers.com//api/v1/clients/" + id0 + "/archive")
+      .patch("https://gescom-api.frimakers.com/api/v1/clients/" + id0 + "/archive")
       .then(() => {});
   };
   return (

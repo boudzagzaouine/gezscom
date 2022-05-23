@@ -31,7 +31,7 @@ const RestoreVille = ({ id }: RestoreVillePorp, ref: Ref<void>) => {
     });
     const restoreTemp = () => {
         axios
-            .patch("https://gescom-api.frimakers.com//api/v1/villes/" + id0 + "/restore")
+            .patch("https://gescom-api.frimakers.com/api/v1/villes/" + id0 + "/restore")
             .then(() => { });
     };
     return (

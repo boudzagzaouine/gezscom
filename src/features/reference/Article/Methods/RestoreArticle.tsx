@@ -30,7 +30,7 @@ const RestoreArticle = ({ id }: RestoreArticlePorp, ref: Ref<void>) => {
   });
   const restoreTemp = () => {
     axios
-      .patch("https://gescom-api.frimakers.com//api/v1/articles/" + id0 + "/restore")
+      .patch("https://gescom-api.frimakers.com/api/v1/articles/" + id0 + "/restore")
       .then(() => { });
   };
   return (

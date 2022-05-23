@@ -31,7 +31,7 @@ const RestoreDevise = ({ id }: RestoreDevisePorp, ref: Ref<void>) => {
     });
     const restoreTemp = () => {
         axios
-            .patch("https://gescom-api.frimakers.com//api/v1/devises/" + id0 + "/restore")
+            .patch("https://gescom-api.frimakers.com/api/v1/devises/" + id0 + "/restore")
             .then(() => { });
     };
     return (

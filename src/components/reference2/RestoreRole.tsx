@@ -31,7 +31,7 @@ const RestoreRole = ({ id }: RestoreRolePorp, ref: Ref<void>) => {
     });
     const restoreTemp = () => {
         axios
-            .patch("https://gescom-api.frimakers.com//api/v1/roles/" + id0 + "/restore")
+            .patch("https://gescom-api.frimakers.com/api/v1/roles/" + id0 + "/restore")
             .then(() => { });
     };
     return (

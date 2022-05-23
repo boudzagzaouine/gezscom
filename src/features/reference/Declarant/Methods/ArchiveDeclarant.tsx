@@ -31,11 +31,7 @@ const ArchiveDeclarant = ({ id }: ArchiveDeclarantProps, ref: Ref<void>) => {
   });
   const archiveTemp = () => {
     axios
-      .patch("https://gescom-api.frimakers.com//api/v1/declarants/" + id0 + "/archive")
       .then(() => { });
-  };
-  return (
-    <>
       <Modal title={"archivage"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
         <div>
           <h2>archivage de déclarant num: {id0}</h2>

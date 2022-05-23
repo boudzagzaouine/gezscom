@@ -30,7 +30,7 @@ const RestoreUnitMeasure = ({ id }: RestoreUnitMeasurePorp, ref: Ref<void>) => {
   });
   const restoreTemp = () => {
     axios
-      .patch("https://gescom-api.frimakers.com//api/v1/unitMeasures/" + id0 + "/restore")
+      .patch("https://gescom-api.frimakers.com/api/v1/unitMeasures/" + id0 + "/restore")
       .then(() => { });
   };
   return (
