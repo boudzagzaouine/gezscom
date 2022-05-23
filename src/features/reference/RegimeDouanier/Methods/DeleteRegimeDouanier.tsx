@@ -31,7 +31,7 @@ const DeleteRegimeDouanier = ({ id, refetch }: DeleteRegimeDouanierPorp, ref: Re
   });
   const [showModal, setShowModal] = React.useState(false);
   const delTemp = () => {
-    axios.delete("https://gescom-api.frimakers.com/api/v1/regimeDouaniers/" + id0).then(() => { });
+    axios.delete("http://localhost:1000/api/v1/regimeDouaniers/" + id0).then(() => { });
   };
   return (
     <>

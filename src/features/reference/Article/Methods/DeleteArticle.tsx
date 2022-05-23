@@ -30,7 +30,7 @@ const DeleteArticle = ({ id, refetch }: DeleteArticlePorp, ref: Ref<void>) => {
   });
   const [showModal, setShowModal] = React.useState(false);
   const delTemp = () => {
-    axios.delete("https://gescom-api.frimakers.com/api/v1/articles/" + id0).then(() => { });
+    axios.delete("http://localhost:1000/api/v1/articles/" + id0).then(() => { });
   };
   return (
     <>

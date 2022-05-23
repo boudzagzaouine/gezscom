@@ -32,7 +32,7 @@ const DeleteTransporteur = ({ id,refetch }: DeleteTransporteurPorp, ref: Ref<voi
     });
     const [showModal, setShowModal] = React.useState(false);
     const delTemp = () => {
-        axios.delete("https://gescom-api.frimakers.com/api/v1/transporteurs/" + id0).then(() => { });
+        axios.delete("http://localhost:1000/api/v1/transporteurs/" + id0).then(() => { });
     };
     return (
         <>

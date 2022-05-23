@@ -31,7 +31,7 @@ const ArchiveUnitMeasure = ({ id }: ArchiveUnitMeasurePorp, ref: Ref<void>) => {
   });
   const archiveTemp = () => {
     axios
-      .patch("https://gescom-api.frimakers.com/api/v1/unitMeasures/" + id0 + "/archive")
+      .patch("http://localhost:1000/api/v1/unitMeasures/" + id0 + "/archive")
       .then(() => { });
   };
   return (

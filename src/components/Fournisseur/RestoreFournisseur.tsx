@@ -30,7 +30,7 @@ const RestoreFournisseur = ({ id }: RestoreFournisseurPorp, ref: Ref<void>) => {
   });
   const restoreTemp = () => {
     axios
-      .patch("https://gescom-api.frimakers.com/api/v1/fournisseurs/" + id0 + "/restore")
+      .patch("http://localhost:1000/api/v1/fournisseurs/" + id0 + "/restore")
       .then(() => {});
   };
   return (

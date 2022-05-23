@@ -32,7 +32,7 @@ const ArchiveRole = ({ id }: ArchiveRolePorp, ref: Ref<void>) => {
     });
     const archiveTemp = () => {
         axios
-            .patch("https://gescom-api.frimakers.com/api/v1/roles/" + id0 + "/archive")
+            .patch("http://localhost:1000/api/v1/roles/" + id0 + "/archive")
             .then(() => { });
     };
     return (

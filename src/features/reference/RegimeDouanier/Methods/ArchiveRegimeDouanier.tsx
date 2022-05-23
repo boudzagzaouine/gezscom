@@ -31,7 +31,11 @@ const ArchiveRegimeDouanier = ({ id }: ArchiveRegimeDouanierPorp, ref: Ref<void>
   });
   const archiveTemp = () => {
     axios
+      .patch("http://localhost:1000/api/v1/regimeDouaniers/" + id0 + "/archive")
       .then(() => { });
+  };
+  return (
+    <>
       <Modal title={"archivage"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
         <div>
           <h2>archivage du régime dounier num: {id0}</h2>
