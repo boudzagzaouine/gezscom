@@ -216,7 +216,7 @@ const ListFournisseurManager = () => {
             }
           </tbody>
         </table>
-        <Pagin load={loadPage}/>
+        <Pagin load={loadPage} visibled={data.content?.length > 0} />
       </Section>
     )
     }

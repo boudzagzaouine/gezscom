@@ -20,6 +20,8 @@ const ListAllCommandes = () => {
         refetch();
       };
     const { data = [], isFetching, refetch } = usePaginationCommandesFournisseurQuery(page);
+    //@ts-ignore
+    const [length,setLength]=useState<number>(data.content?.length)
     const  refCom=useRef(null);
     const [form, setForm]=useState(false);
     const [commandFournisseur0, setcommandFournisseur0]=useState(cf0);
@@ -170,7 +172,7 @@ const ListAllCommandes = () => {
                   ))
                 }
                 </Table>
-                <Pagin load={loadPage} />
+                <Pagin load={loadPage} visibled={false} />
     </Section>
   </>
   )

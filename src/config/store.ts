@@ -23,6 +23,7 @@ import customOfflineConfig from "./offline";
 import { crudApi } from "./rtk";
 
 import counterReducer from "features/counter/counterSlice";
+import { crudClient } from "./rtk/RtkClient";
 
 const {
   middleware: offlineMiddleware,
@@ -47,6 +48,8 @@ export function makeStore() {
   const rootReducer = combineReducers({
     counter: counterReducer,
     [crudApi.reducerPath]: crudApi.reducer,
+    [crudClient.reducerPath]: crudClient.reducer,
+
   });
   const persistedReducer = persistReducer(
     persistConfig,
@@ -60,7 +63,7 @@ export function makeStore() {
         serializableCheck: {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
-      }).concat([crudApi.middleware, offlineMiddleware]),
+      }).concat([crudApi.middleware, offlineMiddleware]).concat([crudClient.middleware, offlineMiddleware]),
   });
   return store;
 }

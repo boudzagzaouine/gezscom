@@ -6,6 +6,7 @@ import { Field, Form } from 'widgets';
 import Bsave from 'widgets/Bsave';
 import { openAdressLivProps, openAdressLivs } from 'components/manager/client/openAdressLivs';
 import Bcyan from 'widgets/Bcyan';
+import Pagin from 'widgets/Pagin';
 const TestOpenClient = () => {
     const clientsToOpen: OpenClientProp = openClients();
     const clientJson: ClientJson = clientsToOpen.data
@@ -15,8 +16,8 @@ const TestOpenClient = () => {
     const editClient=clientsToOpen.edit
     /***********************************************/
     const adressLivsToOpen: openAdressLivProps = openAdressLivs();
-    const adressLivJson: AdressLivJson =adressLivsToOpen.data
-    const adressLivs: AdressLiv[] =adressLivJson.content
+  ///  const adressLivJson: AdressLivJson =adressLivsToOpen.data
+    const adressLivs: AdressLiv[] =adressLivsToOpen.data.content
     const refetchAdressLiv:()=>void=adressLivsToOpen.refetch
     const saveAdressLiv=adressLivsToOpen.save
     const editAdressLiv=adressLivsToOpen.edit
@@ -39,6 +40,7 @@ const TestOpenClient = () => {
             ))}
           </tbody>
         </table>
+        <Pagin load={loadPage} visibled={clients.lenght>0} />
         <Form defaultValues={c0} onSubmit={editClient}>
                   <Field label="id" name="id"  />
                   <Field label="design " name="design"  />

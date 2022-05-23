@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import { PAGE_SIZE } from "tools/consts";
 type PaginProps = {
   load: (page: number) => void;
+  visibled:boolean
 };
-const Pagin = ({ load }: PaginProps) => {
+const Pagin = ({ load,visibled }: PaginProps) => {
   const [init, setInit] = useState(0);
   const [page, setPage] = useState(init);
   let size: number = PAGE_SIZE;
@@ -28,7 +29,8 @@ const Pagin = ({ load }: PaginProps) => {
     if (init < 1) setInit(1);
   };
   return (
-    <nav aria-label="Page navigation example">
+   <>
+   { visibled &&  <nav aria-label="Page navigation example">
       <ul className={"inline-flex -space-x-px float-right my-8"}>
         <li>
           <button
@@ -123,7 +125,8 @@ const Pagin = ({ load }: PaginProps) => {
           </button>
         </li>
       </ul>
-    </nav>
+    </nav>}
+   </>
   );
 };
 
