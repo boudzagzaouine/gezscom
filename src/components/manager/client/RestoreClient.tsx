@@ -4,10 +4,11 @@ import axios from "axios";
 import React, { forwardRef, Ref, useRef, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
+import Bcancel from "widgets/Bcancel";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useRestoreClientMutation } from "../../../config/rtk";
-import Modal from "../../../widgets/Modal";
+import { useRestoreClientMutation } from "config/rtk";
+import Modal from "widgets/Modal";
 type RestoreClientPorp = {
   id: string;
 };
@@ -23,6 +24,9 @@ const RestoreClient = ({ id }: RestoreClientPorp, ref: Ref<void>) => {
     setId0(i);
     setShowModal(true);
   };
+  const close=()=>{
+    setShowModal(false);
+  }
   useEffect(() => {
     //@ts-ignore
     ref.current = openModal;
@@ -34,7 +38,7 @@ const RestoreClient = ({ id }: RestoreClientPorp, ref: Ref<void>) => {
   };
   return (
     <>
-      <Modal title={"restoration"} show={showModal} format={2}>
+      <Modal title={"restoration"} show={showModal} format={5} close={close}>
         <div>
           <h2>restoration du client num: {id0}</h2>
           <form
@@ -50,25 +54,20 @@ const RestoreClient = ({ id }: RestoreClientPorp, ref: Ref<void>) => {
               className="mt-2 float-right"
               onClick={() => {
                 setTimeout(() => {
-                  setShowModal(false);
+                  close();
                 }, 500);
               }}
             >
-              <ReplyIcon
-                className="h-8 w-8 text-[#fff] group-hover:text-gray-500"
-                aria-hidden="true"
-              />
+              Restaurer
             </Bcyan>
           </form>
-          <Bred
+          <Bcancel
             className="mt-2 float-right"
             onClick={() => {
-              setShowModal(false);
+              close();
             }}
-          >
-            <XCircleIcon className={STYLE_ICON} aria-hidden="true" />
-          </Bred>
-        </div>
+          />
+       </div>
       </Modal>
     </>
   );

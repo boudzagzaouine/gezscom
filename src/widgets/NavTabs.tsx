@@ -11,7 +11,11 @@ type NatabsProps = {
 const NavTabs = ({ tab }: NatabsProps) => {
   const [selected, setSelected] = useState(1);
   return (
+<<<<<<< HEAD
     <div className="bg-white w-full float-left h-52 mt-2">
+=======
+    <div className="bg-white w-full float-left h-64 mt-2">
+>>>>>>> develop
       <ul className="float-left">
         {tab.map((t) => (
           <li

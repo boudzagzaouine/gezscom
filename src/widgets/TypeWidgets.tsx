@@ -20,8 +20,12 @@ import type {
   UseFormProps,
   UseFormReturn,
 } from "react-hook-form";
+<<<<<<< HEAD
 import { Client, Article } from "tools/types";
 
+=======
+import { Client, Fournisseur, MatierePremiere } from "tools/types";
+>>>>>>> develop
 import type { UrlObject } from "url";
 
 /**
@@ -212,9 +216,20 @@ export interface NavType {
   visible: boolean;
 }
 export type ListClientsProps = {
+<<<<<<< HEAD
   client: Client;
 };
 
 export type ListArticleProps = {
   article: Article;
 };
+=======
+  idClient: string;
+};
+export type ListFournisseursProps={
+  fournisseur: Fournisseur
+}
+export type ListMatierePremiereProps={
+  matierefour: MatierePremiere
+}
+>>>>>>> develop

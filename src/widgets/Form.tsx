@@ -31,7 +31,8 @@ const Control = forwardRef(
     const isSelect = Component === "select";
     const { value, defaultValue } = props;
     // console.log('log control ? ', props);
-    let additionalProps: Partial<FormControlProps> = {};
+    //@ts-ignore
+    let additionalProps: Partial<FormControlProps<any>> = {};
     if (value !== undefined && value !== null) {
       additionalProps = { checked: "true" === `${value}` };
     } else if (defaultValue !== undefined && defaultValue !== null) {
@@ -41,11 +42,18 @@ const Control = forwardRef(
     /*
      */
     if (isSelect && options) {
+<<<<<<< HEAD
       const selectOptions = options.map((option) => {
         if (!option) return null;
         //@ts-ignore
         const optionValue =
           typeof option === "string" ? option : option[optionKeyName];
+=======
+      const selectOptions = options.map((option:any) => {
+      //  if (!option) return null;
+        //@ts-ignore
+        const optionValue =typeof option === "string" ? option : option[optionKeyName];
+>>>>>>> develop
         //@ts-ignore
         const optionLabel =
           typeof option === "string"
@@ -59,6 +67,7 @@ const Control = forwardRef(
       });
       additionalProps["children"] = selectOptions;
     }
+    //@ts-ignore
     return <Component ref={ref} {...additionalProps} {...props} />;
   }
 );
@@ -84,7 +93,7 @@ export const Form = <T extends FieldValues = FieldValues>({
   const { reset, formState } = methods;
   useEffect(() => {
     if (defaultValues) {
-      // console.log("reset form ?", defaultValues);
+      // console.log("reset form ?", defaultValues); ***
       reset(defaultValues);
     }
   }, [defaultValues]);
@@ -102,7 +111,7 @@ export const Form = <T extends FieldValues = FieldValues>({
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit || defaultOnSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit || defaultOnSubmit)} className="float-right w-full">
         {ObjectUtils.isFunction(children) ? children(methods) : children}
       </form>
     </FormProvider>
