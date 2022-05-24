@@ -23,7 +23,7 @@ const Layout =   ({ children }: LayoutProps) => {
   //status = unauthenticated
   //status = authenticated
   //status = loading
-  console.log("session="+JSON.stringify(session)+" , status = "+status)
+  console.log("jwt = "+session?.accessToken+" , status = "+status)
   const [loading,setLoading]=useState(true)
   const securePage = async () =>{
     const session = await getSession()

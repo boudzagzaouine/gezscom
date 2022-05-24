@@ -1,3 +1,6 @@
+import { inRange } from "lodash";
+import { Timestamp } from "rxjs";
+
 export type Num = {
   id: number;
 };
@@ -38,7 +41,9 @@ export const c0: Client = {
   swift: "",
   adressLivs:[]
  };
-
+export interface CommandeJson{
+  content:Commande[]
+}
 export interface Commande {
   id: string;
   date: Date;
@@ -72,6 +77,9 @@ export const adr0:AdressLiv={
   country:"",
   city:"",
   idClient:""
+}
+export interface ArticleCommandeJson{
+  content:ArticleCommande[]
 }
 export interface ArticleCommande {
   id: string;
@@ -437,6 +445,35 @@ export const u0:Users={
   phone:"",
   role :[]
 }
+export interface AccessUser{ 
+  manageGroupMembership: boolean
+  view: boolean
+  mapRoles: boolean
+  impersonate: boolean
+  manage: boolean 
+  }
+export const access0:AccessUser={ 
+  manageGroupMembership: true,
+  view: true,
+  mapRoles: true,
+  impersonate: true,
+  manage: true, }
+export interface User{ 
+  id: string
+  createdTimestamp: number
+  username: string
+  enabled: boolean
+  totp: boolean
+  emailVerified: boolean
+  firstName: string
+  lastName: string
+  email: string
+  disableableCredentialTypes: any[]
+  requiredActions: any[]
+  notBefore: number
+  access: AccessUser
+  }
+  export const user0:User={ "id": "", "createdTimestamp": 0, "username": "", "enabled": true, "totp": false, "emailVerified": false, "firstName": "", "lastName": "", "email": "", "disableableCredentialTypes": [], "requiredActions": [], "notBefore": 0, "access": access0 }
 export interface Chaine {
   val: string;
 }

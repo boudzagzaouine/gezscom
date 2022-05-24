@@ -1,3 +1,4 @@
+import { crudUser } from './rtk/RtkUser';
 import { crudVille } from './rtk/rtkVille';
 import { crudType } from './rtk/rtkType';
 import { crudTransporteur } from './rtk/rtkTransporteur';
@@ -42,7 +43,6 @@ import { crudUnitMeasure } from "./rtk/rtkUnitMeasure";
 
 import { crudClient } from "./rtk/RtkClient";
 
-
 const {
   middleware: offlineMiddleware,
   enhanceReducer: offlineEnhanceReducer,
@@ -66,6 +66,7 @@ export function makeStore() {
   const rootReducer = combineReducers({
     counter: counterReducer,
     [crudApi.reducerPath]: crudApi.reducer,
+    [crudUser.reducerPath]: crudUser.reducer,
 
 
     [crudArticle.reducerPath]: crudArticle.reducer,
@@ -103,7 +104,9 @@ export function makeStore() {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
 
-      }).concat([crudApi.middleware, offlineMiddleware]).concat([crudArticle.middleware, offlineMiddleware]).concat([crudBureauDouane.middleware, offlineMiddleware]).concat([crudDeclarant.middleware, offlineMiddleware]).concat([crudIncoterm.middleware, offlineMiddleware]).concat([crudIncoterm.middleware, offlineMiddleware]).concat([crudPayementMode.middleware, offlineMiddleware]).concat([crudRawMaterial.middleware, offlineMiddleware]).concat([crudRegimeDouanier.middleware, offlineMiddleware]).concat([crudUnitMeasure.middleware, offlineMiddleware]),
+      }).concat([crudApi.middleware, offlineMiddleware]).concat([crudArticle.middleware, offlineMiddleware]).concat([crudBureauDouane.middleware, offlineMiddleware]).concat([crudDeclarant.middleware, offlineMiddleware]).concat([crudIncoterm.middleware, offlineMiddleware]).concat([crudIncoterm.middleware, offlineMiddleware]).concat([crudPayementMode.middleware, offlineMiddleware]).concat([crudRawMaterial.middleware, offlineMiddleware]).concat([crudRegimeDouanier.middleware, offlineMiddleware])
+        .concat([crudUnitMeasure.middleware, offlineMiddleware])
+        .concat([crudUser.middleware, offlineMiddleware]),
 
     // }).concat([crudApi.middleware, offlineMiddleware]).concat([crudClient.middleware, offlineMiddleware]),
 

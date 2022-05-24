@@ -1,5 +1,7 @@
 import { BriefcaseIcon, SaveIcon, XCircleIcon } from "@heroicons/react/solid";
-import { useAddCommandeMutation, useEditCommandeMutation, useFetchAdressLivsByIdClientQuery, useFetchClientsQuery, useFetchOneClientQuery } from "config/rtk";
+import {  useFetchClientsQuery, useFetchOneClientQuery } from "config/rtk/RtkClient";
+import { useAddCommandeMutation, useEditCommandeMutation } from "config/rtk/RtkCommande";
+import {  useFetchAdressLivsByIdClientQuery } from "config/rtk/RtkAdressLiv";
 import React, { ChangeEvent, forwardRef, Ref, useEffect, useRef, useState } from "react";
 import { STYLE_ICON, style_icon, style_span } from "tools/constStyle";
 import { AdressLiv, c0,adr0, Client, Commande, ClientJson} from "tools/types";

@@ -11,7 +11,7 @@ import DeleteClient from "components/manager/client/DeleteClient";
 import Mitems from "widgets/Mitems";
 import Pagin from "widgets/Pagin";
 import RestoreClient from "components/manager/client/RestoreClient";
-import { usePaginationClientsQuery } from "config/rtk";
+
 import React, { useRef, useState } from "react";
 import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import { STYLE_ICON } from "tools/constStyle";
@@ -23,6 +23,7 @@ import Section from "widgets/Section";
 import { MenuItems } from "widgets/TypeWidgets";
 import FormClientManager from "./FormClientManager";
 import Table from "widgets/Table";
+import { OpenClientProp, openPaginationClients } from "config/rtk/RtkClient";
 const ListClientManager = () => {
   const [form, setForm] = useState(false);
   const [client0, setClient0] = useState(c0);
@@ -32,7 +33,10 @@ const ListClientManager = () => {
     setPage(p);
     refetch();
   };
-  const { data = [], refetch } = usePaginationClientsQuery(page);
+  //openPaginationClients =(page:number):OpenClientProp
+  const openClients:OpenClientProp=openPaginationClients(page)
+  const clients:Client[]=openClients.data.content
+  const refetch=openClients.refetch
   const [disabled, setDisabled] = useState(true);
   const del = useRef(null);
   const archive = useRef(null);
@@ -180,7 +184,7 @@ const ListClientManager = () => {
           >
             {
               //@ts-ignore
-              data.content?.map((client) => (
+              clients?.map((client) => (
                 //   data?.map((client) => (
                 <tr key={client.id}>
                   <Table.td>

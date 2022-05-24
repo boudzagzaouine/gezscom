@@ -1,4 +1,4 @@
-import { useFetchcommandesByIdClientQuery } from "config/rtk";
+import { useFetchcommandesByIdClientQuery } from "config/rtk/RtkCommande";
 import React, { useRef, useState } from "react";
 import {  Client, cm0, Commande } from "tools/types";
 import Bcyan from "widgets/Bcyan";

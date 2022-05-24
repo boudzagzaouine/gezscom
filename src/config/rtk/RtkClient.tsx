@@ -1,8 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenClientProp } from "components/manager/client/openClients";
 import { PAGE_SIZE } from "tools/consts";
 import { AdressLiv, Article, ArticleCommande, BureauDouane, Client, Commande, PayementMode, RawMaterial, RegimeDouanier,Declarant, Incoterm,  UnitMeasure,
-  Devise, Pays, Transporteur, Ville, Role, Type, Document, CommandeFournisseur, Fournisseur, LigneDeCommande, MatierePremiere 
+  Devise, Pays, Transporteur, Ville, Role, Type, Document, CommandeFournisseur, Fournisseur, LigneDeCommande, MatierePremiere, ClientJson 
 } from "tools/types";
 
 export const crudClient = createApi({
@@ -91,8 +90,22 @@ export const {
   useRestoreClientMutation,
   
 } = crudClient;
+export type OpenClientProp={
+  data:ClientJson
+  refetch:()=>void
+  save:()=>void
+  edit:()=>void
+}
 export const openClients =():OpenClientProp =>{
   const { data = [], refetch } = useFetchClientsQuery();
+  const [save]=useAddClientMutation();
+  const [edit]=useEditClientMutation();
+  //@ts-ignore
+  const out:OpenClientProp={data,refetch,save,edit}
+  return out;
+}
+export const openPaginationClients =(page:number):OpenClientProp =>{
+  const { data = [], refetch } = usePaginationClientsQuery(page);
   const [save]=useAddClientMutation();
   const [edit]=useEditClientMutation();
   //@ts-ignore

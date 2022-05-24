@@ -3,7 +3,7 @@ import { OpenClientProp, openClients } from "components/manager/client/openClien
 import {
   useFetchCommandesQuery,
   usePaginationCommandesQuery,
-} from "config/rtk";
+} from "config/rtk/RtkCommande";
 import React, { useRef, useState } from "react";
 import { getClient } from "tools/Methodes";
 import { c0, Client, ClientJson, cm0, Commande } from "tools/types";

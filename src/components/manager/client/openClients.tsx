@@ -1,4 +1,4 @@
-import { useAddClientMutation, useEditClientMutation, useFetchClientsQuery,usePaginationClientsQuery } from "config/rtk";
+import { useAddClientMutation, useEditClientMutation, useFetchClientsQuery,usePaginationClientsQuery } from "config/rtk/RtkClient";
 import { ClientJson } from "tools/types";
 export type OpenClientProp={
   data:ClientJson

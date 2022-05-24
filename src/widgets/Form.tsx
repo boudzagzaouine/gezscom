@@ -42,19 +42,12 @@ const Control = forwardRef(
     /*
      */
     if (isSelect && options) {
-<<<<<<< HEAD
-      const selectOptions = options.map((option) => {
-        if (!option) return null;
-        //@ts-ignore
-        const optionValue =
-          typeof option === "string" ? option : option[optionKeyName];
-=======
+
       const selectOptions = options.map((option:any) => {
       //  if (!option) return null;
         //@ts-ignore
         const optionValue =typeof option === "string" ? option : option[optionKeyName];
->>>>>>> develop
-        //@ts-ignore
+       //@ts-ignore
         const optionLabel =
           typeof option === "string"
             ? option

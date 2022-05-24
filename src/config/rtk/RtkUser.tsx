@@ -1,74 +1,104 @@
+import { RootState } from "@reduxjs/toolkit/dist/query/core/apiState";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenClientProp } from "components/manager/client/openClients";
+import { GetToken } from "config/GetToken";
+import { useSession } from "next-auth/react";
 import { PAGE_SIZE } from "tools/consts";
-import { AdressLiv, Article, ArticleCommande, BureauDouane, Client, Commande, PayementMode, RawMaterial, RegimeDouanier,Declarant, Incoterm,  UnitMeasure,
-  Devise, Pays, Transporteur, Ville, Role, Type, Document, CommandeFournisseur, Fournisseur, LigneDeCommande, MatierePremiere 
+import { User 
 } from "tools/types";
 
-export const crudClient = createApi({
-  reducerPath: "crud-client",
+export const crudUser = createApi({
+  reducerPath: "crud-User",
   baseQuery: fetchBaseQuery({
-    baseUrl:process.env.NEXT_PUBLIC_URL,
+    baseUrl:"http://localhost:4002/admin/realms/gescom",
     prepareHeaders(headers) {
+      headers.set('Content-Type','application/x-www-form-urlencoded')
+      headers.set('Authorization', 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJWZmFhYldKcjJXb0hTY3JMbDBQUU5laGo1d2JSQTVRbDZfTnY3WTBXOS1zIn0.eyJleHAiOjE2NTM4MTkyNzcsImlhdCI6MTY1MzM4NzI3NywiYXV0aF90aW1lIjoxNjUzMzg3Mjc3LCJqdGkiOiI5NTc1ZmY2NS1hYTVmLTRkYTMtYmQ3MS1kYWJmZTA2NGFhMGMiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjQwMDIvcmVhbG1zL2dlc2NvbSIsImF1ZCI6WyJyZWFsbS1tYW5hZ2VtZW50IiwiYnJva2VyIiwiYWNjb3VudCJdLCJzdWIiOiJlZGQxZjJmMS04MzBiLTQxOWQtODUzOC03NjJkNjI4OTc3MjciLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJjbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiMTA4NGM2ODYtZTViMC00OGEzLTk3MDEtYmUwOTRmYjc3NzYzIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWxlYXJuIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7InJlYWxtLW1hbmFnZW1lbnQiOnsicm9sZXMiOlsidmlldy1pZGVudGl0eS1wcm92aWRlcnMiLCJ2aWV3LXJlYWxtIiwibWFuYWdlLWlkZW50aXR5LXByb3ZpZGVycyIsImltcGVyc29uYXRpb24iLCJyZWFsbS1hZG1pbiIsImNyZWF0ZS1jbGllbnQiLCJtYW5hZ2UtdXNlcnMiLCJxdWVyeS1yZWFsbXMiLCJ2aWV3LWF1dGhvcml6YXRpb24iLCJxdWVyeS1jbGllbnRzIiwicXVlcnktdXNlcnMiLCJtYW5hZ2UtZXZlbnRzIiwibWFuYWdlLXJlYWxtIiwidmlldy1ldmVudHMiLCJ2aWV3LXVzZXJzIiwidmlldy1jbGllbnRzIiwibWFuYWdlLWF1dGhvcml6YXRpb24iLCJtYW5hZ2UtY2xpZW50cyIsInF1ZXJ5LWdyb3VwcyJdfSwiYnJva2VyIjp7InJvbGVzIjpbInJlYWQtdG9rZW4iXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJ2aWV3LWFwcGxpY2F0aW9ucyIsInZpZXctY29uc2VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwiZGVsZXRlLWFjY291bnQiLCJtYW5hZ2UtY29uc2VudCIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJzaWQiOiIxMDg0YzY4Ni1lNWIwLTQ4YTMtOTcwMS1iZTA5NGZiNzc3NjMiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJheW91YiBib3VyYWQiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhQHkiLCJnaXZlbl9uYW1lIjoiYXlvdWIiLCJmYW1pbHlfbmFtZSI6ImJvdXJhZCIsImVtYWlsIjoiYUB5In0.KiLZ0DcLU-HqibtGy16XdPp6XCGxVBIMDdflHmZx0wYZy1KWbMK9PNgeeaoXmngkaKvh643ETLK3JOUd6kNP9LTYA43o8JhJBOjcCxt6luuA5D1V0fc95eBkzqDZdD8JSmjdYUBZbzzoa-kB9gpeM-sU_MVGfvlH4SrsouInGzEn6tocxeUKSYoKJAMj-Wplczn6PXNjVSd0fUbP8K9WPqop98Aq1D6r7d9BURXvyYgc2q9cSUIIVk19rYJ8JPgADltG0bND2PHOtks93VqqfZA88erVmksrB6djnakZwD60ksq9BFWMo_2NvClD0lpxsplxhRQv4oSwHErvfHFhMg')
+ headers.set('Access-Control-Allow-Origin','*')
+      // const { data: token, status } = useSession()
+     /*  const jwtProm=GetToken()
+     jwtProm.then((jwt:string)=>{
+      if (jwt) {
+        headers.set('authorization', `Bearer ${jwt}`)
+      }
+     },
+     (error)=>{
+console.log("errrr ="+error)
+     }) */
+    //  console.log("jwt2 = "+token?.accessToken)
       return headers;
     },
+   /*  prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as RootState<any,any,any>).auth?.token
+  
+      // If we have a token set in state, let's assume that we should be passing it.
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`)
+      }
+  
+      return headers
+    }, */
   }),
-  tagTypes: ["Client", "UNAUTHORIZED", "UNKNOWN_ERROR"],
+  tagTypes: ["User", "UNAUTHORIZED", "UNKNOWN_ERROR"],
+  
   endpoints(builder) {
     return {
+     
       /*****************************************************************************/
-      /*********************************CLIENT**************************************/
+      /*********************************User**************************************/
       /*****************************************************************************/
-      fetchClients: builder.query<Client[], void>({
-        query: () => `/clients`,
+      fetchUsers: builder.query<User[], void>({
+        query: () => ({
+          url: `/users`,
+          responseHandler: (response) => response.text(), // This is the same as passing 'text'
+        }),
       }),
-      paginationClients: builder.query<Client[], number>({
-        query: (page) => `/clients?page=${page}&size=${PAGE_SIZE}`,
+      paginationUsers: builder.query<User[], number>({
+        query: (page) => `/Users?page=${page}&size=${PAGE_SIZE}`,
       }),
-      fetchOneClient: builder.query<Client, string>({
-        query: (id) => `/clients/${id}`,
+      fetchOneUser: builder.query<User, string>({
+        query: (id) => `/Users/${id}`,
      }),
-      addClient: builder.mutation<Client, Partial<Client>>({
+      addUser: builder.mutation<User, Partial<User>>({
         query: (body) => ({
-          url: "/clients",
+          url: "/Users",
           method: "POST",
           body,
         }),
        }),
-      editClient: builder.mutation<
-        Client,
-        Partial<Client> & Pick<Client, "id">
+      editUser: builder.mutation<
+        User,
+        Partial<User> & Pick<User, "id">
       >({
         query: (body) => ({
-          url: `/clients/${body.id}`,
+          url: `/Users/${body.id}`,
           method: "PUT",
           body,
         }),
       }),
-      deleteClient: builder.mutation<{ success: boolean; id: number }, number>({
+      deleteUser: builder.mutation<{ success: boolean; id: number }, number>({
         //@ts-ignore
         query(id: Num) {
-          //  if (confirm(`do you want delete Client number ${id.id} ?`))
+          //  if (confirm(`do you want delete User number ${id.id} ?`))
           return {
-            url: `/clients/${id.id}`,
+            url: `/Users/${id.id}`,
             method: "DELETE",
           };
        }}),
-      archiveClient: builder.mutation<
-        Client,
-        Partial<Client> & Pick<Client, "id">
+      archiveUser: builder.mutation<
+        User,
+        Partial<User> & Pick<User, "id">
       >({
         query: (id) => ({
-          url: `/clients/${id}/archive`,
+          url: `/Users/${id}/archive`,
           method: "PUT",
         }),
       }),
-      restoreClient: builder.mutation<
-        Client,
-        Partial<Client> & Pick<Client, "id">
+      restoreUser: builder.mutation<
+        User,
+        Partial<User> & Pick<User, "id">
       >({
         query: (id) => ({
-          url: `/clients/${id}/restore`,
+          url: `/Users/${id}/restore`,
           method: "PUT",
         }),
       }),
@@ -79,23 +109,32 @@ export const crudClient = createApi({
  /***********useMaMethodAfficjageQuery********************************************/
 /***********useMaMethodeOperationMutaion*****************************************/
 export const {
-  /******************CLIENT********************************/
+  /******************User********************************/
   /*******************************************************/
-  useFetchClientsQuery,
-  usePaginationClientsQuery,
-  useFetchOneClientQuery,
-  useAddClientMutation,
-  useEditClientMutation,
-  useDeleteClientMutation,
-  useArchiveClientMutation,
-  useRestoreClientMutation,
+  useFetchUsersQuery,
+  usePaginationUsersQuery,
+  useFetchOneUserQuery,
+  useAddUserMutation,
+  useEditUserMutation,
+  useDeleteUserMutation,
+  useArchiveUserMutation,
+  useRestoreUserMutation,
   
-} = crudClient;
-export const openClients =():OpenClientProp =>{
-  const { data = [], refetch } = useFetchClientsQuery();
-  const [save]=useAddClientMutation();
-  const [edit]=useEditClientMutation();
+} = crudUser;
+export type OpenUserProp ={
+  data:User[]
+  refetch:()=>void
+  save:()=>void
+  edit:()=>void
+}
+export const openUsers =():OpenUserProp =>{
+  const { data: token, status } = useSession()
+
+  console.log("jwt3 = "+token)
+  const { data = [], refetch } = useFetchUsersQuery();
+  const [save]=useAddUserMutation();
+  const [edit]=useEditUserMutation();
   //@ts-ignore
-  const out:OpenClientProp={data,refetch,save,edit}
+  const out:OpenUserProp={data,refetch,save,edit}
   return out;
 }

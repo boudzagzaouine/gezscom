@@ -6,7 +6,7 @@ import {
   usePaginationArticleCommandesQuery,
   useAddArticleCommandeMutation,
   useEditArticleCommandeMutation
-} from "config/rtk";
+} from "config/rtk/RtkArticleCommande";
 import React, { useState } from "react";
 import { style_add_line } from "tools/constStyle";
 import { arc0, Commande ,ArticleCommande} from "tools/types";

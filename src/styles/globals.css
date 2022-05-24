@@ -1,8 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-<<<<<<< HEAD
-=======
 .react-datepickerzz {
     position: absolute !important;
     right: 0 !important;
@@ -15,4 +13,3 @@
 .b-ajust-r {
     margin-right: 183px;
 }
->>>>>>> develop
