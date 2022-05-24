@@ -30,7 +30,7 @@ import customOfflineConfig from "./offline";
 import { crudApi } from "./rtk";
 
 import counterReducer from "features/counter/counterSlice";
-<<<<<<< HEAD
+
 import { crudBureauDouane } from "./rtk/rtkBureauDouane";
 import { crudArticle } from "./rtk/rtkArticle";
 import { crudRegimeDouanier } from "./rtk/rtkRegimeDouanier";
@@ -39,9 +39,9 @@ import { crudDeclarant } from "./rtk/rtkDeclarant";
 import { crudIncoterm } from "./rtk/rtkIncoterm";
 import { crudPayementMode } from "./rtk/rtkPayementMode";
 import { crudUnitMeasure } from "./rtk/rtkUnitMeasure";
-=======
+
 import { crudClient } from "./rtk/RtkClient";
->>>>>>> develop
+
 
 const {
   middleware: offlineMiddleware,
@@ -66,8 +66,8 @@ export function makeStore() {
   const rootReducer = combineReducers({
     counter: counterReducer,
     [crudApi.reducerPath]: crudApi.reducer,
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
     [crudArticle.reducerPath]: crudArticle.reducer,
     [crudBureauDouane.reducerPath]: crudBureauDouane.reducer,
     [crudRegimeDouanier.reducerPath]: crudRegimeDouanier.reducer,
@@ -76,11 +76,11 @@ export function makeStore() {
     [crudIncoterm.reducerPath]: crudIncoterm.reducer,
     [crudPayementMode.reducerPath]: crudPayementMode.reducer,
     [crudUnitMeasure.reducerPath]: crudUnitMeasure.reducer,
-=======
-    [crudClient.reducerPath]: crudClient.reducer,
->>>>>>> develop
 
-=======
+    [crudClient.reducerPath]: crudClient.reducer,
+
+
+
     [crudDevise.reducerPath]: crudDevise.reducer,
     [crudDocument.reducerPath]: crudDocument.reducer,
     [crudPays.reducerPath]: crudPays.reducer,
@@ -88,7 +88,7 @@ export function makeStore() {
     [crudTransporteur.reducerPath]: crudTransporteur.reducer,
     [crudType.reducerPath]: crudType.reducer,
     [crudVille.reducerPath]: crudVille.reducer,
->>>>>>> v_ismail
+
   });
   const persistedReducer = persistReducer(
     persistConfig,
@@ -102,11 +102,11 @@ export function makeStore() {
         serializableCheck: {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
-<<<<<<< HEAD
+
       }).concat([crudApi.middleware, offlineMiddleware]).concat([crudArticle.middleware, offlineMiddleware]).concat([crudBureauDouane.middleware, offlineMiddleware]).concat([crudDeclarant.middleware, offlineMiddleware]).concat([crudIncoterm.middleware, offlineMiddleware]).concat([crudIncoterm.middleware, offlineMiddleware]).concat([crudPayementMode.middleware, offlineMiddleware]).concat([crudRawMaterial.middleware, offlineMiddleware]).concat([crudRegimeDouanier.middleware, offlineMiddleware]).concat([crudUnitMeasure.middleware, offlineMiddleware]),
-=======
-      }).concat([crudApi.middleware, offlineMiddleware]).concat([crudClient.middleware, offlineMiddleware]),
->>>>>>> develop
+
+    // }).concat([crudApi.middleware, offlineMiddleware]).concat([crudClient.middleware, offlineMiddleware]),
+
   });
   return store;
 }

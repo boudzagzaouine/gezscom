@@ -55,12 +55,7 @@ export const crudDocument = createApi({
                     };
                     // else return
                 },
-                //@ts-ignore
-                invalidatesTags: (result, error, id) => [
-                    { type: "Document", id },
-                    { type: "Document", id: "LIST" },
-                ],
-            }),
+           }),
             archiveDocument: builder.mutation<
                 Document,
                 //@ts-ignore

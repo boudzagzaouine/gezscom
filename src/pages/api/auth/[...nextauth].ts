@@ -2,47 +2,42 @@ import nextAuth from "next-auth";
 import KeycloakProvider from "next-auth/providers/keycloak";
 
 
-export default nextAuth ({
-        
-  providers : [
-          KeycloakProvider({
-<<<<<<< HEAD
-                  clientId:process.env.NEXT_API_CLIENT||"",
-                  clientSecret:process.env.NEXT_API_SEC||"",
-                  issuer: process.env.NEXT_URL_API_KEY
-=======
-                  clientId:"client",
-                  clientSecret:"L0ejjfLkKWDBgp5buzco4KZQeMGrt6Mc",
-                  issuer: "http://localhost:8080/realms/gescom"
->>>>>>> v_ismail
-          }),
-          
-               
-          ],
-          theme: {
-            colorScheme: "light",
-          },
-          callbacks: {
-            jwt({ token, account }) {
-              // console.log("token ? ", token)
-              // console.log("account ? ", account)
-              if (account) {
-                token.accessToken = account.access_token;
-              }
-              token.userRole = "admin";
-              return token;
-            },
-            session({ session, token }) {
-              // Send properties to the client, like an access_token from a provider.
-              session.accessToken = token.accessToken;
-              return session;
-            },
-          },
-          
+export default nextAuth({
+
+  providers: [
+    KeycloakProvider({
+
+      clientId: process.env.NEXT_API_CLIENT || "",
+      clientSecret: process.env.NEXT_API_SEC || "",
+      issuer: process.env.NEXT_URL_API_KEY,
+    }),
+
+
+  ],
+  theme: {
+    colorScheme: "light",
+  },
+  callbacks: {
+    jwt({ token, account }) {
+      // console.log("token ? ", token)
+      // console.log("account ? ", account)
+      if (account) {
+        token.accessToken = account.access_token;
+      }
+      token.userRole = "admin";
+      return token;
+    },
+    session({ session, token }) {
+      // Send properties to the client, like an access_token from a provider.
+      session.accessToken = token.accessToken;
+      return session;
+    },
+  },
+
 
 })
 // export default NextAuth({
-  
+
   // https://next-auth.js.org/configuration/providers/oauth
   // providers: [
   //   KeycloakProvider({
@@ -54,7 +49,7 @@ export default nextAuth ({
   //     issuer:"http://localhost:8080/realms/gescom"
 
 
-      
+
   //   }),
   // ],
   // pages: {

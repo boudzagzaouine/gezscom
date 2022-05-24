@@ -4,28 +4,6 @@ export type Num = {
 export interface ClientJson{
   content:Client[]
 }
-
-export interface TransporteurJson {
-  content: Transporteur[]
-}
-export interface DeviseJson{
-  content:Devise[]
-}
-export interface PaysJson {
-  content: Pays[]
-}
-export interface DocumentJson {
-  content: Document[]
-}
-export interface RoleJson {
-  content: Role[]
-}
-export interface TypeJson {
-  content: Type[]
-}
-export interface VilleJson {
-  content: Ville[]
-}
 export interface Client {
   id: string;
   design: string;
@@ -41,12 +19,7 @@ export interface Client {
   bank: string;
   rib: string;
   swift: string;
-<<<<<<< HEAD
-  commandes: Commande[];
-  adressLivs: AdressLiv[];
-=======
   adressLivs:AdressLiv[]
->>>>>>> develop
 }
 export const c0: Client = {
   id: "",
@@ -63,55 +36,14 @@ export const c0: Client = {
   bank: "",
   rib: "",
   swift: "",
-<<<<<<< HEAD
-  commandes: [],
-  adressLivs: [],
-};
-=======
   adressLivs:[]
  };
->>>>>>> develop
 
 export interface Commande {
   id: string;
   date: Date;
   season: string;
   amount: string;
-<<<<<<< HEAD
-  client: Client;
-  idClient: string;
-}
-export const cm0: Commande = {
-  id: "",
-  date: new Date(),
-  amount: "",
-  season: "",
-  client: c0,
-  idClient: "",
-};
-export const getCm0 = (cl: Client): Commande => {
-  return {
-    id: "",
-    date: new Date(),
-    amount: "",
-    season: "",
-    client: cl,
-    idClient: cl.id,
-  };
-};
-export const getClient = (id: string, obj: Client[]): Client | undefined => {
-  const apr = obj?.find((o: Client) => {
-    return o.id === id;
-  });
-  return apr;
-};
-
-export interface AdressLiv {
-  adress: string;
-  id: string;
-  country: string;
-  city: string;
-=======
   idClient: string;
   adrLiv: string;
  }
@@ -504,146 +436,7 @@ export const u0:Users={
   email:"",
   phone:"",
   role :[]
->>>>>>> develop
 }
 export interface Chaine {
   val: string;
 }
-
-export interface ArticleJson {
-  content: Article[]
-}
-
-export interface Article {
-  id: String,
-  design: String;
-  nomenclature: String;
-  tauxPertes: number;
-}
-
-export const article0: Article = {
-  id: "",
-  design: "",
-  nomenclature: "",
-  tauxPertes: 0,
-};
-
-export interface UnitMeasureJson {
-  content: UnitMeasure[]
-}
-
-export interface UnitMeasure {
-  id: String,
-  design: String;
-  symbole: String;
-  decimal: number;
-}
-
-export const unitMeasure0: UnitMeasure = {
-  id: "",
-  design: "",
-  symbole: "",
-  decimal: 0,
-};
-
-export interface BureauDouaneJson {
-  content: BureauDouane[]
-}
-
-export interface BureauDouane {
-  id: String;
-  code: String;
-  design: String;
-}
-
-export const bureauDouane0: BureauDouane = {
-  id: "",
-  code: "",
-  design: "",
-};
-
-export interface DeclarantJson {
-  content: Declarant[]
-}
-
-export interface Declarant {
-  id: String;
-  design: String;
-  ville: String;
-}
-
-export const declarant0: Declarant = {
-  id: "",
-  design: "",
-  ville: "",
-};
-
-export interface IncotermJson {
-  content: Incoterm[]
-}
-
-export interface Incoterm {
-  id: String,
-  code: String;
-  design: String;
-}
-
-export const incoterm0: Incoterm = {
-  id: "",
-  code: "",
-  design: "",
-};
-
-export interface PayementModeJson {
-  content: PayementMode[]
-}
-
-export interface PayementMode {
-  id: String;
-  code: String;
-  design: String;
-}
-
-export const payementMode0: PayementMode = {
-  id: "",
-  code: "",
-  design: "",
-};
-
-export interface RegimeDouanierJson {
-  content: RegimeDouanier[]
-}
-
-export interface RegimeDouanier {
-  id: String;
-  code: String;
-  design: String;
-}
-
-export const regimeDouanier0: RegimeDouanier = {
-  id: "",
-  code: "",
-  design: "",
-};
-
-export interface RawMaterialJson {
-  content: RawMaterial[]
-}
-
-export interface RawMaterial {
-  id: string
-  design: String;
-  nomenclature: String;
-  family: String;
-  tauxPertes: number;
-  measureUnit: String;
-}
-
-export const rawMaterial0: RawMaterial = {
-  id: "",
-  design: "",
-  nomenclature: "",
-  family: "",
-  tauxPertes: 0,
-  measureUnit: "",
-};

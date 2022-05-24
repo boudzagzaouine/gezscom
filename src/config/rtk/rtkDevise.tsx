@@ -55,12 +55,7 @@ export const crudDevise = createApi({
                     };
                     // else return
                 },
-                //@ts-ignore
-                invalidatesTags: (result, error, id) => [
-                    { type: "Devise", id },
-                    { type: "Devise", id: "LIST" },
-                ],
-            }),
+              }),
             archiveDevise: builder.mutation<
                 Devise,
                 //@ts-ignore

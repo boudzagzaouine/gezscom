@@ -3,14 +3,14 @@ import React, { useState } from "react";
 import { PAGE_SIZE } from "tools/consts";
 type PaginProps = {
   load: (page: number) => void;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> v_ismail
+
+
+
+
   visibled: boolean
 };
 const Pagin = ({ load, visibled }: PaginProps) => {
-=======
+
   visibled:boolean
 };
 const Pagin = ({ load,visibled }: PaginProps) => {
@@ -38,7 +38,7 @@ const Pagin = ({ load,visibled }: PaginProps) => {
     if (init < 1) setInit(1);
   };
   return (
-<<<<<<< HEAD
+
     <>
       {visibled && <nav aria-label="Page navigation example">
         <ul className={"inline-flex -space-x-px float-right my-8"}>
@@ -137,7 +137,7 @@ const Pagin = ({ load,visibled }: PaginProps) => {
         </ul>
       </nav>}
     </>
-=======
+
    <>
    { visibled &&  <nav aria-label="Page navigation example">
       <ul className={"inline-flex -space-x-px float-right my-8"}>
