@@ -4,7 +4,7 @@ import { useAddCommandeMutation, useEditCommandeMutation } from "config/rtk/RtkC
 import {  useFetchAdressLivsByIdClientQuery } from "config/rtk/RtkAdressLiv";
 import React, { ChangeEvent, forwardRef, Ref, useEffect, useRef, useState } from "react";
 import { STYLE_ICON, style_icon, style_span } from "tools/constStyle";
-import { AdressLiv, c0,adr0, Client, Commande, ClientJson} from "tools/types";
+import { AdressLiv, c0,adr0, Client, Commande, ClientJson,Devise} from "tools/types";
 import { Field, Form } from "widgets";
 import Modal from "widgets/Modal";
 import NavTabs from "widgets/NavTabs";
@@ -16,7 +16,7 @@ import Bsave from "widgets/Bsave";
 import Bcancel from "widgets/Bcancel";
 import { openAdressLivByIdClient, openAdressLivByIdClientProps } from "components/manager/client/openAdressLivByIdClient";
 import { OpenClientProp, openClients } from "components/manager/client/openClients";
-
+import {openDevises} from "config/rtk/rtkDevise"
 type CommandProps = {
   command: Commande;
   client:Client
@@ -35,7 +35,7 @@ const FormCommande = ({ command,client,clients,refetchList }: CommandProps, ref:
     const refetchAdressLiv:()=>void=adressLivsToOpen.refetch
     const clientsToOpen: OpenClientProp = openClients();
     const clients1: Client[] = clientsToOpen.data.content
-  const {refetch}=useFetchAdressLivsByIdClientQuery(client?.id)
+  //const {refetch}=useFetchAdressLivsByIdClientQuery(client?.id)
    const refetchClient:()=>void=clientsToOpen.refetch
   const openModal = (c: Commande,cl:Client) => {
     setCommand0(c);
@@ -44,6 +44,8 @@ const FormCommande = ({ command,client,clients,refetchList }: CommandProps, ref:
   };
     const [add]=useAddCommandeMutation();
     const [edit]=useEditCommandeMutation();
+    
+    //openDevises = (): OpenDeviseProp
   const save=command0.id==""?add:edit
   const close=()=>{
     setShowModal(false);

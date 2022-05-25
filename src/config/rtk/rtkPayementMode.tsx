@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenPayementModeProp } from "features/PayementMode/Methods/openPayementModes";
+import { OpenPayementModeProp } from "features/reference/PayementMode/Methods/openPayementModes";
 import { PAGE_SIZE } from "tools/consts";
 import { PayementMode } from "tools/types";
 
@@ -93,7 +93,7 @@ export const {
 
 
 export const openPayementModes = (): OpenPayementModeProp => {
-    const { data = [], refetch } = useFetchPayementModesQuery();
+    const { data = [], refetch } = usePaginationPayementModesQuery(0);
     const [save] = useAddPayementModeMutation();
     const [edit] = useEditPayementModeMutation();
     //@ts-ignore

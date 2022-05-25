@@ -7,8 +7,8 @@ import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useDeleteClientMutation, useDeleteDeclarantMutation } from "config/rtk";
-import Modal from "widgets/Modal";
+import { useDeleteClientMutation, useDeleteDeclarantMutation } from "../../../config/rtk";
+import Modal from "../../../widgets/Modal";
 type DeleteDeclarantPorp = {
   id: string;
   refetch: () => void
@@ -29,9 +29,9 @@ const DeleteDeclarant = ({ id, refetch }: DeleteDeclarantPorp, ref: Ref<void>) =
     ref.current = openModal;
   });
   const [showModal, setShowModal] = React.useState(false);
-  const delTemp = () => {
+  /*const delTemp = () => {
     axios.delete("http://localhost:1000/api/v1/declarants/" + id0).then(() => { });
-  };
+  };*/
   return (
     <>
       <Modal title={"suppression"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
@@ -40,7 +40,7 @@ const DeleteDeclarant = ({ id, refetch }: DeleteDeclarantPorp, ref: Ref<void>) =
           <form
             onSubmit={
               //@ts-ignore
-              handleSubmit(delTemp)
+              handleSubmit(del)
             }
           >
             {" "}

@@ -1,4 +1,4 @@
-import { useAddRoleMutation, useEditRoleMutation } from "config/rtk";
+import { useAddRoleMutation, useEditRoleMutation } from "config/rtk/rtkRole";
 import React, { useEffect, useRef, useState } from "react";
 import {
     REQUEST_EDIT,

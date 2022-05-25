@@ -1,6 +1,6 @@
 import { ArchiveIcon, XCircleIcon } from "@heroicons/react/solid";
 import axios from "axios";
-import { useArchiveDocumentMutation } from "config/rtk";
+import { useArchiveDocumentMutation } from "config/rtk/rtkDocument";
 import React, { forwardRef, Ref, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { setTimeout } from "timers";

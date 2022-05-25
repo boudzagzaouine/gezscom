@@ -8,8 +8,8 @@ import { setTimeout } from "timers";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useArchiveClientMutation, useArchiveRegimeDouanierMutation } from "config/rtk";
-import Modal from "widgets/Modal";
+import { useArchiveClientMutation, useArchiveRegimeDouanierMutation } from "../../../config/rtk";
+import Modal from "../../../widgets/Modal";
 type ArchiveRegimeDouanierPorp = {
   id: string;
 };
@@ -36,7 +36,7 @@ const ArchiveRegimeDouanier = ({ id }: ArchiveRegimeDouanierPorp, ref: Ref<void>
   };
   return (
     <>
-      <Modal title={"archivage"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal title={"archivage"} show={showModal} format={classNames("5")} close={() => { setShowModal(false) }}>
         <div>
           <h2>archivage du régime dounier num: {id0}</h2>
           <form

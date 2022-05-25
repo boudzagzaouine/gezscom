@@ -8,8 +8,8 @@ import { setTimeout } from "timers";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useArchiveClientMutation, useArchiveDeclarantMutation } from "config/rtk";
-import Modal from "widgets/Modal";
+import { useArchiveClientMutation, useArchiveDeclarantMutation } from "../../../config/rtk";
+import Modal from "../../../widgets/Modal";
 type ArchiveDeclarantProps = {
   id: string;
 };
@@ -29,11 +29,11 @@ const ArchiveDeclarant = ({ id }: ArchiveDeclarantProps, ref: Ref<void>) => {
     //@ts-ignore
     ref.current = openModal;
   });
-  const archiveTemp = () => {
+  /*const archiveTemp = () => {
     axios
       .patch("http://localhost:1000/api/v1/declarants/" + id0 + "/archive")
       .then(() => { });
-  };
+  };*/
   return (
     <>
       <Modal title={"archivage"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
@@ -42,7 +42,7 @@ const ArchiveDeclarant = ({ id }: ArchiveDeclarantProps, ref: Ref<void>) => {
           <form
             onSubmit={
               //@ts-ignore
-              handleSubmit(archiveTemp)
+              handleSubmit(archive)
             }
           >
             {" "}

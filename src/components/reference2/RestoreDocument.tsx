@@ -1,6 +1,6 @@
 import { ReplyIcon, XCircleIcon } from "@heroicons/react/solid";
 import axios from "axios";
-import { useRestoreDocumentMutation } from "config/rtk";
+import { useRestoreDocumentMutation } from "config/rtk/rtkDocument";
 import React, { forwardRef, Ref, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";

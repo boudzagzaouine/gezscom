@@ -214,7 +214,7 @@ const ListClientManager = () => {
             }
           </Table>
 
-          <Pagin load={loadPage} />
+          <Pagin load={loadPage} visible={clients?.length>0} />
         </Section>
       )}
     </>

@@ -1,10 +1,10 @@
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
-import { Article, article0, BureauDouane, bureauDouane0, Incoterm, incoterm0 } from "tools/types";
+import { Article, article0, BureauDouane, bureauDouane0, Incoterm, incoterm0, IncotermJson } from "tools/types";
 import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
-import { useAddArticleMutation, useArchiveArticleMutation, useDeleteArticleMutation, useEditArticleMutation, useFetchOneArticleQuery, useRestoreArticleMutation, useFetchArticlesQuery, useFetchBureauDouanesQuery, useFetchOneBureauDouaneQuery, useEditBureauDouaneMutation, useDeleteBureauDouaneMutation, useArchiveBureauDouaneMutation, useRestoreBureauDouaneMutation, useFetchIncotermsQuery, useAddIncotermMutation, useEditIncotermMutation, useDeleteIncotermMutation, useArchiveIncotermMutation, useRestoreIncotermMutation, usePaginationIncotermsQuery } from "config/rtk";
+//import { useAddIncotermMutation, useEditIncotermMutation, usePaginationIncotermsQuery } from "config/rtk";
 import classNames from "classnames";
 import Table from "widgets/Table";
 import { MenuItems } from 'widgets/TypeWidgets';
@@ -14,6 +14,8 @@ import Pagin from "widgets/Pagin";
 import ArchiveIncoterm from "./Methods/ArchiveIncoterm";
 import RestoreIncoterm from "./Methods/RestoreIncoterm";
 import DeleteIncoterm from "./Methods/DeleteIncoterm";
+import { OpenIncotermProp } from "./Methods/openIncoterms";
+import { openIncoterms } from "config/rtk/rtkIncoterm";
 
 
 type FormIncotermProps = {
@@ -22,11 +24,19 @@ type FormIncotermProps = {
 const FormIncoterm = ({
     incoterm
 }: FormIncotermProps, ref: Ref<void>) => {
-    const { data = [], isFetching, refetch } = usePaginationIncotermsQuery(0);
+
+    const incotermsToOpen: OpenIncotermProp = openIncoterms();
+    const incotermJson: IncotermJson = incotermsToOpen.data;
+    const incoterms: Incoterm[] = incotermJson.content;
+    const refetchIncoterm: () => void = incotermsToOpen.refetch;
+    const saveIncoterm = incotermsToOpen.save;
+    const editIncoterm = incotermsToOpen.edit;
+
+    //const { data = [], isFetching, refetch } = usePaginationIncotermsQuery(0);
     const [incoterm1, setIncoterm1] = useState<Incoterm>(incoterm0);
     const [request, setRequest] = useState(REQUEST_SAVE)
 
-    const [save] = useAddIncotermMutation();
+    //const [save] = useAddIncotermMutation();
 
     const [form, setForm] = useState(false);
     const [disabled, setDisabled] = useState(true);
@@ -53,7 +63,7 @@ const FormIncoterm = ({
     const [page, setPage] = useState(0);
     const loadPage = (p: number) => {
         setPage(p);
-        refetch();
+        refetchIncoterm();
     };
 
     const showFormulaire = (incoterm: Incoterm) => {
@@ -71,7 +81,7 @@ const FormIncoterm = ({
 
     const void_ = () => { }
 
-    const [updateIncoterm] = useEditIncotermMutation();
+    //const [updateIncoterm] = useEditIncotermMutation();
 
 
     const menu = (incoterm: Incoterm): MenuItems[] => {
@@ -144,7 +154,7 @@ const FormIncoterm = ({
         <>
             {!form && (
                 <section className='bg-white float-left w-full h-full mp-8 shadow-lg'>
-                    <DeleteIncoterm id={""} ref={del} refetch={refetch} />
+                    <DeleteIncoterm id={""} ref={del} refetch={refetchIncoterm} />
                     <ArchiveIncoterm id={""} ref={archive} />
                     <RestoreIncoterm id={""} ref={restore} />
                     <h1>Nouveau Incoterm</h1>
@@ -174,7 +184,7 @@ const FormIncoterm = ({
                             </tr>}
                     >
                         {//@ts-ignore
-                            data.content?.map((incoterm: Incoterm) => {
+                            incoterms?.map((incoterm: Incoterm) => {
                                 return (
                                     //@ts-ignore
                                     <tr key={incoterm.id}>
@@ -186,13 +196,13 @@ const FormIncoterm = ({
                             })
                         }
                     </Table>
-                    <Pagin load={loadPage} />
+                    <Pagin load={loadPage} visible={incoterms?.length > 0 ? true : false} />
                 </section>
             )}
 
             <Modal show={show} title="Nouveau Icoterm" format={+classNames("5")} close={closed}>
                 <div className="float-left w-full">
-                    <Form defaultValues={incoterm1} onSubmit={request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? updateIncoterm : void_}>
+                    <Form defaultValues={incoterm1} onSubmit={request == REQUEST_SAVE ? saveIncoterm : request == REQUEST_EDIT ? editIncoterm : void_}>
                         <div className="float-left w-full">
                             <Field className="sm:grid-cols-6 sm:gap-6" label="Code" name="code" disabled={disabled} required="required" />
 
@@ -212,7 +222,7 @@ const FormIncoterm = ({
                                 type="submit"
                                 onClick={() => {
                                     setTimeout(() => {
-                                        refetch()
+                                        refetchIncoterm()
                                         closed();
                                     }, 500);
                                 }}

@@ -1,12 +1,12 @@
 import { TrashIcon } from "@heroicons/react/outline";
 import { XCircleIcon } from "@heroicons/react/solid";
 import axios from "axios";
+import { useDeleteTransporteurMutation } from "config/rtk/rtkTransporteur";
 import React, { forwardRef, Ref, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useDeleteTransporteurMutation } from "config/rtk";
 import Modal from "widgets/Modal";
 type DeleteTransporteurPorp = {
     id: string;

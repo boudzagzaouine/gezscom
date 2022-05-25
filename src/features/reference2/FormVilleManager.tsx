@@ -1,4 +1,4 @@
-import { useAddVilleMutation, useEditVilleMutation } from "config/rtk";
+import { useAddVilleMutation, useEditVilleMutation } from "config/rtk/rtkVille";
 import React, { useEffect, useRef, useState } from "react";
 import {
     PAYS_CHOICE,

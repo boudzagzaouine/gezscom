@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useDeleteTypeMutation } from "config/rtk";
+import { useDeleteTypeMutation } from "config/rtk/rtkType";
 import Modal from "widgets/Modal";
 type DeleteTypePorp = {
     id: string;

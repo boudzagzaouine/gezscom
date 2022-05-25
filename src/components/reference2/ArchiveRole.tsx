@@ -1,6 +1,6 @@
 import { ArchiveIcon, XCircleIcon } from "@heroicons/react/solid";
 import axios from "axios";
-import { useArchiveRoleMutation } from "config/rtk";
+import { useArchiveRoleMutation } from "config//rtk/rtkRole";
 import React, { forwardRef, Ref, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { setTimeout } from "timers";

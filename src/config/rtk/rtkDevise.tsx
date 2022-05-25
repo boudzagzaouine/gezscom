@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenDeviseProp } from "components/reference2/OpenDevise";
 import { PAGE_SIZE } from "tools/consts";
 import { Devise } from "tools/types";
 
@@ -95,8 +94,17 @@ export const {
     useRestoreDeviseMutation,
 
 } = crudDevise;
+export type DeviseJson={
+    content:Devise[]
+}
+export type OpenDeviseProp={
+    data:DeviseJson
+    refetch:()=>void
+    save:()=>void
+    edit:()=>void
+  }
 export const openDevises = (): OpenDeviseProp => {
-    const { data = [], refetch } = useFetchDevisesQuery();
+    const { data = [], refetch } = usePaginationDevisesQuery(0);
     const [save] = useAddDeviseMutation();
     const [edit] = useEditDeviseMutation();
     //@ts-ignore

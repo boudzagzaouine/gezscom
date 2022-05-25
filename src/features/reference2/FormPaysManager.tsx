@@ -1,7 +1,7 @@
 import {
     PencilAltIcon
 } from "@heroicons/react/solid";
-import { useAddPaysMutation, useEditPaysMutation } from "config/rtk";
+import { useAddPaysMutation, useEditPaysMutation } from "config/rtk/rtkPays";
 import React, { useEffect, useRef, useState } from "react";
 import {
     REQUEST_EDIT,

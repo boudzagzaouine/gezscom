@@ -1,4 +1,4 @@
-import { useAddClientMutation, useEditClientMutation, useFetchOneClientQuery } from "config/rtk";
+import { useAddClientMutation, useEditClientMutation, useFetchOneClientQuery } from "config/rtk/RtkClient";
 import { Client} from "tools/types";
 export type OpenOneClientProp={
   data:Client

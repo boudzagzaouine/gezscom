@@ -1,4 +1,4 @@
-import { useAddDocumentMutation, useEditDocumentMutation } from "config/rtk";
+import { useAddDocumentMutation, useEditDocumentMutation } from "config/rtk/rtkDocument";
 import React, { useEffect, useRef, useState } from "react";
 import {
     REQUEST_EDIT,

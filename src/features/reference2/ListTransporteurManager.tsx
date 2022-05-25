@@ -4,8 +4,8 @@ import ArchiveTransporteur from 'components/reference2/ArchiveTransporteur';
 import DeleteTransporteur from 'components/reference2/DeleteTransporteur';
 import { OpenTransporteurProp } from 'components/reference2/OpenTransporteur';
 import RestoreTransporteur from 'components/reference2/RestoreTransporteur';
-import { usePaginationTransporteursQuery } from 'config/rtk';
-import { openTransporteurs } from 'config/rtk/rtkTransporteur';
+
+import { openTransporteurs, usePaginationTransporteursQuery } from 'config/rtk/rtkTransporteur';
 import React, { useRef, useState } from 'react';
 import { REQUEST_EDIT, REQUEST_SAVE } from 'tools/consts';
 import { t0, Transporteur, TransporteurJson } from 'tools/types';

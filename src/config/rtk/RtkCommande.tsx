@@ -104,3 +104,11 @@ export const crudCommande = createApi({
         const out:OpenCommandeProp={data,refetch,save,edit}
         return out;
       }
+      export const openCommandesPagination =(page:number):OpenCommandeProp =>{
+        const { data = [], refetch } = usePaginationCommandesQuery(page);
+        const [save]=useAddCommandeMutation();
+        const [edit]=useEditCommandeMutation();
+        //@ts-ignore
+        const out:OpenCommandeProp={data,refetch,save,edit}
+        return out;
+      }

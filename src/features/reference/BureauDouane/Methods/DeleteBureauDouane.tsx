@@ -7,8 +7,8 @@ import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useDeleteBureauDouaneMutation, useDeleteClientMutation } from "config/rtk";
-import Modal from "widgets/Modal";
+import { useDeleteBureauDouaneMutation, useDeleteClientMutation } from "../../../config/rtk";
+import Modal from "../../../widgets/Modal";
 type DeleteBureauDouaneProps = {
   id: string;
   refetch: () => void
@@ -34,7 +34,7 @@ const DeleteBureauDouane = ({ id, refetch }: DeleteBureauDouaneProps, ref: Ref<v
   };
   return (
     <>
-      <Modal title={"suppression"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal title={"suppression"} show={showModal} format={classNames("5")} close={() => { setShowModal(false) }}>
         <div>
           <h2>suppression de bureau douane num: {id0}</h2>
           <form

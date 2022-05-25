@@ -1,4 +1,4 @@
-import { useAddAdressLivMutation, useEditAdressLivMutation, useFetchAdressLivsByIdClientQuery } from "config/rtk";
+import { useAddAdressLivMutation, useEditAdressLivMutation, useFetchAdressLivsByIdClientQuery } from "config/rtk/RtkAdressLiv";
 import { AdressLiv, AdressLivJson ,Client} from "tools/types";
 export type openAdressLivByIdClientProps={
   data:AdressLiv[]

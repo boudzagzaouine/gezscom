@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useRestoreTransporteurMutation } from "config/rtk";
+import { useRestoreTransporteurMutation } from "config/rtk/rtkTransporteur";
 import Modal from "widgets/Modal";
 type RestoreTransporteurPorp = {
     id: string;

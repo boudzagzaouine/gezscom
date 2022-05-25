@@ -1,10 +1,9 @@
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
-import { BureauDouane, bureauDouane0 } from "tools/types";
+import { BureauDouane, bureauDouane0, BureauDouaneJson } from "tools/types";
 import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
-import { useFetchBureauDouanesQuery, useEditBureauDouaneMutation, useDeleteBureauDouaneMutation, useArchiveBureauDouaneMutation, useRestoreBureauDouaneMutation, useAddBureauDouaneMutation, usePaginationBureauDouanesQuery } from "config/rtk";
 import classNames from "classnames";
 import Table from "widgets/Table";
 import { MenuItems } from 'widgets/TypeWidgets';
@@ -14,7 +13,8 @@ import DeleteBureauDouane from "./Methods/DeleteBureauDouane";
 import ArchiveBureauDouane from "./Methods/ArchiveBureauDouane";
 import RestoreBureauDouane from "./Methods/RestoreBureauDouane";
 import Pagin from "widgets/Pagin";
-
+import { OpenBureauDouaneProp } from "./Methods/openBureauDouanes";
+import { openBureauDouanes } from "config/rtk/rtkBureauDouane";
 
 type FormBureauDouaneProps = {
     bureauDouane: BureauDouane;
@@ -22,11 +22,19 @@ type FormBureauDouaneProps = {
 const FormBureauDouane = ({
     bureauDouane
 }: FormBureauDouaneProps, ref: Ref<void>) => {
-    const { data = [], isFetching, refetch } = usePaginationBureauDouanesQuery(0);
+
+    const bureauDouanesToOpen: OpenBureauDouaneProp = openBureauDouanes();
+    const bureauDouaneJson: BureauDouaneJson = bureauDouanesToOpen.data;
+    const bureauDouanes: BureauDouane[] = bureauDouaneJson.content;
+    const refetchBureauDouane: () => void = bureauDouanesToOpen.refetch;
+    const saveBureauDouane = bureauDouanesToOpen.save;
+    const editBureauDouane = bureauDouanesToOpen.edit;
+
+    //const { data = [], isFetching, refetch } = usePaginationBureauDouanesQuery(0);
     const [bureauDouane1, setBureauDouane1] = useState<BureauDouane>(bureauDouane0);
     const [request, setRequest] = useState(REQUEST_SAVE)
 
-    const [save] = useAddBureauDouaneMutation();
+    //const [save] = useAddBureauDouaneMutation();
 
     const [form, setForm] = useState(false);
     const [disabled, setDisabled] = useState(true);
@@ -54,7 +62,7 @@ const FormBureauDouane = ({
     const [page, setPage] = useState(0);
     const loadPage = (p: number) => {
         setPage(p);
-        refetch();
+        refetchBureauDouane();
     };
 
     const showFormulaire = (bureauDouane: BureauDouane) => {
@@ -72,7 +80,7 @@ const FormBureauDouane = ({
     const void_ = () => { }
 
 
-    const [updateBureauDouane] = useEditBureauDouaneMutation();
+    //const [updateBureauDouane] = useEditBureauDouaneMutation();
 
     const menu = (bureauDouane: BureauDouane): MenuItems[] => {
         return ([
@@ -144,7 +152,7 @@ const FormBureauDouane = ({
         <>
             {!form && (
                 <section className='bg-white float-left w-full h-full mp-8 shadow-lg'>
-                    <DeleteBureauDouane id={""} ref={del} refetch={refetch} />
+                    <DeleteBureauDouane id={""} ref={del} refetch={refetchBureauDouane} />
                     <ArchiveBureauDouane id={""} ref={archive} />
                     <RestoreBureauDouane id={""} ref={restore} />
                     <h1>Nouveau Bureau Douane</h1>
@@ -174,7 +182,7 @@ const FormBureauDouane = ({
                             </tr>}
                     >
                         {//@ts-ignore
-                            data.content?.map((bureauDouane: BureauDouane) => {
+                            bureauDouanes?.map((bureauDouane: BureauDouane) => {
                                 return (
                                     //@ts-ignore
                                     <tr key={bureauDouane.id}>
@@ -186,13 +194,13 @@ const FormBureauDouane = ({
                             })
                         }
                     </Table>
-                    <Pagin load={loadPage} />
+                    <Pagin load={loadPage} visible={bureauDouanes?.length > 0 ? true : false} />
                 </section>
             )}
 
             <Modal show={show} title="Nouveau Bureau Douane" format={+classNames("5")} close={closed}>
                 <div className="float-left w-full">
-                    <Form defaultValues={bureauDouane1} onSubmit={request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? updateBureauDouane : void_}>
+                    <Form defaultValues={bureauDouane1} onSubmit={request == REQUEST_SAVE ? saveBureauDouane : request == REQUEST_EDIT ? editBureauDouane : void_}>
                         <div className="float-left w-full">
                             <Field className="sm:grid-cols-6 sm:gap-6" label="Code" name="code" disabled={disabled} />
 
@@ -212,7 +220,7 @@ const FormBureauDouane = ({
                                 type="submit"
                                 onClick={() => {
                                     setTimeout(() => {
-                                        refetch()
+                                        refetchBureauDouane()
                                         closed();
                                     }, 500);
                                 }}

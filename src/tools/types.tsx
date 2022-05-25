@@ -99,10 +99,14 @@ export const arc0: ArticleCommande = {
   pu: "",
   idCommande: "",
 };
+export interface ArticleJson {
+  content: Article[]
+}
+
 export interface Article {
-  id: string,
-  design: string;
-  nomenclature: string;
+  id: String,
+  design: String;
+  nomenclature: String;
   tauxPertes: number;
 }
 
@@ -113,10 +117,14 @@ export const article0: Article = {
   tauxPertes: 0,
 };
 
+export interface UnitMeasureJson {
+  content: UnitMeasure[]
+}
+
 export interface UnitMeasure {
-  id: string,
-  design: string;
-  symbole: string;
+  id: String,
+  design: String;
+  symbole: String;
   decimal: number;
 }
 
@@ -127,10 +135,14 @@ export const unitMeasure0: UnitMeasure = {
   decimal: 0,
 };
 
+export interface BureauDouaneJson {
+  content: BureauDouane[]
+}
+
 export interface BureauDouane {
-  id: string;
-  code: string;
-  design: string;
+  id: String;
+  code: String;
+  design: String;
 }
 
 export const bureauDouane0: BureauDouane = {
@@ -139,10 +151,14 @@ export const bureauDouane0: BureauDouane = {
   design: "",
 };
 
+export interface DeclarantJson {
+  content: Declarant[]
+}
+
 export interface Declarant {
-  id: string;
-  design: string;
-  ville: string;
+  id: String;
+  design: String;
+  ville: String;
 }
 
 export const declarant0: Declarant = {
@@ -151,10 +167,14 @@ export const declarant0: Declarant = {
   ville: "",
 };
 
+export interface IncotermJson {
+  content: Incoterm[]
+}
+
 export interface Incoterm {
-  id: string,
-  code: string;
-  design: string;
+  id: String,
+  code: String;
+  design: String;
 }
 
 export const incoterm0: Incoterm = {
@@ -163,10 +183,14 @@ export const incoterm0: Incoterm = {
   design: "",
 };
 
+export interface PayementModeJson {
+  content: PayementMode[]
+}
+
 export interface PayementMode {
-  id: string;
-  code: string;
-  design: string;
+  id: String;
+  code: String;
+  design: String;
 }
 
 export const payementMode0: PayementMode = {
@@ -175,10 +199,14 @@ export const payementMode0: PayementMode = {
   design: "",
 };
 
+export interface RegimeDouanierJson {
+  content: RegimeDouanier[]
+}
+
 export interface RegimeDouanier {
-  id: string;
-  code: string;
-  design: string;
+  id: String;
+  code: String;
+  design: String;
 }
 
 export const regimeDouanier0: RegimeDouanier = {
@@ -187,13 +215,17 @@ export const regimeDouanier0: RegimeDouanier = {
   design: "",
 };
 
+export interface RawMaterialJson {
+  content: RawMaterial[]
+}
+
 export interface RawMaterial {
   id: string
-  design: string;
-  nomenclature: string;
-  family: string;
+  design: String;
+  nomenclature: String;
+  family: String;
   tauxPertes: number;
-  measureUnit: string;
+  measureUnit: String;
 }
 
 export const rawMaterial0: RawMaterial = {
@@ -203,6 +235,59 @@ export const rawMaterial0: RawMaterial = {
   family: "",
   tauxPertes: 0,
   measureUnit: "",
+};
+
+
+export interface DumJson {
+  content: Dum[]
+}
+
+export interface Dum {
+  id: String;
+  numDum: number;
+  date: Date;
+  valeur: number;
+  fournisseur: String;
+  bureauDouane: String;
+  declarant: String;
+  regime: String;
+
+}
+
+export const dum0: Dum = {
+  id: "",
+  numDum: 0,
+  date: new Date(),
+  valeur: 0.0,
+  fournisseur: "",
+  bureauDouane: "",
+  declarant: "",
+  regime: "",
+};
+
+export interface DechargeJson {
+  content: Decharge[]
+}
+
+export interface Decharge {
+  id: String;
+  numDum: number;
+  date: Date;
+  valeur: number;
+  client: String;
+  transporteur: String;
+  declarant: String;
+
+}
+
+export const decharge0: Decharge = {
+  id: "",
+  numDum: 0,
+  date: new Date(),
+  valeur: 0.0,
+  client: "",
+  transporteur: "",
+  declarant: "",
 };
 export interface Transporteur {
   id: string

@@ -1,4 +1,4 @@
-import { useAddDeviseMutation, useEditDeviseMutation } from "config/rtk";
+import { useAddDeviseMutation, useEditDeviseMutation } from "config/rtk/rtkDevise";
 import React, { useEffect, useRef, useState } from "react";
 import {
     REQUEST_EDIT,

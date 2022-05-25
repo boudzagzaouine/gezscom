@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useRestoreClientMutation, useRestoreIncotermMutation } from "config/rtk";
 import Modal from "widgets/Modal";
 type RestoreIncotermPorp = {
   id: string;
@@ -18,8 +17,7 @@ const RestoreIncoterm = ({ id }: RestoreIncotermPorp, ref: Ref<void>) => {
   const { register, handleSubmit } = useForm<string>({
     defaultValues: { id0 },
   });
-  const [restore] = useRestoreIncotermMutation();
-  const [showModal, setShowModal] = React.useState(false);
+ const [showModal, setShowModal] = React.useState(false);
   const openModal = (i: string) => {
     setId0(i);
     setShowModal(true);

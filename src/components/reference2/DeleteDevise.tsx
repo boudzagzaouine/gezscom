@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useDeleteDeviseMutation } from "config/rtk";
+import { useDeleteDeviseMutation } from "config/rtk/rtkDevise";
 import Modal from "widgets/Modal";
 type DeleteDevisePorp = {
     refetch: () => void

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenIncotermProp } from "features/Incoterm/Methods/openIncoterms";
+import { OpenIncotermProp } from "features/reference/Incoterm/Methods/openIncoterms";
 import { PAGE_SIZE } from "tools/consts";
 import { Incoterm } from "tools/types";
 
@@ -95,7 +95,7 @@ export const {
 
 
 export const openIncoterms = (): OpenIncotermProp => {
-    const { data = [], refetch } = useFetchIncotermsQuery();
+    const { data = [], refetch } = usePaginationIncotermsQuery(0);
     const [save] = useAddIncotermMutation();
     const [edit] = useEditIncotermMutation();
     //@ts-ignore

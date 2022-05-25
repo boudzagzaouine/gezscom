@@ -1,4 +1,4 @@
-import { useAddTransporteurMutation, useEditTransporteurMutation } from "config/rtk";
+import { useAddTransporteurMutation, useEditTransporteurMutation } from "config/rtk/rtkTransporteur";
 import React, { useEffect, useRef, useState } from "react";
 import {
     REQUEST_EDIT,

@@ -1,14 +1,11 @@
-import { TrashIcon } from "@heroicons/react/outline";
-import { ArchiveIcon, XCircleIcon } from "@heroicons/react/solid";
+
 import axios from "axios";
 import classNames from "classnames";
 import React, { forwardRef, Ref, useRef, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { setTimeout } from "timers";
-import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
-import Bred from "widgets/Bred";
-import { useArchiveClientMutation, useArchiveUnitMeasureMutation } from "config/rtk";
+import { useArchiveUnitMeasureMutation } from "config/rtk/rtkUnitMeasure";
 import Modal from "widgets/Modal";
 type ArchiveUnitMeasurePorp = {
   id: string;
@@ -29,11 +26,11 @@ const ArchiveUnitMeasure = ({ id }: ArchiveUnitMeasurePorp, ref: Ref<void>) => {
     //@ts-ignore
     ref.current = openModal;
   });
-  const archiveTemp = () => {
+  /*const archiveTemp = () => {
     axios
       .patch("http://localhost:1000/api/v1/unitMeasures/" + id0 + "/archive")
       .then(() => { });
-  };
+  };*/
   return (
     <>
       <Modal title={"archivage"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
@@ -42,7 +39,7 @@ const ArchiveUnitMeasure = ({ id }: ArchiveUnitMeasurePorp, ref: Ref<void>) => {
           <form
             onSubmit={
               //@ts-ignore
-              handleSubmit(archiveTemp)
+              handleSubmit(archive)
             }
           >
             {" "}

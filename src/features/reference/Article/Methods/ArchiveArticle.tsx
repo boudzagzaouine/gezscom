@@ -8,8 +8,8 @@ import { setTimeout } from "timers";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useArchiveArticleMutation } from "config/rtk";
-import Modal from "widgets/Modal";
+import { useArchiveArticleMutation } from "../../../config/rtk";
+import Modal from "../../../widgets/Modal";
 type ArchiveArticlePorp = {
   id: string;
 };
@@ -42,7 +42,7 @@ const ArchiveArticle = ({ id }: ArchiveArticlePorp, ref: Ref<void>) => {
           <form
             onSubmit={
               //@ts-ignore
-              handleSubmit(archiveTemp)
+              handleSubmit(archive)
             }
           >
             {" "}

@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useDeleteDocumentMutation } from "config/rtk";
+import { useDeleteDocumentMutation } from "config/rtk/rtkDocument";
 import Modal from "widgets/Modal";
 type DeleteDocumentPorp = {
     id: string;

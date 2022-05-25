@@ -1,6 +1,9 @@
 import { DocumentAddIcon } from "@heroicons/react/solid";
 import { OpenClientProp, openClients } from "components/manager/client/openClients";
 import {
+  OpenCommandeProp,
+  openCommandes,
+  openCommandesPagination,
   useFetchCommandesQuery,
   usePaginationCommandesQuery,
 } from "config/rtk/RtkCommande";
@@ -21,7 +24,10 @@ const ListAllCommandes = () => {
     setPage(p);
     refetch();
   };
-  const { data = [], isFetching, refetch } = usePaginationCommandesQuery(page);
+  const commandesToOpen:OpenCommandeProp =openCommandesPagination(page)
+  const commandes:Commande[]=commandesToOpen.data.content
+  const refetch=commandesToOpen.refetch
+  //const { data = [], isFetching, refetch } = usePaginationCommandesQuery(page);
   
   const clientsToOpen: OpenClientProp = openClients();
     const clientJson: ClientJson = clientsToOpen.data
@@ -59,8 +65,7 @@ const ListAllCommandes = () => {
         }
       >
         {
-          //@ts-ignore
-          data.content?.map((commande) => (      
+          commandes?.map((commande) => (      
             <tr key={commande.id}>
               <Table.td>{commande.id}</Table.td>
               <Table.td>{getClient(commande.idClient,clients).design}</Table.td>
@@ -79,7 +84,7 @@ const ListAllCommandes = () => {
           ))
         }
       </Table>
-      <Pagin load={loadPage} />
+      <Pagin load={loadPage} visible={commandes?.length >0 } />
     </Section>
   );
 };
