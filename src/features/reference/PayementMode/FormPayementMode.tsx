@@ -1,16 +1,14 @@
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
-import { Article, article0, BureauDouane, bureauDouane0, Declarant, declarant0, PayementMode, payementMode0, PayementModeJson } from "tools/types";
+import { PayementMode, payementMode0, PayementModeJson } from "tools/types";
 import { REQUEST_EDIT, REQUEST_SAVE, VILLE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
-import { useAddArticleMutation, useArchiveArticleMutation, useDeleteArticleMutation, useEditArticleMutation, useFetchOneArticleQuery, useRestoreArticleMutation, useFetchArticlesQuery, useFetchBureauDouanesQuery, useFetchOneBureauDouaneQuery, useEditBureauDouaneMutation, useDeleteBureauDouaneMutation, useArchiveBureauDouaneMutation, useRestoreBureauDouaneMutation, useFetchDeclarantsQuery, useAddDeclarantMutation, useEditDeclarantMutation, useDeleteDeclarantMutation, useArchiveDeclarantMutation, useRestoreDeclarantMutation, useFetchPayementModesQuery, useAddPayementModeMutation, useEditPayementModeMutation, useArchivePayementModeMutation, useRestorePayementModeMutation, useDeletePayementModeMutation, usePaginationPayementModesQuery } from "config/rtk";
 import classNames from "classnames";
 import Table from "widgets/Table";
 import { MenuItems } from 'widgets/TypeWidgets';
 import Mitems from 'widgets/Mitems';
 import { ArchiveIcon, ClipboardListIcon, PencilAltIcon, ReplyIcon, TrashIcon } from "@heroicons/react/outline";
-import axios from "axios";
 import DeletePayementMode from "./Methods/DeletePayementMode";
 import ArchivePayementMode from "./Methods/ArchivePayementMode";
 import RestorePayementMode from "./Methods/RestorePayementMode";
@@ -197,7 +195,7 @@ const FormPayementMode = ({
                             })
                         }
                     </Table>
-                    <Pagin load={loadPage} visibled={payementModes?.length > 0 ? true : false} />
+                    <Pagin load={loadPage} visible={payementModes?.length > 0 ? true : false} />
                 </section>
 
             )}

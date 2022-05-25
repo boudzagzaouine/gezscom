@@ -4,7 +4,6 @@ import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import { Form, Field, Button } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
-import { useAddArticleMutation, useEditArticleMutation, usePaginationArticlesQuery } from "config/rtk";
 import classNames from "classnames";
 import Table from "widgets/Table";
 import { MenuItems } from 'widgets/TypeWidgets';
@@ -198,7 +197,7 @@ const FormArticle = ({
                             })
                         }
                     </Table>
-                    <Pagin load={loadPage} visibled={articles?.length > 0 ? true : false} />
+                    <Pagin load={loadPage} visible={articles?.length > 0 ? true : false} />
 
                 </section>
             )}

@@ -17,7 +17,7 @@ import Pagin from "widgets/Pagin";
 import { openUnitMeasures } from "config/rtk/rtkUnitMeasure";
 import { OpenUnitMeasureProp } from "./Methods/openUnitMeasures";
 
-//777
+
 type FormUnitMeasureProps = {
     unitMeasure: UnitMeasure;
 };

@@ -206,7 +206,7 @@ const FormDum = ({
                             })
                         }
                     </Table>
-                    <Pagin load={loadPage} visible={dums?.length ? true : false} />
+                    <Pagin load={loadPage} visibled={dums?.length ? true : false} />
 
                 </section>
             )}

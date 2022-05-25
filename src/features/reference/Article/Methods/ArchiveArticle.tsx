@@ -1,15 +1,13 @@
-import { TrashIcon } from "@heroicons/react/outline";
-import { ArchiveIcon, XCircleIcon } from "@heroicons/react/solid";
+
 import axios from "axios";
 import classNames from "classnames";
 import React, { forwardRef, Ref, useRef, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { setTimeout } from "timers";
-import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
-import Bred from "widgets/Bred";
-import { useArchiveArticleMutation } from "../../../config/rtk";
-import Modal from "../../../widgets/Modal";
+import { useArchiveArticleMutation } from "config/rtk/rtkArticle";
+import Modal from "widgets/Modal";
+
 type ArchiveArticlePorp = {
   id: string;
 };
@@ -29,11 +27,11 @@ const ArchiveArticle = ({ id }: ArchiveArticlePorp, ref: Ref<void>) => {
     //@ts-ignore
     ref.current = openModal;
   });
-  const archiveTemp = () => {
+  /*const archiveTemp = () => {
     axios
       .patch("http://localhost:1000/api/v1/articles/" + id0 + "/archive")
       .then(() => { });
-  };
+  };*/
   return (
     <>
       <Modal title={"archivage"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>

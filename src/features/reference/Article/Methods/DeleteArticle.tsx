@@ -1,14 +1,12 @@
-import { TrashIcon } from "@heroicons/react/outline";
-import { XCircleIcon } from "@heroicons/react/solid";
+
 import axios from "axios";
 import classNames from "classnames";
 import React, { forwardRef, Ref, useRef, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { STYLE_ICON } from "tools/constStyle";
+
 import Bcyan from "widgets/Bcyan";
-import Bred from "widgets/Bred";
-import { useDeleteArticleMutation } from "../../../config/rtk";
-import Modal from "../../../widgets/Modal";
+import { useDeleteArticleMutation } from "config/rtk/rtkArticle";
+import Modal from "widgets/Modal";
 type DeleteArticlePorp = {
   id: string;
   refetch: () => void

@@ -1,10 +1,9 @@
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
-import { Article, article0, BureauDouane, bureauDouane0, Incoterm, incoterm0, IncotermJson } from "tools/types";
+import { Incoterm, incoterm0, IncotermJson } from "tools/types";
 import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
-//import { useAddIncotermMutation, useEditIncotermMutation, usePaginationIncotermsQuery } from "config/rtk";
 import classNames from "classnames";
 import Table from "widgets/Table";
 import { MenuItems } from 'widgets/TypeWidgets';
@@ -196,7 +195,7 @@ const FormIncoterm = ({
                             })
                         }
                     </Table>
-                    <Pagin load={loadPage} visible={incoterms?.length > 0 ? true : false} />
+                    <Pagin load={loadPage} visible={incoterms.length > 0 ? true : false} />
                 </section>
             )}
 

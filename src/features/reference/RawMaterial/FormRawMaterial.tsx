@@ -1,10 +1,9 @@
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
-import { Article, article0, BureauDouane, bureauDouane0, Declarant, declarant0, PayementMode, payementMode0, RawMaterial, rawMaterial0, RawMaterialJson } from "tools/types";
+import { RawMaterial, rawMaterial0, RawMaterialJson } from "tools/types";
 import { FAMILLE, REQUEST_EDIT, REQUEST_SAVE, UNIT, VILLE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
-import { useAddArticleMutation, useArchiveArticleMutation, useDeleteArticleMutation, useEditArticleMutation, useFetchOneArticleQuery, useRestoreArticleMutation, useFetchArticlesQuery, useFetchBureauDouanesQuery, useFetchOneBureauDouaneQuery, useEditBureauDouaneMutation, useDeleteBureauDouaneMutation, useArchiveBureauDouaneMutation, useRestoreBureauDouaneMutation, useFetchDeclarantsQuery, useAddDeclarantMutation, useEditDeclarantMutation, useDeleteDeclarantMutation, useArchiveDeclarantMutation, useRestoreDeclarantMutation, useFetchPayementModesQuery, useAddPayementModeMutation, useEditPayementModeMutation, useArchivePayementModeMutation, useRestorePayementModeMutation, useDeletePayementModeMutation, useAddRawMaterialMutation, useFetchRawMaterialsQuery, useEditRawMaterialMutation, useDeleteRawMaterialMutation, useArchiveRawMaterialMutation, useRestoreRawMaterialMutation, usePaginationRawMaterialsQuery } from "config/rtk";
 import classNames from "classnames";
 import Table from "widgets/Table";
 import { MenuItems } from 'widgets/TypeWidgets';
@@ -202,7 +201,7 @@ const FormRawMaterial = ({
                             })
                         }
                     </Table>
-                    <Pagin load={loadPage} visibled={rawMaterials?.length > 0 ? true : false} />
+                    <Pagin load={loadPage} visible={rawMaterials?.length > 0 ? true : false} />
                 </section>
             )}
 

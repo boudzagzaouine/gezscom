@@ -79,8 +79,6 @@ const NavVert = ({ updateSel }: NavVertProps) => {
       id: 13,
       icon: 'table',
       text: 'Gestions des Tables',
-      link: "/#",
-      active: route.pathname == '/#',
       sous: [{
         id: UNIT_MEASURE,
         text: 'Unité de mesure',
@@ -198,7 +196,7 @@ const NavVert = ({ updateSel }: NavVertProps) => {
             //setSous(!prev.current);
           }}
         >
-          <Link href={item.link}>
+          <Link href={item.link||""}>
             <a>
               <span className="icon">
                 <Icon i={item.icon} cl="" />

@@ -1,12 +1,10 @@
-import { TrashIcon } from "@heroicons/react/outline";
-import { ArchiveIcon, ReplyIcon, XCircleIcon } from "@heroicons/react/solid";
+
 import axios from "axios";
 import classNames from "classnames";
 import React, { forwardRef, Ref, useRef, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
-import Bred from "widgets/Bred";
+import { useRestoreIncotermMutation } from "config/rtk/rtkIncoterm";
 import Modal from "widgets/Modal";
 type RestoreIncotermPorp = {
   id: string;
@@ -17,7 +15,8 @@ const RestoreIncoterm = ({ id }: RestoreIncotermPorp, ref: Ref<void>) => {
   const { register, handleSubmit } = useForm<string>({
     defaultValues: { id0 },
   });
- const [showModal, setShowModal] = React.useState(false);
+  const [restore] = useRestoreIncotermMutation();
+  const [showModal, setShowModal] = React.useState(false);
   const openModal = (i: string) => {
     setId0(i);
     setShowModal(true);
@@ -26,11 +25,11 @@ const RestoreIncoterm = ({ id }: RestoreIncotermPorp, ref: Ref<void>) => {
     //@ts-ignore
     ref.current = openModal;
   });
-  const restoreTemp = () => {
+  /*const restoreTemp = () => {
     axios
       .patch("http://localhost:1000/api/v1/incoterms/" + id0 + "/restore")
       .then(() => { });
-  };
+  };*/
   return (
     <>
       <Modal title={"restoration"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
@@ -39,7 +38,7 @@ const RestoreIncoterm = ({ id }: RestoreIncotermPorp, ref: Ref<void>) => {
           <form
             onSubmit={
               //@ts-ignore
-              handleSubmit(restoreTemp)
+              handleSubmit(restore)
             }
           >
             {" "}

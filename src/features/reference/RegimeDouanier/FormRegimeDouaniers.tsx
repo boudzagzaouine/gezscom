@@ -1,16 +1,14 @@
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
-import { Article, article0, BureauDouane, bureauDouane0, Declarant, declarant0, PayementMode, payementMode0, RegimeDouanier, regimeDouanier0, RegimeDouanierJson } from "tools/types";
+import { PayementMode, payementMode0, RegimeDouanier, regimeDouanier0, RegimeDouanierJson } from "tools/types";
 import { REQUEST_EDIT, REQUEST_SAVE, VILLE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
-import { useAddArticleMutation, useArchiveArticleMutation, useDeleteArticleMutation, useEditArticleMutation, useFetchOneArticleQuery, useRestoreArticleMutation, useFetchArticlesQuery, useFetchBureauDouanesQuery, useFetchOneBureauDouaneQuery, useEditBureauDouaneMutation, useDeleteBureauDouaneMutation, useArchiveBureauDouaneMutation, useRestoreBureauDouaneMutation, useFetchDeclarantsQuery, useAddDeclarantMutation, useEditDeclarantMutation, useDeleteDeclarantMutation, useArchiveDeclarantMutation, useRestoreDeclarantMutation, useFetchPayementModesQuery, useAddPayementModeMutation, useEditPayementModeMutation, useArchivePayementModeMutation, useRestorePayementModeMutation, useDeletePayementModeMutation, useFetchRegimeDouaniersQuery, useAddRegimeDouanierMutation, useEditRegimeDouanierMutation, useDeleteRegimeDouanierMutation, useArchiveRegimeDouanierMutation, useRestoreRegimeDouanierMutation, usePaginationRegimeDouaniersQuery } from "config/rtk";
 import classNames from "classnames";
 import Table from "widgets/Table";
 import { MenuItems } from 'widgets/TypeWidgets';
 import Mitems from 'widgets/Mitems';
 import { ArchiveIcon, ClipboardListIcon, PencilAltIcon, ReplyIcon, TrashIcon } from "@heroicons/react/outline";
-import axios from "axios";
 import DeleteRegimeDouanier from "./Methods/DeleteRegimeDouanier";
 import ArchiveRegimeDouanier from "./Methods/ArchiveRegimeDouanier";
 import RestoreRegimeDouanier from "./Methods/RestoreRegimeDouanier";
@@ -199,7 +197,7 @@ const FormRegimeDouanier = ({
                             })
                         }
                     </Table>
-                    <Pagin load={loadPage} visibled={regimeDouaniers.length > 0 ? true : false} />
+                    <Pagin load={loadPage} visible={regimeDouaniers.length > 0 ? true : false} />
                 </section>
             )}
 
