@@ -8,7 +8,7 @@ import { setTimeout } from "timers";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useArchiveClientMutation, useArchiveDeclarantMutation, useArchiveIncotermMutation } from "config/rtk";
+
 import Modal from "widgets/Modal";
 type ArchiveIncotermPorp = {
   id: string;
@@ -19,7 +19,7 @@ const ArchiveIncoterm = ({ id }: ArchiveIncotermPorp, ref: Ref<void>) => {
   const { register, handleSubmit } = useForm<string>({
     defaultValues: { id0 },
   });
-  const [archive] = useArchiveIncotermMutation();
+  //const [archive] = useArchiveIncotermMutation();
   const [showModal, setShowModal] = React.useState(false);
   const openModal = (i: string) => {
     setId0(i);

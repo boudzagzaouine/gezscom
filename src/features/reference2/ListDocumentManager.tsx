@@ -2,30 +2,36 @@ import { TrashIcon } from '@heroicons/react/outline';
 import { ArchiveIcon, ClipboardListIcon, PencilAltIcon, ReplyIcon } from '@heroicons/react/solid';
 import ArchiveDocument from 'components/reference2/ArchiveDocument';
 import DeleteDocument from 'components/reference2/DeleteDocument';
+import { OpenDocumentProp } from 'components/reference2/OpenDocument';
 import RestoreDocument from 'components/reference2/RestoreDocument';
-import { usePaginationDocumentsQuery } from 'config/rtk';
+import { openDocuments, usePaginationDocumentsQuery } from 'config/rtk/rtkDocument';
 import React, { useRef, useState } from 'react';
-import { REQUEST_SAVE } from 'tools/consts';
-import Section from 'widgets/Section';
-import { MenuItems } from 'widgets/TypeWidgets';
-import { REQUEST_EDIT } from 'tools/consts';
-import { d0, Document } from 'tools/types';
+import { REQUEST_EDIT, REQUEST_SAVE } from 'tools/consts';
+import { d0, Document, DocumentJson } from 'tools/types';
 import Bcyan from 'widgets/Bcyan';
 import { Button } from 'widgets/Button';
 import Icon from 'widgets/Icon';
 import Mitems from 'widgets/Mitems';
 import Pagin from 'widgets/Pagin';
+import Section from 'widgets/Section';
 import Table from 'widgets/Table';
+import { MenuItems } from 'widgets/TypeWidgets';
 import FormDocumentManager from './FormDocumentManager';
 function ListDocumentManager() {
+    const documentsToOpen: OpenDocumentProp = openDocuments();
+    const documentJson: DocumentJson = documentsToOpen.data
+    const documents: Document[] = documentJson.content
+    const refetchDocument: () => void = documentsToOpen.refetch
+    const saveDocument = documentsToOpen.save
+    const editDocument = documentsToOpen.edit
     const search = (key: string, obj: Document[]): Document[] => {
-        const clientsearch: Document[] = obj.filter(
+        const documentsearch: Document[] = obj.filter(
             (o: Document) => {
                 return o.id.match(key) != null ||
                     o.designation.match(key) != null
             }
         );
-        return clientsearch
+        return documentsearch
     }
     const [form, setForm] = useState(false)
     const [Documend0, setDocumend0] = useState(d0)
@@ -182,8 +188,8 @@ function ListDocumentManager() {
                         {
 
                             //@ts-ignore
-                            data.content?.map((Document) => (
-                                //   data?.map((client) => (
+                            documents?.map((Document) => (
+                                //   data?.map((document) => (
                                 <tr key={Document.id}>
                                     <Table.td>
                                         {Document.id}
@@ -202,7 +208,7 @@ function ListDocumentManager() {
                     </Table>
 
 
-                    <Pagin load={loadPage} />
+                    <Pagin load={loadPage} visibled={documents?.length > 0}/>
                 </Section>
             )}
         </>

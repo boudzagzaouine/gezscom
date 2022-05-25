@@ -1,6 +1,6 @@
 import { ArchiveIcon, XCircleIcon } from "@heroicons/react/solid";
 import axios from "axios";
-import { useArchiveDocumentMutation } from "config/rtk";
+import { useArchiveDocumentMutation } from "config/rtk/rtkDocument";
 import React, { forwardRef, Ref, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { setTimeout } from "timers";
@@ -30,11 +30,7 @@ const ArchiveDocument = ({ id }: ArchiveDocumentPorp, ref: Ref<void>) => {
         //@ts-ignore
         ref.current = openModal;
     });
-    const archiveTemp = () => {
-        axios
-            .patch("http://localhost:1000/api/v1/documents/" + id0 + "/archive")
-            .then(() => { });
-    };
+   
     return (
         <>
             <Modal title={"archivage"} show={showModal} format={5} close={close}>
@@ -43,7 +39,7 @@ const ArchiveDocument = ({ id }: ArchiveDocumentPorp, ref: Ref<void>) => {
                     <form
                         onSubmit={
                             //@ts-ignore
-                            handleSubmit(archiveTemp)
+                            handleSubmit(archive)
                         }
                     >
                         {" "}

@@ -24,7 +24,7 @@ type NavProps = {
 export default  function Nav({ selected ,loading}: NavProps) {
   //selected==CLIENT_MANAGER?navClient:selected==VENDOR_MANAGER?navVendor:selected==PURCHASE_MANAGER?navPurchase:
   const navigation: NavType[] = [
-    { name: "Home", href: "/", current: true, visible: selected == HOME },
+   /*  { name: "Home", href: "/", current: true, visible: selected == HOME }, */
     /* { name: "crud", href: "/crud", current: false, visible: selected == HOME },
     {
       name: "formulaire",
@@ -110,7 +110,7 @@ export default  function Nav({ selected ,loading}: NavProps) {
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
         <>
-          <div className="w-full float-left px-2 sm:px-6 lg:px-8 bg-[#000]">
+          <div className="w-5/6 float-right px-2 sm:px-6 lg:px-8 bg-[#fff]">
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -124,7 +124,7 @@ export default  function Nav({ selected ,loading}: NavProps) {
                 </Disclosure.Button>
               </div>
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex-shrink-0 flex items-center">
+               {/*  <div className="flex-shrink-0 flex items-center">
                   <img
                     className="block lg:hidden h-8 w-auto"
                     src="/images/form.png"
@@ -135,7 +135,7 @@ export default  function Nav({ selected ,loading}: NavProps) {
                     src="/images/logo.png"
                     alt="Workflow"
                   />
-                </div>
+                </div> */}
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
                     {navigation.map((item) =>
@@ -148,9 +148,9 @@ export default  function Nav({ selected ,loading}: NavProps) {
                           <a
                             className={classNames(
                               item.current
-                                ? "bg-gray-900 text-white"
-                                : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                              "px-3 py-2 rounded-md text-sm font-medium"
+                                ? "bg-[#B9DAEC]"
+                                : "hover:bg-gray-700 hover:text-white",
+                              "text-[11273B] px-3 py-2 rounded-md text-sm font-medium"
                             )}
                           >
                             {item.name}
@@ -164,13 +164,13 @@ export default  function Nav({ selected ,loading}: NavProps) {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
+              {/*   <button
                   type="button"
                   className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                 >
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+                </button> */}
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="ml-3 relative">
@@ -210,7 +210,7 @@ export default  function Nav({ selected ,loading}: NavProps) {
                       <Menu.Item>
                         {({ active }) => (
                         <a
-                            href="/api/auth/signin"
+                            href="http://localhost:4002/realms/gescom/protocol/openid-connect/auth?client_id=client&response_type=code&redirect_uri=http://localhost:3000/"
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
@@ -230,7 +230,7 @@ export default  function Nav({ selected ,loading}: NavProps) {
                       <Menu.Item>
                         {({ active }) => (
                       <a
-                            href="#"
+                            href="http://localhost:4002/realms/gescom/protocol/openid-connect/logout"
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"

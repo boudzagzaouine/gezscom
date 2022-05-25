@@ -7,8 +7,8 @@ import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useRestoreClientMutation } from "config/rtk";
-import Modal from "widgets/Modal";
+import { useRestoreClientMutation } from "../../../config/rtk";
+import Modal from "../../../widgets/Modal";
 type RestoreClientPorp = {
   id: string;
 };
@@ -28,11 +28,11 @@ const RestoreClient = ({ id }: RestoreClientPorp, ref: Ref<void>) => {
     //@ts-ignore
     ref.current = openModal;
   });
-  const restoreTemp = () => {
+  /*const restoreTemp = () => {
     axios
       .patch("http://localhost:1000/api/v1/clients/" + id0 + "/restore")
       .then(() => { });
-  };
+  };*/
   return (
     <>
       <Modal title={"restoration"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
@@ -41,7 +41,7 @@ const RestoreClient = ({ id }: RestoreClientPorp, ref: Ref<void>) => {
           <form
             onSubmit={
               //@ts-ignore
-              handleSubmit(restoreTemp)
+              handleSubmit(restore)
             }
           >
             {" "}

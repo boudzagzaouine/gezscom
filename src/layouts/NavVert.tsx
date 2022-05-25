@@ -79,7 +79,8 @@ const NavVert = ({ updateSel }: NavVertProps) => {
       id: 13,
       icon: 'table',
       text: 'Gestions des Tables',
-      link: "",
+      link: "/#",
+      active: route.pathname == '/#',
       sous: [{
         id: UNIT_MEASURE,
         text: 'Unité de mesure',

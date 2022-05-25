@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAddClientMutation, useEditClientMutation } from "config/rtk";
+import { useAddClientMutation, useEditClientMutation } from "config/rtk/RtkClient";
 import {
   DEVISE,
   ICOTERM,
@@ -8,7 +8,7 @@ import {
   REQUEST_SAVE,
 } from "tools/consts";
 import { STYLE_ICON } from "tools/constStyle";
-import { Client } from "tools/types";
+import { Client, Devise ,Incoterm,PayementMode} from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import Section from "widgets/Section";
@@ -25,14 +25,17 @@ import Bsave from "widgets/Bsave";
 import Bcancel from "widgets/Bcancel";
 import Bupdate from "widgets/Bupdate";
 import Xclose from "widgets/Xclose";
-
+import { openDevises } from "config/rtk/rtkDevise";
+import { openIncoterms } from "config/rtk/rtkIncoterm";
+import { openPayementModes } from "config/rtk/rtkPayementMode";
+import { OpenIncotermProp } from "features/reference/Incoterm/Methods/openIncoterms";
 type FormClientManagerProp = {
   closed: () => void;
   client: Client;
   request: number;
   disable: boolean;
   refetch:()=>void
-};
+};//
 const FormClientManager = ({
   closed,
   client,
@@ -40,8 +43,15 @@ const FormClientManager = ({
   disable,
   refetch,
 }: FormClientManagerProp) => {
+  
   const [save] = useAddClientMutation();
   const [edit] = useEditClientMutation();
+  const tabDevises:Devise[]=openDevises().data.content
+  const devises:string[]=tabDevises?.map(d=>d.symbole)
+ const tabIncoterms:Incoterm[]=openIncoterms().data.content 
+ const tabPayementModes:PayementMode[]=openPayementModes().data.content 
+ const incoterms=tabIncoterms?.map(d=>d.code)
+ const payementModes=tabPayementModes?.map(d=>d.code)
   const onSubmit =
     request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit : undefined;
   const [disabled, setDisabled] = useState(disable);
@@ -50,20 +60,20 @@ const FormClientManager = ({
       <Xclose close={closed} />
       <div className="float-left w-full text-xs">
         <Form defaultValues={client} onSubmit={onSubmit}>
-          <h1 className="mb-4">Nom & Prénom du client</h1>
+          <h1 className="mb-4">Nouveau client</h1>
           <div className="float-left w-5/6">
             <div className="float-left w-1/2">
               {request == REQUEST_EDIT && (
                 <Field label="id du client" name="id" />
               )}
-              <Field label="Nom du client" name="design" disabled={disabled} />
+              <Field label="Raison social" name="design" disabled={disabled} />
               <Field label="contact" name="contact" disabled={disabled} />
               <Field label="email" name="email" disabled={disabled} />
               <Field label="tel" name="tel" disabled={disabled} />
               <Field
                 label="device"
                 name="device"
-                options={DEVISE}
+                options={devises}
                 as="select"
                 disabled={disabled}
               />
@@ -78,14 +88,14 @@ const FormClientManager = ({
               <Field
                 label="Mode de payment"
                 name="paymentChoice"
-                options={PAYMENT_CHOICE}
+                options={payementModes}
                 as="select"
                 disabled={disabled}
               />
               <Field
                 label="incoterm"
                 name="incoterm"
-                options={ICOTERM}
+                options={incoterms}
                 as="select"
                 disabled={disabled}
               />

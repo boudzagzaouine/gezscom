@@ -1,4 +1,4 @@
-import { useAddAdressLivMutation, useEditAdressLivMutation, useFetchAdressLivsByIdClientQuery } from "config/rtk";
+import { useAddAdressLivMutation, useEditAdressLivMutation, useFetchAdressLivsByIdClientQuery } from "config/rtk/RtkAdressLiv";
 import React, { useState } from "react";
 import { style_add_line } from "tools/constStyle";
 import { AdressLiv, adr0 } from "tools/types";
@@ -12,6 +12,9 @@ type AdressLivraisonsProps={
 const AdressLivraisons = ({ idClient ,refetchParent}: AdressLivraisonsProps) => {
   const [formArt,setFormArt]=useState(false)
   const [selectedIdCommande,setSelectedIdCommande]=useState("new")
+  const {data=[],refetch}=useFetchAdressLivsByIdClientQuery(idClient)
+  const [save]=useAddAdressLivMutation()
+  const [edit]=useEditAdressLivMutation()
   const close=()=>{
     setFormArt(false)
     setSelectedIdCommande("new")

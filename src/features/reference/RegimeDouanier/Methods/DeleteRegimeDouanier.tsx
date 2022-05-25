@@ -7,8 +7,8 @@ import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useDeleteClientMutation, useDeleteRegimeDouanierMutation } from "config/rtk";
-import Modal from "widgets/Modal";
+import { useDeleteClientMutation, useDeleteRegimeDouanierMutation } from "../../../config/rtk";
+import Modal from "../../../widgets/Modal";
 type DeleteRegimeDouanierPorp = {
   id: string;
   refetch: () => void

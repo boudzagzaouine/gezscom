@@ -8,7 +8,7 @@ import { STYLE_ICON } from "tools/constStyle";
 import Bcancel from "widgets/Bcancel";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useArchiveClientMutation } from "config/rtk";
+import { useArchiveClientMutation } from "config/rtk/RtkClient";
 import Modal from "widgets/Modal";
 type ArchiveClientPorp = {
   id: string;

@@ -1,18 +1,14 @@
-import {
-    PencilAltIcon
-} from "@heroicons/react/solid";
-import { useAddDocumentMutation, useEditDocumentMutation } from "config/rtk";
-import React, { useState } from "react";
+import { useAddDocumentMutation, useEditDocumentMutation } from "config/rtk/rtkDocument";
+import React, { useEffect, useRef, useState } from "react";
 import {
     REQUEST_EDIT,
     REQUEST_SAVE
 } from "tools/consts";
-import { STYLE_ICON } from "tools/constStyle";
+import { Document } from 'tools/types';
 import { Field, Form } from "widgets";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import Section from "widgets/Section";
-import { Document } from 'tools/types';
 
 type FormDocumentManagerProp = {
     closed: () => void;
@@ -33,17 +29,22 @@ const FormDocumentManager = ({
     const [disabled, setDisabled] = useState(disable);
     const text = "nouveau"
     const text1 = "modifier"
+    const imputFocus = useRef(null)
+    useEffect(() => {
+        /*  @ts-ignore*/
+        imputFocus.current.focus()
+    }, [])
     return (
         <Section>
             <div className="float-left w-full text-xs">
                 {/*  @ts-ignore*/}
                 <Form defaultValues={Document} onSubmit={onSubmit}>
-                    {request == REQUEST_SAVE ? <h1 className="mb-2">{text} document </h1>:<h1 className="mb-2">{text1} document </h1>}
-                 
+                    {request == REQUEST_SAVE ? <h1 className="mb-2">{text} document </h1> : <h1 className="mb-2">{text1} document </h1>}
+
                     <div className="float-left w-5/6">
                         <div className="float-left w-1/2">
                             {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
-                            <Field label="designation" name="designation" disabled={disabled} />
+                            <Field ref={imputFocus} label="designation" name="designation" disabled={disabled} />
                         </div>
                     </div>
                     <div className="float-left w-full mt-1">

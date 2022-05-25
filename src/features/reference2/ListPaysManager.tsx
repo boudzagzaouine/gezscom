@@ -2,22 +2,28 @@ import { TrashIcon } from '@heroicons/react/outline';
 import { ArchiveIcon, ClipboardListIcon, PencilAltIcon, ReplyIcon } from '@heroicons/react/solid';
 import ArchivePays from 'components/reference2/ArchivePays';
 import DeletePays from 'components/reference2/DeletePays';
+import { OpenPaysProp } from 'components/reference2/OpenPays';
 import RestorePays from 'components/reference2/RestorePays';
-import { usePaginationPaysQuery } from 'config/rtk';
+import { openPays, usePaginationPaysQuery } from 'config/rtk/rtkPays';
 import React, { useRef, useState } from 'react';
-import { REQUEST_SAVE } from 'tools/consts';
-import Section from 'widgets/Section';
-import { MenuItems } from 'widgets/TypeWidgets';
-import { REQUEST_EDIT } from 'tools/consts';
-import { p0, Pays } from 'tools/types';
+import { REQUEST_EDIT, REQUEST_SAVE } from 'tools/consts';
+import { p0, Pays, PaysJson } from 'tools/types';
 import Bcyan from 'widgets/Bcyan';
 import { Button } from 'widgets/Button';
 import Icon from 'widgets/Icon';
 import Mitems from 'widgets/Mitems';
 import Pagin from 'widgets/Pagin';
+import Section from 'widgets/Section';
 import Table from 'widgets/Table';
+import { MenuItems } from 'widgets/TypeWidgets';
 import FormPaysManager from './FormPaysManager';
 function ListPaysManager() {
+    const paysToOpen: OpenPaysProp = openPays();
+    const paysJson: PaysJson = paysToOpen.data
+    const pays: Pays[] = paysJson.content
+    const refetchPays: () => void = paysToOpen.refetch
+    const savePays = paysToOpen.save
+    const editPays = paysToOpen.edit
     const search = (key: string, obj: Pays[]): Pays[] => {
         const Payssearch: Pays[] = obj.filter(
             (o: Pays) => {
@@ -182,8 +188,8 @@ function ListPaysManager() {
                         {
 
                             //@ts-ignore
-                            data.content?.map((Pays) => (
-                                //   data?.map((client) => (
+                            pays?.map((Pays) => (
+                                //   data?.map((pays) => (
                                 <tr key={Pays.id}>
                                     <Table.td>
                                         {Pays.id}
@@ -200,7 +206,7 @@ function ListPaysManager() {
                     </Table>
 
 
-                    <Pagin load={loadPage} />
+                    <Pagin load={loadPage} visibled={pays?.length > 0} />
                 </Section>
             )}
         </>

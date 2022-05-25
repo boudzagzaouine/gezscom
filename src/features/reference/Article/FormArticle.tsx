@@ -1,10 +1,10 @@
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
-import { Article, article0 } from "tools/types";
+import { Article, article0, ArticleJson } from "tools/types";
 import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import { Form, Field, Button } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
-import { useAddArticleMutation, useEditArticleMutation, useFetchArticlesQuery, usePaginationArticlesQuery } from "config/rtk";
+import { useAddArticleMutation, useEditArticleMutation, usePaginationArticlesQuery } from "config/rtk";
 import classNames from "classnames";
 import Table from "widgets/Table";
 import { MenuItems } from 'widgets/TypeWidgets';
@@ -15,26 +15,34 @@ import ArchiveArticle from "./Methods/ArchiveArticle";
 import RestoreArticle from "./Methods/RestoreArticle";
 import Pagin from "widgets/Pagin";
 import Icon from "widgets/Icon";
+import { OpenArticleProp } from "./Methods/openArticles";
+import { openArticles } from "config/rtk/rtkArticle";
 
 type FormArticleProps = {
     article: Article;
-    
 };
 const FormArticle = ({
     article
 }: FormArticleProps, ref: Ref<void>) => {
 
+    const articlesToOpen: OpenArticleProp = openArticles();
+    const articleJson: ArticleJson = articlesToOpen.data;
+    const articles: Article[] = articleJson.content;
+    const refetchArticle: () => void = articlesToOpen.refetch;
+    const saveArticle = articlesToOpen.save;
+    const editArticle = articlesToOpen.edit;
+
     const [page, setPage] = useState(0);
     const loadPage = (p: number) => {
         setPage(p);
-        refetch();
+        refetchArticle();
     };
 
-    const { data = [], isFetching, refetch } = usePaginationArticlesQuery(0);
+    //const { data = [], isFetching, refetch } = usePaginationArticlesQuery(0);
     const [article1, setArticle1] = useState<Article>(article0);
     const [request, setRequest] = useState(REQUEST_SAVE);
 
-    const [save] = useAddArticleMutation();
+    //const [save] = useAddArticleMutation();
 
     const [form, setForm] = useState(false);
 
@@ -73,7 +81,7 @@ const FormArticle = ({
 
     const void_ = () => { }
 
-    const [updateArticle] = useEditArticleMutation();
+    //const [updateArticle] = useEditArticleMutation();
 
 
     const menu = (article: Article): MenuItems[] => {
@@ -146,7 +154,7 @@ const FormArticle = ({
         <>
             {!form && (
                 <section className='bg-white float-left w-full h-full mp-8 shadow-lg'>
-                    <DeleteArticle id={""} ref={del} refetch={refetch} />
+                    <DeleteArticle id={""} ref={del} refetch={refetchArticle} />
                     <ArchiveArticle id={""} ref={archive} />
                     <RestoreArticle id={""} ref={restore} />
                     <h1>Nouvelle Famille Article</h1>
@@ -176,7 +184,7 @@ const FormArticle = ({
                             </tr>}
                     >
                         {//@ts-ignore
-                            data.content?.map((article: Article) => {
+                            articles?.map((article: Article) => {
                                 return (
                                     //@ts-ignore
                                     <tr key={article.id}>
@@ -190,13 +198,13 @@ const FormArticle = ({
                             })
                         }
                     </Table>
-                    <Pagin load={loadPage} />
+                    <Pagin load={loadPage} visibled={articles?.length > 0 ? true : false} />
 
                 </section>
             )}
             <Modal show={show} title="Nouvelle Famille Article" format={+classNames("5")} close={closed}>
                 <div className="float-left w-full">
-                    <Form defaultValues={article1} onSubmit={request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? updateArticle : void_}>
+                    <Form defaultValues={article1} onSubmit={request == REQUEST_SAVE ? saveArticle : request == REQUEST_EDIT ? editArticle : void_}>
                         <div className="float-left w-full">
                             <Field className="sm:grid-cols-6 sm:gap-6" label="Designation" name="design" disabled={disabled} />
 
@@ -219,7 +227,7 @@ const FormArticle = ({
                                 type="submit"
                                 onClick={() => {
                                     setTimeout(() => {
-                                        refetch()
+                                        refetchArticle()
                                         closed();
                                     }, 500);
                                 }}

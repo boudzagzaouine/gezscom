@@ -1,18 +1,14 @@
-import {
-    PencilAltIcon
-} from "@heroicons/react/solid";
-import { useAddDeviseMutation, useEditDeviseMutation } from "config/rtk";
-import React, { useState } from "react";
+import { useAddDeviseMutation, useEditDeviseMutation } from "config/rtk/rtkDevise";
+import React, { useEffect, useRef, useState } from "react";
 import {
     REQUEST_EDIT,
     REQUEST_SAVE
 } from "tools/consts";
-import { STYLE_ICON } from "tools/constStyle";
+import { Devise } from 'tools/types';
 import { Field, Form } from "widgets";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import Section from "widgets/Section";
-import { Devise } from 'tools/types';
 
 type FormDeviseManagerProp = {
     closed: () => void;
@@ -26,7 +22,6 @@ const FormDeviseManager = ({
     Devise,
     request,
     disable,
-    imputFocus
 }: FormDeviseManagerProp) => {
     const [save] = useAddDeviseMutation();
     const [edit] = useEditDeviseMutation();
@@ -35,13 +30,18 @@ const FormDeviseManager = ({
     const [disabled, setDisabled] = useState(disable);
     const text = "nouveau"
     const text1 = "modifier"
+    const imputFocus = useRef(null)
+    useEffect(() => {
+        /*  @ts-ignore*/
+        imputFocus.current.focus()
+    }, [])
     return (
         <Section>
             <div className="float-left w-full text-xs">
                 {/*  @ts-ignore*/}
                 <Form defaultValues={Devise} onSubmit={onSubmit}>
                     {request == REQUEST_SAVE ? <h1 className="mb-2">{text} devise </h1> : <h1 className="mb-2">{text1} devise </h1>}
-                  
+
                     <div className="float-left w-5/6">
                         <div className="float-left w-1/2">
                             {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
@@ -60,12 +60,12 @@ const FormDeviseManager = ({
                                     }, 500);
                                 }}
                             >
-                              sauvegarder
+                                sauvegarder
                             </Bcyan>
                         )}
                         {!disabled && request == REQUEST_SAVE && (
                             <Bcyan className="float-left" type="submit">
-                              sauvegarder && nouveau
+                                sauvegarder && nouveau
                             </Bcyan>
                         )}
                     </div>
@@ -85,7 +85,7 @@ const FormDeviseManager = ({
                             setDisabled(false);
                         }}
                     >
-                       modifier
+                        modifier
                     </Bcyan>
                 )}
             </div>

@@ -7,8 +7,8 @@ import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useDeleteClientMutation, useDeletePayementModeMutation } from "config/rtk";
-import Modal from "widgets/Modal";
+import { useDeleteClientMutation, useDeletePayementModeMutation } from "../../../config/rtk";
+import Modal from "../../../widgets/Modal";
 type DeletePayementModePorp = {
   id: string;
   refetch: () => void
@@ -35,7 +35,7 @@ const DeletePayementMode = ({ id, refetch }: DeletePayementModePorp, ref: Ref<vo
   };
   return (
     <>
-      <Modal title={"suppression"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal title={"suppression"} show={showModal} format={classNames("5")} close={() => { setShowModal(false) }}>
         <div>
           <h2>suppression du mode de régelement num: {id0}</h2>
           <form

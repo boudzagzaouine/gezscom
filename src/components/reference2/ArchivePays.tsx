@@ -1,12 +1,12 @@
 import { ArchiveIcon, XCircleIcon } from "@heroicons/react/solid";
 import axios from "axios";
+import { useArchivePaysMutation } from "config/rtk/rtkPays";
 import React, { forwardRef, Ref, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { setTimeout } from "timers";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useArchivePaysMutation } from "config/rtk";
 import Modal from "widgets/Modal";
 type ArchivePaysPorp = {
     id: string;
@@ -30,11 +30,7 @@ const ArchivePays = ({ id }: ArchivePaysPorp, ref: Ref<void>) => {
         //@ts-ignore
         ref.current = openModal;
     });
-    const archiveTemp = () => {
-        axios
-            .patch("http://localhost:1000/api/v1/pays/" + id0 + "/archive")
-            .then(() => { });
-    };
+    
     return (
         <>
             <Modal title={"archivage"} show={showModal} format={5} close={close}>
@@ -43,7 +39,7 @@ const ArchivePays = ({ id }: ArchivePaysPorp, ref: Ref<void>) => {
                     <form
                         onSubmit={
                             //@ts-ignore
-                            handleSubmit(archiveTemp)
+                            handleSubmit(archive)
                         }
                     >
                         {" "}

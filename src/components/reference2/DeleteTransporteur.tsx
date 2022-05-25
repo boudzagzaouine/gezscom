@@ -1,18 +1,18 @@
 import { TrashIcon } from "@heroicons/react/outline";
 import { XCircleIcon } from "@heroicons/react/solid";
 import axios from "axios";
+import { useDeleteTransporteurMutation } from "config/rtk/rtkTransporteur";
 import React, { forwardRef, Ref, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useDeleteTransporteurMutation } from "config/rtk";
 import Modal from "widgets/Modal";
 type DeleteTransporteurPorp = {
     id: string;
-    refetch:()=>void
+    refetch: () => void
 };
-const DeleteTransporteur = ({ id,refetch }: DeleteTransporteurPorp, ref: Ref<void>) => {
+const DeleteTransporteur = ({ id, refetch }: DeleteTransporteurPorp, ref: Ref<void>) => {
     const [del] = useDeleteTransporteurMutation();
     const [id0, setId0] = useState(id);
     //@ts-ignore
@@ -23,7 +23,7 @@ const DeleteTransporteur = ({ id,refetch }: DeleteTransporteurPorp, ref: Ref<voi
         setId0(i);
         setShowModal(true);
     };
-    const close=()=>{
+    const close = () => {
         setShowModal(false);
     }
     useEffect(() => {
@@ -31,9 +31,7 @@ const DeleteTransporteur = ({ id,refetch }: DeleteTransporteurPorp, ref: Ref<voi
         ref.current = openModal;
     });
     const [showModal, setShowModal] = React.useState(false);
-    const delTemp = () => {
-        axios.delete("http://localhost:1000/api/v1/transporteurs/" + id0).then(() => { });
-    };
+  
     return (
         <>
             <Modal title={"suppression"} show={showModal} format={5} close={close}>
@@ -42,7 +40,7 @@ const DeleteTransporteur = ({ id,refetch }: DeleteTransporteurPorp, ref: Ref<voi
                     <form
                         onSubmit={
                             //@ts-ignore
-                            handleSubmit(delTemp)
+                            handleSubmit(del)
                         }
                     >
                         {" "}

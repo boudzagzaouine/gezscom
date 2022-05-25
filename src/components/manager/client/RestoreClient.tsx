@@ -7,7 +7,7 @@ import { STYLE_ICON } from "tools/constStyle";
 import Bcancel from "widgets/Bcancel";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useRestoreClientMutation } from "config/rtk";
+import { useRestoreClientMutation } from "config/rtk/RtkClient";
 import Modal from "widgets/Modal";
 type RestoreClientPorp = {
   id: string;

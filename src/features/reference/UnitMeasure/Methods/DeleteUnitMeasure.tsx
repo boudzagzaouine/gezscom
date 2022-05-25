@@ -1,13 +1,10 @@
-import { TrashIcon } from "@heroicons/react/outline";
-import { XCircleIcon } from "@heroicons/react/solid";
+
 import axios from "axios";
 import classNames from "classnames";
 import React, { forwardRef, Ref, useRef, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
-import Bred from "widgets/Bred";
-import { useDeleteClientMutation, useDeleteUnitMeasureMutation } from "config/rtk";
+import { useDeleteUnitMeasureMutation } from "config/rtk/rtkUnitMeasure";
 import Modal from "widgets/Modal";
 type DeleteUnitMeasurePorp = {
   id: string;
@@ -30,9 +27,9 @@ const DeleteUnitMeasure = ({ id, refetch }: DeleteUnitMeasurePorp, ref: Ref<void
     ref.current = openModal;
   });
   const [showModal, setShowModal] = React.useState(false);
-  const delTemp = () => {
+  /*const delTemp = () => {
     axios.delete("http://localhost:1000/api/v1/unitMeasures/" + id0).then(() => { });
-  };
+  };*/
   return (
     <>
       <Modal title={"suppression"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
@@ -41,7 +38,7 @@ const DeleteUnitMeasure = ({ id, refetch }: DeleteUnitMeasurePorp, ref: Ref<void
           <form
             onSubmit={
               //@ts-ignore
-              handleSubmit(delTemp)
+              handleSubmit(del)
             }
           >
             {" "}

@@ -7,8 +7,8 @@ import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useRestoreClientMutation, useRestoreRawMaterialMutation } from "config/rtk";
-import Modal from "widgets/Modal";
+import { useRestoreClientMutation, useRestoreRawMaterialMutation } from "../../../config/rtk";
+import Modal from "../../../widgets/Modal";
 type RestoreRawMaterialPorp = {
   id: string;
 };
@@ -28,11 +28,11 @@ const RestoreRawMaterial = ({ id }: RestoreRawMaterialPorp, ref: Ref<void>) => {
     //@ts-ignore
     ref.current = openModal;
   });
-  const restoreTemp = () => {
+  /*const restoreTemp = () => {
     axios
       .patch("http://localhost:1000/api/v1/rawMaterial/" + id0 + "/restore")
       .then(() => { });
-  };
+  };*/
   return (
     <>
       <Modal title={"restoration"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
@@ -41,7 +41,7 @@ const RestoreRawMaterial = ({ id }: RestoreRawMaterialPorp, ref: Ref<void>) => {
           <form
             onSubmit={
               //@ts-ignore
-              handleSubmit(restoreTemp)
+              handleSubmit(restore)
             }
           >
             {" "}

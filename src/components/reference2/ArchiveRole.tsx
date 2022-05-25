@@ -1,6 +1,6 @@
 import { ArchiveIcon, XCircleIcon } from "@heroicons/react/solid";
 import axios from "axios";
-import { useArchiveRoleMutation } from "config/rtk";
+import { useArchiveRoleMutation } from "config//rtk/rtkRole";
 import React, { forwardRef, Ref, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { setTimeout } from "timers";
@@ -30,11 +30,7 @@ const ArchiveRole = ({ id }: ArchiveRolePorp, ref: Ref<void>) => {
         //@ts-ignore
         ref.current = openModal;
     });
-    const archiveTemp = () => {
-        axios
-            .patch("http://localhost:1000/api/v1/roles/" + id0 + "/archive")
-            .then(() => { });
-    };
+   
     return (
         <>
             <Modal title={"archivage"} show={showModal} format={5} close={close}>
@@ -43,7 +39,7 @@ const ArchiveRole = ({ id }: ArchiveRolePorp, ref: Ref<void>) => {
                     <form
                         onSubmit={
                             //@ts-ignore
-                            handleSubmit(archiveTemp)
+                            handleSubmit(archive)
                         }
                     >
                         {" "}

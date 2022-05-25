@@ -1,6 +1,6 @@
 import { ArchiveIcon, XCircleIcon } from "@heroicons/react/solid";
 import axios from "axios";
-import { useArchiveDeviseMutation } from "config/rtk";
+import { useArchiveDeviseMutation } from "config/rtk/rtkDevise";
 import React, { forwardRef, Ref, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { setTimeout } from "timers";
@@ -23,18 +23,14 @@ const ArchiveDevise = ({ id }: ArchiveDevisePorp, ref: Ref<void>) => {
         setId0(i);
         setShowModal(true);
     };
-    const close=()=>{
+    const close = () => {
         setShowModal(false);
     }
     useEffect(() => {
         //@ts-ignore
         ref.current = openModal;
     });
-    const archiveTemp = () => {
-        axios
-            .patch("http://localhost:1000/api/v1/devises/" + id0 + "/archive")
-            .then(() => { });
-    };
+
     return (
         <>
             <Modal title={"archivage"} show={showModal} format={5} close={close}  >
@@ -43,7 +39,7 @@ const ArchiveDevise = ({ id }: ArchiveDevisePorp, ref: Ref<void>) => {
                     <form
                         onSubmit={
                             //@ts-ignore
-                            handleSubmit(archiveTemp)
+                            handleSubmit(archive)
                         }
                     >
                         {" "}

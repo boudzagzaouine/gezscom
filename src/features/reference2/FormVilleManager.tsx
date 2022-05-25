@@ -1,5 +1,5 @@
-import { useAddVilleMutation, useEditVilleMutation } from "config/rtk";
-import React, { useState } from "react";
+import { useAddVilleMutation, useEditVilleMutation } from "config/rtk/rtkVille";
+import React, { useEffect, useRef, useState } from "react";
 import {
     PAYS_CHOICE,
     REQUEST_EDIT,
@@ -30,17 +30,22 @@ const FormVilleManager = ({
     const [disabled, setDisabled] = useState(disable);
     const text = "nouveau"
     const text1 = "modifier"
+    const imputFocus = useRef(null)
+    useEffect(() => {
+        /*  @ts-ignore*/
+        imputFocus.current.focus()
+    }, [])
     return (
         <Section>
             <div className="float-left w-full text-xs">
                 {/*  @ts-ignore*/}
                 <Form defaultValues={Ville} onSubmit={onSubmit}>
                     {request == REQUEST_SAVE ? <h1 className="mb-2">{text} ville </h1> : <h1 className="mb-2">{text1} ville </h1>}
-                
+
                     <div className="float-left w-5/6">
                         <div className="float-left w-1/2">
                             {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
-                            <Field label="designation" name="concat" disabled={disabled} />
+                            <Field ref={imputFocus} label="designation" name="concat" disabled={disabled} />
                             <Field
                                 label="PAYS"
                                 name="paymentChoice"

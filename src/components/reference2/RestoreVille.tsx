@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useRestoreVilleMutation } from "config/rtk";
+import { useRestoreVilleMutation } from "config/rtk/rtkVille";
 import Modal from "widgets/Modal";
 type RestoreVillePorp = {
     id: string;
@@ -22,7 +22,7 @@ const RestoreVille = ({ id }: RestoreVillePorp, ref: Ref<void>) => {
         setId0(i);
         setShowModal(true);
     };
-    const close=()=>{
+    const close = () => {
         setShowModal(false);
     }
     useEffect(() => {
@@ -36,7 +36,7 @@ const RestoreVille = ({ id }: RestoreVillePorp, ref: Ref<void>) => {
     };
     return (
         <>
-            <Modal title={"restoration"} show={showModal} format={5}  close={close}>
+            <Modal title={"restoration"} show={showModal} format={5} close={close}>
                 <div>
                     <h2>restoration du Ville num: {id0}</h2>
                     <form

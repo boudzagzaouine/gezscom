@@ -7,9 +7,13 @@ export const REQUEST_SAVE = 4;
 export const REQUEST_EDIT = 5;
 export const REQUEST_DELETE = 6;
 export const PAGE_SIZE = 2000;
-export const PAYMENT_CHOICE = ["", "CHECK", "ESPECE", "CARTE"];
-export const ICOTERM = ["", "CTP", "CIP", "DAP", "DDP"];
-export const DEVISE = ["", "MAD", "EUR", "DLR", "YEN"];
+
+export const PAYMENT_CHOICE = [" ", "CHECK", "ESPECE", "CARTE"];
+export const ICOTERM = [" ", "CTP", "CIP", "DAP", "DDP"];
+export const DEVISE = [" ", "MAD", "EUR", "DLR", "YEN"];
+
+
+
 export const HOME = 7;
 export const CLIENT_MANAGER = 8;
 export const VENDOR_MANAGER = 9;
@@ -18,7 +22,9 @@ export const DECIMAL = [" ", "0.0", "0.00", "0.000", "0.0000"];
 export const VILLE = [" ", "Fes", "El Jadida", "Casa", "Rabat"];
 export const FAMILLE = [" ", "Plastique", "Organique", "Céramique", "Métallique"];
 export const UNIT = [" ", "Kg", "Gr", "M", "Cm", "Mm", "L"];
+
 export const PAYS_CHOICE = ["", "Morocco", "Algerie", "Spain"];
+
 export const INCOTERM_GES = 15;
 export const DECLARANT_GES = 16;
 export const MODE_PAYEMENT = 17;
@@ -27,6 +33,7 @@ export const UNIT_MEASURE = 19;
 export const FAMILLE_ARTICLE = 20;
 export const FAMILLE_MATIERE_PREMIERE = 21;
 export const BUREAU_DOUANE = 22;
+
 
 export const TRANSPORTEUR_MANAGER = 23
 export const DOCUMENT_MANAGER = 24
@@ -41,3 +48,4 @@ export const ORIGINE=["", "Maroc", "France", "Canada", "Italie"]
 
 export const ROLE = ["","Admin","User"];
 export const URL_API_SEC=process.env.NEXT_URL_API
+

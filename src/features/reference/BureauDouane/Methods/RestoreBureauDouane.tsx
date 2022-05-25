@@ -7,8 +7,8 @@ import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useRestoreBureauDouaneMutation, useRestoreClientMutation } from "config/rtk";
-import Modal from "widgets/Modal";
+import { useRestoreBureauDouaneMutation, useRestoreClientMutation } from "../../../config/rtk";
+import Modal from "../../../widgets/Modal";
 type RestoreBureauDouaneProps = {
   id: string;
 };
@@ -35,7 +35,7 @@ const RestoreBureauDouane = ({ id }: RestoreBureauDouaneProps, ref: Ref<void>) =
   };
   return (
     <>
-      <Modal title={"restoration"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal title={"restoration"} show={showModal} format={classNames("5")} close={() => { setShowModal(false) }}>
         <div>
           <h2>restoration du bureau douane num: {id0}</h2>
           <form
