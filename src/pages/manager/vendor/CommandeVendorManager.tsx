@@ -1,12 +1,12 @@
-import GenerereCommandeFournisseur from 'features/Fournisseur/GenerereCommandeFournisseur'
-import React from 'react'
+import GenerereCommandeFournisseur from "features/Fournisseur/GenerereCommandeFournisseur";
+import React from "react";
 
 const CommandeVendorManager = () => {
   return (
     <>
-    <GenerereCommandeFournisseur/>
+      <GenerereCommandeFournisseur />
     </>
-  )
-}
+  );
+};
 
-export default CommandeVendorManager
+export default CommandeVendorManager;

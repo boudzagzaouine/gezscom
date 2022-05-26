@@ -1,8 +1,8 @@
 import React from "react";
 import { Client } from "tools/types";
-type soldProps={
-  idClient:string
-}
+type soldProps = {
+  idClient: string;
+};
 const SoldesCommandes = ({ idClient }: soldProps) => {
   return <div>SoldesCommandes</div>;
 };

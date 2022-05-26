@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import classNames from "classnames";
 import React, { forwardRef, Ref, useRef, useEffect, useState } from "react";
@@ -10,7 +9,10 @@ import Modal from "widgets/Modal";
 type RestoreRegimeDouanierPorp = {
   id: string;
 };
-const RestoreRegimeDouanier = ({ id }: RestoreRegimeDouanierPorp, ref: Ref<void>) => {
+const RestoreRegimeDouanier = (
+  { id }: RestoreRegimeDouanierPorp,
+  ref: Ref<void>
+) => {
   const [id0, setId0] = useState(id);
   //@ts-ignore
   const { register, handleSubmit } = useForm<string>({
@@ -33,7 +35,14 @@ const RestoreRegimeDouanier = ({ id }: RestoreRegimeDouanierPorp, ref: Ref<void>
   };*/
   return (
     <>
-      <Modal title={"restoration"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal
+        title={"restoration"}
+        show={showModal}
+        format={+classNames("5")}
+        close={() => {
+          setShowModal(false);
+        }}
+      >
         <div>
           <h2>restoration du régime douanier num: {id0}</h2>
           <form
@@ -62,7 +71,6 @@ const RestoreRegimeDouanier = ({ id }: RestoreRegimeDouanierPorp, ref: Ref<void>
               setShowModal(false);
             }}
           >
-
             Annuler
           </Bcyan>
         </div>
@@ -72,4 +80,3 @@ const RestoreRegimeDouanier = ({ id }: RestoreRegimeDouanierPorp, ref: Ref<void>
 };
 
 export default forwardRef(RestoreRegimeDouanier);
-

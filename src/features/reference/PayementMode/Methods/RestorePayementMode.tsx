@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import classNames from "classnames";
 import React, { forwardRef, Ref, useRef, useEffect, useState } from "react";
@@ -9,7 +8,10 @@ import Modal from "widgets/Modal";
 type RestorePayementModePorp = {
   id: string;
 };
-const RestorePayementMode = ({ id }: RestorePayementModePorp, ref: Ref<void>) => {
+const RestorePayementMode = (
+  { id }: RestorePayementModePorp,
+  ref: Ref<void>
+) => {
   const [id0, setId0] = useState(id);
   //@ts-ignore
   const { register, handleSubmit } = useForm<string>({
@@ -32,7 +34,14 @@ const RestorePayementMode = ({ id }: RestorePayementModePorp, ref: Ref<void>) =>
   };*/
   return (
     <>
-      <Modal title={"restoration"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal
+        title={"restoration"}
+        show={showModal}
+        format={+classNames("5")}
+        close={() => {
+          setShowModal(false);
+        }}
+      >
         <div>
           <h2>restoration du mode de régelement num: {id0}</h2>
           <form

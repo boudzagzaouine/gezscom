@@ -1,12 +1,12 @@
-import ListDeviseManager from 'features/reference2/ListDeviseManager'
-import React from 'react'
+import ListDeviseManager from "features/reference2/ListDeviseManager";
+import React from "react";
 
 function Devise() {
   return (
-      <>
-          <ListDeviseManager/>
+    <>
+      <ListDeviseManager />
     </>
-  )
+  );
 }
 
-export default Devise
+export default Devise;

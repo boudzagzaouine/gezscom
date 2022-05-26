@@ -1,12 +1,12 @@
-import ListVilleManager from 'features/reference2/ListVilleManager'
-import React from 'react'
+import ListVilleManager from "features/reference2/ListVilleManager";
+import React from "react";
 
 function Ville() {
   return (
-      <div>
-          <ListVilleManager/>
+    <div>
+      <ListVilleManager />
     </div>
-  )
+  );
 }
 
-export default Ville
+export default Ville;

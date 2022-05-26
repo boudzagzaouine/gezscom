@@ -11,7 +11,7 @@ import {
   PURCHASE_MANAGER,
   VENDOR_MANAGER,
 } from "tools/consts";
-import { signOut,signIn, getSession, useSession } from "next-auth/react";
+import { signOut, signIn, getSession, useSession } from "next-auth/react";
 import axios from "axios";
 
 function classNames(...classes: any[]) {
@@ -19,12 +19,12 @@ function classNames(...classes: any[]) {
 }
 type NavProps = {
   selected: number;
-  loading:boolean
+  loading: boolean;
 };
-export default  function Nav({ selected ,loading}: NavProps) {
+export default function Nav({ selected, loading }: NavProps) {
   //selected==CLIENT_MANAGER?navClient:selected==VENDOR_MANAGER?navVendor:selected==PURCHASE_MANAGER?navPurchase:
   const navigation: NavType[] = [
-   /*  { name: "Home", href: "/", current: true, visible: selected == HOME }, */
+    /*  { name: "Home", href: "/", current: true, visible: selected == HOME }, */
     /* { name: "crud", href: "/crud", current: false, visible: selected == HOME },
     {
       name: "formulaire",
@@ -103,8 +103,6 @@ export default  function Nav({ selected ,loading}: NavProps) {
       visible: selected == PURCHASE_MANAGER,
     },
   ];
- 
-  
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -124,18 +122,6 @@ export default  function Nav({ selected ,loading}: NavProps) {
                 </Disclosure.Button>
               </div>
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-               {/*  <div className="flex-shrink-0 flex items-center">
-                  <img
-                    className="block lg:hidden h-8 w-auto"
-                    src="/images/form.png"
-                    alt="Workflow"
-                  />
-                  <img
-                    className="hidden lg:block h-8 w-auto"
-                    src="/images/logo.png"
-                    alt="Workflow"
-                  />
-                </div> */}
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
                     {navigation.map((item) =>
@@ -148,8 +134,8 @@ export default  function Nav({ selected ,loading}: NavProps) {
                           <a
                             className={classNames(
                               item.current
-                                ? "bg-[#B9DAEC]"
-                                : "hover:bg-gray-700 hover:text-white",
+                                ? "bg-[#B9DAEC]/30"
+                                : "hover:bg-[#B9DAEC]/10",
                               "text-[11273B] px-3 py-2 rounded-md text-sm font-medium"
                             )}
                           >
@@ -164,7 +150,7 @@ export default  function Nav({ selected ,loading}: NavProps) {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              {/*   <button
+                {/*   <button
                   type="button"
                   className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                 >
@@ -209,18 +195,18 @@ export default  function Nav({ selected ,loading}: NavProps) {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                        <a
+                          <a
                             href="http://localhost:4002/realms/gescom/protocol/openid-connect/auth?client_id=client&response_type=code&redirect_uri=http://localhost:3000/"
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
-                            onClick={(e:any)=>{
+                            onClick={(e: any) => {
                               //api/auth/signin
                               //e.preventDefault()
                               //signIn("keycloak")
-                               signIn("keycloak")
-                            window.location.href='/' 
+                              signIn("keycloak");
+                              window.location.href = "/";
                             }}
                           >
                             sign in
@@ -229,20 +215,20 @@ export default  function Nav({ selected ,loading}: NavProps) {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                      <a
+                          <a
                             href="http://localhost:4002/realms/gescom/protocol/openid-connect/logout"
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
-                            onClick={(e:any)=>{
-                        //      e.preventDefault()
-                             // signOut()
-                           /*  logout()
+                            onClick={(e: any) => {
+                              //      e.preventDefault()
+                              // signOut()
+                              /*  logout()
                             setTimeout(() => {
                               window.location.href='/'
                             }, 500);*/
-                            signOut({callbackUrl:'/',redirect:true})
+                              signOut({ callbackUrl: "/", redirect: true });
                             }}
                           >
                             Sign out

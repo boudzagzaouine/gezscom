@@ -41,7 +41,7 @@ export const Input = memo(
         {
           "py-3": isTextArea,
           "py-1": isInput || isSelect,
-          "bg-[#707070]/30":isSelect
+          "bg-[#707070]/30": isSelect,
         },
         // isRadio || isCheckbox
         //   ? "rounded h-4 w-4"

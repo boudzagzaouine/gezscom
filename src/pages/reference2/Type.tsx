@@ -1,12 +1,12 @@
-import ListTypeManager from 'features/reference2/ListTypeManager'
-import React from 'react'
+import ListTypeManager from "features/reference2/ListTypeManager";
+import React from "react";
 
 function Type() {
   return (
-      <div>
-          <ListTypeManager/>
+    <div>
+      <ListTypeManager />
     </div>
-  )
+  );
 }
 
-export default Type
+export default Type;

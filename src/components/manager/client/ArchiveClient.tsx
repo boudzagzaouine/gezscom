@@ -25,9 +25,9 @@ const ArchiveClient = ({ id }: ArchiveClientPorp, ref: Ref<void>) => {
     setId0(i);
     setShowModal(true);
   };
-  const close=()=>{
+  const close = () => {
     setShowModal(false);
-  }
+  };
   useEffect(() => {
     //@ts-ignore
     ref.current = openModal;
@@ -59,7 +59,7 @@ const ArchiveClient = ({ id }: ArchiveClientPorp, ref: Ref<void>) => {
                 }, 500);
               }}
             >
-             Archiver
+              Archiver
             </Bcyan>
           </form>
           <Bcancel

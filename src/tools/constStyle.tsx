@@ -5,4 +5,3 @@ export const style_icon =
 export const style_span = "mt-px " + color;
 
 export const style_add_line = "bg-[#dfdfdf] cursor-pointer";
-

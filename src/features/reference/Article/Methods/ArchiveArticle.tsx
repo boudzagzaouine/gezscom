@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import classNames from "classnames";
 import React, { forwardRef, Ref, useRef, useEffect, useState } from "react";
@@ -34,7 +33,14 @@ const ArchiveArticle = ({ id }: ArchiveArticlePorp, ref: Ref<void>) => {
   };*/
   return (
     <>
-      <Modal title={"archivage"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal
+        title={"archivage"}
+        show={showModal}
+        format={+classNames("5")}
+        close={() => {
+          setShowModal(false);
+        }}
+      >
         <div>
           <h2>archivage d'article num: {id0}</h2>
           <form

@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import classNames from "classnames";
 import React, { forwardRef, Ref, useRef, useEffect, useState } from "react";
@@ -8,10 +7,12 @@ import { useDeleteRawMaterialMutation } from "config/rtk/rtkRawMaterial";
 import Modal from "widgets/Modal";
 type DeleteRawMaterialPorp = {
   id: string;
-  refetch: () => void
-
+  refetch: () => void;
 };
-const DeleteRawMaterial = ({ id, refetch }: DeleteRawMaterialPorp, ref: Ref<void>) => {
+const DeleteRawMaterial = (
+  { id, refetch }: DeleteRawMaterialPorp,
+  ref: Ref<void>
+) => {
   const [del] = useDeleteRawMaterialMutation();
   const [id0, setId0] = useState(id);
   //@ts-ignore
@@ -32,7 +33,14 @@ const DeleteRawMaterial = ({ id, refetch }: DeleteRawMaterialPorp, ref: Ref<void
   };*/
   return (
     <>
-      <Modal title={"suppression"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal
+        title={"suppression"}
+        show={showModal}
+        format={+classNames("5")}
+        close={() => {
+          setShowModal(false);
+        }}
+      >
         <div>
           <h2>suppression de matière première num: {id0}</h2>
           <form

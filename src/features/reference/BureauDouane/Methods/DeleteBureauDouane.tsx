@@ -7,13 +7,19 @@ import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useDeleteBureauDouaneMutation, useDeleteClientMutation } from "../../../config/rtk";
+import {
+  useDeleteBureauDouaneMutation,
+  useDeleteClientMutation,
+} from "../../../config/rtk";
 import Modal from "../../../widgets/Modal";
 type DeleteBureauDouaneProps = {
   id: string;
-  refetch: () => void
+  refetch: () => void;
 };
-const DeleteBureauDouane = ({ id, refetch }: DeleteBureauDouaneProps, ref: Ref<void>) => {
+const DeleteBureauDouane = (
+  { id, refetch }: DeleteBureauDouaneProps,
+  ref: Ref<void>
+) => {
   const [del] = useDeleteBureauDouaneMutation();
   const [id0, setId0] = useState(id);
   //@ts-ignore
@@ -30,11 +36,20 @@ const DeleteBureauDouane = ({ id, refetch }: DeleteBureauDouaneProps, ref: Ref<v
   });
   const [showModal, setShowModal] = React.useState(false);
   const delTemp = () => {
-    axios.delete("http://localhost:1000/api/v1/bureauDouanes/" + id0).then(() => { });
+    axios
+      .delete("http://localhost:1000/api/v1/bureauDouanes/" + id0)
+      .then(() => {});
   };
   return (
     <>
-      <Modal title={"suppression"} show={showModal} format={classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal
+        title={"suppression"}
+        show={showModal}
+        format={classNames("5")}
+        close={() => {
+          setShowModal(false);
+        }}
+      >
         <div>
           <h2>suppression de bureau douane num: {id0}</h2>
           <form

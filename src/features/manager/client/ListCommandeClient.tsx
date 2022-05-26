@@ -13,11 +13,11 @@ import AdressLivraisons from "./AdressLivraisons";
 import ArticlesClients from "./ArticlesClients";
 import ListCommandes from "./ListCommandes";
 import SoldesCommandes from "./SoldesCommandes";
-type ListCommandeClientProps={
-  client:Client
-  refetch:()=>void
-}
-const ListCommandeClient = ({ client,refetch }: ListCommandeClientProps) => {
+type ListCommandeClientProps = {
+  client: Client;
+  refetch: () => void;
+};
+const ListCommandeClient = ({ client, refetch }: ListCommandeClientProps) => {
   //
   //
   const commanndes: MenuNavTabs[] = [
@@ -59,7 +59,9 @@ const ListCommandeClient = ({ client,refetch }: ListCommandeClientProps) => {
           <span className={style_span}>Adresses de livraisons</span>
         </>
       ),
-      featured: <AdressLivraisons idClient={client.id} refetchParent={refetch} />,
+      featured: (
+        <AdressLivraisons idClient={client.id} refetchParent={refetch} />
+      ),
     },
   ];
   return (

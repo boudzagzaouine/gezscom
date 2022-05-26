@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import classNames from "classnames";
 import React, { forwardRef, Ref, useRef, useEffect, useState } from "react";
@@ -9,7 +8,7 @@ import { useDeleteArticleMutation } from "config/rtk/rtkArticle";
 import Modal from "widgets/Modal";
 type DeleteArticlePorp = {
   id: string;
-  refetch: () => void
+  refetch: () => void;
 };
 const DeleteArticle = ({ id, refetch }: DeleteArticlePorp, ref: Ref<void>) => {
   const [del] = useDeleteArticleMutation();
@@ -33,7 +32,14 @@ const DeleteArticle = ({ id, refetch }: DeleteArticlePorp, ref: Ref<void>) => {
   };*/
   return (
     <>
-      <Modal title={"suppression"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal
+        title={"suppression"}
+        show={showModal}
+        format={+classNames("5")}
+        close={() => {
+          setShowModal(false);
+        }}
+      >
         <div>
           <h2>suppression d'article num: {id0}</h2>
           <form
@@ -49,7 +55,7 @@ const DeleteArticle = ({ id, refetch }: DeleteArticlePorp, ref: Ref<void>) => {
               className="mt-2 float-right"
               onClick={() => {
                 setTimeout(() => {
-                  refetch()
+                  refetch();
                   setShowModal(false);
                 }, 500);
               }}

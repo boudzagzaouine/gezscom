@@ -1,12 +1,10 @@
-import React from 'react'
+import React from "react";
 
 const debara = () => {
-  return (
-    <div>debara</div>
-  )
-}
+  return <div>debara</div>;
+};
 
-export default debara
+export default debara;
 /* export const getCm0 = (cl: Client): Commande => {
     return {
       id: "",

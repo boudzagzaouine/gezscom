@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import classNames from "classnames";
 import { useRestoreDechargeMutation } from "config/rtk/rtkDecharge";
@@ -30,11 +29,18 @@ const restoreDecharge = ({ id }: RestoreDechargePorp, ref: Ref<void>) => {
   const restoreTemp = () => {
     axios
       .patch("http://localhost:1000/api/v1/decharges/" + id0 + "/restore")
-      .then(() => { });
+      .then(() => {});
   };
   return (
     <>
-      <Modal title={"restoration"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal
+        title={"restoration"}
+        show={showModal}
+        format={+classNames("5")}
+        close={() => {
+          setShowModal(false);
+        }}
+      >
         <div>
           <h2>restoration de Decharge num: {id0}</h2>
           <form

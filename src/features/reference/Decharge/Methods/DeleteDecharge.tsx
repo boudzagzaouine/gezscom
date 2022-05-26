@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import classNames from "classnames";
 import { useDeleteDechargeMutation } from "config/rtk/rtkDecharge";
@@ -10,9 +9,12 @@ import Modal from "../../../widgets/Modal";
 
 type DeleteDechargePorp = {
   id: string;
-  refetch: () => void
+  refetch: () => void;
 };
-const DeleteDecharge = ({ id, refetch }: DeleteDechargePorp, ref: Ref<void>) => {
+const DeleteDecharge = (
+  { id, refetch }: DeleteDechargePorp,
+  ref: Ref<void>
+) => {
   const [del] = useDeleteDechargeMutation();
   const [id0, setId0] = useState(id);
   //@ts-ignore
@@ -30,11 +32,20 @@ const DeleteDecharge = ({ id, refetch }: DeleteDechargePorp, ref: Ref<void>) => 
   const [showModal, setShowModal] = React.useState(false);
 
   const delTemp = () => {
-    axios.delete("http://localhost:1000/api/v1/decharges/" + id0).then(() => { });
+    axios
+      .delete("http://localhost:1000/api/v1/decharges/" + id0)
+      .then(() => {});
   };
   return (
     <>
-      <Modal title={"suppression"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal
+        title={"suppression"}
+        show={showModal}
+        format={+classNames("5")}
+        close={() => {
+          setShowModal(false);
+        }}
+      >
         <div>
           <h2>suppression du Décharge num: {id0}</h2>
           <form
@@ -50,7 +61,7 @@ const DeleteDecharge = ({ id, refetch }: DeleteDechargePorp, ref: Ref<void>) => 
               className="mt-2 float-right"
               onClick={() => {
                 setTimeout(() => {
-                  refetch()
+                  refetch();
                   setShowModal(false);
                 }, 500);
               }}

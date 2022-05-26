@@ -1,5 +1,3 @@
-import { TrashIcon } from "@heroicons/react/outline";
-import { ArchiveIcon, XCircleIcon } from "@heroicons/react/solid";
 import axios from "axios";
 import classNames from "classnames";
 import { useArchiveDumMutation } from "config/rtk/rtkDums";
@@ -7,7 +5,7 @@ import React, { forwardRef, Ref, useRef, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { setTimeout } from "timers";
 import Bcyan from "widgets/Bcyan";
-import Modal from "../../../widgets/Modal";
+import Modal from "widgets/Modal";
 type ArchiveDumPorp = {
   id: string;
 };
@@ -30,11 +28,18 @@ const ArchiveDum = ({ id }: ArchiveDumPorp, ref: Ref<void>) => {
   const archiveTemp = () => {
     axios
       .patch("http://localhost:1000/api/v1/dums/" + id0 + "/archive")
-      .then(() => { });
+      .then(() => {});
   };
   return (
     <>
-      <Modal title={"archivage"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal
+        title={"archivage"}
+        show={showModal}
+        format={+classNames("5")}
+        close={() => {
+          setShowModal(false);
+        }}
+      >
         <div>
           <h2>archivage du Dum num: {id0}</h2>
           <form

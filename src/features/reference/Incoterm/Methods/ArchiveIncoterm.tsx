@@ -8,7 +8,11 @@ import { setTimeout } from "timers";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useArchiveClientMutation, useArchiveDeclarantMutation, useArchiveIncotermMutation } from "../../../config/rtk";
+import {
+  useArchiveClientMutation,
+  useArchiveDeclarantMutation,
+  useArchiveIncotermMutation,
+} from "../../../config/rtk";
 import Modal from "../../../widgets/Modal";
 type ArchiveIncotermPorp = {
   id: string;
@@ -32,11 +36,18 @@ const ArchiveIncoterm = ({ id }: ArchiveIncotermPorp, ref: Ref<void>) => {
   const archiveTemp = () => {
     axios
       .patch("http://localhost:1000/api/v1/incoterms/" + id0 + "/archive")
-      .then(() => { });
+      .then(() => {});
   };
   return (
     <>
-      <Modal title={"archivage"} show={showModal} format={classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal
+        title={"archivage"}
+        show={showModal}
+        format={classNames("5")}
+        close={() => {
+          setShowModal(false);
+        }}
+      >
         <div>
           <h2>archivage d'incoterm num: {id0}</h2>
           <form

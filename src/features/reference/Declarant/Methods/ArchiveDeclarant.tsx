@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import classNames from "classnames";
 import React, { forwardRef, Ref, useRef, useEffect, useState } from "react";
@@ -33,7 +32,14 @@ const ArchiveDeclarant = ({ id }: ArchiveDeclarantProps, ref: Ref<void>) => {
   };*/
   return (
     <>
-      <Modal title={"archivage"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal
+        title={"archivage"}
+        show={showModal}
+        format={+classNames("5")}
+        close={() => {
+          setShowModal(false);
+        }}
+      >
         <div>
           <h2>archivage de déclarant num: {id0}</h2>
           <form
@@ -61,7 +67,9 @@ const ArchiveDeclarant = ({ id }: ArchiveDeclarantProps, ref: Ref<void>) => {
             onClick={() => {
               setShowModal(false);
             }}
-          > Annuler
+          >
+            {" "}
+            Annuler
           </Bcyan>
         </div>
       </Modal>
@@ -70,5 +78,3 @@ const ArchiveDeclarant = ({ id }: ArchiveDeclarantProps, ref: Ref<void>) => {
 };
 
 export default forwardRef(ArchiveDeclarant);
-
-

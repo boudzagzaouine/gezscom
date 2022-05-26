@@ -23,9 +23,9 @@ const DeleteClient = ({ id }: DeleteClientPorp, ref: Ref<void>) => {
     setId0(i);
     setShowModal(true);
   };
-  const close=()=>{
+  const close = () => {
     setShowModal(false);
-  }
+  };
   useEffect(() => {
     //@ts-ignore
     ref.current = openModal;
@@ -56,7 +56,7 @@ const DeleteClient = ({ id }: DeleteClientPorp, ref: Ref<void>) => {
                 }, 500);
               }}
             >
-            Supprimer
+              Supprimer
             </Bcyan>
             <Bcancel
               className="mt-2 float-right"
@@ -64,7 +64,7 @@ const DeleteClient = ({ id }: DeleteClientPorp, ref: Ref<void>) => {
                 close();
               }}
             />
-             </form>
+          </form>
         </div>
       </Modal>
     </>

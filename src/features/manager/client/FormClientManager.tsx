@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { useAddClientMutation, useEditClientMutation } from "config/rtk/RtkClient";
+import {
+  useAddClientMutation,
+  useEditClientMutation,
+} from "config/rtk/RtkClient";
 import {
   DEVISE,
   ICOTERM,
@@ -8,7 +11,7 @@ import {
   REQUEST_SAVE,
 } from "tools/consts";
 import { STYLE_ICON } from "tools/constStyle";
-import { Client, Devise ,Incoterm,PayementMode} from "tools/types";
+import { Client, Devise, Incoterm, PayementMode } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import Section from "widgets/Section";
@@ -34,8 +37,8 @@ type FormClientManagerProp = {
   client: Client;
   request: number;
   disable: boolean;
-  refetch:()=>void
-};//
+  refetch: () => void;
+}; //
 const FormClientManager = ({
   closed,
   client,
@@ -43,15 +46,14 @@ const FormClientManager = ({
   disable,
   refetch,
 }: FormClientManagerProp) => {
-  
   const [save] = useAddClientMutation();
   const [edit] = useEditClientMutation();
-  const tabDevises:Devise[]=openDevises().data.content
-  const devises:string[]=tabDevises?.map(d=>d.symbole)
- const tabIncoterms:Incoterm[]=openIncoterms().data.content 
- const tabPayementModes:PayementMode[]=openPayementModes().data.content 
- const incoterms=tabIncoterms?.map(d=>d.code)
- const payementModes=tabPayementModes?.map(d=>d.code)
+  const tabDevises: Devise[] = openDevises().data.content;
+  const devises: string[] = tabDevises?.map((d) => d.symbole);
+  const tabIncoterms: Incoterm[] = openIncoterms().data.content;
+  const tabPayementModes: PayementMode[] = openPayementModes().data.content;
+  const incoterms = tabIncoterms?.map((d) => d.code);
+  const payementModes = tabPayementModes?.map((d) => d.code);
   const onSubmit =
     request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit : undefined;
   const [disabled, setDisabled] = useState(disable);
@@ -123,7 +125,6 @@ const FormClientManager = ({
                   }, 500);
                 }}
               />
-               
             )}
             {/* !disabled && request == REQUEST_SAVE && (
               <Bcyan className="float-left" type="submit">
@@ -140,13 +141,17 @@ const FormClientManager = ({
             ) */}
           </div>
         </Form>
-        {!disabled && <Bcancel
-          className={'float-right b-ajust '+(request ==REQUEST_SAVE && 'b-ajustf')}
-          onClick={() => {
-            setDisabled(true);
-          }}
-        />}
-        
+        {!disabled && (
+          <Bcancel
+            className={
+              "float-right b-ajust " + (request == REQUEST_SAVE && "b-ajustf")
+            }
+            onClick={() => {
+              setDisabled(true);
+            }}
+          />
+        )}
+
         {disabled && (
           <Bupdate
             className="float-right"
@@ -154,9 +159,11 @@ const FormClientManager = ({
               setDisabled(false);
             }}
           />
-           )}
+        )}
       </div>
-      {client.id!="" && <ListCommandeClient client={client} refetch={refetch} />}
+      {client.id != "" && (
+        <ListCommandeClient client={client} refetch={refetch} />
+      )}
     </Section>
   );
 };

@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import classNames from "classnames";
 import React, { forwardRef, Ref, useRef, useEffect, useState } from "react";
@@ -9,10 +8,12 @@ import { useDeleteRegimeDouanierMutation } from "config/rtk/rtkRegimeDouanier";
 import Modal from "widgets/Modal";
 type DeleteRegimeDouanierPorp = {
   id: string;
-  refetch: () => void
-
+  refetch: () => void;
 };
-const DeleteRegimeDouanier = ({ id, refetch }: DeleteRegimeDouanierPorp, ref: Ref<void>) => {
+const DeleteRegimeDouanier = (
+  { id, refetch }: DeleteRegimeDouanierPorp,
+  ref: Ref<void>
+) => {
   const [del] = useDeleteRegimeDouanierMutation();
   const [id0, setId0] = useState(id);
   //@ts-ignore
@@ -33,7 +34,14 @@ const DeleteRegimeDouanier = ({ id, refetch }: DeleteRegimeDouanierPorp, ref: Re
   };*/
   return (
     <>
-      <Modal title={"suppression"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal
+        title={"suppression"}
+        show={showModal}
+        format={+classNames("5")}
+        close={() => {
+          setShowModal(false);
+        }}
+      >
         <div>
           <h2>suppression du régime douanier num: {id0}</h2>
           <form

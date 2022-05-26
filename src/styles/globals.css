@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 .react-datepickerzz {
-    position: absolute !important;
-    right: 0 !important;
+  position: absolute !important;
+  right: 0 !important;
 }
 
 .b-ajust {
-    margin-top: -38px;
+  margin-top: -38px;
 }
 
 .b-ajust-r {
-    margin-right: 183px;
+  margin-right: 183px;
 }

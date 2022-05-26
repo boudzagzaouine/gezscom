@@ -1,12 +1,12 @@
-import ListPaysManager from 'features/reference2/ListPaysManager'
-import React from 'react'
+import ListPaysManager from "features/reference2/ListPaysManager";
+import React from "react";
 
 function Pays() {
   return (
-      <>
-          <ListPaysManager/>
+    <>
+      <ListPaysManager />
     </>
-  )
+  );
 }
 
-export default Pays
+export default Pays;

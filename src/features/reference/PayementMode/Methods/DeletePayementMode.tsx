@@ -7,14 +7,19 @@ import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useDeleteClientMutation, useDeletePayementModeMutation } from "../../../config/rtk";
+import {
+  useDeleteClientMutation,
+  useDeletePayementModeMutation,
+} from "../../../config/rtk";
 import Modal from "../../../widgets/Modal";
 type DeletePayementModePorp = {
   id: string;
-  refetch: () => void
-
+  refetch: () => void;
 };
-const DeletePayementMode = ({ id, refetch }: DeletePayementModePorp, ref: Ref<void>) => {
+const DeletePayementMode = (
+  { id, refetch }: DeletePayementModePorp,
+  ref: Ref<void>
+) => {
   const [del] = useDeletePayementModeMutation();
   const [id0, setId0] = useState(id);
   //@ts-ignore
@@ -31,11 +36,20 @@ const DeletePayementMode = ({ id, refetch }: DeletePayementModePorp, ref: Ref<vo
   });
   const [showModal, setShowModal] = React.useState(false);
   const delTemp = () => {
-    axios.delete("http://localhost:1000/api/v1/payementModes/" + id0).then(() => { });
+    axios
+      .delete("http://localhost:1000/api/v1/payementModes/" + id0)
+      .then(() => {});
   };
   return (
     <>
-      <Modal title={"suppression"} show={showModal} format={classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal
+        title={"suppression"}
+        show={showModal}
+        format={classNames("5")}
+        close={() => {
+          setShowModal(false);
+        }}
+      >
         <div>
           <h2>suppression du mode de régelement num: {id0}</h2>
           <form

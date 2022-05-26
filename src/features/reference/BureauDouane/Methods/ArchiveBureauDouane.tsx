@@ -8,12 +8,15 @@ import { setTimeout } from "timers";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useArchiveBureauDouaneMutation } from "../../../config/rtk";
-import Modal from "../../../widgets/Modal";
+import { useArchiveBureauDouaneMutation } from "config/rtk/rtkBureauDouane";
+import Modal from "widgets/Modal";
 type ArchiveBureauDouaneProps = {
   id: string;
 };
-const ArchiveBureauDouane = ({ id }: ArchiveBureauDouaneProps, ref: Ref<void>) => {
+const ArchiveBureauDouane = (
+  { id }: ArchiveBureauDouaneProps,
+  ref: Ref<void>
+) => {
   const [id0, setId0] = useState(id);
   //@ts-ignore
   const { register, handleSubmit } = useForm<string>({
@@ -32,11 +35,18 @@ const ArchiveBureauDouane = ({ id }: ArchiveBureauDouaneProps, ref: Ref<void>) =
   const archiveTemp = () => {
     axios
       .patch("http://localhost:1000/api/v1/bureauDouanes/" + id0 + "/archive")
-      .then(() => { });
+      .then(() => {});
   };
   return (
     <>
-      <Modal title={"archivage"} show={showModal} format={classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal
+        title={"archivage"}
+        show={showModal}
+        format={+classNames("5")}
+        close={() => {
+          setShowModal(false);
+        }}
+      >
         <div>
           <h2>archivage du bureau douane num: {id0}</h2>
           <form

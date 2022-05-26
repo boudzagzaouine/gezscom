@@ -1,8 +1,8 @@
 import { useFetchFournisseursQuery } from "config/rtk";
 import { Fournisseur } from "tools/types";
-export const openFournisseurs =():Fournisseur[] =>{
+export const openFournisseurs = (): Fournisseur[] => {
   const { data = [], refetch } = useFetchFournisseursQuery();
-  refetch()
+  refetch();
   //@ts-ignore
   return data.content;
-}
+};

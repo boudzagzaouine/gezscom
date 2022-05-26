@@ -1,13 +1,36 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { PAGE_SIZE } from "tools/consts";
-import { AdressLiv, Article, ArticleCommande, BureauDouane, Client, Commande, PayementMode, RawMaterial, RegimeDouanier,Declarant, Incoterm,  UnitMeasure,
-  Devise, Pays, Transporteur, Ville, Role, Type, Document, CommandeFournisseur, Fournisseur, LigneDeCommande, MatierePremiere, ClientJson 
+import {
+  AdressLiv,
+  Article,
+  ArticleCommande,
+  BureauDouane,
+  Client,
+  Commande,
+  PayementMode,
+  RawMaterial,
+  RegimeDouanier,
+  Declarant,
+  Incoterm,
+  UnitMeasure,
+  Devise,
+  Pays,
+  Transporteur,
+  Ville,
+  Role,
+  Type,
+  Document,
+  CommandeFournisseur,
+  Fournisseur,
+  LigneDeCommande,
+  MatierePremiere,
+  ClientJson,
 } from "tools/types";
 
 export const crudClient = createApi({
   reducerPath: "crud-client",
   baseQuery: fetchBaseQuery({
-    baseUrl:process.env.NEXT_PUBLIC_URL,
+    baseUrl: process.env.NEXT_PUBLIC_URL,
     prepareHeaders(headers) {
       return headers;
     },
@@ -26,14 +49,14 @@ export const crudClient = createApi({
       }),
       fetchOneClient: builder.query<Client, string>({
         query: (id) => `/clients/${id}`,
-     }),
+      }),
       addClient: builder.mutation<Client, Partial<Client>>({
         query: (body) => ({
           url: "/clients",
           method: "POST",
           body,
         }),
-       }),
+      }),
       editClient: builder.mutation<
         Client,
         Partial<Client> & Pick<Client, "id">
@@ -52,7 +75,8 @@ export const crudClient = createApi({
             url: `/clients/${id.id}`,
             method: "DELETE",
           };
-       }}),
+        },
+      }),
       archiveClient: builder.mutation<
         Client,
         Partial<Client> & Pick<Client, "id">
@@ -71,11 +95,10 @@ export const crudClient = createApi({
           method: "PUT",
         }),
       }),
-   
     };
   },
 });
- /***********useMaMethodAfficjageQuery********************************************/
+/***********useMaMethodAfficjageQuery********************************************/
 /***********useMaMethodeOperationMutaion*****************************************/
 export const {
   /******************CLIENT********************************/
@@ -88,27 +111,34 @@ export const {
   useDeleteClientMutation,
   useArchiveClientMutation,
   useRestoreClientMutation,
-  
 } = crudClient;
-export type OpenClientProp={
-  data:ClientJson
-  refetch:()=>void
-  save:()=>void
-  edit:()=>void
-}
-export const openClients =():OpenClientProp =>{
+export type OpenClientProp = {
+  data: ClientJson;
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
+export const openClients = (): OpenClientProp => {
   const { data = [], refetch } = useFetchClientsQuery();
-  const [save]=useAddClientMutation();
-  const [edit]=useEditClientMutation();
+  const [save] = useAddClientMutation();
+  const [edit] = useEditClientMutation();
   //@ts-ignore
-  const out:OpenClientProp={data,refetch,save,edit}
+  const out: OpenClientProp = { data, refetch, save, edit };
   return out;
-}
-export const openPaginationClients =(page:number):OpenClientProp =>{
+};
+export const openPaginationClients = (page: number): OpenClientProp => {
   const { data = [], refetch } = usePaginationClientsQuery(page);
-  const [save]=useAddClientMutation();
-  const [edit]=useEditClientMutation();
+  const [save] = useAddClientMutation();
+  const [edit] = useEditClientMutation();
   //@ts-ignore
-  const out:OpenClientProp={data,refetch,save,edit}
+  const out: OpenClientProp = { data, refetch, save, edit };
   return out;
-}
+};
+export const openOneClients = (id: string): OpenClientProp => {
+  const { data = [], refetch } = useFetchOneClientQuery(id);
+  const [save] = useAddClientMutation();
+  const [edit] = useEditClientMutation();
+  //@ts-ignore
+  const out: OpenClientProp = { data, refetch, save, edit };
+  return out;
+};

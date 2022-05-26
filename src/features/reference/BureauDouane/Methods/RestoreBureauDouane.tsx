@@ -7,12 +7,17 @@ import { useForm } from "react-hook-form";
 import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import { useRestoreBureauDouaneMutation, useRestoreClientMutation } from "../../../config/rtk";
-import Modal from "../../../widgets/Modal";
+import {
+  useRestoreBureauDouaneMutation,
+} from "config/rtk/rtkBureauDouane";
+import Modal from "widgets/Modal";
 type RestoreBureauDouaneProps = {
   id: string;
 };
-const RestoreBureauDouane = ({ id }: RestoreBureauDouaneProps, ref: Ref<void>) => {
+const RestoreBureauDouane = (
+  { id }: RestoreBureauDouaneProps,
+  ref: Ref<void>
+) => {
   const [id0, setId0] = useState(id);
   //@ts-ignore
   const { register, handleSubmit } = useForm<string>({
@@ -31,11 +36,18 @@ const RestoreBureauDouane = ({ id }: RestoreBureauDouaneProps, ref: Ref<void>) =
   const restoreTemp = () => {
     axios
       .patch("http://localhost:1000/api/v1/bureauDouanes/" + id0 + "/restore")
-      .then(() => { });
+      .then(() => {});
   };
   return (
     <>
-      <Modal title={"restoration"} show={showModal} format={classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal
+        title={"restoration"}
+        show={showModal}
+        format={+classNames("5")}
+        close={() => {
+          setShowModal(false);
+        }}
+      >
         <div>
           <h2>restoration du bureau douane num: {id0}</h2>
           <form

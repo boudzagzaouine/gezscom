@@ -7,7 +7,7 @@ type ModalProps = {
   title: string;
   show: boolean;
   format: number;
-  close:()=>void
+  close: () => void;
 };
 const calculClass = ({ className }: any) => {
   return cn(
@@ -15,28 +15,35 @@ const calculClass = ({ className }: any) => {
     className
   );
 };
-const Modal = ({ children, title, show, format,close }: ModalProps) => {
+const Modal = ({ children, title, show, format, close }: ModalProps) => {
   const [showModal, setShowModal] = React.useState(show);
   const open = () => {
     //setShowModal(true);
   };
   useEffect(() => {
     //@ts-ignore
-    // ref.current = open;
+    // ref.current = open; className={"relative w-full my-6 mx-auto max-w-" + format + "xl"}
     setShowModal(show);
   }); //
+  /*
+sm	640px	@media (min-width: 640px) { ... }
+md	768px	@media (min-width: 768px) { ... }
+lg	1024px	@media (min-width: 1024px) { ... }
+xl	1280px	@media (min-width: 1280px) { ... }
+2xl	1536px	@media (min-width: 1536px) { ... }*/
   return (
     <>
       {showModal && (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-           <div
-              className={"relative w-full my-6 mx-auto max-w-" + format + "xl"}
+            <div
+              className={
+                "relative xs:w-full sm:w-full md:w-full lg:w-full xl:w-11/12 2xl:w-3/4  my-6 "
+              }
             >
-              
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-              <Xclose close={close}/>    
+                <Xclose close={close} />
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                   <h3 className="text-3xl font-semibold">{title}</h3>

@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import classNames from "classnames";
 import { useRestoreDumMutation } from "config/rtk/rtkDums";
@@ -30,11 +29,18 @@ const restoreDum = ({ id }: RestoreDumPorp, ref: Ref<void>) => {
   const restoreTemp = () => {
     axios
       .patch("http://localhost:1000/api/v1/dums/" + id0 + "/restore")
-      .then(() => { });
+      .then(() => {});
   };
   return (
     <>
-      <Modal title={"restoration"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal
+        title={"restoration"}
+        show={showModal}
+        format={+classNames("5")}
+        close={() => {
+          setShowModal(false);
+        }}
+      >
         <div>
           <h2>restoration du Dum num: {id0}</h2>
           <form

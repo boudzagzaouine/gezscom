@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import classNames from "classnames";
 import React, { forwardRef, Ref, useRef, useEffect, useState } from "react";
@@ -8,9 +7,12 @@ import { useDeleteIncotermMutation } from "config/rtk/rtkIncoterm";
 import Modal from "widgets/Modal";
 type DeleteIncotermPorp = {
   id: string;
-  refetch: () => void
+  refetch: () => void;
 };
-const DeleteIncoterm = ({ id, refetch }: DeleteIncotermPorp, ref: Ref<void>) => {
+const DeleteIncoterm = (
+  { id, refetch }: DeleteIncotermPorp,
+  ref: Ref<void>
+) => {
   const [del] = useDeleteIncotermMutation();
   const [id0, setId0] = useState(id);
   //@ts-ignore
@@ -31,7 +33,14 @@ const DeleteIncoterm = ({ id, refetch }: DeleteIncotermPorp, ref: Ref<void>) => 
   };*/
   return (
     <>
-      <Modal title={"suppression"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal
+        title={"suppression"}
+        show={showModal}
+        format={+classNames("5")}
+        close={() => {
+          setShowModal(false);
+        }}
+      >
         <div>
           <h2>suppression d'incoterm num: {id0}</h2>
           <form
@@ -47,7 +56,7 @@ const DeleteIncoterm = ({ id, refetch }: DeleteIncotermPorp, ref: Ref<void>) => 
               className="mt-2 float-right"
               onClick={() => {
                 setTimeout(() => {
-                  refetch()
+                  refetch();
                   setShowModal(false);
                 }, 500);
               }}

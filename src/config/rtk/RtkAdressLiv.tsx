@@ -1,47 +1,45 @@
-
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { PAGE_SIZE } from "tools/consts";
 import { AdressLiv, AdressLivJson } from "tools/types";
 export const crudAdressLiv = createApi({
-    reducerPath: "crud-api",
-    baseQuery: fetchBaseQuery({
-      baseUrl: process.env.NEXT_PUBLIC_URL,
-      prepareHeaders(headers) {
-        return headers;
-      },
-    }),
-    tagTypes: ["RawMaterial", "Client", "UNAUTHORIZED", "UNKNOWN_ERROR"],
-    endpoints(builder) {
-      return {
-
-        /****************************************************************************/
+  reducerPath: "crud-adressliv",
+  baseQuery: fetchBaseQuery({
+    baseUrl: process.env.NEXT_PUBLIC_URL,
+    prepareHeaders(headers) {
+      return headers;
+    },
+  }),
+  tagTypes: ["AdressLiv", "UNAUTHORIZED", "UNKNOWN_ERROR"],
+  endpoints(builder) {
+    return {
+      /****************************************************************************/
       /*************************AdressLiv*******************************************/
       /****************************************************************************/
       fetchAdressLivs: builder.query<AdressLiv[], void>({
-        query: () => `/AdressLivs`,
+        query: () => `/adressLivs`,
       }),
       paginationAdressLivs: builder.query<AdressLiv[], number>({
-        query: (page) => `/AdressLivs?page=${page}&size=${PAGE_SIZE}`,
+        query: (page) => `/adressLivs?page=${page}&size=${PAGE_SIZE}`,
       }),
       fetchAdressLivsByIdClient: builder.query<AdressLiv[], string>({
-        query: (idClient) => `/AdressLivs/idclient/${idClient}`,
+        query: (idClient) => `/adressLivs/idclient/${idClient}`,
       }),
       fetchOneAdressLiv: builder.query<AdressLiv, string>({
-        query: (id) => `/AdressLivs/${id}`,
+        query: (id) => `/adressLivs/${id}`,
       }),
       addAdressLiv: builder.mutation<AdressLiv, Partial<AdressLiv>>({
         query: (body) => ({
-          url: `/AdressLivs`,
+          url: `/adressLivs`,
           method: "POST",
           body,
-        })
+        }),
       }),
       editAdressLiv: builder.mutation<
         AdressLiv,
         Partial<AdressLiv> & Pick<AdressLiv, "id">
       >({
         query: (body) => ({
-          url: `/AdressLivs/${body.id}`,
+          url: `/adressLivs/${body.id}`,
           method: "PUT",
           body,
         }),
@@ -53,9 +51,9 @@ export const crudAdressLiv = createApi({
         //@ts-ignore
         query(id: Num) {
           return {
-            url: `/AdressLivs/${id.id}`,
+            url: `/adressLivs/${id.id}`,
             method: "DELETE",
-          }
+          };
         },
       }),
       archiveAdressLiv: builder.mutation<
@@ -63,7 +61,7 @@ export const crudAdressLiv = createApi({
         Partial<AdressLiv> & Pick<AdressLiv, "id">
       >({
         query: (id) => ({
-          url: `/AdressLivs/${id}/archive`,
+          url: `/adressLivs/${id}/archive`,
           method: "PUT",
         }),
       }),
@@ -72,35 +70,52 @@ export const crudAdressLiv = createApi({
         Partial<AdressLiv> & Pick<AdressLiv, "id">
       >({
         query: (id) => ({
-          url: `/AdressLivs/${id}/restore`,
+          url: `/adressLivs/${id}/restore`,
           method: "PUT",
         }),
       }),
+    };
+  },
+});
+export const {
+  useFetchAdressLivsQuery,
+  usePaginationAdressLivsQuery,
+  useFetchAdressLivsByIdClientQuery,
+  useFetchOneAdressLivQuery,
+  useAddAdressLivMutation,
+  useEditAdressLivMutation,
+  useDeleteAdressLivMutation,
+  useArchiveAdressLivMutation,
+  useRestoreAdressLivMutation,
+} = crudAdressLiv;
 
-      }}})
-      export const {
-        useFetchAdressLivsQuery,
-        usePaginationAdressLivsQuery,
-        useFetchAdressLivsByIdClientQuery,
-        useFetchOneAdressLivQuery,
-        useAddAdressLivMutation,
-        useEditAdressLivMutation,
-        useDeleteAdressLivMutation,
-        useArchiveAdressLivMutation,
-        useRestoreAdressLivMutation,
-      }=crudAdressLiv
-
-      export type OpenAdressLivProp={
-        data:AdressLivJson
-        refetch:()=>void
-        save:()=>void
-        edit:()=>void
-      }
-      export const openAdressLivs =():OpenAdressLivProp =>{
-        const { data = [], refetch } = useFetchAdressLivsQuery();
-        const [save]=useAddAdressLivMutation();
-        const [edit]=useEditAdressLivMutation();
-        //@ts-ignore
-        const out:OpenAdressLivProp={data,refetch,save,edit}
-        return out;
-      }
+export type OpenAdressLivProp = {
+  data: AdressLivJson;
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
+export type OpenAdressLivByIdClientProp = {
+  data: AdressLiv[];
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
+export const openAdressLivs = (): OpenAdressLivProp => {
+  const { data = [], refetch } = useFetchAdressLivsQuery();
+  const [save] = useAddAdressLivMutation();
+  const [edit] = useEditAdressLivMutation();
+  //@ts-ignore
+  const out: OpenAdressLivProp = { data, refetch, save, edit };
+  return out;
+};
+export const openAdressLivsByIdClient = (
+  idClient: string
+): OpenAdressLivByIdClientProp => {
+  const { data = [], refetch } = useFetchAdressLivsByIdClientQuery(idClient);
+  const [save] = useAddAdressLivMutation();
+  const [edit] = useEditAdressLivMutation();
+  //@ts-ignore
+  const out: OpenAdressLivByIdClientProp = { data, refetch, save, edit };
+  return out;
+};

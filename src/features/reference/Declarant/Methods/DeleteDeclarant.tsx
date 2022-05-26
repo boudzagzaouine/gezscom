@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import classNames from "classnames";
 import React, { forwardRef, Ref, useRef, useEffect, useState } from "react";
@@ -8,9 +7,12 @@ import { useDeleteDeclarantMutation } from "config/rtk/rtkDeclarant";
 import Modal from "widgets/Modal";
 type DeleteDeclarantPorp = {
   id: string;
-  refetch: () => void
+  refetch: () => void;
 };
-const DeleteDeclarant = ({ id, refetch }: DeleteDeclarantPorp, ref: Ref<void>) => {
+const DeleteDeclarant = (
+  { id, refetch }: DeleteDeclarantPorp,
+  ref: Ref<void>
+) => {
   const [del] = useDeleteDeclarantMutation();
   const [id0, setId0] = useState(id);
   //@ts-ignore
@@ -31,7 +33,14 @@ const DeleteDeclarant = ({ id, refetch }: DeleteDeclarantPorp, ref: Ref<void>) =
   };*/
   return (
     <>
-      <Modal title={"suppression"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal
+        title={"suppression"}
+        show={showModal}
+        format={+classNames("5")}
+        close={() => {
+          setShowModal(false);
+        }}
+      >
         <div>
           <h2>suppression de déclarant num: {id0}</h2>
           <form

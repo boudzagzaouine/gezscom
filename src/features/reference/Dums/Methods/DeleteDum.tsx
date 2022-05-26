@@ -1,19 +1,15 @@
-import { TrashIcon } from "@heroicons/react/outline";
-import { XCircleIcon } from "@heroicons/react/solid";
 import axios from "axios";
 import classNames from "classnames";
 import { useDeleteDumMutation } from "config/rtk/rtkDums";
 import React, { forwardRef, Ref, useRef, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
-import Bred from "widgets/Bred";
-import { useDeleteArticleMutation } from "../../../config/rtk";
-import Modal from "../../../widgets/Modal";
+
+import Modal from "widgets/Modal";
 
 type DeleteDumPorp = {
   id: string;
-  refetch: () => void
+  refetch: () => void;
 };
 const DeleteDum = ({ id, refetch }: DeleteDumPorp, ref: Ref<void>) => {
   const [del] = useDeleteDumMutation();
@@ -33,11 +29,18 @@ const DeleteDum = ({ id, refetch }: DeleteDumPorp, ref: Ref<void>) => {
   const [showModal, setShowModal] = React.useState(false);
 
   const delTemp = () => {
-    axios.delete("http://localhost:1000/api/v1/dums/" + id0).then(() => { });
+    axios.delete("http://localhost:1000/api/v1/dums/" + id0).then(() => {});
   };
   return (
     <>
-      <Modal title={"suppression"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal
+        title={"suppression"}
+        show={showModal}
+        format={+classNames("5")}
+        close={() => {
+          setShowModal(false);
+        }}
+      >
         <div>
           <h2>suppression du Dum num: {id0}</h2>
           <form
@@ -53,7 +56,7 @@ const DeleteDum = ({ id, refetch }: DeleteDumPorp, ref: Ref<void>) => {
               className="mt-2 float-right"
               onClick={() => {
                 setTimeout(() => {
-                  refetch()
+                  refetch();
                   setShowModal(false);
                 }, 500);
               }}

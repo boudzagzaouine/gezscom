@@ -4,7 +4,12 @@ import { LayoutName } from "widgets/types";
 import store, { persistor } from "config/store";
 import Layout from "layouts";
 import { NextPage } from "next";
-import { getSession, SessionProvider, signIn ,useSession} from "next-auth/react";
+import {
+  getSession,
+  SessionProvider,
+  signIn,
+  useSession,
+} from "next-auth/react";
 import { appWithTranslation } from "next-i18next";
 import type { AppProps } from "next/app";
 import { FC, ReactElement, ReactNode, useEffect } from "react";
@@ -29,7 +34,6 @@ const getDefaultLayout = (name?: LayoutName) => {
 };
 
 const App: FC<AppPropsWithLayout> = ({ Component, pageProps }) => {
-  
   /* useEffect(()=>{
         
     const securePage = async () =>{

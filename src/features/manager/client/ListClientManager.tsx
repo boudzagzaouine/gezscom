@@ -34,9 +34,9 @@ const ListClientManager = () => {
     refetch();
   };
   //openPaginationClients =(page:number):OpenClientProp
-  const openClients:OpenClientProp=openPaginationClients(page)
-  const clients:Client[]=openClients.data.content
-  const refetch=openClients.refetch
+  const openClients: OpenClientProp = openPaginationClients(page);
+  const clients: Client[] = openClients.data.content;
+  const refetch = openClients.refetch;
   const [disabled, setDisabled] = useState(true);
   const del = useRef(null);
   const archive = useRef(null);
@@ -207,14 +207,34 @@ const ListClientManager = () => {
                   <Table.td>{client.incoterm}</Table.td>
                   <Table.td>{client.paymentChoice}</Table.td>
                   <Table.td>
-                    <Mitems menu={menu(client)} />
+                    <Mitems
+                      archive={() => {
+                        //@ts-ignore
+                        archive.current(client.id);
+                      }}
+                      del={() => {
+                        //@ts-ignore
+                        del.current(client.id);
+                      }}
+                      edit={() => {
+                        FormAsEdit(client);
+                      }}
+                      obj={client}
+                      restore={() => {
+                        //@ts-ignore
+                        restore.current(client.id);
+                      }}
+                      update={() => {
+                        FormAsUpdate(client);
+                      }}
+                    />
                   </Table.td>
                 </tr>
               ))
             }
           </Table>
 
-          <Pagin load={loadPage} visible={clients?.length>0} />
+          <Pagin load={loadPage} visible={clients?.length > 0} />
         </Section>
       )}
     </>

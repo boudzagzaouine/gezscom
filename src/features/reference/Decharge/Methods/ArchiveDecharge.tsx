@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import classNames from "classnames";
 import { useArchiveDechargeMutation } from "config/rtk/rtkDecharge";
@@ -30,11 +29,18 @@ const archiveDecharge = ({ id }: ArchiveDechargePorp, ref: Ref<void>) => {
   const archiveTemp = () => {
     axios
       .patch("http://localhost:1000/api/v1/decharges/" + id0 + "/archive")
-      .then(() => { });
+      .then(() => {});
   };
   return (
     <>
-      <Modal title={"archivage"} show={showModal} format={+classNames("5")} close={() => { setShowModal(false) }}>
+      <Modal
+        title={"archivage"}
+        show={showModal}
+        format={+classNames("5")}
+        close={() => {
+          setShowModal(false);
+        }}
+      >
         <div>
           <h2>archivage de Décharge num: {id0}</h2>
           <form

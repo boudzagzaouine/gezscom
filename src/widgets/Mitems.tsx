@@ -4,8 +4,13 @@ import { Menu, Transition } from "@headlessui/react";
 import {
   DotsVerticalIcon,
   DuplicateIcon,
+  ArchiveIcon,
+  ClipboardListIcon,
+  PencilAltIcon,
+  ReplyIcon,
   TrashIcon,
 } from "@heroicons/react/solid";
+
 import { MenuItems } from "widgets/TypeWidgets";
 
 function classNames(...classes: any[]) {
@@ -14,8 +19,77 @@ function classNames(...classes: any[]) {
 type MitemsProps = {
   menu: MenuItems[];
 };
-
-const Mitems = ({ menu }: MitemsProps) => {
+interface menuProp {
+  obj: any;
+  edit: (obj: any) => void;
+  update: (obj: any) => void;
+  del: (id: string) => void;
+  archive: (id: string) => void;
+  restore: (id: string) => void;
+}
+const Mitems = ({ archive, del, edit, obj, restore, update }: menuProp) => {
+  const menu: MenuItems[] = [
+    {
+      icon: (
+        <ClipboardListIcon
+          className="mr-3 h-8 w-8 text-green-300 group-hover:text-gray-500"
+          aria-hidden="true"
+        />
+      ),
+      text: "Détail",
+      action: () => {
+        edit(obj);
+      },
+    },
+    {
+      icon: (
+        <PencilAltIcon
+          className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
+          aria-hidden="true"
+        />
+      ),
+      text: "Modifier",
+      action: () => {
+        update(obj);
+      },
+    },
+    {
+      icon: (
+        <TrashIcon
+          className="mr-3 h-8 w-8 text-rose-900 group-hover:text-gray-500"
+          aria-hidden="true"
+        />
+      ),
+      text: "Supprimer",
+      action: () => {
+        del(obj.id);
+      },
+    },
+    {
+      icon: (
+        <ArchiveIcon
+          className="mr-3 h-8 w-8 text-gray-800 group-hover:text-gray-500"
+          aria-hidden="true"
+        />
+      ),
+      text: "Archiver",
+      action: () => {
+        archive(obj.id);
+      },
+    },
+    {
+      icon: (
+        <ReplyIcon
+          className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
+          aria-hidden="true"
+        />
+      ),
+      text: "Restorer",
+      action: () => {
+        restore(obj.id);
+      },
+    },
+  ];
   return (
     <>
       <Menu as="div" className="relative inline-block text-left">
@@ -36,7 +110,7 @@ const Mitems = ({ menu }: MitemsProps) => {
         >
           <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none z-40">
             <div className="py-1">
-              {menu.map((m) => (
+              {menu?.map((m) => (
                 <Menu.Item>
                   {({ active }) => (
                     <a
