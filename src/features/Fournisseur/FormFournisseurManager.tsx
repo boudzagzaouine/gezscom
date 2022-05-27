@@ -1,10 +1,15 @@
 import { useAddFournisseurMutation, useEditFournisseurMutation } from "config/rtk";
+import { openDevises } from "config/rtk/rtkDevise";
+import { openIncoterms } from "config/rtk/rtkIncoterm";
+import { openPayementModes } from "config/rtk/rtkPayementMode";
 import React, {useState} from "react";
 import { DEVISE, ICOTERM, PAYMENT_CHOICE, REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
-import { Fournisseur } from "tools/types";
+import { Devise, Fournisseur, Incoterm, PayementMode } from "tools/types";
 import { Field, Form } from "widgets";
 import Avatar from "widgets/Avatar";
+import Bcancel from "widgets/Bcancel";
 import Bcyan from "widgets/Bcyan";
+import Bsave from "widgets/Bsave";
 import Section from "widgets/Section";
 import ListCommandeFournisseur from "./ListCommandeFournisseur";
 
@@ -22,11 +27,16 @@ const FormFournisseurManager = ({
 }: FormFournisseurManagerProp) =>{
     const [save] = useAddFournisseurMutation();
     const [edit] = useEditFournisseurMutation();
+    const tabDevises: Devise[] = openDevises().data.content;
+    const devises: string[] = tabDevises?.map((d) => d.symbole);
+    const tabIncoterms: Incoterm[] = openIncoterms().data.content;
+    const tabPayementModes: PayementMode[] = openPayementModes().data.content;
+    const incoterms = tabIncoterms?.map((d) => d.code);
+    const payementModes = tabPayementModes?.map((d) => d.code);
     const onSubmit = request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit: undefined;
     const[disabled, setDisabled]=useState(disable);
     return(
         <Section>
-            <div className="float-left w-full text-xs">
                 <Form defaultValues={fournisseur} onSubmit={onSubmit}>
                     <div className="float-left w-5/6">
                         <div className="float-left w-1/2">
@@ -38,10 +48,10 @@ const FormFournisseurManager = ({
                             <Field label="Adresse" name="adresse" as="textarea" disabled={disabled}/>
                         </div>
                         <div className="float-left w-1/2">
-                            <Field label="Mode de Réglement" name="modeDeReglements" as="select" options={PAYMENT_CHOICE} disabled={disabled}/>
-                            <Field label="Incoterm" name="incoterm" as="select" options={ICOTERM} disabled={disabled}/>
-                            <Field label="Devise" name="devise" as="select" options={DEVISE} disabled={disabled}/>
-                            <input name="chek" type="checkbox" disabled={disabled}/>  Entrer les coordonnées bancaires du fournisseur
+                            <Field label="Mode de Réglement" name="modeDeReglements" as="select" options={payementModes} disabled={disabled}/>
+                            <Field label="Incoterm" name="incoterm" as="select" options={incoterms} disabled={disabled}/>
+                            <Field label="Devise" name="devise" as="select" options={devises} disabled={disabled}/>
+                             <Field label="Entrer les coordonnées bancaires du fournisseur " type="checkbox" disabled={disabled}/>
                             <Field label="Banque" name="nomBanque" disabled={disabled}/>
                             <Field label="RIB" name="ribBanque" disabled={disabled}/>
                             <Field label="SWIFT" name="swift" disabled={disabled}/>
@@ -50,28 +60,22 @@ const FormFournisseurManager = ({
                     <div className="float-left w-1/6">
                         <Avatar />
                     </div>
-                    <div className="float-left w-full mt-5">
-                        <Bcyan className="float-right" onClick={() => {closed();}}>
-                            Annuler
-                        </Bcyan>
-                        {!disabled  &&  
-                        <Bcyan className="float-right" onClick={() => {setTimeout(() => {closed();}, 500);}}>
-                            Sauvegarder
-                        </Bcyan>
-                        }
-                        {disabled && (
-                        <Bcyan className="float-right" onClick={() => {setDisabled(false);}}>
-                            Modifier
-                        </Bcyan>
-                        )} 
-                        {/*!disabled && request == REQUEST_SAVE && (
-                        <Bcyan className="float-left" type="submit">
-                            Sauvegarder et Nouveau
-                        </Bcyan>
-                        )*/}
-                    </div>
-                </Form>             
-            </div>
+                    <Bsave
+              type="submit"
+              className="float-right mt-5 b-ajust-r"
+              onClick={() => {
+                setTimeout(() => {
+                  closed();
+                }, 500);
+              }}
+            />
+           </Form>
+          <Bcancel
+            className="float-right mt-5 b-ajust"
+            onClick={() => {
+              closed();
+            }}
+          />        
         {disabled && (<ListCommandeFournisseur fournisseur={fournisseur} />)}            
         </Section>
     );

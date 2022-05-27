@@ -1,5 +1,6 @@
 import { ArchiveIcon, ClipboardListIcon, DocumentAddIcon, PencilAltIcon, ReplyIcon, TrashIcon } from '@heroicons/react/solid';
 import { usePaginationCommandesFournisseurQuery } from 'config/rtk';
+import { OpenCommandesFournisseurProp, openPaginationCommandesFournisseurs } from 'config/rtk/rtkFournisseur';
 import React, { useRef, useState } from 'react'
 import { REQUEST_EDIT, REQUEST_SAVE } from 'tools/consts';
 import { f0, cf0, getCf0, Fournisseur, CommandeFournisseur } from 'tools/types';
@@ -7,6 +8,7 @@ import { Button } from 'widgets';
 import Bcyan from 'widgets/Bcyan';
 import Icon from 'widgets/Icon';
 import Mitems from 'widgets/Mitems';
+import Mitems0 from 'widgets/Mitems0';
 import Pagin from 'widgets/Pagin';
 import Section from 'widgets/Section';
 import Table from 'widgets/Table'
@@ -19,8 +21,10 @@ const ListAllCommandes = () => {
         setPage(p);
         refetch();
       };
-    const { data = [], isFetching, refetch } = usePaginationCommandesFournisseurQuery(page);
-    const  refCom=useRef(null);
+      const openCommandFournisseur:OpenCommandesFournisseurProp =openPaginationCommandesFournisseurs(page)
+      const commandFournisseurs:CommandeFournisseur[]=openCommandFournisseur.data.content
+      const refetch=openCommandFournisseur.refetch
+     const  refCom=useRef(null);
     const [form, setForm]=useState(false);
     const [commandFournisseur0, setcommandFournisseur0]=useState(cf0);
     const [disabled, setDisabled]=useState(true);
@@ -154,8 +158,8 @@ const ListAllCommandes = () => {
         }
       >
                   { 
-                  //@ts-ignore
-                  data.content?.map((commande) => (
+                  
+                  commandFournisseurs?.map((commande) => (
                     <tr key={commande.id}>
                       <Table.td>{commande.id}</Table.td>
                       <Table.td>
@@ -165,12 +169,12 @@ const ListAllCommandes = () => {
                       <Table.td>{commande.dateLivraison}</Table.td>
                       <Table.td>-</Table.td>
                       <Table.td>Montant</Table.td>
-                      <Table.td><Mitems menu={menu(commande)} /></Table.td>
+                      <Table.td><Mitems0 menu={menu(commande)} /></Table.td>
                     </tr>
                   ))
                 }
                 </Table>
-                <Pagin load={loadPage} />
+                <Pagin visible={commandFournisseurs?.length >0} load={loadPage} />
     </Section>
   </>
   )

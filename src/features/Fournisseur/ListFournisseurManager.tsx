@@ -3,6 +3,7 @@ import ArchiveFournisseur from 'components/Fournisseur/ArchiveFournisseur';
 import DeleteFournisseur from 'components/Fournisseur/DeleteFournisseur';
 import RestoreFournisseur from 'components/Fournisseur/RestoreFournisseur';
 import { useFetchFournisseursQuery, usePaginationFournisseursQuery } from "config/rtk";
+import { OpenFournisseurProp, openPaginationFournisseurs } from "config/rtk/rtkFournisseur";
 import React from "react";
 import { useRef } from "react";
 import { useState } from "react";
@@ -43,8 +44,10 @@ const ListFournisseurManager = () => {
   const [fournisseur0, setFournisseur0]=useState(f0);
   const [request0, setRequest0]=useState(REQUEST_SAVE);
   const [page, setPage] = useState(0);
-  const {data = [], isFetching, refetch} = usePaginationFournisseursQuery(page);
-  //console.log(data)
+  const fournOpen: OpenFournisseurProp = openPaginationFournisseurs(page);
+  const fournisseurs: Fournisseur[] = fournOpen.data.content;
+  const refetch = fournOpen.refetch;
+  const save = fournOpen.save;
   const [disabled, setDisabled]=useState(true);
   const del = useRef(null);
   const archive = useRef(null);
@@ -185,13 +188,12 @@ const ListFournisseurManager = () => {
             </thead>
           <tbody>
             {
-              //@ts-ignore
-              data.content?.map((fournisseur) =>(
+              fournisseurs?.map((fournisseur) =>(
                 <tr key={fournisseur.id}>
                 <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                   <div className="flex items-center">
                     <div className="h-10 w-10 flex-shrink-0">
-                      <img className="h-10 w-10 rounded-full" src={"/images/empty-avatar.png"} alt=""/>
+                      <img className="h-10 w-10 rounded-full" src={"/images/empty-contact.png"} alt=""/>
                     </div>
                     <div className="ml-4">
                       <div className="font-medium text-gray-900">{fournisseur.raisonSociale}</div>

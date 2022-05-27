@@ -13,6 +13,7 @@ import TestSelect from "features/tests/opens/TestSelect";
 import TestOpenUser from "features/tests/user/TestOpenUser";
 import TestArticleCommande2 from "features/tests/opens/TestArticleCommande2";
 import TestArticleCommande3 from "features/tests/opens/TestArticleCommande3";
+import TestFournisseur from "features/tests/opens/TestFournisseur";
 
 const Test = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -28,7 +29,8 @@ const Test = () => {
       {/* <TestOpenClient /> */}
       {/* <TestSelect /> */}
       {/* <TestOpenUser /> */}
-      <TestArticleCommande2 />
+      {/* <TestArticleCommande2 /> */}
+      <TestFournisseur />
     </>
   );
 };

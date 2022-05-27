@@ -384,6 +384,98 @@ export const {
   useArchiveLigneDeCommandeMutation,
   useRestoreLigneDeCommandeMutation,
   usePaginationLigneDeCommandeQuery,
-  /************ARTICLECOMMANDE*****************************/
-  /*******************************************************/
 } = crudFournisseur;
+export interface FournisseurJson{
+  content:Fournisseur[]
+  }
+  export type OpenFournisseurProp = {
+    data: FournisseurJson;
+    refetch: () => void;
+    save: () => void;
+    edit: () => void;
+  };
+  export const openFournisseurs = (): OpenFournisseurProp => {
+    const { data = [], refetch } = useFetchFournisseursQuery();
+    const [save] = useAddFournisseurMutation();
+    const [edit] = useEditFournisseurMutation();
+    //@ts-ignore
+    const out: OpenFournisseurProp = { data, refetch, save, edit };
+    return out;
+  };
+  export const openPaginationFournisseurs = (page:number): OpenFournisseurProp => {
+    const { data = [], refetch } = usePaginationFournisseursQuery(page);
+    const [save] = useAddFournisseurMutation();
+    const [edit] = useEditFournisseurMutation();
+    //@ts-ignore
+    const out: OpenFournisseurProp = { data, refetch, save, edit };
+    return out;
+  };
+  /********************************************/
+  
+  export interface CommandesFournisseurJson{
+  content:CommandeFournisseur[]
+  }
+  export type OpenCommandesFournisseurProp = {
+    data: CommandesFournisseurJson;
+    refetch: () => void;
+    save: () => void;
+    edit: () => void;
+  };
+  export const openCommandesFournisseurs = (): OpenCommandesFournisseurProp => {
+    const { data = [], refetch } = useFetchCommandesFournisseurQuery();
+    const [save] = useAddCommandeFournisseurMutation();
+    const [edit] = useEditCommandeFournisseurMutation();
+    //@ts-ignore
+    const out: OpenCommandesFournisseurProp = { data, refetch, save, edit };
+    return out;
+  };
+  /********************************************/
+  export const openPaginationCommandesFournisseurs = (page:number): OpenCommandesFournisseurProp => {
+    const { data = [], refetch } = usePaginationCommandesFournisseurQuery(page);
+    const [save] = useAddCommandeFournisseurMutation();
+    const [edit] = useEditCommandeFournisseurMutation();
+    //@ts-ignore
+    const out: OpenCommandesFournisseurProp = { data, refetch, save, edit };
+    return out;
+  };
+  /********************************************/
+  
+  export interface MatierePremiereJson{
+  content:MatierePremiere[]
+  }
+  export type OpenMatierePremiereProp = {
+    data: MatierePremiereJson;
+    refetch: () => void;
+    save: () => void;
+    edit: () => void;
+  };
+  export const openMatierePremieres = (): OpenMatierePremiereProp => {
+    const { data = [], refetch } = useFetchMatierePremiereQuery();
+    const [save] = useAddMatierePremiereMutation();
+    const [edit] = useEditMatierePremiereMutation();
+    //@ts-ignore
+    const out: OpenMatierePremiereProp = { data, refetch, save, edit };
+    return out;
+  };
+  /********************************************/
+  
+  export interface LigneDeCommandeJson{
+  content:LigneDeCommande[]
+  }
+  export type OpenLigneDeCommandeProp = {
+    data: LigneDeCommandeJson;
+    refetch: () => void;
+    save: () => void;
+    edit: () => void;
+  };
+  export const openLigneDeCommandes = (): OpenLigneDeCommandeProp => {
+    const { data = [], refetch } = useFetchLigneDeCommandeQuery();
+    const [save] = useAddLigneDeCommandeMutation();
+    const [edit] = useEditLigneDeCommandeMutation();
+    //@ts-ignore
+    const out: OpenLigneDeCommandeProp = { data, refetch, save, edit };
+    return out;
+  };
+  /********************************************/
+  
+  

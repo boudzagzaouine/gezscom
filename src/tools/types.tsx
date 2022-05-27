@@ -630,6 +630,16 @@ export interface Chaine {
 export interface Id {
   id: string;
 }
+export interface ArticleClient {
+  id:string
+  design:string
+  poid:number
+  prix:number
+  date:Date
+  idClient:string
+  idFamilleArticle:string
+  idFournisseur:string
+  }
 export const code0: Id ={
   id: ""
 }

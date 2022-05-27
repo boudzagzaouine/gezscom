@@ -9,7 +9,7 @@ import {
   AdressLiv,
   cm0,
   adr0,
-  ArticleCommande,
+  Fournisseur,
 } from "tools/types";
 import { Field, Form } from "widgets";
 import Bsave from "widgets/Bsave";
@@ -22,56 +22,38 @@ import {
 import Bcyan from "widgets/Bcyan";
 import Pagin from "widgets/Pagin";
 import {
-  OpenArticleCommandeByCommandeProp,
-  OpenArticleCommandeProp,
-  openArticleCommandesByCommande,
-  getMontantProps,
-  openArticleCommandes,
-} from "config/rtk/RtkArticleCommande";
+  OpenFournisseurProp,
+   openFournisseurs,
+   openPaginationFournisseurs
+} from "config/rtk/rtkFournisseur";
 const TestFournisseur = () => {
   const idcom = "e6ac48fc-b2c1-4f9b-9a26-b811bca498a1";
-  const artComOpen: OpenArticleCommandeProp = openArticleCommandes();
-  const artComs: ArticleCommande[] = artComOpen.data.content;
-  const openmontant: getMontantProps[] = artComOpen.montants;
-  //const montant=openmontant.data
-  const refetch = artComOpen.refetch;
-  /* const refetchMontant=openmontant.refetch
-  const refetch=()=>{
-    refetchArt()
-    refetchMontant()
-  }*/
-  const save = artComOpen.save;
-  //openArticleCommandesByCommande = (idcom:string): OpenArticleCommandeProp
+  const fournOpen: OpenFournisseurProp = openPaginationFournisseurs(0);
+  const fourns: Fournisseur[] = fournOpen.data.content;
+  const refetch = fournOpen.refetch;
+  const save = fournOpen.save;
+  //openFournisseursByCommande = (idcom:string): OpenFournisseurProp
   return (
     <Section>
       <table className="float-left w-full">
         <thead>
           <tr>
             <th>id</th>
-            <th>design</th>
-            <th>qte</th>
-            <th>pu</th>
-            <th>comande</th>
-          </tr>
+            <th>raisonSociale</th>
+            </tr>
         </thead>
         <tbody>
-          {artComs?.map((d: ArticleCommande) => (
-            //     data?.map((d:AdressLiv)=>(
-            <tr key={d.id}>
+          {fourns?.map((d: Fournisseur) => (
+           <tr key={d.id}>
               <td>{d.id}</td>
-              <td>{d.design}</td>
-              <td>{d.qte}</td>
-              <td>{d.pu}</td>
-              <td>{d.idCommande}</td>
-            </tr>
+              <td>{d.raisonSociale}</td>
+              </tr>
           ))}
         </tbody>
       </table>
       <Form defaultValues={adr0} onSubmit={save}>
         <Field label="id" name="id" />
-        <Field label="design" name="design" />
-        <Field label="pu" name="pu" />
-        <Field label="idCommande" name="idCommande" />
+        <Field label="raisonSociale" name="raisonSociale" />
         <Bsave
           onClick={() => {
             setTimeout(() => {
