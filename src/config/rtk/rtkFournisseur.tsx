@@ -16,7 +16,7 @@ export const crudFournisseur = createApi({
       return headers;
     },
   }),
-  tagTypes: ["RawMaterial", "Client", "UNAUTHORIZED", "UNKNOWN_ERROR"],
+  tagTypes: ["Fournisseur", "UNAUTHORIZED", "UNKNOWN_ERROR"],
   endpoints(builder) {
     return {
       /*****************************************************************************/
