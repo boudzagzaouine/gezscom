@@ -5,7 +5,10 @@ import { Field, Form } from "widgets";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import Section from "widgets/Section";
-import { Ville } from "tools/types";
+import { Ville, ville0 } from "tools/types";
+import Bsave from "widgets/Bsave";
+import BsavEndNew from "widgets/BsavEndNew";
+import Bcancel from "widgets/Bcancel";
 
 type FormVilleManagerProp = {
   closed: () => void;
@@ -24,7 +27,7 @@ const FormVilleManager = ({
   const onSubmit =
     request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit : undefined;
   const [disabled, setDisabled] = useState(disable);
-  const text = "nouveau";
+  const text = "nouvelle";
   const text1 = "modifier";
   const imputFocus = useRef(null);
   useEffect(() => {
@@ -33,24 +36,24 @@ const FormVilleManager = ({
   }, []);
   return (
     <Section>
-      <div className="float-left w-full text-xs">
-        {/*  @ts-ignore*/}
-        <Form defaultValues={Ville} onSubmit={onSubmit}>
+       <Form defaultValues={ville0} onSubmit={onSubmit}>
           {request == REQUEST_SAVE ? (
             <h1 className="mb-2">{text} ville </h1>
           ) : (
             <h1 className="mb-2">{text1} ville </h1>
           )}
 
-          <div className="float-left w-5/6">
+          <div className="float-left w-full">
+             {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
             <div className="float-left w-1/2">
-              {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
-              <Field
+               <Field
                 ref={imputFocus}
                 label="designation"
                 name="concat"
                 disabled={disabled}
               />
+			  </div>
+			  <div className="float-left w-1/2">
               <Field
                 label="PAYS"
                 name="paymentChoice"
@@ -60,47 +63,30 @@ const FormVilleManager = ({
               />
             </div>
           </div>
-          <div className="float-left w-full mt-1">
-            {!disabled && (
-              <Bcyan
-                className="float-left"
-                onClick={() => {
-                  setTimeout(() => {
-                    closed();
-                  }, 500);
-                }}
-              >
-                sauvegarder
-              </Bcyan>
-            )}
-            {!disabled && request == REQUEST_SAVE && (
-              <Bcyan className="float-left" type="submit">
-                sauvegarder && nouveau
-              </Bcyan>
-            )}
-          </div>
-        </Form>
-        <Bred
-          className="float-right"
-          onClick={() => {
-            closed();
-          }}
-        >
-          Annuler
-        </Bred>
-        {disabled && (
-          <Bcyan
+                      <div className="float-right mt-5 b-ajust-r">
+                     <Bsave
             className="float-right"
             onClick={() => {
-              setDisabled(false);
+              setTimeout(() => {
+                     closed();
+              }, 600);
             }}
-          >
-            Modifier
-          </Bcyan>
-        )}
-      </div>
+          />
+          <BsavEndNew
+                  className="float-right mr-2"
+                />
+               
+              </div>
+        
+          </Form>
+               <Bcancel
+               className="float-right mt-5 b-ajust"
+               onClick={() => {
+                 closed();
+               }}
+             />
     </Section>
-  );
+     );
 };
 
 export default FormVilleManager;

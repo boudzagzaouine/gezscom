@@ -9,10 +9,9 @@ import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import {
-  useArchiveClientMutation,
   useArchivePayementModeMutation,
-} from "../../../config/rtk";
-import Modal from "../../../widgets/Modal";
+} from "config/rtk/rtkPayementMode";
+import Modal from "widgets/Modal";
 type ArchivePayementModePorp = {
   id: string;
 };
@@ -45,7 +44,7 @@ const ArchivePayementMode = (
       <Modal
         title={"archivage"}
         show={showModal}
-        format={classNames("5")}
+        format={+classNames("5")}
         close={() => {
           setShowModal(false);
         }}

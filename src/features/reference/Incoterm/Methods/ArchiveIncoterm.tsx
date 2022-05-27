@@ -9,11 +9,9 @@ import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import {
-  useArchiveClientMutation,
-  useArchiveDeclarantMutation,
-  useArchiveIncotermMutation,
-} from "../../../config/rtk";
-import Modal from "../../../widgets/Modal";
+ useArchiveIncotermMutation,
+} from "config/rtk/rtkIncoterm";
+import Modal from "widgets/Modal";
 type ArchiveIncotermPorp = {
   id: string;
 };
@@ -43,7 +41,7 @@ const ArchiveIncoterm = ({ id }: ArchiveIncotermPorp, ref: Ref<void>) => {
       <Modal
         title={"archivage"}
         show={showModal}
-        format={classNames("5")}
+        format={+classNames("5")}
         close={() => {
           setShowModal(false);
         }}

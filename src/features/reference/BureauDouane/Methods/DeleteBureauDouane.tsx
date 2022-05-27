@@ -9,9 +9,8 @@ import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import {
   useDeleteBureauDouaneMutation,
-  useDeleteClientMutation,
-} from "../../../config/rtk";
-import Modal from "../../../widgets/Modal";
+} from "config/rtk/rtkBureauDouane";
+import Modal from "widgets/Modal";
 type DeleteBureauDouaneProps = {
   id: string;
   refetch: () => void;
@@ -45,7 +44,7 @@ const DeleteBureauDouane = (
       <Modal
         title={"suppression"}
         show={showModal}
-        format={classNames("5")}
+        format={+classNames("5")}
         close={() => {
           setShowModal(false);
         }}

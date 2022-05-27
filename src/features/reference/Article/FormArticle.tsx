@@ -22,6 +22,10 @@ import Pagin from "widgets/Pagin";
 import Icon from "widgets/Icon";
 import { OpenArticleProp } from "./Methods/openArticles";
 import { openArticles } from "config/rtk/rtkArticle";
+import Mitems0 from "widgets/Mitems0";
+import Bsave from "widgets/Bsave";
+import BsavEndNew from "widgets/BsavEndNew";
+import Bcancel from "widgets/Bcancel";
 
 type FormArticleProps = {
   article: Article;
@@ -215,7 +219,7 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
                     </Table.td>
 
                     <Table.td className="cursor-pointer">
-                      <Mitems menu={menu(article)} />
+                      <Mitems0 menu={menu(article)} />
                     </Table.td>
                   </tr>
                 );
@@ -234,8 +238,7 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
         format={+classNames("5")}
         close={closed}
       >
-        <div className="float-left w-full">
-          <Form
+                  <Form
             defaultValues={article1}
             onSubmit={
               request == REQUEST_SAVE
@@ -245,24 +248,20 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
                 : void_
             }
           >
-            <div className="float-left w-full">
+            <div className="float-left w-1/2">
               <Field
-                className="sm:grid-cols-6 sm:gap-6"
                 label="Designation"
                 name="design"
                 disabled={disabled}
               />
-
-              <div className="float-left w-full">
-                <div className="float-left w-1/2">
-                  <Field
+				<Field
                     label="Nomenclature"
                     name="nomenclature"
                     disabled={disabled}
                     required="required"
                   />
-                </div>
-                <div className="float-left w-1/2">
+				  </div>
+               <div className="float-left w-1/2">
                   <Field
                     label="Taux de pertes"
                     name="tauxPertes"
@@ -270,59 +269,34 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
                     required="required"
                   />
                 </div>
-              </div>
-            </div>
-            {!disabled && (
-              <>
-                <Bcyan
-                  className="m-4 mt-10"
+            <div className="float-right mt-5 b-ajust-r">
+                     <Bsave
+            className="float-right"
+            onClick={() => {
+              setTimeout(() => {
+                refetchArticle();
+                closed();
+              }, 600);
+            }}
+          />
+          <BsavEndNew
+                  className="float-right mr-2"
                   onClick={() => {
                     setShow(true);
                   }}
-                >
-                  Sauvegarder et Nouveau
-                </Bcyan>
-
-                <Bcyan
-                  className="m-4 mt-10"
-                  type="submit"
-                  onClick={() => {
-                    setTimeout(() => {
-                      refetchArticle();
-                      closed();
-                    }, 500);
-                  }}
-                >
-                  Sauvegarder
-                </Bcyan>
-              </>
-            )}
+                />
+               
+              </div>
+        
           </Form>
-
-          <div>
-            {disabled && (
-              <Bcyan
-                className="float-right m-4 mt-10"
-                onClick={() => {
-                  setDisabled(false);
-                }}
-              >
-                modifier
-              </Bcyan>
-            )}
-            {!disabled && (
-              <Bcyan
-                className="float-right"
-                onClick={() => {
-                  setDisabled(false);
-                  setShow(false);
-                }}
-              >
-                Annuler
-              </Bcyan>
-            )}
-          </div>
-        </div>
+               <Bcancel
+               className="float-right mt-5 b-ajust"
+               onClick={() => {
+                 setDisabled(false)
+                 setShow(false);
+               }}
+             />
+          
       </Modal>
     </>
   );

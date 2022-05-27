@@ -8,10 +8,9 @@ import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import {
-  useDeleteClientMutation,
   useDeletePayementModeMutation,
-} from "../../../config/rtk";
-import Modal from "../../../widgets/Modal";
+} from "config/rtk/rtkPayementMode";
+import Modal from "widgets/Modal";
 type DeletePayementModePorp = {
   id: string;
   refetch: () => void;
@@ -45,7 +44,7 @@ const DeletePayementMode = (
       <Modal
         title={"suppression"}
         show={showModal}
-        format={classNames("5")}
+        format={+classNames("5")}
         close={() => {
           setShowModal(false);
         }}

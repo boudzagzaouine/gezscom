@@ -21,6 +21,7 @@ import Bcyan from "widgets/Bcyan";
 import { Button } from "widgets/Button";
 import Icon from "widgets/Icon";
 import Mitems from "widgets/Mitems";
+import Mitems0 from "widgets/Mitems0";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
 import Table from "widgets/Table";
@@ -207,14 +208,14 @@ function ListTransporteurManager() {
                   </Table.td>
 
                   <Table.td>
-                    <Mitems menu={menu(Transporteur)} />
+                    <Mitems0 menu={menu(Transporteur)} />
                   </Table.td>
                 </tr>
               ))
             }
           </Table>
 
-          <Pagin load={loadPage} visibled={transporteurs?.length > 0} />
+          <Pagin load={loadPage} visible={transporteurs?.length > 0} />
         </Section>
       )}
     </>

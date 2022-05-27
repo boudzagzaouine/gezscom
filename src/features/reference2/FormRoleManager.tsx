@@ -1,10 +1,13 @@
 import { useAddRoleMutation, useEditRoleMutation } from "config/rtk/rtkRole";
 import React, { useEffect, useRef, useState } from "react";
 import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
-import { Role } from "tools/types";
+import { Role, role0 } from "tools/types";
 import { Field, Form } from "widgets";
+import Bcancel from "widgets/Bcancel";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
+import Bsave from "widgets/Bsave";
+import BsavEndNew from "widgets/BsavEndNew";
 import Section from "widgets/Section";
 type FormRoleManagerProp = {
   closed: () => void;
@@ -32,18 +35,15 @@ const FormRoleManager = ({
   }, []);
   return (
     <Section>
-      <div className="float-left w-full text-xs">
-        {/*  @ts-ignore*/}
-        <Form defaultValues={Role} onSubmit={onSubmit}>
+       <Form defaultValues={role0} onSubmit={onSubmit}>
           {request == REQUEST_SAVE ? (
             <h1 className="mb-2">{text} role </h1>
           ) : (
             <h1 className="mb-2">{text1} role </h1>
           )}
 
-          <div className="float-left w-5/6">
-            <div className="float-left w-1/2">
-              {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
+          <div className="float-left w-full">
+             {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
               <Field
                 ref={imputFocus}
                 style={{ margin: ".4rem" }}
@@ -51,7 +51,7 @@ const FormRoleManager = ({
                 name="designation"
                 disabled={disabled}
               />
-              <fieldset className="border-2 border-black-600 p-5">
+              <fieldset className="border border-[#ddd]/80 p-5 rounded-md">
                 <legend className="p-5">fonctionalités</legend>
                 <div className="ml-8 p-4">
                   <div className=" float-left">
@@ -60,7 +60,7 @@ const FormRoleManager = ({
                         id="gestions_des_clients"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="gestions_des_clients"
@@ -74,7 +74,7 @@ const FormRoleManager = ({
                         id="supression_clients"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="supression_clients"
@@ -88,7 +88,7 @@ const FormRoleManager = ({
                         id="supression_commande_clients"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="supression_commande_clients"
@@ -102,7 +102,7 @@ const FormRoleManager = ({
                         id="gestions des fournisseur"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="gestions des fournisseur"
@@ -116,7 +116,7 @@ const FormRoleManager = ({
                         id="supression fournisseur"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="supression fournisseur"
@@ -130,7 +130,7 @@ const FormRoleManager = ({
                         id="supression commande  fournisseur"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="supression commande  fournisseur"
@@ -144,7 +144,7 @@ const FormRoleManager = ({
                         id="gestions des dums et decharge"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="gestions des dums et decharge"
@@ -158,7 +158,7 @@ const FormRoleManager = ({
                         id="supression dums"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="supression dums"
@@ -172,7 +172,7 @@ const FormRoleManager = ({
                         id="supression decharge"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="supression decharge"
@@ -186,7 +186,7 @@ const FormRoleManager = ({
                         id="gestions d'achats"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="gestions d'achats"
@@ -200,7 +200,7 @@ const FormRoleManager = ({
                         id="supression bon d'achats"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="supression bon d'achats"
@@ -214,7 +214,7 @@ const FormRoleManager = ({
                         id="supression bon de retours"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="supression bon de retours"
@@ -229,7 +229,7 @@ const FormRoleManager = ({
                         id="gestions des production"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="gestions des production"
@@ -244,7 +244,7 @@ const FormRoleManager = ({
                         id="supression fiche de production"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="supression fiche de production"
@@ -258,7 +258,7 @@ const FormRoleManager = ({
                         id="supression article"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="supression article"
@@ -274,7 +274,7 @@ const FormRoleManager = ({
                         id="vente et facturation"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="vente et facturation"
@@ -288,7 +288,7 @@ const FormRoleManager = ({
                         id="supression de facturation"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="supression de facturation"
@@ -302,7 +302,7 @@ const FormRoleManager = ({
                         id="gestions des utilisateurs"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="gestions des utilisateurs"
@@ -316,7 +316,7 @@ const FormRoleManager = ({
                         id="supression de utilisateur"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="supression de utilisateur"
@@ -330,7 +330,7 @@ const FormRoleManager = ({
                         id="supression de utilisateur"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="supression de utilisateur"
@@ -344,7 +344,7 @@ const FormRoleManager = ({
                         id="gestions des colissage"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="gestions des colissage"
@@ -359,7 +359,7 @@ const FormRoleManager = ({
                         id="supression de fiche colissage"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="supression de fiche colissage"
@@ -373,7 +373,7 @@ const FormRoleManager = ({
                         id="gestions des table"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="gestions des table"
@@ -387,7 +387,7 @@ const FormRoleManager = ({
                         id="Editions des En-tete"
                         nombre-colonnes="2"
                         type="checkbox"
-                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       />
                       <label
                         htmlFor="Editions des En-tete"
@@ -400,48 +400,29 @@ const FormRoleManager = ({
                 </div>
               </fieldset>
             </div>
-          </div>
-          <div className="float-left w-full mt-1">
-            {!disabled && (
-              <Bcyan
-                className="float-left"
-                onClick={() => {
-                  setTimeout(() => {
-                    closed();
-                  }, 500);
-                }}
-              >
-                sauvegarder
-              </Bcyan>
-            )}
-            {!disabled && request == REQUEST_SAVE && (
-              <Bcyan className="float-left" type="submit">
-                sauvegarder && nouveau
-              </Bcyan>
-            )}
-          </div>
-        </Form>
-        <Bred
-          className="float-right"
-          onClick={() => {
-            closed();
-          }}
-        >
-          Annuler
-        </Bred>
-        {disabled && (
-          <Bcyan
+                    <div className="float-right mt-5 b-ajust-r">
+                     <Bsave
             className="float-right"
             onClick={() => {
-              setDisabled(false);
+              setTimeout(() => {
+                     closed();
+              }, 600);
             }}
-          >
-            Modifier
-          </Bcyan>
-        )}
-      </div>
-    </Section>
-  );
+          />
+          <BsavEndNew
+                  className="float-right mr-2"
+                />
+               
+              </div>
+        
+          </Form>
+               <Bcancel
+               className="float-right mt-5 b-ajust"
+               onClick={() => {
+                 closed();
+               }}
+             />
+   </Section>);
 };
 
 export default FormRoleManager;

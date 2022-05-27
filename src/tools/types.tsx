@@ -286,13 +286,28 @@ export const decharge0: Decharge = {
   transporteur: "",
   declarant: "",
 };
+
+export interface TransporteurJson {
+  content:Transporteur[]
+}
 export interface Transporteur {
   id: string;
   designation: string;
 }
+export const transporteur0:Transporteur={
+  id:"",
+  designation:""
+}
 export interface Document {
   id: string;
   designation: string;
+}
+export const document0:Document={
+  id:"",
+  designation:""
+}
+export interface DeviseJson {
+  content:Devise[]
 }
 export interface Devise {
   id: string;
@@ -300,14 +315,32 @@ export interface Devise {
   symbole: string;
   designation: string;
 }
+export const devise0: Devise= {
+  id: "",
+  code_iso: "",
+  symbole: "",
+  designation: "",
+}
+export interface PaysJson {
+  content:Pays[]
+}
 export interface Pays {
   id: string;
   designation: string;
+}
+export const pays0: Pays ={
+  id: "",
+  designation: ""
 }
 export interface Role {
   id: string;
   designation: string;
   nbrUtilisateur: string;
+}
+export const role0: Role ={
+  id: "",
+  designation: "",
+  nbrUtilisateur: "",
 }
 export interface Ville {
   id: string;
@@ -317,6 +350,10 @@ export interface Ville {
 export interface Type {
   id: string;
   designation: string;
+}
+export const type0: Type ={
+  id: "",
+  designation: ""
 }
 export const t0: Transporteur = {
   id: "",
@@ -336,7 +373,7 @@ export const p0: Pays = {
   id: "",
   designation: "",
 };
-export const i0: Ville = {
+export const ville0: Ville = {
   id: "",
   designation: "",
   pays: p0,
@@ -576,6 +613,17 @@ export const user0: User = {
   notBefore: 0,
   access: access0,
 };
+export interface UserSession{
+  name:string 
+  email:string
+}
+export const emptyUser:UserSession={"name":"","email":""}
+export interface SessionToken{
+  user:UserSession
+  expires:Date 
+  accessToken:string
+}
+export const emptySession:SessionToken={"user":emptyUser,"expires":new Date(),"accessToken":""}
 export interface Chaine {
   val: string;
 }

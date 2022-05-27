@@ -2,6 +2,7 @@ import { crudUser } from "./rtk/RtkUser";
 import { crudVille } from "./rtk/rtkVille";
 import { crudType } from "./rtk/rtkType";
 import { crudTransporteur } from "./rtk/rtkTransporteur";
+import { crudFournisseur } from "./rtk/rtkFournisseur";
 import { crudRole } from "./rtk/rtkRole";
 import { crudPays } from "./rtk/rtkPays";
 import { crudDocument } from "./rtk/rtkDocument";
@@ -67,6 +68,7 @@ export function makeStore() {
   const rootReducer = combineReducers({
     counter: counterReducer,
     [crudUser.reducerPath]: crudUser.reducer,
+    [crudFournisseur.reducerPath]: crudFournisseur.reducer,
     [crudVille.reducerPath]: crudVille.reducer,
     [crudType.reducerPath]: crudType.reducer,
     [crudTransporteur.reducerPath]: crudTransporteur.reducer,
@@ -103,6 +105,7 @@ export function makeStore() {
         .concat([crudUser.middleware, offlineMiddleware])
         .concat([crudVille.middleware, offlineMiddleware])
         .concat([crudType.middleware, offlineMiddleware])
+        .concat([crudFournisseur.middleware, offlineMiddleware])
         .concat([crudTransporteur.middleware, offlineMiddleware])
         .concat([crudRole.middleware, offlineMiddleware])
         .concat([crudPays.middleware, offlineMiddleware])

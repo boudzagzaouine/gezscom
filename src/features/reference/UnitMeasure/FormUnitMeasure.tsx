@@ -21,6 +21,11 @@ import RestoreUnitMeasure from "./Methods/RestoreUnitMeasure";
 import Pagin from "widgets/Pagin";
 import { openUnitMeasures } from "config/rtk/rtkUnitMeasure";
 import { OpenUnitMeasureProp } from "./Methods/openUnitMeasures";
+import Mitems0 from "widgets/Mitems0";
+import Bcyanxl from "widgets/Bcyanxl";
+import Bsave from "widgets/Bsave";
+import Bcancel from "widgets/Bcancel";
+import BsavEndNew from "widgets/BsavEndNew";
 
 type FormUnitMeasureProps = {
   unitMeasure: UnitMeasure;
@@ -229,7 +234,7 @@ const FormUnitMeasure = (
                     <Table.td>{unitMeasure.symbole}</Table.td>
                     <Table.td>{unitMeasure.decimal}</Table.td>
                     <Table.td className="cursor-pointer">
-                      <Mitems menu={menu(unitMeasure)} />
+                      <Mitems0 menu={menu(unitMeasure)} />
                     </Table.td>
                   </tr>
                 );
@@ -249,8 +254,7 @@ const FormUnitMeasure = (
         format={+classNames("5")}
         close={closed}
       >
-        <div className="float-left w-full">
-          <Form
+         <Form
             defaultValues={unitMeasure1}
             onSubmit={
               request == REQUEST_SAVE
@@ -260,17 +264,13 @@ const FormUnitMeasure = (
                 : void_
             }
           >
-            <div className="float-left w-full">
-              <div className="float-left w-full">
+            <div className="float-left w-1/2">
                 <Field
-                  className="sm:grid-cols-6 sm:gap-6"
                   label="Designation"
                   name="design"
                   disabled={disabled}
                   required="required"
                 />
-              </div>
-              <div className="float-left w-1/2">
                 <Field
                   label="Symbole"
                   name="symbole"
@@ -288,58 +288,35 @@ const FormUnitMeasure = (
                   required="required"
                 />
               </div>
-            </div>
-            {!disabled && (
-              <>
-                <Bcyan
-                  className="m-4 mt-10"
+           
+              <div className="float-right mt-5 b-ajust-r">
+                     <Bsave
+            className="float-right"
+            onClick={() => {
+              setTimeout(() => {
+                refetchUnitMeasure();
+                close();
+              }, 600);
+            }}
+          />
+          <BsavEndNew
+                  className="float-right mr-2"
                   onClick={() => {
                     setShow(true);
                   }}
-                >
-                  Sauvegarder et Nouveau
-                </Bcyan>
-
-                <Bcyan
-                  className="m-4 mt-10"
-                  type="submit"
-                  onClick={() => {
-                    setTimeout(() => {
-                      refetchUnitMeasure();
-                      closed();
-                    }, 500);
-                  }}
-                >
-                  Sauvegarder
-                </Bcyan>
-              </>
-            )}
+                />
+               
+              </div>
+        
           </Form>
-
-          <div>
-            {disabled && (
-              <Bcyan
-                className="float-right m-4 mt-10"
-                onClick={() => {
-                  setDisabled(false);
-                }}
-              >
-                modifier
-              </Bcyan>
-            )}
-            {!disabled && (
-              <Bcyan
-                className="float-right"
-                onClick={() => {
-                  setDisabled(false);
-                  setShow(false);
-                }}
-              >
-                Annuler
-              </Bcyan>
-            )}
-          </div>
-        </div>
+               <Bcancel
+               className="float-right mt-5 b-ajust"
+               onClick={() => {
+                 setDisabled(false)
+                 setShow(false);
+               }}
+             />
+             
       </Modal>
     </>
   );

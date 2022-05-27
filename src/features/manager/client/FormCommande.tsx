@@ -142,14 +142,7 @@ const FormCommande = (
       format={5}
       close={close}
     >
-      <Bcyan
-        onClick={() => {
-          alert(idclient);
-        }}
-      >
-        test
-      </Bcyan>
-      <Form defaultValues={getCommande(startDate, idclient)} onSubmit={save}>
+     <Form defaultValues={getCommande(startDate, idclient)} onSubmit={save}>
         <>
           <div className="float-left w-1/2 relative">
             <Field
@@ -223,7 +216,7 @@ const FormCommande = (
             <Field label="Saison" name="season" />
           </div>
           <Bsave
-            className="float-right mt-2 b-ajust-r"
+            className="float-right mt-5 b-ajust-r"
             onClick={() => {
               setTimeout(() => {
                 refetchList();
@@ -234,7 +227,7 @@ const FormCommande = (
         </>
       </Form>
       <Bcancel
-        className="float-right mt-2 b-ajust"
+        className="float-right mt-5 b-ajust"
         onClick={() => {
           close();
         }}

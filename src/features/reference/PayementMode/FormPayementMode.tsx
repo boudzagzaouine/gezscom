@@ -21,6 +21,10 @@ import RestorePayementMode from "./Methods/RestorePayementMode";
 import Pagin from "widgets/Pagin";
 import { OpenPayementModeProp } from "./Methods/openPayementModes";
 import { openPayementModes } from "config/rtk/rtkPayementMode";
+import Mitems0 from "widgets/Mitems0";
+import Bsave from "widgets/Bsave";
+import BsavEndNew from "widgets/BsavEndNew";
+import Bcancel from "widgets/Bcancel";
 
 type FormPayementModeProps = {
   payementMode: PayementMode;
@@ -224,7 +228,7 @@ const FormPayementMode = (
                     <Table.td>{payementMode.code}</Table.td>
                     <Table.td>{payementMode.design}</Table.td>
                     <Table.td className="cursor-pointer">
-                      <Mitems menu={menu(payementMode)} />
+                      <Mitems0 menu={menu(payementMode)} />
                     </Table.td>
                   </tr>
                 );
@@ -243,8 +247,7 @@ const FormPayementMode = (
         format={+classNames("5")}
         close={closed}
       >
-        <div className="float-left w-full">
-          <Form
+           <Form
             defaultValues={payementMode1}
             onSubmit={
               request == REQUEST_SAVE
@@ -255,16 +258,15 @@ const FormPayementMode = (
             }
           >
             <div className="float-left w-full">
+			<div className="float-left w-1/2">
               <Field
-                className="sm:grid-cols-6 sm:gap-6"
-                label="Code"
+               label="Code"
                 name="code"
                 disabled={disabled}
                 required="required"
               />
-
-              <div className="float-left w-full">
-                <div className="float-left w-1/2">
+			</div>
+               <div className="float-left w-1/2">
                   <Field
                     label="Designation"
                     name="design"
@@ -272,60 +274,35 @@ const FormPayementMode = (
                     required="required"
                   />
                 </div>
-              </div>
-            </div>
-            {!disabled && (
-              <>
-                <Bcyan
-                  className="m-4 mt-10"
+           </div>
+          <div className="float-right mt-5 b-ajust-r">
+                     <Bsave
+            className="float-right"
+            onClick={() => {
+              setTimeout(() => {
+                refetchPayementMode();
+                      closed();
+              }, 600);
+            }}
+          />
+          <BsavEndNew
+                  className="float-right mr-2"
                   onClick={() => {
                     setShow(true);
                   }}
-                >
-                  Sauvegarder et Nouveau
-                </Bcyan>
-
-                <Bcyan
-                  className="m-4 mt-10"
-                  type="submit"
-                  onClick={() => {
-                    setTimeout(() => {
-                      refetchPayementMode();
-                      closed();
-                    }, 500);
-                  }}
-                >
-                  Sauvegarder
-                </Bcyan>
-              </>
-            )}
+                />
+               
+              </div>
+        
           </Form>
-
-          <div>
-            {disabled && (
-              <Bcyan
-                className="float-right m-4 mt-10"
-                onClick={() => {
-                  setDisabled(false);
-                }}
-              >
-                modifier
-              </Bcyan>
-            )}
-            {!disabled && (
-              <Bcyan
-                className="float-right"
-                onClick={() => {
-                  setDisabled(false);
+               <Bcancel
+               className="float-right mt-5 b-ajust"
+               onClick={() => {
+                 setDisabled(true);
                   setShow(false);
-                }}
-              >
-                Annuler
-              </Bcyan>
-            )}
-          </div>
-        </div>
-      </Modal>
+               }}
+             />
+   </Modal>
     </>
   );
 };

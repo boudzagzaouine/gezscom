@@ -16,7 +16,7 @@ import { Devise, DeviseJson, v0 } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import { Button } from "widgets/Button";
 import Icon from "widgets/Icon";
-import Mitems from "widgets/Mitems";
+import Mitems0 from "widgets/Mitems0";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
 import Table from "widgets/Table";
@@ -213,14 +213,14 @@ function ListDeviseManager() {
                   <Table.td>{Devise.code_iso} </Table.td>
                   <Table.td>{Devise.symbole} </Table.td>
                   <Table.td>
-                    <Mitems key={Devise.id} menu={menu(Devise)} />
+                    <Mitems0 key={Devise.id} menu={menu(Devise)} />
                   </Table.td>
                 </tr>
               ))
             }
           </Table>
 
-          <Pagin load={loadPage} visibled={devises?.length > 0} />
+          <Pagin load={loadPage} visible={devises?.length > 0} />
         </Section>
       )}
     </>

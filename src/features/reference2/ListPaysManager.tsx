@@ -17,6 +17,7 @@ import Bcyan from "widgets/Bcyan";
 import { Button } from "widgets/Button";
 import Icon from "widgets/Icon";
 import Mitems from "widgets/Mitems";
+import Mitems0 from "widgets/Mitems0";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
 import Table from "widgets/Table";
@@ -197,14 +198,14 @@ function ListPaysManager() {
                   <Table.td>{Pays.designation}</Table.td>
 
                   <Table.td>
-                    <Mitems menu={menu(Pays)} />
+                    <Mitems0 menu={menu(Pays)} />
                   </Table.td>
                 </tr>
               ))
             }
           </Table>
 
-          <Pagin load={loadPage} visibled={pays?.length > 0} />
+          <Pagin load={loadPage} visible={pays?.length > 0} />
         </Section>
       )}
     </>

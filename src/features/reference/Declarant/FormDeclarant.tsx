@@ -21,6 +21,10 @@ import RestoreDeclarant from "./Methods/RestoreDeclarant";
 import Pagin from "widgets/Pagin";
 import { OpenDeclarantProp } from "./Methods/openDeclarants";
 import { openDeclarants } from "config/rtk/rtkDeclarant";
+import Mitems0 from "widgets/Mitems0";
+import Bcancel from "widgets/Bcancel";
+import BsavEndNew from "widgets/BsavEndNew";
+import Bsave from "widgets/Bsave";
 
 type FormDeclarantProps = {
   declarant: Declarant;
@@ -221,7 +225,7 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
                     <Table.td>{declarant.design}</Table.td>
                     <Table.td>{declarant.ville}</Table.td>
                     <Table.td className="cursor-pointer">
-                      <Mitems menu={menu(declarant)} />
+                      <Mitems0 menu={menu(declarant)} />
                     </Table.td>
                   </tr>
                 );
@@ -241,8 +245,7 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
         format={+classNames("5")}
         close={closed}
       >
-        <div className="float-left w-full">
-          <Form
+             <Form
             defaultValues={declarant1}
             onSubmit={
               request == REQUEST_SAVE
@@ -253,16 +256,15 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
             }
           >
             <div className="float-left w-full">
+			<div className="float-left w-1/2">
               <Field
-                className="sm:grid-cols-6 sm:gap-6"
-                label="Designation"
+               label="Designation"
                 name="design"
                 disabled={disabled}
                 required="required"
               />
-
-              <div className="float-left w-full">
-                <div className="float-left w-1/2">
+			</div>
+               <div className="float-left w-1/2">
                   <Field
                     label="Ville"
                     name="ville"
@@ -273,59 +275,34 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
                   />
                 </div>
               </div>
-            </div>
-            {!disabled && (
-              <>
-                <Bcyan
-                  className="m-4 mt-10"
+            
+             <div className="float-right mt-5 b-ajust-r">
+                     <Bsave
+            className="float-right"
+            onClick={() => {
+              setTimeout(() => {
+                refetchDeclarant();
+                      closed();
+              }, 600);
+            }}
+          />
+          <BsavEndNew
+                  className="float-right mr-2"
                   onClick={() => {
                     setShow(true);
                   }}
-                >
-                  Sauvegarder et Nouveau
-                </Bcyan>
-
-                <Bcyan
-                  className="m-4 mt-10"
-                  type="submit"
-                  onClick={() => {
-                    setTimeout(() => {
-                      refetchDeclarant();
-                      closed();
-                    }, 500);
-                  }}
-                >
-                  Sauvegarder
-                </Bcyan>
-              </>
-            )}
+                />
+               
+              </div>
+        
           </Form>
-
-          <div>
-            {disabled && (
-              <Bcyan
-                className="float-right m-4 mt-10"
-                onClick={() => {
-                  setDisabled(false);
-                }}
-              >
-                modifier
-              </Bcyan>
-            )}
-            {!disabled && (
-              <Bcyan
-                className="float-right"
-                onClick={() => {
-                  setDisabled(false);
+               <Bcancel
+               className="float-right mt-5 b-ajust"
+               onClick={() => {
+                 setDisabled(true);
                   setShow(false);
-                }}
-              >
-                Annuler
-              </Bcyan>
-            )}
-          </div>
-        </div>
-      </Modal>
+               }}
+             /> </Modal>
     </>
   );
 };

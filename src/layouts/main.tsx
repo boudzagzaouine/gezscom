@@ -38,9 +38,15 @@ const Layout = ({ children }: LayoutProps) => {
     //const token = await getToken()
     //console.log("JSON Web Token ... ::: ", token)
   };
+  const securePage2 = async () => {
+    const session = await getSession();
+    if (!session) {
+      signIn("keycloak")
+    } 
+  };
 
   useEffect(() => {
-    securePage();
+    securePage2();
     //if(loading && !session)window.location.href="/"
     //
   }, []);

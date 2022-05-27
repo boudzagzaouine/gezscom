@@ -8,7 +8,10 @@ import { Field, Form } from "widgets";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import Section from "widgets/Section";
-import { Transporteur } from "tools/types";
+import { Transporteur, transporteur0 } from "tools/types";
+import Bcancel from "widgets/Bcancel";
+import BsavEndNew from "widgets/BsavEndNew";
+import Bsave from "widgets/Bsave";
 
 type FormTransporteurManagerProp = {
   closed: () => void;
@@ -36,67 +39,46 @@ const FormTransporteurManager = ({
   }, []);
   return (
     <Section>
-      <div className="float-left w-full text-xs">
-        {/*  @ts-ignore*/}
-        <Form defaultValues={Transporteur} onSubmit={onSubmit}>
-          {request == REQUEST_SAVE ? (
-            <h1 className="mb-2">{text} Transporteur </h1>
-          ) : (
-            <h1 className="mb-2">{text1} Transporteur </h1>
-          )}
+    <Form defaultValues={transporteur0} onSubmit={onSubmit}>
+       {request == REQUEST_SAVE ? (
+         <h1 className="mb-2">{text} Transporteur </h1>
+       ) : (
+         <h1 className="mb-2">{text1} Transporteur </h1>
+       )}
 
-          <div className="float-left w-5/6">
-            <div className="float-left w-1/2">
-              {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
-              <Field
-                ref={imputFocus}
-                label="designation"
-                name="designation"
-                disabled={disabled}
-              />
-            </div>
-          </div>
-          <div className="float-left w-full mt-1">
-            {!disabled && (
-              <Bcyan
-                className="float-left"
-                onClick={() => {
-                  setTimeout(() => {
-                    closed();
-                  }, 500);
-                }}
-              >
-                sauvegarder
-              </Bcyan>
-            )}
-            {!disabled && request == REQUEST_SAVE && (
-              <Bcyan className="float-left" type="submit">
-                sauvegarder && nouveau
-              </Bcyan>
-            )}
-          </div>
-        </Form>
-        <Bred
-          className="float-right"
-          onClick={() => {
-            closed();
-          }}
-        >
-          Annuler
-        </Bred>
-        {disabled && (
-          <Bcyan
-            className="float-right"
+          {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
+     <div className="float-left w-full">
+           <Field
+             ref={imputFocus}
+             label="designation"
+             name="designation"
+             disabled={disabled}
+           />
+     </div>
+          <div className="float-right mt-5 b-ajust-r">
+                  <Bsave
+         className="float-right"
+         onClick={() => {
+           setTimeout(() => {
+                  closed();
+           }, 600);
+         }}
+       />
+       <BsavEndNew
+               className="float-right mr-2"
+             />
+            
+           </div>
+     
+       </Form>
+            <Bcancel
+            className="float-right mt-5 b-ajust"
             onClick={() => {
-              setDisabled(false);
-            }}
-          >
-            Modifier
-          </Bcyan>
-        )}
-      </div>
-    </Section>
-  );
+              closed()
+           }}
+          />
+ </Section>
+);
 };
 
 export default FormTransporteurManager;

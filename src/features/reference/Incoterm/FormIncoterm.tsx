@@ -21,6 +21,10 @@ import RestoreIncoterm from "./Methods/RestoreIncoterm";
 import DeleteIncoterm from "./Methods/DeleteIncoterm";
 import { OpenIncotermProp } from "./Methods/openIncoterms";
 import { openIncoterms } from "config/rtk/rtkIncoterm";
+import Mitems0 from "widgets/Mitems0";
+import Bcancel from "widgets/Bcancel";
+import BsavEndNew from "widgets/BsavEndNew";
+import Bsave from "widgets/Bsave";
 
 type FormIncotermProps = {
   incoterm: Incoterm;
@@ -220,7 +224,7 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
                     <Table.td>{incoterm.code}</Table.td>
                     <Table.td>{incoterm.design}</Table.td>
                     <Table.td className="cursor-pointer">
-                      <Mitems menu={menu(incoterm)} />
+                      <Mitems0 menu={menu(incoterm)} />
                     </Table.td>
                   </tr>
                 );
@@ -229,7 +233,7 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
           </Table>
           <Pagin
             load={loadPage}
-            visible={incoterms.length > 0 ? true : false}
+            visible={incoterms?.length > 0 ? true : false}
           />
         </section>
       )}
@@ -240,8 +244,7 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
         format={+classNames("5")}
         close={closed}
       >
-        <div className="float-left w-full">
-          <Form
+            <Form
             defaultValues={incoterm1}
             onSubmit={
               request == REQUEST_SAVE
@@ -252,77 +255,51 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
             }
           >
             <div className="float-left w-full">
+			<div className="float-left w-1/2">
               <Field
-                className="sm:grid-cols-6 sm:gap-6"
-                label="Code"
+               label="Code"
                 name="code"
                 disabled={disabled}
                 required="required"
               />
-
-              <div className="float-left w-full">
-                <div className="float-left w-1/2">
+				</div>
+               <div className="float-left w-1/2">
                   <Field
                     label="Designation"
                     name="design"
                     disabled={disabled}
                     required="required"
                   />
-                </div>
-              </div>
+             </div>
             </div>
-            {!disabled && (
-              <>
-                <Bcyan
-                  className="m-4 mt-10"
+                      <div className="float-right mt-5 b-ajust-r">
+                     <Bsave
+            className="float-right"
+            onClick={() => {
+              setTimeout(() => {
+                refetchIncoterm();
+                      closed();
+              }, 600);
+            }}
+          />
+          <BsavEndNew
+                  className="float-right mr-2"
                   onClick={() => {
                     setShow(true);
                   }}
-                >
-                  Sauvegarder et Nouveau
-                </Bcyan>
-
-                <Bcyan
-                  className="m-4 mt-10"
-                  type="submit"
-                  onClick={() => {
-                    setTimeout(() => {
-                      refetchIncoterm();
-                      closed();
-                    }, 500);
-                  }}
-                >
-                  Sauvegarder
-                </Bcyan>
-              </>
-            )}
+                />
+               
+              </div>
+        
           </Form>
-
-          <div>
-            {disabled && (
-              <Bcyan
-                className="float-right m-4 mt-10"
-                onClick={() => {
-                  setDisabled(false);
-                }}
-              >
-                modifier
-              </Bcyan>
-            )}
-            {!disabled && (
-              <Bcyan
-                className="float-right"
-                onClick={() => {
-                  setDisabled(false);
+               <Bcancel
+               className="float-right mt-5 b-ajust"
+               onClick={() => {
+                 setDisabled(true);
                   setShow(false);
-                }}
-              >
-                Annuler
-              </Bcyan>
-            )}
-          </div>
-        </div>
-      </Modal>
+               }}
+             />
+          </Modal>
     </>
   );
 };

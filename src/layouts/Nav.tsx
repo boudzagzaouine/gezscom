@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 //npm install @headlessui/react
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
@@ -13,6 +13,8 @@ import {
 } from "tools/consts";
 import { signOut, signIn, getSession, useSession } from "next-auth/react";
 import axios from "axios";
+import { emptySession, emptyUser, SessionToken, UserSession } from "tools/types";
+import { Session } from "next-auth";
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
@@ -22,6 +24,14 @@ type NavProps = {
   loading: boolean;
 };
 export default function Nav({ selected, loading }: NavProps) {
+  const { data: session, status } = useSession();
+  //@ts-ignore
+  const [user,setUser]=useState<UserSession>(session?.user)
+  useEffect(()=>{
+    if(!session)setUser(emptyUser)
+    else setUser(session?.user)
+  })
+  console.log("my user = "+JSON.stringify(user))
   //selected==CLIENT_MANAGER?navClient:selected==VENDOR_MANAGER?navVendor:selected==PURCHASE_MANAGER?navPurchase:
   const navigation: NavType[] = [
     /*  { name: "Home", href: "/", current: true, visible: selected == HOME }, */
@@ -110,6 +120,7 @@ export default function Nav({ selected, loading }: NavProps) {
         <>
           <div className="w-5/6 float-right px-2 sm:px-6 lg:px-8 bg-[#fff]">
             <div className="relative flex items-center justify-between h-16">
+            
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
                 <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
@@ -124,6 +135,7 @@ export default function Nav({ selected, loading }: NavProps) {
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
+                   
                     {navigation.map((item) =>
                       item.visible ? (
                         <Link
@@ -159,6 +171,7 @@ export default function Nav({ selected, loading }: NavProps) {
                 </button> */}
 
                 {/* Profile dropdown */}
+                <span className="float-right mr-2">{user?.name}</span>
                 <Menu as="div" className="ml-3 relative">
                   <div>
                     <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
@@ -193,30 +206,30 @@ export default function Nav({ selected, loading }: NavProps) {
                           </a>
                         )}
                       </Menu.Item>
-                      <Menu.Item>
+                      {!session && <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="http://localhost:4002/realms/gescom/protocol/openid-connect/auth?client_id=client&response_type=code&redirect_uri=http://localhost:3000/"
+                            href="/api/auth/signin"
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                             onClick={(e: any) => {
                               //api/auth/signin
-                              //e.preventDefault()
+                              e.preventDefault()
                               //signIn("keycloak")
                               signIn("keycloak");
-                              window.location.href = "/";
+                              
                             }}
                           >
                             sign in
                           </a>
                         )}
-                      </Menu.Item>
-                      <Menu.Item>
+                      </Menu.Item>}
+                      {session &&<Menu.Item>
                         {({ active }) => (
                           <a
-                            href="http://localhost:4002/realms/gescom/protocol/openid-connect/logout"
+                            href="/api/auth/federated-logout"
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
@@ -234,7 +247,7 @@ export default function Nav({ selected, loading }: NavProps) {
                             Sign out
                           </a>
                         )}
-                      </Menu.Item>
+                      </Menu.Item>}
                     </Menu.Items>
                   </Transition>
                 </Menu>

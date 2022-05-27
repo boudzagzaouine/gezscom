@@ -21,6 +21,10 @@ import RestoreRawMaterial from "./Methods/RestoreRawMaterial";
 import Pagin from "widgets/Pagin";
 import { openRawMaterials } from "config/rtk/rtkRawMaterial";
 import { OpenRawMaterialProp } from "./Methods/openRawMaterials";
+import Mitems0 from "widgets/Mitems0";
+import Bsave from "widgets/Bsave";
+import BsavEndNew from "widgets/BsavEndNew";
+import Bcancel from "widgets/Bcancel";
 
 type FormRawMaterialProps = {
   rawMaterial: RawMaterial;
@@ -240,7 +244,7 @@ const FormRawMaterial = (
                       {"%"}
                     </Table.td>
                     <Table.td className="cursor-pointer">
-                      <Mitems menu={menu(rawMaterial)} />
+                      <Mitems0 menu={menu(rawMaterial)} />
                     </Table.td>
                   </tr>
                 );
@@ -260,8 +264,7 @@ const FormRawMaterial = (
         format={+classNames("5")}
         close={closed}
       >
-        <div className="float-left w-full">
-          <Form
+              <Form
             defaultValues={rawMaterial1}
             onSubmit={
               request == REQUEST_SAVE
@@ -271,32 +274,26 @@ const FormRawMaterial = (
                 : void_
             }
           >
-            <div className="float-left w-full">
-              <div className="float-left w-full">
-                <Field
-                  className="sm:grid-cols-6 sm:gap-6"
+            <div className="float-left w-1/2">
+               <Field
                   label="Designation"
                   name="design"
                   disabled={disabled}
                 />
-              </div>
-              <div className="float-left w-1/2">
-                <Field
+               <Field
                   label="Nomenclature"
                   name="nomenclature"
                   disabled={disabled}
                 />
-              </div>
-              <div className="float-left w-1/2">
-                <Field
+               <Field
                   label="Famille"
                   name="family"
                   options={FAMILLE}
                   as="select"
                   disabled={disabled}
                 />
-              </div>
-              <div className="float-left w-1/2">
+				</div>
+             <div className="float-left w-1/2">
                 <Field
                   label="Unité De Mesure"
                   name="measureUnit"
@@ -304,68 +301,41 @@ const FormRawMaterial = (
                   as="select"
                   disabled={disabled}
                 />
-              </div>
-              <div className="float-left w-1/2">
-                <Field
+               <Field
                   label="Taux de pertes"
                   name="tauxPertes"
                   disabled={disabled}
                   required="required"
                 />
-              </div>
             </div>
-            {!disabled && (
-              <>
-                <Bcyan
-                  className="m-4 mt-10"
+                        <div className="float-right mt-5 b-ajust-r">
+                     <Bsave
+            className="float-right"
+            onClick={() => {
+              setTimeout(() => {
+                refetchRawMaterial();
+                      closed();
+              }, 600);
+            }}
+          />
+          <BsavEndNew
+                  className="float-right mr-2"
                   onClick={() => {
                     setShow(true);
                   }}
-                >
-                  Sauvegarder et Nouveau
-                </Bcyan>
-
-                <Bcyan
-                  className="m-4 mt-10"
-                  type="submit"
-                  onClick={() => {
-                    setTimeout(() => {
-                      refetchRawMaterial();
-                      closed();
-                    }, 500);
-                  }}
-                >
-                  Sauvegarder
-                </Bcyan>
-              </>
-            )}
+                />
+               
+              </div>
+        
           </Form>
-
-          <div>
-            {disabled && (
-              <Bcyan
-                className="float-right m-4 mt-10"
-                onClick={() => {
-                  setDisabled(false);
-                }}
-              >
-                modifier
-              </Bcyan>
-            )}
-            {!disabled && (
-              <Bcyan
-                className="float-right"
-                onClick={() => {
-                  setDisabled(true);
+               <Bcancel
+               className="float-right mt-5 b-ajust"
+               onClick={() => {
+                 setDisabled(true);
                   setShow(false);
-                }}
-              >
-                Annuler
-              </Bcyan>
-            )}
-          </div>
-        </div>
-      </Modal>
+               }}
+             />
+     </Modal>
     </>
   );
 };
