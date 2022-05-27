@@ -31,7 +31,7 @@ const RestoreDevise = ({ id }: RestoreDevisePorp, ref: Ref<void>) => {
   });
   const restoreTemp = () => {
     axios
-      .patch("http://localhost:1000/api/v1/devises/" + id0 + "/restore")
+      .patch(process.env.NEXT_PUBLIC_URL+"/devises/" + id0 + "/restore")
       .then(() => {});
   };
   return (

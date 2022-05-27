@@ -32,7 +32,7 @@ const DeleteType = ({ id, refetch }: DeleteTypePorp, ref: Ref<void>) => {
   });
   const [showModal, setShowModal] = React.useState(false);
   const delTemp = () => {
-    axios.delete("http://localhost:1000/api/v1/types/" + id0).then(() => {});
+    axios.delete(process.env.NEXT_PUBLIC_URL+"/types/" + id0).then(() => {});
   };
   return (
     <>

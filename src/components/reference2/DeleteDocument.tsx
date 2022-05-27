@@ -36,7 +36,7 @@ const DeleteDocument = (
   const [showModal, setShowModal] = React.useState(false);
   const delTemp = () => {
     axios
-      .delete("http://localhost:1000/api/v1/documents/" + id0)
+      .delete(process.env.NEXT_PUBLIC_URL+"/documents/" + id0)
       .then(() => {});
   };
   return (

@@ -33,7 +33,7 @@ const ArchiveIncoterm = ({ id }: ArchiveIncotermPorp, ref: Ref<void>) => {
   });
   const archiveTemp = () => {
     axios
-      .patch("http://localhost:1000/api/v1/incoterms/" + id0 + "/archive")
+      .patch(process.env.NEXT_PUBLIC_URL+"/incoterms/" + id0 + "/archive")
       .then(() => {});
   };
   return (

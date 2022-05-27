@@ -27,7 +27,7 @@ const ArchiveUnitMeasure = ({ id }: ArchiveUnitMeasurePorp, ref: Ref<void>) => {
   });
   /*const archiveTemp = () => {
     axios
-      .patch("http://localhost:1000/api/v1/unitMeasures/" + id0 + "/archive")
+      .patch(process.env.NEXT_PUBLIC_URL+"/unitMeasures/" + id0 + "/archive")
       .then(() => { });
   };*/
   return (

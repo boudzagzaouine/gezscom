@@ -34,7 +34,7 @@ const ArchiveBureauDouane = (
   });
   const archiveTemp = () => {
     axios
-      .patch("http://localhost:1000/api/v1/bureauDouanes/" + id0 + "/archive")
+      .patch(process.env.NEXT_PUBLIC_URL+"/bureauDouanes/" + id0 + "/archive")
       .then(() => {});
   };
   return (

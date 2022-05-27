@@ -28,7 +28,7 @@ const ArchiveArticle = ({ id }: ArchiveArticlePorp, ref: Ref<void>) => {
   });
   /*const archiveTemp = () => {
     axios
-      .patch("http://localhost:1000/api/v1/articles/" + id0 + "/archive")
+      .patch(process.env.NEXT_PUBLIC_URL+"/articles/" + id0 + "/archive")
       .then(() => { });
   };*/
   return (

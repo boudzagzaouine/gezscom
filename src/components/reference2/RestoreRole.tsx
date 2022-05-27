@@ -31,7 +31,7 @@ const RestoreRole = ({ id }: RestoreRolePorp, ref: Ref<void>) => {
   });
   const restoreTemp = () => {
     axios
-      .patch("http://localhost:1000/api/v1/roles/" + id0 + "/restore")
+      .patch(process.env.NEXT_PUBLIC_URL+"/roles/" + id0 + "/restore")
       .then(() => {});
   };
   return (

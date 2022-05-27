@@ -34,7 +34,7 @@ const RestoreTransporteur = (
   });
   const restoreTemp = () => {
     axios
-      .patch("http://localhost:1000/api/v1/transporteurs/" + id0 + "/restore")
+      .patch(process.env.NEXT_PUBLIC_URL+"/transporteurs/" + id0 + "/restore")
       .then(() => {});
   };
   return (

@@ -16,7 +16,7 @@ const Brestore: FC<ButtonProps> = ({
 }) => {
   return (
     <Bcyan className={calculClass({ ...props, className })} {...props}>
-      Suprimer
+      Restorer
     </Bcyan>
   );
 };

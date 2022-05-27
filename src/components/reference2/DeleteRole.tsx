@@ -32,7 +32,7 @@ const DeleteRole = ({ id, refetch }: DeleteRolePorp, ref: Ref<void>) => {
   });
   const [showModal, setShowModal] = React.useState(false);
   const delTemp = () => {
-    axios.delete("http://localhost:1000/api/v1/roles/" + id0).then(() => {});
+    axios.delete(process.env.NEXT_PUBLIC_URL+"/roles/" + id0).then(() => {});
   };
   return (
     <>

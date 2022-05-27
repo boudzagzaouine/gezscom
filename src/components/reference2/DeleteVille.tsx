@@ -32,7 +32,7 @@ const DeleteVille = ({ id, refetch }: DeleteVillePorp, ref: Ref<void>) => {
   });
   const [showModal, setShowModal] = React.useState(false);
   const delTemp = () => {
-    axios.delete("http://localhost:1000/api/v1/villes/" + id0).then(() => {});
+    axios.delete(process.env.NEXT_PUBLIC_URL+"/villes/" + id0).then(() => {});
   };
   return (
     <>

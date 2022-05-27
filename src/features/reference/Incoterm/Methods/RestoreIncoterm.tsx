@@ -26,7 +26,7 @@ const RestoreIncoterm = ({ id }: RestoreIncotermPorp, ref: Ref<void>) => {
   });
   /*const restoreTemp = () => {
     axios
-      .patch("http://localhost:1000/api/v1/incoterms/" + id0 + "/restore")
+      .patch(process.env.NEXT_PUBLIC_URL+"/incoterms/" + id0 + "/restore")
       .then(() => { });
   };*/
   return (

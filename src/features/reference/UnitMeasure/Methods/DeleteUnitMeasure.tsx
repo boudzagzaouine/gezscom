@@ -29,7 +29,8 @@ const DeleteUnitMeasure = (
   });
   const [showModal, setShowModal] = React.useState(false);
   /*const delTemp = () => {
-    axios.delete("http://localhost:1000/api/v1/unitMeasures/" + id0).then(() => { });
+    axios.delete(process.env.NEXT_PUBLIC_URL+"/unitMeasures/" + id0).then(() => { });
+    axios.delete(process.env.NEXT_PUBLIC_URL+"/unitMeasures/" + id0).then(() => { });
   };*/
   return (
     <>

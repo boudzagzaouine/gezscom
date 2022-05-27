@@ -36,7 +36,7 @@ const ArchivePayementMode = (
   });
   const archiveTemp = () => {
     axios
-      .patch("http://localhost:1000/api/v1/payementModes/" + id0 + "/archive")
+      .patch(process.env.NEXT_PUBLIC_URL+"/payementModes/" + id0 + "/archive")
       .then(() => {});
   };
   return (

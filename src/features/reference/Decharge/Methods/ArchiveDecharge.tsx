@@ -28,7 +28,7 @@ const archiveDecharge = ({ id }: ArchiveDechargePorp, ref: Ref<void>) => {
   });
   const archiveTemp = () => {
     axios
-      .patch("http://localhost:1000/api/v1/decharges/" + id0 + "/archive")
+      .patch(process.env.NEXT_PUBLIC_URL+"/decharges/" + id0 + "/archive")
       .then(() => {});
   };
   return (

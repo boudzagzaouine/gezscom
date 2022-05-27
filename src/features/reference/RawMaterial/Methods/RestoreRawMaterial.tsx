@@ -26,7 +26,7 @@ const RestoreRawMaterial = ({ id }: RestoreRawMaterialPorp, ref: Ref<void>) => {
   });
   /*const restoreTemp = () => {
     axios
-      .patch("http://localhost:1000/api/v1/rawMaterial/" + id0 + "/restore")
+      .patch(process.env.NEXT_PUBLIC_URL+"/rawMaterial/" + id0 + "/restore")
       .then(() => { });
   };*/
   return (

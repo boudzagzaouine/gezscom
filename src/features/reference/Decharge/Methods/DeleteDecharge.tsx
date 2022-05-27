@@ -33,7 +33,7 @@ const DeleteDecharge = (
 
   const delTemp = () => {
     axios
-      .delete("http://localhost:1000/api/v1/decharges/" + id0)
+      .delete(process.env.NEXT_PUBLIC_URL+"/decharges/" + id0)
       .then(() => {});
   };
   return (

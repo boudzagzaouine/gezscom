@@ -29,7 +29,7 @@ const DeleteDum = ({ id, refetch }: DeleteDumPorp, ref: Ref<void>) => {
   const [showModal, setShowModal] = React.useState(false);
 
   const delTemp = () => {
-    axios.delete("http://localhost:1000/api/v1/dums/" + id0).then(() => {});
+    axios.delete(process.env.NEXT_PUBLIC_URL+"/dums/" + id0).then(() => {});
   };
   return (
     <>

@@ -30,7 +30,7 @@ const RestoreRegimeDouanier = (
   });
   /*const restoreTemp = () => {
     axios
-      .patch("http://localhost:1000/api/v1/regimeDouaniers/" + id0 + "/restore")
+      .patch(process.env.NEXT_PUBLIC_URL+"/regimeDouaniers/" + id0 + "/restore")
       .then(() => { });
   };*/
   return (

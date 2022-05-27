@@ -32,7 +32,7 @@ const DeletePays = ({ id, refetch }: DeletePaysPorp, ref: Ref<void>) => {
   });
   const [showModal, setShowModal] = React.useState(false);
   const delTemp = () => {
-    axios.delete("http://localhost:1000/api/v1/pays/" + id0).then(() => {});
+    axios.delete(process.env.NEXT_PUBLIC_URL+"/pays/" + id0).then(() => {});
   };
   return (
     <>

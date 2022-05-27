@@ -30,7 +30,7 @@ const DeleteRegimeDouanier = (
   });
   const [showModal, setShowModal] = React.useState(false);
   /*const delTemp = () => {
-    axios.delete("http://localhost:1000/api/v1/regimeDouaniers/" + id0).then(() => { });
+    axios.delete(process.env.NEXT_PUBLIC_URL+"/regimeDouaniers/" + id0).then(() => { });
   };*/
   return (
     <>

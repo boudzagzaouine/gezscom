@@ -28,7 +28,7 @@ const restoreDum = ({ id }: RestoreDumPorp, ref: Ref<void>) => {
 
   const restoreTemp = () => {
     axios
-      .patch("http://localhost:1000/api/v1/dums/" + id0 + "/restore")
+      .patch(process.env.NEXT_PUBLIC_URL+"/dums/" + id0 + "/restore")
       .then(() => {});
   };
   return (

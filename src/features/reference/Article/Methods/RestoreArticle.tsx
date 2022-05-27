@@ -26,7 +26,7 @@ const RestoreArticle = ({ id }: RestoreArticlePorp, ref: Ref<void>) => {
   });
   /*const restoreTemp = () => {
     axios
-      .patch("http://localhost:1000/api/v1/articles/" + id0 + "/restore")
+      .patch(process.env.NEXT_PUBLIC_URL+"/articles/" + id0 + "/restore")
       .then(() => { });
   };*/
   return (

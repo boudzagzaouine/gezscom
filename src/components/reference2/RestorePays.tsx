@@ -31,7 +31,7 @@ const RestorePays = ({ id }: RestorePaysPorp, ref: Ref<void>) => {
   });
   const restoreTemp = () => {
     axios
-      .patch("http://localhost:1000/api/v1/pays/" + id0 + "/restore")
+      .patch(process.env.NEXT_PUBLIC_URL+"/pays/" + id0 + "/restore")
       .then(() => {});
   };
   return (

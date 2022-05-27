@@ -27,7 +27,7 @@ const ArchiveRawMaterial = ({ id }: ArchiveRawMaterialPorp, ref: Ref<void>) => {
   });
   /*const archiveTemp = () => {
     axios
-      .patch("http://localhost:1000/api/v1/rawMaterials/" + id0 + "/archive")
+      .patch(process.env.NEXT_PUBLIC_URL+"/rawMaterials/" + id0 + "/archive")
       .then(() => { });
   };*/
   return (

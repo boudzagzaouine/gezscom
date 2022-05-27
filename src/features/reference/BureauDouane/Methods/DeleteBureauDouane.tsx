@@ -36,7 +36,7 @@ const DeleteBureauDouane = (
   const [showModal, setShowModal] = React.useState(false);
   const delTemp = () => {
     axios
-      .delete("http://localhost:1000/api/v1/bureauDouanes/" + id0)
+      .delete(process.env.NEXT_PUBLIC_URL+"/bureauDouanes/" + id0)
       .then(() => {});
   };
   return (

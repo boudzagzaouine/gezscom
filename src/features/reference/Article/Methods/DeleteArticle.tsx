@@ -28,7 +28,7 @@ const DeleteArticle = ({ id, refetch }: DeleteArticlePorp, ref: Ref<void>) => {
   const [showModal, setShowModal] = React.useState(false);
 
   /*const delTemp = () => {
-    axios.delete("http://localhost:1000/api/v1/articles/" + id0).then(() => { });
+    axios.delete(process.env.NEXT_PUBLIC_URL+"/articles/" + id0).then(() => { });
   };*/
   return (
     <>

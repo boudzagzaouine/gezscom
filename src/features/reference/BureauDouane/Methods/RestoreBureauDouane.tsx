@@ -35,7 +35,7 @@ const RestoreBureauDouane = (
   });
   const restoreTemp = () => {
     axios
-      .patch("http://localhost:1000/api/v1/bureauDouanes/" + id0 + "/restore")
+      .patch(process.env.NEXT_PUBLIC_URL+"/bureauDouanes/" + id0 + "/restore")
       .then(() => {});
   };
   return (

@@ -13,6 +13,7 @@ import Modal from "widgets/Modal";
 import { Field, Form } from "widgets";
 import { code0 } from "tools/types";
 import Barchive from "widgets/Barchive";
+//signature :abd 27/05-2022 08:57
 type ArchiveClientPorp = {
   id: string;
 };
@@ -37,7 +38,7 @@ const ArchiveClient = ({ id }: ArchiveClientPorp, ref: Ref<void>) => {
   });
   const archiveTemp = () => {
     axios
-      .patch("http://localhost:1000/api/v1/clients/" + id0 + "/archive")
+      .patch(process.env.NEXT_PUBLIC_URL+"/clients/" + id0 + "/archive")
       .then(() => {});
   };
   return (

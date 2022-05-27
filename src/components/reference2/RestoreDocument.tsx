@@ -31,7 +31,7 @@ const RestoreDocument = ({ id }: RestoreDocumentPorp, ref: Ref<void>) => {
   });
   const restoreTemp = () => {
     axios
-      .patch("http://localhost:1000/api/v1/documents/" + id0 + "/restore")
+      .patch(process.env.NEXT_PUBLIC_URL+"/documents/" + id0 + "/restore")
       .then(() => {});
   };
   return (
