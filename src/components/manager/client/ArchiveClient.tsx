@@ -10,6 +10,9 @@ import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import { useArchiveClientMutation } from "config/rtk/RtkClient";
 import Modal from "widgets/Modal";
+import { Field, Form } from "widgets";
+import { code0 } from "tools/types";
+import Barchive from "widgets/Barchive";
 type ArchiveClientPorp = {
   id: string;
 };
@@ -40,36 +43,33 @@ const ArchiveClient = ({ id }: ArchiveClientPorp, ref: Ref<void>) => {
   return (
     <>
       <Modal title={"archivage"} show={showModal} format={5} close={close}>
-        <div>
-          <h2>archivage du client num: {id0}</h2>
-          <form
-            onSubmit={
-              //@ts-ignore
-              handleSubmit(archiveTemp)
-            }
+         <h2>archivage du client num: {id0}</h2>
+          <Form
+            defaultValues={code0}
+            onSubmit={archiveTemp}
           >
-            {" "}
-            <input type="hidden" {...register("id")} />
-            <Bcyan
+           <Field
+                type="hidden"
+                name="id"
+               />
+
+            <Barchive
               type="submit"
-              className="mt-2 float-right"
+              className="float-right mt-5 b-ajust-r"
               onClick={() => {
                 setTimeout(() => {
                   close();
                 }, 500);
               }}
-            >
-              Archiver
-            </Bcyan>
-          </form>
+            />
+           </Form>
           <Bcancel
-            className="mt-2 float-right"
+            className="float-right mt-5 b-ajust"
             onClick={() => {
               close();
             }}
           />
-        </div>
-      </Modal>
+     </Modal>
     </>
   );
 };

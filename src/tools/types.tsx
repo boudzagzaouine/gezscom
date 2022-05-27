@@ -627,3 +627,10 @@ export const emptySession:SessionToken={"user":emptyUser,"expires":new Date(),"a
 export interface Chaine {
   val: string;
 }
+export interface Id {
+  id: string;
+}
+export const code0: Id ={
+  id: ""
+}
+

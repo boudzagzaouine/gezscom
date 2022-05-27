@@ -9,6 +9,9 @@ import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import { useDeleteClientMutation } from "config/rtk/RtkClient";
 import Modal from "widgets/Modal";
+import { Field, Form } from "widgets";
+import Bdel from "widgets/Bdel";
+import { code0 } from "tools/types";
 type DeleteClientPorp = {
   id: string;
 };
@@ -37,36 +40,32 @@ const DeleteClient = ({ id }: DeleteClientPorp, ref: Ref<void>) => {
   return (
     <>
       <Modal title={"suppression"} show={showModal} format={5} close={close}>
-        <div>
-          <h2>suppression de client num: {id0}</h2>
-          <form
-            onSubmit={
-              //@ts-ignore
-              handleSubmit(delTemp)
-            }
+         <h2>suppression de client num: {id0}</h2>
+         <Form
+            defaultValues={code0}
+            onSubmit={delTemp}
           >
-            {" "}
-            <input type="hidden" {...register("id")} />
-            <Bcyan
+           <Field
+                type="hidden"
+                name="id"
+               />
+
+            <Bdel
               type="submit"
-              className="mt-2 float-right"
+              className="float-right mt-5 b-ajust-r"
               onClick={() => {
                 setTimeout(() => {
                   close();
                 }, 500);
               }}
-            >
-              Supprimer
-            </Bcyan>
-            <Bcancel
-              className="mt-2 float-right"
-              onClick={() => {
-                close();
-              }}
             />
-          </form>
-        </div>
-      </Modal>
+           </Form>
+          <Bcancel
+            className="float-right mt-5 b-ajust"
+            onClick={() => {
+              close();
+            }}
+          /></Modal>
     </>
   );
 };

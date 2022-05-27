@@ -9,6 +9,9 @@ import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import { useRestoreClientMutation } from "config/rtk/RtkClient";
 import Modal from "widgets/Modal";
+import { code0 } from "tools/types";
+import { Field, Form } from "widgets";
+import Brestore from "widgets/Brestore";
 type RestoreClientPorp = {
   id: string;
 };
@@ -39,36 +42,33 @@ const RestoreClient = ({ id }: RestoreClientPorp, ref: Ref<void>) => {
   return (
     <>
       <Modal title={"restoration"} show={showModal} format={5} close={close}>
-        <div>
-          <h2>restoration du client num: {id0}</h2>
-          <form
-            onSubmit={
-              //@ts-ignore
-              handleSubmit(restoreTemp)
-            }
+         <h2>restoration du client num: {id0}</h2>
+         <Form
+            defaultValues={code0}
+            onSubmit={restoreTemp}
           >
-            {" "}
-            <input type="hidden" {...register("id")} />
-            <Bcyan
+           <Field
+                type="hidden"
+                name="id"
+               />
+
+            <Brestore
               type="submit"
-              className="mt-2 float-right"
+              className="float-right mt-5 b-ajust-r"
               onClick={() => {
                 setTimeout(() => {
                   close();
                 }, 500);
               }}
-            >
-              Restaurer
-            </Bcyan>
-          </form>
+            />
+           </Form>
           <Bcancel
-            className="mt-2 float-right"
+            className="float-right mt-5 b-ajust"
             onClick={() => {
               close();
             }}
           />
-        </div>
-      </Modal>
+     </Modal>
     </>
   );
 };
