@@ -149,7 +149,9 @@ export const openArticleCommandesByCommande = (
   const out: OpenArticleCommandeByCommandeProp = {
     data,
     refetchArtCom,
+    //@ts-ignore
     save,
+    //@ts-ignore
     edit,
     montant,
   };

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenArticleProp } from "features/Article/Methods/openArticles";
+import { OpenArticleProp } from "features/reference/Article/Methods/openArticles";
 import { PAGE_SIZE } from "tools/consts";
 import { Article } from "tools/types";
 

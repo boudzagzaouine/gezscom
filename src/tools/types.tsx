@@ -630,6 +630,9 @@ export interface Chaine {
 export interface Id {
   id: string;
 }
+export interface ArticleClientJson {
+  content:ArticleClient[]
+}
 export interface ArticleClient {
   id:string
   design:string
@@ -640,6 +643,17 @@ export interface ArticleClient {
   idFamilleArticle:string
   idFournisseur:string
   }
+  export const articleClient0:  ArticleClient= {
+    id:"",
+    design:"",
+    poid:0,
+    prix:0,
+    //@ts-ignore
+    date:"",
+    idClient:"",
+    idFamilleArticle:"",
+    idFournisseur:"",
+    }
 export const code0: Id ={
   id: ""
 }

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenBureauDouaneProp } from "features/BureauDouane/Methods/openBureauDouanes";
+import { OpenBureauDouaneProp } from "features/reference/BureauDouane/Methods/openBureauDouanes";
 import { PAGE_SIZE } from "tools/consts";
 import { BureauDouane } from "tools/types";
 
