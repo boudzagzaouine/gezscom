@@ -30,7 +30,7 @@ KEYCLOAK_SECRET=jsobRD42pYHjys1a8uzTI02JOwvtSRLc
 KEYCLOAK_ISSUER=http://gescom-kc.frimakers.com/realms/gescom
 
 NEXT_PUBLIC_URL=https://gescom-api.frimakers.com/api/v1
-NEXT_URL_API=http://localhost:4003/
+NEXT_URL_API=https://gescom-api.frimakers.com/api/v1
 
 DEV:
 NEXTAUTH_URL=http://localhost:3000

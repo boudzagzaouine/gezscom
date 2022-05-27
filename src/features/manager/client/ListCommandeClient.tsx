@@ -11,6 +11,7 @@ import NavTabs from "widgets/NavTabs";
 import { ListClientsProps, MenuNavTabs } from "widgets/TypeWidgets";
 import AdressLivraisons from "./AdressLivraisons";
 import ArticlesClients from "./ArticlesClients";
+import ListArticleClients from "./ListArticleClients";
 import ListCommandes from "./ListCommandes";
 import SoldesCommandes from "./SoldesCommandes";
 type ListCommandeClientProps = {
@@ -49,7 +50,7 @@ const ListCommandeClient = ({ client, refetch }: ListCommandeClientProps) => {
           <span className={style_span}>Articles Clients</span>
         </>
       ),
-      featured: <ArticlesClients idClient={client.id} />,
+      featured: <ListArticleClients client={client} refetchParent={refetch} />,
     },
     {
       id: 4,

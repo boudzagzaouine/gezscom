@@ -118,8 +118,7 @@ export type OpenArticleClientProp = {
 };
 export type OpenArticleClientByClientProp = {
   data: ArticleClient[];
-  montant: getMontantProps;
-  refetchArtCom: () => void;
+ refetch: () => void;
   save: () => void;
   edit: () => void;
 };
@@ -140,20 +139,14 @@ export const openArticleClientsByClient = (
     useFetchArticleClientsByIdClientQuery(idclient);
   const [save] = useAddArticleClientMutation();
   const [edit] = useEditArticleClientMutation();
-  const montant = getMontant(idclient);
-  const refetchArtCom = () => {
-    refetch();
-    montant.refetch();
-  };
   //@ts-ignore
   const out: OpenArticleClientByClientProp = {
     data,
-    refetchArtCom,
+    refetch,
     //@ts-ignore
     save,
     //@ts-ignore
     edit,
-    montant,
-  };
+ };
   return out;
 };

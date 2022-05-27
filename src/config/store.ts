@@ -19,6 +19,7 @@ import { crudUnitMeasure } from "./rtk/rtkUnitMeasure";
 import { crudClient } from "./rtk/RtkClient";
 import { crudAdressLiv } from "./rtk/RtkAdressLiv";
 import { crudArticleCommande } from "./rtk/RtkArticleCommande";
+import { crudArticleClient } from "./rtk/RtkArticleClient";
 
 import {
   configureStore,
@@ -88,6 +89,7 @@ export function makeStore() {
     [crudClient.reducerPath]: crudClient.reducer,
     [crudAdressLiv.reducerPath]: crudAdressLiv.reducer,
     [crudArticleCommande.reducerPath]: crudArticleCommande.reducer,
+    [crudArticleClient.reducerPath]: crudArticleClient.reducer,
   });
   const persistedReducer = persistReducer(
     persistConfig,
@@ -122,7 +124,9 @@ export function makeStore() {
         .concat([crudUnitMeasure.middleware, offlineMiddleware])
         .concat([crudClient.middleware, offlineMiddleware])
         .concat([crudAdressLiv.middleware, offlineMiddleware])
-        .concat([crudArticleCommande.middleware, offlineMiddleware]),
+        .concat([crudArticleCommande.middleware, offlineMiddleware])
+        .concat([crudArticleClient.middleware, offlineMiddleware])
+    ,
   });
   return store;
 }
