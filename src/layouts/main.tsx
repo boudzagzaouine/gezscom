@@ -35,7 +35,7 @@ const Layout = ({ children }: LayoutProps) => {
         //   signIn("keycloak")
       }, 200);
     }
-    //const token = await getToken()
+    //   const token = await getToken()
     //console.log("JSON Web Token ... ::: ", token)
   };
   const securePage2 = async () => {
