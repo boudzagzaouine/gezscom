@@ -116,7 +116,7 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
           setDisabled(false);
         },
       },
-      {
+      /* {
         icon: (
           <TrashIcon
             className="mr-3 h-8 w-8 text-rose-900 group-hover:text-gray-500"
@@ -128,7 +128,7 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
           //@ts-ignore
           del.current(incoterm.id);
         },
-      },
+      }, */
       {
         icon: (
           <ArchiveIcon

@@ -61,7 +61,7 @@ const ListClientManager = () => {
     setDisabled(false);
     showFormulaire(client);
   };
-  const menu = (client: Client): MenuItems[] => {
+  /* const menu = (client: Client): MenuItems[] => {
     return [
       {
         icon: (
@@ -127,7 +127,7 @@ const ListClientManager = () => {
         },
       },
     ];
-  };
+  }; */
   return (
     <>
       {form && (
@@ -220,10 +220,6 @@ const ListClientManager = () => {
                         FormAsEdit(client);
                       }}
                       obj={client}
-                      restore={() => {
-                        //@ts-ignore
-                        restore.current(client.id);
-                      }}
                       update={() => {
                         FormAsUpdate(client);
                       }}
