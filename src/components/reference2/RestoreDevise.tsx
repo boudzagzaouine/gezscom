@@ -1,11 +1,10 @@
-import { ReplyIcon, XCircleIcon } from "@heroicons/react/solid";
 import axios from "axios";
 import { useRestoreDeviseMutation } from "config/rtk/rtkDevise";
 import React, { forwardRef, Ref, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { STYLE_ICON } from "tools/constStyle";
-import Bcyan from "widgets/Bcyan";
-import Bred from "widgets/Bred";
+import { Field, Form } from "widgets";
+import Bcancel from "widgets/Bcancel";
+import Brestore from "widgets/Brestore";
 import Modal from "widgets/Modal";
 type RestoreDevisePorp = {
   id: string;
@@ -37,37 +36,33 @@ const RestoreDevise = ({ id }: RestoreDevisePorp, ref: Ref<void>) => {
   return (
     <>
       <Modal title={"restoration"} show={showModal} format={5} close={close}>
-        <div>
+
           <h2>restoration du Devise num: {id0}</h2>
-          <form
-            onSubmit={
-              //@ts-ignore
-              handleSubmit(restoreTemp)
-            }
+          <Form
+            onSubmit={restoreTemp}
           >
-            {" "}
-            <input type="hidden" {...register("id")} />
-            <Bcyan
+            <Field
+              type="hidden"
+              name="id"
+            />
+
+            <Brestore
               type="submit"
-              className="mt-2 float-right"
+              className="float-right mt-5 b-ajust-r"
               onClick={() => {
                 setTimeout(() => {
-                  setShowModal(false);
+                  close();
                 }, 500);
               }}
-            >
-              Restorer
-            </Bcyan>
-          </form>
-          <Bred
-            className="mt-2 float-right"
+            />
+          </Form>
+          <Bcancel
+            className="float-right mt-5 b-ajust"
             onClick={() => {
-              setShowModal(false);
+              close();
             }}
-          >
-            Annuler
-          </Bred>
-        </div>
+          />
+
       </Modal>
     </>
   );

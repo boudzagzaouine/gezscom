@@ -46,7 +46,7 @@ const Layout = ({ children }: LayoutProps) => {
   };
 
   useEffect(() => {
-    securePage2();
+ //   securePage2();
     //if(loading && !session)window.location.href="/"
     //
   }, []);
@@ -64,9 +64,11 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Nav selected={selected} loading={true} />
-      {   loading && session && status === "authenticated" &&  block()   }
+      {   
+      //loading && session && status === "authenticated" &&  block()   
+      }
       { 
-      //block()
+      block()
        } 
       {/*  {loading && session && <section className="bg-slate-100 float-left w-full">
           <div className="w-1/6 float-left">

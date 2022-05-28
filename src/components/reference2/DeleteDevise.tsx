@@ -1,12 +1,10 @@
-import { TrashIcon } from "@heroicons/react/outline";
-import { XCircleIcon } from "@heroicons/react/solid";
 import axios from "axios";
+import { useDeleteDeviseMutation } from "config/rtk/rtkDevise";
 import React, { forwardRef, Ref, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { STYLE_ICON } from "tools/constStyle";
-import Bcyan from "widgets/Bcyan";
-import Bred from "widgets/Bred";
-import { useDeleteDeviseMutation } from "config/rtk/rtkDevise";
+import { Field, Form } from "widgets";
+import Bcancel from "widgets/Bcancel";
+import Bdel from "widgets/Bdel";
 import Modal from "widgets/Modal";
 type DeleteDevisePorp = {
   refetch: () => void;
@@ -32,43 +30,37 @@ const DeleteDevise = ({ id, refetch }: DeleteDevisePorp, ref: Ref<void>) => {
   });
   const [showModal, setShowModal] = React.useState(false);
   const delTemp = () => {
-    axios.delete(process.env.NEXT_PUBLIC_URL+"/devises/" + id0).then(() => {});
+    axios.delete(process.env.NEXT_PUBLIC_URL + "/devises/" + id0).then(() => { });
   };
   return (
     <>
       <Modal title={"suppression"} show={showModal} format={5} close={close}>
-        <div>
-          <h2>suppression de document num: {id0}</h2>
-          <form
-            onSubmit={
-              //@ts-ignore
-              handleSubmit(delTemp)
-            }
-          >
-            {" "}
-            <input type="hidden" {...register("id")} />
-            <Bcyan
-              type="submit"
-              className="mt-2 float-right"
-              onClick={() => {
-                setTimeout(() => {
-                  refetch();
-                  setShowModal(false);
-                }, 500);
-              }}
-            >
-              Supprimer
-            </Bcyan>
-            <Bred
-              className="mt-2 float-right"
-              onClick={() => {
-                setShowModal(false);
-              }}
-            >
-              Annuler
-            </Bred>
-          </form>
-        </div>
+
+        <h2>suppression de document num: {id0}</h2>
+        <Form
+          onSubmit={delTemp}
+        >
+          <Field
+            type="hidden"
+            name="id"
+          />
+
+          <Bdel
+            type="submit"
+            className="float-right mt-5 b-ajust-r"
+            onClick={() => {
+              setTimeout(() => {
+                close();
+              }, 500);
+            }}
+          />
+        </Form>
+        <Bcancel
+          className="float-right mt-5 b-ajust"
+          onClick={() => {
+            close();
+          }}
+        />
       </Modal>
     </>
   );

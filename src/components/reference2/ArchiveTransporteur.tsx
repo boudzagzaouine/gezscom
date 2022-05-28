@@ -1,20 +1,16 @@
-import { ArchiveIcon, XCircleIcon } from "@heroicons/react/solid";
 import axios from "axios";
 import { useArchiveTransporteurMutation } from "config/rtk/rtkTransporteur";
 import React, { forwardRef, Ref, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { setTimeout } from "timers";
-import { STYLE_ICON } from "tools/constStyle";
-import Bcyan from "widgets/Bcyan";
-import Bred from "widgets/Bred";
+import { Field, Form } from "widgets";
+import Barchive from "widgets/Barchive";
+import Bcancel from "widgets/Bcancel";
 import Modal from "widgets/Modal";
 type ArchiveTransporteurPorp = {
   id: string;
 };
-const ArchiveTransporteur = (
-  { id }: ArchiveTransporteurPorp,
-  ref: Ref<void>
-) => {
+const ArchiveTransporteur = ({ id }: ArchiveTransporteurPorp, ref: Ref<void>) => {
   const [id0, setId0] = useState(id);
   //@ts-ignore
   const { register, handleSubmit } = useForm<string>({
@@ -33,41 +29,42 @@ const ArchiveTransporteur = (
     //@ts-ignore
     ref.current = openModal;
   });
+  const archiveTemp = () => {
+    axios
+      .patch(process.env.NEXT_PUBLIC_URL + "/transporteurs/" + id0 + "/archive")
+      .then(() => { });
+  };
 
   return (
     <>
       <Modal title={"archivage"} show={showModal} format={5} close={close}>
-        <div>
-          <h2>archivage du transporteur num: {id0}</h2>
-          <form
-            onSubmit={
-              //@ts-ignore
-              handleSubmit(archive)
-            }
-          >
-            {" "}
-            <input type="hidden" {...register("id")} />
-            <Bcyan
-              type="submit"
-              className="mt-2 float-right"
-              onClick={() => {
-                setTimeout(() => {
-                  setShowModal(false);
-                }, 500);
-              }}
-            >
-              Archiver
-            </Bcyan>
-          </form>
-          <Bred
-            className="mt-2 float-right"
+
+        <h2>archivage du Transporteur num: {id0}</h2>
+        <Form
+          onSubmit={archiveTemp}
+
+        >
+          <Field
+            type="hidden"
+            name="id"
+          />
+
+          <Barchive
+            type="submit"
+            className="float-right mt-5 b-ajust-r"
             onClick={() => {
-              setShowModal(false);
+              setTimeout(() => {
+                close();
+              }, 500);
             }}
-          >
-            Annuler
-          </Bred>
-        </div>
+          />
+        </Form>
+        <Bcancel
+          className="float-right mt-5 b-ajust"
+          onClick={() => {
+            close();
+          }}
+        />
       </Modal>
     </>
   );

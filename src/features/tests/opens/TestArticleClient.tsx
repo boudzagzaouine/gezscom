@@ -30,16 +30,10 @@ import {
 } from "config/rtk/RtkArticleClient";
 const TestArticleClient = () => {
   const idcom = "24aada24-6ab5-461b-89e6-a9be5fa14c82";
-  const artComOpen: OpenArticleClientByClientProp = openArticleClientsByClient(idcom);
-  const artComs: ArticleClient[] = artComOpen.data;
-  //const montant=openmontant.data
-  const refetch = artComOpen.refetch;
-  /* const refetchMontant=openmontant.refetch
-  const refetch=()=>{
-    refetchArt()
-    refetchMontant()
-  }*/
-  const save = artComOpen.save;
+  const articleClientsOpen: OpenArticleClientByClientProp = openArticleClientsByClient(idcom);
+  const articlesClients: ArticleClient[] = articleClientsOpen.data;
+ const refetch = articleClientsOpen.refetch;
+  const save = articleClientsOpen.save;
   //openArticleClientsByClient = (idcom:string): OpenArticleClientProp
   return (
     <Section>
@@ -54,7 +48,7 @@ const TestArticleClient = () => {
           </tr>
         </thead>
         <tbody>
-          {artComs?.map((d: ArticleClient) => (
+          {articlesClients?.map((d: ArticleClient) => (
             //     data?.map((d:AdressLiv)=>(
             <tr key={d.id}>
               <td>{d.id}</td>

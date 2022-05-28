@@ -24,17 +24,11 @@ const IndexPage: NextPage = () => {
   const { t } = useTranslation("common");
   return (
     <Col>
-      <Head title={t("title")} />
-      <View>
-        <Text as="h1">
-          <Link href="wall">{t("wall-link")}</Link>
-        </Text>
-      </View>
+      <Head title={t("GESCOM")} />
       <View as="main">
-        <Counter />
+        <h1 className="center">SITE EN COURS D'EXECUTION</h1>
       </View>
-      <Form.Control as="input" href="wefwe" />
-    </Col>
+   </Col>
   );
 };
 

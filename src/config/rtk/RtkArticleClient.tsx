@@ -38,7 +38,7 @@ export const crudArticleClient = createApi({
         Partial<ArticleClient>
       >({
         query: (body) => ({
-          url: `/articleclients/post`,
+          url: `/articleclients`,
           method: "POST",
           body,
         }),

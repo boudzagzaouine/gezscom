@@ -1,11 +1,10 @@
-import { ReplyIcon, XCircleIcon } from "@heroicons/react/solid";
 import axios from "axios";
-import { useRestoreRoleMutation } from "config//rtk/rtkRole";
+import { useRestoreRoleMutation } from "config/rtk/rtkRole";
 import React, { forwardRef, Ref, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { STYLE_ICON } from "tools/constStyle";
-import Bcyan from "widgets/Bcyan";
-import Bred from "widgets/Bred";
+import { Field, Form } from "widgets";
+import Bcancel from "widgets/Bcancel";
+import Brestore from "widgets/Brestore";
 import Modal from "widgets/Modal";
 type RestoreRolePorp = {
   id: string;
@@ -31,43 +30,39 @@ const RestoreRole = ({ id }: RestoreRolePorp, ref: Ref<void>) => {
   });
   const restoreTemp = () => {
     axios
-      .patch(process.env.NEXT_PUBLIC_URL+"/roles/" + id0 + "/restore")
-      .then(() => {});
+      .patch(process.env.NEXT_PUBLIC_URL + "/roles/" + id0 + "/restore")
+      .then(() => { });
   };
   return (
     <>
       <Modal title={"restoration"} show={showModal} format={5} close={close}>
-        <div>
-          <h2>restoration du Role num: {id0}</h2>
-          <form
-            onSubmit={
-              //@ts-ignore
-              handleSubmit(restoreTemp)
-            }
-          >
-            {" "}
-            <input type="hidden" {...register("id")} />
-            <Bcyan
-              type="submit"
-              className="mt-2 float-right"
-              onClick={() => {
-                setTimeout(() => {
-                  setShowModal(false);
-                }, 500);
-              }}
-            >
-              Restorer
-            </Bcyan>
-          </form>
-          <Bred
-            className="mt-2 float-right"
+
+        <h2>restoration du Role num: {id0}</h2>
+        <Form
+          onSubmit={restoreTemp}
+        >
+          <Field
+            type="hidden"
+            name="id"
+          />
+
+          <Brestore
+            type="submit"
+            className="float-right mt-5 b-ajust-r"
             onClick={() => {
-              setShowModal(false);
+              setTimeout(() => {
+                close();
+              }, 500);
             }}
-          >
-            Annuler
-          </Bred>
-        </div>
+          />
+        </Form>
+        <Bcancel
+          className="float-right mt-5 b-ajust"
+          onClick={() => {
+            close();
+          }}
+        />
+
       </Modal>
     </>
   );
