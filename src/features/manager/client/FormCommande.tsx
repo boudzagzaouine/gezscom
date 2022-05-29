@@ -41,69 +41,20 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
   const close = () => {
     setShowModal(false);
   };
-  useEffect(() => {
-    refetchAdressLiv();
-    refetchClient();
-    //@ts-ignore
-    ref.current = openModal;
-  });
-  const commanndes: MenuNavTabs[] = [
-    {
-      id: 1,
-      name: (
-        <>
-          <BriefcaseIcon className={style_icon} aria-hidden="true" />
-          <span className={style_span}>Articles de la Commande</span>
-        </>
-      ),
-      featured: <ArticlesCommande idCommande={command0.id} />,
-    },
-  ];
-  const fieldIdClient = useRef(null);
-  const fieldAdressLiv = useRef(null);
-  if (client0 == undefined && client?.id != "") {
-    refetchAdressLiv();
-    setTimeout(() => {
-      setClient0(client);
-    }, 200);
-  }
-  const getCommande = (date: Date, idclient: string): Commande => {
-    return {
-      id: command0.id,
-      date: date,
-      amount: command0.amount,
-      season: command0.season,
-      idClient: idclient,
-      adrLiv: command0.adrLiv,
-    };
-  };
+  useEffect(()=>{
+ //@ts-ignore
+ ref.current = openModal;
+  })
+
   return (
-    <Modal
-      title={
-        command0.id === "" ? "Nouvelle commande" : "Mise à jour de la commande"
-      }
-      show={showModal}
-      format={5}
-      close={close}
-    >
-     <Form defaultValues={getCommande(startDate, idclient)} onSubmit={save}>
-        <>
-          <div className="float-left w-1/2 relative">
-            <Field
-              type="hidden"
-              name="idClient"
-              value={client0?.id}
-              ref={fieldIdClient}
-            />
-            <Field type="hidden" name="id" value={command0.id} />
-            {command0.idClient != "" ? (
-              <>
-                <Field label="Client" value={client0?.design} />
-              </>
-            ) : (
-              <Field
-                label="Client *"
-                name="cococo"
+    <Modal close={close} format={5} show={showModal} title={command0.id === "" ? "Nouvelle commande" : "Mise à jour de la commande"} >
+<Form defaultValues={command0} >
+<div className="float-left w-1/2 relative">
+{command0.idClient!=""?
+<Field label="Client" value={client0?.design} />:
+<Field
+                label="Client"
+                name="client__"
                 as="select"
                 onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                   let c: Client = JSON.parse(e.target.value);
@@ -113,10 +64,9 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
                 {[c0, ...(clients0 || [])]?.map((c: Client) => (
                   <option value={JSON.stringify(c)}>{c.design}</option>
                 ))}
-              </Field>
-            )}
-            <Field
-              label="Date Commande *"
+              </Field>}
+              <Field
+              label="Date Commande"
               name="date33"
               value={dateFormat(startDate, "dd-mm-yyyy")}
               onFocus={() => {
@@ -144,14 +94,18 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
               />
               <span>coco:{command0.adrLiv}</span>
             <Field
-              label="Adresse de livraison *"
+              label="Adress de livraison"
               name="adrLiv"
               as="select"
-              optionLabelName="adress"
-              optionKeyName="adress"
-              options={[adr0, ...(adressLivs || [])]}
-            />
-            <Field label="Saison *" name="season" />
+              onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                setCommand0({...command0,adrLiv:e.target.value})
+               }}
+            >
+              {[adr0, ...(adressLivs || [])]?.map((c: AdressLiv) => (
+                  <option value={c.adress}>{c.adress}</option>
+                ))}
+            </Field>
+            <Field label="Saison" name="season" />
           </div>
           <Bsave
             className="float-right mt-5 b-ajust-r"
