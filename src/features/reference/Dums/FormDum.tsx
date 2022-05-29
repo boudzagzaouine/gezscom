@@ -1,5 +1,5 @@
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
-import { Dum, dum0, DumJson, dumMat0, rawMaterial0 } from "tools/types";
+import { Dum, dum0, DumJson} from "tools/types";
 import {
   BUREAU,
   DECLARANTS,
@@ -31,11 +31,9 @@ import ArchiveDum from "./Methods/ArchiveDum";
 import RestoreDum from "./Methods/RestoreDum";
 import { BriefcaseIcon } from "@heroicons/react/solid";
 import { style_icon, style_span } from "tools/constStyle";
-import FormMatierePremiere from "features/MatierePremiere/FormMatierePremiere";
-import AdressLivraisons from "features/manager/client/AdressLivraisons";
-import ListeMatiers from "features/MatPremiere/MatierePremiere";
 import NavTabs from "widgets/NavTabs";
-import DumMat from "features/MatierePremiere/DumMat";
+import DumMat from "features/reference/MatierePremiere/DumMat";
+import Mitems0 from "widgets/Mitems0";
 
 type FormDumProps = {
   dum: Dum;
@@ -259,7 +257,7 @@ const FormDum = ({ dum }: FormDumProps, ref: Ref<void>) => {
                     <Table.td>{dum.date}</Table.td>
 
                     <Table.td className="cursor-pointer">
-                      <Mitems menu={menu(dum)} />
+                      <Mitems0 menu={menu(dum)} />
                     </Table.td>
                   </tr>
                 );

@@ -66,7 +66,7 @@ const FormClientManager = ({
           <div className="float-left w-5/6">
             <div className="float-left w-1/2">
               {request == REQUEST_EDIT && (
-                <Field label="id du client" name="id" />
+                <Field type="hidden" name="id" />
               )}
               <Field label="Raison social" name="design" disabled={disabled} />
               <Field label="contact" name="contact" disabled={disabled} />

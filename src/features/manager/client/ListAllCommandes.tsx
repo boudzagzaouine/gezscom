@@ -28,6 +28,8 @@ const ListAllCommandes = () => {
   const commandesToOpen: OpenCommandeProp = openCommandesPagination(page);
   const commandes: Commande[] = commandesToOpen.data.content;
   const refetch = commandesToOpen.refetch;
+  const add=commandesToOpen.save
+  const edit=commandesToOpen.edit
   //const { data = [], isFetching, refetch } = usePaginationCommandesQuery(page);
 
   const clientsToOpen: OpenClientProp = openClients();
@@ -52,6 +54,8 @@ const ListAllCommandes = () => {
         </Bcyan>
       )}
       <FormCommande
+      add={add}
+      edit={edit}      
         command={cm1}
         client={client}
         clients={clients || []}

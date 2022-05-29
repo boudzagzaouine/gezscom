@@ -1,38 +1,24 @@
-import { RefreshIcon } from "@heroicons/react/solid";
-import axios from "axios";
 import {
-  useFetchArticleCommandesByIdCommandeQuery,
-  useFetchArticleCommandesQuery,
-  usePaginationArticleCommandesQuery,
   useAddArticleCommandeMutation,
   useEditArticleCommandeMutation,
+  OpenArticleCommandeByCommandeProp,
+  openArticleCommandesByCommande,
 } from "config/rtk/RtkArticleCommande";
 import React, { useState } from "react";
 import { style_add_line } from "tools/constStyle";
-import { arc0, Commande, ArticleCommande } from "tools/types";
-import { Field, Form } from "widgets";
-import Bcyan from "widgets/Bcyan";
+import { arc0, ArticleCommande } from "tools/types";
 import Bedit from "widgets/Bedit";
-import Mitems from "widgets/Mitems";
-import Pagin from "widgets/Pagin";
 import Table from "widgets/Table";
 import FormArticleCommande from "./FormArticleCommande";
 
-type ArticlesCommandeProps = {
+type ListArticleCommandesProps = {
   idCommande: string;
+  idClient:string
 };
-const ArticlesCommande = ({ idCommande }: ArticlesCommandeProps) => {
-  /*  const [page, setPage] = useState(0);
-  const loadPage = (p: number) => {
-    setPage(p);
-    refetch();
-  }; */
-  //@ts-ignore
-  const {
-    data = [],
-    isFetching,
-    refetch,
-  } = useFetchArticleCommandesByIdCommandeQuery(idCommande);
+const ListArticleCommandes = ({ idCommande,idClient }: ListArticleCommandesProps) => {
+  const articleCommandesOpen: OpenArticleCommandeByCommandeProp=openArticleCommandesByCommande(idCommande)
+  const articleCommandes:ArticleCommande[]=articleCommandesOpen.data
+  const refetch=articleCommandesOpen.refetchArtCom
   const [selectedIdCommande, setSelectedIdCommande] = useState("new");
   const [formArt, setFormArt] = useState(false);
   const arc1: ArticleCommande = arc0;
@@ -64,10 +50,8 @@ const ArticlesCommande = ({ idCommande }: ArticlesCommandeProps) => {
         }
       >
         {
-          //@ts-ignore
-          data?.map((article) => (
-            // articles?.map((article) => (
-            <>
+         articleCommandes?.map((article) => (
+           <>
               <tr key={article.id}>
                 <Table.td>{article.id}</Table.td>
                 <Table.td>{article.idCommande} </Table.td>
@@ -86,6 +70,7 @@ const ArticlesCommande = ({ idCommande }: ArticlesCommandeProps) => {
               {selectedIdCommande == article.id && formArt && (
                 <FormArticleCommande
                   articleCommande={article}
+                  idClient={idClient}
                   close={close}
                   saveArticle={edit}
                   refetch={refetch}
@@ -97,6 +82,7 @@ const ArticlesCommande = ({ idCommande }: ArticlesCommandeProps) => {
         {selectedIdCommande == "new" && formArt && (
           <FormArticleCommande
             articleCommande={arc1}
+            idClient={idClient}
             close={close}
             saveArticle={save}
             refetch={refetch}
@@ -122,4 +108,4 @@ const ArticlesCommande = ({ idCommande }: ArticlesCommandeProps) => {
   );
 };
 
-export default ArticlesCommande;
+export default ListArticleCommandes;

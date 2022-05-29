@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { PAGE_SIZE } from "tools/consts";
 import { ArticleCommande, ArticleCommandeJson } from "tools/types";
 export const crudArticleCommande = createApi({
-  reducerPath: "crud-article-commande",
+  reducerPath: "crud-articlecommande",
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_URL,
     prepareHeaders(headers) {
@@ -127,12 +127,11 @@ export const openArticleCommandes = (): OpenArticleCommandeProp => {
   const { data = [], refetch } = useFetchArticleCommandesQuery();
   const [save] = useAddArticleCommandeMutation();
   const [edit] = useEditArticleCommandeMutation();
-
   //@ts-ignore
   const out: OpenArticleCommandeProp = { data, refetch, save, edit };
   return out;
 };
-
+//const articleCommandes: OpenArticleCommandeByCommandeProp=openArticleCommandesByCommande()
 export const openArticleCommandesByCommande = (
   idcom: string
 ): OpenArticleCommandeByCommandeProp => {

@@ -89,7 +89,7 @@ export const {
   /*******************************************************/
   /*******************************************************/
 } = crudArticle;
-
+//const familleArticleOpen:OpenArticleProp=openArticles()
 export const openArticles = (): OpenArticleProp => {
   const { data = [], refetch } = useFetchArticlesQuery();
   const [save] = useAddArticleMutation();

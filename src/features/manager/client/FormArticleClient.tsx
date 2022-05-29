@@ -13,20 +13,18 @@ import { openArticles } from 'config/rtk/rtkArticle';
 import { OpenArticleProp } from "features/reference/Article/Methods/openArticles";
 type FormArticleClientProp={
   articleclient:ArticleClient
-  client:Client
+ // client:Client
   refetchList:()=>void
   add:()=>void
   edit:()=>void
 }
-const FormArticleClient = ({articleclient,client,refetchList,add,edit}:FormArticleClientProp,ref:Ref<void>) => {
+const FormArticleClient = ({articleclient,refetchList,add,edit}:FormArticleClientProp,ref:Ref<void>) => {
   const [showModal, setShowModal] = useState(false);
-  const [client0,setClient0]=useState(client)
   const [articleclient0, setArticleclient0] = useState(articleclient);
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(articleclient0.date);
   const [openCalendar, setOpenCalendar] = useState(false);
-  const openModal = (a: ArticleClient, cl: Client) => {
+  const openModal = (a: ArticleClient) => {
     setArticleclient0(a);
-    setClient0(cl)
     setShowModal(true);
   };
   const fournisseursOpen: OpenFournisseurProp=openFournisseurs() 
@@ -41,17 +39,7 @@ const FormArticleClient = ({articleclient,client,refetchList,add,edit}:FormArtic
  //@ts-ignore
  ref.current = openModal;
   })
-  const getArticleClient=(date:Date,idclient:string):ArticleClient=> ({
-    id:"",
-    design:"",
-    poid:0,
-    prix:0,
-   date:date,
-    idClient:idclient,
-    idFamilleArticle:"",
-    idFournisseur:"",
-    })
-  return (
+ return (
     <Modal
     title={
       articleclient0.id === "" ? "Nouvel article client" : "Mise à jour de l'article client"
@@ -60,58 +48,78 @@ const FormArticleClient = ({articleclient,client,refetchList,add,edit}:FormArtic
     format={5}
     close={close}
   >
- <Form defaultValues={getArticleClient(startDate, client0?.id)} onSubmit={save}>
+ <Form defaultValues={articleclient0} onSubmit={save} >
         <>
           <div className="float-left w-1/2 relative">
-            <Field
-              type="hidden"
-              name="idClient"
-              value={client0?.id}
-             />
-             <Field label="Client" value={client0?.design} />
-            <Field type="hidden" name="id" value={articleclient0.id} />
-          
-            <Field
-              label="Date Commande"
+         <Field label="Designation" name="design"
+           onChange={
+            (e:ChangeEvent<HTMLInputElement>)=>{
+             setArticleclient0({...articleclient0,design:e.target.value})
+            }
+          } 
+         />
+        <Field label="Prix" name="prix"
+        onChange={
+          (e:ChangeEvent<HTMLInputElement>)=>{
+           setArticleclient0({...articleclient0,prix:+e.target.value})
+          }}
+        />
+         <Field label="Poid" name="poid" 
+         onChange={
+          (e:ChangeEvent<HTMLInputElement>)=>{
+           setArticleclient0({...articleclient0,poid:+e.target.value})
+          }}
+         />
+            
+          </div>
+           <div className="float-left w-1/2">
+           <Field
+              label="Date"
               name="date33"
               value={dateFormat(startDate, "dd-mm-yyyy")}
               onFocus={() => {
                 setOpenCalendar(true);
               }}
             />
-             {openCalendar && (
+            {openCalendar && (
               <DatePicker
                 selected={startDate}
                 name="date11"
-                onChange={(date: Date) => {
-                  setStartDate(date);
-                  //  command0.date=startDate
-                  setOpenCalendar(false);
+                onChange={(d: Date) => {
+                  setStartDate(d);
+                  setArticleclient0({...articleclient0,date:d})
+                 setOpenCalendar(false);
                 }}
                 dateFormat="dd-MM-yyyy"
                 calendarContainer={Calendar}
-                inline
+                inline 
               />
             )}
-          </div>
-          <div className="float-left w-1/2">
-            <Field
-              label="Fournisseur"
-              name="idFournisseur"
-              as="select"
-              optionLabelName="raisonSociale"
-              optionKeyName="id"
-              options={[f0, ...(fournisseurs || [])]}
-            />
-            <Field
+               <Field
+                label="Fournisseur"
+                name="idFournisseur"
+                as="select"
+                onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                  setArticleclient0({...articleclient0,idFournisseur:e.target.value})
+                 }}
+              >
+                {[f0, ...(fournisseurs || [])]?.map((c: Fournisseur) => (
+                  <option value={c.id}>{c.raisonSociale}</option>
+                ))}
+              </Field>
+             <Field
               label="Famille Article"
               name="idFamilleArticle"
               as="select"
-              optionLabelName="design"
-              optionKeyName="id"
-              options={[article0, ...(famillArticles || [])]}
-            />
-          </div>
+              onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                setArticleclient0({...articleclient0,idFamilleArticle:e.target.value})
+               }}
+            >
+              {[article0, ...(famillArticles || [])]?.map((c: Article) => (
+                  <option value={c.id}>{c.design}</option>
+                ))}
+            </Field>
+          </div> 
           <Bsave
             className="float-right mt-5 b-ajust-r"
             onClick={() => {
