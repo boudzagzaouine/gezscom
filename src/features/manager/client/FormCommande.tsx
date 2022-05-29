@@ -89,13 +89,13 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
             )}
 </div>
 <div className="float-left w-1/2">
-  <Field  label="Adress de livraison"
+  <Field  label="Adress de livraison1"
               name="adrLiv1"
               />
               <span>coco:{command0.adrLiv}</span>
-            <Field
-              label="Adress de livraison"
-              name="adrLiv"
+              <Field
+              label="Adress de livraison2"
+              name="adrLiv2"
               as="select"
               onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                 setCommand0({...command0,adrLiv:e.target.value})
@@ -105,7 +105,16 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
                   <option value={c.adress}>{c.adress}</option>
                 ))}
             </Field>
-            <Field label="Saison" name="season" />
+            <Field
+              label="Adress de livraison3"
+              name="adrLiv"
+              as="select"
+              value={command0.adrLiv}
+              options={[adr0, ...(adressLivs || [])]} 
+              optionKeyName="adress"
+              optionLabelName="adress"
+            />
+           <Field label="Saison" name="season" />
           </div>
           <Bsave
             className="float-right mt-5 b-ajust-r"

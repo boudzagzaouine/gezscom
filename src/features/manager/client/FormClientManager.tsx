@@ -1,142 +1,171 @@
-import React, { ChangeEvent, forwardRef, Ref, useEffect, useState } from 'react'
-import { adr0, AdressLiv, c0, Client, cm0, Commande } from 'tools/types'
-//@ts-ignore
-import dateFormat from "dateformat";
-import DatePicker from "react-datepicker";
-import Calendar from "widgets/Calendar";
-import { Field, Form } from 'widgets';
-import Bsave from 'widgets/Bsave';
-import Bcancel from 'widgets/Bcancel';
-import Modal from 'widgets/Modal'
-import { openAdressLivByIdClientProps } from 'components/manager/client/openAdressLivByIdClient';
-import { openAdressLivsByIdClient } from 'config/rtk/RtkAdressLiv';
-import NavTabs from 'widgets/NavTabs';
-import { BriefcaseIcon } from '@heroicons/react/solid';
-import { style_icon, style_span } from 'tools/constStyle';
-import ListArticleCommandes from './ListArticleCommandes';
-type FormCommandeProp={
-  command:Commande
-  client:Client
-  clients:Client[]
- refetchList:()=>void
-  add:()=>void
-  edit:()=>void
-}
-const FormCommande = ({command,add,edit,refetchList,client,clients}:FormCommandeProp,ref:Ref<void>) => {
-  const [showModal, setShowModal] = useState(false);
-  const [command0, setCommand0] = useState(command);
-  const [client0,setClient0] =useState(client)
-  const [clients0,setClients0] =useState(clients)
-  const adressLivsToOpen: openAdressLivByIdClientProps =
-  openAdressLivsByIdClient(client0?.id);
-const adressLivs: AdressLiv[] = adressLivsToOpen.data;
-  const [startDate, setStartDate] = useState(command0.date);
-  const [openCalendar, setOpenCalendar] = useState(false);
-  const openModal = (c: Commande,cl:Client) => {
-    setCommand0(c);
-    setClient0(cl)
-    setShowModal(true);
-  };
-  const save = command0.id == "" ? add : edit;
-  const close = () => {
-    setShowModal(false);
-  };
-  useEffect(()=>{
- //@ts-ignore
- ref.current = openModal;
-  })
-
+import React, { useState } from "react";
+import {
+  useAddClientMutation,
+  useEditClientMutation,
+} from "config/rtk/RtkClient";
+import {
+  DEVISE,
+  ICOTERM,
+  PAYMENT_CHOICE,
+  REQUEST_EDIT,
+  REQUEST_SAVE,
+} from "tools/consts";
+import { STYLE_ICON } from "tools/constStyle";
+import { Client, Devise, Incoterm, PayementMode } from "tools/types";
+import Bcyan from "widgets/Bcyan";
+import Bred from "widgets/Bred";
+import Section from "widgets/Section";
+import { Field, Form } from "widgets";
+import Avatar from "widgets/Avatar";
+import {
+  PencilAltIcon,
+  SaveIcon,
+  UserAddIcon,
+  XCircleIcon,
+} from "@heroicons/react/solid";
+import ListCommandeClient from "./ListCommandeClient";
+import Bsave from "widgets/Bsave";
+import Bcancel from "widgets/Bcancel";
+import Bupdate from "widgets/Bupdate";
+import Xclose from "widgets/Xclose";
+import { openDevises } from "config/rtk/rtkDevise";
+import { openIncoterms } from "config/rtk/rtkIncoterm";
+import { openPayementModes } from "config/rtk/rtkPayementMode";
+import { OpenIncotermProp } from "features/reference/Incoterm/Methods/openIncoterms";
+type FormClientManagerProp = {
+  closed: () => void;
+  client: Client;
+  request: number;
+  disable: boolean;
+  refetch: () => void;
+}; //
+const FormClientManager = ({
+  closed,
+  client,
+  request,
+  disable,
+  refetch,
+}: FormClientManagerProp) => {
+  const [save] = useAddClientMutation();
+  const [edit] = useEditClientMutation();
+  const tabDevises: Devise[] = openDevises().data.content;
+  const devises: string[] = tabDevises?.map((d) => d.symbole);
+  const tabIncoterms: Incoterm[] = openIncoterms().data.content;
+  const tabPayementModes: PayementMode[] = openPayementModes().data.content;
+  const incoterms = tabIncoterms?.map((d) => d.code);
+  const payementModes = tabPayementModes?.map((d) => d.code);
+  const onSubmit =
+    request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit : undefined;
+  const [disabled, setDisabled] = useState(disable);
   return (
-    <Modal close={close} format={5} show={showModal} title={command0.id === "" ? "Nouvelle commande" : "Mise à jour de la commande"} >
-<Form defaultValues={command0} >
-<div className="float-left w-1/2 relative">
-{command0.idClient!=""?
-<Field label="Client" value={client0?.design} />:
-<Field
-                label="Client"
-                name="client__"
-                as="select"
-                onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                  let c: Client = JSON.parse(e.target.value);
-                  setClient0(c);
-                }}
-              >
-                {[c0, ...(clients0 || [])]?.map((c: Client) => (
-                  <option value={JSON.stringify(c)}>{c.design}</option>
-                ))}
-              </Field>}
+    <Section>
+      <Xclose close={closed} />
+      <div className="float-left w-full text-xs">
+        <Form defaultValues={client} onSubmit={onSubmit}>
+          <h1 className="mb-4">Nouveau client</h1>
+          <div className="float-left w-5/6">
+            <div className="float-left w-1/2">
+              {request == REQUEST_EDIT && (
+                <Field type="hidden" name="id" />
+              )}
+              <Field label="Raison social" name="design" disabled={disabled} />
+              <Field label="contact" name="contact" disabled={disabled} />
+              <Field label="email" name="email" disabled={disabled} />
+              <Field label="tel" name="tel" disabled={disabled} />
               <Field
-              label="Date Commande"
-              name="date33"
-              value={dateFormat(startDate, "dd-mm-yyyy")}
-              onFocus={() => {
-                setOpenCalendar(true);
-              }}
-            />
-           {openCalendar && (
-              <DatePicker
-                selected={startDate}
-                name="date11"
-                onChange={(d: Date) => {
-                  setStartDate(d);
-                  setCommand0({...command0,date:d})
-                  setOpenCalendar(false);
+                label="device"
+                name="device"
+                options={devises}
+                as="select"
+                disabled={disabled}
+              />
+              <Field
+                label="adresse de livraison"
+                name="adrLiv"
+                as="textarea"
+                disabled={disabled}
+              />
+            </div>
+            <div className="float-left w-1/2">
+              <Field
+                label="Mode de payment"
+                name="paymentChoice"
+                options={payementModes}
+                as="select"
+                disabled={disabled}
+              />
+              <Field
+                label="incoterm"
+                name="incoterm"
+                options={incoterms}
+                as="select"
+                disabled={disabled}
+              />
+              <Field
+                label="adresse de facturation"
+                name="adrFact"
+                as="textarea"
+                disabled={disabled}
+              />
+              <Field label="bank" name="bank" disabled={disabled} />
+              <Field label="rib" name="rib" disabled={disabled} />
+              <Field label="swift" name="swift" disabled={disabled} />
+            </div>
+          </div>
+          <div className="float-left w-1/6">
+            <Avatar />
+          </div>
+          <div className="float-left w-full mt-1">
+            {!disabled && (
+              <Bsave
+                className="float-right b-ajust-r"
+                onClick={() => {
+                  setTimeout(() => {
+                    closed();
+                  }, 500);
                 }}
-                dateFormat="dd-MM-yyyy"
-                calendarContainer={Calendar}
-                inline
               />
             )}
-</div>
-<div className="float-left w-1/2">
-  <Field  label="Adress de livraison"
-              name="adrLiv1"
-              />
-              <span>coco:{command0.adrLiv}</span>
-            <Field
-              label="Adress de livraison"
-              name="adrLiv"
-              as="select"
-              onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                setCommand0({...command0,adrLiv:e.target.value})
-               }}
-            >
-              {[adr0, ...(adressLivs || [])]?.map((c: AdressLiv) => (
-                  <option value={c.adress}>{c.adress}</option>
-                ))}
-            </Field>
-            <Field label="Saison" name="season" />
+            {/* !disabled && request == REQUEST_SAVE && (
+              <Bcyan className="float-left" type="submit">
+                <SaveIcon
+                  className="h-8 w-8 text-[#fff] group-hover:text-gray-500  float-left"
+                  aria-hidden="true"
+                />{" "}
+                <span className="px-2 float-left">&&</span>
+                <UserAddIcon
+                  className="h-8 w-8 text-[#fff] group-hover:text-gray-500 float-left"
+                  aria-hidden="true"
+                />
+              </Bcyan>
+            ) */}
           </div>
-          <Bsave
-            className="float-right mt-5 b-ajust-r"
+        </Form>
+        {!disabled && (
+          <Bcancel
+            className={
+              "float-right b-ajust " + (request == REQUEST_SAVE && "b-ajustf")
+            }
             onClick={() => {
-              setTimeout(() => {
-                refetchList();
-                close();
-              }, 600);
+              setDisabled(true);
             }}
           />
-     </Form>
-      <Bcancel
-        className="float-right mt-5 b-ajust"
-        onClick={() => {
-          close();
-        }}
-      />
-{command0.id != "" && <NavTabs tab={[
-    {
-      id: 1,
-      name: (
-        <>
-          <BriefcaseIcon className={style_icon} aria-hidden="true" />
-          <span className={style_span}>Articles de la commande</span>
-        </>
-      ),
-      featured: <ListArticleCommandes idClient={client0.id} idCommande={command0.id} />,
-    },
-  ]} />}
-        </Modal>
-  )
-}
+        )}
 
-export default forwardRef(FormCommande)
+        {disabled && (
+          <Bupdate
+            className="float-right"
+            onClick={() => {
+              setDisabled(false);
+            }}
+          />
+        )}
+      </div>
+      {client.id != "" && (
+        <ListCommandeClient client={client} refetch={refetch} />
+      )}
+    </Section>
+  );
+};
+
+export default FormClientManager;

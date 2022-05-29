@@ -174,8 +174,7 @@ const ListClientManager = () => {
             thead={
               <tr>
                 <Table.th>Nom client</Table.th>
-                <Table.th>Id</Table.th>
-                <Table.th>Contact</Table.th>
+               <Table.th>Contact</Table.th>
                 <Table.th>Icoterm</Table.th>
                 <Table.th>Mode règlement</Table.th>
                 <Table.th></Table.th>
@@ -197,8 +196,7 @@ const ListClientManager = () => {
                       </figcaption>
                     </figure>
                   </Table.td>
-                  <Table.td>{client.id}</Table.td>
-                  <Table.td>
+                 <Table.td>
                     <ul>
                       <li>{client.tel}</li>
                       <li>{client.email}</li>

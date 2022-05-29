@@ -1,5 +1,5 @@
 import { BriefcaseIcon } from "@heroicons/react/solid";
-import { openFournisseurs } from "components/Fournisseur/openFournisseur";
+import { openFournisseurs ,OpenFournisseurProp} from "config/rtk/rtkFournisseur";
 import { useAddCommandeFournisseurMutation, useEditCommandeFournisseurMutation } from "config/rtk";
 import React, { ChangeEvent, forwardRef, Ref, useEffect, useState } from "react";
 import { style_icon, style_span } from "tools/constStyle";
@@ -20,14 +20,16 @@ type CommandesProps={
 const FormCommandes = ({command}:CommandesProps,ref: Ref<void>) => {
   const [showModal, setShowModal] = React.useState(false);
   const [command0,setCommand0]=useState(command)
-  const fournisseurs:Fournisseur[]=openFournisseurs()
+  const fournisseursOpen:OpenFournisseurProp=openFournisseurs()
+  const fournisseurs:Fournisseur[]=fournisseursOpen.data.content
+  const add=fournisseursOpen.save;
+  const edit=fournisseursOpen.edit;
+  
   const openModal = (c: CommandeFournisseur) => {
     setCommand0(c)
     setShowModal(true);
   };
-  const [add]=useAddCommandeFournisseurMutation();
-  const [edit]=useEditCommandeFournisseurMutation();
-  const save=command0.id==""?add:edit
+ const save=command0.id==""?add:edit
   const close=()=>{
     setShowModal(false);
   }

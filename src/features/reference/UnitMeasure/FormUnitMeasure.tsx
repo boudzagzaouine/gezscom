@@ -271,12 +271,12 @@ const FormUnitMeasure = (
               }, 600);
             }}
           />
-          <BsavEndNew
+          {unitMeasure1.id=="" &&<BsavEndNew
                   className="float-right mr-2"
                   onClick={() => {
                     setShow(true);
                   }}
-                />
+                />}
                
               </div>
         
