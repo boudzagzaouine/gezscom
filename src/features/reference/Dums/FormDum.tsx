@@ -194,7 +194,7 @@ const FormDum = ({ dum }: FormDumProps, ref: Ref<void>) => {
 
           <div className="float-left w-full">
             <button
-              className="bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left"
+              className="bg-sky-900 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left"
               onClick={() => {
                 setDisabled(false);
                 open(dum0);

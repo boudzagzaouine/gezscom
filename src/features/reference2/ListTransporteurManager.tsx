@@ -130,19 +130,6 @@ function ListTransporteurManager() {
           archive.current(Transporteur.id);
         },
       },
-      {
-        icon: (
-          <ReplyIcon
-            className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Restorer",
-        action: () => {
-          //@ts-ignore
-          restore.current(Transporteur.id);
-        },
-      },
     ];
   };
 
@@ -165,6 +152,7 @@ function ListTransporteurManager() {
           <DeleteTransporteur refetch={refetch} id={""} ref={del} />
           <ArchiveTransporteur id={""} ref={archive} />
           <RestoreTransporteur id={""} ref={restore} />
+          <h1>Transporteur</h1>
           <div className="float-left w-full">
             <Bcyan
               className="float-left"
@@ -174,7 +162,7 @@ function ListTransporteurManager() {
                 FormAsAdd();
               }}
             >
-              ajouter transorteur
+              Nouveau Transporteur
             </Bcyan>
 
             <div className="float-right">
@@ -191,8 +179,7 @@ function ListTransporteurManager() {
             className="tab-list float-left w-full mt-8"
             thead={
               <tr>
-                <Table.th>id</Table.th>
-                <Table.th>designation</Table.th>
+                <Table.th>Désignation</Table.th>
                 <Table.th></Table.th>
               </tr>
             }
@@ -202,7 +189,6 @@ function ListTransporteurManager() {
               transporteurs?.map((Transporteur) => (
                 //   data?.map((transporteur) => (
                 <tr key={Transporteur.id}>
-                  <Table.td>{Transporteur.id}</Table.td>
                   <Table.td>
                     <span>{Transporteur.designation}</span>
                   </Table.td>

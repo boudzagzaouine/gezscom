@@ -94,20 +94,6 @@ const FormPayementMode = (
     return [
       {
         icon: (
-          <ClipboardListIcon
-            className="mr-3 h-8 w-8 text-green-300 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Détail",
-        action: () => {
-          open(payementMode);
-          setRequest(REQUEST_EDIT);
-          setDisabled(true);
-        },
-      },
-      {
-        icon: (
           <PencilAltIcon
             className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
             aria-hidden="true"
@@ -146,19 +132,6 @@ const FormPayementMode = (
           archive.current(payementMode.id);
         },
       },
-      {
-        icon: (
-          <ReplyIcon
-            className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Restorer",
-        action: () => {
-          //@ts-ignore
-          restore.current(payementMode.id);
-        },
-      },
     ];
   };
 
@@ -169,10 +142,10 @@ const FormPayementMode = (
           <DeletePayementMode id={""} ref={del} refetch={refetchPayementMode} />
           <ArchivePayementMode id={""} ref={archive} />
           <RestorePayementMode id={""} ref={restore} />
-          <h1>Nouveau Mode de Réglement </h1>
+          <h1>Mode de Réglement </h1>
           <div className="float-left w-full">
             <button
-              className="bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left"
+              className="bg-sky-900 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left"
               onClick={() => {
                 setDisabled(false);
                 open(payementMode0);
@@ -243,7 +216,7 @@ const FormPayementMode = (
       )}
       <Modal
         show={show}
-        title="Nouveau Mode De Réglement"
+        title="Mode De Réglement"
         format={+classNames("5")}
         close={closed}
       >
@@ -260,7 +233,7 @@ const FormPayementMode = (
             <div className="float-left w-full">
 			<div className="float-left w-1/2">
               <Field
-               label="Code"
+               label="Code *"
                 name="code"
                 disabled={disabled}
                 required="required"
@@ -268,7 +241,7 @@ const FormPayementMode = (
 			</div>
                <div className="float-left w-1/2">
                   <Field
-                    label="Designation"
+                    label="Désignation *"
                     name="design"
                     disabled={disabled}
                     required="required"

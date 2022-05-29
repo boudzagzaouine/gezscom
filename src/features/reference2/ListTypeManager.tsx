@@ -17,6 +17,7 @@ import Bcyan from "widgets/Bcyan";
 import { Button } from "widgets/Button";
 import Icon from "widgets/Icon";
 import Mitems from "widgets/Mitems";
+import Mitems0 from "widgets/Mitems0";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
 import Table from "widgets/Table";
@@ -121,19 +122,6 @@ function ListTypeManager() {
           archive.current(Type.id);
         },
       },
-      {
-        icon: (
-          <ReplyIcon
-            className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Restorer",
-        action: () => {
-          //@ts-ignore
-          restore.current(Type.id);
-        },
-      },
     ];
   };
 
@@ -156,6 +144,7 @@ function ListTypeManager() {
           <DeleteType refetch={refetch} id={""} ref={del} />
           <ArchiveType id={""} ref={archive} />
           <RestoreType id={""} ref={restore} />
+          <h1>Type</h1>
           <div className="float-left w-full">
             <Bcyan
               className="float-left"
@@ -165,7 +154,7 @@ function ListTypeManager() {
                 FormAsAdd();
               }}
             >
-              ajouter Type
+              Nouveau Type
             </Bcyan>
 
             <div className="float-right">
@@ -182,8 +171,7 @@ function ListTypeManager() {
             className="tab-list float-left w-full mt-8"
             thead={
               <tr>
-                <Table.th>id</Table.th>
-                <Table.th>designation</Table.th>
+                <Table.th>Désignation</Table.th>
                 <Table.th></Table.th>
               </tr>
             }
@@ -193,7 +181,6 @@ function ListTypeManager() {
               types?.map((Type) => (
                 //   data?.map((type) => (
                 <tr key={Type.id}>
-                  <Table.td>{Type.id}</Table.td>
                   <Table.td>
                     <figure>
                       <figcaption>
@@ -203,7 +190,7 @@ function ListTypeManager() {
                   </Table.td>
 
                   <Table.td>
-                    <Mitems menu={menu(Type)} />
+                    <Mitems0 menu={menu(Type)} />
                   </Table.td>
                 </tr>
               ))

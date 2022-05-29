@@ -19,6 +19,9 @@ import { ListClientsProps } from "widgets/TypeWidgets";
 import FormCommande from "./FormCommande";
 //@ts-ignore
 import dateFormat from "dateformat";
+import Mitems from "widgets/Mitems";
+import DeleteCommand from "components/manager/client/DeleteCommand";
+import ArchiveCommand from "components/manager/client/ArchiveCommand";
 const ListAllCommandes = () => {
   const [page, setPage] = useState(0);
   const loadPage = (p: number) => {
@@ -38,8 +41,12 @@ const ListAllCommandes = () => {
   const refCom = useRef(null);
   const cm1: Commande = cm0;
   cm1.idClient = "";
+  const del = useRef(null);
+  const archive = useRef(null);
   return (
     <Section>
+      <DeleteCommand id={""} ref={del} />
+      <ArchiveCommand id={""} ref={archive} />
       {clients?.length != 0 && (
         <Bcyan
           className="float-left mt-2"
@@ -79,17 +86,31 @@ const ListAllCommandes = () => {
             <Table.td>{commande.season}</Table.td>
             <Table.td>{commande.amount}</Table.td>
             <Table.td>
-              <Bedit
-                className="float-left mt-2"
-                onClick={() => {
-                  //
-                  //@ts-ignore
-                  refCom.current(
-                    commande,
-                    getClient(commande.idClient, clients)
-                  );
-                }}
-              />
+            <Mitems
+                      archive={() => {
+                        //@ts-ignore
+                        archive.current(commande.id);
+                      }}
+                      del={() => {
+                        //@ts-ignore
+                        del.current(commande.id);
+                      }}
+                      edit={() => {
+                        //@ts-ignore
+                        refCom.current(
+                          commande,
+                          getClient(commande.idClient, clients)
+                        );
+                      }}
+                      obj={client}
+                      update={() => {
+                        //@ts-ignore
+                        refCom.current(
+                          commande,
+                          getClient(commande.idClient, clients)
+                        );
+                      }}
+                    />
             </Table.td>
           </tr>
         ))}

@@ -30,8 +30,8 @@ const FormDocumentManager = ({
   const onSubmit =
     request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit : undefined;
   const [disabled, setDisabled] = useState(disable);
-  const text = "nouveau";
-  const text1 = "modifier";
+  const text = "Nouveau";
+  const text1 = "Modifier";
   const imputFocus = useRef(null);
   useEffect(() => {
     /*  @ts-ignore*/
@@ -41,16 +41,16 @@ const FormDocumentManager = ({
     <Section>
        <Form defaultValues={document0} onSubmit={onSubmit}>
           {request == REQUEST_SAVE ? (
-            <h1 className="mb-2">{text} document </h1>
+            <h1 className="mb-2">{text} Document </h1>
           ) : (
-            <h1 className="mb-2">{text1} document </h1>
+            <h1 className="mb-2">{text1} Document </h1>
           )}
 
           <div className="float-left w-full">
              {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
               <Field
                 ref={imputFocus}
-                label="designation"
+                label="Désignation *"
                 name="designation"
                 disabled={disabled}
               />

@@ -17,6 +17,7 @@ import Bcyan from "widgets/Bcyan";
 import { Button } from "widgets/Button";
 import Icon from "widgets/Icon";
 import Mitems from "widgets/Mitems";
+import Mitems0 from "widgets/Mitems0";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
 import Table from "widgets/Table";
@@ -121,19 +122,6 @@ function ListRoleManager() {
           archive.current(Role.id);
         },
       },
-      {
-        icon: (
-          <ReplyIcon
-            className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Restorer",
-        action: () => {
-          //@ts-ignore
-          restore.current(Role.id);
-        },
-      },
     ];
   };
 
@@ -156,6 +144,7 @@ function ListRoleManager() {
           <DeleteRole refetch={refetch} id={""} ref={del} />
           <ArchiveRole id={""} ref={archive} />
           <RestoreRole id={""} ref={restore} />
+          <h1>Role</h1>
           <div className="float-left w-full">
             <Bcyan
               className="float-left"
@@ -165,7 +154,7 @@ function ListRoleManager() {
                 FormAsAdd();
               }}
             >
-              ajouter role
+              Nouveau Role
             </Bcyan>
 
             <div className="float-right">
@@ -182,9 +171,8 @@ function ListRoleManager() {
             className="tab-list float-left w-full mt-8"
             thead={
               <tr>
-                <Table.th>id</Table.th>
-                <Table.th>designation</Table.th>
-                <Table.th>nobre des utilisateurs</Table.th>
+                <Table.th>Désignation</Table.th>
+                <Table.th>Nombre des utilisateurs</Table.th>
                 <Table.th></Table.th>
               </tr>
             }
@@ -192,7 +180,6 @@ function ListRoleManager() {
             {roles?.map((Role) => (
               //   data?.map((role) => (
               <tr key={Role.id}>
-                <Table.td>{Role.id}</Table.td>
                 <Table.td>
                   <span>{Role.designation}</span>
                 </Table.td>
@@ -201,7 +188,7 @@ function ListRoleManager() {
                 </Table.td>
 
                 <Table.td>
-                  <Mitems menu={menu(Role)} />
+                  <Mitems0 menu={menu(Role)} />
                 </Table.td>
               </tr>
             ))}

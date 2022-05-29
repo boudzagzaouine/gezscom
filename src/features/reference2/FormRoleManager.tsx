@@ -26,8 +26,8 @@ const FormRoleManager = ({
   const onSubmit =
     request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit : undefined;
   const [disabled, setDisabled] = useState(disable);
-  const text = "nouveau";
-  const text1 = "modifier";
+  const text = "Nouveau";
+  const text1 = "Modifier";
   const imputFocus = useRef(null);
   useEffect(() => {
     /*  @ts-ignore*/
@@ -37,9 +37,9 @@ const FormRoleManager = ({
     <Section>
        <Form defaultValues={role0} onSubmit={onSubmit}>
           {request == REQUEST_SAVE ? (
-            <h1 className="mb-2">{text} role </h1>
+            <h1 className="mb-2">{text} Role </h1>
           ) : (
-            <h1 className="mb-2">{text1} role </h1>
+            <h1 className="mb-2">{text1} Role </h1>
           )}
 
           <div className="float-left w-full">
@@ -47,12 +47,12 @@ const FormRoleManager = ({
               <Field
                 ref={imputFocus}
                 style={{ margin: ".4rem" }}
-                label="designation"
+                label="Désignation"
                 name="designation"
                 disabled={disabled}
               />
               <fieldset className="border border-[#ddd]/80 p-5 rounded-md">
-                <legend className="p-5">fonctionalités</legend>
+                <legend className="p-5">Fonctionnalités</legend>
                 <div className="ml-8 p-4">
                   <div className=" float-left">
                     <div>
@@ -66,7 +66,7 @@ const FormRoleManager = ({
                         htmlFor="gestions_des_clients"
                         className="font-medium text-gray-700"
                       >
-                        gestions des clients
+                        Gestion Clients
                       </label>
                     </div>
                     <div className="ml-8">
@@ -80,7 +80,7 @@ const FormRoleManager = ({
                         htmlFor="supression_clients"
                         className="font-medium text-gray-700"
                       >
-                        supression clients
+                        Suppression client
                       </label>
                     </div>
                     <div className="ml-8">
@@ -94,7 +94,7 @@ const FormRoleManager = ({
                         htmlFor="supression_commande_clients"
                         className="font-medium text-gray-700"
                       >
-                        supression commande client
+                        Suppression commande client
                       </label>
                     </div>
                     <div className="mt-4">
@@ -108,7 +108,7 @@ const FormRoleManager = ({
                         htmlFor="gestions des fournisseur"
                         className="font-medium text-gray-700"
                       >
-                        gestions des fournisseur
+                        Gestion Fournisseurs
                       </label>
                     </div>
                     <div className="ml-8">
@@ -122,7 +122,7 @@ const FormRoleManager = ({
                         htmlFor="supression fournisseur"
                         className="font-medium text-gray-700"
                       >
-                        supression fournisseur
+                        Suppression fournisseur
                       </label>
                     </div>
                     <div className="ml-8">
@@ -136,7 +136,7 @@ const FormRoleManager = ({
                         htmlFor="supression commande  fournisseur"
                         className="font-medium text-gray-700"
                       >
-                        supression commande fournisseur
+                        Suppression commande fournisseur
                       </label>
                     </div>
                     <div className="mt-4">
@@ -150,7 +150,7 @@ const FormRoleManager = ({
                         htmlFor="gestions des dums et decharge"
                         className="font-medium text-gray-700"
                       >
-                        gestions des dums et decharge
+                        Gestion Dums & Décharges
                       </label>
                     </div>
                     <div className="ml-8">
@@ -164,7 +164,7 @@ const FormRoleManager = ({
                         htmlFor="supression dums"
                         className="font-medium text-gray-700"
                       >
-                        supression dums
+                        Suppression dum
                       </label>
                     </div>
                     <div className="ml-8">
@@ -178,7 +178,7 @@ const FormRoleManager = ({
                         htmlFor="supression decharge"
                         className="font-medium text-gray-700"
                       >
-                        supression decharge
+                        Supression décharge
                       </label>
                     </div>
                     <div className="mt-4">
@@ -192,7 +192,7 @@ const FormRoleManager = ({
                         htmlFor="gestions d'achats"
                         className="font-medium text-gray-700"
                       >
-                        gestions d'achats
+                        Gestion Achats
                       </label>
                     </div>
                     <div className="ml-8">
@@ -206,7 +206,7 @@ const FormRoleManager = ({
                         htmlFor="supression bon d'achats"
                         className="font-medium text-gray-700"
                       >
-                        supression bon d'achats
+                        Suppression bon d'achats
                       </label>
                     </div>
                     <div className="ml-8">
@@ -220,7 +220,7 @@ const FormRoleManager = ({
                         htmlFor="supression bon de retours"
                         className="font-medium text-gray-700"
                       >
-                        supression bon de retours
+                        Suppression bon de retours
                       </label>
                     </div>
 
@@ -235,7 +235,7 @@ const FormRoleManager = ({
                         htmlFor="gestions des production"
                         className="font-medium text-gray-700"
                       >
-                        gestions des production
+                        Gestion Productions
                       </label>
                     </div>
 
@@ -250,7 +250,7 @@ const FormRoleManager = ({
                         htmlFor="supression fiche de production"
                         className="font-medium text-gray-700"
                       >
-                        supression fiche de production
+                        Suppression fiche production
                       </label>
                     </div>
                     <div className="ml-8">
@@ -264,7 +264,7 @@ const FormRoleManager = ({
                         htmlFor="supression article"
                         className="font-medium text-gray-700"
                       >
-                        supression article
+                        Suppression Article
                       </label>
                     </div>
                   </div>
@@ -280,7 +280,7 @@ const FormRoleManager = ({
                         htmlFor="vente et facturation"
                         className="font-medium text-gray-700"
                       >
-                        vente et facturation
+                        Ventes et facturation
                       </label>
                     </div>
                     <div className="ml-8">
@@ -294,7 +294,7 @@ const FormRoleManager = ({
                         htmlFor="supression de facturation"
                         className="font-medium text-gray-700"
                       >
-                        supression de facturation
+                        Supression Facture
                       </label>
                     </div>
                     <div className="mt-4">
@@ -308,7 +308,7 @@ const FormRoleManager = ({
                         htmlFor="gestions des utilisateurs"
                         className="font-medium text-gray-700"
                       >
-                        gestions des utilisateurs
+                        Gestions Utilisateurs
                       </label>
                     </div>
                     <div className="ml-8">
@@ -322,7 +322,7 @@ const FormRoleManager = ({
                         htmlFor="supression de utilisateur"
                         className="font-medium text-gray-700"
                       >
-                        supression de utilisateur
+                        Suppression utilisateur
                       </label>
                     </div>
                     <div className="ml-8">
@@ -336,7 +336,7 @@ const FormRoleManager = ({
                         htmlFor="supression de utilisateur"
                         className="font-medium text-gray-700"
                       >
-                        supression de role
+                        Suppression role
                       </label>
                     </div>
                     <div className="mt-4">
@@ -350,7 +350,7 @@ const FormRoleManager = ({
                         htmlFor="gestions des colissage"
                         className="font-medium text-gray-700"
                       >
-                        gestions des colissage
+                        Gestion Colisages
                       </label>
                     </div>
 
@@ -365,7 +365,7 @@ const FormRoleManager = ({
                         htmlFor="supression de fiche colissage"
                         className="font-medium text-gray-700"
                       >
-                        supression de fiche colissage
+                        Suppression fiche colisage
                       </label>
                     </div>
                     <div className="mt-4">
@@ -379,7 +379,7 @@ const FormRoleManager = ({
                         htmlFor="gestions des table"
                         className="font-medium text-gray-700"
                       >
-                        gestions des tables
+                        Gestions des Tables
                       </label>
                     </div>
                     <div className="mt-4">
@@ -393,7 +393,7 @@ const FormRoleManager = ({
                         htmlFor="Editions des En-tete"
                         className="font-medium text-gray-700"
                       >
-                        Editions des En-tete
+                        Editions des en-tetes
                       </label>
                     </div>
                   </div>

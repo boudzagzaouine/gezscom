@@ -30,8 +30,8 @@ const FormTransporteurManager = ({
   const onSubmit =
     request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit : undefined;
   const [disabled, setDisabled] = useState(disable);
-  const text = "nouveau";
-  const text1 = "modifier";
+  const text = "Nouveau";
+  const text1 = "Modifier";
   const imputFocus = useRef(null);
   useEffect(() => {
     /*  @ts-ignore*/
@@ -50,7 +50,7 @@ const FormTransporteurManager = ({
      <div className="float-left w-full">
            <Field
              ref={imputFocus}
-             label="designation"
+             label="Désignation *"
              name="designation"
              disabled={disabled}
            />

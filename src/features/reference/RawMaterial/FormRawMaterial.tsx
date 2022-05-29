@@ -95,20 +95,6 @@ const FormRawMaterial = (
     return [
       {
         icon: (
-          <ClipboardListIcon
-            className="mr-3 h-8 w-8 text-green-300 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Détail",
-        action: () => {
-          open(rawMaterial);
-          setRequest(REQUEST_EDIT);
-          setDisabled(true);
-        },
-      },
-      {
-        icon: (
           <PencilAltIcon
             className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
             aria-hidden="true"
@@ -147,19 +133,6 @@ const FormRawMaterial = (
           archive.current(rawMaterial.id);
         },
       },
-      {
-        icon: (
-          <ReplyIcon
-            className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Restorer",
-        action: () => {
-          //@ts-ignore
-          restore.current(rawMaterial.id);
-        },
-      },
     ];
   };
 
@@ -170,16 +143,16 @@ const FormRawMaterial = (
           <DeleteRawMaterial id={""} ref={del} refetch={refetchRawMaterial} />
           <ArchiveRawMaterial id={""} ref={archive} />
           <RestoreRawMaterial id={""} ref={restore} />
-          <h1>Nouvelle Famille Matière Première </h1>
+          <h1>Familles Matière première</h1>
           <div className="float-left w-full">
             <button
-              className="bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left"
+              className="bg-sky-900 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left"
               onClick={() => {
                 setDisabled(false);
                 open(rawMaterial0);
               }}
             >
-              Nouvelle Matière Première
+              Nouvelle Famille Matière Première
             </button>
             <div className="float-right">
               <button className="bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg">
@@ -214,7 +187,7 @@ const FormRawMaterial = (
                   Désignation
                 </th>
                 <th className=" top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
-                  nomenclature
+                  Nomenclature
                 </th>
                 <th className=" top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
                   Famille
@@ -260,7 +233,7 @@ const FormRawMaterial = (
 
       <Modal
         show={show}
-        title="Nouvelle Famille Matière première"
+        title="Famille Matière première"
         format={+classNames("5")}
         close={closed}
       >
@@ -276,12 +249,12 @@ const FormRawMaterial = (
           >
             <div className="float-left w-1/2">
                <Field
-                  label="Designation"
+                  label="Désignation *"
                   name="design"
                   disabled={disabled}
                 />
                <Field
-                  label="Nomenclature"
+                  label="Nomenclature *"
                   name="nomenclature"
                   disabled={disabled}
                 />
@@ -295,14 +268,14 @@ const FormRawMaterial = (
 				</div>
              <div className="float-left w-1/2">
                 <Field
-                  label="Unité De Mesure"
+                  label="Unité De Mesure *"
                   name="measureUnit"
                   options={UNIT}
                   as="select"
                   disabled={disabled}
                 />
                <Field
-                  label="Taux de pertes"
+                  label="Taux de perte *"
                   name="tauxPertes"
                   disabled={disabled}
                   required="required"

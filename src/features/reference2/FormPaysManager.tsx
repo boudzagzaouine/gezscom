@@ -29,8 +29,8 @@ const FormPaysManager = ({
   const onSubmit =
     request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit : undefined;
   const [disabled, setDisabled] = useState(disable);
-  const text = "nouveau";
-  const text1 = "modifier";
+  const text = "Nouveau";
+  const text1 = "Modifier";
   const imputFocus = useRef(null);
   useEffect(() => {
     /*  @ts-ignore*/
@@ -40,16 +40,16 @@ const FormPaysManager = ({
     <Section>
        <Form defaultValues={pays0} onSubmit={onSubmit}>
           {request == REQUEST_SAVE ? (
-            <h1 className="mb-2">{text} pays </h1>
+            <h1 className="mb-2">{text} Pays </h1>
           ) : (
-            <h1 className="mb-2">{text1} pays </h1>
+            <h1 className="mb-2">{text1} Pays </h1>
           )}
 
           <div className="float-left w-full">
              {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
               <Field
                 ref={imputFocus}
-                label="designation"
+                label="Désignation *"
                 name="designation"
                 disabled={disabled}
               />

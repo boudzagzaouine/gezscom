@@ -7,6 +7,7 @@ import { Button } from "widgets";
 import Bcyan from "widgets/Bcyan";
 import Icon from "widgets/Icon";
 import Mitems from "widgets/Mitems";
+import Mitems0 from "widgets/Mitems0";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
 import Table from "widgets/Table";
@@ -101,19 +102,19 @@ const ListAllMatierePremiere = () => {
           archive.current(matiere.id);
         },
       },
-      {
-        icon: (
-          <ReplyIcon
-            className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Restorer",
-        action: () => {
-          //@ts-ignore
-          restore.current(matiere.id);
-        },
-      },
+      // {
+      //   icon: (
+      //     <ReplyIcon
+      //       className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
+      //       aria-hidden="true"
+      //     />
+      //   ),
+      //   text: "Restorer",
+      //   action: () => {
+      //     //@ts-ignore
+      //     restore.current(matiere.id);
+      //   },
+      // },
     ];
   };
   return (
@@ -160,7 +161,7 @@ const ListAllMatierePremiere = () => {
                       <Table.td>{matiere.idFournisseur}</Table.td>
                       <Table.td>{matiere.familleMatierePremiere}</Table.td>
                       <Table.td>{matiere.origine}</Table.td>
-                      <Table.td><Mitems menu={menu(matiere)} /></Table.td>
+                      <Table.td><Mitems0 menu={menu(matiere)} /></Table.td>
                     </tr>
                   ))
                 }

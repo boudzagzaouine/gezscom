@@ -109,7 +109,7 @@ const FormCommande = (
       name: (
         <>
           <BriefcaseIcon className={style_icon} aria-hidden="true" />
-          <span className={style_span}>Articles de la commande</span>
+          <span className={style_span}>Articles de la Commande</span>
         </>
       ),
       featured: <ArticlesCommande idCommande={command0.id} />,
@@ -158,7 +158,7 @@ const FormCommande = (
               </>
             ) : (
               <Field
-                label="Client"
+                label="Client *"
                 name="cococo"
                 as="select"
                 onChange={(e: ChangeEvent<HTMLSelectElement>) => {
@@ -175,7 +175,7 @@ const FormCommande = (
               </Field>
             )}
             <Field
-              label="Date Commande"
+              label="Date Commande *"
               name="date33"
               value={dateFormat(startDate, "dd-mm-yyyy")}
               onFocus={() => {
@@ -206,14 +206,14 @@ const FormCommande = (
           </div>
           <div className="float-left w-1/2">
             <Field
-              label="Adress de livraison"
+              label="Adresse de livraison *"
               name="adrLiv"
               as="select"
               optionLabelName="adress"
               optionKeyName="adress"
               options={[adr0, ...(adressLivs || [])]}
             />
-            <Field label="Saison" name="season" />
+            <Field label="Saison *" name="season" />
           </div>
           <Bsave
             className="float-right mt-5 b-ajust-r"

@@ -27,8 +27,8 @@ const FormVilleManager = ({
   const onSubmit =
     request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit : undefined;
   const [disabled, setDisabled] = useState(disable);
-  const text = "nouvelle";
-  const text1 = "modifier";
+  const text = "Nouvelle";
+  const text1 = "Modifier";
   const imputFocus = useRef(null);
   useEffect(() => {
     /*  @ts-ignore*/
@@ -48,14 +48,14 @@ const FormVilleManager = ({
             <div className="float-left w-1/2">
                <Field
                 ref={imputFocus}
-                label="designation"
+                label="Désignation *"
                 name="concat"
                 disabled={disabled}
               />
 			  </div>
 			  <div className="float-left w-1/2">
               <Field
-                label="PAYS"
+                label="Pays *"
                 name="paymentChoice"
                 options={PAYS_CHOICE}
                 as="select"

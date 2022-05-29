@@ -102,20 +102,6 @@ const FormRegimeDouanier = (
     return [
       {
         icon: (
-          <ClipboardListIcon
-            className="mr-3 h-8 w-8 text-green-300 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Détail",
-        action: () => {
-          open(regimeDouanier);
-          setRequest(REQUEST_EDIT);
-          setDisabled(true);
-        },
-      },
-      {
-        icon: (
           <PencilAltIcon
             className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
             aria-hidden="true"
@@ -154,19 +140,6 @@ const FormRegimeDouanier = (
           archive.current(regimeDouanier.id);
         },
       },
-      {
-        icon: (
-          <ReplyIcon
-            className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Restorer",
-        action: () => {
-          //@ts-ignore
-          restore.current(regimeDouanier.id);
-        },
-      },
     ];
   };
 
@@ -181,10 +154,10 @@ const FormRegimeDouanier = (
           />
           <ArchiveRegimeDouanier id={""} ref={archive} />
           <RestoreRegimeDouanier id={""} ref={restore} />
-          <h1>Nouveau Régime Douanier </h1>
+          <h1>Régimes Douaniers</h1>
           <div className="float-left w-full">
             <button
-              className="bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left"
+              className="bg-sky-900 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left"
               onClick={() => {
                 setDisabled(false);
                 open(regimeDouanier0);
@@ -256,7 +229,7 @@ const FormRegimeDouanier = (
 
       <Modal
         show={show}
-        title="Nouveau Régime Douanier"
+        title="Régime Douanier"
         format={+classNames("5")}
         close={closed}
       >
@@ -273,7 +246,7 @@ const FormRegimeDouanier = (
             <div className="float-left w-full">
 			<div className="float-left w-1/2">
               <Field
-               label="Code"
+               label="Numéro *"
                 name="code"
                 disabled={disabled}
                 required="required"
@@ -281,7 +254,7 @@ const FormRegimeDouanier = (
 			</div>
                <div className="float-left w-1/2">
                   <Field
-                    label="Designation"
+                    label="Désignation *"
                     name="design"
                     disabled={disabled}
                     required="required"

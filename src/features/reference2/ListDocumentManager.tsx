@@ -20,6 +20,7 @@ import Bcyan from "widgets/Bcyan";
 import { Button } from "widgets/Button";
 import Icon from "widgets/Icon";
 import Mitems from "widgets/Mitems";
+import Mitems0 from "widgets/Mitems0";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
 import Table from "widgets/Table";
@@ -124,19 +125,6 @@ function ListDocumentManager() {
           archive.current(Document.id);
         },
       },
-      {
-        icon: (
-          <ReplyIcon
-            className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Restorer",
-        action: () => {
-          //@ts-ignore
-          restore.current(Document.id);
-        },
-      },
     ];
   };
 
@@ -159,6 +147,7 @@ function ListDocumentManager() {
           <DeleteDocument refetch={refetch} id={""} ref={del} />
           <ArchiveDocument id={""} ref={archive} />
           <RestoreDocument id={""} ref={restore} />
+          <h1>Document</h1>
           <div className="float-left w-full">
             <Bcyan
               className="float-left"
@@ -168,7 +157,7 @@ function ListDocumentManager() {
                 FormAsAdd();
               }}
             >
-              ajouter document
+              Nouveau Document
             </Bcyan>
 
             <div className="float-right">
@@ -185,8 +174,7 @@ function ListDocumentManager() {
             className="tab-list float-left w-full mt-8"
             thead={
               <tr>
-                <Table.th>id</Table.th>
-                <Table.th>designation</Table.th>
+                <Table.th>Désignation</Table.th>
                 <Table.th></Table.th>
               </tr>
             }
@@ -196,13 +184,12 @@ function ListDocumentManager() {
               documents?.map((Document) => (
                 //   data?.map((document) => (
                 <tr key={Document.id}>
-                  <Table.td>{Document.id}</Table.td>
                   <Table.td>
                     <span>{Document.designation}</span>
                   </Table.td>
 
                   <Table.td>
-                    <Mitems menu={menu(Document)} />
+                    <Mitems0 menu={menu(Document)} />
                   </Table.td>
                 </tr>
               ))
