@@ -92,20 +92,6 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
     return [
       {
         icon: (
-          <ClipboardListIcon
-            className="mr-3 h-8 w-8 text-green-300 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Détail",
-        action: () => {
-          open(article);
-          setRequest(REQUEST_EDIT);
-          setDisabled(true);
-        },
-      },
-      {
-        icon: (
           <PencilAltIcon
             className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
             aria-hidden="true"
@@ -144,19 +130,6 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
           archive.current(article.id);
         },
       },
-      {
-        icon: (
-          <ReplyIcon
-            className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Restorer",
-        action: () => {
-          //@ts-ignore
-          restore.current(article.id);
-        },
-      },
     ];
   };
 
@@ -167,10 +140,10 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
           <DeleteArticle id={""} ref={del} refetch={refetchArticle} />
           <ArchiveArticle id={""} ref={archive} />
           <RestoreArticle id={""} ref={restore} />
-          <h1>Nouvelle Famille Article</h1>
+          <h1>Familles Article</h1>
           <div className="float-left w-full">
             <button
-              className="bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left"
+              className="bg-sky-900 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left"
               onClick={() => {
                 setDisabled(false);
                 open(article0);
@@ -250,20 +223,20 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
           >
             <div className="float-left w-1/2">
               <Field
-                label="Designation"
+                label="Désignation *"
                 name="design"
                 disabled={disabled}
               />
-				<Field
-                    label="Nomenclature"
+				  </div>
+               <div className="float-left w-1/2">
+                  <Field
+                    label="Nomenclature *"
                     name="nomenclature"
                     disabled={disabled}
                     required="required"
                   />
-				  </div>
-               <div className="float-left w-1/2">
                   <Field
-                    label="Taux de pertes"
+                    label="Taux de perte *"
                     name="tauxPertes"
                     disabled={disabled}
                     required="required"

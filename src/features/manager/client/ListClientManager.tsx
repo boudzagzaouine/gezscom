@@ -157,7 +157,7 @@ const ListClientManager = () => {
                 FormAsAdd();
               }}
             >
-              Nouveau client
+              Nouveau Client
             </Bcyan>
             <div className="float-right">
               <Button className="bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg">
@@ -173,9 +173,9 @@ const ListClientManager = () => {
             className="tab-list float-left w-full mt-8"
             thead={
               <tr>
-                <Table.th>nom client</Table.th>
-                <Table.th>id</Table.th>
-                <Table.th>contact</Table.th>
+                <Table.th>Nom client</Table.th>
+                <Table.th>Id</Table.th>
+                <Table.th>Contact</Table.th>
                 <Table.th>Icoterm</Table.th>
                 <Table.th>Mode règlement</Table.th>
                 <Table.th></Table.th>

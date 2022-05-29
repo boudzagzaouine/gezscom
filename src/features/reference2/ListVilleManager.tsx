@@ -17,6 +17,7 @@ import Bcyan from "widgets/Bcyan";
 import { Button } from "widgets/Button";
 import Icon from "widgets/Icon";
 import Mitems from "widgets/Mitems";
+import Mitems0 from "widgets/Mitems0";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
 import Table from "widgets/Table";
@@ -121,19 +122,6 @@ function ListVilleManager() {
           archive.current(Ville.id);
         },
       },
-      {
-        icon: (
-          <ReplyIcon
-            className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Restorer",
-        action: () => {
-          //@ts-ignore
-          restore.current(Ville.id);
-        },
-      },
     ];
   };
 
@@ -156,6 +144,7 @@ function ListVilleManager() {
           <DeleteVille refetch={refetch} id={""} ref={del} />
           <ArchiveVille id={""} ref={archive} />
           <RestoreVille id={""} ref={restore} />
+          <h1>Ville</h1>
           <div className="float-left w-full">
             <Bcyan
               className="float-left"
@@ -165,7 +154,7 @@ function ListVilleManager() {
                 FormAsAdd();
               }}
             >
-              ajouter ville
+              Nouvelle Ville
             </Bcyan>
 
             <div className="float-right">
@@ -182,8 +171,7 @@ function ListVilleManager() {
             className="tab-list float-left w-full mt-8"
             thead={
               <tr>
-                <Table.th>id</Table.th>
-                <Table.th>designation</Table.th>
+                <Table.th>Désignation</Table.th>
                 <Table.th>Pays</Table.th>
                 <Table.th></Table.th>
               </tr>
@@ -194,7 +182,6 @@ function ListVilleManager() {
               villes?.map((Ville) => (
                 //   data?.map((ville) => (
                 <tr key={Ville.id}>
-                  <Table.td>{Ville.id}</Table.td>
                   <Table.td>
                     <span>{Ville.designation}</span>
                   </Table.td>
@@ -203,7 +190,7 @@ function ListVilleManager() {
                   </Table.td>
 
                   <Table.td>
-                    <Mitems key={Ville.id} menu={menu(Ville)} />
+                    <Mitems0 key={Ville.id} menu={menu(Ville)} />
                   </Table.td>
                 </tr>
               ))

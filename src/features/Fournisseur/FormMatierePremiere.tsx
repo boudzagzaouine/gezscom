@@ -62,9 +62,9 @@ optionLabelName="raisonSociale"
 
 
 }
-<Field label="Désignation" name="designation"  />
-<Field label="Famille matiére premiére" name="familleMatierePremiere" as="select" options={LIST_FAMILLE_MATIERE_PREMIERE}/>
-<Field label="Prix" name="prix" />
+<Field label="Désignation *" name="designation"  />
+<Field label="Famille matière première *" name="familleMatierePremiere" as="select" options={LIST_FAMILLE_MATIERE_PREMIERE}/>
+<Field label="Prix *" name="prix" />
 <Field label="Origine" name="origine" as="select" options={ORIGINE}/>
 {/* <DatePicker className="border-[#f00]" selected={stsartDate} onChange={(date:any) => setStartDate(date)} /> */}
 </div>

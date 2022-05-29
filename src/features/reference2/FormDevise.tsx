@@ -31,8 +31,8 @@ const FormDeviseManager = ({
   const onSubmit =
     request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit : undefined;
   const [disabled, setDisabled] = useState(disable);
-  const text = "nouveau";
-  const text1 = "modifier";
+  const text = "Nouveau";
+  const text1 = "Modifier";
   const imputFocus = useRef(null);
   useEffect(() => {
     /*  @ts-ignore*/
@@ -42,21 +42,21 @@ const FormDeviseManager = ({
     <Section>
        <Form defaultValues={v0} onSubmit={onSubmit}>
           {request == REQUEST_SAVE ? (
-            <h1 className="mb-2">{text} devise </h1>
+            <h1 className="mb-2">{text} Devise </h1>
           ) : (
-            <h1 className="mb-2">{text1} devise </h1>
+            <h1 className="mb-2">{text1} Devise </h1>
           )}
 
           <div className="float-left w-full">
              {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
               <Field
                 ref={imputFocus}
-                label="designation"
+                label="Désignation *"
                 name="designation"
                 disabled={disabled}
               />
-              <Field label="code iso" name="code_iso" disabled={disabled} />
-              <Field label="symbole" name="symbole" disabled={disabled} />
+              <Field label="Code ISO *" name="code_iso" disabled={disabled} />
+              <Field label="Symbole *" name="symbole" disabled={disabled} />
             </div>
                <div className="float-right mt-5 b-ajust-r">
                      <Bsave

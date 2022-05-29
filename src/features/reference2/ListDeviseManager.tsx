@@ -127,19 +127,6 @@ function ListDeviseManager() {
           archive.current(Devise.id);
         },
       },
-      {
-        icon: (
-          <ReplyIcon
-            className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Restorer",
-        action: () => {
-          //@ts-ignore
-          restore.current(Devise.id);
-        },
-      },
     ];
   };
   const imputFocus = useRef();
@@ -168,6 +155,7 @@ function ListDeviseManager() {
           <DeleteDevise refetch={refetch} id={""} ref={del} />
           <ArchiveDevise id={""} ref={archive} />
           <RestoreDevise id={""} ref={restore} />
+          <h1>Devise</h1>
           <div className="float-left w-full">
             <Bcyan
               className="float-left"
@@ -178,7 +166,7 @@ function ListDeviseManager() {
                 FormAsAdd();
               }}
             >
-              ajouter devise
+              Novelle Devise
             </Bcyan>
 
             <div className="float-right">
@@ -195,10 +183,9 @@ function ListDeviseManager() {
             className="tab-list float-left w-full mt-8"
             thead={
               <tr>
-                <Table.th>id</Table.th>
-                <Table.th>designation</Table.th>
-                <Table.th>code_iso</Table.th>
-                <Table.th>symbole</Table.th>
+                <Table.th>Désignation</Table.th>
+                <Table.th>Code ISO</Table.th>
+                <Table.th>Symbole</Table.th>
                 <Table.th></Table.th>
               </tr>
             }
@@ -208,7 +195,6 @@ function ListDeviseManager() {
               devises?.map((Devise) => (
                 //   data?.map((devise) => (
                 <tr key={Devise.id}>
-                  <Table.td>{Devise.id}</Table.td>
                   <Table.td>{Devise.designation} </Table.td>
                   <Table.td>{Devise.code_iso} </Table.td>
                   <Table.td>{Devise.symbole} </Table.td>

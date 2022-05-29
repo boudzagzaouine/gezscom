@@ -122,19 +122,6 @@ function ListPaysManager() {
           archive.current(Pays.id);
         },
       },
-      {
-        icon: (
-          <ReplyIcon
-            className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Restorer",
-        action: () => {
-          //@ts-ignore
-          restore.current(Pays.id);
-        },
-      },
     ];
   };
 
@@ -157,6 +144,7 @@ function ListPaysManager() {
           <DeletePays refetch={refetch} id={""} ref={del} />
           <ArchivePays id={""} ref={archive} />
           <RestorePays id={""} ref={restore} />
+          <h1>Pays</h1>
           <div className="float-left w-full">
             <Bcyan
               className="float-left"
@@ -166,7 +154,7 @@ function ListPaysManager() {
                 FormAsAdd();
               }}
             >
-              ajouter pays
+              Nouveau Pays
             </Bcyan>
 
             <div className="float-right">
@@ -183,8 +171,7 @@ function ListPaysManager() {
             className="tab-list float-left w-full mt-8"
             thead={
               <tr>
-                <Table.th>id</Table.th>
-                <Table.th>designation</Table.th>
+                <Table.th>Désignation</Table.th>
                 <Table.th></Table.th>
               </tr>
             }
@@ -194,7 +181,6 @@ function ListPaysManager() {
               pays?.map((Pays) => (
                 //   data?.map((pays) => (
                 <tr key={Pays.id}>
-                  <Table.td>{Pays.id}</Table.td>
                   <Table.td>{Pays.designation}</Table.td>
 
                   <Table.td>

@@ -91,20 +91,6 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
     return [
       {
         icon: (
-          <ClipboardListIcon
-            className="mr-3 h-8 w-8 text-green-300 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Détail",
-        action: () => {
-          open(declarant);
-          setRequest(REQUEST_EDIT);
-          setDisabled(true);
-        },
-      },
-      {
-        icon: (
           <PencilAltIcon
             className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
             aria-hidden="true"
@@ -143,19 +129,6 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
           archive.current(declarant.id);
         },
       },
-      {
-        icon: (
-          <ReplyIcon
-            className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Restorer",
-        action: () => {
-          //@ts-ignore
-          restore.current(declarant.id);
-        },
-      },
     ];
   };
 
@@ -166,16 +139,16 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
           <DeleteDeclarant id={""} ref={del} refetch={refetchDeclarant} />
           <ArchiveDeclarant id={""} ref={archive} />
           <RestoreDeclarant id={""} ref={restore} />
-          <h1>Nouveau Declarant</h1>
+          <h1>Déclarants</h1>
           <div className="float-left w-full">
             <button
-              className="bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left"
+              className="bg-sky-900 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left"
               onClick={() => {
                 setDisabled(false);
                 open(declarant0);
               }}
             >
-              Nouveau Declarant
+              Nouveau Déclarant
             </button>
             <div className="float-right">
               <button className="bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg">
@@ -241,7 +214,7 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
 
       <Modal
         show={show}
-        title="Nouveau Declarant"
+        title="Déclarant"
         format={+classNames("5")}
         close={closed}
       >
@@ -258,7 +231,7 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
             <div className="float-left w-full">
 			<div className="float-left w-1/2">
               <Field
-               label="Designation"
+               label="Désignation *"
                 name="design"
                 disabled={disabled}
                 required="required"
@@ -266,7 +239,7 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
 			</div>
                <div className="float-left w-1/2">
                   <Field
-                    label="Ville"
+                    label="Ville *"
                     name="ville"
                     options={VILLE}
                     as="select"

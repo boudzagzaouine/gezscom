@@ -95,21 +95,6 @@ const FormUnitMeasure = (
     return [
       {
         icon: (
-          <ClipboardListIcon
-            className="mr-3 h-8 w-8 text-green-300 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Détail",
-        //@ts-ignore
-        action: () => {
-          open(unitMeasure);
-          setRequest(REQUEST_EDIT);
-          setDisabled(true);
-        },
-      },
-      {
-        icon: (
           <PencilAltIcon
             className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
             aria-hidden="true"
@@ -148,19 +133,6 @@ const FormUnitMeasure = (
           archive.current(unitMeasure.id);
         },
       },
-      {
-        icon: (
-          <ReplyIcon
-            className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Restorer",
-        action: () => {
-          //@ts-ignore
-          restore.current(unitMeasure.id);
-        },
-      },
     ];
   };
 
@@ -171,10 +143,10 @@ const FormUnitMeasure = (
           <DeleteUnitMeasure id={""} ref={del} refetch={refetchUnitMeasure} />
           <ArchiveUnitMeasure id={""} ref={archive} />
           <RestoreUnitMeasure id={""} ref={restore} />
-          <h1>Nouvelle Unité de Mesure </h1>
+          <h1>Unités de Mesure</h1>
           <div className="float-left w-full">
             <button
-              className="bg-cyan-800 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left"
+              className="bg-sky-900 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left"
               onClick={() => {
                 setDisabled(false);
                 open(unitMeasure0);
@@ -250,7 +222,7 @@ const FormUnitMeasure = (
 
       <Modal
         show={show}
-        title="Nouveau Régime Douanier"
+        title="Unité de Mesure"
         format={+classNames("5")}
         close={closed}
       >
@@ -266,21 +238,21 @@ const FormUnitMeasure = (
           >
             <div className="float-left w-1/2">
                 <Field
-                  label="Designation"
+                  label="Désignation *"
                   name="design"
-                  disabled={disabled}
-                  required="required"
-                />
-                <Field
-                  label="Symbole"
-                  name="symbole"
                   disabled={disabled}
                   required="required"
                 />
               </div>
               <div className="float-left w-1/2">
+              <Field
+                  label="Symbole *"
+                  name="symbole"
+                  disabled={disabled}
+                  required="required"
+                />
                 <Field
-                  label="Decimal"
+                  label="Décimal *"
                   name="decimal"
                   options={DECIMAL}
                   as="select"

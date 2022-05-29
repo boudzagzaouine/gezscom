@@ -94,19 +94,19 @@ const ListAllCommandes = () => {
             archive.current(commande.id);
           },
         },
-        {
-          icon: (
-            <ReplyIcon
-              className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-              aria-hidden="true"
-            />
-          ),
-          text: "Restorer",
-          action: () => {
-            //@ts-ignore
-            restore.current(commande.id);
-          },
-        },
+        // {
+        //   icon: (
+        //     <ReplyIcon
+        //       className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
+        //       aria-hidden="true"
+        //     />
+        //   ),
+        //   text: "Restorer",
+        //   action: () => {
+        //     //@ts-ignore
+        //     restore.current(commande.id);
+        //   },
+        // },
       ];
     };
   return (

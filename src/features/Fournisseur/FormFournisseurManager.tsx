@@ -41,16 +41,16 @@ const FormFournisseurManager = ({
                     <div className="float-left w-5/6">
                         <div className="float-left w-1/2">
                             {request == REQUEST_EDIT && <Field type="hidden" name="id"/>}
-                            <Field label="Nom du fournisseur" name="raisonSociale" disabled={disabled}/>
+                            <Field label="Nom du Fournisseur *" name="raisonSociale" disabled={disabled}/>
                             <Field label="Contact" name="contact" disabled={disabled}/>
                             <Field label="Téléphone" name="tel" disabled={disabled}/>
                             <Field label="Email" name="email" disabled={disabled}/>
-                            <Field label="Adresse" name="adresse" as="textarea" disabled={disabled}/>
+                            <Field label="Adresse *" name="adresse" as="textarea" disabled={disabled}/>
                         </div>
                         <div className="float-left w-1/2">
-                            <Field label="Mode de Réglement" name="modeDeReglements" as="select" options={payementModes} disabled={disabled}/>
-                            <Field label="Incoterm" name="incoterm" as="select" options={incoterms} disabled={disabled}/>
-                            <Field label="Devise" name="devise" as="select" options={devises} disabled={disabled}/>
+                            <Field label="Mode de Règlement *" name="modeDeReglements" as="select" options={payementModes} disabled={disabled}/>
+                            <Field label="Incoterm *" name="incoterm" as="select" options={incoterms} disabled={disabled}/>
+                            <Field label="Devise *" name="devise" as="select" options={devises} disabled={disabled}/>
                              <Field label="Entrer les coordonnées bancaires du fournisseur " type="checkbox" disabled={disabled}/>
                             <Field label="Banque" name="nomBanque" disabled={disabled}/>
                             <Field label="RIB" name="ribBanque" disabled={disabled}/>

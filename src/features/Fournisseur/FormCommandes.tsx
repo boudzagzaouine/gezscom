@@ -38,7 +38,7 @@ const FormCommandes = ({command}:CommandesProps,ref: Ref<void>) => {
   const  commandes: MenuNavTabs[]= [
     {
       id:1,
-      name: (<><BriefcaseIcon className={style_icon} aria-hidden="true" /><span className={style_span}>Matiére Premiére</span></>),
+      name: (<><BriefcaseIcon className={style_icon} aria-hidden="true" /><span className={style_span}>Matières Premières</span></>),
       featured: (<FormLigneDeCommande idCommandeFournisseur={command0.id}/>),
     },
         ]  
@@ -68,8 +68,9 @@ const FormCommandes = ({command}:CommandesProps,ref: Ref<void>) => {
 name="idFournisseur" 
 as ="select" options={[f0,...fournisseurs]} optionLabelName="raisonSociale" />
 }
-<Field label="Date de commande" name="dateCommande" type="date" />
-<Field label="Date de Livraison" name="dateLivraison"  type="date"/>
+<Field label="Date Livraison *" name="dateLivraison"  type="date"/>
+<Field label="Date Commande *" name="dateCommande" type="date" />
+
 {/* <DatePicker className="border-[#f00]" selected={startDate} onChange={(date:any) => setStartDate(date)} /> */}
 </div>
 {/*<Bcyan className="float-right mt-2" onClick={()=>{setShowModal(false)}} >
