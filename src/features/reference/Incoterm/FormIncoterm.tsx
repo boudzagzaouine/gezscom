@@ -25,6 +25,7 @@ import Mitems0 from "widgets/Mitems0";
 import Bcancel from "widgets/Bcancel";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bsave from "widgets/Bsave";
+import ModalS from "widgets/ModalS";
 
 type FormIncotermProps = {
   incoterm: Incoterm;
@@ -211,12 +212,13 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
         </section>
       )}
 
-      <Modal
+      <ModalS
         show={show}
         title={incoterm1.id==""?"Nouveau Icoterm":"Modifier Incoterm"}
         format={+classNames("5")}
         close={closed}
       >
+        <div className="float-left w-full">
             <Form
             defaultValues={incoterm1}
             onSubmit={
@@ -227,25 +229,19 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
                 : void_
             }
           >
-            <div className="float-left w-5/6">
-            <div className=" float-left w-1/2">
+            <div className="float-left w-full">
               <Field
                label="Code *"
                 name="code"
                 disabled={disabled} required={true}
                 
               />
-              </div>
-              </div>
-              <div className="float-left w-5/6">
-              <div className="float-left w-1/2">
                   <Field
                     label="Désignation *"
                     name="design"
                     disabled={disabled} required={true}
                     
                   />
-             </div>
             </div>
                       <div className=" mt-5 b-ajust-r">
                      <Bsave
@@ -258,7 +254,7 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
             }}
           />
           {incoterm1.id=="" &&<BsavEndNew
-                  className="float-left mr-2"
+                  className="ml-10 mr-2"
                   onClick={() => {
                     setShow(true);
                   }}
@@ -274,7 +270,8 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
                   setShow(false);
                }}
              />
-          </Modal>
+             </div>
+          </ModalS>
     </>
   );
 };
