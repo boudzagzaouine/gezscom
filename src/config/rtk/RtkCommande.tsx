@@ -95,12 +95,27 @@ export type OpenCommandeProp = {
   save: () => void;
   edit: () => void;
 };
+//const commandesOpen: OpenCommandeProp =openCommandes()
 export const openCommandes = (): OpenCommandeProp => {
   const { data = [], refetch } = useFetchCommandesQuery();
   const [save] = useAddCommandeMutation();
   const [edit] = useEditCommandeMutation();
   //@ts-ignore
   const out: OpenCommandeProp = { data, refetch, save, edit };
+  return out;
+};
+export type OpenCommandeByClientProp = {
+  data: Commande[];
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
+export const openCommandesByClient = (idclient:string): OpenCommandeByClientProp => {
+  const { data = [], refetch } = useFetchcommandesByIdClientQuery(idclient);
+  const [save] = useAddCommandeMutation();
+  const [edit] = useEditCommandeMutation();
+  //@ts-ignore
+  const out: OpenCommandeByClientProp = { data, refetch, save, edit };
   return out;
 };
 export const openCommandesPagination = (page: number): OpenCommandeProp => {

@@ -63,9 +63,6 @@ const persistConfig = {
 };
 
 export function makeStore() {
-  //   return configureStore({
-  //     reducer: { counter: counterReducer },
-  //   });
   const rootReducer = combineReducers({
     counter: counterReducer,
     [crudUser.reducerPath]: crudUser.reducer,

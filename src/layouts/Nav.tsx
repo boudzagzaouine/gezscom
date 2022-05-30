@@ -13,8 +13,9 @@ import {
 } from "tools/consts";
 import { signOut, signIn, getSession, useSession } from "next-auth/react";
 import axios from "axios";
-import { emptySession, emptyUser, SessionToken, UserSession } from "tools/types";
+import { emptySession, emptyUser, SessionToken, user0, UserSession } from "tools/types";
 import { Session } from "next-auth";
+import { useRouter } from "next/router";
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
@@ -27,8 +28,10 @@ export default function Nav({ selected, loading }: NavProps) {
   const { data: session, status } = useSession();
   //@ts-ignore
   const [user,setUser]=useState<UserSession>(session?.user)
+  const route = useRouter()
   useEffect(()=>{
     if(!session)setUser(emptyUser)
+    //@ts-ignore
     else setUser(session?.user)
   })
   console.log("my user = "+JSON.stringify(user))
@@ -47,70 +50,70 @@ export default function Nav({ selected, loading }: NavProps) {
     {
       name: "Clients",
       href: "/manager/client/ClientManager",
-      current: true,
-      visible: selected == CLIENT_MANAGER,
+      current: route.pathname == "/manager/client/ClientManager",
+      visible: route.pathname == "/manager/client/ClientManager" ||route.pathname == "/manager/client/CommandeClientManager"||route.pathname == "/manager/client/SoldeCommandeClientManager",
     },
     {
       name: "Commandes Clients",
       href: "/manager/client/CommandeClientManager",
-      current: false,
-      visible: selected == CLIENT_MANAGER,
+      current: route.pathname == "/manager/client/CommandeClientManager",
+      visible: route.pathname == "/manager/client/ClientManager" ||route.pathname == "/manager/client/CommandeClientManager"||route.pathname == "/manager/client/SoldeCommandeClientManager",
     },
     {
       name: "Soldes Commandes",
       href: "/manager/client/SoldeCommandeClientManager",
-      current: false,
-      visible: selected == CLIENT_MANAGER,
+      current: route.pathname == "/manager/client/SoldeCommandeClientManager",
+      visible: route.pathname == "/manager/client/ClientManager" ||route.pathname == "/manager/client/CommandeClientManager"||route.pathname == "/manager/client/SoldeCommandeClientManager",
     },
 
     {
       name: "Fournisseurs",
       href: "/manager/vendor/VendorManager",
-      current: true,
-      visible: selected == VENDOR_MANAGER,
+      current: route.pathname == "/manager/vendor/VendorManager",
+      visible: route.pathname == "/manager/vendor/VendorManager"||route.pathname == "/manager/vendor/CommandeVendor"||route.pathname == "/manager/vendor/RawMaterielManager"||route.pathname == "/manager/vendor/CommandeVendorManager",
     },
     {
       name: "Commandes Fournisseurs",
       href: "/manager/vendor/CommandeVendor",
-      current: false,
-      visible: selected == VENDOR_MANAGER,
+      current: route.pathname == "/manager/vendor/CommandeVendor",
+      visible: route.pathname == "/manager/vendor/VendorManager"||route.pathname == "/manager/vendor/CommandeVendor"||route.pathname == "/manager/vendor/RawMaterielManager"||route.pathname == "/manager/vendor/CommandeVendorManager",
     },
     {
       name: "Matières premieres",
       href: "/manager/vendor/RawMaterielManager",
-      current: false,
-      visible: selected == VENDOR_MANAGER,
+      current: route.pathname == "/manager/vendor/RawMaterielManager",
+      visible: route.pathname == "/manager/vendor/VendorManager"||route.pathname == "/manager/vendor/CommandeVendor"||route.pathname == "/manager/vendor/RawMaterielManager"||route.pathname == "/manager/vendor/CommandeVendorManager",
     },
     {
       name: "Gestion des Com Fourn",
       href: "/manager/vendor/CommandeVendorManager",
-      current: false,
-      visible: selected == VENDOR_MANAGER,
+      current: route.pathname == "/manager/vendor/CommandeVendorManager",
+      visible: route.pathname == "/manager/vendor/VendorManager"||route.pathname == "/manager/vendor/CommandeVendor"||route.pathname == "/manager/vendor/RawMaterielManager"||route.pathname == "/manager/vendor/CommandeVendorManager",
     },
 
     {
       name: "Réception",
       href: "/manager/purchase/Reception",
-      current: true,
-      visible: selected == PURCHASE_MANAGER,
+      current: route.pathname == "/manager/purchase/Reception",
+      visible: route.pathname == "/manager/purchase/Reception"||route.pathname == "/manager/purchase/RightOfReturn"||route.pathname == "/manager/purchase/StockStatus"||route.pathname == "/manager/purchase/InputOutputHistory",
     },
     {
       name: "Bon de retour",
       href: "/manager/purchase/RightOfReturn",
-      current: false,
-      visible: selected == PURCHASE_MANAGER,
+      current: route.pathname == "/manager/purchase/RightOfReturn",
+      visible: route.pathname == "/manager/purchase/Reception"||route.pathname == "/manager/purchase/RightOfReturn"||route.pathname == "/manager/purchase/StockStatus"||route.pathname == "/manager/purchase/InputOutputHistory",
     },
     {
       name: "état du stock",
       href: "/manager/purchase/StockStatus",
-      current: false,
-      visible: selected == PURCHASE_MANAGER,
+      current: route.pathname == "/manager/purchase/StockStatus",
+      visible: route.pathname == "/manager/purchase/Reception"||route.pathname == "/manager/purchase/RightOfReturn"||route.pathname == "/manager/purchase/StockStatus"||route.pathname == "/manager/purchase/InputOutputHistory",
     },
     {
       name: "historique des entrées sorties",
       href: "/manager/purchase/InputOutputHistory",
-      current: false,
-      visible: selected == PURCHASE_MANAGER,
+      current: route.pathname == "/manager/purchase/InputOutputHistory",
+      visible: route.pathname == "/manager/purchase/Reception"||route.pathname == "/manager/purchase/RightOfReturn"||route.pathname == "/manager/purchase/StockStatus"||route.pathname == "/manager/purchase/InputOutputHistory",
     },
   ];
 

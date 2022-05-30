@@ -29,12 +29,12 @@ import {
   openArticleCommandes,
 } from "config/rtk/RtkArticleCommande";
 const TestArticleCommande3 = () => {
-  const idcom = "e6ac48fc-b2c1-4f9b-9a26-b811bca498a1";
-  const artComOpen: OpenArticleCommandeProp = openArticleCommandes();
-  const artComs: ArticleCommande[] = artComOpen.data.content;
-  const openmontant: getMontantProps[] = artComOpen.montants;
+  const idcom = "9cdc7135-8bda-4513-ba66-43b000a22f4b";
+  const artComOpen: OpenArticleCommandeByCommandeProp = openArticleCommandesByCommande(idcom);
+  const artComs: ArticleCommande[] = artComOpen.data;
+ // const openmontant: getMontantProps[] = artComOpen.montants;
   //const montant=openmontant.data
-  const refetch = artComOpen.refetch;
+  const refetch = artComOpen.refetchArtCom;
   /* const refetchMontant=openmontant.refetch
   const refetch=()=>{
     refetchArt()

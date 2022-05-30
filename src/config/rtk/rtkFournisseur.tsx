@@ -394,6 +394,7 @@ export interface FournisseurJson{
     save: () => void;
     edit: () => void;
   };
+  //const fournisseursOpen:OpenFournisseurProp=openFournisseurs()
   export const openFournisseurs = (): OpenFournisseurProp => {
     const { data = [], refetch } = useFetchFournisseursQuery();
     const [save] = useAddFournisseurMutation();

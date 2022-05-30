@@ -15,6 +15,7 @@ import TestArticleCommande2 from "features/tests/opens/TestArticleCommande2";
 import TestArticleCommande3 from "features/tests/opens/TestArticleCommande3";
 import TestFournisseur from "features/tests/opens/TestFournisseur";
 import TestArticleClient from "features/tests/opens/TestArticleClient";
+import Calendar from "widgets/Calendar";
 
 const Test = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -30,9 +31,9 @@ const Test = () => {
       {/* <TestOpenClient /> */}
       {/* <TestSelect /> */}
       {/* <TestOpenUser /> */}
-      {/* <TestArticleCommande2 /> */}
+      {<TestArticleCommande3 />}
       {/* <TestFournisseur /> */}
-      <TestArticleClient/>
+      {/* <TestArticleClient/> */}
     </>
   );
 };

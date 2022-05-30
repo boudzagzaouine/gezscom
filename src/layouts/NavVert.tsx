@@ -22,7 +22,7 @@ import {
   VILLE_MANAGER,
   USER_MANAGER,
 } from "tools/consts";
-import Icon from "../widgets/Icon";
+import Icon from "widgets/Icon";
 type NavVertProps = {
   updateSel: (s: number) => void;
 };
@@ -30,7 +30,7 @@ const NavVert = ({ updateSel }: NavVertProps) => {
   const route = useRouter();
   const [sous, setSous] = useState(-1);
   const prev = useRef(-1);
-
+console.log("route = "+JSON.stringify(route))
   useEffect(() => {
     prev.current = sous;
   }, []);
@@ -49,7 +49,7 @@ const NavVert = ({ updateSel }: NavVertProps) => {
       icon: "user-circle",
       text: "Gestion de Clients",
       link: "/manager/client/ClientManager",
-      active: route.pathname == "/manager/client/ClientManager",
+      active: route.pathname == "/manager/client/ClientManager" ||route.pathname == "/manager/client/CommandeClientManager"||route.pathname == "/manager/client/SoldeCommandeClientManager",
       sous: [],
     },
     {
@@ -57,7 +57,7 @@ const NavVert = ({ updateSel }: NavVertProps) => {
       icon: "truck",
       text: "Gestion de Fournisseurs",
       link: "/manager/vendor/VendorManager",
-      active: route.pathname == "/manager/vendor/VendorManager",
+      active: route.pathname == "/manager/vendor/VendorManager"||route.pathname == "/manager/vendor/CommandeVendor"||route.pathname == "/manager/vendor/RawMaterielManager"||route.pathname == "/manager/vendor/CommandeVendorManager",
       sous: [],
     },
     /* {id:USER_MANAGER,
@@ -72,7 +72,7 @@ const NavVert = ({ updateSel }: NavVertProps) => {
       icon: "shopping-bag",
       text: "gestion d'achats",
       link: "/manager/purchase/Reception",
-      active: route.pathname == "/manager/purchase/Reception",
+      active: route.pathname == "/manager/purchase/Reception"||route.pathname == "/manager/purchase/RightOfReturn"||route.pathname == "/manager/purchase/StockStatus"||route.pathname == "/manager/purchase/InputOutputHistory",
       sous: [],
     },
     /* {
@@ -95,6 +95,8 @@ const NavVert = ({ updateSel }: NavVertProps) => {
       id: 13,
       icon: "table",
       text: "Gestion des Tables",
+      link: "/reference/unitMeasure/NewUnitMeasure",
+      active: route.pathname == "/reference/unitMeasure/NewUnitMeasure" || route.pathname == "/reference/article/NewArticle" || route.pathname == "/reference/rawMaterial/NewRawMaterial" || route.pathname == "/reference/bureauDouane/NewBureauDouane" || route.pathname == "/reference/regimeDouanier/NewRegimeDouanier" || route.pathname == "/reference/payementMode/NewPayementMode" || route.pathname == "/reference/incoterm/NewIncoterm" || route.pathname == "/reference/declarant/NewDeclarant" || route.pathname == "/reference2/Transporteur" || route.pathname == "/reference2/Document" || route.pathname == "/reference2/Devise" || route.pathname == "/reference2/Pays" || route.pathname == "/reference2/Ville" || route.pathname == "/reference2/Type" || route.pathname == "/reference2/Role",
       sous: [
         {
           id: UNIT_MEASURE,
@@ -190,7 +192,9 @@ const NavVert = ({ updateSel }: NavVertProps) => {
       ],
     },
   ];
+useEffect(()=>{
 
+})
   return (
     <>
       <ul className="nav-horiz bg-[#2B5173]">
@@ -206,11 +210,10 @@ const NavVert = ({ updateSel }: NavVertProps) => {
                 ? "border-l-2 border-white bg-opacity-10 bg-[#000]"
                 : "border-l-0 bg-transparent")
             }
-            onClick={() => {
+           /*  onClick={() => {
               updateSel(item.id);
               setSous(item.id);
-              //setSous(!prev.current);
-            }}
+           }} */
           >
             <Link href={item.link || ""}>
               <a>
@@ -220,7 +223,7 @@ const NavVert = ({ updateSel }: NavVertProps) => {
                 <span className="text">{item.text}</span>
               </a>
             </Link>
-            {item.sous.length != 0 && sous == item.id && (
+            {item.active && (
               <ul className="ml-20 list-[disclosure-closed] mt-8">
                 {item.sous.map((sItem) => (
                   <li

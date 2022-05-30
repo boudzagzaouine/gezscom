@@ -9,14 +9,14 @@ import { AdressLiv, adr0 } from "tools/types";
 import Bedit from "widgets/Bedit";
 import Table from "widgets/Table";
 import FormAdressLivraisons from "./FormAdressLivraisons";
-type AdressLivraisonsProps = {
+type ListAdressLivraisonsProps = {
   idClient: string;
   refetchParent: () => void;
 };
-const AdressLivraisons = ({
+const ListAdressLivraisons = ({
   idClient,
   refetchParent,
-}: AdressLivraisonsProps) => {
+}: ListAdressLivraisonsProps) => {
   const [formArt, setFormArt] = useState(false);
   const [selectedIdCommande, setSelectedIdCommande] = useState("new");
   const { data = [], refetch } = useFetchAdressLivsByIdClientQuery(idClient);
@@ -101,4 +101,4 @@ const AdressLivraisons = ({
   );
 };
 
-export default AdressLivraisons;
+export default ListAdressLivraisons;

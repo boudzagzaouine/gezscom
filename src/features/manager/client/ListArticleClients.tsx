@@ -1,10 +1,16 @@
+import { openArticles } from "config/rtk/rtkArticle";
 import { OpenArticleClientByClientProp, openArticleClientsByClient, useFetchArticleClientsByIdClientQuery } from "config/rtk/RtkArticleClient";
+import { OpenFournisseurProp, openFournisseurs } from "config/rtk/rtkFournisseur";
+import { OpenArticleProp } from "features/reference/Article/Methods/openArticles";
 import React, { useRef, useState } from "react";
-import { Client, articleClient0, ArticleClient } from "tools/types";
+import { getFamilleArticle } from "tools/Methodes";
+import { Client, articleClient0, ArticleClient, Article, Fournisseur, getFournisseur } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import Bedit from "widgets/Bedit";
 import Table from "widgets/Table";
 import FormArticleClient from "./FormArticleClient";
+//@ts-ignore
+import dateFormat from "dateformat";
 type ListArticleClientsProp = {
   client: Client;
   refetchParent: () => void;
@@ -14,8 +20,12 @@ const ListArticleClients = ({ client, refetchParent }: ListArticleClientsProp) =
   const articlesClients: ArticleClient[] = articleClientsOpen.data;
  const refetch = articleClientsOpen.refetch;
  const add =articleClientsOpen.save
- const edit =articleClientsOpen.edit
+  const edit =articleClientsOpen.edit
   const articleClient1: ArticleClient = articleClient0;
+  const familleArticleOpen:OpenArticleProp=openArticles()
+  const familleArticles:Article[]=familleArticleOpen.data.content
+  const fournisseursOpen:OpenFournisseurProp=openFournisseurs()
+  const fournisseurs:Fournisseur[]=fournisseursOpen.data.content
   articleClient1.idClient = client.id;
   const refArticleClient = useRef(null);
   const refetchAll = () => {
@@ -28,7 +38,7 @@ const ListArticleClients = ({ client, refetchParent }: ListArticleClientsProp) =
         className="float-left mt-2"
         onClick={() => {
           //@ts-ignore
-          refArticleClient.current(articleClient0,client);
+          refArticleClient.current(articleClient1);
         }}
       >
         Nouvelle ArticleClient
@@ -36,7 +46,6 @@ const ListArticleClients = ({ client, refetchParent }: ListArticleClientsProp) =
       <FormArticleClient
         articleclient={articleClient1}
         ref={refArticleClient}
-        client={client}
         add={add}
         edit={edit}
         refetchList={refetchAll}
@@ -45,11 +54,13 @@ const ListArticleClients = ({ client, refetchParent }: ListArticleClientsProp) =
         className="tab-list float-left w-full mt-2"
         thead={
           <tr>
-            <Table.th>N° BC</Table.th>
-            <Table.th>Client</Table.th>
-            <Table.th>Date</Table.th>
-            <Table.th>famille article</Table.th>
+            <Table.th>Code Article</Table.th>
+            <Table.th>Designation</Table.th>
+            <Table.th>Poids</Table.th>            
+            <Table.th>Prix</Table.th>            
+            <Table.th>famille</Table.th>
             <Table.th>fournisseur</Table.th>
+            <Table.th>Date</Table.th>
             <Table.th></Table.th>
           </tr>
         }
@@ -57,25 +68,18 @@ const ListArticleClients = ({ client, refetchParent }: ListArticleClientsProp) =
         {articlesClients?.map((articleclient) => (
           <tr key={articleclient.id}>
             <Table.td>{articleclient.id}</Table.td>
-            <Table.td>{articleclient.idClient}</Table.td>
-            <Table.td>{articleclient.date}</Table.td>
-            <Table.td>{articleclient.idFamilleArticle}</Table.td>
-            <Table.td>{articleclient.idFournisseur}</Table.td>
+            <Table.td>{articleclient.design}</Table.td>
+            <Table.td>{articleclient.poid}</Table.td>
+            <Table.td>{articleclient.prix}</Table.td>
+            <Table.td>{getFamilleArticle(articleclient.idFamilleArticle,familleArticles)?.design  }</Table.td>
+            <Table.td>{ getFournisseur(articleclient.idFournisseur,fournisseurs)?.raisonSociale }</Table.td>
+            <Table.td>{dateFormat(articleclient.date, "dd-mm-yyyy")}</Table.td>
              <Table.td>
-              {/*  <Bcyan
-        className="float-left mt-2"
-        onClick={() => {
-          //@ts-ignore
-          refArticleClient.current(getCm(client,articleclient));
-        }}
-      >
-       ...
-      </Bcyan> */}
               <Bedit
                 className="float-left mt-2"
                 onClick={() => {
                   //@ts-ignore
-                  refArticleClient.current(articleclient, client);
+                  refArticleClient.current(articleclient);
                 }}
               />
             </Table.td>

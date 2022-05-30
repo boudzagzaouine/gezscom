@@ -18,6 +18,7 @@ import React, { useRef, useState } from "react";
 import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import { t0, Transporteur, TransporteurJson } from "tools/types";
 import Bcyan from "widgets/Bcyan";
+import Bcyanxl from "widgets/Bcyanxl";
 import { Button } from "widgets/Button";
 import Icon from "widgets/Icon";
 import Mitems from "widgets/Mitems";
@@ -142,7 +143,7 @@ function ListTransporteurManager() {
           <RestoreTransporteur id={""} ref={restore} />
           <h1>Transporteur</h1>
           <div className="float-left w-full">
-            <Bcyan
+            <Bcyanxl
               className="float-left"
               onClick={() => {
                 //setTransporteur0(c0);
@@ -151,7 +152,7 @@ function ListTransporteurManager() {
               }}
             >
               Nouveau Transporteur
-            </Bcyan>
+            </Bcyanxl>
 
             <div className="float-right">
               <Button className="bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg">

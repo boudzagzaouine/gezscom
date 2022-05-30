@@ -66,21 +66,21 @@ const FormClientManager = ({
           <div className="float-left w-5/6">
             <div className="float-left w-1/2">
               {request == REQUEST_EDIT && (
-                <Field label="id du client" name="id" />
+                <Field type="hidden" name="id" />
               )}
-              <Field label="Raison social *" name="design" disabled={disabled} />
-              <Field label="Contact" name="contact" disabled={disabled} />
-              <Field label="Email" name="email" disabled={disabled} />
-              <Field label="Téléphone" name="tel" disabled={disabled} />
+              <Field label="Raison social" name="design" disabled={disabled} />
+              <Field label="contact" name="contact" disabled={disabled} />
+              <Field label="email" name="email" disabled={disabled} />
+              <Field label="tel" name="tel" disabled={disabled} />
               <Field
-                label="Devise *"
+                label="device"
                 name="device"
                 options={devises}
                 as="select"
                 disabled={disabled}
               />
               <Field
-                label="Adresse de livraison"
+                label="adresse de livraison"
                 name="adrLiv"
                 as="textarea"
                 disabled={disabled}
@@ -88,28 +88,28 @@ const FormClientManager = ({
             </div>
             <div className="float-left w-1/2">
               <Field
-                label="Mode de Réglement *"
+                label="Mode de payment"
                 name="paymentChoice"
                 options={payementModes}
                 as="select"
                 disabled={disabled}
               />
               <Field
-                label="Incoterm  *"
+                label="incoterm"
                 name="incoterm"
                 options={incoterms}
                 as="select"
                 disabled={disabled}
               />
               <Field
-                label="Adresse de facturation *"
+                label="adresse de facturation"
                 name="adrFact"
                 as="textarea"
                 disabled={disabled}
               />
-              <Field label="Banque" name="bank" disabled={disabled} />
-              <Field label="RIB" name="rib" disabled={disabled} />
-              <Field label="SWIFT" name="swift" disabled={disabled} />
+              <Field label="bank" name="bank" disabled={disabled} />
+              <Field label="rib" name="rib" disabled={disabled} />
+              <Field label="swift" name="swift" disabled={disabled} />
             </div>
           </div>
           <div className="float-left w-1/6">
