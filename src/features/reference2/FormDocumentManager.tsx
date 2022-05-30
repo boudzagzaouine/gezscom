@@ -1,55 +1,53 @@
-import {
-  useAddDocumentMutation,
-  useEditDocumentMutation,
-} from "config/rtk/rtkDocument";
-import React, { useEffect, useRef, useState } from "react";
-import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
-import { Document, document0 } from "tools/types";
+import React, { useEffect,Ref, useState, forwardRef } from "react";
+import { Document } from "tools/types";
 import { Field, Form } from "widgets";
 import Bcancel from "widgets/Bcancel";
-import Bcyan from "widgets/Bcyan";
-import Bred from "widgets/Bred";
 import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
-import Section from "widgets/Section";
+import ModalS from "widgets/ModalS";
+
 
 type FormDocumentManagerProp = {
-  closed: () => void;
-  Document: Document;
-  request: number;
-  disable: boolean;
+  save:()=>void 
+  edit:()=>void
+  refetch:()=>void
+  document: Document;
+ disable: boolean;
 };
 const FormDocumentManager = ({
-  closed,
-  Document,
-  request,
+  save,
+  edit,
+  refetch,
+  document,
   disable,
-}: FormDocumentManagerProp) => {
-  const [save] = useAddDocumentMutation();
-  const [edit] = useEditDocumentMutation();
-  const onSubmit =
-    request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit : undefined;
+}: FormDocumentManagerProp,ref:Ref<void>) => {
+
   const [disabled, setDisabled] = useState(disable);
-  const text = "Nouveau";
-  const text1 = "Modifier";
-  const imputFocus = useRef(null);
+  const [document0, setDocument0] = useState(document);
+  const [showModal, setShowModal] = useState(false);
+  
+  const onSubmit =document0.id=="" ? save : edit;
+  const openModal=(d:Document,disable: boolean)=> {
+    setDocument0(d);
+    setShowModal(true);
+    setDisabled(disable)
+  };  
+  const close= () =>{
+    setShowModal(false)
+  };
   useEffect(() => {
-    /*  @ts-ignore*/
-    imputFocus.current.focus();
+    //@ts-ignore
+    ref.current = openModal;
   }, []);
   return (
-    <Section>
+    <ModalS show={showModal}
+    title={document0.id==""?"Nouveau Document":"Modifier Document"}
+    format={5}
+    close={close}
+     >
        <Form defaultValues={document0} onSubmit={onSubmit}>
-          {request == REQUEST_SAVE ? (
-            <h1 className="mb-2">{text} Document </h1>
-          ) : (
-            <h1 className="mb-2">{text1} Document </h1>
-          )}
-
           <div className="float-left w-full">
-             {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
               <Field
-                ref={imputFocus}
                 label="Désignation *"
                 name="designation"
                 disabled={disabled}
@@ -60,12 +58,18 @@ const FormDocumentManager = ({
             className="float-right"
             onClick={() => {
               setTimeout(() => {
-                     closed();
+                refetch()
+                     close();
               }, 600);
             }}
           />
           {document0.id=="" &&<BsavEndNew
                   className="float-right mr-2"
+                  onClick={() => {
+                    setTimeout(() => {
+                      refetch()
+                   }, 600);
+                  }}
                 />}
                
               </div>
@@ -74,12 +78,11 @@ const FormDocumentManager = ({
                <Bcancel
                className="float-right mt-5 b-ajust"
                onClick={() => {
-                 setDisabled(true);
-                  setShow(false);
+                close()
                }}
              />
-   </Section>
+   </ModalS>
   );
 };
 
-export default FormDocumentManager;
+export default forwardRef(FormDocumentManager) ;

@@ -1,60 +1,52 @@
-import {
-  useAddDeviseMutation,
-  useEditDeviseMutation,
-} from "config/rtk/rtkDevise";
-import React, { useEffect, useRef, useState } from "react";
-import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
-import { Devise, v0 } from "tools/types";
+import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
+import { Devise } from "tools/types";
 import { Field, Form } from "widgets";
 import Bcancel from "widgets/Bcancel";
-import Bcyan from "widgets/Bcyan";
-import Bred from "widgets/Bred";
 import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
 import ModalS from "widgets/ModalS";
-import Section from "widgets/Section";
 type FormDeviseManagerProp = {
-  closed: () => void;
+  save:()=>void 
+  edit:()=>void
+  refetch:()=>void
   Devise: Devise;
-  request: number;
-  disable: boolean;
-  imputFocus: any;
-  showModal:boolean;
-  setshowModal:(b:boolean)=>void
-};
+ disable: boolean;
+ };
 const FormDeviseManager = ({
-  closed,
+  save,
+  edit,
+  refetch,
   Devise,
-  request,
   disable,
-  showModal,
-  setshowModal,
-}: FormDeviseManagerProp) => {
-  const close=()=>{
-    setshowModal(false)
-  }
-  const [save] = useAddDeviseMutation();
-  const [edit] = useEditDeviseMutation();
-  const onSubmit =
-    request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit : undefined;
+}: FormDeviseManagerProp,ref:Ref<void>) => {
+
   const [disabled, setDisabled] = useState(disable);
-  const imputFocus = useRef(null);
+  const [devise0, setDevise0] = useState(Devise);
+  const [showModal, setShowModal] = useState(false);
+  
+  const onSubmit =devise0.id=="" ? save : edit;
+  const openModal=(d:Devise,disable: boolean)=> {
+    setDevise0(d);
+    setShowModal(true);
+    setDisabled(disable)
+  };  
+  const close= () =>{
+    setShowModal(false)
+  };
   useEffect(() => {
-    /*  @ts-ignore*/
-    imputFocus.current.focus();
+    //@ts-ignore
+    ref.current = openModal;
   }, []);
   return (
     <ModalS show={showModal}
-    title={v0.id==""?"Nouveau Devise":"Modifier Devise"}
+    title={devise0.id==""?"Nouvelle Devise":"Modifier Devise"}
     format={5}
-    close={closed}
+    close={close}
      >
-    <Section>
-       <Form defaultValues={v0} onSubmit={onSubmit}>
+    
+       <Form defaultValues={devise0} onSubmit={onSubmit}>
           <div className="float-left w-full">
-             {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
-              <Field
-                ref={imputFocus}
+            <Field
                 label="Désignation *"
                 name="designation"
                 disabled={disabled}
@@ -67,12 +59,18 @@ const FormDeviseManager = ({
             className="float-right"
             onClick={() => {
               setTimeout(() => {
-                     closed();
+                refetch()
+                     close();
               }, 600);
             }}
           />
-          {v0.id=="" &&<BsavEndNew
+          {devise0.id=="" &&<BsavEndNew
                   className="float-right mr-2"
+                  onClick={() => {
+                    setTimeout(() => {
+                      refetch()
+                   }, 600);
+                  }}
                 />}
                
               </div>
@@ -81,12 +79,12 @@ const FormDeviseManager = ({
                <Bcancel
                className="float-right mt-5 b-ajust"
                onClick={() => {
-                 closed()
+                 close()
                }}
              />
-       </Section>
+       
        </ModalS>
   );
 };
 
-export default FormDeviseManager;
+export default forwardRef(FormDeviseManager);

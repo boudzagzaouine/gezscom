@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenDocumentProp } from "components/reference2/OpenDocument";
 import { PAGE_SIZE } from "tools/consts";
 import { Document } from "tools/types";
 
@@ -95,8 +94,17 @@ export const {
   useArchiveDocumentMutation,
   useRestoreDocumentMutation,
 } = crudDocument;
-export const openDocuments = (): OpenDocumentProp => {
-  const { data = [], refetch } = useFetchDocumentsQuery();
+export type DocumentJson = {
+  content: Document[];
+};
+export type OpenDocumentProp = {
+  data: DocumentJson;
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
+export const openDocuments = (page:number): OpenDocumentProp => {
+  const { data = [], refetch } = usePaginationDocumentsQuery(page);
   const [save] = useAddDocumentMutation();
   const [edit] = useEditDocumentMutation();
   //@ts-ignore
