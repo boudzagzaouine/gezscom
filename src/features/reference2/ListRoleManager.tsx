@@ -182,7 +182,7 @@ function ListRoleManager() {
             ))}
           </Table>
 
-          <Pagin load={loadPage} max={300} visibled={roles?.length > 0} />
+          <Pagin load={loadPage} max={300} visible={roles?.length > 0} />
         </Section>
       )}
     </>

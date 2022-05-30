@@ -184,7 +184,7 @@ function ListDocumentManager() {
             }
           </Table>
 
-          <Pagin load={loadPage} max={300} visibled={documents?.length > 0} />
+          <Pagin load={loadPage} max={300} visible={documents?.length > 0} />
         </Section>
       )}
     </>
