@@ -1,8 +1,9 @@
 import { ArchiveIcon, ClipboardListIcon, DocumentAddIcon, PencilAltIcon, ReplyIcon, TrashIcon } from '@heroicons/react/solid';
 import { usePaginationCommandesFournisseurQuery } from 'config/rtk';
-import { OpenCommandesFournisseurProp, openPaginationCommandesFournisseurs } from 'config/rtk/rtkFournisseur';
+import { OpenCommandesFournisseurProp, OpenFournisseurProp, openFournisseurs, openPaginationCommandesFournisseurs } from 'config/rtk/rtkFournisseur';
 import React, { useRef, useState } from 'react'
 import { REQUEST_EDIT, REQUEST_SAVE } from 'tools/consts';
+import { getFournisseur } from 'tools/Methodes';
 import { f0, cf0, getCf0, Fournisseur, CommandeFournisseur } from 'tools/types';
 import { Button } from 'widgets';
 import Bcyan from 'widgets/Bcyan';
@@ -13,7 +14,7 @@ import Pagin from 'widgets/Pagin';
 import Section from 'widgets/Section';
 import Table from 'widgets/Table'
 import { MenuItems } from 'widgets/TypeWidgets';
-import FormCommandes1 from './FormCommandes1';
+import FormCommandes from './FormCommandes';
 
 const ListAllCommandes = () => {
     const [page, setPage] = useState(0);
@@ -23,24 +24,30 @@ const ListAllCommandes = () => {
       };
       const openCommandFournisseur:OpenCommandesFournisseurProp =openPaginationCommandesFournisseurs(page)
       const commandFournisseurs:CommandeFournisseur[]=openCommandFournisseur.data.content
+      const fournisseursOpen:OpenFournisseurProp=openFournisseurs()
+  const fournisseurs:Fournisseur[]=fournisseursOpen.data.content
       const refetch=openCommandFournisseur.refetch
+      const add =openCommandFournisseur.save
+      const edit=openCommandFournisseur.edit
      const  refCom=useRef(null);
     const [form, setForm]=useState(false);
     const [commandFournisseur0, setcommandFournisseur0]=useState(cf0);
     const [disabled, setDisabled]=useState(true);
     const [request0, setRequest0]=useState(REQUEST_SAVE);
-    const showFormulaire = (commande: CommandeFournisseur)=>{
-      setcommandFournisseur0(commande);
+    const showFormulaire = (commande: CommandeFournisseur,fournisseur:Fournisseur)=>{
+      /* setcommandFournisseur0(commande);
       setForm(true);
-      setRequest0(REQUEST_EDIT);
+      setRequest0(REQUEST_EDIT); */
+       //@ts-ignore
+       refCom.current(commande,fournisseur)
     };
-    const FormAsEdit = (commande: CommandeFournisseur)=>{
+    const FormAsEdit = (commande: CommandeFournisseur,fournisseur:Fournisseur)=>{
       setDisabled(true);
-      showFormulaire(commande);
+      showFormulaire(commande,fournisseur);
     };
-    const FormAsUpdate=(commande: CommandeFournisseur)=>{
+    const FormAsUpdate=(commande: CommandeFournisseur,fournisseur:Fournisseur)=>{
       setDisabled(false);
-      showFormulaire(commande);  
+      showFormulaire(commande,fournisseur);  
     };
   return (
     <>
@@ -48,7 +55,7 @@ const ListAllCommandes = () => {
           <div className="float-left w-full">
           <Bcyan className="float-left mt-2" onClick={()=>{
       //@ts-ignore
-      refCom.current(cf0)
+      refCom.current(cf0,f0)
     }} >
     Nouvelle Commande
               </Bcyan>
@@ -63,7 +70,13 @@ const ListAllCommandes = () => {
               </Button>
             </div>
         </div>
-    <FormCommandes1 command={cf0} ref={refCom}/>
+    <FormCommandes 
+    add={add}
+    edit={edit}
+    fournisseur={f0}
+    fournisseurs={fournisseurs}
+    command={cf0} 
+    ref={refCom}/>
     <Table className="tab-list float-left w-full mt-2"
         thead={
           <tr>
@@ -83,7 +96,7 @@ const ListAllCommandes = () => {
                     <tr key={commande.id}>
                       <Table.td>{commande.id}</Table.td>
                       <Table.td>
-                        fournisseur
+                      { getFournisseur(commande.idFournisseur,fournisseurs)?.raisonSociale }
                       </Table.td>
                       <Table.td>{commande.dateCommande}</Table.td>
                       <Table.td>{commande.dateLivraison}</Table.td>
@@ -100,11 +113,11 @@ const ListAllCommandes = () => {
           del.current(commande.id);
         }}
         edit={() => {
-          FormAsEdit(commande);
+          FormAsEdit(commande,getFournisseur(commande.idFournisseur,fournisseurs));
         }}
         obj={commande}
         update={() => {
-          FormAsUpdate(commande);
+          FormAsUpdate(commande,getFournisseur(commande.idFournisseur,fournisseurs));
         }}
       />
                         </Table.td>

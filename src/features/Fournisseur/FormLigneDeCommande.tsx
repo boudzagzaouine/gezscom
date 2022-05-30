@@ -9,7 +9,7 @@ type LigneDeCommandeProps={
   idCommandeFournisseur:string,
 }
 const FormLigneDeCommande = ({idCommandeFournisseur}:LigneDeCommandeProps) => {
-  //@ts-ignore
+ /*  //@ts-ignore
   const { data = [], isFetching, refetch } = useFetchLigneDeCommandeByIdCommandeFournisseurQuery(idCommandeFournisseur);
 
   const [selectedIdCommande,setSelectedIdCommande]=useState("new")
@@ -23,9 +23,9 @@ const FormLigneDeCommande = ({idCommandeFournisseur}:LigneDeCommandeProps) => {
     setSelectedIdCommande(id)
   }
   const [save]=useAddLigneDeCommandeMutation();
-  const [edit]=useEditLigneDeCommandeMutation();
+  const [edit]=useEditLigneDeCommandeMutation(); */
 return (
-    <div>
+   /*  <div>
       <Table className="tab-list float-left w-full mt-8"
         thead={
           <tr>
@@ -69,7 +69,8 @@ return (
         </tr>
         }
       </Table>
-    </div>
+    </div> */
+    <></>
   );
 }
 export default FormLigneDeCommande

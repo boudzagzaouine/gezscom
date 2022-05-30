@@ -12,21 +12,29 @@ import Modal from "widgets/Modal";
 import NavTabs from "widgets/NavTabs";
 import { MenuNavTabs } from "widgets/TypeWidgets";
 import FormLigneDeCommande from "./FormLigneDeCommande";
-
+//@ts-ignore
+import dateFormat from "dateformat";
+import DatePicker from "react-datepicker";
+import Calendar from "widgets/Calendar";
 type CommandesProps={
     command:CommandeFournisseur;
+    fournisseur:Fournisseur
+    fournisseurs:Fournisseur[]
+    add:()=>void 
+    edit:()=>void
 }
 
-const FormCommandes = ({command}:CommandesProps,ref: Ref<void>) => {
+const FormCommandes = ({command,fournisseurs,fournisseur,add,edit}:CommandesProps,ref: Ref<void>) => {
   const [showModal, setShowModal] = React.useState(false);
   const [command0,setCommand0]=useState(command)
-  const fournisseursOpen:OpenFournisseurProp=openFournisseurs()
-  const fournisseurs:Fournisseur[]=fournisseursOpen.data.content
-  const add=fournisseursOpen.save;
-  const edit=fournisseursOpen.edit;
-  
-  const openModal = (c: CommandeFournisseur) => {
+  const [fournisseur0,setFournisseur0]=useState(fournisseur)
+  const [startDateLiv, setStartDateLiv] = useState(command0.dateLivraison);
+  const [openCalendarLiv, setOpenCalendarLiv] = useState(false);
+  const [startDateCommande, setStartDateCommande] = useState(command0.dateCommande);
+  const [openCalendarCommande, setOpenCalendarCommande] = useState(false);
+  const openModal = (c: CommandeFournisseur,f:Fournisseur) => {
     setCommand0(c)
+    setFournisseur0(f)
     setShowModal(true);
   };
  const save=command0.id==""?add:edit
@@ -48,46 +56,84 @@ const FormCommandes = ({command}:CommandesProps,ref: Ref<void>) => {
     <Modal title={command0.id===""?"Nouvelle Commande Fournisseur":"Mise à jour de la commande"} show={showModal} format={5} close={close}>
 
 <Form defaultValues={command0} onSubmit={save}>
-{({  watch }) => {
-  //@ts-ignore
-          const idFournisseur = watch("idFournisseur");
-          const raisonsoc=watch("fournisseur.raisonSociale");
-          const fournisseur:Fournisseur=f0;
-          console.log(idFournisseur)
-          console.log(raisonsoc)
-          console.log(command0)
-          return (
+
             <>
   <div className="mt-1">
-<Field type="hidden"  name="idFournisseur"  />
 { command0.idFournisseur!=""?(
   <>
-  <Field type="hidden" name="idFournisseur"/>
-  <Field label="Fournisseur" value={raisonsoc}/>
+ <Field label="Fournisseur" value={fournisseur0.raisonSociale}/>
   </>
 ):
+<>
 <Field label="Fournisseur" 
 name="idFournisseur" 
 as ="select" options={[f0,...fournisseurs]} optionLabelName="raisonSociale" />
+<Field
+                label="Fournisseur" 
+                name="idFournisseur" 
+                as="select"
+                onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                 setCommand0({...command0,idFournisseur:e.target.value})
+                }}
+              >
+                {[f0, ...(fournisseurs || [])]?.map((f: Fournisseur) => (
+                  <option value={f.id}>{f.raisonSociale}</option>
+                ))}
+              </Field>
+</>
 }
-<Field label="Date Livraison *" name="dateLivraison"  type="date"/>
-<Field label="Date Commande *" name="dateCommande" type="date" />
-
-{/* <DatePicker className="border-[#f00]" selected={startDate} onChange={(date:any) => setStartDate(date)} /> */}
+<Field
+              label="Date Commande"
+              name="date33"
+              value={dateFormat(startDateCommande, "dd-mm-yyyy")}
+              onFocus={() => {
+                setOpenCalendarCommande(true);
+              }}
+            />
+           {openCalendarCommande && (
+              <DatePicker
+                selected={startDateCommande}
+                name="date11"
+                onChange={(d: Date) => {
+                  setStartDateCommande(d);
+                  setCommand0({...command0,dateCommande:d})
+                  setOpenCalendarCommande(false);
+                }}
+                dateFormat="dd-MM-yyyy"
+                calendarContainer={Calendar}
+                inline
+              />
+            )}
+         <Field
+              label="Date de livraison"
+              name="date333"
+              value={dateFormat(startDateLiv, "dd-mm-yyyy")}
+              onFocus={() => {
+                setOpenCalendarLiv(true);
+              }}
+            />
+           {openCalendarLiv && (
+              <DatePicker
+                selected={startDateLiv}
+                name="date111"
+                onChange={(d: Date) => {
+                  setStartDateLiv(d);
+                  setCommand0({...command0,dateLivraison:d})
+                  setOpenCalendarLiv(false);
+                }}
+                dateFormat="dd-MM-yyyy"
+                calendarContainer={Calendar}
+                inline
+              />
+            )}
 </div>
-{/*<Bcyan className="float-right mt-2" onClick={()=>{setShowModal(false)}} >
-Annuler
-</Bcyan>
-<Bcyan className="float-right mt-2" >
- Sauvegarder
-</Bcyan> */}<Bsave className="float-right mt-2 b-ajust-r" onClick={() => {
+<Bsave className="float-right mt-2 b-ajust-r" onClick={() => {
           setTimeout(() => {
             close();
           }, 600);
         }} />
             </>
-    );
-  }}
+ 
 
 </Form>
 <Bcancel
@@ -96,7 +142,7 @@ Annuler
           close();
         }}
       />
- <NavTabs tab={commandes} /> 
+ {command0.id!="" &&<NavTabs tab={commandes} /> }
    </Modal>
   )
 }
