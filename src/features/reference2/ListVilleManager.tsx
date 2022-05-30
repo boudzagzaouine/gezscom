@@ -185,7 +185,7 @@ function ListVilleManager() {
             }
           </Table>
 
-          <Pagin load={loadPage} max={300} visibled={villes?.length > 0} />
+          <Pagin load={loadPage} max={300} visible={villes?.length > 0} />
         </Section>
       )}
     </>

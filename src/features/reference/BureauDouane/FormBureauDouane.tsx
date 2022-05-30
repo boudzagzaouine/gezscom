@@ -209,7 +209,7 @@ const FormBureauDouane = (
           </Table>
           <Pagin
            load={loadPage} max={300}
-            visibled={bureauDouanes?.length > 0 ? true : false}
+            visible={bureauDouanes?.length > 0 ? true : false}
           />
         </section>
       )}
