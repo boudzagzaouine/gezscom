@@ -221,8 +221,8 @@ const FormRegimeDouanier = (
             }
           </Table>
           <Pagin
-            Pagin load={loadPage} max={300}
-            visible={regimeDouaniers?.length > 0 ? true : false}
+           load={loadPage} max={300}
+            visibled={regimeDouaniers?.length > 0 ? true : false}
           />
         </section>
       )}

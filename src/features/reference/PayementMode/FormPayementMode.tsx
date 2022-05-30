@@ -210,8 +210,8 @@ const FormPayementMode = (
             }
           </Table>
           <Pagin
-            Pagin load={loadPage} max={300}
-            visible={payementModes?.length > 0 ? true : false}
+           load={loadPage} max={300}
+            visibled={payementModes?.length > 0 ? true : false}
           />
         </section>
       )}
