@@ -18,17 +18,17 @@ export const crudPays = createApi({
       /********************************Pays************************************************************* */
       /********************************************************************************************* */
       fetchPays: builder.query<Pays[], void>({
-        query: () => `/transporteurs`,
+        query: () => `/pays`,
       }),
       paginationPays: builder.query<Pays[], number>({
-        query: (page) => `/transporteurs?page=${page}&size=${PAGE_SIZE}`,
+        query: (page) => `/pays?page=${page}&size=${PAGE_SIZE}`,
       }),
       fetchOnePays: builder.query<Pays, string>({
-        query: (id) => `/transporteurs/${id}`,
+        query: (id) => `/pays/${id}`,
       }),
       addPays: builder.mutation<Pays, Partial<Pays>>({
         query: (body) => ({
-          url: "/transporteurs",
+          url: "/pays",
           method: "POST",
           body,
         }),
@@ -39,7 +39,7 @@ export const crudPays = createApi({
         Partial<Pays> & Pick<Pays, "id">
       >({
         query: (body) => ({
-          url: `/transporteurs/${body.id}`,
+          url: `/pays/${body.id}`,
           method: "PUT",
           body,
         }),
@@ -49,7 +49,7 @@ export const crudPays = createApi({
         query(id: Num) {
           //  if (confirm(`do you want delete Pays number ${id.id} ?`))
           return {
-            url: `/transporteurs/${id.id}`,
+            url: `/pays/${id.id}`,
             method: "DELETE",
           };
           // else return
@@ -66,7 +66,7 @@ export const crudPays = createApi({
         Partial<Pays> & Pick<Pays, "id">
       >({
         query: (id) => ({
-          url: `/transporteurs/${id}/archive`,
+          url: `/pays/${id}/archive`,
           method: "PATCH",
         }),
       }),
@@ -76,7 +76,7 @@ export const crudPays = createApi({
         Partial<Pays> & Pick<Pays, "id">
       >({
         query: (id) => ({
-          url: `/transporteurs/${id}/restore`,
+          url: `/pays/${id}/restore`,
           method: "PUT",
         }),
       }),
