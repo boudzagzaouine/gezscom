@@ -208,7 +208,7 @@ const FormBureauDouane = (
             }
           </Table>
           <Pagin
-            load={loadPage}
+            Pagin load={loadPage} max={300}
             visible={bureauDouanes?.length > 0 ? true : false}
           />
         </section>
