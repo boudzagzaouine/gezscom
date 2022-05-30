@@ -1,10 +1,13 @@
 import { ArchiveIcon, ClipboardListIcon, PencilAltIcon, ReplyIcon, TrashIcon } from "@heroicons/react/solid";
 import { usePaginationMatierePremiereQuery } from "config/rtk";
+import { OpenFournisseurProp, openFournisseurs, OpenMatierePremiereProp, openMatierePremieresPagination } from "config/rtk/rtkFournisseur";
 import { useRef, useState } from "react";
 import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
-import { getMp0, mp0, f0, MatierePremiere } from "tools/types";
+import { getFournisseur } from "tools/Methodes";
+import { getMp0, mp0, f0, MatierePremiere, Fournisseur } from "tools/types";
 import { Button } from "widgets";
 import Bcyan from "widgets/Bcyan";
+import Bcyanxl from "widgets/Bcyanxl";
 import Icon from "widgets/Icon";
 import Mitems from "widgets/Mitems";
 import Mitems0 from "widgets/Mitems0";
@@ -20,37 +23,18 @@ const ListAllMatierePremiere = () => {
         setPage(p);
         refetch();
       };
-  const { data = [], isFetching, refetch } = usePaginationMatierePremiereQuery(page);
+  const matierePremieresOpen:OpenMatierePremiereProp=openMatierePremieresPagination(page)
+  const matierePremieres:MatierePremiere[]=matierePremieresOpen.data.content
+  const refetch=matierePremieresOpen.refetch
+  const fournisseursOpen: OpenFournisseurProp=openFournisseurs() 
+  const fournisseurs:Fournisseur[]=fournisseursOpen.data.content
   const  refCom=useRef(null);
-  const [form, setForm]=useState(false);
-  const [matierepremiere0, setMatierepremiere0]=useState(mp0);
-  const [request0, setRequest0]=useState(REQUEST_SAVE);
-  //console.log(data)
-  const [disabled, setDisabled]=useState(true);
-  const del = useRef(null);
+ const del = useRef(null);
   const archive = useRef(null);
   const restore = useRef(null);
 
-  const showFormulaire = (matiere: MatierePremiere)=>{
-    setMatierepremiere0(matiere);
-    setForm(true);
-    setRequest0(REQUEST_EDIT);
-  };
-  const FormAsAdd = ()=>{
-    setDisabled(false);
-    setMatierepremiere0(mp0);
-    setForm(true);
-    setRequest0(REQUEST_SAVE);
-  };
-  const FormAsEdit = (matiere: MatierePremiere)=>{
-    setDisabled(true);
-    showFormulaire(matiere);
-  };
-  const FormAsUpdate=(matiere: MatierePremiere)=>{
-    setDisabled(false);
-    showFormulaire(matiere);  
-  };
-  const menu=(matiere:MatierePremiere): MenuItems[]=>{
+  
+  const menu=(matiere:MatierePremiere,fournisseur:Fournisseur): MenuItems[]=>{
     return[
       {
         icon: (
@@ -61,7 +45,8 @@ const ListAllMatierePremiere = () => {
         ),
         text: "Détail",
         action: () => {
-          FormAsEdit(matiere);
+          //@ts-ignore
+          refCom.current(matiere,true,fournisseur)
         },
       },
       {
@@ -73,7 +58,8 @@ const ListAllMatierePremiere = () => {
         ),
         text: "Modifier",
         action: () => {
-          FormAsUpdate(matiere);
+          //@ts-ignore
+          refCom.current(matiere,false,fournisseur)
         },
       },
       {
@@ -120,12 +106,12 @@ const ListAllMatierePremiere = () => {
   return (
     <Section>
           <div className="float-left w-full">
-          <Bcyan className="float-left mt-2" onClick={()=>{
+          <Bcyanxl className="float-left mt-2" onClick={()=>{
           //@ts-ignore
-          refCom.current(getMp0(f0))
+          refCom.current(mp0)
         }} >
          Nouvelle Matière première
-        </Bcyan>
+        </Bcyanxl>
           <div className="float-right">
               <input
                 type="text"
@@ -137,7 +123,7 @@ const ListAllMatierePremiere = () => {
               </Button>
             </div>
         </div>
-    <FormMatierePremiere Matierep={getMp0(f0)} ref={refCom}/>
+    <FormMatierePremiere Matierep={mp0}  disabled={false} ref={refCom} refetch={refetch} fournisseurs={fournisseurs} fournisseur={f0} />
     <Table className="tab-list float-left w-full mt-2"
         thead={
           <tr>
@@ -152,16 +138,15 @@ const ListAllMatierePremiere = () => {
         }
       >
                   { 
-                  //@ts-ignore
-                  data.content?.map((matiere) => (
+                 matierePremieres?.map((matiere) => (
                     <tr key={matiere.id}>
                       <Table.td>{matiere.id}</Table.td>
                       <Table.td>{matiere.designation}</Table.td>
                       <Table.td>{matiere.prix}</Table.td>
-                      <Table.td>{matiere.idFournisseur}</Table.td>
+                      <Table.td>{getFournisseur(matiere.idFournisseur,fournisseurs).raisonSociale}</Table.td>
                       <Table.td>{matiere.familleMatierePremiere}</Table.td>
                       <Table.td>{matiere.origine}</Table.td>
-                      <Table.td><Mitems0 menu={menu(matiere)} /></Table.td>
+                      <Table.td><Mitems0 menu={menu(matiere,getFournisseur(matiere.idFournisseur,fournisseurs))} /></Table.td>
                     </tr>
                   ))
                 }

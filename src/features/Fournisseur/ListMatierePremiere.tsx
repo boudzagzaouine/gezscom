@@ -1,7 +1,7 @@
 import React from 'react'
 import { DocumentAddIcon } from "@heroicons/react/solid";
 import { useRef, useState } from "react";
-import { getCf0, getMp0, MatierePremiere } from "tools/types";
+import { f0, getCf0, getMp0, MatierePremiere } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import Table from "widgets/Table";
 import { ListFournisseursProps, ListMatierePremiereProps } from "widgets/TypeWidgets";
@@ -23,7 +23,7 @@ import { OpenMatiere } from 'components/Fournisseur/OpenMatiere';
           }} >
           Nouvelle Matiére 
            </Bcyan>
-          <FormMatierePremiere Matierep={getMp0(fournisseur)} ref={refCom}/>
+          <FormMatierePremiere Matierep={getMp0(fournisseur)} ref={refCom} disabled={false} fournisseur={f0} fournisseurs={[]} refetch={refetch} />
           
          
           <Table className="tab-list float-left w-full mt-2"

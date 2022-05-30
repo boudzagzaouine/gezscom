@@ -85,7 +85,7 @@ export default function Nav({ selected, loading }: NavProps) {
       visible: route.pathname == "/manager/vendor/VendorManager"||route.pathname == "/manager/vendor/CommandeVendor"||route.pathname == "/manager/vendor/RawMaterielManager"||route.pathname == "/manager/vendor/CommandeVendorManager",
     },
     {
-      name: "Gestion des Com Fourn",
+      name: "Génerer Commandes Fournisseur",
       href: "/manager/vendor/CommandeVendorManager",
       current: route.pathname == "/manager/vendor/CommandeVendorManager",
       visible: route.pathname == "/manager/vendor/VendorManager"||route.pathname == "/manager/vendor/CommandeVendor"||route.pathname == "/manager/vendor/RawMaterielManager"||route.pathname == "/manager/vendor/CommandeVendorManager",

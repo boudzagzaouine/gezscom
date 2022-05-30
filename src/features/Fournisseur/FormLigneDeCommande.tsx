@@ -16,6 +16,8 @@ const FormLigneDeCommande = ({idCommandeFournisseur}:LigneDeCommandeProps) => {
  const refetch=ligneDeCommandesOpen.refetch
  const save=ligneDeCommandesOpen.save
  const edit=ligneDeCommandesOpen.edit
+ let lc1:LigneDeCommande=lc0
+ lc1.idCommandeFournisseur=idCommandeFournisseur
   const [selectedIdCommande,setSelectedIdCommande]=useState("new")
   const [formArt,setFormArt]=useState(false)
   const close=()=>{
@@ -51,11 +53,11 @@ const FormLigneDeCommande = ({idCommandeFournisseur}:LigneDeCommandeProps) => {
                 }} />
               </Table.td>
             </tr>
-            {selectedIdCommande==article.id && formArt && <FormulaireLigneDeCommande ligneCommande={article} close={close} saveArticle={edit}/>}
+            {selectedIdCommande==article.id && formArt && <FormulaireLigneDeCommande ligneCommande={article} close={close} saveArticle={edit} refetch={refetch} />}
           </>
           ))
         }
-        {selectedIdCommande=="new" && formArt && <FormulaireLigneDeCommande ligneCommande={lc0} close={close} saveArticle={save}/>}
+        {selectedIdCommande=="new" && formArt && <FormulaireLigneDeCommande ligneCommande={lc1} close={close} saveArticle={save} refetch={refetch} />}
         {
           !formArt && <tr
           onClick={() => {

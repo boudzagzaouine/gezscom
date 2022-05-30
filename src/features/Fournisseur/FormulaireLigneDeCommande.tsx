@@ -1,7 +1,7 @@
 
 
 
-import React from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import { Field, Form} from "widgets";
 import {  LigneDeCommande, MatierePremiere, mp0} from "tools/types";
 import Table from "widgets/Table";
@@ -14,16 +14,30 @@ type FormLignedeCommandeProp={
     refetch:()=>void
     close:()=>void
 }
-const FormulaireLigneDeCommande = ({ligneCommande,saveArticle,close}:FormLignedeCommandeProp) => {
+const FormulaireLigneDeCommande = ({ligneCommande,saveArticle,close,refetch}:FormLignedeCommandeProp) => {
   const matierePremieresOpen:OpenMatierePremiereProp=openMatierePremieres()
   const matiere:MatierePremiere[]=matierePremieresOpen.data.content
+  const [ligneCommande0,setLigneCommande0]=useState(ligneCommande)
   return (
     <>
     <tr className="relative">
 <div className="absolute left-0 top-0 bg-[#ccc]">
-<Form defaultValues={ligneCommande} onSubmit={saveArticle}>
+<Form defaultValues={ligneCommande0} onSubmit={saveArticle}>
             <Table.td>
-              <Field name="id" placeholder="Désignation" as="select" options={[mp0,...(matiere||[])]} optionLabelName="designation" />
+              <Field name="idMatierePremiere" placeholder="Désignation" as="select" optionKeyName="id" options={[mp0,...(matiere||[])]} optionLabelName="designation" />
+              {/* <Field
+                placeholder="Matiere Prmiere" 
+                name="idMatierePremiere"
+                as="select"
+                onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                  let c: Client = JSON.parse(e.target.value);
+                  setClient0(c);
+                }}
+              >
+                {[c0, ...(clients0 || [])]?.map((c: Client) => (
+                  <option value={JSON.stringify(c)}>{c.design}</option>
+                ))}
+              </Field> */}
             </Table.td>
             <Table.td>
               <Field name="quantite" placeholder="Quantité"/>

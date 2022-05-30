@@ -462,6 +462,18 @@ export interface FournisseurJson{
     return out;
   };
   /********************************************/
+   /*
+  const matierePremieresOpen:OpenMatierePremiereProp=openMatierePremieresPagination(page)
+  */
+  export const openMatierePremieresPagination = (page:number): OpenMatierePremiereProp => {
+    const { data = [], refetch } = usePaginationMatierePremiereQuery(page);
+    const [save] = useAddMatierePremiereMutation();
+    const [edit] = useEditMatierePremiereMutation();
+    //@ts-ignore
+    const out: OpenMatierePremiereProp = { data, refetch, save, edit };
+    return out;
+  };
+  /********************************************/
   
   export interface LigneDeCommandeJson{
   content:LigneDeCommande[]
