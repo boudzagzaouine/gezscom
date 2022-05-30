@@ -223,7 +223,7 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
                 : void_
             }
           >
-            <div className=" float-left w-full">
+            <div className=" float-left w-1/2">
               <Field
                 label="Désignation *"
                 name="design"

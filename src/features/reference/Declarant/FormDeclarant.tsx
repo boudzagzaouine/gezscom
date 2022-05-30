@@ -25,6 +25,7 @@ import Mitems0 from "widgets/Mitems0";
 import Bcancel from "widgets/Bcancel";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bsave from "widgets/Bsave";
+import ModalS from "widgets/ModalS";
 
 type FormDeclarantProps = {
   declarant: Declarant;
@@ -212,12 +213,13 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
         </section>
       )}
 
-      <Modal
+      <ModalS
         show={show}
         title={declarant1.id=="" ? "Nouveau Déclarant":"Modifier Déclarant"}
         format={+classNames("5")}
         close={closed}
       >
+        <div className="float-left w-full">
              <Form
             defaultValues={declarant1}
             onSubmit={
@@ -228,18 +230,13 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
                 : void_
             }
           >
-            <div className="float-left w-5/6">
-            <div className=" float-left w-1/2">
+            <div className=" float-left w-full">
               <Field
                label="Désignation *"
                 name="design"
                 disabled={disabled} required={true}
                 
               />
-              </div>
-              </div>
-              <div className="float-left w-5/6">
-              <div className="float-left w-1/2">
                   <Field
                     label="Ville *"
                     name="ville"
@@ -249,7 +246,6 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
                     
                   />
                 </div>
-              </div>
             
              <div className="mt-5 b-ajust-r">
                      <Bsave
@@ -262,7 +258,7 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
             }}
           />
           {declarant1.id=="" &&<BsavEndNew
-                  className="float-left mr-2"
+                  className="ml-10 mr-2"
                   onClick={() => {
                     setShow(true);
                   }}
@@ -277,7 +273,9 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
                  setDisabled(true);
                   setShow(false);
                }}
-             /> </Modal>
+             />
+             </div> 
+             </ModalS>
     </>
   );
 };
