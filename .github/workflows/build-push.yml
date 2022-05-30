@@ -30,7 +30,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/gescom:v1.0
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/gescom:v1.1.2
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
