@@ -214,12 +214,9 @@ const FormUnitMeasure = (
               })
             }
           </Table>
-          <Pagin
-            
-			
-			
+          <Pagin		
 			Pagin load={loadPage} max={300}
-            visible={unitMeasures?.length > 0 ? true : false}
+            visibled={unitMeasures?.length > 0 ? true : false}
           />
         </section>
       )}
