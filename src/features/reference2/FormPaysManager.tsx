@@ -63,9 +63,9 @@ const FormPaysManager = ({
               }, 400);
             }}
           />
-          <BsavEndNew
+          {pays0.id=="" &&<BsavEndNew
                   className="float-right mr-2"
-                />
+                />}
                
               </div>
         

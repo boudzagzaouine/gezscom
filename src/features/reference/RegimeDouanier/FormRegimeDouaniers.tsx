@@ -198,7 +198,7 @@ const FormRegimeDouanier = (
                   Code
                 </th>
                 <th className=" top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
-                  Designation
+                  Désignation
                 </th>
                 <th></th>
               </tr>
@@ -229,7 +229,7 @@ const FormRegimeDouanier = (
 
       <Modal
         show={show}
-        title="Régime Douanier"
+        title={regimeDouanier1.id==""?"Nouveau Régime Douanier":"Modifier Régime Douanier"}
         format={+classNames("5")}
         close={closed}
       >
@@ -243,16 +243,18 @@ const FormRegimeDouanier = (
                 : void_
             }
           >
-            <div className="float-left w-full">
-			<div className="float-left w-1/2">
+            <div className="float-left w-5/6">
+            <div className=" float-left w-1/2">
               <Field
-               label="Numéro *"
+               label="Code *"
                 name="code"
                 disabled={disabled}
                 required="required"
               />
-			</div>
-               <div className="float-left w-1/2">
+              </div>
+              </div>
+              <div className="float-left w-5/6">
+              <div className="float-left w-1/2">
                   <Field
                     label="Désignation *"
                     name="design"
@@ -261,7 +263,7 @@ const FormRegimeDouanier = (
                   />
                 </div>
            </div>
-          <div className="float-right mt-5 b-ajust-r">
+          <div className=" mt-5 b-ajust-r">
                      <Bsave
             className="float-right"
             onClick={() => {
@@ -271,12 +273,12 @@ const FormRegimeDouanier = (
               }, 600);
             }}
           />
-          <BsavEndNew
-                  className="float-right mr-2"
+          {regimeDouanier1.id=="" &&<BsavEndNew
+                  className="float-left mr-2"
                   onClick={() => {
                     setShow(true);
                   }}
-                />
+                />}
                
               </div>
         

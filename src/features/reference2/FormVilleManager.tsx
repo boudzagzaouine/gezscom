@@ -72,9 +72,9 @@ const FormVilleManager = ({
               }, 600);
             }}
           />
-          <BsavEndNew
+          {ville0.id=="" &&<BsavEndNew
                   className="float-right mr-2"
-                />
+                />}
                
               </div>
         

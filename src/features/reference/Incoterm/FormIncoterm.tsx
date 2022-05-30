@@ -182,7 +182,7 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
                   Code
                 </th>
                 <th className=" top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
-                  Designation
+                  Désignation
                 </th>
                 <th></th>
               </tr>
@@ -213,7 +213,7 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
 
       <Modal
         show={show}
-        title="Icoterm"
+        title={incoterm1.id==""?"Nouveau Icoterm":"Modifier Incoterm"}
         format={+classNames("5")}
         close={closed}
       >
@@ -227,16 +227,18 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
                 : void_
             }
           >
-            <div className="float-left w-full">
-			<div className="float-left w-1/2">
+            <div className="float-left w-5/6">
+            <div className=" float-left w-1/2">
               <Field
                label="Code *"
                 name="code"
                 disabled={disabled}
                 required="required"
               />
-				</div>
-               <div className="float-left w-1/2">
+              </div>
+              </div>
+              <div className="float-left w-5/6">
+              <div className="float-left w-1/2">
                   <Field
                     label="Désignation *"
                     name="design"
@@ -245,7 +247,7 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
                   />
              </div>
             </div>
-                      <div className="float-right mt-5 b-ajust-r">
+                      <div className=" mt-5 b-ajust-r">
                      <Bsave
             className="float-right"
             onClick={() => {
@@ -255,12 +257,12 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
               }, 600);
             }}
           />
-          <BsavEndNew
-                  className="float-right mr-2"
+          {incoterm1.id=="" &&<BsavEndNew
+                  className="float-left mr-2"
                   onClick={() => {
                     setShow(true);
                   }}
-                />
+                />}
                
               </div>
         

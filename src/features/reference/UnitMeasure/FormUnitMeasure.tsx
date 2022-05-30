@@ -184,13 +184,13 @@ const FormUnitMeasure = (
             thead={
               <tr>
                 <th className=" top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
-                  Designation
+                  Désignation
                 </th>
                 <th className=" top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
                   Symbole
                 </th>
                 <th className=" top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
-                  Decimal
+                  Décimal
                 </th>
                 <th></th>
               </tr>
@@ -222,7 +222,7 @@ const FormUnitMeasure = (
 
       <Modal
         show={show}
-        title="Unité de Mesure"
+        title={unitMeasure1.id==""?"Nouvelle Unité de Mesure":"Modifier Unité de Mesure"}
         format={+classNames("5")}
         close={closed}
       >
@@ -236,7 +236,8 @@ const FormUnitMeasure = (
                 : void_
             }
           >
-            <div className="float-left w-1/2">
+            <div className="float-left w-5/6">
+            <div className=" float-left w-1/2">
                 <Field
                   label="Désignation *"
                   name="design"
@@ -244,6 +245,8 @@ const FormUnitMeasure = (
                   required="required"
                 />
               </div>
+              </div>
+              <div className="float-left w-5/6">
               <div className="float-left w-1/2">
               <Field
                   label="Symbole *"
@@ -251,6 +254,8 @@ const FormUnitMeasure = (
                   disabled={disabled}
                   required="required"
                 />
+              </div>
+              <div className="float-right w-1/2">
                 <Field
                   label="Décimal *"
                   name="decimal"
@@ -260,8 +265,8 @@ const FormUnitMeasure = (
                   required="required"
                 />
               </div>
-           
-              <div className="float-right mt-5 b-ajust-r">
+           </div>
+              <div className=" mt-5 b-ajust-r">
                      <Bsave
             className="float-right"
             onClick={() => {
@@ -271,12 +276,12 @@ const FormUnitMeasure = (
               }, 600);
             }}
           />
-          <BsavEndNew
-                  className="float-right mr-2"
+          {unitMeasure1.id=="" &&<BsavEndNew
+                  className="float-left mr-2"
                   onClick={() => {
                     setShow(true);
                   }}
-                />
+                />}
                
               </div>
         

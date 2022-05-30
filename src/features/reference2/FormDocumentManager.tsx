@@ -64,9 +64,9 @@ const FormDocumentManager = ({
               }, 600);
             }}
           />
-          <BsavEndNew
+          {document0.id=="" &&<BsavEndNew
                   className="float-right mr-2"
-                />
+                />}
                
               </div>
         
