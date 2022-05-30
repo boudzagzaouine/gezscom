@@ -60,9 +60,7 @@ const FormCommandes = ({command,fournisseurs,fournisseur,add,edit,refetchList}:C
 
             <>
   <div className="mt-1">
-    <Bcyan onClick={()=>alert(JSON.stringify(command0))}>
-      test
-    </Bcyan>
+  
 { command0.id!=""?(
   <>
  <Field label="Fournisseur" value={fournisseur0.raisonSociale}/>

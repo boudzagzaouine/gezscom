@@ -11,6 +11,7 @@ import { OpenMatierePremiereProp, openMatierePremieres } from 'config/rtk/rtkFou
 type FormLignedeCommandeProp={
     ligneCommande:LigneDeCommande
     saveArticle:(art:LigneDeCommande)=>void
+    refetch:()=>void
     close:()=>void
 }
 const FormulaireLigneDeCommande = ({ligneCommande,saveArticle,close}:FormLignedeCommandeProp) => {
@@ -31,19 +32,27 @@ const FormulaireLigneDeCommande = ({ligneCommande,saveArticle,close}:FormLignede
               <Field name="prix" placeholder="Prix" />
             </Table.td>
             <Table.td>
-            <div className="float-right w-full">
-                {/* <Bsave />*/}
-               </div>
+              <div className="float-right w-full">
+                <Bsave
+                  onClick={() => {
+                    setTimeout(() => {
+                      refetch();
+                    }, 500);
+                  }}
+                />
+              </div>
             </Table.td>
           </Form>
           <div className="float-right w-full">
-                {/* <Bcancel className="absolute right-0" onClick={() => {
-            close()
-          }} />*/}
-               </div>
-             
-</div>
-        </tr>
+            <Bcancel
+              className="absolute right-0"
+              onClick={() => {
+                close();
+              }}
+            />
+          </div>
+        </div>
+      </tr>
     </>
   )
 }
