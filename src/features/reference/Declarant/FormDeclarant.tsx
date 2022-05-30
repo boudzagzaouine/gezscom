@@ -206,8 +206,8 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
             }
           </Table>
           <Pagin
-            Pagin load={loadPage} max={300}
-            visible={declarants?.length > 0 ? true : false}
+           load={loadPage} max={300}
+            visibled={declarants?.length > 0 ? true : false}
           />
         </section>
       )}

@@ -225,8 +225,8 @@ const FormRawMaterial = (
             }
           </Table>
           <Pagin
-            Pagin load={loadPage} max={300}
-            visible={rawMaterials?.length > 0 ? true : false}
+           load={loadPage} max={300}
+            visibled={rawMaterials?.length > 0 ? true : false}
           />
         </section>
       )}

@@ -206,8 +206,8 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
             }
           </Table>
           <Pagin
-            Pagin load={loadPage} max={300}
-            visible={incoterms?.length > 0 ? true : false}
+           load={loadPage} max={300}
+            visibled={incoterms?.length > 0 ? true : false}
           />
         </section>
       )}
