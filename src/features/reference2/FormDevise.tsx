@@ -67,9 +67,9 @@ const FormDeviseManager = ({
               }, 600);
             }}
           />
-          <BsavEndNew
+          {v0.id=="" &&<BsavEndNew
                   className="float-right mr-2"
-                />
+                />}
                
               </div>
         

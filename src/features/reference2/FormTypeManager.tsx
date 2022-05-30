@@ -62,9 +62,9 @@ const FormTypeManager = ({
               }, 600);
             }}
           />
-          <BsavEndNew
+          {type0.id=="" &&<BsavEndNew
                   className="float-right mr-2"
-                />
+                />}
                
               </div>
         

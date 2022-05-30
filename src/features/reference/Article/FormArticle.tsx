@@ -166,13 +166,13 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
             thead={
               <tr>
                 <th className=" top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
-                  Designation
+                  Désignation
                 </th>
                 <th className=" top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
                   Nomenclature
                 </th>
                 <th className=" top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 ">
-                  Taux de pertes
+                  Taux de perte
                 </th>
                 <th></th>
               </tr>
@@ -207,7 +207,7 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
       )}
       <Modal
         show={show}
-        title="Nouvelle Famille Article"
+        title={article1.id==""?"Nouvelle Famille Article":"Modifier Famille Article"}
         format={+classNames("5")}
         close={closed}
       >
@@ -221,20 +221,25 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
                 : void_
             }
           >
-            <div className="float-left w-1/2">
+            <div className="float-left w-5/6">
+            <div className=" float-left w-1/2">
               <Field
                 label="Désignation *"
                 name="design"
                 disabled={disabled}
               />
 				  </div>
-               <div className="float-left w-1/2">
+          </div>
+          <div className="float-left w-5/6">
+            <div className="float-left w-1/2">
                   <Field
                     label="Nomenclature *"
                     name="nomenclature"
                     disabled={disabled}
                     required="required"
                   />
+                  </div>
+              <div className="float-right w-1/2">
                   <Field
                     label="Taux de perte *"
                     name="tauxPertes"
@@ -242,7 +247,9 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
                     required="required"
                   />
                 </div>
-            <div className="float-right mt-5 b-ajust-r">
+            </div>
+            
+            <div className="mt-5 b-ajust-r">
                      <Bsave
             className="float-right"
             onClick={() => {
@@ -252,12 +259,12 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
               }, 600);
             }}
           />
-          <BsavEndNew
-                  className="float-right mr-2"
+          {article1.id=="" &&<BsavEndNew
+                  className="float-left mr-2"
                   onClick={() => {
                     setShow(true);
                   }}
-                />
+                />}
                
               </div>
         

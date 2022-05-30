@@ -216,7 +216,7 @@ const FormBureauDouane = (
 
       <Modal
         show={show}
-        title="Bureau Douane"
+        title={bureauDouane1.id==""?"Nouveau Bureau Douane":"Modifier Bureau Douane"}
         format={+classNames("5")}
         close={closed}
       >
@@ -254,12 +254,12 @@ const FormBureauDouane = (
               }, 600);
             }}
           />
-          <BsavEndNew
+          {bureauDouane1.id=="" &&<BsavEndNew
                   className="float-right mr-2"
                   onClick={() => {
                     setShow(true);
                   }}
-                />
+                />}
                
               </div>
         

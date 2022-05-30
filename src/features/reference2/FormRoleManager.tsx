@@ -336,7 +336,7 @@ const FormRoleManager = ({
                         htmlFor="supression de utilisateur"
                         className="font-medium text-gray-700"
                       >
-                        Suppression role
+                        Suppression rôle
                       </label>
                     </div>
                     <div className="mt-4">
@@ -409,9 +409,9 @@ const FormRoleManager = ({
               }, 600);
             }}
           />
-          <BsavEndNew
+          {role0.id=="" &&<BsavEndNew
                   className="float-right mr-2"
-                />
+                />}
                
               </div>
         

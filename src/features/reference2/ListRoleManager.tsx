@@ -74,18 +74,6 @@ function ListRoleManager() {
     return [
       {
         icon: (
-          <ClipboardListIcon
-            className="mr-3 h-8 w-8 text-green-300 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Détail",
-        action: () => {
-          FormAsEdit(Role);
-        },
-      },
-      {
-        icon: (
           <PencilAltIcon
             className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
             aria-hidden="true"
@@ -144,7 +132,7 @@ function ListRoleManager() {
           <DeleteRole refetch={refetch} id={""} ref={del} />
           <ArchiveRole id={""} ref={archive} />
           <RestoreRole id={""} ref={restore} />
-          <h1>Role</h1>
+          <h1>Rôles</h1>
           <div className="float-left w-full">
             <Bcyan
               className="float-left"
@@ -154,7 +142,7 @@ function ListRoleManager() {
                 FormAsAdd();
               }}
             >
-              Nouveau Role
+              Nouveau Rôle
             </Bcyan>
 
             <div className="float-right">

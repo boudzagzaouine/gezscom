@@ -233,7 +233,7 @@ const FormRawMaterial = (
 
       <Modal
         show={show}
-        title="Famille Matière première"
+        title={rawMaterial1.id==""?"Nouvelle Famille Matière première":"Modifier Famille Matière première"}
         format={+classNames("5")}
         close={closed}
       >
@@ -291,12 +291,12 @@ const FormRawMaterial = (
               }, 600);
             }}
           />
-          <BsavEndNew
+          {rawMaterial1.id=="" &&<BsavEndNew
                   className="float-right mr-2"
                   onClick={() => {
                     setShow(true);
                   }}
-                />
+                />}
                
               </div>
         

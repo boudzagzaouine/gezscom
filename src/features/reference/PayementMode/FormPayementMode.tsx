@@ -216,7 +216,7 @@ const FormPayementMode = (
       )}
       <Modal
         show={show}
-        title="Mode De Réglement"
+        title={payementMode1.id==""?"Nouveau Mode De Réglement":"Nouveau Mode De Réglement"}
         format={+classNames("5")}
         close={closed}
       >
@@ -258,12 +258,12 @@ const FormPayementMode = (
               }, 600);
             }}
           />
-          <BsavEndNew
+          {payementMode1.id=="" &&<BsavEndNew
                   className="float-right mr-2"
                   onClick={() => {
                     setShow(true);
                   }}
-                />
+                />}
                
               </div>
         

@@ -37,7 +37,7 @@ export const Input = memo(
       }
       // console.log('render input ? ', label);
       const inputClassName = classNames(
-        `border outline-[#707070]/80  text-[#000] float-left rounded border-[#707070]/30 outline:border-[#f00] disabled:bg-[#dfdfdf]/30`,
+        `border outline-[#707070]/80  text-[#000000] float-left rounded border-[#707070]/30 outline:border-[#f00] disabled:bg-[#ddd]/30`,
         (!isRadio && !isCheckbox && `w-full`),
         {
           "py-3": isTextArea,

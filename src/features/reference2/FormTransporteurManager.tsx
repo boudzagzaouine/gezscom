@@ -64,9 +64,9 @@ const FormTransporteurManager = ({
            }, 600);
          }}
        />
-       <BsavEndNew
+       {transporteur0.id=="" &&<BsavEndNew
                className="float-right mr-2"
-             />
+             />}
             
            </div>
      
