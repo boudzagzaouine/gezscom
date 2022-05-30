@@ -1,6 +1,7 @@
 import { useAddLigneDeCommandeMutation, useEditLigneDeCommandeMutation, useFetchLigneDeCommandeByIdCommandeFournisseurQuery, useFetchLigneDeCommandeByIdMatierePremiereQuery } from "config/rtk";
+import { OpenLigneDeCommandeByJoinProp, openLigneDeCommandesByFournisseur } from "config/rtk/rtkFournisseur";
 import { useState } from "react";
-import { lc0 } from "tools/types";
+import { lc0, LigneDeCommande } from "tools/types";
 import Bedit from "widgets/Bedit";
 import Table from "widgets/Table";
 import FormulaireLigneDeCommande from "./FormulaireLigneDeCommande";
@@ -9,9 +10,12 @@ type LigneDeCommandeProps={
   idCommandeFournisseur:string,
 }
 const FormLigneDeCommande = ({idCommandeFournisseur}:LigneDeCommandeProps) => {
- /*  //@ts-ignore
-  const { data = [], isFetching, refetch } = useFetchLigneDeCommandeByIdCommandeFournisseurQuery(idCommandeFournisseur);
-
+ //const { data = [], isFetching, refetch } = useFetchLigneDeCommandeByIdCommandeFournisseurQuery(idCommandeFournisseur);
+ const ligneDeCommandesOpen:OpenLigneDeCommandeByJoinProp=openLigneDeCommandesByFournisseur(idCommandeFournisseur)
+ const ligneDeCommandes:LigneDeCommande[]=ligneDeCommandesOpen.data
+ const refetch=ligneDeCommandesOpen.refetch
+ const save=ligneDeCommandesOpen.save
+ const edit=ligneDeCommandesOpen.edit
   const [selectedIdCommande,setSelectedIdCommande]=useState("new")
   const [formArt,setFormArt]=useState(false)
   const close=()=>{
@@ -22,10 +26,8 @@ const FormLigneDeCommande = ({idCommandeFournisseur}:LigneDeCommandeProps) => {
     setFormArt(true)
     setSelectedIdCommande(id)
   }
-  const [save]=useAddLigneDeCommandeMutation();
-  const [edit]=useEditLigneDeCommandeMutation(); */
-return (
-   /*  <div>
+ return (
+    <div>
       <Table className="tab-list float-left w-full mt-8"
         thead={
           <tr>
@@ -37,9 +39,7 @@ return (
         }
       >
         {
-          //@ts-ignore
-          data.content?.map((article) => (
-         // articles?.map((article) => (
+          ligneDeCommandes?.map((article) => (
            <>
           <tr key={article.id}>
               <Table.td>{article.designation} </Table.td>
@@ -69,8 +69,7 @@ return (
         </tr>
         }
       </Table>
-    </div> */
-    <></>
+    </div>
   );
 }
 export default FormLigneDeCommande

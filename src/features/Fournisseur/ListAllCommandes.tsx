@@ -73,6 +73,7 @@ const ListAllCommandes = () => {
     <FormCommandes 
     add={add}
     edit={edit}
+    refetchList={refetch}
     fournisseur={f0}
     fournisseurs={fournisseurs}
     command={cf0} 

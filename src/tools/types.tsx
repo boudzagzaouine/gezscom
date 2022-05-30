@@ -433,7 +433,6 @@ export interface CommandeFournisseur {
   dateLivraison: Date;
   dateCommande: Date;
   montant: number;
-  fournisseur: Fournisseur;
   idFournisseur: string;
 }
 export const cf0: CommandeFournisseur = {
@@ -442,8 +441,7 @@ export const cf0: CommandeFournisseur = {
   dateCommande: new Date(),
   //@ts-ignore
   montant: "",
-  fournisseur: f0,
-  idFournisseur: "",
+   idFournisseur: "",
 };
 export const getCf0 = (f: Fournisseur): CommandeFournisseur => {
   return {

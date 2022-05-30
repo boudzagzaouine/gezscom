@@ -450,6 +450,9 @@ export interface FournisseurJson{
     save: () => void;
     edit: () => void;
   };
+  /*
+  const matierePremieresOpen:OpenMatierePremiereProp=openMatierePremieres()
+  */
   export const openMatierePremieres = (): OpenMatierePremiereProp => {
     const { data = [], refetch } = useFetchMatierePremiereQuery();
     const [save] = useAddMatierePremiereMutation();
@@ -469,12 +472,39 @@ export interface FournisseurJson{
     save: () => void;
     edit: () => void;
   };
+  export type OpenLigneDeCommandeByJoinProp = {
+    data: LigneDeCommande[];
+    refetch: () => void;
+    save: () => void;
+    edit: () => void;
+  };
   export const openLigneDeCommandes = (): OpenLigneDeCommandeProp => {
     const { data = [], refetch } = useFetchLigneDeCommandeQuery();
     const [save] = useAddLigneDeCommandeMutation();
     const [edit] = useEditLigneDeCommandeMutation();
     //@ts-ignore
     const out: OpenLigneDeCommandeProp = { data, refetch, save, edit };
+    return out;
+  };
+  //const ligneDeCommandesOpen:OpenLigneDeCommandeByJoinProp=openLigneDeCommandesByFournisseur()
+  //const ligneDeCommandes:LigneDeCommande[]=ligneDeCommandesOpen.data
+  //const refetch=ligneDeCommandesOpen.refetch
+  //const add=ligneDeCommandesOpen.save
+  //const edit=ligneDeCommandesOpen.edit
+  export const openLigneDeCommandesByFournisseur = (idCommandeFournisseur:string): OpenLigneDeCommandeByJoinProp => {
+    const { data = [], refetch } = useFetchLigneDeCommandeByIdCommandeFournisseurQuery(idCommandeFournisseur)
+    const [save] = useAddLigneDeCommandeMutation();
+    const [edit] = useEditLigneDeCommandeMutation();
+    //@ts-ignore
+    const out: OpenLigneDeCommandeByJoinProp = { data, refetch, save, edit };
+    return out;
+  };
+  export const openLigneDeCommandesByMatierePremiere = (idMatierePremiere:string): OpenLigneDeCommandeByJoinProp => {
+    const { data = [], refetch } = useFetchLigneDeCommandeByIdMatierePremiereQuery(idMatierePremiere)
+    const [save] = useAddLigneDeCommandeMutation();
+    const [edit] = useEditLigneDeCommandeMutation();
+    //@ts-ignore
+    const out: OpenLigneDeCommandeByJoinProp = { data, refetch, save, edit };
     return out;
   };
   /********************************************/

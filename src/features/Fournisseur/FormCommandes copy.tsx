@@ -51,7 +51,7 @@ const FormCommandes = ({command}:CommandesProps,ref: Ref<void>) => {
 {({  watch }) => {
   //@ts-ignore
           const idFournisseur = watch("idFournisseur");
-          const raisonsoc=watch("fournisseur.raisonSociale");
+          const raisonsoc=watch("dateCommande");
           const fournisseur:Fournisseur=f0;
           console.log(idFournisseur)
           console.log(raisonsoc)

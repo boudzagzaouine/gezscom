@@ -7,21 +7,22 @@ import {  LigneDeCommande, MatierePremiere, mp0} from "tools/types";
 import Table from "widgets/Table";
 import Bcancel from 'widgets/Bcancel';
 import Bsave from 'widgets/Bsave';
-import { OpenMatiere } from 'components/Fournisseur/OpenMatiere';
+import { OpenMatierePremiereProp, openMatierePremieres } from 'config/rtk/rtkFournisseur';
 type FormLignedeCommandeProp={
     ligneCommande:LigneDeCommande
     saveArticle:(art:LigneDeCommande)=>void
     close:()=>void
 }
 const FormulaireLigneDeCommande = ({ligneCommande,saveArticle,close}:FormLignedeCommandeProp) => {
-  const matiere:MatierePremiere[]=OpenMatiere()  
+  const matierePremieresOpen:OpenMatierePremiereProp=openMatierePremieres()
+  const matiere:MatierePremiere[]=matierePremieresOpen.data.content
   return (
     <>
     <tr className="relative">
 <div className="absolute left-0 top-0 bg-[#ccc]">
 <Form defaultValues={ligneCommande} onSubmit={saveArticle}>
             <Table.td>
-              <Field name="id" placeholder="Désignation" as="select" options={[mp0,...matiere]} optionLabelName="designation" />
+              <Field name="id" placeholder="Désignation" as="select" options={[mp0,...(matiere||[])]} optionLabelName="designation" />
             </Table.td>
             <Table.td>
               <Field name="quantite" placeholder="Quantité"/>

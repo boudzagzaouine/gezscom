@@ -22,9 +22,10 @@ type CommandesProps={
     fournisseurs:Fournisseur[]
     add:()=>void 
     edit:()=>void
+    refetchList:()=>void
 }
 
-const FormCommandes = ({command,fournisseurs,fournisseur,add,edit}:CommandesProps,ref: Ref<void>) => {
+const FormCommandes = ({command,fournisseurs,fournisseur,add,edit,refetchList}:CommandesProps,ref: Ref<void>) => {
   const [showModal, setShowModal] = React.useState(false);
   const [command0,setCommand0]=useState(command)
   const [fournisseur0,setFournisseur0]=useState(fournisseur)
@@ -59,21 +60,22 @@ const FormCommandes = ({command,fournisseurs,fournisseur,add,edit}:CommandesProp
 
             <>
   <div className="mt-1">
-{ command0.idFournisseur!=""?(
+    <Bcyan onClick={()=>alert(JSON.stringify(command0))}>
+      test
+    </Bcyan>
+{ command0.id!=""?(
   <>
  <Field label="Fournisseur" value={fournisseur0.raisonSociale}/>
   </>
 ):
 <>
-<Field label="Fournisseur" 
-name="idFournisseur" 
-as ="select" options={[f0,...fournisseurs]} optionLabelName="raisonSociale" />
 <Field
                 label="Fournisseur" 
                 name="idFournisseur" 
                 as="select"
                 onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                 setCommand0({...command0,idFournisseur:e.target.value})
+                  let idF:string=e.target.value
+                 setCommand0({...command0,idFournisseur:idF})
                 }}
               >
                 {[f0, ...(fournisseurs || [])]?.map((f: Fournisseur) => (
@@ -129,6 +131,7 @@ as ="select" options={[f0,...fournisseurs]} optionLabelName="raisonSociale" />
 </div>
 <Bsave className="float-right mt-2 b-ajust-r" onClick={() => {
           setTimeout(() => {
+            refetchList()
             close();
           }, 600);
         }} />
