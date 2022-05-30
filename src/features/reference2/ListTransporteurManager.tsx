@@ -141,7 +141,7 @@ function ListTransporteurManager() {
           <DeleteTransporteur refetch={refetch} id={""} ref={del} />
           <ArchiveTransporteur id={""} ref={archive} />
           <RestoreTransporteur id={""} ref={restore} />
-          <h1>Transporteur</h1>
+          <h1>Transporteurs</h1>
           <div className="float-left w-full">
             <Bcyanxl
               className="float-left"

@@ -100,8 +100,9 @@ export type OpenDeviseProp = {
   save: () => void;
   edit: () => void;
 };
-export const openDevises = (): OpenDeviseProp => {
-  const { data = [], refetch } = usePaginationDevisesQuery(0);
+//const deviseOpen: OpenDeviseProp =openDevises()
+export const openDevises = (page:number): OpenDeviseProp => {
+  const { data = [], refetch } = usePaginationDevisesQuery(page);
   const [save] = useAddDeviseMutation();
   const [edit] = useEditDeviseMutation();
   //@ts-ignore

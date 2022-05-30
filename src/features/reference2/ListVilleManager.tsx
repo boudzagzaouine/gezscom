@@ -132,7 +132,7 @@ function ListVilleManager() {
           <DeleteVille refetch={refetch} id={""} ref={del} />
           <ArchiveVille id={""} ref={archive} />
           <RestoreVille id={""} ref={restore} />
-          <h1>Ville</h1>
+          <h1>Villes</h1>
           <div className="float-left w-full">
             <Bcyan
               className="float-left"

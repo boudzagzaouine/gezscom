@@ -112,7 +112,7 @@ console.log("route = "+JSON.stringify(route))
         },
         {
           id: FAMILLE_MATIERE_PREMIERE,
-          text: "Famille Matière Première",
+          text: "Familles Matière première",
           link: "/reference/rawMaterial/NewRawMaterial",
           active: route.pathname == "/reference/rawMaterial/NewRawMaterial",
         },
@@ -179,7 +179,7 @@ console.log("route = "+JSON.stringify(route))
         },
         {
           id: TYPE_MANAGER,
-          text: "Types",
+          text: "Types En-Têtes",
           link: "/reference2/Type",
           active: route.pathname == "/reference2/Type",
         },
