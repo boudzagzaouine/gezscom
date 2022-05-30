@@ -53,8 +53,8 @@ const FormRoleManager = ({
               />
               <fieldset className="border border-[#ddd]/80 p-5 rounded-md">
                 <legend className="p-5">Fonctionnalités</legend>
-                <div className="ml-8 p-4">
-                  <div className=" float-left">
+                    <div className="float-left w-full">
+                      <div className="float-left w-1/2">
                     <div>
                       <input
                         id="gestions_des_clients"
@@ -226,7 +226,7 @@ const FormRoleManager = ({
                     </div>
                   </div>
                       
-                  <div className=" float-right">
+                  <div className="float-left w-1/2">
                   <div className="mt-4">
                       <input
                         id="gestions des dums et decharge"
