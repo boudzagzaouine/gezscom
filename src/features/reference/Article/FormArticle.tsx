@@ -202,7 +202,7 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
           </Table>
           <Pagin
            load={loadPage} max={300}
-            visibled={articles?.length > 0 ? true : false}
+            visible={articles?.length > 0 ? true : false}
           />
         </section>
       )}

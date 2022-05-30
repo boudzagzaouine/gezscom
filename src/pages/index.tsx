@@ -26,7 +26,7 @@ const IndexPage: NextPage = () => {
     <Col>
       <Head title={t("GESCOM")} />
       <View as="main">
-        <h1 className="center">La Page d'accueil en cours d'instruction</h1>
+        <h1 className="center">La Page d'accueil en cours de construction</h1>
       </View>
    </Col>
   );
