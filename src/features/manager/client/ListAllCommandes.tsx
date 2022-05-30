@@ -119,7 +119,7 @@ const ListAllCommandes = () => {
           </tr>
         ))}
       </Table>
-      <Pagin load={loadPage} visible={commandes?.length > 0} />
+      <Pagin load={loadPage} visible={commandes?.length > 0}  max={commandes?.length} />
     </Section>
   );
 };
