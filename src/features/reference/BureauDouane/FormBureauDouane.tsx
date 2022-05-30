@@ -24,6 +24,7 @@ import { openBureauDouanes } from "config/rtk/rtkBureauDouane";
 import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bcancel from "widgets/Bcancel";
+import ModalS from "widgets/ModalS";
 
 type FormBureauDouaneProps = {
   bureauDouane: BureauDouane;
@@ -150,7 +151,7 @@ const FormBureauDouane = (
                 open(bureauDouane0);
               }}
             >
-              Nouveau Bureau Douane
+              Nouveau Bureau Douanier
             </button>
             <div className="float-right">
               <button className="bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg">
@@ -182,10 +183,10 @@ const FormBureauDouane = (
             thead={
               <tr>
                 <th className=" top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
-                  Code
+                  Numéro
                 </th>
                 <th className=" top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
-                  Designation
+                  Désignation
                 </th>
                 <th></th>
               </tr>
@@ -214,12 +215,13 @@ const FormBureauDouane = (
         </section>
       )}
 
-      <Modal
+      <ModalS
         show={show}
         title={bureauDouane1.id==""?"Nouveau Bureau Douane":"Modifier Bureau Douane"}
         format={+classNames("5")}
         close={closed}
       >
+        <div className="float-left w-full">
              <Form
             defaultValues={bureauDouane1}
             onSubmit={
@@ -230,21 +232,19 @@ const FormBureauDouane = (
                 : void_
             }
           >
-            <div className="float-left w-1/2">
+            <div className="float-left w-full">
               <Field
                label="Numéro *"
                 name="code"
                 disabled={disabled} required={true}
               />
-			</div>
-             <div className="float-left w-1/2">
                   <Field
                     label="Désignation *"
                     name="design"
                     disabled={disabled} required={true}
                   />
             </div>
-            <div className="float-right mt-5 b-ajust-r">
+            <div className="mt-5 b-ajust-r">
                      <Bsave
             className="float-right"
             onClick={() => {
@@ -255,7 +255,7 @@ const FormBureauDouane = (
             }}
           />
           {bureauDouane1.id=="" &&<BsavEndNew
-                  className="float-right mr-2"
+                  className="ml-10 mr-2"
                   onClick={() => {
                     setShow(true);
                   }}
@@ -271,7 +271,8 @@ const FormBureauDouane = (
                   setShow(false);
                }}
              />
-     </Modal>
+             </div>
+     </ModalS>
     </>
   );
 };

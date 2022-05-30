@@ -31,6 +31,7 @@ import Mitems0 from "widgets/Mitems0";
 import Bcancel from "widgets/Bcancel";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bsave from "widgets/Bsave";
+import ModalS from "widgets/ModalS";
 
 type FormRegimeDouanierProps = {
   regimeDouanier: RegimeDouanier;
@@ -195,7 +196,7 @@ const FormRegimeDouanier = (
             thead={
               <tr>
                 <th className=" top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
-                  Code
+                  Numéro
                 </th>
                 <th className=" top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
                   Désignation
@@ -227,12 +228,13 @@ const FormRegimeDouanier = (
         </section>
       )}
 
-      <Modal
+      <ModalS
         show={show}
         title={regimeDouanier1.id==""?"Nouveau Régime Douanier":"Modifier Régime Douanier"}
         format={+classNames("5")}
         close={closed}
       >
+        <div className="float-left w-full">
         <Form
             defaultValues={regimeDouanier1}
             onSubmit={
@@ -243,25 +245,19 @@ const FormRegimeDouanier = (
                 : void_
             }
           >
-            <div className="float-left w-5/6">
-            <div className=" float-left w-1/2">
+            <div className="float-left w-full">
               <Field
-               label="Code *"
+               label="Numéro *"
                 name="code"
                 disabled={disabled} required={true}
                 
               />
-              </div>
-              </div>
-              <div className="float-left w-5/6">
-              <div className="float-left w-1/2">
                   <Field
                     label="Désignation *"
                     name="design"
                     disabled={disabled} required={true}
                     
-                  />
-                </div>
+              />
            </div>
           <div className=" mt-5 b-ajust-r">
                      <Bsave
@@ -274,7 +270,7 @@ const FormRegimeDouanier = (
             }}
           />
           {regimeDouanier1.id=="" &&<BsavEndNew
-                  className="float-left mr-2"
+                  className="ml-10 mr-2"
                   onClick={() => {
                     setShow(true);
                   }}
@@ -290,8 +286,8 @@ const FormRegimeDouanier = (
                   setShow(false);
                }}
              />
-  
-    </Modal>
+            </div>
+    </ModalS>
     </>
   );
 };
