@@ -13,7 +13,7 @@ import Pagin from 'widgets/Pagin';
 import Section from 'widgets/Section';
 import Table from 'widgets/Table'
 import { MenuItems } from 'widgets/TypeWidgets';
-import FormCommandes from './FormCommandes';
+import FormCommandes1 from './FormCommandes1';
 
 const ListAllCommandes = () => {
     const [page, setPage] = useState(0);
@@ -42,93 +42,13 @@ const ListAllCommandes = () => {
       setDisabled(false);
       showFormulaire(commande);  
     };
-    const menu=(commande:CommandeFournisseur): MenuItems[]=>{
-      return[
-        {
-          icon: (
-            <ClipboardListIcon
-              className="mr-3 h-8 w-8 text-green-300 group-hover:text-gray-500"
-              aria-hidden="true"
-            />
-          ),
-          text: "Détail",
-          action: () => {
-            FormAsEdit(commande);
-          },
-        },
-        {
-          icon: (
-            <PencilAltIcon
-              className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-              aria-hidden="true"
-            />
-          ),
-          text: "Modifier",
-          action: () => {
-            FormAsUpdate(commande);
-          },
-        },
-        {
-          icon: (
-            <TrashIcon
-              className="mr-3 h-8 w-8 text-rose-900 group-hover:text-gray-500"
-              aria-hidden="true"
-            />
-          ),
-          text: "Supprimer",
-          action: () => {
-            //@ts-ignore
-            del.current(commande.id);
-          },
-        },
-        {
-          icon: (
-            <ArchiveIcon
-              className="mr-3 h-8 w-8 text-gray-800 group-hover:text-gray-500"
-              aria-hidden="true"
-            />
-          ),
-          text: "Archiver",
-          action: () => {
-            //@ts-ignore
-            archive.current(commande.id);
-          },
-        },
-        // {
-        //   icon: (
-        //     <ReplyIcon
-        //       className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-        //       aria-hidden="true"
-        //     />
-        //   ),
-        //   text: "Restorer",
-        //   action: () => {
-        //     //@ts-ignore
-        //     restore.current(commande.id);
-        //   },
-        // },
-      ];
-    };
   return (
     <>
-    {/*form && (
-      <FormCommandes 
-      request={request0} 
-      commande={commandFournisseur0} 
-      closed={() => {
-        setForm(false);
-        setRequest0(REQUEST_SAVE);
-        refetch();
-      }}
-      disable={disabled}
-      />
-    )}
-    {!form && (*/}
-    <Section>
+ <Section>
           <div className="float-left w-full">
           <Bcyan className="float-left mt-2" onClick={()=>{
       //@ts-ignore
-      refCom.current(getCf0(f0))
+      refCom.current(cf0)
     }} >
     Nouvelle Commande
               </Bcyan>
@@ -143,7 +63,7 @@ const ListAllCommandes = () => {
               </Button>
             </div>
         </div>
-    <FormCommandes command={getCf0(f0)} ref={refCom}/>
+    <FormCommandes1 command={cf0} ref={refCom}/>
     <Table className="tab-list float-left w-full mt-2"
         thead={
           <tr>
@@ -169,12 +89,30 @@ const ListAllCommandes = () => {
                       <Table.td>{commande.dateLivraison}</Table.td>
                       <Table.td>-</Table.td>
                       <Table.td>Montant</Table.td>
-                      <Table.td><Mitems0 menu={menu(commande)} /></Table.td>
+                      <Table.td>
+                          <Mitems
+        archive={() => {
+          //@ts-ignore
+          archive.current(commande.id);
+        }}
+        del={() => {
+          //@ts-ignore
+          del.current(commande.id);
+        }}
+        edit={() => {
+          FormAsEdit(commande);
+        }}
+        obj={commande}
+        update={() => {
+          FormAsUpdate(commande);
+        }}
+      />
+                        </Table.td>
                     </tr>
                   ))
                 }
                 </Table>
-                <Pagin visible={commandFournisseurs?.length >0} load={loadPage} />
+                <Pagin visible={commandFournisseurs?.length >0} load={loadPage} max={commandFournisseurs?.length } />
     </Section>
   </>
   )
