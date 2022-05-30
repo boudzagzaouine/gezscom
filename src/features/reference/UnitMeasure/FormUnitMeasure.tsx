@@ -26,6 +26,7 @@ import Bcyanxl from "widgets/Bcyanxl";
 import Bsave from "widgets/Bsave";
 import Bcancel from "widgets/Bcancel";
 import BsavEndNew from "widgets/BsavEndNew";
+import ModalS from "widgets/ModalS";
 
 type FormUnitMeasureProps = {
   unitMeasure: UnitMeasure;
@@ -220,12 +221,14 @@ const FormUnitMeasure = (
         </section>
       )}
 
-      <Modal
+      <ModalS
         show={show}
         title={unitMeasure1.id==""?"Nouvelle Unité de Mesure":"Modifier Unité de Mesure"}
         format={+classNames("5")}
         close={closed}
-      >
+     >
+             <div className="float-left w-full">
+        
          <Form
             defaultValues={unitMeasure1}
             onSubmit={
@@ -236,23 +239,22 @@ const FormUnitMeasure = (
                 : void_
             }
           >
-            <div className="float-left w-5/6">
-            <div className=" float-left w-1/2">
+           <div className=" float-left w-full">
                 <Field
                   label="Désignation *"
                   name="design"
-                  disabled={disabled}
-                  required="required"
+                  disabled={disabled} required={true}
+                  
                 />
               </div>
-              </div>
-              <div className="float-left w-5/6">
+            
+              <div className="float-left w-full">
               <div className="float-left w-1/2">
               <Field
                   label="Symbole *"
                   name="symbole"
-                  disabled={disabled}
-                  required="required"
+                  disabled={disabled} required={true}
+                  
                 />
               </div>
               <div className="float-right w-1/2">
@@ -261,8 +263,8 @@ const FormUnitMeasure = (
                   name="decimal"
                   options={DECIMAL}
                   as="select"
-                  disabled={disabled}
-                  required="required"
+                  disabled={disabled} required={true}
+                  
                 />
               </div>
            </div>
@@ -277,7 +279,7 @@ const FormUnitMeasure = (
             }}
           />
           {unitMeasure1.id=="" &&<BsavEndNew
-                  className="float-left mr-2"
+                  className="ml-10 mr-2"
                   onClick={() => {
                     setShow(true);
                   }}
@@ -286,6 +288,9 @@ const FormUnitMeasure = (
               </div>
         
           </Form>
+      
+          
+
                <Bcancel
                className="float-right mt-5 b-ajust"
                onClick={() => {
@@ -293,8 +298,8 @@ const FormUnitMeasure = (
                  setShow(false);
                }}
              />
-             
-      </Modal>
+                </div> 
+      </ModalS>
     </>
   );
 };

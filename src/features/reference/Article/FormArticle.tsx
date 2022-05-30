@@ -26,6 +26,7 @@ import Mitems0 from "widgets/Mitems0";
 import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bcancel from "widgets/Bcancel";
+import ModalS from "widgets/ModalS";
 
 type FormArticleProps = {
   article: Article;
@@ -205,12 +206,13 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
           />
         </section>
       )}
-      <Modal
+      <ModalS
         show={show}
         title={article1.id==""?"Nouvelle Famille Article":"Modifier Famille Article"}
         format={+classNames("5")}
         close={closed}
       >
+        <div className="float-left w-full">
                   <Form
             defaultValues={article1}
             onSubmit={
@@ -221,30 +223,28 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
                 : void_
             }
           >
-            <div className="float-left w-5/6">
-            <div className=" float-left w-1/2">
+            <div className=" float-left w-full">
               <Field
                 label="Désignation *"
                 name="design"
-                disabled={disabled}
+                disabled={disabled} required={true}
               />
-				  </div>
           </div>
-          <div className="float-left w-5/6">
+          <div className="float-left w-full">
             <div className="float-left w-1/2">
                   <Field
                     label="Nomenclature *"
                     name="nomenclature"
-                    disabled={disabled}
-                    required="required"
+                    disabled={disabled} required={true}
+                    
                   />
                   </div>
               <div className="float-right w-1/2">
                   <Field
                     label="Taux de perte *"
                     name="tauxPertes"
-                    disabled={disabled}
-                    required="required"
+                    disabled={disabled} required={true}
+                    
                   />
                 </div>
             </div>
@@ -260,7 +260,7 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
             }}
           />
           {article1.id=="" &&<BsavEndNew
-                  className="float-left mr-2"
+                  className="ml-10 mr-2"
                   onClick={() => {
                     setShow(true);
                   }}
@@ -276,8 +276,8 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
                  setShow(false);
                }}
              />
-          
-      </Modal>
+          </div>
+      </ModalS>
     </>
   );
 };

@@ -25,6 +25,7 @@ import Mitems0 from "widgets/Mitems0";
 import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bcancel from "widgets/Bcancel";
+import ModalS from "widgets/ModalS";
 
 type FormPayementModeProps = {
   payementMode: PayementMode;
@@ -186,7 +187,7 @@ const FormPayementMode = (
                   Code
                 </th>
                 <th className=" top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
-                  Designation
+                  Désignation
                 </th>
                 <th></th>
               </tr>
@@ -214,12 +215,13 @@ const FormPayementMode = (
           />
         </section>
       )}
-      <Modal
+      <ModalS
         show={show}
-        title={payementMode1.id==""?"Nouveau Mode De Réglement":"Nouveau Mode De Réglement"}
+        title={payementMode1.id==""?"Nouveau Mode De Réglement":"Modifier Mode De Réglement"}
         format={+classNames("5")}
         close={closed}
       >
+        <div className="float-left w-full">
            <Form
             defaultValues={payementMode1}
             onSubmit={
@@ -231,24 +233,20 @@ const FormPayementMode = (
             }
           >
             <div className="float-left w-full">
-			<div className="float-left w-1/2">
-              <Field
+			         <Field
                label="Code *"
                 name="code"
-                disabled={disabled}
-                required="required"
+                disabled={disabled} required={true}
+                
               />
-			</div>
-               <div className="float-left w-1/2">
-                  <Field
+			           <Field
                     label="Désignation *"
                     name="design"
-                    disabled={disabled}
-                    required="required"
+                    disabled={disabled} required={true}
+                    
                   />
                 </div>
-           </div>
-          <div className="float-right mt-5 b-ajust-r">
+          <div className=" mt-5 b-ajust-r">
                      <Bsave
             className="float-right"
             onClick={() => {
@@ -259,7 +257,7 @@ const FormPayementMode = (
             }}
           />
           {payementMode1.id=="" &&<BsavEndNew
-                  className="float-right mr-2"
+                  className="ml-10 mr-2"
                   onClick={() => {
                     setShow(true);
                   }}
@@ -275,7 +273,8 @@ const FormPayementMode = (
                   setShow(false);
                }}
              />
-   </Modal>
+             </div>
+   </ModalS>
     </>
   );
 };
