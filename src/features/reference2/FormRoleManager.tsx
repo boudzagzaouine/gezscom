@@ -37,9 +37,9 @@ const FormRoleManager = ({
     <Section>
        <Form defaultValues={role0} onSubmit={onSubmit}>
           {request == REQUEST_SAVE ? (
-            <h1 className="mb-2">{text} Role </h1>
+            <h1 className="mb-2">{text} Rôle </h1>
           ) : (
-            <h1 className="mb-2">{text1} Role </h1>
+            <h1 className="mb-2">{text1} Rôle </h1>
           )}
 
           <div className="float-left w-full">
@@ -53,8 +53,8 @@ const FormRoleManager = ({
               />
               <fieldset className="border border-[#ddd]/80 p-5 rounded-md">
                 <legend className="p-5">Fonctionnalités</legend>
-                <div className="ml-8 p-4">
-                  <div className=" float-left">
+                    <div className="float-left w-full">
+                      <div className="float-left w-1/2">
                     <div>
                       <input
                         id="gestions_des_clients"
@@ -141,48 +141,6 @@ const FormRoleManager = ({
                     </div>
                     <div className="mt-4">
                       <input
-                        id="gestions des dums et decharge"
-                        nombre-colonnes="2"
-                        type="checkbox"
-                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                      />
-                      <label
-                        htmlFor="gestions des dums et decharge"
-                        className="font-medium text-gray-700"
-                      >
-                        Gestion Dums & Décharges
-                      </label>
-                    </div>
-                    <div className="ml-8">
-                      <input
-                        id="supression dums"
-                        nombre-colonnes="2"
-                        type="checkbox"
-                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                      />
-                      <label
-                        htmlFor="supression dums"
-                        className="font-medium text-gray-700"
-                      >
-                        Suppression dum
-                      </label>
-                    </div>
-                    <div className="ml-8">
-                      <input
-                        id="supression decharge"
-                        nombre-colonnes="2"
-                        type="checkbox"
-                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                      />
-                      <label
-                        htmlFor="supression decharge"
-                        className="font-medium text-gray-700"
-                      >
-                        Supression décharge
-                      </label>
-                    </div>
-                    <div className="mt-4">
-                      <input
                         id="gestions d'achats"
                         nombre-colonnes="2"
                         type="checkbox"
@@ -223,7 +181,6 @@ const FormRoleManager = ({
                         Suppression bon de retours
                       </label>
                     </div>
-
                     <div className="mt-4">
                       <input
                         id="gestions des production"
@@ -268,7 +225,79 @@ const FormRoleManager = ({
                       </label>
                     </div>
                   </div>
-                  <div className=" float-right">
+                      
+                  <div className="float-left w-1/2">
+                  <div className="mt-4">
+                      <input
+                        id="gestions des dums et decharge"
+                        nombre-colonnes="2"
+                        type="checkbox"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                      />
+                      <label
+                        htmlFor="gestions des dums et decharge"
+                        className="font-medium text-gray-700"
+                      >
+                        Gestion Dums & Décharges
+                      </label>
+                    </div>
+                    <div className="ml-8">
+                      <input
+                        id="supression dums"
+                        nombre-colonnes="2"
+                        type="checkbox"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                      />
+                      <label
+                        htmlFor="supression dums"
+                        className="font-medium text-gray-700"
+                      >
+                        Suppression dum
+                      </label>
+                    </div>
+                    <div className="ml-8">
+                      <input
+                        id="supression decharge"
+                        nombre-colonnes="2"
+                        type="checkbox"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                      />
+                      <label
+                        htmlFor="supression decharge"
+                        className="font-medium text-gray-700"
+                      >
+                        Suppression décharge
+                      </label>
+                    </div>
+                    <div className="mt-4">
+                      <input
+                        id="gestions des colissage"
+                        nombre-colonnes="2"
+                        type="checkbox"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                      />
+                      <label
+                        htmlFor="gestions des colissage"
+                        className="font-medium text-gray-700"
+                      >
+                        Gestion Colisages
+                      </label>
+                    </div>
+
+                    <div className="ml-8">
+                      <input
+                        id="supression de fiche colissage"
+                        nombre-colonnes="2"
+                        type="checkbox"
+                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                      />
+                      <label
+                        htmlFor="supression de fiche colissage"
+                        className="font-medium text-gray-700"
+                      >
+                        Suppression fiche colisage
+                      </label>
+                    </div>
                     <div className="mt-4">
                       <input
                         id="vente et facturation"
@@ -308,7 +337,7 @@ const FormRoleManager = ({
                         htmlFor="gestions des utilisateurs"
                         className="font-medium text-gray-700"
                       >
-                        Gestions Utilisateurs
+                        Gestion Utilisateurs
                       </label>
                     </div>
                     <div className="ml-8">
@@ -341,35 +370,6 @@ const FormRoleManager = ({
                     </div>
                     <div className="mt-4">
                       <input
-                        id="gestions des colissage"
-                        nombre-colonnes="2"
-                        type="checkbox"
-                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                      />
-                      <label
-                        htmlFor="gestions des colissage"
-                        className="font-medium text-gray-700"
-                      >
-                        Gestion Colisages
-                      </label>
-                    </div>
-
-                    <div className="ml-8">
-                      <input
-                        id="supression de fiche colissage"
-                        nombre-colonnes="2"
-                        type="checkbox"
-                        className="focus:ring-indigo-500 mr-2 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                      />
-                      <label
-                        htmlFor="supression de fiche colissage"
-                        className="font-medium text-gray-700"
-                      >
-                        Suppression fiche colisage
-                      </label>
-                    </div>
-                    <div className="mt-4">
-                      <input
                         id="gestions des table"
                         nombre-colonnes="2"
                         type="checkbox"
@@ -379,7 +379,7 @@ const FormRoleManager = ({
                         htmlFor="gestions des table"
                         className="font-medium text-gray-700"
                       >
-                        Gestions des Tables
+                        Gestion des Tables
                       </label>
                     </div>
                     <div className="mt-4">
@@ -393,7 +393,7 @@ const FormRoleManager = ({
                         htmlFor="Editions des En-tete"
                         className="font-medium text-gray-700"
                       >
-                        Editions des en-tetes
+                        Edition des en-têtes
                       </label>
                     </div>
                   </div>

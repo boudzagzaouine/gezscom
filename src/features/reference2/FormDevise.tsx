@@ -11,42 +11,46 @@ import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
+import ModalS from "widgets/ModalS";
 import Section from "widgets/Section";
-
 type FormDeviseManagerProp = {
   closed: () => void;
   Devise: Devise;
   request: number;
   disable: boolean;
   imputFocus: any;
+  showModal:boolean;
+  setshowModal:(b:boolean)=>void
 };
 const FormDeviseManager = ({
   closed,
   Devise,
   request,
   disable,
+  showModal,
+  setshowModal,
 }: FormDeviseManagerProp) => {
+  const close=()=>{
+    setshowModal(false)
+  }
   const [save] = useAddDeviseMutation();
   const [edit] = useEditDeviseMutation();
   const onSubmit =
     request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit : undefined;
   const [disabled, setDisabled] = useState(disable);
-  const text = "Nouveau";
-  const text1 = "Modifier";
   const imputFocus = useRef(null);
   useEffect(() => {
     /*  @ts-ignore*/
     imputFocus.current.focus();
   }, []);
   return (
+    <ModalS show={showModal}
+    title={v0.id==""?"Nouveau Devise":"Modifier Devise"}
+    format={5}
+    close={closed}
+     >
     <Section>
        <Form defaultValues={v0} onSubmit={onSubmit}>
-          {request == REQUEST_SAVE ? (
-            <h1 className="mb-2">{text} Devise </h1>
-          ) : (
-            <h1 className="mb-2">{text1} Devise </h1>
-          )}
-
           <div className="float-left w-full">
              {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
               <Field
@@ -81,6 +85,7 @@ const FormDeviseManager = ({
                }}
              />
        </Section>
+       </ModalS>
   );
 };
 

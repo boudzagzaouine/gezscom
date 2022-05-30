@@ -52,6 +52,7 @@ function ListDeviseManager() {
     refetch();
   };
   const [disabled, setDisabled] = useState(true);
+  const [showModalE, setShowModalE] = useState(false);
   const del = useRef(null);
   const archive = useRef(null);
   const restore = useRef(null);
@@ -66,6 +67,7 @@ function ListDeviseManager() {
     setDevise0(v0);
     setForm(true);
     setRequesv0(REQUEST_SAVE);
+    setShowModalE(true)
   };
   const FormAsEdit = (Devise: Devise) => {
     setDisabled(true);
@@ -136,6 +138,8 @@ function ListDeviseManager() {
             refetch();
           }}
           disable={disabled}
+          showModal={showModalE} 
+          setshowModal={setShowModalE}
         />
       )}
       {!form && (
@@ -152,6 +156,7 @@ function ListDeviseManager() {
                 //setClienv0(c0);
                 //setForm(true);
                 FormAsAdd();
+                
               }}
             >
               Novelle Devise
