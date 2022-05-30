@@ -240,7 +240,7 @@ const FormDecharge = ({ decharge }: FormDechargeProps, ref: Ref<void>) => {
               })
             }
           </Table>
-          <Pagin load={loadPage} max={300} visibled={decharges?.length ? true : false} />
+          <Pagin load={loadPage} max={300} visible={decharges?.length ? true : false} />
         </section>
       )}
       <Modal

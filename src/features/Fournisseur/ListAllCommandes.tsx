@@ -174,7 +174,7 @@ const ListAllCommandes = () => {
                   ))
                 }
                 </Table>
-                <Pagin visibled={commandFournisseurs?.length >0} load={loadPage} />
+                <Pagin visible={commandFournisseurs?.length >0} load={loadPage} />
     </Section>
   </>
   )

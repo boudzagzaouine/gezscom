@@ -169,7 +169,7 @@ const ListAllMatierePremiere = () => {
                 <
 				
 				
-				Pagin load={loadPage} max={300} visibled={true} />
+				Pagin load={loadPage} max={300} visible={true} />
     </Section>
   )
 }

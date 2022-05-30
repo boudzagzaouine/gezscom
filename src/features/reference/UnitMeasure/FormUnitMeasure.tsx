@@ -25,6 +25,8 @@ import Mitems0 from "widgets/Mitems0";
 import Bcyanxl from "widgets/Bcyanxl";
 import Bsave from "widgets/Bsave";
 import Bcancel from "widgets/Bcancel";
+
+
 import BsavEndNew from "widgets/BsavEndNew";
 import ModalS from "widgets/ModalS";
 
@@ -214,9 +216,8 @@ const FormUnitMeasure = (
               })
             }
           </Table>
-          <Pagin		
-			Pagin load={loadPage} max={300}
-            visibled={unitMeasures?.length > 0 ? true : false}
+          <Pagin load={loadPage} max={300}
+            visible={unitMeasures?.length > 0 ? true : false}
           />
         </section>
       )}
