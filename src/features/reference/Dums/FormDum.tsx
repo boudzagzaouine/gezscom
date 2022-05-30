@@ -264,7 +264,7 @@ const FormDum = ({ dum }: FormDumProps, ref: Ref<void>) => {
               })
             }
           </Table>
-          <Pagin load={loadPage} visible={dums?.length ? true : false} />
+          <Pagin load={loadPage} max={300} visible={dums?.length ? true : false} />
         </section>
       )}
       <Modal

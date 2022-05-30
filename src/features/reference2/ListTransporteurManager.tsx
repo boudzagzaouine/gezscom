@@ -190,7 +190,7 @@ function ListTransporteurManager() {
             }
           </Table>
 
-          <Pagin load={loadPage} visible={transporteurs?.length > 0} />
+          <Pagin load={loadPage} max={300} visible={transporteurs?.length > 0} />
         </Section>
       )}
     </>
