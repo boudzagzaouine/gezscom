@@ -248,8 +248,8 @@ const FormRegimeDouanier = (
               <Field
                label="Code *"
                 name="code"
-                disabled={disabled}
-                required="required"
+                disabled={disabled} required={true}
+                
               />
               </div>
               </div>
@@ -258,8 +258,8 @@ const FormRegimeDouanier = (
                   <Field
                     label="Désignation *"
                     name="design"
-                    disabled={disabled}
-                    required="required"
+                    disabled={disabled} required={true}
+                    
                   />
                 </div>
            </div>

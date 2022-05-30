@@ -233,8 +233,8 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
               <Field
                label="Désignation *"
                 name="design"
-                disabled={disabled}
-                required="required"
+                disabled={disabled} required={true}
+                
               />
               </div>
               </div>
@@ -245,8 +245,8 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
                     name="ville"
                     options={VILLE}
                     as="select"
-                    disabled={disabled}
-                    required="required"
+                    disabled={disabled} required={true}
+                    
                   />
                 </div>
               </div>
