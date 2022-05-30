@@ -42,7 +42,7 @@ const Control = forwardRef(
     /*
      */
     if (isSelect && options) {
-      const selectOptions = options.map((option: any) => {
+      const selectOptions = options?.map((option: any) => {
         //  if (!option) return null;
         //@ts-ignore
         const optionValue =

@@ -11,7 +11,7 @@ import {
   REQUEST_SAVE,
 } from "tools/consts";
 import { STYLE_ICON } from "tools/constStyle";
-import { Client, Devise, Incoterm, PayementMode } from "tools/types";
+import { Client, Devise, Incoterm, PayementMode,payementMode0,incoterm0, devise0 } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import Section from "widgets/Section";
@@ -75,7 +75,7 @@ const FormClientManager = ({
               <Field
                 label="device"
                 name="device"
-                options={devises}
+                options={[devise0,...(devises||[])]}
                 as="select"
                 disabled={disabled}
               />
@@ -90,16 +90,20 @@ const FormClientManager = ({
               <Field
                 label="Mode de payment"
                 name="paymentChoice"
-                options={payementModes}
+                options={[payementMode0,...(payementModes||[])]}
                 as="select"
                 disabled={disabled}
+                optionKeyName = "code"
+                optionLabelName = "code"
               />
               <Field
                 label="incoterm"
                 name="incoterm"
-                options={incoterms}
+                options={[incoterm0,...(incoterms||[])]}
                 as="select"
                 disabled={disabled}
+                optionKeyName = "code"
+                optionLabelName = "code"
               />
               <Field
                 label="adresse de facturation"
@@ -147,7 +151,9 @@ const FormClientManager = ({
               "float-right b-ajust " + (request == REQUEST_SAVE && "b-ajustf")
             }
             onClick={() => {
+              if(client.id!="")
               setDisabled(true);
+              else closed()
             }}
           />
         )}

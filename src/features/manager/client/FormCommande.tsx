@@ -51,7 +51,7 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
     <Modal close={close} format={5} show={showModal} title={command0.id === "" ? "Nouvelle commande" : "Mise à jour de la commande"} >
 <Form defaultValues={command0} onSubmit={save} >
 <div className="float-left w-1/2 relative">
-{command0.idClient!=""?
+{command0.id!=""?
 <Field label="Client" value={client0?.design} />:
 <Field
                 label="Client"
@@ -60,6 +60,7 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
                 onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                   let c: Client = JSON.parse(e.target.value);
                   setClient0(c);
+                  setCommand0({...command0,idClient:c.id})
                 }}
               >
                 {[c0, ...(clients0 || [])]?.map((c: Client) => (
@@ -90,18 +91,9 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
             )}
 </div>
 <div className="float-left w-1/2">
-
-  {/*
-  <Field  label="Adress de livraison1"
-              name="adrLiv"
-              />
-  <Field  label="Adress de livraison1"
-              name="adrLiv1"
-              />
-              <span>coco:{command0.adrLiv}</span>
               <Field
-              label="Adress de livraison2"
-              name="adrLiv2"
+              label="Adress de livraison"
+              name="adrLiv"
               as="select"
               onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                 setCommand0({...command0,adrLiv:e.target.value})
@@ -110,21 +102,20 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
               {[adr0, ...(adressLivs || [])]?.map((c: AdressLiv) => (
                   <option value={c.adress}>{c.adress}</option>
                 ))}
-            </Field> */}
-             <Field
-              label="Adress de livraison"
-              name="adrLiv"
-              as="select"
-              options={[adr0, ...(adressLivs || [])]} 
-              optionKeyName="adress"
-              optionLabelName="adress"
-            /> 
+            </Field> 
             <Field
               label="Saison"
               name="season"
               as="select"
-             options={["", ...SEASON]} 
-            /> 
+              onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                setCommand0({...command0,season:e.target.value})
+               }}
+ 
+            >
+              {["", ...SEASON]?.map((c: string) => (
+                  <option value={c}>{c}</option>
+                ))}
+              </Field> 
            </div>
           <Bsave
             className="float-right mt-5 b-ajust-r"

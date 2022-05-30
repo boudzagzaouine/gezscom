@@ -7,6 +7,7 @@ type PaginProps = {
   max:number
 };
 const Pagin = ({ load, visible ,max}: PaginProps) => {
+  const visible1:boolean =false 
   const [init, setInit] = useState(0);
   const [page, setPage] = useState(init);
   let size: number = PAGE_SIZE;
@@ -32,7 +33,7 @@ const Pagin = ({ load, visible ,max}: PaginProps) => {
   };
   return (
     <>
-      {visible && (
+      {visible1 && (
         <nav aria-label="Page navigation example">
           <ul className={"inline-flex -space-x-px float-right my-8"}>
             <li>
