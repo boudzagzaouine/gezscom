@@ -12,7 +12,7 @@ import Mitems from "widgets/Mitems";
 import Pagin from "widgets/Pagin";
 import RestoreClient from "components/manager/client/RestoreClient";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import { STYLE_ICON } from "tools/constStyle";
 import { c0, Client } from "tools/types";
@@ -61,6 +61,9 @@ const ListClientManager = () => {
     setDisabled(false);
     showFormulaire(client);
   };
+  useEffect(()=>{
+    
+  })
   /* const menu = (client: Client): MenuItems[] => {
     return [
       {
@@ -228,7 +231,7 @@ const ListClientManager = () => {
             }
           </Table>
 
-          <Pagin load={loadPage} visible={clients?.length > 0} />
+          <Pagin load={loadPage} visible={clients?.length > 0} max={clients?.length} />
         </Section>
       )}
     </>
