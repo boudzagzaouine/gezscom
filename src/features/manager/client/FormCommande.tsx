@@ -14,6 +14,7 @@ import NavTabs from 'widgets/NavTabs';
 import { BriefcaseIcon } from '@heroicons/react/solid';
 import { style_icon, style_span } from 'tools/constStyle';
 import ListArticleCommandes from './ListArticleCommandes';
+import { SEASON } from 'tools/consts';
 type FormCommandeProp={
   command:Commande
   client:Client
@@ -48,7 +49,7 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
 
   return (
     <Modal close={close} format={5} show={showModal} title={command0.id === "" ? "Nouvelle commande" : "Mise à jour de la commande"} >
-<Form defaultValues={command0} >
+<Form defaultValues={command0} onSubmit={save} >
 <div className="float-left w-1/2 relative">
 {command0.idClient!=""?
 <Field label="Client" value={client0?.design} />:
@@ -89,6 +90,11 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
             )}
 </div>
 <div className="float-left w-1/2">
+
+  {/*
+  <Field  label="Adress de livraison1"
+              name="adrLiv"
+              />
   <Field  label="Adress de livraison1"
               name="adrLiv1"
               />
@@ -104,18 +110,22 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
               {[adr0, ...(adressLivs || [])]?.map((c: AdressLiv) => (
                   <option value={c.adress}>{c.adress}</option>
                 ))}
-            </Field>
-            <Field
-              label="Adress de livraison3"
+            </Field> */}
+             <Field
+              label="Adress de livraison"
               name="adrLiv"
               as="select"
-              value={command0.adrLiv}
               options={[adr0, ...(adressLivs || [])]} 
               optionKeyName="adress"
               optionLabelName="adress"
-            />
-           <Field label="Saison" name="season" />
-          </div>
+            /> 
+            <Field
+              label="Saison"
+              name="season"
+              as="select"
+             options={["", ...SEASON]} 
+            /> 
+           </div>
           <Bsave
             className="float-right mt-5 b-ajust-r"
             onClick={() => {

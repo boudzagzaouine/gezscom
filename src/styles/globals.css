@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "~react-datepicker/dist/react-datepicker.css";
 .react-datepickerzz {
     position: absolute !important;
     right: 0 !important;

@@ -55,4 +55,5 @@ export const LIST_FAMILLE_MATIERE_PREMIERE = [
 export const ORIGINE = ["", "Maroc", "France", "Canada", "Italie"];
 
 export const ROLE = ["", "Admin", "User"];
+export const SEASON = ["hiver","printemps","automne","été"];
 export const URL_API_SEC = process.env.NEXT_URL_API;
