@@ -25,6 +25,7 @@ import Mitems0 from "widgets/Mitems0";
 import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bcancel from "widgets/Bcancel";
+import ModalS from "widgets/ModalS";
 
 type FormRawMaterialProps = {
   rawMaterial: RawMaterial;
@@ -190,13 +191,10 @@ const FormRawMaterial = (
                   Nomenclature
                 </th>
                 <th className=" top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
+                  Taux de perte
+                </th>
+                <th className=" top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
                   Famille
-                </th>
-                <th className=" top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
-                  Unité de Mesure
-                </th>
-                <th className=" top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
-                  Taux de pertes
                 </th>
                 <th></th>
               </tr>
@@ -210,12 +208,11 @@ const FormRawMaterial = (
                   <tr key={rawMaterial.id}>
                     <Table.td>{rawMaterial.design}</Table.td>
                     <Table.td>{rawMaterial.nomenclature}</Table.td>
-                    <Table.td>{rawMaterial.family}</Table.td>
-                    <Table.td>{rawMaterial.measureUnit}</Table.td>
                     <Table.td>
                       {rawMaterial.tauxPertes}
                       {"%"}
                     </Table.td>
+                    <Table.td>{rawMaterial.family}</Table.td>
                     <Table.td className="cursor-pointer">
                       <Mitems0 menu={menu(rawMaterial)} />
                     </Table.td>
@@ -231,12 +228,13 @@ const FormRawMaterial = (
         </section>
       )}
 
-      <Modal
+      <ModalS
         show={show}
         title={rawMaterial1.id==""?"Nouvelle Famille Matière première":"Modifier Famille Matière première"}
         format={+classNames("5")}
         close={closed}
       >
+        <div className="float-left w-full">
               <Form
             defaultValues={rawMaterial1}
             onSubmit={
@@ -247,17 +245,22 @@ const FormRawMaterial = (
                 : void_
             }
           >
-            <div className="float-left w-1/2">
+            <div className=" float-left w-1/2">
                <Field
                   label="Désignation *"
                   name="design"
                   disabled={disabled} required={true}
                 />
+            </div>
+            <div className="float-left w-full">
+            <div className="float-left w-1/2">
                <Field
                   label="Nomenclature *"
                   name="nomenclature"
                   disabled={disabled} required={true}
                 />
+                </div>
+              <div className="float-right w-1/2">
                <Field
                   label="Famille"
                   name="family"
@@ -265,7 +268,9 @@ const FormRawMaterial = (
                   as="select"
                   disabled={disabled} required={true}
                 />
-				</div>
+             </div>
+				      </div>
+              <div className="float-left w-full">
              <div className="float-left w-1/2">
                 <Field
                   label="Unité De Mesure *"
@@ -274,16 +279,16 @@ const FormRawMaterial = (
                   as="select"
                   disabled={disabled} required={true}
                 />
+               </div>
+              <div className="float-right w-1/2">
                <Field
                   label="Taux de perte *"
                   name="tauxPertes"
-                  
-				  
-				  disabled={disabled} required={true}
-                  
+				          disabled={disabled} required={true}
                 />
             </div>
-                        <div className="float-right mt-5 b-ajust-r">
+            </div>
+            <div className="mt-5 b-ajust-r">
                      <Bsave
             className="float-right"
             onClick={() => {
@@ -294,7 +299,7 @@ const FormRawMaterial = (
             }}
           />
           {rawMaterial1.id=="" &&<BsavEndNew
-                  className="float-right mr-2"
+                  className="ml-10 mr-2"
                   onClick={() => {
                     setShow(true);
                   }}
@@ -310,7 +315,8 @@ const FormRawMaterial = (
                   setShow(false);
                }}
              />
-     </Modal>
+             </div>
+     </ModalS>
     </>
   );
 };
