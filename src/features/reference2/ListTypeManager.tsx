@@ -132,7 +132,7 @@ function ListTypeManager() {
           <DeleteType refetch={refetch} id={""} ref={del} />
           <ArchiveType id={""} ref={archive} />
           <RestoreType id={""} ref={restore} />
-          <h1>Type</h1>
+          <h1>Types En-Têtes</h1>
           <div className="float-left w-full">
             <Bcyan
               className="float-left"

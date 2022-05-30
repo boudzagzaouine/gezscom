@@ -5,7 +5,7 @@ import { Field, Form } from "widgets";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import Section from "widgets/Section";
-import { Ville, ville0 } from "tools/types";
+import { Ville, i0 } from "tools/types";
 import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bcancel from "widgets/Bcancel";
@@ -36,7 +36,7 @@ const FormVilleManager = ({
   }, []);
   return (
     <Section>
-       <Form defaultValues={ville0} onSubmit={onSubmit}>
+       <Form defaultValues={i0} onSubmit={onSubmit}>
           {request == REQUEST_SAVE ? (
             <h1 className="mb-2">{text} ville </h1>
           ) : (
@@ -49,14 +49,14 @@ const FormVilleManager = ({
                <Field
                 ref={imputFocus}
                 label="Désignation *"
-                name="concat"
+                name="designation"
                 disabled={disabled}
               />
 			  </div>
 			  <div className="float-left w-1/2">
               <Field
                 label="Pays *"
-                name="paymentChoice"
+                name="pays"
                 options={PAYS_CHOICE}
                 as="select"
                 disabled={disabled}
@@ -72,7 +72,7 @@ const FormVilleManager = ({
               }, 600);
             }}
           />
-          {ville0.id=="" &&<BsavEndNew
+          {i0.id=="" &&<BsavEndNew
                   className="float-right mr-2"
                 />}
                

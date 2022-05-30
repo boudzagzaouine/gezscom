@@ -306,6 +306,9 @@ export const document0:Document={
   id:"",
   designation:""
 }
+export interface DocumentJson {
+  content:Document[]
+}
 export interface DeviseJson {
   content:Devise[]
 }
@@ -347,6 +350,9 @@ export interface Ville {
   designation: string;
   pays: Pays;
 }
+export interface VilleJson{
+  content:Ville[]
+}
 export interface Type {
   id: string;
   designation: string;
@@ -373,7 +379,7 @@ export const p0: Pays = {
   id: "",
   designation: "",
 };
-export const ville0: Ville = {
+export const i0: Ville = {
   id: "",
   designation: "",
   pays: p0,

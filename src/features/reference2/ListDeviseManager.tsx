@@ -1,17 +1,14 @@
 import { TrashIcon } from "@heroicons/react/outline";
 import {
   ArchiveIcon,
-  ClipboardListIcon,
   PencilAltIcon,
-  ReplyIcon,
 } from "@heroicons/react/solid";
 import ArchiveDevise from "components/reference2/ArchiveDevise";
 import DeleteDevise from "components/reference2/DeleteDevise";
 import { OpenDeviseProp } from "components/reference2/OpenDevise";
 import RestoreDevise from "components/reference2/RestoreDevise";
-import { openDevises, usePaginationDevisesQuery } from "config/rtk/rtkDevise";
+import { openDevises } from "config/rtk/rtkDevise";
 import React, { useRef, useState } from "react";
-import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import { Devise, DeviseJson, v0 } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import { Button } from "widgets/Button";
@@ -24,60 +21,29 @@ import { MenuItems } from "widgets/TypeWidgets";
 import FormDeviseManager from "./FormDevise";
 
 function ListDeviseManager() {
-  const devisesToOpen: OpenDeviseProp = openDevises();
+  
+ const [page, setPage] = useState(0);
+ const loadPage = (p: number) => {
+   setPage(p);
+   refetch();
+ };
+
+  const devisesToOpen: OpenDeviseProp = openDevises(page);
   const deviseJson: DeviseJson = devisesToOpen.data;
   const devises: Devise[] = deviseJson.content;
-  const refetchDevise: () => void = devisesToOpen.refetch;
-  const saveDevise = devisesToOpen.save;
-  const editDevise = devisesToOpen.edit;
-  const search = (key: string, obj: Devise[]): Devise[] => {
-    const Devisesearch: Devise[] = obj.filter((o: Devise) => {
-      return (
-        o.id.match(key) != null ||
-        o.code_iso.match(key) != null ||
-        o.symbole.match(key) != null
-      );
-    });
-    return Devisesearch;
-  };
-
-  const [form, setForm] = useState(false);
-  const [Devise0, setDevise0] = useState(v0);
-  const [requesv0, setRequesv0] = useState(REQUEST_SAVE);
-  const [page, setPage] = useState(0);
-  const { data = [], isFetching, refetch } = usePaginationDevisesQuery(page);
-  const [button, setButton] = useState("");
-  const loadPage = (p: number) => {
-    setPage(p);
-    refetch();
-  };
-  const [disabled, setDisabled] = useState(true);
-  const [showModalE, setShowModalE] = useState(false);
+  const refetch: () => void = devisesToOpen.refetch;
+  const save = devisesToOpen.save;
+  const edit = devisesToOpen.edit;
+ 
+ 
+  const refCom = useRef(null);
   const del = useRef(null);
   const archive = useRef(null);
   const restore = useRef(null);
 
-  const showFormulaire = (Devise: Devise) => {
-    setDevise0(Devise);
-    setForm(true);
-    setRequesv0(REQUEST_EDIT);
-  };
-  const FormAsAdd = () => {
-    setDisabled(false);
-    setDevise0(v0);
-    setForm(true);
-    setRequesv0(REQUEST_SAVE);
-    setShowModalE(true)
-  };
-  const FormAsEdit = (Devise: Devise) => {
-    setDisabled(true);
-    showFormulaire(Devise);
-  };
-  const FormAsUpdate = (Devise: Devise) => {
-    setDisabled(false);
-    showFormulaire(Devise);
-  };
-  const menu = (Devise: Devise): MenuItems[] => {
+  
+  
+  const menu = (devise: Devise): MenuItems[] => {
     return [
       {
         icon: (
@@ -88,7 +54,8 @@ function ListDeviseManager() {
         ),
         text: "Modifier",
         action: () => {
-          FormAsUpdate(Devise);
+          //@ts-ignore
+           refCom.current(devise,false);
         },
       },
       {
@@ -120,29 +87,10 @@ function ListDeviseManager() {
     ];
   };
   const imputFocus = useRef();
-  const handle = () => {
-    //@ts-ignore
-    imputFocus.current.focus();
-  };
+ 
 
   return (
     <>
-      {form && (
-        <FormDeviseManager
-          imputFocus={imputFocus}
-          request={requesv0}
-          Devise={Devise0}
-          closed={() => {
-            setForm(false);
-            setRequesv0(REQUEST_SAVE);
-            refetch();
-          }}
-          disable={disabled}
-          showModal={showModalE} 
-          setshowModal={setShowModalE}
-        />
-      )}
-      {!form && (
         <Section>
           <DeleteDevise refetch={refetch} id={""} ref={del} />
           <ArchiveDevise id={""} ref={archive} />
@@ -152,15 +100,21 @@ function ListDeviseManager() {
             <Bcyan
               className="float-left"
               onClick={() => {
-                handle;
-                //setClienv0(c0);
-                //setForm(true);
-                FormAsAdd();
+                //@ts-ignore
+                refCom.current(v0,false);
                 
               }}
             >
               Novelle Devise
             </Bcyan>
+            <FormDeviseManager
+            refetch={refetch}
+            save={save}
+            edit={edit}
+          Devise={v0}
+         disable={false}
+          ref={refCom}
+        />
 
             <div className="float-right">
               <Button className="bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg">
@@ -184,10 +138,8 @@ function ListDeviseManager() {
             }
           >
             {
-              //@ts-ignore
-              devises?.map((Devise) => (
-                //   data?.map((devise) => (
-                <tr key={Devise.id}>
+             devises?.map((Devise) => (
+                      <tr key={Devise.id}>
                   <Table.td>{Devise.designation} </Table.td>
                   <Table.td>{Devise.code_iso} </Table.td>
                   <Table.td>{Devise.symbole} </Table.td>
@@ -201,7 +153,7 @@ function ListDeviseManager() {
 
           <Pagin load={loadPage} max={300} visible={devises?.length > 0} />
         </Section>
-      )}
+      
     </>
   );
 }
