@@ -232,8 +232,8 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
               <Field
                label="Code *"
                 name="code"
-                disabled={disabled}
-                required="required"
+                disabled={disabled} required={true}
+                
               />
               </div>
               </div>
@@ -242,8 +242,8 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
                   <Field
                     label="Désignation *"
                     name="design"
-                    disabled={disabled}
-                    required="required"
+                    disabled={disabled} required={true}
+                    
                   />
              </div>
             </div>

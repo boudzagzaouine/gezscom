@@ -287,7 +287,7 @@ const FormDum = ({ dum }: FormDumProps, ref: Ref<void>) => {
             <div className="float-left w-full">
               <div>
                 <div className="float-left w-1/2">
-                  <Field label="N° Dum" name="numDum" disabled={disabled} />
+                  <Field label="N° Dum" name="numDum" disabled={disabled} required={true} />
                 </div>
                 <div className="float-left w-1/2">
                   <Field
@@ -295,7 +295,7 @@ const FormDum = ({ dum }: FormDumProps, ref: Ref<void>) => {
                     name="regime"
                     options={REGIME}
                     as="select"
-                    disabled={disabled}
+                    disabled={disabled} required={true}
                   />
                 </div>
               </div>
@@ -305,7 +305,7 @@ const FormDum = ({ dum }: FormDumProps, ref: Ref<void>) => {
                     label="Date"
                     name="date"
                     type="date"
-                    disabled={disabled}
+                    disabled={disabled} required={true}
                   />
                 </div>
                 <div className="float-left w-1/2">
@@ -314,7 +314,7 @@ const FormDum = ({ dum }: FormDumProps, ref: Ref<void>) => {
                     name="fournisseur"
                     options={FOURNISSEUR}
                     as="select"
-                    disabled={disabled}
+                    disabled={disabled} required={true}
                   />
                 </div>
               </div>
@@ -325,7 +325,7 @@ const FormDum = ({ dum }: FormDumProps, ref: Ref<void>) => {
                     name="bureauDouane"
                     options={BUREAU}
                     as="select"
-                    disabled={disabled}
+                    disabled={disabled} required={true}
                   />
                 </div>
                 <div className="float-left w-1/2">
@@ -334,7 +334,7 @@ const FormDum = ({ dum }: FormDumProps, ref: Ref<void>) => {
                     name="declarant"
                     options={DECLARANTS}
                     as="select"
-                    disabled={disabled}
+                    disabled={disabled} required={true}
                   />
                 </div>
               </div>

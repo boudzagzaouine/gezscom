@@ -251,19 +251,19 @@ const FormRawMaterial = (
                <Field
                   label="Désignation *"
                   name="design"
-                  disabled={disabled}
+                  disabled={disabled} required={true}
                 />
                <Field
                   label="Nomenclature *"
                   name="nomenclature"
-                  disabled={disabled}
+                  disabled={disabled} required={true}
                 />
                <Field
                   label="Famille"
                   name="family"
                   options={FAMILLE}
                   as="select"
-                  disabled={disabled}
+                  disabled={disabled} required={true}
                 />
 				</div>
              <div className="float-left w-1/2">
@@ -272,13 +272,15 @@ const FormRawMaterial = (
                   name="measureUnit"
                   options={UNIT}
                   as="select"
-                  disabled={disabled}
+                  disabled={disabled} required={true}
                 />
                <Field
                   label="Taux de perte *"
                   name="tauxPertes"
-                  disabled={disabled}
-                  required="required"
+                  
+				  
+				  disabled={disabled} required={true}
+                  
                 />
             </div>
                         <div className="float-right mt-5 b-ajust-r">

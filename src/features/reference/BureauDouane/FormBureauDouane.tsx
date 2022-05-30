@@ -234,14 +234,14 @@ const FormBureauDouane = (
               <Field
                label="Numéro *"
                 name="code"
-                disabled={disabled}
+                disabled={disabled} required={true}
               />
 			</div>
              <div className="float-left w-1/2">
                   <Field
                     label="Désignation *"
                     name="design"
-                    disabled={disabled}
+                    disabled={disabled} required={true}
                   />
             </div>
             <div className="float-right mt-5 b-ajust-r">
