@@ -27,6 +27,7 @@ import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bcancel from "widgets/Bcancel";
 import ModalS from "widgets/ModalS";
+import Required from "widgets/Required";
 
 type FormArticleProps = {
   article: Article;
@@ -201,7 +202,7 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
             }
           </Table>
           <Pagin
-           load={loadPage} max={300}
+           load={loadPage} max={articles?.length}
             visible={articles?.length > 0 ? true : false}
           />
         </section>
@@ -212,7 +213,7 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
         format={+classNames("5")}
         close={closed}
       >
-        <div className="float-left w-full">
+        <div className="float-left w-full text-sm">
                   <Form
             defaultValues={article1}
             onSubmit={
@@ -225,25 +226,25 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
           >
             <div className=" float-left w-1/2">
               <Field
-                label="Désignation *"
+                label={<Required msg="Désignation"/>}
                 name="design"
-                disabled={disabled} required={true}
+                disabled={disabled}//required={true}
               />
           </div>
           <div className="float-left w-full">
             <div className="float-left w-1/2">
                   <Field
-                    label="Nomenclature *"
+                    label={<Required msg="Nomenclature"/>}
                     name="nomenclature"
-                    disabled={disabled} required={true}
+                    disabled={disabled}//required={true}
                     
                   />
                   </div>
               <div className="float-right w-1/2">
                   <Field
-                    label="Taux de perte *"
+                    label={<Required msg="Taux de perte"/>}
                     name="tauxPertes"
-                    disabled={disabled} required={true}
+                    disabled={disabled}//required={true}
                     
                   />
                 </div>
@@ -256,14 +257,16 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
               setTimeout(() => {
                 refetchArticle();
                 closed();
-              }, 600);
+              }, 500);
             }}
           />
           {article1.id=="" &&<BsavEndNew
-                  className="ml-10 mr-2"
-                  onClick={() => {
-                    setShow(true);
-                  }}
+                   className="ml-10 mr-2"
+                   onClick={() => {
+                     setTimeout(() => {
+                      refetchArticle();
+                       }, 500);
+                   }}
                 />}
                
               </div>

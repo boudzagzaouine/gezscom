@@ -26,6 +26,7 @@ import Bcancel from "widgets/Bcancel";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bsave from "widgets/Bsave";
 import ModalS from "widgets/ModalS";
+import Required from "widgets/Required";
 
 type FormIncotermProps = {
   incoterm: Incoterm;
@@ -206,7 +207,7 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
             }
           </Table>
           <Pagin
-           load={loadPage} max={300}
+           load={loadPage} max={incoterms?.length}
             visible={incoterms?.length > 0 ? true : false}
           />
         </section>
@@ -231,15 +232,15 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
           >
             <div className="float-left w-full">
               <Field
-               label="Code *"
+               label={<Required msg="Code"/>}
                 name="code"
-                disabled={disabled} required={true}
+                disabled={disabled}//required={true}
                 
               />
                   <Field
-                    label="Désignation *"
+                    label={<Required msg="Désignation"/>}
                     name="design"
-                    disabled={disabled} required={true}
+                    disabled={disabled}//required={true}
                     
                   />
             </div>
@@ -250,13 +251,15 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
               setTimeout(() => {
                 refetchIncoterm();
                       closed();
-              }, 600);
+              }, 500);
             }}
           />
           {incoterm1.id=="" &&<BsavEndNew
                   className="ml-10 mr-2"
                   onClick={() => {
-                    setShow(true);
+                    setTimeout(() => {
+                      refetchIncoterm();
+                      }, 500);
                   }}
                 />}
                

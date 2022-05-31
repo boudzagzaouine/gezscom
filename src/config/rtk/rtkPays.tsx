@@ -97,8 +97,16 @@ export const {
   useArchivePaysMutation,
   useRestorePaysMutation,
 } = crudPays;
-export const openPays = (): OpenPaysProp => {
-  const { data = [], refetch } = useFetchPaysQuery();
+export const openPays = (page:number): OpenPaysProp => {
+  const { data = [], refetch } = usePaginationPaysQuery(page);
+  const [save] = useAddPaysMutation();
+  const [edit] = useEditPaysMutation();
+  //@ts-ignore
+  const out: OpenPaysProp = { data, refetch, save, edit };
+  return out;
+};
+export const openpaysv = (): OpenPaysProp => {
+  const { data = [], refetch } = usePaginationPaysQuery(0);
   const [save] = useAddPaysMutation();
   const [edit] = useEditPaysMutation();
   //@ts-ignore

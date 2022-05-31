@@ -1,6 +1,6 @@
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
-import { Declarant, declarant0, DeclarantJson } from "tools/types";
-import { REQUEST_EDIT, REQUEST_SAVE, VILLE } from "tools/consts";
+import { Declarant, declarant0, DeclarantJson, Ville } from "tools/types";
+import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
@@ -26,6 +26,8 @@ import Bcancel from "widgets/Bcancel";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bsave from "widgets/Bsave";
 import ModalS from "widgets/ModalS";
+import { openVilleD } from "config/rtk/rtkVille";
+import Required from "widgets/Required";
 
 type FormDeclarantProps = {
   declarant: Declarant;
@@ -34,6 +36,8 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
   const declarantsToOpen: OpenDeclarantProp = openDeclarants();
   const declarantJson: DeclarantJson = declarantsToOpen.data;
   const declarants: Declarant[] = declarantJson.content;
+  const tabVille: Ville[] = openVilleD().data.content;
+  const Ville = tabVille?.map((d) => d.designation);
   const refetchDeclarant: () => void = declarantsToOpen.refetch;
   const saveDeclarant = declarantsToOpen.save;
   const editDeclarant = declarantsToOpen.edit;
@@ -207,7 +211,7 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
             }
           </Table>
           <Pagin
-           load={loadPage} max={300}
+           load={loadPage} max={declarants?.length}
             visible={declarants?.length > 0 ? true : false}
           />
         </section>
@@ -232,17 +236,17 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
           >
             <div className=" float-left w-full">
               <Field
-               label="Désignation *"
+               label={<Required msg="Désignation"/>}
                 name="design"
-                disabled={disabled} required={true}
+                disabled={disabled}//required={true}
                 
               />
                   <Field
-                    label="Ville *"
+                    label={<Required msg="Ville"/>}
                     name="ville"
-                    options={VILLE}
+                    options={["",...(Ville||[])]}
                     as="select"
-                    disabled={disabled} required={true}
+                    disabled={disabled}//required={true}
                     
                   />
                 </div>
@@ -254,14 +258,16 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
               setTimeout(() => {
                 refetchDeclarant();
                       closed();
-              }, 600);
+              }, 500);
             }}
           />
           {declarant1.id=="" &&<BsavEndNew
-                  className="ml-10 mr-2"
-                  onClick={() => {
-                    setShow(true);
-                  }}
+                   className="ml-10 mr-2"
+                   onClick={() => {
+                     setTimeout(() => {
+                      refetchDeclarant();
+                       }, 500);
+                   }}
                 />}
                
               </div>

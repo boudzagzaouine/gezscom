@@ -29,57 +29,24 @@ import Table from "widgets/Table";
 import { MenuItems } from "widgets/TypeWidgets";
 import FormTransporteurManager from "./FormTransporteurManager";
 function ListTransporteurManager() {
-  const transporteursToOpen: OpenTransporteurProp = openTransporteurs();
-  const transporteurJson: TransporteurJson = transporteursToOpen.data;
-  const transporteurs: Transporteur[] = transporteurJson.content;
-  const refetchTransporteur: () => void = transporteursToOpen.refetch;
-  const saveTransporteur = transporteursToOpen.save;
-  const editTransporteur = transporteursToOpen.edit;
-  const search = (key: string, obj: Transporteur[]): Transporteur[] => {
-    const transporteursearch: Transporteur[] = obj.filter((o: Transporteur) => {
-      return o.id.match(key) != null || o.designation.match(key) != null;
-    });
-    return transporteursearch;
-  };
-  const [form, setForm] = useState(false);
-  const [Transporteur0, setTransporteur0] = useState(t0);
-  const [request0, setRequest0] = useState(REQUEST_SAVE);
   const [page, setPage] = useState(0);
-  const {
-    data = [],
-    isFetching,
-    refetch,
-  } = usePaginationTransporteursQuery(page);
-  const [button, setButton] = useState("");
   const loadPage = (p: number) => {
     setPage(p);
     refetch();
   };
-  const [disabled, setDisabled] = useState(true);
-  const del = useRef(null);
-  const archive = useRef(null);
-  const restore = useRef(null);
+ 
+   const transporteurToOpen: OpenTransporteurProp = openTransporteurs(page);
+   const transporteurJson: TransporteurJson = transporteurToOpen.data;
+   const transporteurs: Transporteur[] = transporteurJson.content;
+   const refetch: () => void = transporteurToOpen.refetch;
+   const save = transporteurToOpen.save;
+   const edit = transporteurToOpen.edit;
+   const refCom = useRef(null);
+   const del = useRef(null);
+   const archive = useRef(null);
+   const restore = useRef(null);
 
-  const showFormulaire = (Transporteur: Transporteur) => {
-    setTransporteur0(Transporteur);
-    setForm(true);
-    setRequest0(REQUEST_EDIT);
-  };
-  const FormAsAdd = () => {
-    setDisabled(false);
-    setTransporteur0(t0);
-    setForm(true);
-    setRequest0(REQUEST_SAVE);
-  };
-  const FormAsEdit = (Transporteur: Transporteur) => {
-    setDisabled(true);
-    showFormulaire(Transporteur);
-  };
-  const FormAsUpdate = (Transporteur: Transporteur) => {
-    setDisabled(false);
-    showFormulaire(Transporteur);
-  };
-  const menu = (Transporteur: Transporteur): MenuItems[] => {
+  const menu = (transporteur: Transporteur): MenuItems[] => {
     return [
       {
         icon: (
@@ -90,7 +57,8 @@ function ListTransporteurManager() {
         ),
         text: "Modifier",
         action: () => {
-          FormAsUpdate(Transporteur);
+        //@ts-ignore
+           refCom.current(transporteur,false);
         },
       },
       {
@@ -103,7 +71,7 @@ function ListTransporteurManager() {
         text: "Supprimer",
         action: () => {
           //@ts-ignore
-          del.current(Transporteur.id);
+          del.current(transporteur.id);
         },
       },
       {
@@ -116,7 +84,7 @@ function ListTransporteurManager() {
         text: "Archiver",
         action: () => {
           //@ts-ignore
-          archive.current(Transporteur.id);
+          archive.current(transporteur.id);
         },
       },
     ];
@@ -124,19 +92,6 @@ function ListTransporteurManager() {
 
   return (
     <>
-      {form && (
-        <FormTransporteurManager
-          request={request0}
-          Transporteur={Transporteur0}
-          closed={() => {
-            setForm(false);
-            setRequest0(REQUEST_SAVE);
-            refetch();
-          }}
-          disable={disabled}
-        />
-      )}
-      {!form && (
         <Section>
           <DeleteTransporteur refetch={refetch} id={""} ref={del} />
           <ArchiveTransporteur id={""} ref={archive} />
@@ -146,13 +101,20 @@ function ListTransporteurManager() {
             <Bcyanxl
               className="float-left"
               onClick={() => {
-                //setTransporteur0(c0);
-                //setForm(true);
-                FormAsAdd();
+                //@ts-ignore
+                refCom.current(t0,false);
               }}
             >
               Nouveau Transporteur
             </Bcyanxl>
+            <FormTransporteurManager
+            refetch={refetch}
+            save={save}
+            edit={edit}
+            transporteur={t0}
+           disable={false}
+            ref={refCom}
+            />
 
             <div className="float-right">
               <Button className="bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg">
@@ -174,9 +136,7 @@ function ListTransporteurManager() {
             }
           >
             {
-              //@ts-ignore
               transporteurs?.map((Transporteur) => (
-                //   data?.map((transporteur) => (
                 <tr key={Transporteur.id}>
                   <Table.td>
                     <span>{Transporteur.designation}</span>
@@ -190,9 +150,8 @@ function ListTransporteurManager() {
             }
           </Table>
 
-          <Pagin load={loadPage} max={300} visible={transporteurs?.length > 0} />
+          <Pagin load={loadPage} max={transporteurs?.length} visible={transporteurs?.length > 0} />
         </Section>
-      )}
     </>
   );
 }

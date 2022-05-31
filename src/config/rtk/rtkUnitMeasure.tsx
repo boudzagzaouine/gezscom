@@ -96,6 +96,14 @@ export const openUnitMeasures = (): OpenUnitMeasureProp => {
   const [save] = useAddUnitMeasureMutation();
   const [edit] = useEditUnitMeasureMutation();
   //@ts-ignore
-  const out: OpenClientProp = { data, refetch, save, edit };
+  const out: OpenUnitMeasureProp = { data, refetch, save, edit };
+  return out;
+};
+export const openUnitF = (): OpenUnitMeasureProp => {
+  const { data = [], refetch } = usePaginationUnitMeasuresQuery(0);
+  const [save] = useAddUnitMeasureMutation();
+  const [edit] = useEditUnitMeasureMutation();
+  //@ts-ignore
+  const out: OpenUnitMeasureProp = { data, refetch, save, edit };
   return out;
 };

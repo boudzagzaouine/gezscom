@@ -26,6 +26,7 @@ import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bcancel from "widgets/Bcancel";
 import ModalS from "widgets/ModalS";
+import Required from "widgets/Required";
 
 type FormPayementModeProps = {
   payementMode: PayementMode;
@@ -210,7 +211,7 @@ const FormPayementMode = (
             }
           </Table>
           <Pagin
-           load={loadPage} max={300}
+           load={loadPage} max={payementModes?.length}
             visible={payementModes?.length > 0 ? true : false}
           />
         </section>
@@ -234,15 +235,15 @@ const FormPayementMode = (
           >
             <div className="float-left w-full">
 			         <Field
-               label="Code *"
+               label={<Required msg="Code"/>}
                 name="code"
-                disabled={disabled} required={true}
+                disabled={disabled}//required={true}
                 
               />
 			           <Field
-                    label="Désignation *"
+                    label={<Required msg="Désignation"/>}
                     name="design"
-                    disabled={disabled} required={true}
+                    disabled={disabled}//required={true}
                     
                   />
                 </div>
@@ -253,13 +254,15 @@ const FormPayementMode = (
               setTimeout(() => {
                 refetchPayementMode();
                       closed();
-              }, 600);
+              }, 500);
             }}
           />
           {payementMode1.id=="" &&<BsavEndNew
                   className="ml-10 mr-2"
                   onClick={() => {
-                    setShow(true);
+                    setTimeout(() => {
+                      refetchPayementMode();
+                      }, 500);
                   }}
                 />}
                

@@ -97,8 +97,8 @@ export const {
   useArchiveTypeMutation,
   useRestoreTypeMutation,
 } = crudType;
-export const openTypes = (): OpenTypeProp => {
-  const { data = [], refetch } = useFetchTypesQuery();
+export const openTypes = (page:number): OpenTypeProp => {
+  const { data = [], refetch } = usePaginationTypesQuery(page);
   const [save] = useAddTypeMutation();
   const [edit] = useEditTypeMutation();
   //@ts-ignore

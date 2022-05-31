@@ -1,22 +1,18 @@
 import { TrashIcon } from "@heroicons/react/outline";
 import {
   ArchiveIcon,
-  ClipboardListIcon,
   PencilAltIcon,
-  ReplyIcon,
 } from "@heroicons/react/solid";
 import ArchiveType from "components/reference2/ArchiveType";
 import DeleteType from "components/reference2/DeleteType";
 import { OpenTypeProp } from "components/reference2/OpenType";
 import RestoreType from "components/reference2/RestoreType";
-import { openTypes, usePaginationTypesQuery } from "config/rtk/rtkType";
+import { openTypes } from "config/rtk/rtkType";
 import React, { useRef, useState } from "react";
-import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
-import { d0, Type, TypeJson } from "tools/types";
+import { type0, Type, TypeJson } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import { Button } from "widgets/Button";
 import Icon from "widgets/Icon";
-import Mitems from "widgets/Mitems";
 import Mitems0 from "widgets/Mitems0";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
@@ -24,53 +20,22 @@ import Table from "widgets/Table";
 import { MenuItems } from "widgets/TypeWidgets";
 import FormTypeManager from "./FormTypeManager";
 function ListTypeManager() {
-  const typesToOpen: OpenTypeProp = openTypes();
-  const typeJson: TypeJson = typesToOpen.data;
-  const types: Type[] = typeJson.content;
-  const refetchType: () => void = typesToOpen.refetch;
-  const saveType = typesToOpen.save;
-  const editType = typesToOpen.edit;
-  const search = (key: string, obj: Type[]): Type[] => {
-    const typesearch: Type[] = obj.filter((o: Type) => {
-      return o.id.match(key) != null || o.designation.match(key) != null;
-    });
-    return typesearch;
-  };
-  const [form, setForm] = useState(false);
-  const [Documend0, setDocumend0] = useState(d0);
-  const [requesd0, setRequesd0] = useState(REQUEST_SAVE);
   const [page, setPage] = useState(0);
-  const { data = [], isFetching, refetch } = usePaginationTypesQuery(page);
-  const [button, setButton] = useState("");
   const loadPage = (p: number) => {
     setPage(p);
     refetch();
   };
-  const [disabled, setDisabled] = useState(true);
+  const typesToOpen: OpenTypeProp = openTypes(page);
+  const typeJson: TypeJson = typesToOpen.data;
+  const types: Type[] = typeJson.content;
+  const refetch: () => void = typesToOpen.refetch;
+  const save = typesToOpen.save;
+  const edit = typesToOpen.edit;
+  const refCom = useRef(null);
   const del = useRef(null);
   const archive = useRef(null);
   const restore = useRef(null);
-
-  const showFormulaire = (Type: Type) => {
-    setDocumend0(Type);
-    setForm(true);
-    setRequesd0(REQUEST_EDIT);
-  };
-  const FormAsAdd = () => {
-    setDisabled(false);
-    setDocumend0(d0);
-    setForm(true);
-    setRequesd0(REQUEST_SAVE);
-  };
-  const FormAsEdit = (Type: Type) => {
-    setDisabled(true);
-    showFormulaire(Type);
-  };
-  const FormAsUpdate = (Type: Type) => {
-    setDisabled(false);
-    showFormulaire(Type);
-  };
-  const menu = (Type: Type): MenuItems[] => {
+  const menu = (type: Type): MenuItems[] => {
     return [
       {
         icon: (
@@ -81,7 +46,8 @@ function ListTypeManager() {
         ),
         text: "Modifier",
         action: () => {
-          FormAsUpdate(Type);
+          //@ts-ignore
+          refCom.current(type,false);
         },
       },
       {
@@ -94,7 +60,7 @@ function ListTypeManager() {
         text: "Supprimer",
         action: () => {
           //@ts-ignore
-          del.current(Type.id);
+          del.current(type.id);
         },
       },
       {
@@ -107,7 +73,7 @@ function ListTypeManager() {
         text: "Archiver",
         action: () => {
           //@ts-ignore
-          archive.current(Type.id);
+          archive.current(type.id);
         },
       },
     ];
@@ -115,19 +81,6 @@ function ListTypeManager() {
 
   return (
     <>
-      {form && (
-        <FormTypeManager
-          request={requesd0}
-          Type={Documend0}
-          closed={() => {
-            setForm(false);
-            setRequesd0(REQUEST_SAVE);
-            refetch();
-          }}
-          disable={disabled}
-        />
-      )}
-      {!form && (
         <Section>
           <DeleteType refetch={refetch} id={""} ref={del} />
           <ArchiveType id={""} ref={archive} />
@@ -137,14 +90,20 @@ function ListTypeManager() {
             <Bcyan
               className="float-left"
               onClick={() => {
-                //setCliend0(c0);
-                //setForm(true);
-                FormAsAdd();
+                //@ts-ignore
+                refCom.current(type0,false);
               }}
             >
               Nouveau Type
             </Bcyan>
-
+            <FormTypeManager
+            refetch={refetch}
+            save={save}
+            edit={edit}
+          Type={type0}
+         disable={false}
+          ref={refCom}
+            />
             <div className="float-right">
               <Button className="bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg">
                 <Icon i="search" cl="" />
@@ -165,9 +124,7 @@ function ListTypeManager() {
             }
           >
             {
-              //@ts-ignore
               types?.map((Type) => (
-                //   data?.map((type) => (
                 <tr key={Type.id}>
                   <Table.td>
                     <figure>
@@ -185,9 +142,8 @@ function ListTypeManager() {
             }
           </Table>
 
-          <Pagin load={loadPage} max={300} visible={types?.length > 0} />
+          <Pagin load={loadPage} max={types?.length} visible={types?.length > 0} />
         </Section>
-      )}
     </>
   );
 }

@@ -3,20 +3,17 @@ import {
   ArchiveIcon,
   ClipboardListIcon,
   PencilAltIcon,
-  ReplyIcon,
 } from "@heroicons/react/solid";
 import ArchiveRole from "components/reference2/ArchiveRole";
 import DeleteRole from "components/reference2/DeleteRole";
-import { OpenRoleProp } from "components/reference2/openRole";
+import { OpenRoleProp } from "components/reference2/OpenRole";
 import RestoreRole from "components/reference2/RestoreRole";
-import { openRoles, usePaginationRolesQuery } from "config/rtk/rtkRole";
+import { openRoles } from "config/rtk/rtkRole";
 import React, { useRef, useState } from "react";
-import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import { r0, Role, RoleJson } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import { Button } from "widgets/Button";
 import Icon from "widgets/Icon";
-import Mitems from "widgets/Mitems";
 import Mitems0 from "widgets/Mitems0";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
@@ -24,53 +21,24 @@ import Table from "widgets/Table";
 import { MenuItems } from "widgets/TypeWidgets";
 import FormRoleManager from "./FormRoleManager";
 function ListRoleManager() {
-  const rolesToOpen: OpenRoleProp = openRoles();
-  const roleJson: RoleJson = rolesToOpen.data;
-  const roles: Role[] = roleJson.content;
-  const refetchRole: () => void = rolesToOpen.refetch;
-  const saveRole = rolesToOpen.save;
-  const editRole = rolesToOpen.edit;
-  const search = (key: string, obj: Role[]): Role[] => {
-    const rolesearch: Role[] = obj.filter((o: Role) => {
-      return o.id.match(key) != null || o.designation.match(key) != null;
-    });
-    return rolesearch;
-  };
-  const [form, setForm] = useState(false);
-  const [Roler0, setRoler0] = useState(r0);
-  const [requesr0, setRequesr0] = useState(REQUEST_SAVE);
   const [page, setPage] = useState(0);
-  const { data = [], isFetching, refetch } = usePaginationRolesQuery(page);
-  const [button, setButton] = useState("");
   const loadPage = (p: number) => {
     setPage(p);
     refetch();
   };
-  const [disabled, setDisabled] = useState(true);
-  const del = useRef(null);
-  const archive = useRef(null);
-  const restore = useRef(null);
+ 
+  const rolesToOpen: OpenRoleProp = openRoles(page);
+  const roleJson: RoleJson = rolesToOpen.data;
+  const roles: Role[] = roleJson.content;
+  const refetch: () => void = rolesToOpen.refetch;
+  const save = rolesToOpen.save;
+  const edit = rolesToOpen.edit;
+   const refCom = useRef(null);
+   const del = useRef(null);
+   const archive = useRef(null);
+   const restore = useRef(null);
 
-  const showFormulaire = (Role: Role) => {
-    setRoler0(Role);
-    setForm(true);
-    setRequesr0(REQUEST_EDIT);
-  };
-  const FormAsAdd = () => {
-    setDisabled(false);
-    setRoler0(r0);
-    setForm(true);
-    setRequesr0(REQUEST_SAVE);
-  };
-  const FormAsEdit = (Role: Role) => {
-    setDisabled(true);
-    showFormulaire(Role);
-  };
-  const FormAsUpdate = (Role: Role) => {
-    setDisabled(false);
-    showFormulaire(Role);
-  };
-  const menu = (Role: Role): MenuItems[] => {
+  const menu = (role: Role): MenuItems[] => {
     return [
       {
         icon: (
@@ -81,7 +49,8 @@ function ListRoleManager() {
         ),
         text: "Détail",
         action: () => {
-          FormAsEdit(Role);
+          //@ts-ignore
+          refCom.current(role,true);
         },
       },
       {
@@ -93,7 +62,8 @@ function ListRoleManager() {
         ),
         text: "Modifier",
         action: () => {
-          FormAsUpdate(Role);
+          //@ts-ignore
+          refCom.current(role,false);
         },
       },
       {
@@ -106,7 +76,7 @@ function ListRoleManager() {
         text: "Supprimer",
         action: () => {
           //@ts-ignore
-          del.current(Role.id);
+          del.current(role.id);
         },
       },
       {
@@ -119,7 +89,7 @@ function ListRoleManager() {
         text: "Archiver",
         action: () => {
           //@ts-ignore
-          archive.current(Role.id);
+          archive.current(role.id);
         },
       },
     ];
@@ -127,19 +97,7 @@ function ListRoleManager() {
 
   return (
     <>
-      {form && (
-        <FormRoleManager
-          request={requesr0}
-          Role={Roler0}
-          closed={() => {
-            setForm(false);
-            setRequesr0(REQUEST_SAVE);
-            refetch();
-          }}
-          disable={disabled}
-        />
-      )}
-      {!form && (
+
         <Section>
           <DeleteRole refetch={refetch} id={""} ref={del} />
           <ArchiveRole id={""} ref={archive} />
@@ -149,14 +107,20 @@ function ListRoleManager() {
             <Bcyan
               className="float-left"
               onClick={() => {
-                //setClienr0(c0);
-                //setForm(true);
-                FormAsAdd();
+                //@ts-ignore
+                refCom.current(r0,false);
               }}
             >
               Nouveau Rôle
-            </Bcyan>
-
+            </Bcyan>  
+              <FormRoleManager
+            refetch={refetch}
+            save={save}
+            edit={edit}
+          Role={r0}
+         disable={false}
+          ref={refCom}
+            />
             <div className="float-right">
               <Button className="bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg">
                 <Icon i="search" cl="" />
@@ -178,7 +142,6 @@ function ListRoleManager() {
             }
           >
             {roles?.map((Role) => (
-              //   data?.map((role) => (
               <tr key={Role.id}>
                 <Table.td>
                   <span>{Role.designation}</span>
@@ -194,9 +157,8 @@ function ListRoleManager() {
             ))}
           </Table>
 
-          <Pagin load={loadPage} max={300} visible={roles?.length > 0} />
+          <Pagin load={loadPage} max={roles?.length} visible={roles?.length > 0} />
         </Section>
-      )}
     </>
   );
 }
