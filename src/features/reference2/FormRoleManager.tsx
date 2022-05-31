@@ -1,52 +1,53 @@
 import { useAddRoleMutation, useEditRoleMutation } from "config/rtk/rtkRole";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, Ref, useState, forwardRef } from "react";
 import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
-import { Role, role0 } from "tools/types";
+import { Role } from "tools/types";
 import { Field, Form } from "widgets";
 import Bcancel from "widgets/Bcancel";
-import Bcyan from "widgets/Bcyan";
-import Bred from "widgets/Bred";
 import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
+import ModalS from "widgets/ModalS";
 import Section from "widgets/Section";
 type FormRoleManagerProp = {
-  closed: () => void;
+  save:()=>void 
+  edit:()=>void
+  refetch:()=>void
   Role: Role;
-  request: number;
-  disable: boolean;
+ disable: boolean;
 };
 const FormRoleManager = ({
-  closed,
+  save,
+  edit,
+  refetch,
   Role,
-  request,
   disable,
-}: FormRoleManagerProp) => {
-  const [save] = useAddRoleMutation();
-  const [edit] = useEditRoleMutation();
-  const onSubmit =
-    request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit : undefined;
+}: FormRoleManagerProp, ref:Ref<void>) => {
   const [disabled, setDisabled] = useState(disable);
-  const text = "Nouveau";
-  const text1 = "Modifier";
-  const imputFocus = useRef(null);
+  const [role0, setRole0] = useState(Role);
+  const [showModal, setShowModal] = useState(false);
+  
+  const onSubmit =role0.id=="" ? save : edit;
+  const openModal=(d:Role,disable: boolean)=> {
+    setRole0(d);
+    setShowModal(true);
+    setDisabled(disable)
+  };  
+  const close= () =>{
+    setShowModal(false)
+  };
   useEffect(() => {
-    /*  @ts-ignore*/
-    imputFocus.current.focus();
+    //@ts-ignore
+    ref.current = openModal;
   }, []);
   return (
-    <Section>
+    <ModalS show={showModal}
+    title={role0.id==""?"Nouveau Rôle":"Modifier Rôle"}
+    format={5}
+    close={close}
+     >
        <Form defaultValues={role0} onSubmit={onSubmit}>
-          {request == REQUEST_SAVE ? (
-            <h1 className="mb-2">{text} Rôle </h1>
-          ) : (
-            <h1 className="mb-2">{text1} Rôle </h1>
-          )}
-
           <div className="float-left w-full">
-             {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
               <Field
-                ref={imputFocus}
-                style={{ margin: ".4rem" }}
                 label="Désignation"
                 name="designation"
                 disabled={disabled}
@@ -400,17 +401,23 @@ const FormRoleManager = ({
                 </div>
               </fieldset>
             </div>
-                    <div className="float-right mt-5 b-ajust-r">
+                    <div className=" mt-5 b-ajust-r">
                      <Bsave
             className="float-right"
             onClick={() => {
               setTimeout(() => {
-                     closed();
+                refetch()
+                     close();
               }, 600);
             }}
           />
           {role0.id=="" &&<BsavEndNew
-                  className="float-right mr-2"
+                  className="ml-1 mr-2"
+                  onClick={() => {
+                    setTimeout(() => {
+                      refetch()
+                   }, 600);
+                  }}
                 />}
                
               </div>
@@ -419,10 +426,11 @@ const FormRoleManager = ({
                <Bcancel
                className="float-right mt-5 b-ajust"
                onClick={() => {
-                 closed();
+                 close()
                }}
              />
-   </Section>);
+   </ModalS>
+   );
 };
 
-export default FormRoleManager;
+export default forwardRef(FormRoleManager) ;

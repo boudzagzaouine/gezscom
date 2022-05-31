@@ -149,7 +149,7 @@ function ListDocumentManager() {
             }
           </Table>
 
-          <Pagin load={loadPage} max={300} visible={document?.length > 0} />
+          <Pagin load={loadPage} max={document?.length} visible={document?.length > 0} />
         </Section>
     </>
   );

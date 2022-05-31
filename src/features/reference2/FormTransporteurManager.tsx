@@ -1,84 +1,88 @@
-import {
-  useAddTransporteurMutation,
-  useEditTransporteurMutation,
-} from "config/rtk/rtkTransporteur";
-import React, { useEffect, useRef, useState } from "react";
-import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
+import React, { forwardRef, useEffect, Ref, useState } from "react";
 import { Field, Form } from "widgets";
-import Bcyan from "widgets/Bcyan";
-import Bred from "widgets/Bred";
-import Section from "widgets/Section";
-import { Transporteur, transporteur0 } from "tools/types";
+import { Transporteur } from "tools/types";
 import Bcancel from "widgets/Bcancel";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bsave from "widgets/Bsave";
+import ModalS from "widgets/ModalS";
+import Required from "widgets/Required";
 
 type FormTransporteurManagerProp = {
-  closed: () => void;
-  Transporteur: Transporteur;
-  request: number;
+  save:()=>void 
+  edit:()=>void
+  refetch:()=>void
+  transporteur:Transporteur;
   disable: boolean;
 };
 const FormTransporteurManager = ({
-  closed,
-  Transporteur,
-  request,
+  save,
+  edit,
+  refetch,
+  transporteur,
   disable,
-}: FormTransporteurManagerProp) => {
-  const [save] = useAddTransporteurMutation();
-  const [edit] = useEditTransporteurMutation();
-  const onSubmit =
-    request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit : undefined;
+}: FormTransporteurManagerProp,ref:Ref<void>) => {
+
   const [disabled, setDisabled] = useState(disable);
-  const text = "Nouveau";
-  const text1 = "Modifier";
-  const imputFocus = useRef(null);
+  const [transporteur0, setTransporteur0] = useState(transporteur);
+  const [showModal, setShowModal] = useState(false);
+  
+  const onSubmit =transporteur0.id=="" ? save : edit;
+  const openModal=(d:Transporteur,disable: boolean)=> {
+    setTransporteur0(d);
+    setShowModal(true);
+    setDisabled(disable)
+  };  
+  const close= () =>{
+    setShowModal(false)
+  };
   useEffect(() => {
-    /*  @ts-ignore*/
-    imputFocus.current.focus();
+    //@ts-ignore
+    ref.current = openModal;
   }, []);
   return (
-    <Section>
+    <ModalS show={showModal}
+    title={transporteur0.id==""?"Nouveau Transporteur":"Modifier Transporteur"}
+    format={5}
+    close={close}
+     >
     <Form defaultValues={transporteur0} onSubmit={onSubmit}>
-       {request == REQUEST_SAVE ? (
-         <h1 className="mb-2">{text} Transporteur </h1>
-       ) : (
-         <h1 className="mb-2">{text1} Transporteur </h1>
-       )}
-
-          {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
      <div className="float-left w-full">
            <Field
-             ref={imputFocus}
-             label="Désignation *"
+             label={<Required msg="Désignation"/>}
              name="designation"
              disabled={disabled}
            />
      </div>
-          <div className="float-right mt-5 b-ajust-r">
+          <div className="mt-5 b-ajust-r">
                   <Bsave
          className="float-right"
          onClick={() => {
-           setTimeout(() => {
-                  closed();
-           }, 600);
-         }}
+          setTimeout(() => {
+            refetch()
+                 close();
+          }, 600);
+        }}
        />
        {transporteur0.id=="" &&<BsavEndNew
-               className="float-right mr-2"
+               className="ml-10 mr-2"
+               onClick={() => {
+                 setTimeout(() => {
+                   refetch()
+                }, 600);
+               }}
              />}
             
            </div>
      
        </Form>
             <Bcancel
-            className="float-right mt-5 b-ajust"
-            onClick={() => {
-              closed()
+           className="float-right mt-5 b-ajust"
+           onClick={() => {
+             close()
            }}
           />
- </Section>
+ </ModalS>
 );
 };
 
-export default FormTransporteurManager;
+export default forwardRef(FormTransporteurManager);

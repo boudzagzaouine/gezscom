@@ -96,8 +96,8 @@ export const {
   useArchiveRoleMutation,
   useRestoreRoleMutation,
 } = crudRole;
-export const openRoles = (): OpenRoleProp => {
-  const { data = [], refetch } = useFetchRolesQuery();
+export const openRoles = (page:number): OpenRoleProp => {
+  const { data = [], refetch } = usePaginationRolesQuery(page);
   const [save] = useAddRoleMutation();
   const [edit] = useEditRoleMutation();
   //@ts-ignore

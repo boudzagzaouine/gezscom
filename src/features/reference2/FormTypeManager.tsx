@@ -1,69 +1,75 @@
-import { PencilAltIcon } from "@heroicons/react/solid";
-import { useAddTypeMutation, useEditTypeMutation } from "config/rtk/rtkType";
-import React, { useEffect, useRef, useState } from "react";
-import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
-import { STYLE_ICON } from "tools/constStyle";
+import React, { useEffect, Ref, useState, forwardRef } from "react";
 import { Field, Form } from "widgets";
-import Bcyan from "widgets/Bcyan";
-import Bred from "widgets/Bred";
-import Section from "widgets/Section";
-import { Type, type0 } from "tools/types";
+import { Type } from "tools/types";
 import Bcancel from "widgets/Bcancel";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bsave from "widgets/Bsave";
+import ModalS from "widgets/ModalS";
+import Required from "widgets/Required";
 
 type FormTypeManagerProp = {
-  closed: () => void;
+  save:()=>void 
+  edit:()=>void
+  refetch:()=>void
   Type: Type;
-  request: number;
-  disable: boolean;
+ disable: boolean;
 };
 const FormTypeManager = ({
-  closed,
+  save,
+  edit,
+  refetch,
   Type,
-  request,
   disable,
-}: FormTypeManagerProp) => {
-  const [save] = useAddTypeMutation();
-  const [edit] = useEditTypeMutation();
-  const onSubmit =
-    request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit : undefined;
+}: FormTypeManagerProp,ref:Ref<void>) => {
   const [disabled, setDisabled] = useState(disable);
-  const text = "Nouveau";
-  const text1 = "Modifier";
-  const imputFocus = useRef(null);
+  const [type0, setType0] = useState(Type);
+  const [showModal, setShowModal] = useState(false);
+  
+  const onSubmit =type0.id=="" ? save : edit;
+  const openModal=(d:Type,disable: boolean)=> {
+    setType0(d);
+    setShowModal(true);
+    setDisabled(disable)
+  };  
+  const close= () =>{
+    setShowModal(false)
+  };
   useEffect(() => {
-    /*  @ts-ignore*/
-    imputFocus.current.focus();
+    //@ts-ignore
+    ref.current = openModal;
   }, []);
+
   return (
-    <Section>
+    <ModalS show={showModal}
+    title={type0.id==""?"Nouveau Type":"Modifier Type"}
+    format={5}
+    close={close}
+     >
        <Form defaultValues={type0} onSubmit={onSubmit}>
-          {request == REQUEST_SAVE ? (
-            <h1 className="mb-2">{text} Type </h1>
-          ) : (
-            <h1 className="mb-2">{text1} Type </h1>
-          )}
-    {request == REQUEST_EDIT && <Field type="hidden" name="id" />}         
           <div className="float-left w-full">
              <Field
-                ref={imputFocus}
-                label="Désignation *"
+                label={<Required msg="Désignation"/>}
                 name="designation"
                 disabled={disabled}
               />
             </div>
-                    <div className="float-right mt-5 b-ajust-r">
+                    <div className="mt-5 b-ajust-r">
                      <Bsave
-            className="float-right"
-            onClick={() => {
-              setTimeout(() => {
-                     closed();
-              }, 600);
-            }}
+             className="float-right"
+             onClick={() => {
+               setTimeout(() => {
+                 refetch()
+                      close();
+               }, 600);
+             }}
           />
           {type0.id=="" &&<BsavEndNew
-                  className="float-right mr-2"
+                  className="ml-10 mr-2"
+                  onClick={() => {
+                    setTimeout(() => {
+                      refetch()
+                   }, 600);
+                  }}
                 />}
                
               </div>
@@ -72,11 +78,11 @@ const FormTypeManager = ({
                <Bcancel
                className="float-right mt-5 b-ajust"
                onClick={() => {
-                 closed();
+                 close()
                }}
              />
-    </Section>
+    </ModalS>
     );
 };
 
-export default FormTypeManager;
+export default forwardRef(FormTypeManager) ;

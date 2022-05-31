@@ -29,6 +29,7 @@ import Bcancel from "widgets/Bcancel";
 
 import BsavEndNew from "widgets/BsavEndNew";
 import ModalS from "widgets/ModalS";
+import Required from "widgets/Required";
 
 type FormUnitMeasureProps = {
   unitMeasure: UnitMeasure;
@@ -216,7 +217,7 @@ const FormUnitMeasure = (
               })
             }
           </Table>
-          <Pagin load={loadPage} max={300}
+          <Pagin load={loadPage} max={unitMeasures?.length}
             visible={unitMeasures?.length > 0 ? true : false}
           />
         </section>
@@ -242,9 +243,9 @@ const FormUnitMeasure = (
           >
            <div className=" float-left w-1/2">
                 <Field
-                  label="Désignation *"
+                  label={<Required msg="Désignation"/>}
                   name="design"
-                  disabled={disabled} required={true}
+                  disabled={disabled}//required={true}
                   
                 />
               </div>
@@ -252,19 +253,19 @@ const FormUnitMeasure = (
               <div className="float-left w-full">
               <div className="float-left w-1/2">
               <Field
-                  label="Symbole *"
+                  label={<Required msg="Symbole"/>}
                   name="symbole"
-                  disabled={disabled} required={true}
+                  disabled={disabled}//required={true}
                   
                 />
               </div>
               <div className="float-right w-1/2">
                 <Field
-                  label="Décimal *"
+                  label={<Required msg="Décimal"/>}
                   name="decimal"
                   options={DECIMAL}
                   as="select"
-                  disabled={disabled} required={true}
+                  disabled={disabled}//required={true}
                   
                 />
               </div>
@@ -275,14 +276,16 @@ const FormUnitMeasure = (
             onClick={() => {
               setTimeout(() => {
                 refetchUnitMeasure();
-                close();
-              }, 600);
+                closed();
+              }, 500);
             }}
           />
           {unitMeasure1.id=="" &&<BsavEndNew
                   className="ml-10 mr-2"
                   onClick={() => {
-                    setShow(true);
+                    setTimeout(() => {
+                      refetchUnitMeasure();
+                      }, 500);
                   }}
                 />}
                

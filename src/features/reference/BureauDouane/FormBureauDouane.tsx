@@ -25,6 +25,7 @@ import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bcancel from "widgets/Bcancel";
 import ModalS from "widgets/ModalS";
+import Required from "widgets/Required";
 
 type FormBureauDouaneProps = {
   bureauDouane: BureauDouane;
@@ -209,7 +210,7 @@ const FormBureauDouane = (
             }
           </Table>
           <Pagin
-           load={loadPage} max={300}
+           load={loadPage} max={bureauDouanes?.length}
             visible={bureauDouanes?.length > 0 ? true : false}
           />
         </section>
@@ -234,14 +235,14 @@ const FormBureauDouane = (
           >
             <div className="float-left w-full">
               <Field
-               label="Numéro *"
+               label={<Required msg="Numéro"/>}
                 name="code"
-                disabled={disabled} required={true}
+                disabled={disabled}//required={true}
               />
                   <Field
-                    label="Désignation *"
+                    label={<Required msg="Désignation"/>}
                     name="design"
-                    disabled={disabled} required={true}
+                    disabled={disabled}//required={true}
                   />
             </div>
             <div className="mt-5 b-ajust-r">
@@ -251,14 +252,16 @@ const FormBureauDouane = (
               setTimeout(() => {
                 refetchBureauDouane();
                       closed();
-              }, 600);
+              }, 500);
             }}
           />
           {bureauDouane1.id=="" &&<BsavEndNew
-                  className="ml-10 mr-2"
-                  onClick={() => {
-                    setShow(true);
-                  }}
+                   className="ml-10 mr-2"
+                   onClick={() => {
+                     setTimeout(() => {
+                      refetchBureauDouane();
+                       }, 500);
+                   }}
                 />}
                
               </div>

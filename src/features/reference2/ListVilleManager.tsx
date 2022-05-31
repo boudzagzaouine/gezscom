@@ -1,22 +1,18 @@
 import { TrashIcon } from "@heroicons/react/outline";
 import {
   ArchiveIcon,
-  ClipboardListIcon,
   PencilAltIcon,
-  ReplyIcon,
 } from "@heroicons/react/solid";
 import ArchiveVille from "components/reference2/ArchiveVille";
 import DeleteVille from "components/reference2/DeleteVille";
 import { OpenVilleProp } from "components/reference2/OpenVille";
 import RestoreVille from "components/reference2/RestoreVille";
-import { openVilles, usePaginationVillesQuery } from "config/rtk/rtkVille";
+import { openVilles } from "config/rtk/rtkVille";
 import React, { useRef, useState } from "react";
-import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import { i0, Ville, VilleJson } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import { Button } from "widgets/Button";
 import Icon from "widgets/Icon";
-import Mitems from "widgets/Mitems";
 import Mitems0 from "widgets/Mitems0";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
@@ -24,53 +20,25 @@ import Table from "widgets/Table";
 import { MenuItems } from "widgets/TypeWidgets";
 import FormVilleManager from "./FormVilleManager";
 function ListVilleManager() {
-  const villesToOpen: OpenVilleProp = openVilles();
-  const villeJson: VilleJson = villesToOpen.data;
-  const villes: Ville[] = villeJson.content;
-  const refetchVille: () => void = villesToOpen.refetch;
-  const saveVille = villesToOpen.save;
-  const editVille = villesToOpen.edit;
-  const search = (key: string, obj: Ville[]): Ville[] => {
-    const Villesearch: Ville[] = obj.filter((o: Ville) => {
-      return o.id.match(key) != null || o.designation.match(key) != null;
-    });
-    return Villesearch;
-  };
-  const [form, setForm] = useState(false);
-  const [Ville0, setVille0] = useState(i0);
-  const [requesi0, setRequesi0] = useState(REQUEST_SAVE);
   const [page, setPage] = useState(0);
-  const { data = [], isFetching, refetch } = usePaginationVillesQuery(page);
-  const [button, setButton] = useState("");
-  const loadPage = (p: number) => {
-    setPage(p);
-    refetch();
-  };
-  const [disabled, setDisabled] = useState(true);
+ const loadPage = (p: number) => {
+   setPage(p);
+   refetch();
+ };
+
+ const villesToOpen: OpenVilleProp = openVilles(page);
+ const villeJson: VilleJson = villesToOpen.data;
+ const villes: Ville[] = villeJson.content;
+  const refetch: () => void = villesToOpen.refetch;
+  const save = villesToOpen.save;
+  const edit = villesToOpen.edit;
+  const refCom = useRef(null);
   const del = useRef(null);
   const archive = useRef(null);
   const restore = useRef(null);
 
-  const showFormulaire = (Ville: Ville) => {
-    setVille0(Ville);
-    setForm(true);
-    setRequesi0(REQUEST_EDIT);
-  };
-  const FormAsAdd = () => {
-    setDisabled(false);
-    setVille0(i0);
-    setForm(true);
-    setRequesi0(REQUEST_SAVE);
-  };
-  const FormAsEdit = (Ville: Ville) => {
-    setDisabled(true);
-    showFormulaire(Ville);
-  };
-  const FormAsUpdate = (Ville: Ville) => {
-    setDisabled(false);
-    showFormulaire(Ville);
-  };
-  const menu = (Ville: Ville): MenuItems[] => {
+  
+  const menu = (ville: Ville): MenuItems[] => {
     return [
       {
         icon: (
@@ -81,7 +49,8 @@ function ListVilleManager() {
         ),
         text: "Modifier",
         action: () => {
-          FormAsUpdate(Ville);
+         //@ts-ignore
+         refCom.current(ville,false);
         },
       },
       {
@@ -94,7 +63,7 @@ function ListVilleManager() {
         text: "Supprimer",
         action: () => {
           //@ts-ignore
-          del.current(Ville.id);
+          del.current(ville.id);
         },
       },
       {
@@ -107,7 +76,7 @@ function ListVilleManager() {
         text: "Archiver",
         action: () => {
           //@ts-ignore
-          archive.current(Ville.id);
+          archive.current(ville.id);
         },
       },
     ];
@@ -115,19 +84,6 @@ function ListVilleManager() {
 
   return (
     <>
-      {form && (
-        <FormVilleManager
-          request={requesi0}
-          Ville={Ville0}
-          closed={() => {
-            setForm(false);
-            setRequesi0(REQUEST_SAVE);
-            refetch();
-          }}
-          disable={disabled}
-        />
-      )}
-      {!form && (
         <Section>
           <DeleteVille refetch={refetch} id={""} ref={del} />
           <ArchiveVille id={""} ref={archive} />
@@ -137,14 +93,20 @@ function ListVilleManager() {
             <Bcyan
               className="float-left"
               onClick={() => {
-                //setClieni0(c0);
-                //setForm(true);
-                FormAsAdd();
+                //@ts-ignore
+                refCom.current(i0,false);
               }}
             >
               Nouvelle Ville
             </Bcyan>
-
+            <FormVilleManager
+                 refetch={refetch}
+                 save={save}
+                 edit={edit}
+               Ville={i0}
+              disable={false}
+               ref={refCom}
+              />
             <div className="float-right">
               <Button className="bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg">
                 <Icon i="search" cl="" />
@@ -166,15 +128,13 @@ function ListVilleManager() {
             }
           >
             {
-              //@ts-ignore
               villes?.map((Ville) => (
-                //   data?.map((ville) => (
                 <tr key={Ville.id}>
                   <Table.td>
                     <span>{Ville.designation}</span>
                   </Table.td>
                   <Table.td>
-                    <span>{Ville.pays.designation}</span>
+                    <span>{Ville.pays}</span>
                   </Table.td>
 
                   <Table.td>
@@ -185,9 +145,8 @@ function ListVilleManager() {
             }
           </Table>
 
-          <Pagin load={loadPage} max={300} visible={villes?.length > 0} />
+          <Pagin load={loadPage} max={villes?.length} visible={villes?.length > 0} />
         </Section>
-      )}
     </>
   );
 }

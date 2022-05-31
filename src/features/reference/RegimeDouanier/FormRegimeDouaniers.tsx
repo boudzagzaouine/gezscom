@@ -32,6 +32,7 @@ import Bcancel from "widgets/Bcancel";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bsave from "widgets/Bsave";
 import ModalS from "widgets/ModalS";
+import Required from "widgets/Required";
 
 type FormRegimeDouanierProps = {
   regimeDouanier: RegimeDouanier;
@@ -222,7 +223,7 @@ const FormRegimeDouanier = (
             }
           </Table>
           <Pagin
-           load={loadPage} max={300}
+           load={loadPage} max={regimeDouaniers?.length}
             visible={regimeDouaniers?.length > 0 ? true : false}
           />
         </section>
@@ -247,13 +248,13 @@ const FormRegimeDouanier = (
           >
             <div className="float-left w-full">
               <Field
-               label="Numéro *"
+               label={<Required msg="Numéro"/>}
                 name="code"
                 disabled={disabled} required={true}
                 
               />
                   <Field
-                    label="Désignation *"
+                    label={<Required msg="Désignation"/>}
                     name="design"
                     disabled={disabled} required={true}
                     
@@ -266,13 +267,15 @@ const FormRegimeDouanier = (
               setTimeout(() => {
                 refetchRegimeDouanier();
                       closed();
-              }, 600);
+              }, 500);
             }}
           />
           {regimeDouanier1.id=="" &&<BsavEndNew
                   className="ml-10 mr-2"
                   onClick={() => {
-                    setShow(true);
+                    setTimeout(() => {
+                      refetchRegimeDouanier();
+                      }, 500);
                   }}
                 />}
                

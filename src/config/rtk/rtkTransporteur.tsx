@@ -100,8 +100,8 @@ export const {
   useArchiveTransporteurMutation,
   useRestoreTransporteurMutation,
 } = crudTransporteur;
-export const openTransporteurs = (): OpenTransporteurProp => {
-  const { data = [], refetch } = useFetchTransporteursQuery();
+export const openTransporteurs = (page:number): OpenTransporteurProp => {
+  const { data = [], refetch } = usePaginationTransporteursQuery(page);
   const [save] = useAddTransporteurMutation();
   const [edit] = useEditTransporteurMutation();
   //@ts-ignore

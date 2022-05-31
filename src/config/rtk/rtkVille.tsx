@@ -97,8 +97,16 @@ export const {
   useArchiveVilleMutation,
   useRestoreVilleMutation,
 } = crudVille;
-export const openVilles = (): OpenVilleProp => {
-  const { data = [], refetch } = useFetchVillesQuery();
+export const openVilles = (page:number): OpenVilleProp => {
+  const { data = [], refetch } = usePaginationVillesQuery(page);
+  const [save] = useAddVilleMutation();
+  const [edit] = useEditVilleMutation();
+  //@ts-ignore
+  const out: OpenVilleProp = { data, refetch, save, edit };
+  return out;
+};
+export const openVilleD = (): OpenVilleProp => {
+  const { data = [], refetch } = usePaginationVillesQuery(0);
   const [save] = useAddVilleMutation();
   const [edit] = useEditVilleMutation();
   //@ts-ignore
