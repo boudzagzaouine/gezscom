@@ -15,7 +15,8 @@ import Section from 'widgets/Section';
 import Table from 'widgets/Table'
 import { MenuItems } from 'widgets/TypeWidgets';
 import FormCommandes from './FormCommandes';
-
+//@ts-ignore
+import dateFormat from "dateformat";
 const ListAllCommandes = () => {
     const [page, setPage] = useState(0);
       const loadPage = (p: number) => {
@@ -99,10 +100,10 @@ const ListAllCommandes = () => {
                       <Table.td>
                       { getFournisseur(commande.idFournisseur,fournisseurs)?.raisonSociale }
                       </Table.td>
-                      <Table.td>{commande.dateCommande}</Table.td>
-                      <Table.td>{commande.dateLivraison}</Table.td>
+                      <Table.td>{dateFormat(commande.dateCommande, "dd-mm-yyyy")}</Table.td>
+                      <Table.td>{dateFormat(commande.dateLivraison, "dd-mm-yyyy") }</Table.td>
                       <Table.td>-</Table.td>
-                      <Table.td>Montant</Table.td>
+                      <Table.td>{commande.montant}</Table.td>
                       <Table.td>
                           <Mitems
         archive={() => {

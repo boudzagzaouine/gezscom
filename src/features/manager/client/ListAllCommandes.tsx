@@ -36,10 +36,7 @@ const ListAllCommandes = () => {
   //const { data = [], isFetching, refetch } = usePaginationCommandesQuery(page);
 
   const clientsToOpen: OpenClientProp = openClients();
-  const clientJson: ClientJson = clientsToOpen.data;
-  const clients: Client[] = clientJson.content;
-  const refetchClient: () => void = clientsToOpen.refetch;
-  const [client, setClient] = useState<Client>(c0);
+  const clients: Client[] = clientsToOpen.data.content;
   const refCom = useRef(null);
   const cm1: Commande = cm0;
   cm1.idClient = "";
@@ -54,7 +51,7 @@ const ListAllCommandes = () => {
           className="float-left mt-2"
           onClick={() => {
             //@ts-ignore
-            refCom.current(cm1);
+            refCom.current(cm1,c0,false);
           }}
         >
           Nouvelle commande
@@ -64,10 +61,11 @@ const ListAllCommandes = () => {
       add={add}
       edit={edit}      
         command={cm1}
-        client={client}
+        client={c0}
         clients={clients || []}
         refetchList={refetch}
         ref={refCom}
+        disabled={false}
       />
       <Table
         className="tab-list float-left w-full mt-2"
@@ -103,15 +101,17 @@ const ListAllCommandes = () => {
                         //@ts-ignore
                         refCom.current(
                           commande,
-                          getClient(commande.idClient, clients)
+                          getClient(commande.idClient, clients),
+                          true
                         );
                       }}
-                      obj={client}
+                      obj={commande}
                       update={() => {
                         //@ts-ignore
                         refCom.current(
                           commande,
-                          getClient(commande.idClient, clients)
+                          getClient(commande.idClient, clients),
+                          false
                         );
                       }}
                     />

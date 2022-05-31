@@ -16,6 +16,7 @@ import FormLigneDeCommande from "./FormLigneDeCommande";
 import dateFormat from "dateformat";
 import DatePicker from "react-datepicker";
 import Calendar from "widgets/Calendar";
+import CloseCalendar from "widgets/CloseCalendar";
 type CommandesProps={
     command:CommandeFournisseur;
     fournisseur:Fournisseur
@@ -57,7 +58,8 @@ const FormCommandes = ({command,fournisseurs,fournisseur,add,edit,refetchList}:C
     <Modal title={command0.id===""?"Nouvelle Commande Fournisseur":"Mise à jour de la commande"} show={showModal} format={5} close={close}>
 
 <Form defaultValues={command0} onSubmit={save}>
-
+<CloseCalendar open={openCalendarCommande} setOpen={setOpenCalendarCommande} />
+<CloseCalendar open={openCalendarLiv} setOpen={setOpenCalendarLiv} />
             <>
   <div className="mt-1">
   

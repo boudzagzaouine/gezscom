@@ -15,6 +15,8 @@ import { BriefcaseIcon } from '@heroicons/react/solid';
 import { style_icon, style_span } from 'tools/constStyle';
 import ListArticleCommandes from './ListArticleCommandes';
 import { SEASON } from 'tools/consts';
+import Bupdate from 'widgets/Bupdate';
+import CloseCalendar from 'widgets/CloseCalendar';
 type FormCommandeProp={
   command:Commande
   client:Client
@@ -22,21 +24,23 @@ type FormCommandeProp={
  refetchList:()=>void
   add:()=>void
   edit:()=>void
+  disabled:boolean
 }
-const FormCommande = ({command,add,edit,refetchList,client,clients}:FormCommandeProp,ref:Ref<void>) => {
+const FormCommande = ({command,add,edit,refetchList,client,clients,disabled}:FormCommandeProp,ref:Ref<void>) => {
   const [showModal, setShowModal] = useState(false);
   const [command0, setCommand0] = useState(command);
   const [client0,setClient0] =useState(client)
-  const [clients0,setClients0] =useState(clients)
-  const adressLivsToOpen: openAdressLivByIdClientProps =
+  const [disabled0,setDisabled0]=useState(disabled)
+ const adressLivsToOpen: openAdressLivByIdClientProps =
   openAdressLivsByIdClient(client0?.id);
 const adressLivs: AdressLiv[] = adressLivsToOpen.data;
   const [startDate, setStartDate] = useState(command0.date);
   const [openCalendar, setOpenCalendar] = useState(false);
-  const openModal = (c: Commande,cl:Client) => {
+  const openModal = (c: Commande,cl:Client,disabled:boolean) => {
     setCommand0(c);
     setClient0(cl)
     setShowModal(true);
+    setDisabled0(disabled)
   };
   const save = command0.id == "" ? add : edit;
   const close = () => {
@@ -50,9 +54,11 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
   return (
     <Modal close={close} format={5} show={showModal} title={command0.id === "" ? "Nouvelle commande" : "Mise à jour de la commande"} >
 <Form defaultValues={command0} onSubmit={save} >
+<CloseCalendar open={openCalendar} setOpen={setOpenCalendar} />
+            
 <div className="float-left w-1/2 relative">
 {command0.id!=""?
-<Field label="Client" value={client0?.design} />:
+<Field disabled={true} label="Client" value={client0?.design} />:
 <Field
                 label="Client"
                 name="client__"
@@ -63,11 +69,11 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
                   setCommand0({...command0,idClient:c.id})
                 }}
               >
-                {[c0, ...(clients0 || [])]?.map((c: Client) => (
+                {[c0, ...(clients || [])]?.map((c: Client) => (
                   <option value={JSON.stringify(c)}>{c.design}</option>
                 ))}
               </Field>}
-              <Field
+              <Field disabled={disabled0} 
               label="Date Commande"
               name="date33"
               value={dateFormat(startDate, "dd-mm-yyyy")}
@@ -76,7 +82,8 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
               }}
             />
            {openCalendar && (
-              <DatePicker
+              <>
+             <DatePicker
                 selected={startDate}
                 name="date11"
                 onChange={(d: Date) => {
@@ -88,10 +95,12 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
                 calendarContainer={Calendar}
                 inline
               />
+              
+              </>
             )}
 </div>
 <div className="float-left w-1/2">
-              <Field
+              <Field disabled={disabled0} 
               label="Adress de livraison"
               name="adrLiv"
               as="select"
@@ -103,7 +112,7 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
                   <option value={c.adress}>{c.adress}</option>
                 ))}
             </Field> 
-            <Field
+            <Field disabled={disabled0} 
               label="Saison"
               name="season"
               as="select"
@@ -117,22 +126,41 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
                 ))}
               </Field> 
            </div>
-          <Bsave
-            className="float-right mt-5 b-ajust-r"
-            onClick={() => {
-              setTimeout(() => {
-                refetchList();
+           <div className="float-left w-full mt-1">
+            {!disabled0 && (
+              <Bsave
+                className="float-right b-ajust-r"
+                onClick={() => {
+                  setTimeout(() => {
+                 refetchList();
                 close();
-              }, 600);
+             }, 500);
+                }}
+              />
+            )}
+         </div>
+        </Form>
+        {!disabled0 && (
+          <Bcancel
+            className={
+              "float-right b-ajust " + (command0.id=="" && "b-ajustf")
+            }
+            onClick={() => {
+              if(command0.id!="")
+              setDisabled0(true);
+              else close()
             }}
           />
-     </Form>
-      <Bcancel
-        className="float-right mt-5 b-ajust"
-        onClick={() => {
-          close();
-        }}
-      />
+        )}
+
+        {disabled0 && (
+          <Bupdate
+            className="float-right"
+            onClick={() => {
+              setDisabled0(false);
+            }}
+          />
+        )}
 {command0.id != "" && <NavTabs tab={[
     {
       id: 1,

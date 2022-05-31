@@ -130,20 +130,7 @@ const FormClientManager = ({
                 }}
               />
             )}
-            {/* !disabled && request == REQUEST_SAVE && (
-              <Bcyan className="float-left" type="submit">
-                <SaveIcon
-                  className="h-8 w-8 text-[#fff] group-hover:text-gray-500  float-left"
-                  aria-hidden="true"
-                />{" "}
-                <span className="px-2 float-left">&&</span>
-                <UserAddIcon
-                  className="h-8 w-8 text-[#fff] group-hover:text-gray-500 float-left"
-                  aria-hidden="true"
-                />
-              </Bcyan>
-            ) */}
-          </div>
+         </div>
         </Form>
         {!disabled && (
           <Bcancel
