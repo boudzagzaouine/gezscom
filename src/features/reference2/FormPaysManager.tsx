@@ -1,70 +1,76 @@
-import { PencilAltIcon } from "@heroicons/react/solid";
 import { useAddPaysMutation, useEditPaysMutation } from "config/rtk/rtkPays";
-import React, { useEffect, useRef, useState } from "react";
-import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
-import { STYLE_ICON } from "tools/constStyle";
+import React, { useEffect, Ref, useState, forwardRef } from "react";
 import { Field, Form } from "widgets";
-import Bcyan from "widgets/Bcyan";
-import Bred from "widgets/Bred";
-import Section from "widgets/Section";
-import { Pays, pays0 } from "tools/types";
+import { Pays } from "tools/types";
 import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bcancel from "widgets/Bcancel";
+import ModalS from "widgets/ModalS";
+import Required from "widgets/Required";
 
 type FormPaysManagerProp = {
-  closed: () => void;
+  save:()=>void 
+  edit:()=>void
+  refetch:()=>void
   Pays: Pays;
-  request: number;
-  disable: boolean;
+ disable: boolean;
 };
 const FormPaysManager = ({
-  closed,
+  save,
+  edit,
+  refetch,
   Pays,
-  request,
   disable,
-}: FormPaysManagerProp) => {
-  const [save] = useAddPaysMutation();
-  const [edit] = useEditPaysMutation();
-  const onSubmit =
-    request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit : undefined;
+}: FormPaysManagerProp,ref:Ref<void>) => {
   const [disabled, setDisabled] = useState(disable);
-  const text = "Nouveau";
-  const text1 = "Modifier";
-  const imputFocus = useRef(null);
+  const [pays0, setPays0] = useState(Pays);
+  const [showModal, setShowModal] = useState(false);
+  
+  const onSubmit =pays0.id=="" ? save : edit;
+  const openModal=(d:Pays,disable: boolean)=> {
+    setPays0(d);
+    setShowModal(true);
+    setDisabled(disable)
+  };  
+  const close= () =>{
+    setShowModal(false)
+  };
   useEffect(() => {
-    /*  @ts-ignore*/
-    imputFocus.current.focus();
+    //@ts-ignore
+    ref.current = openModal;
   }, []);
-  return (
-    <Section>
-       <Form defaultValues={pays0} onSubmit={onSubmit}>
-          {request == REQUEST_SAVE ? (
-            <h1 className="mb-2">{text} Pays </h1>
-          ) : (
-            <h1 className="mb-2">{text1} Pays </h1>
-          )}
 
+  return (
+    <ModalS show={showModal}
+    title={pays0.id==""?"Nouveau Pays":"Modifier Pays"}
+    format={5}
+    close={close}
+     >
+       <Form defaultValues={pays0} onSubmit={onSubmit}>
           <div className="float-left w-full">
-             {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
               <Field
-                ref={imputFocus}
-                label="Désignation *"
+                label={<Required msg="Désignation"/>}
                 name="designation"
                 disabled={disabled}
               />
             </div>
-                      <div className="float-right mt-5 b-ajust-r">
+                      <div className="mt-5 b-ajust-r">
                      <Bsave
-            className="float-right"
-            onClick={() => {
-              setTimeout(() => {
-                     closed();
-              }, 400);
-            }}
+           className="float-right"
+           onClick={() => {
+             setTimeout(() => {
+               refetch()
+                    close();
+             }, 600);
+           }}
           />
           {pays0.id=="" &&<BsavEndNew
-                  className="float-right mr-2"
+                  className="ml-10 mr-2"
+                  onClick={() => {
+                    setTimeout(() => {
+                      refetch()
+                   }, 600);
+                  }}
                 />}
                
               </div>
@@ -73,11 +79,11 @@ const FormPaysManager = ({
                <Bcancel
                className="float-right mt-5 b-ajust"
                onClick={() => {
-                 closed();
+                 close()
                }}
              />
-    </Section>
+    </ModalS>
   );
 };
 
-export default FormPaysManager;
+export default forwardRef(FormPaysManager);

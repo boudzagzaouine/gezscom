@@ -1,6 +1,6 @@
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
-import { RawMaterial, rawMaterial0, RawMaterialJson } from "tools/types";
-import { FAMILLE, REQUEST_EDIT, REQUEST_SAVE, UNIT, VILLE } from "tools/consts";
+import { RawMaterial, rawMaterial0, RawMaterialJson, UnitMeasure } from "tools/types";
+import {  REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
@@ -19,13 +19,15 @@ import DeleteRawMaterial from "./Methods/DeleteRawMaterial";
 import ArchiveRawMaterial from "./Methods/ArchiveRawMaterial";
 import RestoreRawMaterial from "./Methods/RestoreRawMaterial";
 import Pagin from "widgets/Pagin";
-import { openRawMaterials } from "config/rtk/rtkRawMaterial";
+import { openFamilleF, openRawMaterials} from "config/rtk/rtkRawMaterial";
 import { OpenRawMaterialProp } from "./Methods/openRawMaterials";
 import Mitems0 from "widgets/Mitems0";
 import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bcancel from "widgets/Bcancel";
 import ModalS from "widgets/ModalS";
+import { openUnitF } from "config/rtk/rtkUnitMeasure";
+import Required from "widgets/Required";
 
 type FormRawMaterialProps = {
   rawMaterial: RawMaterial;
@@ -40,7 +42,10 @@ const FormRawMaterial = (
   const refetchRawMaterial: () => void = rawMaterialsToOpen.refetch;
   const saveRawMaterial = rawMaterialsToOpen.save;
   const editRawMaterial = rawMaterialsToOpen.edit;
-
+  const tabUnit: UnitMeasure[] = openUnitF().data.content;
+  const Unit = tabUnit?.map((d) => d.symbole);
+  const tabFamille: RawMaterial[] = openFamilleF().data.content;
+  const Famille = tabFamille?.map((d) => d.design);
   const [page, setPage] = useState(0);
   const loadPage = (p: number) => {
     setPage(p);
@@ -181,7 +186,7 @@ const FormRawMaterial = (
             </div>
           </div>
           <Table
-            className="tab-list float-left w-full mt-8 tab-list float-left w-full"
+            className="tab-list float-left w-full mt-8 tab-list"
             thead={
               <tr>
                 <th className=" top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
@@ -222,7 +227,7 @@ const FormRawMaterial = (
             }
           </Table>
           <Pagin
-           load={loadPage} max={300}
+           load={loadPage} max={rawMaterials?.length}
             visible={rawMaterials?.length > 0 ? true : false}
           />
         </section>
@@ -234,7 +239,7 @@ const FormRawMaterial = (
         format={+classNames("5")}
         close={closed}
       >
-        <div className="float-left w-full">
+        <div className="float-left w-full text-sm">
               <Form
             defaultValues={rawMaterial1}
             onSubmit={
@@ -247,44 +252,44 @@ const FormRawMaterial = (
           >
             <div className=" float-left w-1/2">
                <Field
-                  label="Désignation *"
+                  label={<Required msg="Désignation"/>}
                   name="design"
-                  disabled={disabled} required={true}
+                  disabled={disabled}//required={true}
                 />
             </div>
             <div className="float-left w-full">
             <div className="float-left w-1/2">
                <Field
-                  label="Nomenclature *"
+                  label={<Required msg="Nomenclature"/>}
                   name="nomenclature"
-                  disabled={disabled} required={true}
+                  disabled={disabled}//required={true}
                 />
                 </div>
               <div className="float-right w-1/2">
                <Field
-                  label="Famille"
+                  label="Famille Mère"
                   name="family"
-                  options={FAMILLE}
+                  options={["",...(Famille||[])]}
                   as="select"
-                  disabled={disabled} required={true}
+                  disabled={disabled}
                 />
              </div>
 				      </div>
               <div className="float-left w-full">
              <div className="float-left w-1/2">
                 <Field
-                  label="Unité De Mesure *"
+                  label={<Required msg="Unité De Mesure"/>}
                   name="measureUnit"
-                  options={UNIT}
+                  options={["",...(Unit||[])]}
                   as="select"
-                  disabled={disabled} required={true}
+                  disabled={disabled}//required={true}
                 />
                </div>
               <div className="float-right w-1/2">
                <Field
-                  label="Taux de perte *"
+                  label={<Required msg="Taux de perte"/>}
                   name="tauxPertes"
-				          disabled={disabled} required={true}
+				          disabled={disabled}//required={true}
                 />
             </div>
             </div>
@@ -295,14 +300,16 @@ const FormRawMaterial = (
               setTimeout(() => {
                 refetchRawMaterial();
                       closed();
-              }, 600);
+              }, 500);
             }}
           />
           {rawMaterial1.id=="" &&<BsavEndNew
-                  className="ml-10 mr-2"
-                  onClick={() => {
-                    setShow(true);
-                  }}
+                   className="ml-10 mr-2"
+                   onClick={() => {
+                     setTimeout(() => {
+                      refetchRawMaterial();
+                       }, 500);
+                   }}
                 />}
                
               </div>

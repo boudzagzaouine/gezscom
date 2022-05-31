@@ -348,7 +348,7 @@ export const role0: Role ={
 export interface Ville {
   id: string;
   designation: string;
-  pays: Pays;
+  pays: string;
 }
 export interface VilleJson{
   content:Ville[]
@@ -360,6 +360,9 @@ export interface Type {
 export const type0: Type ={
   id: "",
   designation: ""
+}
+export interface TypeJson{
+  content:Type[]
 }
 export const t0: Transporteur = {
   id: "",
@@ -382,7 +385,7 @@ export const p0: Pays = {
 export const i0: Ville = {
   id: "",
   designation: "",
-  pays: p0,
+  pays: "",
 };
 export const y0: Document = {
   id: "",
@@ -393,6 +396,9 @@ export const r0: Role = {
   designation: "",
   nbrUtilisateur: "",
 };
+export interface RoleJson{
+  content:Role[]
+}
 //************************************************************ */
 //************************************************************ */
 //**********************Fournisseur*************************** */

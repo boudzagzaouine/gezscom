@@ -5,6 +5,7 @@ import Bcancel from "widgets/Bcancel";
 import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
 import ModalS from "widgets/ModalS";
+import Required from "widgets/Required";
 
 
 type FormDocumentManagerProp = {
@@ -48,12 +49,12 @@ const FormDocumentManager = ({
        <Form defaultValues={document0} onSubmit={onSubmit}>
           <div className="float-left w-full">
               <Field
-                label="Désignation *"
+                label={<Required msg="Désignation"/>}
                 name="designation"
                 disabled={disabled}
               />
             </div>
-          <div className="float-right mt-5 b-ajust-r">
+          <div className=" mt-5 b-ajust-r">
                      <Bsave
             className="float-right"
             onClick={() => {
@@ -64,7 +65,7 @@ const FormDocumentManager = ({
             }}
           />
           {document0.id=="" &&<BsavEndNew
-                  className="float-right mr-2"
+                  className="ml-10 mr-2"
                   onClick={() => {
                     setTimeout(() => {
                       refetch()

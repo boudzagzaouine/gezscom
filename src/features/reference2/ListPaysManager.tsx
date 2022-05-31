@@ -1,22 +1,18 @@
 import { TrashIcon } from "@heroicons/react/outline";
 import {
   ArchiveIcon,
-  ClipboardListIcon,
   PencilAltIcon,
-  ReplyIcon,
 } from "@heroicons/react/solid";
 import ArchivePays from "components/reference2/ArchivePays";
 import DeletePays from "components/reference2/DeletePays";
 import { OpenPaysProp } from "components/reference2/OpenPays";
 import RestorePays from "components/reference2/RestorePays";
-import { openPays, usePaginationPaysQuery } from "config/rtk/rtkPays";
+import { openPays } from "config/rtk/rtkPays";
 import React, { useRef, useState } from "react";
-import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
-import { p0, Pays, PaysJson } from "tools/types";
+import { Pays, pays0, PaysJson } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import { Button } from "widgets/Button";
 import Icon from "widgets/Icon";
-import Mitems from "widgets/Mitems";
 import Mitems0 from "widgets/Mitems0";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
@@ -24,53 +20,24 @@ import Table from "widgets/Table";
 import { MenuItems } from "widgets/TypeWidgets";
 import FormPaysManager from "./FormPaysManager";
 function ListPaysManager() {
-  const paysToOpen: OpenPaysProp = openPays();
-  const paysJson: PaysJson = paysToOpen.data;
-  const pays: Pays[] = paysJson.content;
-  const refetchPays: () => void = paysToOpen.refetch;
-  const savePays = paysToOpen.save;
-  const editPays = paysToOpen.edit;
-  const search = (key: string, obj: Pays[]): Pays[] => {
-    const Payssearch: Pays[] = obj.filter((o: Pays) => {
-      return o.id.match(key) != null || o.designation.match(key) != null;
-    });
-    return Payssearch;
-  };
-  const [form, setForm] = useState(false);
-  const [Pays0, setPays0] = useState(p0);
-  const [requesp0, setRequesp0] = useState(REQUEST_SAVE);
   const [page, setPage] = useState(0);
-  const { data = [], isFetching, refetch } = usePaginationPaysQuery(page);
-  const [button, setButton] = useState("");
   const loadPage = (p: number) => {
     setPage(p);
     refetch();
   };
-  const [disabled, setDisabled] = useState(true);
-  const del = useRef(null);
-  const archive = useRef(null);
-  const restore = useRef(null);
+ 
+   const paysToOpen: OpenPaysProp = openPays(page);
+   const paysJson: PaysJson = paysToOpen.data;
+   const pays: Pays[] = paysJson.content;
+   const refetch: () => void = paysToOpen.refetch;
+   const save = paysToOpen.save;
+   const edit = paysToOpen.edit;
+   const refCom = useRef(null);
+   const del = useRef(null);
+   const archive = useRef(null);
+   const restore = useRef(null);
 
-  const showFormulaire = (Pays: Pays) => {
-    setPays0(Pays);
-    setForm(true);
-    setRequesp0(REQUEST_EDIT);
-  };
-  const FormAsAdd = () => {
-    setDisabled(false);
-    setPays0(p0);
-    setForm(true);
-    setRequesp0(REQUEST_SAVE);
-  };
-  const FormAsEdit = (Pays: Pays) => {
-    setDisabled(true);
-    showFormulaire(Pays);
-  };
-  const FormAsUpdate = (Pays: Pays) => {
-    setDisabled(false);
-    showFormulaire(Pays);
-  };
-  const menu = (Pays: Pays): MenuItems[] => {
+  const menu = (pays: Pays): MenuItems[] => {
     return [
       {
         icon: (
@@ -81,7 +48,8 @@ function ListPaysManager() {
         ),
         text: "Modifier",
         action: () => {
-          FormAsUpdate(Pays);
+         //@ts-ignore
+           refCom.current(pays,false);
         },
       },
       {
@@ -94,7 +62,7 @@ function ListPaysManager() {
         text: "Supprimer",
         action: () => {
           //@ts-ignore
-          del.current(Pays.id);
+          del.current(pays.id);
         },
       },
       {
@@ -107,7 +75,7 @@ function ListPaysManager() {
         text: "Archiver",
         action: () => {
           //@ts-ignore
-          archive.current(Pays.id);
+          archive.current(pays.id);
         },
       },
     ];
@@ -115,19 +83,6 @@ function ListPaysManager() {
 
   return (
     <>
-      {form && (
-        <FormPaysManager
-          request={requesp0}
-          Pays={Pays0}
-          closed={() => {
-            setForm(false);
-            setRequesp0(REQUEST_SAVE);
-            refetch();
-          }}
-          disable={disabled}
-        />
-      )}
-      {!form && (
         <Section>
           <DeletePays refetch={refetch} id={""} ref={del} />
           <ArchivePays id={""} ref={archive} />
@@ -137,14 +92,21 @@ function ListPaysManager() {
             <Bcyan
               className="float-left"
               onClick={() => {
-                //setClienp0(c0);
-                //setForm(true);
-                FormAsAdd();
+                //@ts-ignore
+                refCom.current(pays0,false);
               }}
             >
               Nouveau Pays
             </Bcyan>
-
+              
+        <FormPaysManager
+          refetch={refetch}
+          save={save}
+          edit={edit}
+        Pays={pays0}
+       disable={false}
+        ref={refCom}
+        />
             <div className="float-right">
               <Button className="bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg">
                 <Icon i="search" cl="" />
@@ -165,9 +127,7 @@ function ListPaysManager() {
             }
           >
             {
-              //@ts-ignore
               pays?.map((Pays) => (
-                //   data?.map((pays) => (
                 <tr key={Pays.id}>
                   <Table.td>{Pays.designation}</Table.td>
 
@@ -179,9 +139,8 @@ function ListPaysManager() {
             }
           </Table>
 
-          <Pagin load={loadPage} max={300} visible={pays?.length > 0} />
+          <Pagin load={loadPage} max={pays?.length} visible={pays?.length > 0} />
         </Section>
-      )}
     </>
   );
 }

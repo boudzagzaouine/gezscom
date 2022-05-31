@@ -5,6 +5,7 @@ import Bcancel from "widgets/Bcancel";
 import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
 import ModalS from "widgets/ModalS";
+import Required from "widgets/Required";
 type FormDeviseManagerProp = {
   save:()=>void 
   edit:()=>void
@@ -43,18 +44,25 @@ const FormDeviseManager = ({
     format={5}
     close={close}
      >
-    
+    <div className="float-left w-full">
        <Form defaultValues={devise0} onSubmit={onSubmit}>
-          <div className="float-left w-full">
+          <div className=" float-left w-1/2">
             <Field
-                label="Désignation *"
+                label={<Required msg="Désignation"/>}
                 name="designation"
                 disabled={disabled}
               />
-              <Field label="Code ISO *" name="code_iso" disabled={disabled} />
-              <Field label="Symbole *" name="symbole" disabled={disabled} />
+              </div>
+            
+            <div className="float-left w-full">
+            <div className="float-left w-1/2">
+              <Field label={<Required msg="Code ISO"/>} name="code_iso" disabled={disabled} />
             </div>
-               <div className="float-right mt-5 b-ajust-r">
+            <div className="float-right w-1/2">
+              <Field label={<Required msg="Symbole"/>} name="symbole" disabled={disabled} />
+            </div>
+            </div>
+               <div className="mt-5 b-ajust-r">
                      <Bsave
             className="float-right"
             onClick={() => {
@@ -65,7 +73,7 @@ const FormDeviseManager = ({
             }}
           />
           {devise0.id=="" &&<BsavEndNew
-                  className="float-right mr-2"
+                  className="ml-10 mr-2"
                   onClick={() => {
                     setTimeout(() => {
                       refetch()
@@ -82,7 +90,7 @@ const FormDeviseManager = ({
                  close()
                }}
              />
-       
+       </div>
        </ModalS>
   );
 };
