@@ -119,6 +119,9 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
             <Field disabled={disabled0} 
               label={<Required msg="Saison"/>}
               name="season"
+              onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                setCommand0({...command0,season:e.target.value})
+               }}
              />
            
            </div>
