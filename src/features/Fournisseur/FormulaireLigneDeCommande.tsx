@@ -7,7 +7,7 @@ import {  LigneDeCommande, MatierePremiere, mp0} from "tools/types";
 import Table from "widgets/Table";
 import Bcancel from 'widgets/Bcancel';
 import Bsave from 'widgets/Bsave';
-import { OpenMatierePremiereProp, openMatierePremieres } from 'config/rtk/rtkFournisseur';
+import { openMatierePremiereByFournisseur, OpenMatierePremiereJoinProp, OpenMatierePremiereProp, openMatierePremieres } from 'config/rtk/rtkFournisseur';
 import Bcyan from 'widgets/Bcyan';
 type FormLignedeCommandeProp={
     ligneCommande:LigneDeCommande
@@ -16,9 +16,9 @@ type FormLignedeCommandeProp={
     refetch:()=>void
     close:()=>void
 }
-const FormulaireLigneDeCommande = ({ligneCommande,saveArticle,close,refetch}:FormLignedeCommandeProp) => {
-  const matierePremieresOpen:OpenMatierePremiereProp=openMatierePremieres()
-  const matiere:MatierePremiere[]=matierePremieresOpen.data.content
+const FormulaireLigneDeCommande = ({ligneCommande,idfournisseur,saveArticle,close,refetch}:FormLignedeCommandeProp) => {
+  const matierePremiereByFournisseurOpen: OpenMatierePremiereJoinProp=openMatierePremiereByFournisseur(idfournisseur)
+  const matierePremieres:MatierePremiere[]= matierePremiereByFournisseurOpen.data
   const [ligneCommande0,setLigneCommande0]=useState(ligneCommande)
   return (
     <>
@@ -29,20 +29,19 @@ const FormulaireLigneDeCommande = ({ligneCommande,saveArticle,close,refetch}:For
   }} >test</Bcyan>
 <Form defaultValues={ligneCommande0} onSubmit={saveArticle}>
             <Table.td>
-              <Field name="idMatierePremiere" placeholder="Désignation" as="select" optionKeyName="id" options={[mp0,...(matiere||[])]} optionLabelName="designation" />
-              {/* <Field
+          {/*     <Field name="idMatierePremiere" placeholder="Désignation" as="select" optionKeyName="id" options={[mp0,...(matierePremieres||[])]} optionLabelName="designation" />
+          */}      <Field
                 placeholder="Matiere Prmiere" 
                 name="idMatierePremiere"
                 as="select"
                 onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                  let c: Client = JSON.parse(e.target.value);
-                  setClient0(c);
+                  setLigneCommande0({...ligneCommande0,designation:e.target.value})
                 }}
               >
-                {[c0, ...(clients0 || [])]?.map((c: Client) => (
-                  <option value={JSON.stringify(c)}>{c.design}</option>
+                {[mp0,...(matierePremieres||[])]?.map((m: MatierePremiere) => (
+                  <option value={m.designation}>{m.designation}</option>
                 ))}
-              </Field> */}
+              </Field> 
             </Table.td>
             <Table.td>
               <Field name="quantite" placeholder="Quantité"/>

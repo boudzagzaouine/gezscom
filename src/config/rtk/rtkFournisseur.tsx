@@ -472,6 +472,12 @@ const edit=commandesFournisseursByFounisseurOpen.edit
     save: () => void;
     edit: () => void;
   };
+  export type OpenMatierePremiereJoinProp = {
+    data: MatierePremiere[];
+    refetch: () => void;
+    save: () => void;
+    edit: () => void;
+  };
   /*
   const matierePremieresOpen:OpenMatierePremiereProp=openMatierePremieres()
   */
@@ -493,6 +499,19 @@ const edit=commandesFournisseursByFounisseurOpen.edit
     const [edit] = useEditMatierePremiereMutation();
     //@ts-ignore
     const out: OpenMatierePremiereProp = { data, refetch, save, edit };
+    return out;
+  };
+  /********************************************/
+  /*
+  const matierePremiereByFournisseurOpen: OpenMatierePremiereJoinProp=openMatierePremiereByFournisseur(idfournisseur)
+  const matierePremieres:MatierePremiere[]= matierePremiereByFournisseurOpen.data
+  */
+  export const openMatierePremiereByFournisseur = (idfournisseur:string):  OpenMatierePremiereJoinProp => {
+    const { data = [], refetch } = useFetchMatierePremiereByIdFournisseurQuery(idfournisseur)
+    const [save] = useAddMatierePremiereMutation();
+    const [edit] = useEditMatierePremiereMutation();
+    //@ts-ignore
+    const out:  OpenMatierePremiereJoinProp = { data, refetch, save, edit };
     return out;
   };
   /********************************************/
