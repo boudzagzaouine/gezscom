@@ -55,7 +55,7 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
   })
 
   return (
-    <Modal close={close} format={5} show={showModal} title={titleFm("commande client",command0.id,disabled0)}  >
+    <Modal close={close} format={5} show={showModal} title={command0.id==""?"Novelle commande client":"Commande client :"+client0.design}  >
   
 <Form defaultValues={command0} onSubmit={save} >
 <CloseCalendar open={openCalendar} setOpen={setOpenCalendar} />

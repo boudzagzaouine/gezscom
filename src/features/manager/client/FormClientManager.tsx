@@ -35,7 +35,7 @@ import { openPayementModes } from "config/rtk/rtkPayementMode";
 import { OpenIncotermProp } from "features/reference/Incoterm/Methods/openIncoterms";
 import Title from "widgets/Title";
 import ShowCheckedsField from "widgets/ShowCheckedsField";
-
+//14:28
 type FormClientManagerProp = {
   closed: () => void;
   client: Client;
