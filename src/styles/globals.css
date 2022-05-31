@@ -29,4 +29,9 @@
     width: 400px;
     height: 300px;
     right: 0;
+    background-color: #ff4500;
+}
+
+.min-w-40 {
+    min-width: 160px;
 }

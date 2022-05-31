@@ -17,6 +17,9 @@ import ListArticleCommandes from './ListArticleCommandes';
 import { SEASON } from 'tools/consts';
 import Bupdate from 'widgets/Bupdate';
 import CloseCalendar from 'widgets/CloseCalendar';
+import Bcyan from 'widgets/Bcyan';
+import Title, { title, titleFm } from 'widgets/Title';
+import Required from 'widgets/Required';
 type FormCommandeProp={
   command:Commande
   client:Client
@@ -52,15 +55,16 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
   })
 
   return (
-    <Modal close={close} format={5} show={showModal} title={command0.id === "" ? "Nouvelle commande" : "Mise à jour de la commande"} >
+    <Modal close={close} format={5} show={showModal} title={titleFm("commande client",command0.id,disabled0)}  >
+  
 <Form defaultValues={command0} onSubmit={save} >
 <CloseCalendar open={openCalendar} setOpen={setOpenCalendar} />
             
 <div className="float-left w-1/2 relative">
-{command0.id!=""?
-<Field disabled={true} label="Client" value={client0?.design} />:
-<Field
-                label="Client"
+{client0.id!=""?
+<Field disabled={true} label={<Required msg="Client"/>} value={client0?.design} />:
+<Field disabled={disabled0} 
+                label={<Required msg="Client"/>}
                 name="client__"
                 as="select"
                 onChange={(e: ChangeEvent<HTMLSelectElement>) => {
@@ -74,7 +78,7 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
                 ))}
               </Field>}
               <Field disabled={disabled0} 
-              label="Date Commande"
+              label={<Required msg="Date Commande"/>}
               name="date33"
               value={dateFormat(startDate, "dd-mm-yyyy")}
               onFocus={() => {
@@ -101,7 +105,7 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
 </div>
 <div className="float-left w-1/2">
               <Field disabled={disabled0} 
-              label="Adress de livraison"
+              label={<Required msg="Adress de livraison"/>}
               name="adrLiv"
               as="select"
               onChange={(e: ChangeEvent<HTMLSelectElement>) => {
@@ -113,18 +117,10 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
                 ))}
             </Field> 
             <Field disabled={disabled0} 
-              label="Saison"
+              label={<Required msg="Saison"/>}
               name="season"
-              as="select"
-              onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                setCommand0({...command0,season:e.target.value})
-               }}
- 
-            >
-              {["", ...SEASON]?.map((c: string) => (
-                  <option value={c}>{c}</option>
-                ))}
-              </Field> 
+             />
+           
            </div>
            <div className="float-left w-full mt-1">
             {!disabled0 && (
@@ -170,7 +166,7 @@ const adressLivs: AdressLiv[] = adressLivsToOpen.data;
           <span className={style_span}>Articles de la commande</span>
         </>
       ),
-      featured: <ListArticleCommandes idClient={client0.id} idCommande={command0.id} />,
+      featured: <ListArticleCommandes idClient={client0.id} idCommande={command0.id}  refetchParent={refetchList} />,
     },
   ]} />}
         </Modal>

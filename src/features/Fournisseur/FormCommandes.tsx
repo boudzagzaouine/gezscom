@@ -63,9 +63,9 @@ const FormCommandes = ({command,fournisseurs,fournisseur,add,edit,refetchList}:C
             <>
   <div className="mt-1">
   
-{ command0.id!=""?(
+{ fournisseur0.id!=""?(
   <>
- <Field label="Fournisseur" value={fournisseur0.raisonSociale}/>
+ <Field label="Fournisseur" value={fournisseur0.raisonSociale} disabled={true} />
   </>
 ):
 <>

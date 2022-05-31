@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useRef,ChangeEvent} from "react";
 import {
   useAddClientMutation,
   useEditClientMutation,
@@ -28,10 +28,14 @@ import Bsave from "widgets/Bsave";
 import Bcancel from "widgets/Bcancel";
 import Bupdate from "widgets/Bupdate";
 import Xclose from "widgets/Xclose";
+import Required from "widgets/Required";
 import { openDevises } from "config/rtk/rtkDevise";
 import { openIncoterms } from "config/rtk/rtkIncoterm";
 import { openPayementModes } from "config/rtk/rtkPayementMode";
 import { OpenIncotermProp } from "features/reference/Incoterm/Methods/openIncoterms";
+import Title from "widgets/Title";
+import ShowCheckedsField from "widgets/ShowCheckedsField";
+
 type FormClientManagerProp = {
   closed: () => void;
   client: Client;
@@ -62,25 +66,25 @@ const FormClientManager = ({
       <Xclose close={closed} />
       <div className="float-left w-full text-xs">
         <Form defaultValues={client} onSubmit={onSubmit}>
-          <h1 className="mb-4">Nouveau client</h1>
+          <Title  msg="client" id={client.id} edit={disabled} />
           <div className="float-left w-5/6">
             <div className="float-left w-1/2">
               {request == REQUEST_EDIT && (
                 <Field type="hidden" name="id" />
               )}
-              <Field label="Raison social" name="design" disabled={disabled} />
+              <Field label={<Required msg="raison social"/> } name="design" disabled={disabled} />
               <Field label="contact" name="contact" disabled={disabled} />
               <Field label="email" name="email" disabled={disabled} />
               <Field label="tel" name="tel" disabled={disabled} />
               <Field
-                label="device"
+                label={<Required msg="devise"/> }
                 name="device"
                 options={[devise0,...(devises||[])]}
                 as="select"
                 disabled={disabled}
               />
               <Field
-                label="adresse de livraison"
+                label="Adresse de  livraison par défaut"
                 name="adrLiv"
                 as="textarea"
                 disabled={disabled}
@@ -88,7 +92,7 @@ const FormClientManager = ({
             </div>
             <div className="float-left w-1/2">
               <Field
-                label="Mode de payment"
+                label={<Required msg="mode de règlement"/> }
                 name="paymentChoice"
                 options={[payementMode0,...(payementModes||[])]}
                 as="select"
@@ -97,7 +101,7 @@ const FormClientManager = ({
                 optionLabelName = "code"
               />
               <Field
-                label="incoterm"
+                label={<Required msg="incoterm"/> }
                 name="incoterm"
                 options={[incoterm0,...(incoterms||[])]}
                 as="select"
@@ -106,14 +110,16 @@ const FormClientManager = ({
                 optionLabelName = "code"
               />
               <Field
-                label="adresse de facturation"
+                label={<Required msg="adresse de facturation"/> }
                 name="adrFact"
                 as="textarea"
                 disabled={disabled}
               />
+             <ShowCheckedsField msg="les coordonnées bancaires du client" isAdd={client.id==""} >
               <Field label="bank" name="bank" disabled={disabled} />
               <Field label="rib" name="rib" disabled={disabled} />
               <Field label="swift" name="swift" disabled={disabled} />
+              </ShowCheckedsField>
             </div>
           </div>
           <div className="float-left w-1/6">

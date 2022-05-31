@@ -73,19 +73,19 @@ export default function Nav({ selected, loading }: NavProps) {
       visible: route.pathname == "/manager/vendor/VendorManager"||route.pathname == "/manager/vendor/CommandeVendor"||route.pathname == "/manager/vendor/RawMaterielManager"||route.pathname == "/manager/vendor/CommandeVendorManager",
     },
     {
-      name: "Commandes Fournisseurs",
+      name: "Commandes Fournisseur",
       href: "/manager/vendor/CommandeVendor",
       current: route.pathname == "/manager/vendor/CommandeVendor",
       visible: route.pathname == "/manager/vendor/VendorManager"||route.pathname == "/manager/vendor/CommandeVendor"||route.pathname == "/manager/vendor/RawMaterielManager"||route.pathname == "/manager/vendor/CommandeVendorManager",
     },
     {
-      name: "Matières premieres",
+      name: "Matières premières",
       href: "/manager/vendor/RawMaterielManager",
       current: route.pathname == "/manager/vendor/RawMaterielManager",
       visible: route.pathname == "/manager/vendor/VendorManager"||route.pathname == "/manager/vendor/CommandeVendor"||route.pathname == "/manager/vendor/RawMaterielManager"||route.pathname == "/manager/vendor/CommandeVendorManager",
     },
     {
-      name: "Génerer Commandes Fournisseur",
+      name: "Générer Commandes Fournisseur",
       href: "/manager/vendor/CommandeVendorManager",
       current: route.pathname == "/manager/vendor/CommandeVendorManager",
       visible: route.pathname == "/manager/vendor/VendorManager"||route.pathname == "/manager/vendor/CommandeVendor"||route.pathname == "/manager/vendor/RawMaterielManager"||route.pathname == "/manager/vendor/CommandeVendorManager",

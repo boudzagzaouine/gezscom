@@ -1,5 +1,6 @@
 import { Article, article0, c0, Client, f0, Fournisseur } from "./types";
-
+//@ts-ignore
+import dateFormat from "dateformat";
 export const getClient = (id: string, obj: Client[]): Client => {
   const apr = obj?.find((o: Client) => {
     return o.id === id;
@@ -18,3 +19,7 @@ export const getFournisseur = (id: string, obj: Fournisseur[]): Fournisseur => {
   });
   return apr || f0;
 };
+
+export const DateFormat = (date:Date) => {
+  return dateFormat(date, "dd-mm-yyyy")
+}

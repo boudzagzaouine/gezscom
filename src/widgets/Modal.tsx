@@ -4,7 +4,7 @@ import Xclose from "./Xclose";
 import cn from "classnames";
 type ModalProps = {
   children: ReactNode;
-  title: string;
+  title: string|Element;
   show: boolean;
   format: number;
   close: () => void;

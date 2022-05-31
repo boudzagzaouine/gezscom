@@ -10,7 +10,12 @@ import Avatar from "widgets/Avatar";
 import Bcancel from "widgets/Bcancel";
 import Bcyan from "widgets/Bcyan";
 import Bsave from "widgets/Bsave";
+import Bupdate from "widgets/Bupdate";
+import Required from "widgets/Required";
 import Section from "widgets/Section";
+import ShowCheckedsField from "widgets/ShowCheckedsField";
+import Title from "widgets/Title";
+import Xclose from "widgets/Xclose";
 import ListCommandeFournisseur from "./ListCommandeFournisseur";
 
 type FormFournisseurManagerProp = {
@@ -37,46 +42,70 @@ const FormFournisseurManager = ({
     const[disabled, setDisabled]=useState(disable);
     return(
         <Section>
-                <Form defaultValues={fournisseur} onSubmit={onSubmit}>
+                <Xclose close={closed} />
+                <Title  msg="fournisseur" id={fournisseur.id} edit={disabled} />
+              <div className="text-xs" >
+              <Form defaultValues={fournisseur} onSubmit={onSubmit}>
                     <div className="float-left w-5/6">
                         <div className="float-left w-1/2">
                             {request == REQUEST_EDIT && <Field type="hidden" name="id"/>}
-                            <Field label="Nom du Fournisseur *" name="raisonSociale" disabled={disabled}/>
+                            <Field label= {<Required msg="Nom du Fournisseur"/> } name="raisonSociale" disabled={disabled}/>
                             <Field label="Contact" name="contact" disabled={disabled}/>
                             <Field label="Téléphone" name="tel" disabled={disabled}/>
                             <Field label="Email" name="email" disabled={disabled}/>
-                            <Field label="Adresse *" name="adresse" as="textarea" disabled={disabled}/>
+                            <Field label= {<Required msg="Adresse"/> } name="adresse" as="textarea" disabled={disabled}/>
                         </div>
                         <div className="float-left w-1/2">
-                            <Field label="Mode de Règlement *" name="modeDeReglements" as="select" options={payementModes} disabled={disabled}/>
-                            <Field label="Incoterm *" name="incoterm" as="select" options={incoterms} disabled={disabled}/>
-                            <Field label="Devise *" name="devise" as="select" options={devises} disabled={disabled}/>
-                             <Field label="Entrer les coordonnées bancaires du fournisseur " type="checkbox" disabled={disabled}/>
+                            <Field label= {<Required msg="Mode de Règlement"/> } name="modeDeReglements" as="select" options={payementModes} disabled={disabled}/>
+                            <Field label= {<Required msg="Incoterm"/> } name="incoterm" as="select" options={incoterms} disabled={disabled}/>
+                            <Field label= {<Required msg="Devise"/> } name="devise" as="select" options={devises} disabled={disabled}/>
+                           
+                            <ShowCheckedsField msg="les coordonnées bancaires du fournisseur" isAdd={fournisseur.id==""} >
                             <Field label="Banque" name="nomBanque" disabled={disabled}/>
                             <Field label="RIB" name="ribBanque" disabled={disabled}/>
                             <Field label="SWIFT" name="swift" disabled={disabled}/>
+              </ShowCheckedsField>
                         </div>
                     </div>
                     <div className="float-left w-1/6">
                         <Avatar />
-                    </div>
-                    <Bsave
-              type="submit"
-              className="float-right mt-5 b-ajust-r"
-              onClick={() => {
-                setTimeout(() => {
-                  closed();
-                }, 500);
-              }}
-            />
-           </Form>
+                        </div>
+                        <div className="float-left w-full mt-1">
+            {!disabled && (
+              <Bsave
+                className="float-right b-ajust-r"
+                onClick={() => {
+                  setTimeout(() => {
+                    closed();
+                  }, 500);
+                }}
+              />
+            )}
+         </div>
+        </Form>
+              </div>
+        {!disabled && (
           <Bcancel
-            className="float-right mt-5 b-ajust"
+            className={
+              "float-right b-ajust " + (request == REQUEST_SAVE && "b-ajustf")
+            }
             onClick={() => {
-              closed();
+              if(fournisseur.id!="")
+              setDisabled(true);
+              else closed()
             }}
-          />        
-        {disabled && (<ListCommandeFournisseur fournisseur={fournisseur} />)}            
+          />
+        )}
+
+        {disabled && (
+          <Bupdate
+            className="float-right"
+            onClick={() => {
+              setDisabled(false);
+            }}
+          />
+        )}
+        {fournisseur.id!="" && (<ListCommandeFournisseur fournisseur={fournisseur} />)}            
         </Section>
     );
 };

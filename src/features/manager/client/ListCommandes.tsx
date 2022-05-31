@@ -1,5 +1,6 @@
 import { OpenCommandeByClientProp, openCommandesByClient, useFetchcommandesByIdClientQuery } from "config/rtk/RtkCommande";
 import React, { useRef, useState } from "react";
+import { DateFormat } from "tools/Methodes";
 import { Client, cm0, Commande } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import Bedit from "widgets/Bedit";
@@ -41,6 +42,7 @@ edit={edit}
         client={client}
         clients={[]}
         refetchList={refetchAll}
+        disabled={false}
       />
       <Table
         className="tab-list float-left w-full mt-2"
@@ -58,8 +60,8 @@ edit={edit}
         {commandes?.map((commande) => (
           <tr key={commande.id}>
             <Table.td>{commande.id}</Table.td>
-            <Table.td>{commande.idClient}</Table.td>
-            <Table.td>{commande.date}</Table.td>
+            <Table.td>{client.design}</Table.td>
+            <Table.td>{DateFormat(commande.date)}</Table.td>
             <Table.td>{commande.season}</Table.td>
             <Table.td>{commande.amount}</Table.td>
             <Table.td>

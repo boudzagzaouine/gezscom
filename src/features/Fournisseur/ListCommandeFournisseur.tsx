@@ -24,7 +24,7 @@ const ListCommandeFournisseur = ({fournisseur}:ListFournisseursProps) => {
         ] 
     return (
      <>
-     <NavTabsHeight tab={commandes} />
+     <NavTabs tab={commandes} />
      </>
       )
   

@@ -14,11 +14,18 @@ import FormArticleCommande from "./FormArticleCommande";
 type ListArticleCommandesProps = {
   idCommande: string;
   idClient:string
+  refetchParent:()=>void
 };
-const ListArticleCommandes = ({ idCommande,idClient }: ListArticleCommandesProps) => {
+const ListArticleCommandes = ({ idCommande,idClient,refetchParent }: ListArticleCommandesProps) => {
   const articleCommandesOpen: OpenArticleCommandeByCommandeProp=openArticleCommandesByCommande(idCommande)
   const articleCommandes:ArticleCommande[]=articleCommandesOpen.data
-  const refetch=articleCommandesOpen.refetchArtCom
+  const save= articleCommandesOpen.save;
+  const edit = articleCommandesOpen.edit;
+  const refetchArtCom=articleCommandesOpen.refetchArtCom
+  const refetch=()=>{
+    refetchParent()
+    refetchArtCom()
+  }
   const [selectedIdCommande, setSelectedIdCommande] = useState("new");
   const [formArt, setFormArt] = useState(false);
   const arc1: ArticleCommande = arc0;
@@ -31,8 +38,7 @@ const ListArticleCommandes = ({ idCommande,idClient }: ListArticleCommandesProps
     setFormArt(true);
     setSelectedIdCommande(id);
   };
-  const [save] = useAddArticleCommandeMutation();
-  const [edit] = useEditArticleCommandeMutation();
+  
   return (
     <div>
       <Table

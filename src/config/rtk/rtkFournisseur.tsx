@@ -422,6 +422,12 @@ export interface FournisseurJson{
     save: () => void;
     edit: () => void;
   };
+  export type OpenCommandesFournisseurJoinProp = {
+    data: CommandeFournisseur[];
+    refetch: () => void;
+    save: () => void;
+    edit: () => void;
+  };
   export const openCommandesFournisseurs = (): OpenCommandesFournisseurProp => {
     const { data = [], refetch } = useFetchCommandesFournisseurQuery();
     const [save] = useAddCommandeFournisseurMutation();
@@ -437,6 +443,22 @@ export interface FournisseurJson{
     const [edit] = useEditCommandeFournisseurMutation();
     //@ts-ignore
     const out: OpenCommandesFournisseurProp = { data, refetch, save, edit };
+    return out;
+  };
+  /********************************************/
+  /*
+const commandesFournisseursByFounisseurOpen: OpenCommandesFournisseurJoinProp =openCommandesFournisseursByFounisseur(...)
+const commandesFournisseurs:CommandeFournisseur[]=commandesFournisseursByFounisseurOpen.data
+cosnt refetch=commandesFournisseursByFounisseurOpen.refetch
+const add=commandesFournisseursByFounisseurOpen.save
+const edit=commandesFournisseursByFounisseurOpen.edit
+  */
+  export const openCommandesFournisseursByFounisseur = (idFournisseur:string): OpenCommandesFournisseurJoinProp => {
+    const { data = [], refetch } = useFetchCommandesFournisseurByIdFournisseurQuery(idFournisseur)
+    const [save] = useAddCommandeFournisseurMutation();
+    const [edit] = useEditCommandeFournisseurMutation();
+    //@ts-ignore
+    const out: OpenCommandesFournisseurJoinProp  = { data, refetch, save, edit };
     return out;
   };
   /********************************************/

@@ -3,7 +3,7 @@ import { usePaginationCommandesFournisseurQuery } from 'config/rtk';
 import { OpenCommandesFournisseurProp, OpenFournisseurProp, openFournisseurs, openPaginationCommandesFournisseurs } from 'config/rtk/rtkFournisseur';
 import React, { useRef, useState } from 'react'
 import { REQUEST_EDIT, REQUEST_SAVE } from 'tools/consts';
-import { getFournisseur } from 'tools/Methodes';
+import { DateFormat, getFournisseur } from 'tools/Methodes';
 import { f0, cf0, getCf0, Fournisseur, CommandeFournisseur } from 'tools/types';
 import { Button } from 'widgets';
 import Bcyan from 'widgets/Bcyan';
@@ -15,8 +15,7 @@ import Section from 'widgets/Section';
 import Table from 'widgets/Table'
 import { MenuItems } from 'widgets/TypeWidgets';
 import FormCommandes from './FormCommandes';
-//@ts-ignore
-import dateFormat from "dateformat";
+
 const ListAllCommandes = () => {
     const [page, setPage] = useState(0);
       const loadPage = (p: number) => {
@@ -100,8 +99,8 @@ const ListAllCommandes = () => {
                       <Table.td>
                       { getFournisseur(commande.idFournisseur,fournisseurs)?.raisonSociale }
                       </Table.td>
-                      <Table.td>{dateFormat(commande.dateCommande, "dd-mm-yyyy")}</Table.td>
-                      <Table.td>{dateFormat(commande.dateLivraison, "dd-mm-yyyy") }</Table.td>
+                      <Table.td>{DateFormat(commande.dateCommande)}</Table.td>
+                      <Table.td>{DateFormat(commande.dateLivraison) }</Table.td>
                       <Table.td>-</Table.td>
                       <Table.td>{commande.montant}</Table.td>
                       <Table.td>
