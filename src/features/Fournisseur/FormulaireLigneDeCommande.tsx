@@ -14,7 +14,7 @@ type FormLignedeCommandeProp={
     idfournisseur:string
     saveArticle:(art:LigneDeCommande)=>void
     refetch:()=>void
-    close:()=>void
+       close:()=>void
 }
 const FormulaireLigneDeCommande = ({ligneCommande,idfournisseur,saveArticle,close,refetch}:FormLignedeCommandeProp) => {
   const matierePremiereByFournisseurOpen: OpenMatierePremiereJoinProp=openMatierePremiereByFournisseur(idfournisseur)
@@ -24,13 +24,9 @@ const FormulaireLigneDeCommande = ({ligneCommande,idfournisseur,saveArticle,clos
     <>
     <tr className="relative">
 <div className="absolute left-0 top-0 bg-[#ccc]">
-  <Bcyan onClick={()=>{
-   // alert(JSON.stringify())
-  }} >test</Bcyan>
-<Form defaultValues={ligneCommande0} onSubmit={saveArticle}>
+ <Form defaultValues={ligneCommande0} onSubmit={saveArticle}>
             <Table.td>
-          {/*     <Field name="idMatierePremiere" placeholder="Désignation" as="select" optionKeyName="id" options={[mp0,...(matierePremieres||[])]} optionLabelName="designation" />
-          */}      <Field
+              <Field
                 placeholder="Matiere Prmiere" 
                 name="idMatierePremiere"
                 as="select"
