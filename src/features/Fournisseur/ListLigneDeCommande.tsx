@@ -7,9 +7,10 @@ import Table from "widgets/Table";
 import FormulaireLigneDeCommande from "./FormulaireLigneDeCommande";
 const style_add_line = "bg-[#dfdfdf] cursor-pointer";
 type LigneDeCommandeProps={
-  idCommandeFournisseur:string,
+  idCommandeFournisseur:string
+  idfournisseur:string
 }
-const FormLigneDeCommande = ({idCommandeFournisseur}:LigneDeCommandeProps) => {
+const ListLigneDeCommande = ({idCommandeFournisseur,idfournisseur}:LigneDeCommandeProps) => {
  //const { data = [], isFetching, refetch } = useFetchLigneDeCommandeByIdCommandeFournisseurQuery(idCommandeFournisseur);
  const ligneDeCommandesOpen:OpenLigneDeCommandeByJoinProp=openLigneDeCommandesByFournisseur(idCommandeFournisseur)
  const ligneDeCommandes:LigneDeCommande[]=ligneDeCommandesOpen.data
@@ -41,23 +42,23 @@ const FormLigneDeCommande = ({idCommandeFournisseur}:LigneDeCommandeProps) => {
         }
       >
         {
-          ligneDeCommandes?.map((article) => (
+          ligneDeCommandes?.map((ligneDeCommande) => (
            <>
-          <tr key={article.id}>
-              <Table.td>{article.designation} </Table.td>
-              <Table.td>{article.quantite}</Table.td>
-              <Table.td>{article.prix}</Table.td>
+          <tr key={ligneDeCommande.id}>
+              <Table.td>{ligneDeCommande.designation} </Table.td>
+              <Table.td>{ligneDeCommande.quantite}</Table.td>
+              <Table.td>{ligneDeCommande.prix}</Table.td>
               <Table.td>
                 <Bedit onClick={()=>{
-                  open(article.id)
+                  open(ligneDeCommande.id)
                 }} />
               </Table.td>
             </tr>
-            {selectedIdCommande==article.id && formArt && <FormulaireLigneDeCommande ligneCommande={article} close={close} saveArticle={edit} refetch={refetch} />}
+            {selectedIdCommande==ligneDeCommande.id && formArt && <FormulaireLigneDeCommande idfournisseur={idfournisseur} ligneCommande={ligneDeCommande} close={close} saveArticle={edit} refetch={refetch} />}
           </>
           ))
         }
-        {selectedIdCommande=="new" && formArt && <FormulaireLigneDeCommande ligneCommande={lc1} close={close} saveArticle={save} refetch={refetch} />}
+        {selectedIdCommande=="new" && formArt && <FormulaireLigneDeCommande idfournisseur={idfournisseur} ligneCommande={lc1} close={close} saveArticle={save} refetch={refetch} />}
         {
           !formArt && <tr
           onClick={() => {
@@ -74,4 +75,4 @@ const FormLigneDeCommande = ({idCommandeFournisseur}:LigneDeCommandeProps) => {
     </div>
   );
 }
-export default FormLigneDeCommande
+export default ListLigneDeCommande

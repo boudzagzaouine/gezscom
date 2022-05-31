@@ -52,7 +52,7 @@ export const LIST_FAMILLE_MATIERE_PREMIERE = [
   "metalliques",
   "minerales",
 ];
-export const ORIGINE = ["", "Maroc", "France", "Canada", "Italie"];
+export const ORIGINE = ["", "Manuelle","Genéré"];
 
 export const ROLE = ["", "Admin", "User"];
 export const SEASON = ["hiver","printemps","automne","été"];

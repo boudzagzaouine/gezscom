@@ -11,7 +11,7 @@ import Bsave from "widgets/Bsave";
 import Modal from "widgets/Modal";
 import NavTabs from "widgets/NavTabs";
 import { MenuNavTabs } from "widgets/TypeWidgets";
-import FormLigneDeCommande from "./FormLigneDeCommande";
+import ListLigneDeCommande from "./ListLigneDeCommande";
 //@ts-ignore
 import dateFormat from "dateformat";
 import DatePicker from "react-datepicker";
@@ -51,7 +51,7 @@ const FormCommandes = ({command,fournisseurs,fournisseur,add,edit,refetchList}:C
     {
       id:1,
       name: (<><BriefcaseIcon className={style_icon} aria-hidden="true" /><span className={style_span}>Matières Premières</span></>),
-      featured: (<FormLigneDeCommande idCommandeFournisseur={command0.id}/>),
+      featured: (<ListLigneDeCommande idCommandeFournisseur={command0.id} idfournisseur={fournisseur0.id} />),
     },
         ]  
   return (

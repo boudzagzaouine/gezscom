@@ -197,7 +197,7 @@ useEffect(()=>{
 })
   return (
     <>
-      <ul className="nav-horiz bg-[#2B5173]">
+      <ul className="nav-horiz bg-[#2B5173] h-full">
         <h2 className="bg-[#000] bg-opacity-10 text-[#fff] w-full float-left py-2.5">
           GESTION COMMERCIAL{" "}
         </h2>
