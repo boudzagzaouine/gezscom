@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenTypeProp } from "config/rtk/OpenType";
 import { PAGE_SIZE } from "tools/consts";
-import { Type } from "tools/types";
+import { Type, TypeJson } from "tools/types";
 
 export const crudType = createApi({
   reducerPath: "crud-Type",
@@ -97,6 +96,12 @@ export const {
   useArchiveTypeMutation,
   useRestoreTypeMutation,
 } = crudType;
+export type OpenTypeProp = {
+  data: TypeJson;
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
 export const openTypes = (page:number): OpenTypeProp => {
   const { data = [], refetch } = usePaginationTypesQuery(page);
   const [save] = useAddTypeMutation();
