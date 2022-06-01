@@ -1,28 +1,18 @@
-import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
-import { BureauDouane, bureauDouane0, BureauDouaneJson } from "tools/types";
-import { ARCHIVE, DEL, REQUEST_EDIT, REQUEST_SAVE, RESTORE } from "tools/consts";
-import { Form, Field } from "widgets";
-import Modal from "widgets/Modal";
-import Bcyan from "widgets/Bcyan";
 import classNames from "classnames";
-import Table from "widgets/Table";
-import { MenuItems } from "widgets/TypeWidgets";
-import {
-  ArchiveIcon,
-  ClipboardListIcon,
-  PencilAltIcon,
-  ReplyIcon,
-  TrashIcon,
-} from "@heroicons/react/outline";
-import Pagin from "widgets/Pagin";
-import { openBureauDouanes, OpenBureauDouaneProp} from "config/rtk/rtkBureauDouane";
+import { OpenBureauDouaneProp, openBureauDouanes } from "config/rtk/rtkBureauDouane";
+import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
+import { ARCHIVE, DEL, REQUEST_EDIT, REQUEST_SAVE, RESTORE } from "tools/consts";
+import { BureauDouane, bureauDouane0, BureauDouaneJson } from "tools/types";
+import { Field, Form } from "widgets";
+import Action from "widgets/Action";
+import Bcancel from "widgets/Bcancel";
 import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
-import Bcancel from "widgets/Bcancel";
-import ModalS from "widgets/ModalS";
-import Required from "widgets/Required";
-import Action from "widgets/Action";
 import MitemsRef from "widgets/MitemsRef";
+import ModalS from "widgets/ModalS";
+import Pagin from "widgets/Pagin";
+import Required from "widgets/Required";
+import Table from "widgets/Table";
 
 type FormBureauDouaneProps = {
   bureauDouane: BureauDouane;

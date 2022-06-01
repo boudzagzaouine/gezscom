@@ -1,33 +1,27 @@
+import {
+  ArchiveIcon, PencilAltIcon, TrashIcon
+} from "@heroicons/react/outline";
+import classNames from "classnames";
+import { OpenRegimeDouanierProp, openRegimeDouaniers } from "config/rtk/rtkRegimeDouanier";
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
+import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import {
   PayementMode,
   payementMode0,
   RegimeDouanier,
   regimeDouanier0,
-  RegimeDouanierJson,
+  RegimeDouanierJson
 } from "tools/types";
-import { REQUEST_EDIT, REQUEST_SAVE, VILLE } from "tools/consts";
-import { Form, Field } from "widgets";
-import Modal from "widgets/Modal";
-import Bcyan from "widgets/Bcyan";
-import classNames from "classnames";
+import { Field, Form } from "widgets";
+import Bcancel from "widgets/Bcancel";
+import Bsave from "widgets/Bsave";
+import BsavEndNew from "widgets/BsavEndNew";
+import Mitems from "widgets/Mitems";
+import ModalS from "widgets/ModalS";
+import Pagin from "widgets/Pagin";
+import Required from "widgets/Required";
 import Table from "widgets/Table";
 import { MenuItems } from "widgets/TypeWidgets";
-import Mitems from "widgets/Mitems";
-import {
-  ArchiveIcon,
-  ClipboardListIcon,
-  PencilAltIcon,
-  ReplyIcon,
-  TrashIcon,
-} from "@heroicons/react/outline";
-import Pagin from "widgets/Pagin";
-import { openRegimeDouaniers, OpenRegimeDouanierProp} from "config/rtk/rtkRegimeDouanier";
-import Bcancel from "widgets/Bcancel";
-import BsavEndNew from "widgets/BsavEndNew";
-import Bsave from "widgets/Bsave";
-import ModalS from "widgets/ModalS";
-import Required from "widgets/Required";
 
 type FormRegimeDouanierProps = {
   regimeDouanier: RegimeDouanier;

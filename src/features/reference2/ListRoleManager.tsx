@@ -2,13 +2,12 @@ import { TrashIcon } from "@heroicons/react/outline";
 import {
   ArchiveIcon,
   ClipboardListIcon,
-  PencilAltIcon,
+  PencilAltIcon
 } from "@heroicons/react/solid";
 import ArchiveRole from "components/reference2/ArchiveRole";
 import DeleteRole from "components/reference2/DeleteRole";
-import { OpenRoleProp } from "config/rtk/rtkRole";
 import RestoreRole from "components/reference2/RestoreRole";
-import { openRoles } from "config/rtk/rtkRole";
+import { OpenRoleProp, openRoles } from "config/rtk/rtkRole";
 import React, { useRef, useState } from "react";
 import { r0, Role, RoleJson } from "tools/types";
 import Bcyan from "widgets/Bcyan";

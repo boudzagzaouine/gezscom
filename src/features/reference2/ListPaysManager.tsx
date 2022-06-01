@@ -1,13 +1,12 @@
 import { TrashIcon } from "@heroicons/react/outline";
 import {
   ArchiveIcon,
-  PencilAltIcon,
+  PencilAltIcon
 } from "@heroicons/react/solid";
 import ArchivePays from "components/reference2/ArchivePays";
 import DeletePays from "components/reference2/DeletePays";
-import { OpenPaysProp } from "config/rtk/rtkPays";
 import RestorePays from "components/reference2/RestorePays";
-import { openPays } from "config/rtk/rtkPays";
+import { openPays, OpenPaysProp } from "config/rtk/rtkPays";
 import React, { useRef, useState } from "react";
 import { Pays, pays0, PaysJson } from "tools/types";
 import Bcyan from "widgets/Bcyan";

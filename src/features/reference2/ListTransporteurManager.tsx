@@ -1,13 +1,12 @@
 import { TrashIcon } from "@heroicons/react/outline";
 import {
   ArchiveIcon,
-  PencilAltIcon,
+  PencilAltIcon
 } from "@heroicons/react/solid";
 import ArchiveTransporteur from "components/reference2/ArchiveTransporteur";
 import DeleteTransporteur from "components/reference2/DeleteTransporteur";
-import { OpenTransporteurProp } from "config/rtk/rtkTransporteur";
 import RestoreTransporteur from "components/reference2/RestoreTransporteur";
-import {openTransporteurs,} from "config/rtk/rtkTransporteur";
+import { OpenTransporteurProp, openTransporteurs } from "config/rtk/rtkTransporteur";
 import React, { useRef, useState } from "react";
 import { t0, Transporteur, TransporteurJson } from "tools/types";
 import Bcyanxl from "widgets/Bcyanxl";

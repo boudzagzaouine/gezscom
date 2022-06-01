@@ -1,27 +1,20 @@
-import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
-import { PayementMode, payementMode0, PayementModeJson } from "tools/types";
-import { REQUEST_EDIT, REQUEST_SAVE, VILLE } from "tools/consts";
-import { Form, Field } from "widgets";
-import Modal from "widgets/Modal";
-import Bcyan from "widgets/Bcyan";
-import classNames from "classnames";
-import Table from "widgets/Table";
-import { MenuItems } from "widgets/TypeWidgets";
-import Mitems from "widgets/Mitems";
 import {
-  ArchiveIcon,
-  ClipboardListIcon,
-  PencilAltIcon,
-  ReplyIcon,
-  TrashIcon,
+  ArchiveIcon, PencilAltIcon, TrashIcon
 } from "@heroicons/react/outline";
-import Pagin from "widgets/Pagin";
-import { openPayementModes ,OpenPayementModeProp} from "config/rtk/rtkPayementMode";
+import classNames from "classnames";
+import { OpenPayementModeProp, openPayementModes } from "config/rtk/rtkPayementMode";
+import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
+import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
+import { PayementMode, payementMode0, PayementModeJson } from "tools/types";
+import { Field, Form } from "widgets";
+import Bcancel from "widgets/Bcancel";
 import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
-import Bcancel from "widgets/Bcancel";
 import ModalS from "widgets/ModalS";
+import Pagin from "widgets/Pagin";
 import Required from "widgets/Required";
+import Table from "widgets/Table";
+import { MenuItems } from "widgets/TypeWidgets";
 
 type FormPayementModeProps = {
   payementMode: PayementMode;

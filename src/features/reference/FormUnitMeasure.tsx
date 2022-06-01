@@ -1,23 +1,18 @@
-import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
-import { UnitMeasure, unitMeasure0, UnitMeasureJson } from "tools/types";
-import { ARCHIVE, DECIMAL, DEL, REQUEST_EDIT, REQUEST_SAVE, RESTORE, VILLE } from "tools/consts";
-import { Form, Field } from "widgets";
-import Modal from "widgets/Modal";
-import Bcyan from "widgets/Bcyan";
 import classNames from "classnames";
-import Table from "widgets/Table";
-import { MenuItems } from "widgets/TypeWidgets";
-import Mitems from "widgets/Mitems";
-import Pagin from "widgets/Pagin";
-import { openUnitMeasures, OpenUnitMeasureProp} from "config/rtk/rtkUnitMeasure";
-import Bcyanxl from "widgets/Bcyanxl";
-import Bsave from "widgets/Bsave";
-import Bcancel from "widgets/Bcancel";
-import BsavEndNew from "widgets/BsavEndNew";
-import ModalS from "widgets/ModalS";
-import Required from "widgets/Required";
+import { OpenUnitMeasureProp, openUnitMeasures } from "config/rtk/rtkUnitMeasure";
+import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
+import { ARCHIVE, DECIMAL, DEL, REQUEST_EDIT, REQUEST_SAVE, RESTORE } from "tools/consts";
+import { UnitMeasure, unitMeasure0, UnitMeasureJson } from "tools/types";
+import { Field, Form } from "widgets";
 import Action from "widgets/Action";
+import Bcancel from "widgets/Bcancel";
+import Bsave from "widgets/Bsave";
+import BsavEndNew from "widgets/BsavEndNew";
 import MitemsRef from "widgets/MitemsRef";
+import ModalS from "widgets/ModalS";
+import Pagin from "widgets/Pagin";
+import Required from "widgets/Required";
+import Table from "widgets/Table";
 
 type FormUnitMeasureProps = {
   unitMeasure: UnitMeasure;
@@ -79,7 +74,7 @@ const FormUnitMeasure = (
     open(unitMeasure);
   };
 
-  const void_ = () => {};
+  const void_ = () => { };
 
   //const [updateUnitMeasure] = useEditUnitMeasureMutation();
 
@@ -88,9 +83,9 @@ const FormUnitMeasure = (
     <>
       {!form && (
         <section className="bg-white float-left w-full h-full mp-8 shadow-lg">
-          <Action id="" path="unitMeasures" design="" type="Unité de Mesure" ref={del} action={DEL}/>
-          <Action id="" path="unitMeasures" design="" type="Unité de Mesure" ref={archive} action={ARCHIVE}/>
-          <Action id="" path="unitMeasures" design="" type="Unité de Mesure" ref={restore} action={RESTORE}/>
+          <Action id="" path="unitMeasures" design="" type="Unité de Mesure" ref={del} action={DEL} />
+          <Action id="" path="unitMeasures" design="" type="Unité de Mesure" ref={archive} action={ARCHIVE} />
+          <Action id="" path="unitMeasures" design="" type="Unité de Mesure" ref={restore} action={RESTORE} />
           <h1>Unités de Mesure</h1>
           <div className="float-left w-full">
             <button
@@ -154,24 +149,24 @@ const FormUnitMeasure = (
                     <Table.td>{unitMeasure.symbole}</Table.td>
                     <Table.td>{unitMeasure.decimal}</Table.td>
                     <Table.td className="cursor-pointer">
-                    <MitemsRef
-                      archive={() => {
-                        //@ts-ignore
-                        archive.current(unitMeasure.id,unitMeasure.design);
-                      }}
-                    /*   restore={() => {
-                        //@ts-ignore
-                        restore.current(client.id,client.design);
-                      }} */
-                      del={() => {
-                        //@ts-ignore
-                        del.current(unitMeasure.id,unitMeasure.design);
-                      }}
-                      obj={unitMeasure}
-                      update={() => {
-                        FormAsUpdate(unitMeasure);
-                      }}
-                    />
+                      <MitemsRef
+                        archive={() => {
+                          //@ts-ignore
+                          archive.current(unitMeasure.id, unitMeasure.design);
+                        }}
+                        /*   restore={() => {
+                            //@ts-ignore
+                            restore.current(client.id,client.design);
+                          }} */
+                        del={() => {
+                          //@ts-ignore
+                          del.current(unitMeasure.id, unitMeasure.design);
+                        }}
+                        obj={unitMeasure}
+                        update={() => {
+                          FormAsUpdate(unitMeasure);
+                        }}
+                      />
                     </Table.td>
                   </tr>
                 );
@@ -186,84 +181,84 @@ const FormUnitMeasure = (
 
       <ModalS
         show={show}
-        title={unitMeasure1.id==""?"Nouvelle Unité de Mesure":"Modifier Unité de Mesure"}
+        title={unitMeasure1.id == "" ? "Nouvelle Unité de Mesure" : "Modifier Unité de Mesure"}
         format={+classNames("5")}
         close={closed}
-     >
-             <div className="float-left w-full">
-        
-         <Form
+      >
+        <div className="float-left w-full">
+
+          <Form
             defaultValues={unitMeasure1}
             onSubmit={
               request == REQUEST_SAVE
                 ? saveUnitMeasure
                 : request == REQUEST_EDIT
-                ? editUnitMeasure
-                : void_
+                  ? editUnitMeasure
+                  : void_
             }
           >
-           <div className=" float-left w-1/2">
-                <Field
-                  label={<Required msg="Désignation"/>}
-                  name="design"
-                  disabled={disabled}//required={true}
-                  
-                />
-              </div>
-            
-              <div className="float-left w-full">
-              <div className="float-left w-1/2">
+            <div className=" float-left w-1/2">
               <Field
-                  label={<Required msg="Symbole"/>}
+                label={<Required msg="Désignation" />}
+                name="design"
+                disabled={disabled}//required={true}
+
+              />
+            </div>
+
+            <div className="float-left w-full">
+              <div className="float-left w-1/2">
+                <Field
+                  label={<Required msg="Symbole" />}
                   name="symbole"
                   disabled={disabled}//required={true}
-                  
+
                 />
               </div>
               <div className="float-right w-1/2">
                 <Field
-                  label={<Required msg="Décimal"/>}
+                  label={<Required msg="Décimal" />}
                   name="decimal"
                   options={DECIMAL}
                   as="select"
                   disabled={disabled}//required={true}
-                  
+
                 />
               </div>
-           </div>
-              <div className=" mt-5 b-ajust-r">
-                     <Bsave
-            className="float-right"
+            </div>
+            <div className=" mt-5 b-ajust-r">
+              <Bsave
+                className="float-right"
+                onClick={() => {
+                  setTimeout(() => {
+                    refetchUnitMeasure();
+                    closed();
+                  }, 500);
+                }}
+              />
+              {unitMeasure1.id == "" && <BsavEndNew
+                className="ml-10 mr-2"
+                onClick={() => {
+                  setTimeout(() => {
+                    refetchUnitMeasure();
+                  }, 500);
+                }}
+              />}
+
+            </div>
+
+          </Form>
+
+
+
+          <Bcancel
+            className="float-right mt-5 b-ajust"
             onClick={() => {
-              setTimeout(() => {
-                refetchUnitMeasure();
-                closed();
-              }, 500);
+              setDisabled(false)
+              setShow(false);
             }}
           />
-          {unitMeasure1.id=="" &&<BsavEndNew
-                  className="ml-10 mr-2"
-                  onClick={() => {
-                    setTimeout(() => {
-                      refetchUnitMeasure();
-                      }, 500);
-                  }}
-                />}
-               
-              </div>
-        
-          </Form>
-      
-          
-
-               <Bcancel
-               className="float-right mt-5 b-ajust"
-               onClick={() => {
-                 setDisabled(false)
-                 setShow(false);
-               }}
-             />
-                </div> 
+        </div>
       </ModalS>
     </>
   );

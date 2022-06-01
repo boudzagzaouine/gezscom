@@ -1,23 +1,17 @@
 import { TrashIcon } from "@heroicons/react/outline";
 import {
   ArchiveIcon,
-  PencilAltIcon,
+  PencilAltIcon
 } from "@heroicons/react/solid";
 import ArchiveDocument from "components/reference2/ArchiveDocument";
 import DeleteDocument from "components/reference2/DeleteDocument";
-import { OpenDocumentProp } from "config/rtk/rtkDocument";
 import RestoreDocument from "components/reference2/RestoreDocument";
-import {
-  openDocuments,
-  usePaginationDocumentsQuery,
-} from "config/rtk/rtkDocument";
+import { OpenDocumentProp, openDocuments } from "config/rtk/rtkDocument";
 import React, { useRef, useState } from "react";
-import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
-import { d0, Document, DocumentJson, y0 } from "tools/types";
+import { Document, DocumentJson, y0 } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import { Button } from "widgets/Button";
 import Icon from "widgets/Icon";
-import Mitems from "widgets/Mitems";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
 import Table from "widgets/Table";

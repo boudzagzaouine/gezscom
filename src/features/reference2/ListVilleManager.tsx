@@ -1,13 +1,12 @@
 import { TrashIcon } from "@heroicons/react/outline";
 import {
   ArchiveIcon,
-  PencilAltIcon,
+  PencilAltIcon
 } from "@heroicons/react/solid";
 import ArchiveVille from "components/reference2/ArchiveVille";
 import DeleteVille from "components/reference2/DeleteVille";
-import { OpenVilleProp } from "config/rtk/rtkVille";
 import RestoreVille from "components/reference2/RestoreVille";
-import { openVilles } from "config/rtk/rtkVille";
+import { OpenVilleProp, openVilles } from "config/rtk/rtkVille";
 import React, { useRef, useState } from "react";
 import { i0, Ville, VilleJson } from "tools/types";
 import Bcyan from "widgets/Bcyan";

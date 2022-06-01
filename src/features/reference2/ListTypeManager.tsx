@@ -1,15 +1,14 @@
 import { TrashIcon } from "@heroicons/react/outline";
 import {
   ArchiveIcon,
-  PencilAltIcon,
+  PencilAltIcon
 } from "@heroicons/react/solid";
 import ArchiveType from "components/reference2/ArchiveType";
 import DeleteType from "components/reference2/DeleteType";
-import { OpenTypeProp } from "config/rtk/rtkType";
 import RestoreType from "components/reference2/RestoreType";
-import { openTypes } from "config/rtk/rtkType";
+import { OpenTypeProp, openTypes } from "config/rtk/rtkType";
 import React, { useRef, useState } from "react";
-import { type0, Type, TypeJson } from "tools/types";
+import { Type, type0, TypeJson } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import { Button } from "widgets/Button";
 import Icon from "widgets/Icon";

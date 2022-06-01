@@ -1,28 +1,22 @@
-import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
-import { Declarant, declarant0, DeclarantJson, Ville } from "tools/types";
-import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
-import { Form, Field } from "widgets";
-import Modal from "widgets/Modal";
-import Bcyan from "widgets/Bcyan";
+import {
+  ArchiveIcon, PencilAltIcon, TrashIcon
+} from "@heroicons/react/outline";
 import classNames from "classnames";
+import { OpenDeclarantProp, openDeclarants } from "config/rtk/rtkDeclarant";
+import { openVilleD } from "config/rtk/rtkVille";
+import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
+import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
+import { Declarant, declarant0, DeclarantJson, Ville } from "tools/types";
+import { Field, Form } from "widgets";
+import Bcancel from "widgets/Bcancel";
+import Bsave from "widgets/Bsave";
+import BsavEndNew from "widgets/BsavEndNew";
+import Mitems from "widgets/Mitems";
+import ModalS from "widgets/ModalS";
+import Pagin from "widgets/Pagin";
+import Required from "widgets/Required";
 import Table from "widgets/Table";
 import { MenuItems } from "widgets/TypeWidgets";
-import Mitems from "widgets/Mitems";
-import {
-  ArchiveIcon,
-  ClipboardListIcon,
-  PencilAltIcon,
-  ReplyIcon,
-  TrashIcon,
-} from "@heroicons/react/outline";
-import Pagin from "widgets/Pagin";
-import { openDeclarants, OpenDeclarantProp} from "config/rtk/rtkDeclarant";
-import Bcancel from "widgets/Bcancel";
-import BsavEndNew from "widgets/BsavEndNew";
-import Bsave from "widgets/Bsave";
-import ModalS from "widgets/ModalS";
-import { openVilleD } from "config/rtk/rtkVille";
-import Required from "widgets/Required";
 
 type FormDeclarantProps = {
   declarant: Declarant;

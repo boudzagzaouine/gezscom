@@ -1,27 +1,20 @@
-import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
-import { Incoterm, incoterm0, IncotermJson } from "tools/types";
-import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
-import { Form, Field } from "widgets";
-import Modal from "widgets/Modal";
-import Bcyan from "widgets/Bcyan";
+import {
+  ArchiveIcon, PencilAltIcon
+} from "@heroicons/react/outline";
 import classNames from "classnames";
+import { OpenIncotermProp, openIncoterms } from "config/rtk/rtkIncoterm";
+import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
+import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
+import { Incoterm, incoterm0, IncotermJson } from "tools/types";
+import { Field, Form } from "widgets";
+import Bcancel from "widgets/Bcancel";
+import Bsave from "widgets/Bsave";
+import BsavEndNew from "widgets/BsavEndNew";
+import ModalS from "widgets/ModalS";
+import Pagin from "widgets/Pagin";
+import Required from "widgets/Required";
 import Table from "widgets/Table";
 import { MenuItems } from "widgets/TypeWidgets";
-import Mitems from "widgets/Mitems";
-import {
-  ArchiveIcon,
-  ClipboardListIcon,
-  PencilAltIcon,
-  ReplyIcon,
-  TrashIcon,
-} from "@heroicons/react/outline";
-import Pagin from "widgets/Pagin";
-import { openIncoterms,OpenIncotermProp } from "config/rtk/rtkIncoterm";
-import Bcancel from "widgets/Bcancel";
-import BsavEndNew from "widgets/BsavEndNew";
-import Bsave from "widgets/Bsave";
-import ModalS from "widgets/ModalS";
-import Required from "widgets/Required";
 
 type FormIncotermProps = {
   incoterm: Incoterm;
