@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenTypeProp } from "components/reference2/OpenType";
+import { OpenTypeProp } from "config/rtk/OpenType";
 import { PAGE_SIZE } from "tools/consts";
 import { Type } from "tools/types";
 

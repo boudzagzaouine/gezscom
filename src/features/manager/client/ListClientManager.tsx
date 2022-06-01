@@ -123,7 +123,7 @@ const ListClientManager = () => {
                     <figure>
                       <img src={"/images/empty-contact.png"} alt="" />
                       <figcaption>
-                        <span>{client.design}</span>
+                        <span>{client['design']}</span>
                         &nbsp;&nbsp;
                         <span>{client.contact}</span>
                       </figcaption>
