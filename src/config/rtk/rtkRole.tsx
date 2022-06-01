@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenRoleProp } from "components/reference2/OpenRole";
 import { PAGE_SIZE } from "tools/consts";
-import { Role } from "tools/types";
+import { Role, RoleJson } from "tools/types";
 export const crudRole = createApi({
   reducerPath: "crud-Role",
   baseQuery: fetchBaseQuery({
@@ -96,6 +95,12 @@ export const {
   useArchiveRoleMutation,
   useRestoreRoleMutation,
 } = crudRole;
+export type OpenRoleProp = {
+  data: RoleJson;
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
 export const openRoles = (page:number): OpenRoleProp => {
   const { data = [], refetch } = usePaginationRolesQuery(page);
   const [save] = useAddRoleMutation();

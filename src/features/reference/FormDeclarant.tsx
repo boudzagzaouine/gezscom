@@ -15,13 +15,8 @@ import {
   ReplyIcon,
   TrashIcon,
 } from "@heroicons/react/outline";
-import DeleteDeclarant from "./Declarant/Methods/DeleteDeclarant";
-import ArchiveDeclarant from "./Declarant/Methods/ArchiveDeclarant";
-import RestoreDeclarant from "./Declarant/Methods/RestoreDeclarant";
 import Pagin from "widgets/Pagin";
-import { OpenDeclarantProp } from "../../config/rtk/openDeclarants";
-import { openDeclarants } from "config/rtk/rtkDeclarant";
-import Mitems0 from "widgets/Mitems0";
+import { openDeclarants, OpenDeclarantProp} from "config/rtk/rtkDeclarant";
 import Bcancel from "widgets/Bcancel";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bsave from "widgets/Bsave";
@@ -203,7 +198,7 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
                     <Table.td>{declarant.design}</Table.td>
                     <Table.td>{declarant.ville}</Table.td>
                     <Table.td className="cursor-pointer">
-                      <Mitems0 menu={menu(declarant)} />
+                      <Mitems menu={menu(declarant)} />
                     </Table.td>
                   </tr>
                 );

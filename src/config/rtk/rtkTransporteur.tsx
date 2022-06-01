@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenTransporteurProp } from "components/reference2/OpenTransporteur";
 import { PAGE_SIZE } from "tools/consts";
-import { Transporteur } from "tools/types";
+import { Transporteur, TransporteurJson } from "tools/types";
 
 export const crudTransporteur = createApi({
   reducerPath: "crud-Transporteur",
@@ -100,6 +99,14 @@ export const {
   useArchiveTransporteurMutation,
   useRestoreTransporteurMutation,
 } = crudTransporteur;
+
+export type OpenTransporteurProp = {
+  data: TransporteurJson;
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
+
 export const openTransporteurs = (page:number): OpenTransporteurProp => {
   const { data = [], refetch } = usePaginationTransporteursQuery(page);
   const [save] = useAddTransporteurMutation();

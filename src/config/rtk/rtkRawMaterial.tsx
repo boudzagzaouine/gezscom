@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenRawMaterialProp } from "config/rtk/openRawMaterials";
 import { PAGE_SIZE } from "tools/consts";
-import { RawMaterial } from "tools/types";
+import { RawMaterial, RawMaterialJson } from "tools/types";
 
 export const crudRawMaterial = createApi({
   reducerPath: "crud-rawMaterial",
@@ -90,7 +89,12 @@ export const {
   /*******************************************************/
   /*******************************************************/
 } = crudRawMaterial;
-
+export type OpenRawMaterialProp = {
+  data: RawMaterialJson;
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
 export const openRawMaterials = (): OpenRawMaterialProp => {
   const { data = [], refetch } = useFetchRawMaterialsQuery();
   const [save] = useAddRawMaterialMutation();

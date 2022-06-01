@@ -5,7 +5,7 @@ import {
 } from "@heroicons/react/solid";
 import ArchiveDocument from "components/reference2/ArchiveDocument";
 import DeleteDocument from "components/reference2/DeleteDocument";
-import { OpenDocumentProp } from "components/reference2/OpenDocument";
+import { OpenDocumentProp } from "config/rtk/rtkDocument";
 import RestoreDocument from "components/reference2/RestoreDocument";
 import {
   openDocuments,
@@ -18,7 +18,6 @@ import Bcyan from "widgets/Bcyan";
 import { Button } from "widgets/Button";
 import Icon from "widgets/Icon";
 import Mitems from "widgets/Mitems";
-import Mitems0 from "widgets/Mitems0";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
 import Table from "widgets/Table";

@@ -1,6 +1,6 @@
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
 import { Article, article0, ArticleJson } from "tools/types";
-import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
+import { ARCHIVE, DEL, REQUEST_EDIT, REQUEST_SAVE, RESTORE } from "tools/consts";
 import { Form, Field, Button } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
@@ -15,19 +15,16 @@ import {
   ReplyIcon,
   TrashIcon,
 } from "@heroicons/react/outline";
-import DeleteArticle from "./Article/Methods/DeleteArticle";
-import ArchiveArticle from "./Article/Methods/ArchiveArticle";
-import RestoreArticle from "./Article/Methods/RestoreArticle";
 import Pagin from "widgets/Pagin";
 import Icon from "widgets/Icon";
-import { OpenArticleProp } from "../../config/rtk/openArticles";
-import { openArticles } from "config/rtk/rtkArticle";
-import Mitems0 from "widgets/Mitems0";
+import { openArticles ,OpenArticleProp} from "config/rtk/rtkArticle";
 import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bcancel from "widgets/Bcancel";
 import ModalS from "widgets/ModalS";
 import Required from "widgets/Required";
+import Action from "widgets/Action";
+import MitemsRef from "widgets/MitemsRef";
 
 type FormArticleProps = {
   article: Article;
@@ -85,63 +82,23 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
     setDisabled(true);
     showFormulaire(article);
   };
+  const FormAsUpdate = (article: Article) => {
+    setDisabled(false);
+    open(article);
+  };
 
   const void_ = () => {};
 
   //const [updateArticle] = useEditArticleMutation();
 
-  const menu = (article: Article): MenuItems[] => {
-    return [
-      {
-        icon: (
-          <PencilAltIcon
-            className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Modifier",
-        action: () => {
-          open(article);
-          setRequest(REQUEST_EDIT);
-          setDisabled(false);
-        },
-      },
-      {
-        icon: (
-          <TrashIcon
-            className="mr-3 h-8 w-8 text-rose-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Supprimer",
-        action: () => {
-          //@ts-ignore
-          del.current(article.id);
-        },
-      },
-      {
-        icon: (
-          <ArchiveIcon
-            className="mr-3 h-8 w-8 text-gray-800 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Archiver",
-        action: () => {
-          //@ts-ignore
-          archive.current(article.id);
-        },
-      },
-    ];
-  };
-
+  
   return (
     <>
       {!form && (
         <section className="bg-white float-left w-full h-full mp-8 shadow-lg">
-          <DeleteArticle id={""} ref={del} refetch={refetchArticle} />
-          <ArchiveArticle id={""} ref={archive} />
-          <RestoreArticle id={""} ref={restore} />
+          <Action id="" path="articles" design="" type="L'article" ref={del} action={DEL}/>
+          <Action id="" path="articles" design="" type="L'article" ref={archive} action={ARCHIVE}/>
+          <Action id="" path="articles" design="" type="L'article" ref={restore} action={RESTORE}/>
           <h1>Familles Article</h1>
           <div className="float-left w-full">
             <button
@@ -194,7 +151,24 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
                     </Table.td>
 
                     <Table.td className="cursor-pointer">
-                      <Mitems0 menu={menu(article)} />
+                    <MitemsRef
+                      archive={() => {
+                        //@ts-ignore
+                        archive.current(article.id,article.design);
+                      }}
+                    /*   restore={() => {
+                        //@ts-ignore
+                        restore.current(client.id,client.design);
+                      }} */
+                      del={() => {
+                        //@ts-ignore
+                        del.current(article.id,article.design);
+                      }}
+                      obj={article}
+                      update={() => {
+                        FormAsUpdate(article);
+                      }}
+                    />
                     </Table.td>
                   </tr>
                 );

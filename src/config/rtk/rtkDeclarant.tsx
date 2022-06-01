@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenDeclarantProp } from "config/rtk/openDeclarants";
 import { PAGE_SIZE } from "tools/consts";
-import { Declarant } from "tools/types";
+import { Declarant, DeclarantJson } from "tools/types";
 
 export const crudDeclarant = createApi({
   reducerPath: "crud-declarant",
@@ -90,7 +89,12 @@ export const {
   /*******************************************************/
   /*******************************************************/
 } = crudDeclarant;
-
+export type OpenDeclarantProp = {
+  data: DeclarantJson;
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
 export const openDeclarants = (): OpenDeclarantProp => {
   const { data = [], refetch } = useFetchDeclarantsQuery();
   const [save] = useAddDeclarantMutation();

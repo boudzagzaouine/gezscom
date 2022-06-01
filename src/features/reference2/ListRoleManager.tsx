@@ -6,7 +6,7 @@ import {
 } from "@heroicons/react/solid";
 import ArchiveRole from "components/reference2/ArchiveRole";
 import DeleteRole from "components/reference2/DeleteRole";
-import { OpenRoleProp } from "components/reference2/OpenRole";
+import { OpenRoleProp } from "config/rtk/rtkRole";
 import RestoreRole from "components/reference2/RestoreRole";
 import { openRoles } from "config/rtk/rtkRole";
 import React, { useRef, useState } from "react";
@@ -14,7 +14,6 @@ import { r0, Role, RoleJson } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import { Button } from "widgets/Button";
 import Icon from "widgets/Icon";
-import Mitems0 from "widgets/Mitems0";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
 import Table from "widgets/Table";
@@ -151,7 +150,7 @@ function ListRoleManager() {
                 </Table.td>
 
                 <Table.td>
-                  <Mitems0 menu={menu(Role)} />
+                  <Mitems menu={menu(Role)} />
                 </Table.td>
               </tr>
             ))}

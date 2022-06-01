@@ -15,13 +15,8 @@ import {
   ReplyIcon,
   TrashIcon,
 } from "@heroicons/react/outline";
-import DeletePayementMode from "./PayementMode/Methods/DeletePayementMode";
-import ArchivePayementMode from "./PayementMode/Methods/ArchivePayementMode";
-import RestorePayementMode from "./PayementMode/Methods/RestorePayementMode";
 import Pagin from "widgets/Pagin";
-import { OpenPayementModeProp } from "../../config/rtk/openPayementModes";
-import { openPayementModes } from "config/rtk/rtkPayementMode";
-import Mitems0 from "widgets/Mitems0";
+import { openPayementModes ,OpenPayementModeProp} from "config/rtk/rtkPayementMode";
 import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bcancel from "widgets/Bcancel";

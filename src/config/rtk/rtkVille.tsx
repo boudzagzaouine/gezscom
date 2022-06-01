@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenVilleProp } from "components/reference2/OpenVille";
 import { PAGE_SIZE } from "tools/consts";
-import { Ville } from "tools/types";
+import { Ville, VilleJson } from "tools/types";
 
 export const crudVille = createApi({
   reducerPath: "crud-Ville",
@@ -97,6 +96,13 @@ export const {
   useArchiveVilleMutation,
   useRestoreVilleMutation,
 } = crudVille;
+
+export type OpenVilleProp = {
+  data: VilleJson;
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
 export const openVilles = (page:number): OpenVilleProp => {
   const { data = [], refetch } = usePaginationVillesQuery(page);
   const [save] = useAddVilleMutation();

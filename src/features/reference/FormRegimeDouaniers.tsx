@@ -21,13 +21,8 @@ import {
   ReplyIcon,
   TrashIcon,
 } from "@heroicons/react/outline";
-import DeleteRegimeDouanier from "./RegimeDouanier/Methods/DeleteRegimeDouanier";
-import ArchiveRegimeDouanier from "./RegimeDouanier/Methods/ArchiveRegimeDouanier";
-import RestoreRegimeDouanier from "./RegimeDouanier/Methods/RestoreRegimeDouanier";
 import Pagin from "widgets/Pagin";
-import { openRegimeDouaniers } from "config/rtk/rtkRegimeDouanier";
-import { OpenRegimeDouanierProp } from "../../config/rtk/openRegimeDouaniers";
-import Mitems0 from "widgets/Mitems0";
+import { openRegimeDouaniers, OpenRegimeDouanierProp} from "config/rtk/rtkRegimeDouanier";
 import Bcancel from "widgets/Bcancel";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bsave from "widgets/Bsave";
@@ -215,7 +210,7 @@ const FormRegimeDouanier = (
                     <Table.td>{regimeDouanier.code}</Table.td>
                     <Table.td>{regimeDouanier.design}</Table.td>
                     <Table.td className="cursor-pointer">
-                      <Mitems0 menu={menu(regimeDouanier)} />
+                      <Mitems menu={menu(regimeDouanier)} />
                     </Table.td>
                   </tr>
                 );

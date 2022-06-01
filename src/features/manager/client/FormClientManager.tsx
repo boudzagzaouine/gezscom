@@ -32,7 +32,7 @@ import Required from "widgets/Required";
 import { openDevises } from "config/rtk/rtkDevise";
 import { openIncoterms } from "config/rtk/rtkIncoterm";
 import { openPayementModes } from "config/rtk/rtkPayementMode";
-import { OpenIncotermProp } from "config/rtk/openIncoterms";
+import { OpenIncotermProp } from "config/rtk/rtkIncoterm";
 import Title from "widgets/Title";
 import ShowCheckedsField from "widgets/ShowCheckedsField";
 //14:28
@@ -52,7 +52,7 @@ const FormClientManager = ({
 }: FormClientManagerProp) => {
   const [save] = useAddClientMutation();
   const [edit] = useEditClientMutation();
-  const tabDevises: Devise[] = openDevises().data.content;
+  const tabDevises: Devise[] = openDevises(0).data.content;
   const devises: string[] = tabDevises?.map((d) => d.symbole);
   const tabIncoterms: Incoterm[] = openIncoterms().data.content;
   const tabPayementModes: PayementMode[] = openPayementModes().data.content;

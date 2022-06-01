@@ -9,8 +9,7 @@ import { Field, Form } from 'widgets';
 import Bsave from 'widgets/Bsave';
 import Bcancel from 'widgets/Bcancel';
 import { OpenFournisseurProp, openFournisseurs } from 'config/rtk/rtkFournisseur';
-import { openArticles } from 'config/rtk/rtkArticle';
-import { OpenArticleProp } from "config/rtk/openArticles";
+import { openArticles ,OpenArticleProp} from 'config/rtk/rtkArticle';
 type FormArticleClientProp={
   articleclient:ArticleClient
  // client:Client
