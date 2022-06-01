@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenIncotermProp } from "config/rtk/openIncoterms";
 import { PAGE_SIZE } from "tools/consts";
-import { Incoterm } from "tools/types";
+import { Incoterm, IncotermJson } from "tools/types";
 
 export const crudIncoterm = createApi({
   reducerPath: "crud-incoterm",
@@ -90,7 +89,12 @@ export const {
   /*******************************************************/
   /*******************************************************/
 } = crudIncoterm;
-
+export type OpenIncotermProp = {
+  data: IncotermJson;
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
 export const openIncoterms = (): OpenIncotermProp => {
   const { data = [], refetch } = usePaginationIncotermsQuery(0);
   const [save] = useAddIncotermMutation();

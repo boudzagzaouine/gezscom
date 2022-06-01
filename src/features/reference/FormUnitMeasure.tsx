@@ -1,6 +1,6 @@
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
 import { UnitMeasure, unitMeasure0, UnitMeasureJson } from "tools/types";
-import { DECIMAL, REQUEST_EDIT, REQUEST_SAVE, VILLE } from "tools/consts";
+import { ARCHIVE, DECIMAL, DEL, REQUEST_EDIT, REQUEST_SAVE, RESTORE, VILLE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
@@ -8,28 +8,16 @@ import classNames from "classnames";
 import Table from "widgets/Table";
 import { MenuItems } from "widgets/TypeWidgets";
 import Mitems from "widgets/Mitems";
-import {
-  ArchiveIcon,
-  ClipboardListIcon,
-  PencilAltIcon,
-  ReplyIcon,
-  TrashIcon,
-} from "@heroicons/react/outline";
-import DeleteUnitMeasure from "./UnitMeasure/Methods/DeleteUnitMeasure";
-import ArchiveUnitMeasure from "./UnitMeasure/Methods/ArchiveUnitMeasure";
-import RestoreUnitMeasure from "./UnitMeasure/Methods/RestoreUnitMeasure";
 import Pagin from "widgets/Pagin";
-import { openUnitMeasures } from "config/rtk/rtkUnitMeasure";
-import { OpenUnitMeasureProp } from "../../config/rtk/openUnitMeasures";
-import Mitems0 from "widgets/Mitems0";
+import { openUnitMeasures, OpenUnitMeasureProp} from "config/rtk/rtkUnitMeasure";
 import Bcyanxl from "widgets/Bcyanxl";
 import Bsave from "widgets/Bsave";
 import Bcancel from "widgets/Bcancel";
-
-
 import BsavEndNew from "widgets/BsavEndNew";
 import ModalS from "widgets/ModalS";
 import Required from "widgets/Required";
+import Action from "widgets/Action";
+import MitemsRef from "widgets/MitemsRef";
 
 type FormUnitMeasureProps = {
   unitMeasure: UnitMeasure;
@@ -86,67 +74,23 @@ const FormUnitMeasure = (
     setRequest(REQUEST_EDIT);
   };
 
-  const FormAsEdit = (unitMeasure: UnitMeasure) => {
-    setDisabled(true);
-    showFormulaire(unitMeasure);
+  const FormAsUpdate = (unitMeasure: UnitMeasure) => {
+    setDisabled(false);
+    open(unitMeasure);
   };
 
   const void_ = () => {};
 
   //const [updateUnitMeasure] = useEditUnitMeasureMutation();
 
-  const menu = (unitMeasure: UnitMeasure): MenuItems[] => {
-    return [
-      {
-        icon: (
-          <PencilAltIcon
-            className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Modifier",
-        action: () => {
-          open(unitMeasure);
-          setRequest(REQUEST_EDIT);
-          setDisabled(false);
-        },
-      },
-      {
-        icon: (
-          <TrashIcon
-            className="mr-3 h-8 w-8 text-rose-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Supprimer",
-        action: () => {
-          //@ts-ignore
-          del.current(unitMeasure.id);
-        },
-      },
-      {
-        icon: (
-          <ArchiveIcon
-            className="mr-3 h-8 w-8 text-gray-800 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Archiver",
-        action: () => {
-          //@ts-ignore
-          archive.current(unitMeasure.id);
-        },
-      },
-    ];
-  };
 
   return (
     <>
       {!form && (
         <section className="bg-white float-left w-full h-full mp-8 shadow-lg">
-          <DeleteUnitMeasure id={""} ref={del} refetch={refetchUnitMeasure} />
-          <ArchiveUnitMeasure id={""} ref={archive} />
-          <RestoreUnitMeasure id={""} ref={restore} />
+          <Action id="" path="unitMeasures" design="" type="Unité de Mesure" ref={del} action={DEL}/>
+          <Action id="" path="unitMeasures" design="" type="Unité de Mesure" ref={archive} action={ARCHIVE}/>
+          <Action id="" path="unitMeasures" design="" type="Unité de Mesure" ref={restore} action={RESTORE}/>
           <h1>Unités de Mesure</h1>
           <div className="float-left w-full">
             <button
@@ -210,7 +154,24 @@ const FormUnitMeasure = (
                     <Table.td>{unitMeasure.symbole}</Table.td>
                     <Table.td>{unitMeasure.decimal}</Table.td>
                     <Table.td className="cursor-pointer">
-                      <Mitems0 menu={menu(unitMeasure)} />
+                    <MitemsRef
+                      archive={() => {
+                        //@ts-ignore
+                        archive.current(unitMeasure.id,unitMeasure.design);
+                      }}
+                    /*   restore={() => {
+                        //@ts-ignore
+                        restore.current(client.id,client.design);
+                      }} */
+                      del={() => {
+                        //@ts-ignore
+                        del.current(unitMeasure.id,unitMeasure.design);
+                      }}
+                      obj={unitMeasure}
+                      update={() => {
+                        FormAsUpdate(unitMeasure);
+                      }}
+                    />
                     </Table.td>
                   </tr>
                 );

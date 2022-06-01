@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenPayementModeProp } from "config/rtk/openPayementModes";
 import { PAGE_SIZE } from "tools/consts";
-import { PayementMode } from "tools/types";
+import { PayementMode, PayementModeJson } from "tools/types";
 
 export const crudPayementMode = createApi({
   reducerPath: "crud-payementMode",
@@ -90,7 +89,12 @@ export const {
   /*******************************************************/
   /*******************************************************/
 } = crudPayementMode;
-
+export type OpenPayementModeProp = {
+  data: PayementModeJson;
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
 export const openPayementModes = (): OpenPayementModeProp => {
   const { data = [], refetch } = usePaginationPayementModesQuery(0);
   const [save] = useAddPayementModeMutation();

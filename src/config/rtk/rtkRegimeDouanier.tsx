@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenRegimeDouanierProp } from "config/rtk/openRegimeDouaniers";
 import { PAGE_SIZE } from "tools/consts";
-import { RegimeDouanier } from "tools/types";
+import { RegimeDouanier, RegimeDouanierJson } from "tools/types";
 
 export const crudRegimeDouanier = createApi({
   reducerPath: "crud-regimeDouanier",
@@ -93,6 +92,12 @@ export const {
   /*******************************************************/
   /*******************************************************/
 } = crudRegimeDouanier;
+export type OpenRegimeDouanierProp = {
+  data: RegimeDouanierJson;
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
 
 export const openRegimeDouaniers = (): OpenRegimeDouanierProp => {
   const { data = [], refetch } = useFetchRegimeDouaniersQuery();

@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenArticleProp } from "config/rtk/openArticles";
 import { PAGE_SIZE } from "tools/consts";
-import { Article } from "tools/types";
+import { Article, ArticleJson } from "tools/types";
 
 export const crudArticle = createApi({
   reducerPath: "crud-article",
@@ -90,6 +89,12 @@ export const {
   /*******************************************************/
 } = crudArticle;
 //const familleArticleOpen:OpenArticleProp=openArticles()
+export type OpenArticleProp = {
+  data: ArticleJson;
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
 export const openArticles = (): OpenArticleProp => {
   const { data = [], refetch } = useFetchArticlesQuery();
   const [save] = useAddArticleMutation();

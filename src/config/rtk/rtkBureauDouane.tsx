@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenBureauDouaneProp } from "config/rtk/openBureauDouanes";
 import { PAGE_SIZE } from "tools/consts";
-import { BureauDouane } from "tools/types";
+import { BureauDouane, BureauDouaneJson } from "tools/types";
 
 export const crudBureauDouane = createApi({
   reducerPath: "crud-bureauDouane",
@@ -90,6 +89,12 @@ export const {
   /*******************************************************/
   /*******************************************************/
 } = crudBureauDouane;
+export type OpenBureauDouaneProp = {
+  data: BureauDouaneJson;
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
 
 export const openBureauDouanes = (): OpenBureauDouaneProp => {
   const { data = [], refetch } = useFetchBureauDouanesQuery();

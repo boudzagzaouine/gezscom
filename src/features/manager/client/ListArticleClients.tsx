@@ -1,7 +1,6 @@
-import { openArticles } from "config/rtk/rtkArticle";
+import { openArticles, OpenArticleProp} from "config/rtk/rtkArticle";
 import { OpenArticleClientByClientProp, openArticleClientsByClient, useFetchArticleClientsByIdClientQuery } from "config/rtk/RtkArticleClient";
 import { OpenFournisseurProp, openFournisseurs } from "config/rtk/rtkFournisseur";
-import { OpenArticleProp } from "config/rtk/openArticles";
 import React, { useRef, useState } from "react";
 import { getFamilleArticle } from "tools/Methodes";
 import { Client, articleClient0, ArticleClient, Article, Fournisseur, getFournisseur } from "tools/types";

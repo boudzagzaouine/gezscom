@@ -1,6 +1,6 @@
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
 import { RawMaterial, rawMaterial0, RawMaterialJson, UnitMeasure } from "tools/types";
-import {  REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
+import {  ARCHIVE, DEL, REQUEST_EDIT, REQUEST_SAVE, RESTORE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
@@ -15,19 +15,16 @@ import {
   ReplyIcon,
   TrashIcon,
 } from "@heroicons/react/outline";
-import DeleteRawMaterial from "./RawMaterial/Methods/DeleteRawMaterial";
-import ArchiveRawMaterial from "./RawMaterial/Methods/ArchiveRawMaterial";
-import RestoreRawMaterial from "./RawMaterial/Methods/RestoreRawMaterial";
 import Pagin from "widgets/Pagin";
-import { openFamilleF, openRawMaterials} from "config/rtk/rtkRawMaterial";
-import { OpenRawMaterialProp } from "../../config/rtk/openRawMaterials";
-import Mitems0 from "widgets/Mitems0";
+import { openFamilleF, openRawMaterials,OpenRawMaterialProp} from "config/rtk/rtkRawMaterial";
 import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bcancel from "widgets/Bcancel";
 import ModalS from "widgets/ModalS";
 import { openUnitF } from "config/rtk/rtkUnitMeasure";
 import Required from "widgets/Required";
+import Action from "widgets/Action";
+import MitemsRef from "widgets/MitemsRef";
 
 type FormRawMaterialProps = {
   rawMaterial: RawMaterial;
@@ -94,61 +91,20 @@ const FormRawMaterial = (
     setDisabled(true);
     showFormulaire(rawMaterial);
   };
-
+  const FormAsUpdate = (rawMaterial: RawMaterial) => {
+    setDisabled(false);
+    open(rawMaterial);
+  };
   const void_ = () => {};
 
-  const menu = (rawMaterial: RawMaterial): MenuItems[] => {
-    return [
-      {
-        icon: (
-          <PencilAltIcon
-            className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Modifier",
-        action: () => {
-          open(rawMaterial);
-          setRequest(REQUEST_EDIT);
-          setDisabled(false);
-        },
-      },
-      {
-        icon: (
-          <TrashIcon
-            className="mr-3 h-8 w-8 text-rose-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Supprimer",
-        action: () => {
-          //@ts-ignore
-          del.current(rawMaterial.id);
-        },
-      },
-      {
-        icon: (
-          <ArchiveIcon
-            className="mr-3 h-8 w-8 text-gray-800 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Archiver",
-        action: () => {
-          //@ts-ignore
-          archive.current(rawMaterial.id);
-        },
-      },
-    ];
-  };
 
   return (
     <>
       {!form && (
         <section className="bg-white float-left w-full h-full mp-8 shadow-lg">
-          <DeleteRawMaterial id={""} ref={del} refetch={refetchRawMaterial} />
-          <ArchiveRawMaterial id={""} ref={archive} />
-          <RestoreRawMaterial id={""} ref={restore} />
+          <Action id="" path="rawMaterials" design="" type="Famille Matière Première" ref={del} action={DEL}/>
+          <Action id="" path="rawMaterials" design="" type="Famille Matière Première" ref={archive} action={ARCHIVE}/>
+          <Action id="" path="rawMaterials" design="" type="Famille Matière Première" ref={restore} action={RESTORE}/>
           <h1>Familles Matière première</h1>
           <div className="float-left w-full">
             <button
@@ -219,7 +175,24 @@ const FormRawMaterial = (
                     </Table.td>
                     <Table.td>{rawMaterial.family}</Table.td>
                     <Table.td className="cursor-pointer">
-                      <Mitems0 menu={menu(rawMaterial)} />
+                    <MitemsRef
+                      archive={() => {
+                        //@ts-ignore
+                        archive.current(rawMaterial.id,rawMaterial.design);
+                      }}
+                    /*   restore={() => {
+                        //@ts-ignore
+                        restore.current(client.id,client.design);
+                      }} */
+                      del={() => {
+                        //@ts-ignore
+                        del.current(rawMaterial.id,rawMaterial.design);
+                      }}
+                      obj={rawMaterial}
+                      update={() => {
+                        FormAsUpdate(rawMaterial);
+                      }}
+                    />
                     </Table.td>
                   </tr>
                 );

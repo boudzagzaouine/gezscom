@@ -91,7 +91,7 @@ const Archive = ({ id,design,type,path,action}: ArchiveClientPorp, ref: Ref<void
             }
            </Form>
            <Bcancel
-            className="float-right mt-5 b-ajust bg-[#ffffff] text-rose-900 border-rose-900"
+            className=" float-right mt-5 b-ajust bg-[#ffffff] text-rose-900 border-rose-900 "
             onClick={() => {
               close();
             }}

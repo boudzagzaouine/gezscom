@@ -5,7 +5,7 @@ import {
 } from "@heroicons/react/solid";
 import ArchiveDevise from "components/reference2/ArchiveDevise";
 import DeleteDevise from "components/reference2/DeleteDevise";
-import { OpenDeviseProp } from "components/reference2/OpenDevise";
+import { OpenDeviseProp } from "config/rtk/rtkDevise";
 import RestoreDevise from "components/reference2/RestoreDevise";
 import { openDevises } from "config/rtk/rtkDevise";
 import React, { useRef, useState } from "react";
@@ -13,12 +13,12 @@ import { Devise, DeviseJson, v0 } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import { Button } from "widgets/Button";
 import Icon from "widgets/Icon";
-import Mitems0 from "widgets/Mitems0";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
 import Table from "widgets/Table";
 import { MenuItems } from "widgets/TypeWidgets";
 import FormDeviseManager from "./FormDevise";
+import Mitems from "widgets/Mitems";
 
 function ListDeviseManager() {
   
@@ -144,7 +144,7 @@ function ListDeviseManager() {
                   <Table.td>{Devise.code_iso} </Table.td>
                   <Table.td>{Devise.symbole} </Table.td>
                   <Table.td>
-                    <Mitems0 key={Devise.id} menu={menu(Devise)} />
+                    <Mitems key={Devise.id} menu={menu(Devise)} />
                   </Table.td>
                 </tr>
               ))

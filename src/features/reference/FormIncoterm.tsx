@@ -16,12 +16,7 @@ import {
   TrashIcon,
 } from "@heroicons/react/outline";
 import Pagin from "widgets/Pagin";
-import ArchiveIncoterm from "./Incoterm/Methods/ArchiveIncoterm";
-import RestoreIncoterm from "./Incoterm/Methods/RestoreIncoterm";
-import DeleteIncoterm from "./Incoterm/Methods/DeleteIncoterm";
-import { OpenIncotermProp } from "../../config/rtk/openIncoterms";
-import { openIncoterms } from "config/rtk/rtkIncoterm";
-import Mitems0 from "widgets/Mitems0";
+import { openIncoterms,OpenIncotermProp } from "config/rtk/rtkIncoterm";
 import Bcancel from "widgets/Bcancel";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bsave from "widgets/Bsave";

@@ -5,7 +5,7 @@ import {
 } from "@heroicons/react/solid";
 import ArchiveType from "components/reference2/ArchiveType";
 import DeleteType from "components/reference2/DeleteType";
-import { OpenTypeProp } from "components/reference2/OpenType";
+import { OpenTypeProp } from "config/rtk/rtkType";
 import RestoreType from "components/reference2/RestoreType";
 import { openTypes } from "config/rtk/rtkType";
 import React, { useRef, useState } from "react";
@@ -13,7 +13,6 @@ import { type0, Type, TypeJson } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import { Button } from "widgets/Button";
 import Icon from "widgets/Icon";
-import Mitems0 from "widgets/Mitems0";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
 import Table from "widgets/Table";
@@ -135,7 +134,7 @@ function ListTypeManager() {
                   </Table.td>
 
                   <Table.td>
-                    <Mitems0 menu={menu(Type)} />
+                    <Mitems menu={menu(Type)} />
                   </Table.td>
                 </tr>
               ))

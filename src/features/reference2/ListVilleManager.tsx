@@ -5,7 +5,7 @@ import {
 } from "@heroicons/react/solid";
 import ArchiveVille from "components/reference2/ArchiveVille";
 import DeleteVille from "components/reference2/DeleteVille";
-import { OpenVilleProp } from "components/reference2/OpenVille";
+import { OpenVilleProp } from "config/rtk/rtkVille";
 import RestoreVille from "components/reference2/RestoreVille";
 import { openVilles } from "config/rtk/rtkVille";
 import React, { useRef, useState } from "react";
@@ -13,7 +13,6 @@ import { i0, Ville, VilleJson } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import { Button } from "widgets/Button";
 import Icon from "widgets/Icon";
-import Mitems0 from "widgets/Mitems0";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
 import Table from "widgets/Table";
@@ -138,7 +137,7 @@ function ListVilleManager() {
                   </Table.td>
 
                   <Table.td>
-                    <Mitems0 key={Ville.id} menu={menu(Ville)} />
+                    <Mitems key={Ville.id} menu={menu(Ville)} />
                   </Table.td>
                 </tr>
               ))

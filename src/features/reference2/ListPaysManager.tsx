@@ -5,7 +5,7 @@ import {
 } from "@heroicons/react/solid";
 import ArchivePays from "components/reference2/ArchivePays";
 import DeletePays from "components/reference2/DeletePays";
-import { OpenPaysProp } from "components/reference2/OpenPays";
+import { OpenPaysProp } from "config/rtk/rtkPays";
 import RestorePays from "components/reference2/RestorePays";
 import { openPays } from "config/rtk/rtkPays";
 import React, { useRef, useState } from "react";
@@ -13,7 +13,6 @@ import { Pays, pays0, PaysJson } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import { Button } from "widgets/Button";
 import Icon from "widgets/Icon";
-import Mitems0 from "widgets/Mitems0";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
 import Table from "widgets/Table";
@@ -132,7 +131,7 @@ function ListPaysManager() {
                   <Table.td>{Pays.designation}</Table.td>
 
                   <Table.td>
-                    <Mitems0 menu={menu(Pays)} />
+                    <Mitems menu={menu(Pays)} />
                   </Table.td>
                 </tr>
               ))

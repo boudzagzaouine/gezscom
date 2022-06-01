@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenUnitMeasureProp } from "config/rtk/openUnitMeasures";
 import { PAGE_SIZE } from "tools/consts";
-import { UnitMeasure } from "tools/types";
+import { UnitMeasure, UnitMeasureJson } from "tools/types";
 
 export const crudUnitMeasure = createApi({
   reducerPath: "crud-unitMeasure",
@@ -90,7 +89,12 @@ export const {
   /*******************************************************/
   /*******************************************************/
 } = crudUnitMeasure;
-
+export type OpenUnitMeasureProp = {
+  data: UnitMeasureJson;
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
 export const openUnitMeasures = (): OpenUnitMeasureProp => {
   const { data = [], refetch } = useFetchUnitMeasuresQuery();
   const [save] = useAddUnitMeasureMutation();

@@ -1,13 +1,12 @@
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
 import { BureauDouane, bureauDouane0, BureauDouaneJson } from "tools/types";
-import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
+import { ARCHIVE, DEL, REQUEST_EDIT, REQUEST_SAVE, RESTORE } from "tools/consts";
 import { Form, Field } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
 import classNames from "classnames";
 import Table from "widgets/Table";
 import { MenuItems } from "widgets/TypeWidgets";
-import Mitems0 from "widgets/Mitems0";
 import {
   ArchiveIcon,
   ClipboardListIcon,
@@ -15,17 +14,15 @@ import {
   ReplyIcon,
   TrashIcon,
 } from "@heroicons/react/outline";
-import DeleteBureauDouane from "./BureauDouane/Methods/DeleteBureauDouane";
-import ArchiveBureauDouane from "./BureauDouane/Methods/ArchiveBureauDouane";
-import RestoreBureauDouane from "./BureauDouane/Methods/RestoreBureauDouane";
 import Pagin from "widgets/Pagin";
-import { OpenBureauDouaneProp } from "../../config/rtk/openBureauDouanes";
-import { openBureauDouanes } from "config/rtk/rtkBureauDouane";
+import { openBureauDouanes, OpenBureauDouaneProp} from "config/rtk/rtkBureauDouane";
 import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bcancel from "widgets/Bcancel";
 import ModalS from "widgets/ModalS";
 import Required from "widgets/Required";
+import Action from "widgets/Action";
+import MitemsRef from "widgets/MitemsRef";
 
 type FormBureauDouaneProps = {
   bureauDouane: BureauDouane;
@@ -86,63 +83,22 @@ const FormBureauDouane = (
     setDisabled(true);
     showFormulaire(bureauDouane);
   };
+  const FormAsUpdate = (bureauDouane: BureauDouane) => {
+    setDisabled(false);
+    open(bureauDouane);
+  };
 
   const void_ = () => {};
 
   //const [updateBureauDouane] = useEditBureauDouaneMutation();
 
-  const menu = (bureauDouane: BureauDouane): MenuItems[] => {
-    return [
-      {
-        icon: (
-          <PencilAltIcon
-            className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Modifier",
-        action: () => {
-          open(bureauDouane);
-          setRequest(REQUEST_EDIT);
-          setDisabled(false);
-        },
-      },
-      {
-        icon: (
-          <TrashIcon
-            className="mr-3 h-8 w-8 text-rose-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Supprimer",
-        action: () => {
-          //@ts-ignore
-          del.current(bureauDouane.id);
-        },
-      },
-      {
-        icon: (
-          <ArchiveIcon
-            className="mr-3 h-8 w-8 text-gray-800 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Archiver",
-        action: () => {
-          //@ts-ignore
-          archive.current(bureauDouane.id);
-        },
-      },
-    ];
-  };
-
   return (
     <>
       {!form && (
         <section className="bg-white float-left w-full h-full mp-8 shadow-lg">
-          <DeleteBureauDouane id={""} ref={del} refetch={refetchBureauDouane} />
-          <ArchiveBureauDouane id={""} ref={archive} />
-          <RestoreBureauDouane id={""} ref={restore} />
+          <Action id="" path="bureauDouanes" design="" type="Bureau Douane" ref={del} action={DEL}/>
+          <Action id="" path="bureauDouanes" design="" type="Bureau Douane" ref={archive} action={ARCHIVE}/>
+          <Action id="" path="bureauDouanes" design="" type="Bureau Douane" ref={restore} action={RESTORE}/>
           <h1>Bureaux de Douane</h1>
           <div className="float-left w-full">
             <button
@@ -202,7 +158,24 @@ const FormBureauDouane = (
                     <Table.td>{bureauDouane.code}</Table.td>
                     <Table.td>{bureauDouane.design}</Table.td>
                     <Table.td className="cursor-pointer">
-                      <Mitems0 menu={menu(bureauDouane)} />
+                    <MitemsRef
+                      archive={() => {
+                        //@ts-ignore
+                        archive.current(bureauDouane.id,bureauDouane.design);
+                      }}
+                    /*   restore={() => {
+                        //@ts-ignore
+                        restore.current(client.id,client.design);
+                      }} */
+                      del={() => {
+                        //@ts-ignore
+                        del.current(bureauDouane.id,bureauDouane.design);
+                      }}
+                      obj={bureauDouane}
+                      update={() => {
+                        FormAsUpdate(bureauDouane);
+                      }}
+                    />
                     </Table.td>
                   </tr>
                 );
