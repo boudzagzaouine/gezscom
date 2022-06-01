@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { declarant0 } from "tools/types";
 
-import FormDeclarant from "features/reference/Declarant/FormDeclarant";
+import FormDeclarant from "features/reference/FormDeclarant";
 
 export default function NewArticle() {
   const form = useRef(null);

@@ -57,3 +57,6 @@ export const ORIGINE = ["", "Manuelle","Genéré"];
 export const ROLE = ["", "Admin", "User"];
 export const SEASON = ["hiver","printemps","automne","été"];
 export const URL_API_SEC = process.env.NEXT_URL_API;
+export const ARCHIVE=31
+export const RESTORE=32
+export const DEL=33

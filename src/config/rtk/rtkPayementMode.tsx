@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenPayementModeProp } from "features/reference/PayementMode/Methods/openPayementModes";
+import { OpenPayementModeProp } from "config/rtk/openPayementModes";
 import { PAGE_SIZE } from "tools/consts";
 import { PayementMode } from "tools/types";
 

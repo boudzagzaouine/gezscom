@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import FormArticle from "features/reference/Article/FormArticle";
+import FormArticle from "features/reference/FormArticle";
 import { article0 } from "tools/types";
 
 export default function NewArticle() {

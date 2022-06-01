@@ -10,7 +10,7 @@ import Bsave from 'widgets/Bsave';
 import Bcancel from 'widgets/Bcancel';
 import { OpenFournisseurProp, openFournisseurs } from 'config/rtk/rtkFournisseur';
 import { openArticles } from 'config/rtk/rtkArticle';
-import { OpenArticleProp } from "features/reference/Article/Methods/openArticles";
+import { OpenArticleProp } from "config/rtk/openArticles";
 type FormArticleClientProp={
   articleclient:ArticleClient
  // client:Client

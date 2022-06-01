@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenUnitMeasureProp } from "features/reference/UnitMeasure/Methods/openUnitMeasures";
+import { OpenUnitMeasureProp } from "config/rtk/openUnitMeasures";
 import { PAGE_SIZE } from "tools/consts";
 import { UnitMeasure } from "tools/types";
 

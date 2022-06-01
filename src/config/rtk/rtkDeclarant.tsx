@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenDeclarantProp } from "features/reference/Declarant/Methods/openDeclarants";
+import { OpenDeclarantProp } from "config/rtk/openDeclarants";
 import { PAGE_SIZE } from "tools/consts";
 import { Declarant } from "tools/types";
 

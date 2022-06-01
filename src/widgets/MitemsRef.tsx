@@ -16,31 +16,19 @@ import { MenuItems } from "widgets/TypeWidgets";
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }
-type MitemsProps = {
+type MitemsRefProps = {
   menu: MenuItems[];
 };
 interface menuProp {
   obj: any;
-  edit: (obj: any) => void;
-  update: (obj: any) => void;
+   update: (obj: any) => void;
   del: (id: string) => void;
   archive: (id: string) => void;
  //restore: (id: string) => void;
 }
-const Mitems = ({ archive, del, edit, obj, update ,...props}: menuProp) => {
+const MitemsRef = ({ archive, del,  obj, update ,...props}: menuProp) => {
   const menu: MenuItems[] = [
-    {
-      icon: (
-        <ClipboardListIcon
-          className="mr-3 h-8 w-8 text-green-300 group-hover:text-gray-500"
-          aria-hidden="true"
-        />
-      ),
-      text: "Détail",
-      action: () => {
-        edit(obj);
-      },
-    },
+   
     {
       icon: (
         <PencilAltIcon
@@ -135,4 +123,4 @@ const Mitems = ({ archive, del, edit, obj, update ,...props}: menuProp) => {
   );
 };
 
-export default Mitems;
+export default MitemsRef;

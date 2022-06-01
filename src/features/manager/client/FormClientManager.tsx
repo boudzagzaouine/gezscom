@@ -32,7 +32,7 @@ import Required from "widgets/Required";
 import { openDevises } from "config/rtk/rtkDevise";
 import { openIncoterms } from "config/rtk/rtkIncoterm";
 import { openPayementModes } from "config/rtk/rtkPayementMode";
-import { OpenIncotermProp } from "features/reference/Incoterm/Methods/openIncoterms";
+import { OpenIncotermProp } from "config/rtk/openIncoterms";
 import Title from "widgets/Title";
 import ShowCheckedsField from "widgets/ShowCheckedsField";
 //14:28

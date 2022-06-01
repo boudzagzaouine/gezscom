@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenRawMaterialProp } from "features/reference/RawMaterial/Methods/openRawMaterials";
+import { OpenRawMaterialProp } from "config/rtk/openRawMaterials";
 import { PAGE_SIZE } from "tools/consts";
 import { RawMaterial } from "tools/types";
 

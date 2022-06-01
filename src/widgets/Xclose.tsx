@@ -1,13 +1,20 @@
 import { XIcon } from "@heroicons/react/solid";
-import React from "react";
-type XcloseProp = {
+import React, { ElementType } from "react";
+import cn from "classnames";
+type XcloseProp  = {
   close: () => void;
+  
+};
+const calculClass = ( className :string) => {
+  return cn(
+    className
+  );
 };
 //x-close absolute top-1 right-1 cursor-pointer p-2.5 bg-transparent
-const Xclose = ({ close }: XcloseProp) => {
+const Xclose =({ close }:XcloseProp) => {
   return (
     <button
-      className="absolute top-1 right-1 cursor-pointer p-2.5 bg-transparent"
+      className={cn("absolute top-1 right-1 cursor-pointer p-2.5 bg-transparent")}
       onClick={() => {
         close();
       }}

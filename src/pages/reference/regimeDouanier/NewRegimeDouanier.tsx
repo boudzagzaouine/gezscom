@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { regimeDouanier0 } from "tools/types";
-import FormRegimeDouaniers from "features/reference/RegimeDouanier/FormRegimeDouaniers";
+import FormRegimeDouaniers from "features/reference/FormRegimeDouaniers";
 
 export default function NewRegimeDouanier() {
   const form = useRef(null);

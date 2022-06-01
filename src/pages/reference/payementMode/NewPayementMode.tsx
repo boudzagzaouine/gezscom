@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { payementMode0 } from "tools/types";
-import FormPayementMode from "features/reference/PayementMode/FormPayementMode";
+import FormPayementMode from "features/reference/FormPayementMode";
 
 export default function NewPayementMode() {
   const form = useRef(null);

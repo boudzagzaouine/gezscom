@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenIncotermProp } from "features/reference/Incoterm/Methods/openIncoterms";
+import { OpenIncotermProp } from "config/rtk/openIncoterms";
 import { PAGE_SIZE } from "tools/consts";
 import { Incoterm } from "tools/types";
 

@@ -6,24 +6,24 @@ import {
   TrashIcon,
   UserAddIcon,
 } from "@heroicons/react/solid";
-import ArchiveClient from "components/manager/client/ArchiveClient";
-import DeleteClient from "components/manager/client/DeleteClient";
+
 import Mitems from "widgets/Mitems";
 import Pagin from "widgets/Pagin";
-import RestoreClient from "components/manager/client/RestoreClient";
+
 
 import React, { useEffect, useRef, useState } from "react";
-import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
+import { ARCHIVE, DEL, REQUEST_EDIT, REQUEST_SAVE, RESTORE } from "tools/consts";
 import { STYLE_ICON } from "tools/constStyle";
 import { c0, Client } from "tools/types";
 import { Button } from "widgets";
 import Bcyan from "widgets/Bcyan";
 import Icon from "widgets/Icon";
 import Section from "widgets/Section";
-import { MenuItems } from "widgets/TypeWidgets";
+
 import FormClientManager from "./FormClientManager";
 import Table from "widgets/Table";
 import { OpenClientProp, openPaginationClients } from "config/rtk/RtkClient";
+import Action from "widgets/Action";
 const ListClientManager = () => {
   const [form, setForm] = useState(false);
   const [client0, setClient0] = useState(c0);
@@ -61,77 +61,7 @@ const ListClientManager = () => {
     setDisabled(false);
     showFormulaire(client);
   };
-  useEffect(()=>{
-    
-  })
-  /* const menu = (client: Client): MenuItems[] => {
-    return [
-      {
-        icon: (
-          <ClipboardListIcon
-            className="mr-3 h-8 w-8 text-green-300 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Détail",
-        action: () => {
-          FormAsEdit(client);
-        },
-      },
-      {
-        icon: (
-          <PencilAltIcon
-            className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Modifier",
-        action: () => {
-          FormAsUpdate(client);
-        },
-      },
-      {
-        icon: (
-          <TrashIcon
-            className="mr-3 h-8 w-8 text-rose-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Supprimer",
-        action: () => {
-          //@ts-ignore
-          del.current(client.id);
-        },
-      },
-      {
-        icon: (
-          <ArchiveIcon
-            className="mr-3 h-8 w-8 text-gray-800 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Archiver",
-        action: () => {
-          //@ts-ignore
-          archive.current(client.id);
-        },
-      },
-      {
-        icon: (
-          <ReplyIcon
-            className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Restorer",
-        action: () => {
-          //@ts-ignore
-          restore.current(client.id);
-        },
-      },
-    ];
-  }; */
-  return (
+   return (
     <>
       {form && (
         <FormClientManager
@@ -148,9 +78,9 @@ const ListClientManager = () => {
       )}
       {!form && (
         <Section>
-          <DeleteClient id={""} ref={del} />
-          <ArchiveClient id={""} ref={archive} />
-          <RestoreClient id={""} ref={restore} />
+          <Action id="" path="clients" design="" type="le client" ref={del} action={DEL}/>
+          <Action id="" path="clients" design="" type="le client" ref={archive} action={ARCHIVE}/>
+          <Action id="" path="clients" design="" type="le client" ref={restore} action={RESTORE}/>
           <div className="float-left w-full">
             <Bcyan
               className="float-left"
@@ -211,11 +141,15 @@ const ListClientManager = () => {
                     <Mitems
                       archive={() => {
                         //@ts-ignore
-                        archive.current(client.id);
+                        archive.current(client.id,client.design);
                       }}
+                    /*   restore={() => {
+                        //@ts-ignore
+                        restore.current(client.id,client.design);
+                      }} */
                       del={() => {
                         //@ts-ignore
-                        del.current(client.id);
+                        del.current(client.id,client.design);
                       }}
                       edit={() => {
                         FormAsEdit(client);

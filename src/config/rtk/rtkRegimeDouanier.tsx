@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenRegimeDouanierProp } from "features/reference/RegimeDouanier/Methods/openRegimeDouaniers";
+import { OpenRegimeDouanierProp } from "config/rtk/openRegimeDouaniers";
 import { PAGE_SIZE } from "tools/consts";
 import { RegimeDouanier } from "tools/types";
 

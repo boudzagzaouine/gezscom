@@ -35,3 +35,15 @@
 .min-w-40 {
     min-width: 160px;
 }
+
+.w-300 {
+    width: 500px;
+}
+
+.figFlou {
+    background-repeat: no-repeat;
+    background: url('../../public/images/flou.jpg');
+    background-size: 158%;
+    z-index: -1;
+    opacity: 0.5;
+}
