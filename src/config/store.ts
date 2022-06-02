@@ -17,6 +17,7 @@ import { crudDeclarant } from './rtk/rtkDeclarant';
 import { crudDevise } from './rtk/rtkDevise';
 import { crudDocument } from './rtk/rtkDocument';
 import { crudFournisseur } from './rtk/rtkFournisseur';
+import { crudGeneric } from './rtk/rtkGen';
 import { crudIncoterm } from './rtk/rtkIncoterm';
 import { crudPayementMode } from './rtk/rtkPayementMode';
 import { crudPays } from './rtk/rtkPays';
@@ -70,6 +71,7 @@ export function makeStore() {
     [crudArticleCommande.reducerPath]: crudArticleCommande.reducer,
     [crudArticleClient.reducerPath]: crudArticleClient.reducer,
     [crudPayementMode.reducerPath]: crudPayementMode.reducer,
+    [crudGeneric.reducerPath]: crudGeneric.reducer,
    
   });
   const persistedReducer = persistReducer(
@@ -107,6 +109,7 @@ export function makeStore() {
         .concat([crudArticleCommande.middleware, offlineMiddleware])
         .concat([crudArticleClient.middleware, offlineMiddleware])  
         .concat([crudPayementMode.middleware, offlineMiddleware])  
+        .concat([crudGeneric.middleware, offlineMiddleware])  
     ,
   });
   return store;

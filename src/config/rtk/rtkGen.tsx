@@ -1,126 +1,95 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { PAGE_SIZE } from 'tools/consts';
-import { IdsObject, PayementModeJson } from 'tools/types';
+import { IdsObject, IdsObjectJson } from 'tools/types';
 
-type Crud={
-  crud:any
-}
-export const  crudGeneral=(path:string)=>
- {crud: createApi({
-    reducerPath: "crud-general",
-    baseQuery: fetchBaseQuery({
-      baseUrl: process.env.NEXT_PUBLIC_URL,
-      prepareHeaders(headers) {
-        
-        return headers;
-      },
-    }),
-    tagTypes: ["PayementMode", "UNAUTHORIZED", "UNKNOWN_ERROR"],
-    
-    endpoints(builder) {
-      return {
-       
-        /*****************************************************************************/
-        /*********************************PayementMode**************************************/
-        /*****************************************************************************/
-       fetchPayementModes: builder.query<IdsObject[], void>({
-          query() {
-            return `/${path}`
-          },
-        }),
-        paginationPayementModes: builder.query<IdsObject[], void>({
-          query(){
-             return `/${path}?page=0&size=${PAGE_SIZE}`},
-        }),
-        fetchOnePayementMode: builder.query<IdsObject, string>({
-          query: (id) => `/${path}/${id}`,
-        }),
-        addPayementMode: builder.mutation<IdsObject, Partial<IdsObject>>({
-          query: (body) => ({
-            url: `/${path}`,
-            method: "POST",
-            body,
-          }),
-        }),
-        editPayementMode: builder.mutation<
-        IdsObject,
-          Partial<IdsObject> & Pick<IdsObject, "id">
-        >({
-          query: (body) => ({
-            url: `/${path}/${body.id}`,
-            method: "PUT",
-            body,
-          }),
-        }),
-        deletePayementMode: builder.mutation<
-          { success: boolean; id: number },
-          number
-        >({
-          //@ts-ignore
-          query(id: Num) {
-            //  if (confirm(`do you want delete Client number ${id.id} ?`))
-            return {
-              url: `/payementModes/${id.id}`,
-              method: "DELETE",
-            };
-          },
-        }),
-        archivePayementMode: builder.mutation<
-        IdsObject,
-          Partial<IdsObject> & Pick<IdsObject, "id">
-        >({
-          query: (id) => ({
-            url: `/payementModes/${id}/archive`,
-            method: "PUT",
-          }),
-        }),
-        restorePayementMode: builder.mutation<
-        IdsObject,
-          Partial<IdsObject> & Pick<IdsObject, "id">
-        >({
-          query: (id) => ({
-            url: `/payementModes/${id}/restore`,
-            method: "PUT",
-          }),
-        }),
-      };
+export const crudGeneric = createApi({
+  reducerPath: "crud-generic",
+  baseQuery: fetchBaseQuery({
+    baseUrl: process.env.NEXT_PUBLIC_URL,
+    prepareHeaders(headers) {
+      return headers;
     },
-  });}
-  
+  }),
+  tagTypes: ["IdsObject", "UNAUTHORIZED", "UNKNOWN_ERROR"],
+  endpoints(builder) {
+    return {
+      /****************************************************************************/
+      /*************************IdsObject*******************************************/
+      /****************************************************************************/
+      fetch: builder.query<IdsObject[], string>({
+        query: (path) => `/${path}`,
+      }),
+     
+      add: builder.mutation<IdsObject,Partial<IdsObject> & Pick<IdsObject,"path">>({
+        query: (body) => ({
+          url: `/${body.path}`,
+          method: "POST",
+          body,
+        }),
+      }),
+      edit: builder.mutation<IdsObject,Partial<IdsObject> & Pick<IdsObject,"path"> & Pick<IdsObject, "id"> >({
+        query: (body) => ({
+          url: `/${body.path}/${body.id}`,
+          method: "PUT",
+          body,
+        }),
+      }),
+      delete: builder.mutation<
+        { success: boolean; id: number },
+        number
+      >({
+        //@ts-ignore
+        query(id: Num) {
+          return {
+            url: `/IdsObjects/${id.id}`,
+            method: "DELETE",
+          };
+        },
+      }),
+      archiveIdsObject: builder.mutation<
+        IdsObject,
+        Partial<IdsObject> & Pick<IdsObject, "id">
+      >({
+        query: (id) => ({
+          url: `/IdsObjects/${id}/archive`,
+          method: "PUT",
+        }),
+      }),
+      restoreIdsObject: builder.mutation<
+        IdsObject,
+        Partial<IdsObject> & Pick<IdsObject, "id">
+      >({
+        query: (id) => ({
+          url: `/IdsObjects/${id}/restore`,
+          method: "PUT",
+        }),
+      }),
+    };
+  },
+});
+export const {
+  useFetchQuery,
+  useAddMutation,
+  useEditMutation
+} = crudGeneric;
 
-const {
-  useFetchPayementModesQuery,
-  usePaginationPayementModesQuery,
-  useFetchOnePayementModeQuery,
-  useAddPayementModeMutation,
-  useEditPayementModeMutation,
-  useDeletePayementModeMutation,
-  useArchivePayementModeMutation,
-  useRestorePayementModeMutation,
- } = crud;
- return {
-  useFetchPayementModesQuery,
-  usePaginationPayementModesQuery,
-  useFetchOnePayementModeQuery,
-  useAddPayementModeMutation,
-  useEditPayementModeMutation,
-  useDeletePayementModeMutation,
-  useArchivePayementModeMutation,
-  useRestorePayementModeMutation,
- } 
-
-export type OpenCrudProp = {
-  data: PayementModeJson;
+export type OpenIdsObjectProp<E extends IdsObjectJson> = {
+  data: E;
   refetch: () => void;
   save: () => void;
   edit: () => void;
 };
-//const open: OpenCrudProp=openCrud ()
-export const openCrud = (path:string): OpenCrudProp => {
-  const { data = [], refetch } = usePaginationPayementModesQuery(path);
-  const [save] = useAddPayementModeMutation();
-  const [edit] = useEditPayementModeMutation();
+export type OpenIdsObjectByIdClientProp<E extends IdsObject> = {
+  data: E[];
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
+//@ts-ignore
+export const openIdsObjects = (path:string): OpenIdsObjectProp<> => {
+  const { data = [], refetch } = useFetchQuery(path);
+  const [save] = useAddMutation();
+  const [edit] = useEditMutation();
   //@ts-ignore
-  const out: OpenCrudProp = { data, refetch, save, edit };
+  const out: OpenIdsObjectProp = { data, refetch, save, edit };
   return out;
 };

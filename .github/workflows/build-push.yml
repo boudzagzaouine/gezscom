@@ -42,7 +42,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/gescom
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/gescom:v1.1
     
       - name: Update kube config
         run: aws eks update-kubeconfig --name ids-prod --region eu-west-3
