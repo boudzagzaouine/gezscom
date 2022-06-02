@@ -1,3 +1,7 @@
+import { openpaysv } from 'config/rtk/rtkPays';
+import { openFamilleF } from 'config/rtk/rtkRawMaterial';
+import { openUnitF } from 'config/rtk/rtkUnitMeasure';
+import { openVilleD } from 'config/rtk/rtkVille';
 import React, { useRef, useState } from 'react';
 import { ARCHIVE, DEL, RESTORE } from 'tools/consts';
 import { DateFormat } from 'tools/Methodes';
@@ -27,6 +31,31 @@ type ListProp = {
   /* path:string 
   title:string */
 };
+/*
+ const tabUnit: UnitMeasure[] = openUnitF().data.content;
+  const Unit = tabUnit?.map((d) => d.symbole);
+  const tabFamille: RawMaterial[] = openFamilleF().data.content;
+  const Famille = tabFamille?.map((d) => d.design);
+*/
+const tabSelect=(type:string)=>{
+  switch(type){
+    case "UnitMeasure":
+      return openUnitF().data.content 
+    break;
+    case "FamilleRawMaterial":
+      return openFamilleF().data.content
+    break;
+    case "Ville":
+      return openVilleD().data.content 
+    break;
+    case "Pays":
+      return openpaysv().data.content 
+    break;
+    default:
+      return [{id:"zz",design:"toto"},{id:"cc",design:"coco"},{id:"ff",design:"fofo"},]
+      break;
+  }
+}
 const List = ({title, mal,body,list,emptyObject,save,edit,refetch }: ListProp) => {
   const refCom = useRef(null);
   const del = useRef(null);
@@ -41,6 +70,7 @@ const List = ({title, mal,body,list,emptyObject,save,edit,refetch }: ListProp) =
     setShow(true)
     setObject(u)
    };
+  
   return (
     <Section>
       <Action id="" path="unitMeasures" design="" type="Unité de Mesure" ref={del} action={DEL} />
@@ -77,7 +107,7 @@ edit={edit}
       >
         {list?.map((l)=>(<tr key={l.id}>{
           //@ts-ignore
-        body?.map((b:string)=>(<Table.td>{b.split("#")[2]=="attr"?l[b.split("#")[1]]:b.split("#")[2]=="date"?DateFormat(l[b.split("#")[1]]):b.split("#")[2]=="atutr"?l[b.split("#")[1]]:b.split("#")[2]=="join"?b.split("#")[3]:""}</Table.td>)
+        body?.map((b:string)=>(<Table.td>{b.split("#")[2]=="attr"?l[b.split("#")[1]]:b.split("#")[2]=="date"?DateFormat(l[b.split("#")[1]]):b.split("#")[2]=="select"?l[b.split("#")[1]]:b.split("#")[2]=="join"?b.split("#")[3]:""}</Table.td>)
         )
         }
         <Table.td>
@@ -109,7 +139,21 @@ edit={edit}
             defaultValues={object}
             onSubmit={object.id==""?save:edit}
           >
-           {body?.map((b:string)=>(<Field label={b.split("#")[0]} name={b.split("#")[1]} disabled={false} />))}  
+           {body?.map((b:string)=>(
+             b.split("#")[2]=="attr"?<Field label={b.split("#")[0]} name={b.split("#")[1]} disabled={false} />:
+             b.split("#")[2]=="select"?
+             <Field
+                  label={b.split("#")[0]}
+                  name={b.split("#")[1]}
+                  options={["",...(tabSelect(b.split("#")[3])||[])]}
+                  as="select"
+                  disabled={false}
+                  optionKeyName = "id"
+                  
+                  optionLabelName = "design"
+                />:
+             <></>
+             ))}  
             
             <div className="mt-5 b-ajust-r">
                      <Bsave
