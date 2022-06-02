@@ -127,7 +127,7 @@ function ListPaysManager() {
             {
               pays?.map((Pays) => (
                 <tr key={Pays.id}>
-                  <Table.td>{Pays.designation}</Table.td>
+                  <Table.td>{Pays.design}</Table.td>
 
                   <Table.td>
                     <Mitems menu={menu(Pays)} />

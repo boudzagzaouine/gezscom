@@ -25,7 +25,7 @@ const ListFournisseurManager = () => {
     const fournisseurSearch: Fournisseur[] = obj.filter((o: Fournisseur) => {
       return(
         o.id.match(key) != null||
-        o.raisonSociale.match(key) != null||
+        o.design.match(key) != null||
         o.contact.match(key) != null||
         o.tel.match(key) != null||
         o.email.match(key) != null||
@@ -130,7 +130,7 @@ const ListFournisseurManager = () => {
                       <img className="h-10 w-10 rounded-full" src={"/images/empty-contact.png"} alt=""/>
                     </div>
                     <div className="ml-4">
-                      <div className="font-medium text-gray-900">{fournisseur.raisonSociale}</div>
+                      <div className="font-medium text-gray-900">{fournisseur.design}</div>
                     </div>
                   </div>
                 </td>
@@ -149,15 +149,15 @@ const ListFournisseurManager = () => {
                 <Mitems
                       archive={() => {
                         //@ts-ignore
-                        archive.current(fournisseur.id,fournisseur.raisonSociale);
+                        archive.current(fournisseur.id,fournisseur.design);
                       }}
                    /*    restore={() => {
                         //@ts-ignore
-                        restore.current(fournisseur.id,fournisseur.raisonSociale);
+                        restore.current(fournisseur.id,fournisseur.design);
                       }} */
                       del={() => {
                         //@ts-ignore
-                        del.current(fournisseur.id,fournisseur.raisonSociale);
+                        del.current(fournisseur.id,fournisseur.design);
                       }}
                       edit={() => {
                         FormAsEdit(fournisseur);

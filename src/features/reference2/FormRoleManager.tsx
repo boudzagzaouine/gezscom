@@ -49,7 +49,7 @@ const FormRoleManager = ({
           <div className="float-left w-full">
               <Field
                 label="Désignation"
-                name="designation"
+                name="design"
                 disabled={disabled}
               />
               <fieldset className="border border-[#ddd]/80 p-5 rounded-md">

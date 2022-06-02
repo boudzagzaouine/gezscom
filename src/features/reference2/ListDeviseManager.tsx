@@ -140,7 +140,7 @@ function ListDeviseManager() {
             {
              devises?.map((Devise) => (
                       <tr key={Devise.id}>
-                  <Table.td>{Devise.designation} </Table.td>
+                  <Table.td>{Devise.design} </Table.td>
                   <Table.td>{Devise.code_iso} </Table.td>
                   <Table.td>{Devise.symbole} </Table.td>
                   <Table.td>

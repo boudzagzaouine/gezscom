@@ -49,7 +49,7 @@ const FormDeviseManager = ({
           <div className=" float-left w-1/2">
             <Field
                 label={<Required msg="Désignation"/>}
-                name="designation"
+                name="design"
                 disabled={disabled}
               />
               </div>

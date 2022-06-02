@@ -47,7 +47,7 @@ const ListArticleCommandes = ({ idCommande,idClient,refetchParent }: ListArticle
           <tr>
             <Table.th>code</Table.th>
             <Table.th>commande</Table.th>
-            <Table.th>designation</Table.th>
+            <Table.th>design</Table.th>
             <Table.th>quantité</Table.th>
             <Table.th>portion</Table.th>
             <Table.th>p.u</Table.th>

@@ -129,7 +129,7 @@ function ListTransporteurManager() {
               transporteurs?.map((Transporteur) => (
                 <tr key={Transporteur.id}>
                   <Table.td>
-                    <span>{Transporteur.designation}</span>
+                    <span>{Transporteur.design}</span>
                   </Table.td>
 
                   <Table.td>

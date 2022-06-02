@@ -129,7 +129,7 @@ function ListVilleManager() {
               villes?.map((Ville) => (
                 <tr key={Ville.id}>
                   <Table.td>
-                    <span>{Ville.designation}</span>
+                    <span>{Ville.design}</span>
                   </Table.td>
                   <Table.td>
                     <span>{Ville.pays}</span>

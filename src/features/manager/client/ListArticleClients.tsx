@@ -54,7 +54,7 @@ const ListArticleClients = ({ client, refetchParent }: ListArticleClientsProp) =
         thead={
           <tr>
             <Table.th>Code Article</Table.th>
-            <Table.th>Designation</Table.th>
+            <Table.th>design</Table.th>
             <Table.th>Poids</Table.th>            
             <Table.th>Prix</Table.th>            
             <Table.th>famille</Table.th>
@@ -71,7 +71,7 @@ const ListArticleClients = ({ client, refetchParent }: ListArticleClientsProp) =
             <Table.td>{articleclient.poid}</Table.td>
             <Table.td>{articleclient.prix}</Table.td>
             <Table.td>{getFamilleArticle(articleclient.idFamilleArticle,familleArticles)?.design  }</Table.td>
-            <Table.td>{ getFournisseur(articleclient.idFournisseur,fournisseurs)?.raisonSociale }</Table.td>
+            <Table.td>{ getFournisseur(articleclient.idFournisseur,fournisseurs)?.design }</Table.td>
             <Table.td>{dateFormat(articleclient.date, "dd-mm-yyyy")}</Table.td>
              <Table.td>
               <Bedit

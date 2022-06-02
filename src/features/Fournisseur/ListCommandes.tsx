@@ -47,7 +47,7 @@ const ListCommandes=({fournisseur}:ListFournisseursProps)=>{
                           <tr key={commande.id}>
                             <Table.td>{commande.id}</Table.td>
                             <Table.td>
-                              {fournisseur.raisonSociale}
+                              {fournisseur.design}
                             </Table.td>
                             <Table.td>{DateFormat(commande.dateCommande)}</Table.td>
                             <Table.td>{DateFormat(commande.dateLivraison)}</Table.td>

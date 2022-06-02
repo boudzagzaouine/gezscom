@@ -97,7 +97,7 @@ const ListAllCommandes = () => {
                     <tr key={commande.id}>
                       <Table.td>{commande.id}</Table.td>
                       <Table.td>
-                      { getFournisseur(commande.idFournisseur,fournisseurs)?.raisonSociale }
+                      { getFournisseur(commande.idFournisseur,fournisseurs)?.design }
                       </Table.td>
                       <Table.td>{DateFormat(commande.dateCommande)}</Table.td>
                       <Table.td>{DateFormat(commande.dateLivraison) }</Table.td>

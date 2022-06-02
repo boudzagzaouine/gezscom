@@ -43,7 +43,7 @@ import { OpenMatiere } from 'components/Fournisseur/OpenMatiere';
                             <Table.td>{m.id}</Table.td>
                             <Table.td>{}</Table.td>
                             <Table.td>{m.prix}</Table.td>
-                            <Table.td>{fournisseur.raisonSociale}</Table.td>
+                            <Table.td>{fournisseur.design}</Table.td>
                             <Table.td>{m.familleMatierePremiere}</Table.td>
                             <Table.td></Table.td>
                             </tr>

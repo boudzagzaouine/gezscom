@@ -141,9 +141,9 @@ const ListAllMatierePremiere = () => {
                  matierePremieres?.map((matiere) => (
                     <tr key={matiere.id}>
                       <Table.td>{matiere.id}</Table.td>
-                      <Table.td>{matiere.designation}</Table.td>
+                      <Table.td>{matiere.design}</Table.td>
                       <Table.td>{matiere.prix}</Table.td>
-                      <Table.td>{getFournisseur(matiere.idFournisseur,fournisseurs).raisonSociale}</Table.td>
+                      <Table.td>{getFournisseur(matiere.idFournisseur,fournisseurs).design}</Table.td>
                       <Table.td>{matiere.familleMatierePremiere}</Table.td>
                       <Table.td>{matiere.origine}</Table.td>
                       <Table.td><Mitems0 menu={menu(matiere,getFournisseur(matiere.idFournisseur,fournisseurs))} /></Table.td>

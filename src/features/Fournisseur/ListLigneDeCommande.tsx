@@ -45,7 +45,7 @@ const ListLigneDeCommande = ({idCommandeFournisseur,idfournisseur}:LigneDeComman
           ligneDeCommandes?.map((ligneDeCommande) => (
            <>
           <tr key={ligneDeCommande.id}>
-              <Table.td>{ligneDeCommande.designation} </Table.td>
+              <Table.td>{ligneDeCommande.design} </Table.td>
               <Table.td>{ligneDeCommande.quantite}</Table.td>
               <Table.td>{ligneDeCommande.prix}</Table.td>
               <Table.td>

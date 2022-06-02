@@ -50,7 +50,7 @@ const FormArticleClient = ({articleclient,refetchList,add,edit}:FormArticleClien
  <Form defaultValues={articleclient0} onSubmit={save} >
         <>
           <div className="float-left w-1/2 relative">
-         <Field label="Designation" name="design"
+         <Field label="design" name="design"
            onChange={
             (e:ChangeEvent<HTMLInputElement>)=>{
              setArticleclient0({...articleclient0,design:e.target.value})
@@ -103,7 +103,7 @@ const FormArticleClient = ({articleclient,refetchList,add,edit}:FormArticleClien
                  }}
               >
                 {[f0, ...(fournisseurs || [])]?.map((c: Fournisseur) => (
-                  <option value={c.id}>{c.raisonSociale}</option>
+                  <option value={c.id}>{c.design}</option>
                 ))}
               </Field>
              <Field

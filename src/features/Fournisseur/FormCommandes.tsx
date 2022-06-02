@@ -65,7 +65,7 @@ const FormCommandes = ({command,fournisseurs,fournisseur,add,edit,refetchList}:C
   
 { fournisseur0.id!=""?(
   <>
- <Field label="Fournisseur" value={fournisseur0.raisonSociale} disabled={true} />
+ <Field label="Fournisseur" value={fournisseur0.design} disabled={true} />
   </>
 ):
 <>
@@ -79,7 +79,7 @@ const FormCommandes = ({command,fournisseurs,fournisseur,add,edit,refetchList}:C
                 }}
               >
                 {[f0, ...(fournisseurs || [])]?.map((f: Fournisseur) => (
-                  <option value={f.id}>{f.raisonSociale}</option>
+                  <option value={f.id}>{f.design}</option>
                 ))}
               </Field>
 </>

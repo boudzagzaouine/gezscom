@@ -5,7 +5,6 @@ import { Client, cm0, Commande } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import Bedit from "widgets/Bedit";
 import Table from "widgets/Table";
-import List from "widgets/List";
 import FormCommande from "./FormCommande";
 type ListCommandesProp = {
   client: Client;
@@ -25,12 +24,30 @@ const ListCommandes = ({ client, refetchParent }: ListCommandesProp) => {
     refetchParent();
   };
   return (
-  <>
-  <List head={["N° BC","Client","Date","Saison","Montant"]} body={["id#attr","idClient#join#"+client.design,"date#date","season#attr","amount#attr"]}  list={commandes} />
-  </>
-  );
-};
-/*    <tr>
+    <>
+      <Bcyan
+        className="float-left mt-2"
+        onClick={() => {
+          //@ts-ignore
+          refCom.current(cm0,client);
+        }}
+      >
+        Nouvelle commande
+      </Bcyan>
+      <FormCommande
+add={save}
+edit={edit}
+        command={cm1}
+        ref={refCom}
+        client={client}
+        clients={[]}
+        refetchList={refetchAll}
+        disabled={false}
+      />
+      <Table
+        className="tab-list float-left w-full mt-2"
+        thead={
+          <tr>
             <Table.th>N° BC</Table.th>
             <Table.th>Client</Table.th>
             <Table.th>Date</Table.th>
@@ -47,5 +64,29 @@ const ListCommandes = ({ client, refetchParent }: ListCommandesProp) => {
             <Table.td>{DateFormat(commande.date)}</Table.td>
             <Table.td>{commande.season}</Table.td>
             <Table.td>{commande.amount}</Table.td>
-            <Table.td>*/
+            <Table.td>
+              {/*  <Bcyan
+        className="float-left mt-2"
+        onClick={() => {
+          //@ts-ignore
+          refCom.current(getCm(client,commande));
+        }}
+      >
+       ...
+      </Bcyan> */}
+              <Bedit
+                className="float-left mt-2"
+                onClick={() => {
+                  //@ts-ignore
+                  refCom.current(commande, client);
+                }}
+              />
+            </Table.td>
+          </tr>
+        ))}
+      </Table>
+    </>
+  );
+};
+
 export default ListCommandes;

@@ -45,7 +45,7 @@ const FormMatierePremiere = ({Matierep,disabled,refetch,fournisseurs,fournisseur
 
 { matiere0.id!=""?(
   <>
-  <Field label="Fournisseur" value={fournisseur0?.raisonSociale} />
+  <Field label="Fournisseur" value={fournisseur0?.design} />
  </>
 ):
 
@@ -54,13 +54,13 @@ label="Fournisseur"
 name="idFournisseur" 
 as ="select" 
 options={[f0,...(fournisseurs||[])]} 
-optionLabelName="raisonSociale"
+optionLabelName="design"
 optionKeyName="id"
 />
 
 
 }
-<Field label="Désignation *" name="designation"  />
+<Field label="Désignation *" name="design"  />
 <Field label="Famille matière première *" name="familleMatierePremiere" as="select" options={LIST_FAMILLE_MATIERE_PREMIERE}/>
 <Field label="Prix *" name="prix" />
 <Field label="Origine" name="origine" as="select" options={ORIGINE}/>

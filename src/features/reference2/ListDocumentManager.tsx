@@ -131,7 +131,7 @@ function ListDocumentManager() {
                 //   data?.map((document) => (
                 <tr key={Document.id}>
                   <Table.td>
-                    <span>{Document.designation}</span>
+                    <span>{Document.design}</span>
                   </Table.td>
 
                   <Table.td>

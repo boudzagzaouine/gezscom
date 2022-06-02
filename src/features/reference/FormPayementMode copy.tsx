@@ -2,48 +2,47 @@ import {
   ArchiveIcon, PencilAltIcon, TrashIcon
 } from "@heroicons/react/outline";
 import classNames from "classnames";
-import { OpenDeclarantProp, openDeclarants } from "config/rtk/rtkDeclarant";
-import { openVilleD } from "config/rtk/rtkVille";
+import { OpenPayementModeProp, openPayementModes } from "config/rtk/rtkPayementMode";
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
 import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
-import { Declarant, declarant0, DeclarantJson, Ville } from "tools/types";
+import { PayementMode, payementMode0, PayementModeJson } from "tools/types";
 import { Field, Form } from "widgets";
 import Bcancel from "widgets/Bcancel";
 import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
-import Mitems from "widgets/Mitems";
 import ModalS from "widgets/ModalS";
 import Pagin from "widgets/Pagin";
 import Required from "widgets/Required";
 import Table from "widgets/Table";
 import { MenuItems } from "widgets/TypeWidgets";
 
-type FormDeclarantProps = {
-  declarant: Declarant;
+type FormPayementModeProps = {
+  payementMode: PayementMode;
 };
-const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
-  const declarantsToOpen: OpenDeclarantProp = openDeclarants();
-  const declarantJson: DeclarantJson = declarantsToOpen.data;
-  const declarants: Declarant[] = declarantJson.content;
-  const tabVille: Ville[] = openVilleD().data.content;
-  const Ville = tabVille?.map((d) => d.design);
-  const refetchDeclarant: () => void = declarantsToOpen.refetch;
-  const saveDeclarant = declarantsToOpen.save;
-  const editDeclarant = declarantsToOpen.edit;
+const FormPayementMode = (
+  { payementMode }: FormPayementModeProps,
+  ref: Ref<void>
+) => {
+  const payementModesToOpen: OpenPayementModeProp = openPayementModes();
+  const payementModeJson: PayementModeJson = payementModesToOpen.data;
+  const payementModes: PayementMode[] = payementModeJson.content;
+  const refetchPayementMode: () => void = payementModesToOpen.refetch;
+  const savePayementMode = payementModesToOpen.save;
+  const editPayementMode = payementModesToOpen.edit;
 
-  //const { data = [], isFetching, refetch } = usePaginationDeclarantsQuery(0);
-  const [declarant1, setDeclarant1] = useState<Declarant>(declarant0);
+  //const { data = [], isFetching, refetch } = usePaginationPayementModesQuery(0);
+  const [payementMode1, setPayementMode1] =
+    useState<PayementMode>(payementMode0);
   const [request, setRequest] = useState(REQUEST_SAVE);
 
-  //const [save] = useAddDeclarantMutation();
-
+  //const [save] = useAddPayementModeMutation();
   const [form, setForm] = useState(false);
 
   const [disabled, setDisabled] = useState(true);
 
   const [show, setShow] = useState(false);
-  const open = (d: Declarant) => {
-    setDeclarant1(d);
+  const open = (p: PayementMode) => {
+    setPayementMode1(p);
     setShow(true);
   };
   useEffect(() => {
@@ -63,25 +62,25 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
   const [page, setPage] = useState(0);
   const loadPage = (p: number) => {
     setPage(p);
-    refetchDeclarant();
+    refetchPayementMode();
   };
 
-  const showFormulaire = (declarant: Declarant) => {
-    setDeclarant1(declarant);
+  const showFormulaire = (payementMode: PayementMode) => {
+    setPayementMode1(payementMode);
     setForm(true);
     setRequest(REQUEST_EDIT);
   };
 
-  const FormAsEdit = (declarant: Declarant) => {
+  const FormAsEdit = (payementMode: PayementMode) => {
     setDisabled(true);
-    showFormulaire(declarant);
+    showFormulaire(payementMode);
   };
 
   const void_ = () => {};
 
-  //const [updateDeclarant] = useEditDeclarantMutation();
+  //const [updatePayementMode] = useEditPayementModeMutation();
 
-  const menu = (declarant: Declarant): MenuItems[] => {
+  const menu = (payementMode: PayementMode): MenuItems[] => {
     return [
       {
         icon: (
@@ -92,7 +91,7 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
         ),
         text: "Modifier",
         action: () => {
-          open(declarant);
+          open(payementMode);
           setRequest(REQUEST_EDIT);
           setDisabled(false);
         },
@@ -107,7 +106,7 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
         text: "Supprimer",
         action: () => {
           //@ts-ignore
-          del.current(declarant.id);
+          del.current(payementMode.id);
         },
       },
       {
@@ -120,7 +119,7 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
         text: "Archiver",
         action: () => {
           //@ts-ignore
-          archive.current(declarant.id);
+          archive.current(payementMode.id);
         },
       },
     ];
@@ -130,19 +129,19 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
     <>
       {!form && (
         <section className="bg-white float-left w-full h-full mp-8 shadow-lg">
-          <DeleteDeclarant id={""} ref={del} refetch={refetchDeclarant} />
-          <ArchiveDeclarant id={""} ref={archive} />
-          <RestoreDeclarant id={""} ref={restore} />
-          <h1>Déclarants</h1>
+          <DeletePayementMode id={""} ref={del} refetch={refetchPayementMode} />
+          <ArchivePayementMode id={""} ref={archive} />
+          <RestorePayementMode id={""} ref={restore} />
+          <h1>Mode de Réglement </h1>
           <div className="float-left w-full">
             <button
               className="bg-sky-900 p-3 text-white rounded border border-cyan-900py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-left"
               onClick={() => {
                 setDisabled(false);
-                open(declarant0);
+                open(payementMode0);
               }}
             >
-              Nouveau Déclarant
+              Nouveau Mode de Réglement
             </button>
             <div className="float-right">
               <button className="bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg">
@@ -174,10 +173,10 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
             thead={
               <tr>
                 <th className=" top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
-                  Désignation
+                  Code
                 </th>
                 <th className=" top-0 z-10    py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
-                  Ville
+                  Désignation
                 </th>
                 <th></th>
               </tr>
@@ -185,14 +184,14 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
           >
             {
               //@ts-ignore
-              declarants?.map((declarant: Declarant) => {
+              payementModes?.map((payementMode: PayementMode) => {
                 return (
                   //@ts-ignore
-                  <tr key={declarant.id}>
-                    <Table.td>{declarant.design}</Table.td>
-                    <Table.td>{declarant.ville}</Table.td>
+                  <tr key={payementMode.id}>
+                    <Table.td>{payementMode.code}</Table.td>
+                    <Table.td>{payementMode.design}</Table.td>
                     <Table.td className="cursor-pointer">
-                      <Mitems menu={menu(declarant)} />
+                      <Mitems0 menu={menu(payementMode)} />
                     </Table.td>
                   </tr>
                 );
@@ -200,63 +199,59 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
             }
           </Table>
           <Pagin
-           load={loadPage} max={declarants?.length}
-            visible={declarants?.length > 0 ? true : false}
+           load={loadPage} max={payementModes?.length}
+            visible={payementModes?.length > 0 ? true : false}
           />
         </section>
       )}
-
       <ModalS
         show={show}
-        title={declarant1.id=="" ? "Nouveau Déclarant":"Modifier Déclarant"}
+        title={payementMode1.id==""?"Nouveau Mode De Réglement":"Modifier Mode De Réglement"}
         format={+classNames("5")}
         close={closed}
       >
         <div className="float-left w-full">
-             <Form
-            defaultValues={declarant1}
+           <Form
+            defaultValues={payementMode1}
             onSubmit={
               request == REQUEST_SAVE
-                ? saveDeclarant
+                ? savePayementMode
                 : request == REQUEST_EDIT
-                ? editDeclarant
+                ? editPayementMode
                 : void_
             }
           >
-            <div className=" float-left w-full">
-              <Field
-               label={<Required msg="Désignation"/>}
-                name="design"
+            <div className="float-left w-full">
+			         <Field
+               label={<Required msg="Code"/>}
+                name="code"
                 disabled={disabled}//required={true}
                 
               />
-                  <Field
-                    label={<Required msg="Ville"/>}
-                    name="ville"
-                    options={["",...(Ville||[])]}
-                    as="select"
+			           <Field
+                    label={<Required msg="Désignation"/>}
+                    name="design"
                     disabled={disabled}//required={true}
                     
                   />
                 </div>
-            
-             <div className="mt-5 b-ajust-r">
+          <div className=" mt-5 b-ajust-r">
                      <Bsave
             className="float-right"
             onClick={() => {
               setTimeout(() => {
-                refetchDeclarant();
+                refetchPayementMode();
                       closed();
               }, 500);
             }}
           />
-          {declarant1.id=="" &&<BsavEndNew
-                   className="ml-10 mr-2"
-                   onClick={() => {
-                     setTimeout(() => {
-                      refetchDeclarant();
-                       }, 500);
-                   }}
+          {payementMode1.id=="" &&<BsavEndNew
+                  className="ml-10 mr-2"
+                  onClick={() => {
+                    setTimeout(() => {
+                      refetchPayementMode();
+                      }, 500);
+                  }}
                 />}
                
               </div>
@@ -269,10 +264,10 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
                   setShow(false);
                }}
              />
-             </div> 
-             </ModalS>
+             </div>
+   </ModalS>
     </>
   );
 };
 
-export default forwardRef(FormDeclarant);
+export default forwardRef(FormPayementMode);

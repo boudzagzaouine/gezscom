@@ -142,7 +142,7 @@ function ListRoleManager() {
             {roles?.map((Role) => (
               <tr key={Role.id}>
                 <Table.td>
-                  <span>{Role.designation}</span>
+                  <span>{Role.design}</span>
                 </Table.td>
                 <Table.td>
                   <span>{Role.nbrUtilisateur}</span>

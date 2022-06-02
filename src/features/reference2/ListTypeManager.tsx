@@ -127,7 +127,7 @@ function ListTypeManager() {
                   <Table.td>
                     <figure>
                       <figcaption>
-                        <span>{Type.designation}</span>
+                        <span>{Type.design}</span>
                       </figcaption>
                     </figure>
                   </Table.td>

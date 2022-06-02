@@ -50,7 +50,7 @@ const FormPaysManager = ({
           <div className="float-left w-full">
               <Field
                 label={<Required msg="Désignation"/>}
-                name="designation"
+                name="design"
                 disabled={disabled}
               />
             </div>

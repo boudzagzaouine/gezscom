@@ -6,12 +6,16 @@ export type Num ={
 };
 export type IdsObject ={
   id: string;
+  design:string;
 };
+export const ids0:IdsObject={
+  id:"",
+  design:""
+}
 export interface ClientJson{
   content: Client[];
 }
 export interface Client extends IdsObject{
-  design: string;
   contact: string;
   image: string;
   email: string;
@@ -60,6 +64,7 @@ export const cm0: Commande ={
   season: "",
   idClient: "",
   adrLiv: "",
+  design: ""
 };
 
 export interface AdressLivJson{
@@ -77,12 +82,12 @@ export const adr0: AdressLiv ={
   country: "",
   city: "",
   idClient: "",
+  design: ""
 };
 export interface ArticleCommandeJson{
   content: ArticleCommande[];
 }
 export interface ArticleCommande extends IdsObject{
-  design: string;
   qte: number;
   portion: string;
   pu: number;
@@ -103,7 +108,6 @@ export interface ArticleJson{
 }
 
 export interface Article extends IdsObject{
-  design: string;
   nomenclature: string;
   tauxPertes: number;
 }
@@ -120,7 +124,6 @@ export interface UnitMeasureJson{
 }
 
 export interface UnitMeasure extends IdsObject{
-  design: string;
   symbole: string;
   decimal: number;
 }
@@ -138,7 +141,7 @@ export interface BureauDouaneJson{
 
 export interface BureauDouane extends IdsObject{
   code: string;
-  design: string;
+  
 }
 
 export const bureauDouane0: BureauDouane ={
@@ -152,7 +155,6 @@ export interface DeclarantJson{
 }
 
 export interface Declarant extends IdsObject{
-  design: string;
   ville: string;
 }
 
@@ -168,7 +170,7 @@ export interface IncotermJson{
 
 export interface Incoterm extends IdsObject{
   code: string;
-  design: string;
+  
 }
 
 export const incoterm0: Incoterm ={
@@ -183,7 +185,7 @@ export interface PayementModeJson{
 
 export interface PayementMode extends IdsObject{
   code: string;
-  design: string;
+  
 }
 
 export const payementMode0: PayementMode ={
@@ -198,7 +200,7 @@ export interface RegimeDouanierJson{
 
 export interface RegimeDouanier extends IdsObject{
   code: string;
-  design: string;
+  
 }
 
 export const regimeDouanier0: RegimeDouanier ={
@@ -212,7 +214,6 @@ export interface RawMaterialJson{
 }
 
 export interface RawMaterial extends IdsObject{
-  design: string;
   nomenclature: string;
   family: string;
   tauxPertes: number;
@@ -251,6 +252,7 @@ export const dum0: Dum ={
   bureauDouane: "",
   declarant: "",
   regime: "",
+  design: ""
 };
 
 export interface DechargeJson{
@@ -274,24 +276,25 @@ export const decharge0: Decharge ={
   client: "",
   transporteur: "",
   declarant: "",
+  design: ""
 };
 
 export interface TransporteurJson{
   content:Transporteur[]
 }
 export interface Transporteur extends IdsObject{
-  designation: string;
+  
 }
 export const transporteur0:Transporteur={
   id:"",
-  designation:""
+  design:""
 }
 export interface Document extends IdsObject{
-  designation: string;
+  
 }
 export const document0:Document={
   id:"",
-  designation:""
+  design:""
 }
 export interface DocumentJson{
   content:Document[]
@@ -302,80 +305,78 @@ export interface DeviseJson{
 export interface Devise extends IdsObject{
   code_iso: string;
   symbole: string;
-  designation: string;
+  
 }
 export const devise0: Devise={
   id: "",
   code_iso: "",
   symbole: "",
-  designation: "",
+  design: "",
 }
 export interface PaysJson{
   content:Pays[]
 }
 export interface Pays extends IdsObject{
-  designation: string;
+  
 }
 export const pays0: Pays ={
   id: "",
-  designation: ""
+  design: ""
 }
 export interface Role extends IdsObject{
-  designation: string;
   nbrUtilisateur: string;
 }
 export const role0: Role ={
   id: "",
-  designation: "",
+  design: "",
   nbrUtilisateur: "",
 }
 export interface Ville extends IdsObject{
-  designation: string;
   pays: string;
 }
 export interface VilleJson{
   content:Ville[]
 }
 export interface Type extends IdsObject{
-  designation: string;
+  
 }
 export const type0: Type ={
   id: "",
-  designation: ""
+  design: ""
 }
 export interface TypeJson{
   content:Type[]
 }
 export const t0: Transporteur ={
   id: "",
-  designation: "",
+  design: "",
 };
 export const d0: Document ={
   id: "",
-  designation: "",
+  design: "",
 };
 export const v0: Devise ={
   id: "",
   code_iso: "",
   symbole: "",
-  designation: "",
+  design: "",
 };
 export const p0: Pays ={
   id: "",
-  designation: "",
+  design: "",
 };
 export const i0: Ville ={
   id: "",
-  designation: "",
+  design: "",
   pays: "",
 };
 export const y0: Document ={
   id: "",
-  designation: "",
+  design: "",
 };
 export const r0: Role ={
   id: "",
-  designation: "",
+  design: "",
   nbrUtilisateur: "",
 };
 export interface RoleJson{
@@ -385,7 +386,6 @@ export interface RoleJson{
 //************************************************************ */
 //**********************Fournisseur*************************** */
 export interface Fournisseur extends IdsObject{
-  raisonSociale: string;
   contact: string;
   tel: string;
   email: string;
@@ -403,7 +403,7 @@ export interface Fournisseur extends IdsObject{
 
 export const f0: Fournisseur ={
   id: "",
-  raisonSociale: "",
+  design: "",
   contact: "",
   tel: "",
   email: "",
@@ -459,7 +459,6 @@ export const getFournisseur = (
 //************************************************************ */
 //********************MatierePremiere************************* */
 export interface MatierePremiere extends IdsObject{
-  designation: string;
   familleMatierePremiere: string;
   prix: number;
   origine: string;
@@ -468,7 +467,7 @@ export interface MatierePremiere extends IdsObject{
 }
 export const mp0: MatierePremiere ={
   id: "",
-  designation: "",
+  design: "",
   familleMatierePremiere: "",
   //@ts-ignore
   prix: "",
@@ -479,7 +478,7 @@ export const mp0: MatierePremiere ={
 export const getMp0 = (f: Fournisseur): MatierePremiere =>{
   return{
     id: "",
-    designation: "",
+    design: "",
     familleMatierePremiere: "",
     //@ts-ignore
     prix: "",
@@ -492,7 +491,6 @@ export const getMp0 = (f: Fournisseur): MatierePremiere =>{
 //************************************************************ */
 //********************LigneDeCommande************************* */
 export interface LigneDeCommande extends IdsObject{
-  designation: string;
   quantite: number;
   prix: number;
   commandeFournisseur: CommandeFournisseur;
@@ -502,7 +500,7 @@ export interface LigneDeCommande extends IdsObject{
 }
 export const lc0: LigneDeCommande ={
   id: "",
-  designation: "",
+  design: "",
   //@ts-ignore
   quantite: "",
   //@ts-ignore
@@ -518,7 +516,7 @@ export const getlc0 = (
 ): LigneDeCommande =>{
   return{
     id: "",
-    designation: "",
+    design: "",
     //@ts-ignore
     quantite: "",
     //@ts-ignore
@@ -599,6 +597,7 @@ export const user0: User ={
   requiredActions: [],
   notBefore: 0,
   access: access0,
+  design: ""
 };
 export interface UserSession{
   name:string 

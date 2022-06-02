@@ -31,11 +31,11 @@ const FormulaireLigneDeCommande = ({ligneCommande,idfournisseur,saveArticle,clos
                 name="idMatierePremiere"
                 as="select"
                 onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                  setLigneCommande0({...ligneCommande0,designation:e.target.value})
+                  setLigneCommande0({...ligneCommande0,design:e.target.value})
                 }}
               >
                 {[mp0,...(matierePremieres||[])]?.map((m: MatierePremiere) => (
-                  <option value={m.designation}>{m.designation}</option>
+                  <option value={m.design}>{m.design}</option>
                 ))}
               </Field> 
             </Table.td>

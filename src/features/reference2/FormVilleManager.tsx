@@ -27,7 +27,7 @@ const FormVilleManager = ({
   const [ville0, setVille0] = useState(Ville);
   const [showModal, setShowModal] = useState(false);
   const tabPays: Pays[] = openpaysv().data.content;
-  const pays = tabPays?.map((d) => d.designation);
+  const pays = tabPays?.map((d) => d.design);
   const onSubmit =ville0.id=="" ? save : edit;
   const openModal=(d:Ville,disable: boolean)=> {
     setVille0(d);
@@ -53,7 +53,7 @@ const FormVilleManager = ({
        <div className="float-left w-full">
                <Field
                 label={<Required msg="Désignation"/>}
-                name="designation"
+                name="design"
                 disabled={disabled}
               />
               <Field

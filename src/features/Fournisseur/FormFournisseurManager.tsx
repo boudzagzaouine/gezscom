@@ -49,7 +49,7 @@ const FormFournisseurManager = ({
                     <div className="float-left w-5/6">
                         <div className="float-left w-1/2">
                             {request == REQUEST_EDIT && <Field type="hidden" name="id"/>}
-                            <Field label= {<Required msg="Nom du Fournisseur"/> } name="raisonSociale" disabled={disabled}/>
+                            <Field label= {<Required msg="Nom du Fournisseur"/> } name="design" disabled={disabled}/>
                             <Field label="Contact" name="contact" disabled={disabled}/>
                             <Field label="Téléphone" name="tel" disabled={disabled}/>
                             <Field label="Email" name="email" disabled={disabled}/>
