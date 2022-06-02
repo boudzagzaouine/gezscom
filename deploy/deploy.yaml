@@ -17,7 +17,7 @@ spec:
         - name: gescom-key
       containers:
         - name: gescom-app
-          image: innovds/gescom
+          image: innovds/gescom:v1.1
           envFrom:
             - configMapRef:
                 name: contact-ms-cfg

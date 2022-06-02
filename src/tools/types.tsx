@@ -1,16 +1,18 @@
-import{ inRange } from "lodash";
-import{ Timestamp } from "rxjs";
-
 export type Num ={
   id: number;
 };
+export type IdsObjectJson ={
+  content:IdsObject[]
+}
 export type IdsObject ={
   id: string;
   design:string;
+  path:string
 };
 export const ids0:IdsObject={
   id:"",
-  design:""
+  design:"",
+  path:""
 }
 export interface ClientJson{
   content: Client[];
@@ -46,6 +48,7 @@ export const c0: Client ={
   rib: "",
   swift: "",
   adressLivs: [],
+  path: ""
 };
 export interface CommandeJson{
   content: Commande[];
@@ -64,7 +67,8 @@ export const cm0: Commande ={
   season: "",
   idClient: "",
   adrLiv: "",
-  design: ""
+  design: "",
+  path: ""
 };
 
 export interface AdressLivJson{
@@ -82,7 +86,8 @@ export const adr0: AdressLiv ={
   country: "",
   city: "",
   idClient: "",
-  design: ""
+  design: "",
+  path: ""
 };
 export interface ArticleCommandeJson{
   content: ArticleCommande[];
@@ -117,6 +122,7 @@ export const article0: Article ={
   design: "",
   nomenclature: "",
   tauxPertes: 0,
+  path: ""
 };
 
 export interface UnitMeasureJson{
@@ -133,6 +139,7 @@ export const unitMeasure0: UnitMeasure ={
   design: "",
   symbole: "",
   decimal: 0,
+  path: ""
 };
 
 export interface BureauDouaneJson{
@@ -148,6 +155,7 @@ export const bureauDouane0: BureauDouane ={
   id: "",
   code: "",
   design: "",
+  path: ""
 };
 
 export interface DeclarantJson{
@@ -162,6 +170,7 @@ export const declarant0: Declarant ={
   id: "",
   design: "",
   ville: "",
+  path: ""
 };
 
 export interface IncotermJson{
@@ -177,6 +186,7 @@ export const incoterm0: Incoterm ={
   id: "",
   code: "",
   design: "",
+  path: ""
 };
 
 export interface PayementModeJson{
@@ -192,6 +202,7 @@ export const payementMode0: PayementMode ={
   id: "",
   code: "",
   design: "",
+  path: "payementModes"
 };
 
 export interface RegimeDouanierJson{
@@ -207,6 +218,7 @@ export const regimeDouanier0: RegimeDouanier ={
   id: "",
   code: "",
   design: "",
+  path: ""
 };
 
 export interface RawMaterialJson{
@@ -227,6 +239,7 @@ export const rawMaterial0: RawMaterial ={
   family: "",
   tauxPertes: 0,
   measureUnit: "",
+  path: ""
 };
 
 export interface DumJson{
@@ -252,7 +265,8 @@ export const dum0: Dum ={
   bureauDouane: "",
   declarant: "",
   regime: "",
-  design: ""
+  design: "",
+  path: ""
 };
 
 export interface DechargeJson{
@@ -276,7 +290,8 @@ export const decharge0: Decharge ={
   client: "",
   transporteur: "",
   declarant: "",
-  design: ""
+  design: "",
+  path: ""
 };
 
 export interface TransporteurJson{
@@ -286,15 +301,17 @@ export interface Transporteur extends IdsObject{
   
 }
 export const transporteur0:Transporteur={
-  id:"",
-  design:""
+  id: "",
+  design: "",
+  path: ""
 }
 export interface Document extends IdsObject{
   
 }
 export const document0:Document={
-  id:"",
-  design:""
+  id: "",
+  design: "",
+  path: ""
 }
 export interface DocumentJson{
   content:Document[]
@@ -312,6 +329,7 @@ export const devise0: Devise={
   code_iso: "",
   symbole: "",
   design: "",
+  path: ""
 }
 export interface PaysJson{
   content:Pays[]
@@ -321,7 +339,8 @@ export interface Pays extends IdsObject{
 }
 export const pays0: Pays ={
   id: "",
-  design: ""
+  design: "",
+  path: ""
 }
 export interface Role extends IdsObject{
   nbrUtilisateur: string;
@@ -330,6 +349,7 @@ export const role0: Role ={
   id: "",
   design: "",
   nbrUtilisateur: "",
+  path: ""
 }
 export interface Ville extends IdsObject{
   pays: string;
@@ -342,7 +362,8 @@ export interface Type extends IdsObject{
 }
 export const type0: Type ={
   id: "",
-  design: ""
+  design: "",
+  path: ""
 }
 export interface TypeJson{
   content:Type[]
@@ -350,34 +371,41 @@ export interface TypeJson{
 export const t0: Transporteur ={
   id: "",
   design: "",
+  path: ""
 };
 export const d0: Document ={
   id: "",
   design: "",
+  path: ""
 };
 export const v0: Devise ={
   id: "",
   code_iso: "",
   symbole: "",
   design: "",
+  path: ""
 };
 export const p0: Pays ={
   id: "",
   design: "",
+  path: ""
 };
 export const i0: Ville ={
   id: "",
   design: "",
   pays: "",
+  path: ""
 };
 export const y0: Document ={
   id: "",
   design: "",
+  path: ""
 };
 export const r0: Role ={
   id: "",
   design: "",
   nbrUtilisateur: "",
+  path: ""
 };
 export interface RoleJson{
   content:Role[]
@@ -417,6 +445,7 @@ export const f0: Fournisseur ={
   image: "",
   commandes: [],
   matiere: [],
+  path: ""
 };
 //************************************************************ */
 //************************************************************ */
@@ -597,7 +626,8 @@ export const user0: User ={
   requiredActions: [],
   notBefore: 0,
   access: access0,
-  design: ""
+  design: "",
+  path: ""
 };
 export interface UserSession{
   name:string 
