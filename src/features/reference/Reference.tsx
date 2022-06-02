@@ -25,7 +25,7 @@ const Reference = ({type}:ReferenceProps) => {
       const UnitmesureToOpen: OpenUnitMeasureProp = openUnitMeasures();
       return<List title="Unité de Mesure" mal={false} body={["Désignation#design#attr","Symbole#symbole#attr","Décimal#decimal#attr"]}  list={UnitmesureToOpen.data.content} emptyObject={unitMeasure0} save={UnitmesureToOpen.save} edit={UnitmesureToOpen.edit} refetch={UnitmesureToOpen.refetch} />;  
     break;
-    case "article":
+   /*  case "article":
       const articleToOpen: OpenArticleProp = openArticles();
      return<List title="Famille Article" mal={true} body={["Désignation#design#attr","Nomenclature#nomenclature#attr","Taux de perte#tauxPertes#attr"]}  list={articleToOpen.data.content} emptyObject={article0} save={articleToOpen.save} edit={articleToOpen.edit} refetch={articleToOpen.refetch} />;  
     break;
@@ -76,7 +76,7 @@ const Reference = ({type}:ReferenceProps) => {
     case "Type":
       const TypeToOpen: OpenTypeProp = openTypes(0);
       return<List title="Type" mal={true} body={["Désignation#design#attr"]}  list={TypeToOpen.data.content} emptyObject={type0} save={TypeToOpen.save} edit={TypeToOpen.edit} refetch={TypeToOpen.refetch} />;  
-    break;
+    break; */
     default:
     return <></>  
     break;

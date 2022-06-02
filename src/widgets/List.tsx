@@ -1,3 +1,4 @@
+import { OpenIdsObjectProp, openIdsObjects } from 'config/rtk/rtkGen';
 import { openpaysv } from 'config/rtk/rtkPays';
 import { openFamilleF } from 'config/rtk/rtkRawMaterial';
 import { openUnitF } from 'config/rtk/rtkUnitMeasure';
@@ -5,7 +6,7 @@ import { openVilleD } from 'config/rtk/rtkVille';
 import React, { useRef, useState } from 'react';
 import { ARCHIVE, DEL, RESTORE } from 'tools/consts';
 import { DateFormat } from 'tools/Methodes';
-import { IdsObject } from 'tools/types';
+import { IdsObject, IdsObjectJson } from 'tools/types';
 import Bcyan from 'widgets/Bcyan';
 import Table from 'widgets/Table';
 
@@ -19,18 +20,7 @@ import MitemsRef from './MitemsRef';
 import ModalS from './ModalS';
 import Section from './Section';
 
-type ListProp = {
-  title:string
-  mal:boolean
-  body:string[]
-  list:IdsObject[]
-  emptyObject:IdsObject
-  save:()=>void
-  edit:()=>void
-  refetch:()=>void
-  /* path:string 
-  title:string */
-};
+
 /*
  const tabUnit: UnitMeasure[] = openUnitF().data.content;
   const Unit = tabUnit?.map((d) => d.symbole);
@@ -38,6 +28,7 @@ type ListProp = {
   const Famille = tabFamille?.map((d) => d.design);
 */
 const tabSelect=(type:string)=>{
+  
   switch(type){
     case "UnitMeasure":
       return openUnitF().data.content 
@@ -56,7 +47,20 @@ const tabSelect=(type:string)=>{
       break;
   }
 }
-const List = ({title, mal,body,list,emptyObject,save,edit,refetch }: ListProp) => {
+type ListProp<E extends IdsObject,J extends IdsObjectJson> = {
+  title:string
+  mal:boolean
+  body:string[]
+  emptyObject:E
+  path:string 
+};
+const List = ({title, mal,body,emptyObject ,path}: ListProp<IdsObject,IdsObjectJson>) => {
+  const open: OpenIdsObjectProp<IdsObjectJson>=openIdsObjects(path)
+  
+  const list: IdsObject[] = open.data.content;
+  const refetch: () => void = open.refetch;
+  const save = open.save;
+  const edit = open.edit;
   const refCom = useRef(null);
   const del = useRef(null);
   const archive = useRef(null);
@@ -66,21 +70,21 @@ const List = ({title, mal,body,list,emptyObject,save,edit,refetch }: ListProp) =
   const close=()=>{
     setShow(false)
   }
-  const open = (u: IdsObject) => {
+  const load = (u: IdsObject) => {
     setShow(true)
     setObject(u)
    };
   
   return (
     <Section>
-      <Action id="" path="unitMeasures" design="" type="Unité de Mesure" ref={del} action={DEL} />
-          <Action id="" path="unitMeasures" design="" type="Unité de Mesure" ref={archive} action={ARCHIVE} />
-          <Action id="" path="unitMeasures" design="" type="Unité de Mesure" ref={restore} action={RESTORE} />
+      <Action id="" path={path} design="" type={title} ref={del} action={DEL} />
+          <Action id="" path={path} design="" type={title} ref={archive} action={ARCHIVE} />
+          <Action id="" path={path} design="" type={title} ref={restore} action={RESTORE} />
         
       <Bcyan
         className="float-left mt-2"
         onClick={() => {
-          open(emptyObject);
+          load(emptyObject);
         }}
       >
        {(mal?"Nouveau ":"Nouvelle ")+title}
@@ -122,7 +126,7 @@ edit={edit}
                         }}
                         obj={l}
                         update={() => {
-                          open(l);
+                          load(l);
                         }}
                       />
         </Table.td>
