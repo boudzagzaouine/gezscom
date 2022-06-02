@@ -1,13 +1,14 @@
-import { openCrud, OpenCrudProp } from 'config/rtk/rtkGen';
+import { OpenIdsObjectProp, openIdsObjects } from 'config/rtk/rtkGen';
 import React from 'react';
-import { PayementMode, payementMode0 } from 'tools/types';
+import { PayementMode, payementMode0, PayementModeJson } from 'tools/types';
 import { Field, Form } from 'widgets';
 import Bcyan from 'widgets/Bcyan';
 import Bsave from 'widgets/Bsave';
 import Section from 'widgets/Section';
 
+
 const TestOpengeneral = () => {
-   const open: OpenCrudProp=openCrud ("payementModes")
+   const open: OpenIdsObjectProp<PayementModeJson>=openIdsObjects("payementModes")
   
   const list: PayementMode[] = open.data.content;
   const refetch: () => void = open.refetch;
@@ -37,7 +38,7 @@ const TestOpengeneral = () => {
             }
           </tbody>
         </table>
-        <Form defaultValues={payementMode0} onSubmit={save}>
+        <Form defaultValues={payementMode0} onSubmit={edit}>
           <Field label="id" name="id" />
           <Field label="design " name="design" />
           <Field label="code" name="code" />
