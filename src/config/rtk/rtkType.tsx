@@ -102,7 +102,7 @@ export type OpenTypeProp = {
   save: () => void;
   edit: () => void;
 };
-export const openTypes = (page:number): OpenTypeProp => {
+export const openTypes = (page: number): OpenTypeProp => {
   const { data = [], refetch } = usePaginationTypesQuery(page);
   const [save] = useAddTypeMutation();
   const [edit] = useEditTypeMutation();

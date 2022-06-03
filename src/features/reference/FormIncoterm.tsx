@@ -1,6 +1,4 @@
-import {
-  ArchiveIcon, PencilAltIcon
-} from "@heroicons/react/outline";
+import { ArchiveIcon, PencilAltIcon } from "@heroicons/react/outline";
 import classNames from "classnames";
 import { OpenIncotermProp, openIncoterms } from "config/rtk/rtkIncoterm";
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
@@ -195,7 +193,8 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
             }
           </Table>
           <Pagin
-           load={loadPage} max={incoterms?.length}
+            load={loadPage}
+            max={incoterms?.length}
             visible={incoterms?.length > 0 ? true : false}
           />
         </section>
@@ -203,12 +202,12 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
 
       <ModalS
         show={show}
-        title={incoterm1.id==""?"Nouveau Icoterm":"Modifier Incoterm"}
+        title={incoterm1.id == "" ? "Nouveau Icoterm" : "Modifier Incoterm"}
         format={+classNames("5")}
         close={closed}
       >
         <div className="float-left w-full">
-            <Form
+          <Form
             defaultValues={incoterm1}
             onSubmit={
               request == REQUEST_SAVE
@@ -220,49 +219,47 @@ const FormIncoterm = ({ incoterm }: FormIncotermProps, ref: Ref<void>) => {
           >
             <div className="float-left w-full">
               <Field
-               label={<Required msg="Code"/>}
+                label={<Required msg="Code" />}
                 name="code"
-                disabled={disabled}//required={true}
-                
+                disabled={disabled} //required={true}
               />
-                  <Field
-                    label={<Required msg="Désignation"/>}
-                    name="design"
-                    disabled={disabled}//required={true}
-                    
-                  />
+              <Field
+                label={<Required msg="Désignation" />}
+                name="design"
+                disabled={disabled} //required={true}
+              />
             </div>
-                      <div className=" mt-5 b-ajust-r">
-                     <Bsave
-            className="float-right"
-            onClick={() => {
-              setTimeout(() => {
-                refetchIncoterm();
-                      closed();
-              }, 500);
-            }}
-          />
-          {incoterm1.id=="" &&<BsavEndNew
+            <div className=" mt-5 b-ajust-r">
+              <Bsave
+                className="float-right"
+                onClick={() => {
+                  setTimeout(() => {
+                    refetchIncoterm();
+                    closed();
+                  }, 500);
+                }}
+              />
+              {incoterm1.id == "" && (
+                <BsavEndNew
                   className="ml-10 mr-2"
                   onClick={() => {
                     setTimeout(() => {
                       refetchIncoterm();
-                      }, 500);
+                    }, 500);
                   }}
-                />}
-               
-              </div>
-        
+                />
+              )}
+            </div>
           </Form>
-               <Bcancel
-               className="float-right mt-5 b-ajust"
-               onClick={() => {
-                 setDisabled(true);
-                  setShow(false);
-               }}
-             />
-             </div>
-          </ModalS>
+          <Bcancel
+            className="float-right mt-5 b-ajust"
+            onClick={() => {
+              setDisabled(true);
+              setShow(false);
+            }}
+          />
+        </div>
+      </ModalS>
     </>
   );
 };

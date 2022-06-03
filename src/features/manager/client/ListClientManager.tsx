@@ -10,9 +10,14 @@ import {
 import Mitems from "widgets/Mitems";
 import Pagin from "widgets/Pagin";
 
-
 import React, { useEffect, useRef, useState } from "react";
-import { ARCHIVE, DEL, REQUEST_EDIT, REQUEST_SAVE, RESTORE } from "tools/consts";
+import {
+  ARCHIVE,
+  DEL,
+  REQUEST_EDIT,
+  REQUEST_SAVE,
+  RESTORE,
+} from "tools/consts";
 import { STYLE_ICON } from "tools/constStyle";
 import { c0, Client } from "tools/types";
 import { Button } from "widgets";
@@ -61,7 +66,7 @@ const ListClientManager = () => {
     setDisabled(false);
     showFormulaire(client);
   };
-   return (
+  return (
     <>
       {form && (
         <FormClientManager
@@ -78,9 +83,30 @@ const ListClientManager = () => {
       )}
       {!form && (
         <Section>
-          <Action id="" path="clients" design="" type="le client" ref={del} action={DEL}/>
-          <Action id="" path="clients" design="" type="le client" ref={archive} action={ARCHIVE}/>
-          <Action id="" path="clients" design="" type="le client" ref={restore} action={RESTORE}/>
+          <Action
+            id=""
+            path="clients"
+            design=""
+            type="le client"
+            ref={del}
+            action={DEL}
+          />
+          <Action
+            id=""
+            path="clients"
+            design=""
+            type="le client"
+            ref={archive}
+            action={ARCHIVE}
+          />
+          <Action
+            id=""
+            path="clients"
+            design=""
+            type="le client"
+            ref={restore}
+            action={RESTORE}
+          />
           <div className="float-left w-full">
             <Bcyan
               className="float-left"
@@ -107,7 +133,7 @@ const ListClientManager = () => {
             thead={
               <tr>
                 <Table.th>Nom client</Table.th>
-               <Table.th>Contact</Table.th>
+                <Table.th>Contact</Table.th>
                 <Table.th>Icoterm</Table.th>
                 <Table.th>Mode règlement</Table.th>
                 <Table.th></Table.th>
@@ -129,7 +155,7 @@ const ListClientManager = () => {
                       </figcaption>
                     </figure>
                   </Table.td>
-                 <Table.td>
+                  <Table.td>
                     <ul>
                       <li>{client.tel}</li>
                       <li>{client.email}</li>
@@ -141,15 +167,15 @@ const ListClientManager = () => {
                     <Mitems
                       archive={() => {
                         //@ts-ignore
-                        archive.current(client.id,client.design);
+                        archive.current(client.id, client.design);
                       }}
-                    /*   restore={() => {
+                      /*   restore={() => {
                         //@ts-ignore
                         restore.current(client.id,client.design);
                       }} */
                       del={() => {
                         //@ts-ignore
-                        del.current(client.id,client.design);
+                        del.current(client.id, client.design);
                       }}
                       edit={() => {
                         FormAsEdit(client);
@@ -165,7 +191,11 @@ const ListClientManager = () => {
             }
           </Table>
 
-          <Pagin load={loadPage} visible={clients?.length > 0} max={clients?.length} />
+          <Pagin
+            load={loadPage}
+            visible={clients?.length > 0}
+            max={clients?.length}
+          />
         </Section>
       )}
     </>

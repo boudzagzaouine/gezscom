@@ -1,4 +1,8 @@
-import { OpenCommandeByClientProp, openCommandesByClient, useFetchcommandesByIdClientQuery } from "config/rtk/RtkCommande";
+import {
+  OpenCommandeByClientProp,
+  openCommandesByClient,
+  useFetchcommandesByIdClientQuery,
+} from "config/rtk/RtkCommande";
 import React, { useRef, useState } from "react";
 import { DateFormat } from "tools/Methodes";
 import { Client, cm0, Commande } from "tools/types";
@@ -11,11 +15,13 @@ type ListCommandesProp = {
   refetchParent: () => void;
 };
 const ListCommandes = ({ client, refetchParent }: ListCommandesProp) => {
-  const commandesOpen: OpenCommandeByClientProp =openCommandesByClient(client.id)
-  const commandes:Commande[]=commandesOpen.data
-  const save=commandesOpen.save
-  const edit=commandesOpen.edit
-  const refetch=commandesOpen.refetch
+  const commandesOpen: OpenCommandeByClientProp = openCommandesByClient(
+    client.id
+  );
+  const commandes: Commande[] = commandesOpen.data;
+  const save = commandesOpen.save;
+  const edit = commandesOpen.edit;
+  const refetch = commandesOpen.refetch;
   const cm1: Commande = cm0;
   cm1.idClient = client.id;
   const refCom = useRef(null);
@@ -29,14 +35,14 @@ const ListCommandes = ({ client, refetchParent }: ListCommandesProp) => {
         className="float-left mt-2"
         onClick={() => {
           //@ts-ignore
-          refCom.current(cm0,client);
+          refCom.current(cm0, client);
         }}
       >
         Nouvelle commande
       </Bcyan>
       <FormCommande
-add={save}
-edit={edit}
+        add={save}
+        edit={edit}
         command={cm1}
         ref={refCom}
         client={client}

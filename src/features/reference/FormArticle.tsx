@@ -1,6 +1,12 @@
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
 import { Article, article0, ArticleJson } from "tools/types";
-import { ARCHIVE, DEL, REQUEST_EDIT, REQUEST_SAVE, RESTORE } from "tools/consts";
+import {
+  ARCHIVE,
+  DEL,
+  REQUEST_EDIT,
+  REQUEST_SAVE,
+  RESTORE,
+} from "tools/consts";
 import { Form, Field, Button } from "widgets";
 import Modal from "widgets/Modal";
 import Bcyan from "widgets/Bcyan";
@@ -17,7 +23,7 @@ import {
 } from "@heroicons/react/outline";
 import Pagin from "widgets/Pagin";
 import Icon from "widgets/Icon";
-import { openArticles ,OpenArticleProp} from "config/rtk/rtkArticle";
+import { openArticles, OpenArticleProp } from "config/rtk/rtkArticle";
 import Bsave from "widgets/Bsave";
 import BsavEndNew from "widgets/BsavEndNew";
 import Bcancel from "widgets/Bcancel";
@@ -91,14 +97,34 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
 
   //const [updateArticle] = useEditArticleMutation();
 
-  
   return (
     <>
       {!form && (
         <section className="bg-white float-left w-full h-full mp-8 shadow-lg">
-          <Action id="" path="articles" design="" type="L'article" ref={del} action={DEL}/>
-          <Action id="" path="articles" design="" type="L'article" ref={archive} action={ARCHIVE}/>
-          <Action id="" path="articles" design="" type="L'article" ref={restore} action={RESTORE}/>
+          <Action
+            id=""
+            path="articles"
+            design=""
+            type="L'article"
+            ref={del}
+            action={DEL}
+          />
+          <Action
+            id=""
+            path="articles"
+            design=""
+            type="L'article"
+            ref={archive}
+            action={ARCHIVE}
+          />
+          <Action
+            id=""
+            path="articles"
+            design=""
+            type="L'article"
+            ref={restore}
+            action={RESTORE}
+          />
           <h1>Familles Article</h1>
           <div className="float-left w-full">
             <button
@@ -151,24 +177,24 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
                     </Table.td>
 
                     <Table.td className="cursor-pointer">
-                    <MitemsRef
-                      archive={() => {
-                        //@ts-ignore
-                        archive.current(article.id,article.design);
-                      }}
-                    /*   restore={() => {
+                      <MitemsRef
+                        archive={() => {
+                          //@ts-ignore
+                          archive.current(article.id, article.design);
+                        }}
+                        /*   restore={() => {
                         //@ts-ignore
                         restore.current(client.id,client.design);
                       }} */
-                      del={() => {
-                        //@ts-ignore
-                        del.current(article.id,article.design);
-                      }}
-                      obj={article}
-                      update={() => {
-                        FormAsUpdate(article);
-                      }}
-                    />
+                        del={() => {
+                          //@ts-ignore
+                          del.current(article.id, article.design);
+                        }}
+                        obj={article}
+                        update={() => {
+                          FormAsUpdate(article);
+                        }}
+                      />
                     </Table.td>
                   </tr>
                 );
@@ -176,19 +202,24 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
             }
           </Table>
           <Pagin
-           load={loadPage} max={articles?.length}
+            load={loadPage}
+            max={articles?.length}
             visible={articles?.length > 0 ? true : false}
           />
         </section>
       )}
       <ModalS
         show={show}
-        title={article1.id==""?"Nouvelle Famille Article":"Modifier Famille Article"}
+        title={
+          article1.id == ""
+            ? "Nouvelle Famille Article"
+            : "Modifier Famille Article"
+        }
         format={+classNames("5")}
         close={closed}
       >
         <div className="float-left w-full text-sm">
-                  <Form
+          <Form
             defaultValues={article1}
             onSubmit={
               request == REQUEST_SAVE
@@ -200,60 +231,58 @@ const FormArticle = ({ article }: FormArticleProps, ref: Ref<void>) => {
           >
             <div className=" float-left w-1/2">
               <Field
-                label={<Required msg="Désignation"/>}
+                label={<Required msg="Désignation" />}
                 name="design"
-                disabled={disabled}//required={true}
+                disabled={disabled} //required={true}
               />
-          </div>
-          <div className="float-left w-full">
-            <div className="float-left w-1/2">
-                  <Field
-                    label={<Required msg="Nomenclature"/>}
-                    name="nomenclature"
-                    disabled={disabled}//required={true}
-                    
-                  />
-                  </div>
-              <div className="float-right w-1/2">
-                  <Field
-                    label={<Required msg="Taux de perte"/>}
-                    name="tauxPertes"
-                    disabled={disabled}//required={true}
-                    
-                  />
-                </div>
             </div>
-            
+            <div className="float-left w-full">
+              <div className="float-left w-1/2">
+                <Field
+                  label={<Required msg="Nomenclature" />}
+                  name="nomenclature"
+                  disabled={disabled} //required={true}
+                />
+              </div>
+              <div className="float-right w-1/2">
+                <Field
+                  label={<Required msg="Taux de perte" />}
+                  name="tauxPertes"
+                  disabled={disabled} //required={true}
+                />
+              </div>
+            </div>
+
             <div className="mt-5 b-ajust-r">
-                     <Bsave
-            className="float-right"
+              <Bsave
+                className="float-right"
+                onClick={() => {
+                  setTimeout(() => {
+                    refetchArticle();
+                    closed();
+                  }, 500);
+                }}
+              />
+              {article1.id == "" && (
+                <BsavEndNew
+                  className="ml-10 mr-2"
+                  onClick={() => {
+                    setTimeout(() => {
+                      refetchArticle();
+                    }, 500);
+                  }}
+                />
+              )}
+            </div>
+          </Form>
+          <Bcancel
+            className="float-right mt-5 b-ajust"
             onClick={() => {
-              setTimeout(() => {
-                refetchArticle();
-                closed();
-              }, 500);
+              setDisabled(false);
+              setShow(false);
             }}
           />
-          {article1.id=="" &&<BsavEndNew
-                   className="ml-10 mr-2"
-                   onClick={() => {
-                     setTimeout(() => {
-                      refetchArticle();
-                       }, 500);
-                   }}
-                />}
-               
-              </div>
-        
-          </Form>
-               <Bcancel
-               className="float-right mt-5 b-ajust"
-               onClick={() => {
-                 setDisabled(false)
-                 setShow(false);
-               }}
-             />
-          </div>
+        </div>
       </ModalS>
     </>
   );

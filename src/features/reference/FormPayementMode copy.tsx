@@ -1,8 +1,13 @@
 import {
-  ArchiveIcon, PencilAltIcon, TrashIcon
+  ArchiveIcon,
+  PencilAltIcon,
+  TrashIcon,
 } from "@heroicons/react/outline";
 import classNames from "classnames";
-import { OpenPayementModeProp, openPayementModes } from "config/rtk/rtkPayementMode";
+import {
+  OpenPayementModeProp,
+  openPayementModes,
+} from "config/rtk/rtkPayementMode";
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
 import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import { PayementMode, payementMode0, PayementModeJson } from "tools/types";
@@ -199,19 +204,24 @@ const FormPayementMode = (
             }
           </Table>
           <Pagin
-           load={loadPage} max={payementModes?.length}
+            load={loadPage}
+            max={payementModes?.length}
             visible={payementModes?.length > 0 ? true : false}
           />
         </section>
       )}
       <ModalS
         show={show}
-        title={payementMode1.id==""?"Nouveau Mode De Réglement":"Modifier Mode De Réglement"}
+        title={
+          payementMode1.id == ""
+            ? "Nouveau Mode De Réglement"
+            : "Modifier Mode De Réglement"
+        }
         format={+classNames("5")}
         close={closed}
       >
         <div className="float-left w-full">
-           <Form
+          <Form
             defaultValues={payementMode1}
             onSubmit={
               request == REQUEST_SAVE
@@ -222,50 +232,48 @@ const FormPayementMode = (
             }
           >
             <div className="float-left w-full">
-			         <Field
-               label={<Required msg="Code"/>}
+              <Field
+                label={<Required msg="Code" />}
                 name="code"
-                disabled={disabled}//required={true}
-                
+                disabled={disabled} //required={true}
               />
-			           <Field
-                    label={<Required msg="Désignation"/>}
-                    name="design"
-                    disabled={disabled}//required={true}
-                    
-                  />
-                </div>
-          <div className=" mt-5 b-ajust-r">
-                     <Bsave
-            className="float-right"
-            onClick={() => {
-              setTimeout(() => {
-                refetchPayementMode();
-                      closed();
-              }, 500);
-            }}
-          />
-          {payementMode1.id=="" &&<BsavEndNew
+              <Field
+                label={<Required msg="Désignation" />}
+                name="design"
+                disabled={disabled} //required={true}
+              />
+            </div>
+            <div className=" mt-5 b-ajust-r">
+              <Bsave
+                className="float-right"
+                onClick={() => {
+                  setTimeout(() => {
+                    refetchPayementMode();
+                    closed();
+                  }, 500);
+                }}
+              />
+              {payementMode1.id == "" && (
+                <BsavEndNew
                   className="ml-10 mr-2"
                   onClick={() => {
                     setTimeout(() => {
                       refetchPayementMode();
-                      }, 500);
+                    }, 500);
                   }}
-                />}
-               
-              </div>
-        
+                />
+              )}
+            </div>
           </Form>
-               <Bcancel
-               className="float-right mt-5 b-ajust"
-               onClick={() => {
-                 setDisabled(true);
-                  setShow(false);
-               }}
-             />
-             </div>
-   </ModalS>
+          <Bcancel
+            className="float-right mt-5 b-ajust"
+            onClick={() => {
+              setDisabled(true);
+              setShow(false);
+            }}
+          />
+        </div>
+      </ModalS>
     </>
   );
 };

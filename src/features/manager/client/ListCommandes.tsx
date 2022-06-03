@@ -1,4 +1,8 @@
-import { OpenCommandeByClientProp, openCommandesByClient, useFetchcommandesByIdClientQuery } from "config/rtk/RtkCommande";
+import {
+  OpenCommandeByClientProp,
+  openCommandesByClient,
+  useFetchcommandesByIdClientQuery,
+} from "config/rtk/RtkCommande";
 import React, { useRef, useState } from "react";
 import { DateFormat } from "tools/Methodes";
 import { Client, cm0, Commande } from "tools/types";
@@ -12,11 +16,13 @@ type ListCommandesProp = {
   refetchParent: () => void;
 };
 const ListCommandes = ({ client, refetchParent }: ListCommandesProp) => {
-  const commandesOpen: OpenCommandeByClientProp =openCommandesByClient(client.id)
-  const commandes:Commande[]=commandesOpen.data
-  const save=commandesOpen.save
-  const edit=commandesOpen.edit
-  const refetch=commandesOpen.refetch
+  const commandesOpen: OpenCommandeByClientProp = openCommandesByClient(
+    client.id
+  );
+  const commandes: Commande[] = commandesOpen.data;
+  const save = commandesOpen.save;
+  const edit = commandesOpen.edit;
+  const refetch = commandesOpen.refetch;
   const cm1: Commande = cm0;
   cm1.idClient = client.id;
   const refCom = useRef(null);
@@ -25,9 +31,19 @@ const ListCommandes = ({ client, refetchParent }: ListCommandesProp) => {
     refetchParent();
   };
   return (
-  <>
-  <List head={["N° BC","Client","Date","Saison","Montant"]} body={["id#attr","idClient#join#"+client.design,"date#date","season#attr","amount#attr"]}  list={commandes} />
-  </>
+    <>
+      <List
+        head={["N° BC", "Client", "Date", "Saison", "Montant"]}
+        body={[
+          "id#attr",
+          "idClient#join#" + client.design,
+          "date#date",
+          "season#attr",
+          "amount#attr",
+        ]}
+        list={commandes}
+      />
+    </>
   );
 };
 /*    <tr>

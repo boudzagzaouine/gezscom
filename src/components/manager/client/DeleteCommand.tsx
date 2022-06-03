@@ -35,37 +35,34 @@ const DeleteCommand = ({ id }: DeleteCommandPorp, ref: Ref<void>) => {
   });
   const [showModal, setShowModal] = React.useState(false);
   const delTemp = () => {
-    axios.delete(process.env.NEXT_PUBLIC_URL+"/commandes/" + id0).then(() => {});
+    axios
+      .delete(process.env.NEXT_PUBLIC_URL + "/commandes/" + id0)
+      .then(() => {});
   };
   return (
     <>
       <Modal title={"suppression"} show={showModal} format={5} close={close}>
-         <h2>suppression de la commande num: {id0}</h2>
-         <Form
-            defaultValues={code0}
-            onSubmit={delTemp}
-          >
-           <Field
-                type="hidden"
-                name="id"
-               />
+        <h2>suppression de la commande num: {id0}</h2>
+        <Form defaultValues={code0} onSubmit={delTemp}>
+          <Field type="hidden" name="id" />
 
-            <Bdel
-              type="submit"
-              className="float-right mt-5 b-ajust-r"
-              onClick={() => {
-                setTimeout(() => {
-                  close();
-                }, 500);
-              }}
-            />
-           </Form>
-          <Bcancel
-            className="float-right mt-5 b-ajust"
+          <Bdel
+            type="submit"
+            className="float-right mt-5 b-ajust-r"
             onClick={() => {
-              close();
+              setTimeout(() => {
+                close();
+              }, 500);
             }}
-          /></Modal>
+          />
+        </Form>
+        <Bcancel
+          className="float-right mt-5 b-ajust"
+          onClick={() => {
+            close();
+          }}
+        />
+      </Modal>
     </>
   );
 };

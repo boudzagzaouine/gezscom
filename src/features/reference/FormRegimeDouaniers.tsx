@@ -1,8 +1,13 @@
 import {
-  ArchiveIcon, PencilAltIcon, TrashIcon
+  ArchiveIcon,
+  PencilAltIcon,
+  TrashIcon,
 } from "@heroicons/react/outline";
 import classNames from "classnames";
-import { OpenRegimeDouanierProp, openRegimeDouaniers } from "config/rtk/rtkRegimeDouanier";
+import {
+  OpenRegimeDouanierProp,
+  openRegimeDouaniers,
+} from "config/rtk/rtkRegimeDouanier";
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
 import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import {
@@ -10,7 +15,7 @@ import {
   payementMode0,
   RegimeDouanier,
   regimeDouanier0,
-  RegimeDouanierJson
+  RegimeDouanierJson,
 } from "tools/types";
 import { Field, Form } from "widgets";
 import Bcancel from "widgets/Bcancel";
@@ -212,7 +217,8 @@ const FormRegimeDouanier = (
             }
           </Table>
           <Pagin
-           load={loadPage} max={regimeDouaniers?.length}
+            load={loadPage}
+            max={regimeDouaniers?.length}
             visible={regimeDouaniers?.length > 0 ? true : false}
           />
         </section>
@@ -220,12 +226,16 @@ const FormRegimeDouanier = (
 
       <ModalS
         show={show}
-        title={regimeDouanier1.id==""?"Nouveau Régime Douanier":"Modifier Régime Douanier"}
+        title={
+          regimeDouanier1.id == ""
+            ? "Nouveau Régime Douanier"
+            : "Modifier Régime Douanier"
+        }
         format={+classNames("5")}
         close={closed}
       >
         <div className="float-left w-full">
-        <Form
+          <Form
             defaultValues={regimeDouanier1}
             onSubmit={
               request == REQUEST_SAVE
@@ -237,49 +247,49 @@ const FormRegimeDouanier = (
           >
             <div className="float-left w-full">
               <Field
-               label={<Required msg="Numéro"/>}
+                label={<Required msg="Numéro" />}
                 name="code"
-                disabled={disabled} required={true}
-                
+                disabled={disabled}
+                required={true}
               />
-                  <Field
-                    label={<Required msg="Désignation"/>}
-                    name="design"
-                    disabled={disabled} required={true}
-                    
+              <Field
+                label={<Required msg="Désignation" />}
+                name="design"
+                disabled={disabled}
+                required={true}
               />
-           </div>
-          <div className=" mt-5 b-ajust-r">
-                     <Bsave
-            className="float-right"
-            onClick={() => {
-              setTimeout(() => {
-                refetchRegimeDouanier();
-                      closed();
-              }, 500);
-            }}
-          />
-          {regimeDouanier1.id=="" &&<BsavEndNew
+            </div>
+            <div className=" mt-5 b-ajust-r">
+              <Bsave
+                className="float-right"
+                onClick={() => {
+                  setTimeout(() => {
+                    refetchRegimeDouanier();
+                    closed();
+                  }, 500);
+                }}
+              />
+              {regimeDouanier1.id == "" && (
+                <BsavEndNew
                   className="ml-10 mr-2"
                   onClick={() => {
                     setTimeout(() => {
                       refetchRegimeDouanier();
-                      }, 500);
+                    }, 500);
                   }}
-                />}
-               
-              </div>
-        
-          </Form>
-               <Bcancel
-               className="float-right mt-5 b-ajust"
-               onClick={() => {
-                 setDisabled(true);
-                  setShow(false);
-               }}
-             />
+                />
+              )}
             </div>
-    </ModalS>
+          </Form>
+          <Bcancel
+            className="float-right mt-5 b-ajust"
+            onClick={() => {
+              setDisabled(true);
+              setShow(false);
+            }}
+          />
+        </div>
+      </ModalS>
     </>
   );
 };

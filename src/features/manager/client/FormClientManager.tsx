@@ -1,4 +1,4 @@
-import React, { useState ,useRef,ChangeEvent} from "react";
+import React, { useState, useRef, ChangeEvent } from "react";
 import {
   useAddClientMutation,
   useEditClientMutation,
@@ -11,7 +11,15 @@ import {
   REQUEST_SAVE,
 } from "tools/consts";
 import { STYLE_ICON } from "tools/constStyle";
-import { Client, Devise, Incoterm, PayementMode,payementMode0,incoterm0, devise0 } from "tools/types";
+import {
+  Client,
+  Devise,
+  Incoterm,
+  PayementMode,
+  payementMode0,
+  incoterm0,
+  devise0,
+} from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import Section from "widgets/Section";
@@ -66,20 +74,22 @@ const FormClientManager = ({
       <Xclose close={closed} />
       <div className="float-left w-full text-xs">
         <Form defaultValues={client} onSubmit={onSubmit}>
-          <Title  msg="client" id={client.id} edit={disabled} />
+          <Title msg="client" id={client.id} edit={disabled} />
           <div className="float-left w-5/6">
             <div className="float-left w-1/2">
-              {request == REQUEST_EDIT && (
-                <Field type="hidden" name="id" />
-              )}
-              <Field label={<Required msg="raison social"/> } name="design" disabled={disabled} />
+              {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
+              <Field
+                label={<Required msg="raison social" />}
+                name="design"
+                disabled={disabled}
+              />
               <Field label="contact" name="contact" disabled={disabled} />
               <Field label="email" name="email" disabled={disabled} />
               <Field label="tel" name="tel" disabled={disabled} />
               <Field
-                label={<Required msg="devise"/> }
+                label={<Required msg="devise" />}
                 name="device"
-                options={[devise0,...(devises||[])]}
+                options={[devise0, ...(devises || [])]}
                 as="select"
                 disabled={disabled}
               />
@@ -92,33 +102,36 @@ const FormClientManager = ({
             </div>
             <div className="float-left w-1/2">
               <Field
-                label={<Required msg="mode de règlement"/> }
+                label={<Required msg="mode de règlement" />}
                 name="paymentChoice"
-                options={[payementMode0,...(payementModes||[])]}
+                options={[payementMode0, ...(payementModes || [])]}
                 as="select"
                 disabled={disabled}
-                optionKeyName = "code"
-                optionLabelName = "code"
+                optionKeyName="code"
+                optionLabelName="code"
               />
               <Field
-                label={<Required msg="incoterm"/> }
+                label={<Required msg="incoterm" />}
                 name="incoterm"
-                options={[incoterm0,...(incoterms||[])]}
+                options={[incoterm0, ...(incoterms || [])]}
                 as="select"
                 disabled={disabled}
-                optionKeyName = "code"
-                optionLabelName = "code"
+                optionKeyName="code"
+                optionLabelName="code"
               />
               <Field
-                label={<Required msg="adresse de facturation"/> }
+                label={<Required msg="adresse de facturation" />}
                 name="adrFact"
                 as="textarea"
                 disabled={disabled}
               />
-             <ShowCheckedsField msg="les coordonnées bancaires du client" isAdd={client.id==""} >
-              <Field label="bank" name="bank" disabled={disabled} />
-              <Field label="rib" name="rib" disabled={disabled} />
-              <Field label="swift" name="swift" disabled={disabled} />
+              <ShowCheckedsField
+                msg="les coordonnées bancaires du client"
+                isAdd={client.id == ""}
+              >
+                <Field label="bank" name="bank" disabled={disabled} />
+                <Field label="rib" name="rib" disabled={disabled} />
+                <Field label="swift" name="swift" disabled={disabled} />
               </ShowCheckedsField>
             </div>
           </div>
@@ -136,7 +149,7 @@ const FormClientManager = ({
                 }}
               />
             )}
-         </div>
+          </div>
         </Form>
         {!disabled && (
           <Bcancel
@@ -144,9 +157,8 @@ const FormClientManager = ({
               "float-right b-ajust " + (request == REQUEST_SAVE && "b-ajustf")
             }
             onClick={() => {
-              if(client.id!="")
-              setDisabled(true);
-              else closed()
+              if (client.id != "") setDisabled(true);
+              else closed();
             }}
           />
         )}

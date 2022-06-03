@@ -20,19 +20,22 @@ import Brestore from "./Brestore";
 import Bdel from "./Bdel";
 //signature :abd 27/05-2022 08:57
 type ArchiveClientPorp = {
-  id:string
-  path:string
-  action:number
-  design:string
-  type:string
+  id: string;
+  path: string;
+  action: number;
+  design: string;
+  type: string;
 };
-const Archive = ({ id,design,type,path,action}: ArchiveClientPorp, ref: Ref<void>) => {
+const Archive = (
+  { id, design, type, path, action }: ArchiveClientPorp,
+  ref: Ref<void>
+) => {
   const [id0, setId0] = useState(id);
-  const [design0,setDesign0]=useState(design)
+  const [design0, setDesign0] = useState(design);
   const [showModal, setShowModal] = React.useState(false);
-  const openModal = (id: string,design:string) => {
+  const openModal = (id: string, design: string) => {
     setId0(id);
-    setDesign0(design)
+    setDesign0(design);
     setShowModal(true);
   };
   const close = () => {
@@ -43,30 +46,42 @@ const Archive = ({ id,design,type,path,action}: ArchiveClientPorp, ref: Ref<void
     ref.current = openModal;
   });
   const archiveTemp = () => {
-    let act=action==ARCHIVE?"archive":action==RESTORE?"restore":action==DEL?"del":""
+    let act =
+      action == ARCHIVE
+        ? "archive"
+        : action == RESTORE
+        ? "restore"
+        : action == DEL
+        ? "del"
+        : "";
     axios
-      .patch(process.env.NEXT_PUBLIC_URL+"/"+path+"/" + id0 + "/"+act)
+      .patch(process.env.NEXT_PUBLIC_URL + "/" + path + "/" + id0 + "/" + act)
       .then(() => {});
   };
-  const style="float-right mt-5 b-ajust-r bg-rose-900 border-rose-800"
-  let verbe=action==ARCHIVE?"archiver":action==RESTORE?"restorer":action==DEL?"supprimer":""
-   
+  const style = "float-right mt-5 b-ajust-r bg-rose-900 border-rose-800";
+  let verbe =
+    action == ARCHIVE
+      ? "archiver"
+      : action == RESTORE
+      ? "restorer"
+      : action == DEL
+      ? "supprimer"
+      : "";
+
   return (
     <>
       <Box title={"archivage"} show={showModal} action={action} close={close}>
-         {
-           //@ts-ignore
-           <h2>vous vouler {verbe} {type}: {design0} ?</h2>}
-          <Form
-            defaultValues={code0}
-            onSubmit={archiveTemp}
-          >
-           <Field
-                type="hidden"
-                name="id"
-               />
+        {
+          //@ts-ignore
+          <h2>
+            vous vouler {verbe} {type}: {design0} ?
+          </h2>
+        }
+        <Form defaultValues={code0} onSubmit={archiveTemp}>
+          <Field type="hidden" name="id" />
 
-            {action==ARCHIVE?<Barchive
+          {action == ARCHIVE ? (
+            <Barchive
               type="submit"
               className={style}
               onClick={() => {
@@ -74,29 +89,38 @@ const Archive = ({ id,design,type,path,action}: ArchiveClientPorp, ref: Ref<void
                   close();
                 }, 500);
               }}
-            />:action==RESTORE?<Brestore  type="submit"
-            className={style}
-            onClick={() => {
-              setTimeout(() => {
-                close();
-              }, 500);
-            }}/>
-            :action==DEL?<Bdel  type="submit"
-            className={style}
-            onClick={() => {
-              setTimeout(() => {
-                close();
-              }, 500);
-            }}/>:<></>
-            }
-           </Form>
-           <Bcancel
-            className=" float-right mt-5 b-ajust bg-[#ffffff] text-rose-900 border-rose-900 "
-            onClick={() => {
-              close();
-            }}
-          /> 
-     </Box>
+            />
+          ) : action == RESTORE ? (
+            <Brestore
+              type="submit"
+              className={style}
+              onClick={() => {
+                setTimeout(() => {
+                  close();
+                }, 500);
+              }}
+            />
+          ) : action == DEL ? (
+            <Bdel
+              type="submit"
+              className={style}
+              onClick={() => {
+                setTimeout(() => {
+                  close();
+                }, 500);
+              }}
+            />
+          ) : (
+            <></>
+          )}
+        </Form>
+        <Bcancel
+          className=" float-right mt-5 b-ajust bg-[#ffffff] text-rose-900 border-rose-900 "
+          onClick={() => {
+            close();
+          }}
+        />
+      </Box>
     </>
   );
 };

@@ -31,8 +31,8 @@ const ListAllCommandes = () => {
   const commandesToOpen: OpenCommandeProp = openCommandesPagination(page);
   const commandes: Commande[] = commandesToOpen.data.content;
   const refetch = commandesToOpen.refetch;
-  const add=commandesToOpen.save
-  const edit=commandesToOpen.edit
+  const add = commandesToOpen.save;
+  const edit = commandesToOpen.edit;
   //const { data = [], isFetching, refetch } = usePaginationCommandesQuery(page);
 
   const clientsToOpen: OpenClientProp = openClients();
@@ -51,15 +51,15 @@ const ListAllCommandes = () => {
           className="float-left mt-2"
           onClick={() => {
             //@ts-ignore
-            refCom.current(cm1,c0,false);
+            refCom.current(cm1, c0, false);
           }}
         >
           Nouvelle commande
         </Bcyan>
       )}
       <FormCommande
-      add={add}
-      edit={edit}      
+        add={add}
+        edit={edit}
         command={cm1}
         client={c0}
         clients={clients || []}
@@ -88,38 +88,42 @@ const ListAllCommandes = () => {
             <Table.td>{commande.season}</Table.td>
             <Table.td>{commande.amount}</Table.td>
             <Table.td>
-            <Mitems
-                      archive={() => {
-                        //@ts-ignore
-                        archive.current(commande.id);
-                      }}
-                      del={() => {
-                        //@ts-ignore
-                        del.current(commande.id);
-                      }}
-                      edit={() => {
-                        //@ts-ignore
-                        refCom.current(
-                          commande,
-                          getClient(commande.idClient, clients),
-                          true
-                        );
-                      }}
-                      obj={commande}
-                      update={() => {
-                        //@ts-ignore
-                        refCom.current(
-                          commande,
-                          getClient(commande.idClient, clients),
-                          false
-                        );
-                      }}
-                    />
+              <Mitems
+                archive={() => {
+                  //@ts-ignore
+                  archive.current(commande.id);
+                }}
+                del={() => {
+                  //@ts-ignore
+                  del.current(commande.id);
+                }}
+                edit={() => {
+                  //@ts-ignore
+                  refCom.current(
+                    commande,
+                    getClient(commande.idClient, clients),
+                    true
+                  );
+                }}
+                obj={commande}
+                update={() => {
+                  //@ts-ignore
+                  refCom.current(
+                    commande,
+                    getClient(commande.idClient, clients),
+                    false
+                  );
+                }}
+              />
             </Table.td>
           </tr>
         ))}
       </Table>
-      <Pagin load={loadPage} visible={commandes?.length > 0}  max={commandes?.length} />
+      <Pagin
+        load={loadPage}
+        visible={commandes?.length > 0}
+        max={commandes?.length}
+      />
     </Section>
   );
 };

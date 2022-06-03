@@ -1,34 +1,49 @@
-import { createOffline } from '@redux-offline/redux-offline';
-import offlineConfig from '@redux-offline/redux-offline/lib/defaults';
-import { Action, combineReducers, configureStore, StoreEnhancer, ThunkAction } from '@reduxjs/toolkit';
-import counterReducer from 'features/counter/counterSlice';
-import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import { createOffline } from "@redux-offline/redux-offline";
+import offlineConfig from "@redux-offline/redux-offline/lib/defaults";
+import {
+  Action,
+  combineReducers,
+  configureStore,
+  StoreEnhancer,
+  ThunkAction,
+} from "@reduxjs/toolkit";
+import counterReducer from "features/counter/counterSlice";
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  persistReducer,
+  persistStore,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
-import customOfflineConfig from './offline';
-import { crudAdressLiv } from './rtk/RtkAdressLiv';
-import { crudArticle } from './rtk/rtkArticle';
-import { crudArticleClient } from './rtk/RtkArticleClient';
-import { crudArticleCommande } from './rtk/RtkArticleCommande';
-import { crudBureauDouane } from './rtk/rtkBureauDouane';
-import { crudClient } from './rtk/RtkClient';
-import { crudCommande } from './rtk/RtkCommande';
-import { crudDeclarant } from './rtk/rtkDeclarant';
-import { crudDevise } from './rtk/rtkDevise';
-import { crudDocument } from './rtk/rtkDocument';
-import { crudFournisseur } from './rtk/rtkFournisseur';
-import { crudGeneric } from './rtk/rtkGen';
-import { crudIncoterm } from './rtk/rtkIncoterm';
-import { crudPayementMode } from './rtk/rtkPayementMode';
-import { crudPays } from './rtk/rtkPays';
-import { crudRawMaterial } from './rtk/rtkRawMaterial';
-import { crudRegimeDouanier } from './rtk/rtkRegimeDouanier';
-import { crudRole } from './rtk/rtkRole';
-import { crudTransporteur } from './rtk/rtkTransporteur';
-import { crudType } from './rtk/rtkType';
-import { crudUnitMeasure } from './rtk/rtkUnitMeasure';
-import { crudUser } from './rtk/RtkUser';
-import { crudVille } from './rtk/rtkVille';
+import customOfflineConfig from "./offline";
+import { crudAdressLiv } from "./rtk/RtkAdressLiv";
+import { crudArticle } from "./rtk/rtkArticle";
+import { crudArticleClient } from "./rtk/RtkArticleClient";
+import { crudArticleCommande } from "./rtk/RtkArticleCommande";
+import { crudBureauDouane } from "./rtk/rtkBureauDouane";
+import { crudClient } from "./rtk/RtkClient";
+import { crudCommande } from "./rtk/RtkCommande";
+import { crudDeclarant } from "./rtk/rtkDeclarant";
+import { crudDevise } from "./rtk/rtkDevise";
+import { crudDocument } from "./rtk/rtkDocument";
+import { crudFournisseur } from "./rtk/rtkFournisseur";
+import { crudGeneric } from "./rtk/rtkGen";
+import { crudIncoterm } from "./rtk/rtkIncoterm";
+import { crudPayementMode } from "./rtk/rtkPayementMode";
+import { crudPays } from "./rtk/rtkPays";
+import { crudRawMaterial } from "./rtk/rtkRawMaterial";
+import { crudRegimeDouanier } from "./rtk/rtkRegimeDouanier";
+import { crudRole } from "./rtk/rtkRole";
+import { crudTransporteur } from "./rtk/rtkTransporteur";
+import { crudType } from "./rtk/rtkType";
+import { crudUnitMeasure } from "./rtk/rtkUnitMeasure";
+import { crudUser } from "./rtk/RtkUser";
+import { crudVille } from "./rtk/rtkVille";
 
 const {
   middleware: offlineMiddleware,
@@ -72,7 +87,6 @@ export function makeStore() {
     [crudArticleClient.reducerPath]: crudArticleClient.reducer,
     [crudPayementMode.reducerPath]: crudPayementMode.reducer,
     [crudGeneric.reducerPath]: crudGeneric.reducer,
-   
   });
   const persistedReducer = persistReducer(
     persistConfig,
@@ -107,10 +121,9 @@ export function makeStore() {
         .concat([crudClient.middleware, offlineMiddleware])
         .concat([crudAdressLiv.middleware, offlineMiddleware])
         .concat([crudArticleCommande.middleware, offlineMiddleware])
-        .concat([crudArticleClient.middleware, offlineMiddleware])  
-        .concat([crudPayementMode.middleware, offlineMiddleware])  
-        .concat([crudGeneric.middleware, offlineMiddleware])  
-    ,
+        .concat([crudArticleClient.middleware, offlineMiddleware])
+        .concat([crudPayementMode.middleware, offlineMiddleware])
+        .concat([crudGeneric.middleware, offlineMiddleware]),
   });
   return store;
 }

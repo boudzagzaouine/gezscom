@@ -36,39 +36,33 @@ const RestoreClient = ({ id }: RestoreClientPorp, ref: Ref<void>) => {
   });
   const restoreTemp = () => {
     axios
-      .patch(process.env.NEXT_PUBLIC_URL+"/clients/" + id0 + "/restore")
+      .patch(process.env.NEXT_PUBLIC_URL + "/clients/" + id0 + "/restore")
       .then(() => {});
   };
   return (
     <>
       <Modal title={"restoration"} show={showModal} format={5} close={close}>
-         <h2>restoration du client num: {id0}</h2>
-         <Form
-            defaultValues={code0}
-            onSubmit={restoreTemp}
-          >
-           <Field
-                type="hidden"
-                name="id"
-               />
+        <h2>restoration du client num: {id0}</h2>
+        <Form defaultValues={code0} onSubmit={restoreTemp}>
+          <Field type="hidden" name="id" />
 
-            <Brestore
-              type="submit"
-              className="float-right mt-5 b-ajust-r"
-              onClick={() => {
-                setTimeout(() => {
-                  close();
-                }, 500);
-              }}
-            />
-           </Form>
-          <Bcancel
-            className="float-right mt-5 b-ajust"
+          <Brestore
+            type="submit"
+            className="float-right mt-5 b-ajust-r"
             onClick={() => {
-              close();
+              setTimeout(() => {
+                close();
+              }, 500);
             }}
           />
-     </Modal>
+        </Form>
+        <Bcancel
+          className="float-right mt-5 b-ajust"
+          onClick={() => {
+            close();
+          }}
+        />
+      </Modal>
     </>
   );
 };

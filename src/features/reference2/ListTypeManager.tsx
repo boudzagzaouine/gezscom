@@ -1,8 +1,5 @@
 import { TrashIcon } from "@heroicons/react/outline";
-import {
-  ArchiveIcon,
-  PencilAltIcon
-} from "@heroicons/react/solid";
+import { ArchiveIcon, PencilAltIcon } from "@heroicons/react/solid";
 import ArchiveType from "components/reference2/ArchiveType";
 import DeleteType from "components/reference2/DeleteType";
 import RestoreType from "components/reference2/RestoreType";
@@ -45,7 +42,7 @@ function ListTypeManager() {
         text: "Modifier",
         action: () => {
           //@ts-ignore
-          refCom.current(type,false);
+          refCom.current(type, false);
         },
       },
       {
@@ -79,69 +76,71 @@ function ListTypeManager() {
 
   return (
     <>
-        <Section>
-          <DeleteType refetch={refetch} id={""} ref={del} />
-          <ArchiveType id={""} ref={archive} />
-          <RestoreType id={""} ref={restore} />
-          <h1>Types En-Têtes</h1>
-          <div className="float-left w-full">
-            <Bcyan
-              className="float-left"
-              onClick={() => {
-                //@ts-ignore
-                refCom.current(type0,false);
-              }}
-            >
-              Nouveau Type
-            </Bcyan>
-            <FormTypeManager
+      <Section>
+        <DeleteType refetch={refetch} id={""} ref={del} />
+        <ArchiveType id={""} ref={archive} />
+        <RestoreType id={""} ref={restore} />
+        <h1>Types En-Têtes</h1>
+        <div className="float-left w-full">
+          <Bcyan
+            className="float-left"
+            onClick={() => {
+              //@ts-ignore
+              refCom.current(type0, false);
+            }}
+          >
+            Nouveau Type
+          </Bcyan>
+          <FormTypeManager
             refetch={refetch}
             save={save}
             edit={edit}
-          Type={type0}
-         disable={false}
-          ref={refCom}
+            Type={type0}
+            disable={false}
+            ref={refCom}
+          />
+          <div className="float-right">
+            <Button className="bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg">
+              <Icon i="search" cl="" />
+            </Button>
+            <input
+              type="text"
+              className="py-3 border outline-[#ddd] border-[#ddd] float-left border-l-0 rounded-r-lg w-96"
             />
-            <div className="float-right">
-              <Button className="bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg">
-                <Icon i="search" cl="" />
-              </Button>
-              <input
-                type="text"
-                className="py-3 border outline-[#ddd] border-[#ddd] float-left border-l-0 rounded-r-lg w-96"
-              />
-            </div>
           </div>
-          <Table
-            className="tab-list float-left w-full mt-8"
-            thead={
-              <tr>
-                <Table.th>Désignation</Table.th>
-                <Table.th></Table.th>
-              </tr>
-            }
-          >
-            {
-              types?.map((Type) => (
-                <tr key={Type.id}>
-                  <Table.td>
-                    <figure>
-                      <figcaption>
-                        <span>{Type.design}</span>
-                      </figcaption>
-                    </figure>
-                  </Table.td>
+        </div>
+        <Table
+          className="tab-list float-left w-full mt-8"
+          thead={
+            <tr>
+              <Table.th>Désignation</Table.th>
+              <Table.th></Table.th>
+            </tr>
+          }
+        >
+          {types?.map((Type) => (
+            <tr key={Type.id}>
+              <Table.td>
+                <figure>
+                  <figcaption>
+                    <span>{Type.design}</span>
+                  </figcaption>
+                </figure>
+              </Table.td>
 
-                  <Table.td>
-                    <Mitems menu={menu(Type)} />
-                  </Table.td>
-                </tr>
-              ))
-            }
-          </Table>
+              <Table.td>
+                <Mitems menu={menu(Type)} />
+              </Table.td>
+            </tr>
+          ))}
+        </Table>
 
-          <Pagin load={loadPage} max={types?.length} visible={types?.length > 0} />
-        </Section>
+        <Pagin
+          load={loadPage}
+          max={types?.length}
+          visible={types?.length > 0}
+        />
+      </Section>
     </>
   );
 }

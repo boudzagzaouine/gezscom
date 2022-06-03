@@ -37,9 +37,9 @@ export const Input = memo(
       }
       // console.log('render input ? ', label);
       const inputClassName = classNames(
-        {"min-w-40": isSelect,},
+        { "min-w-40": isSelect },
         `border outline-[#707070]/80  text-[#000000] float-left rounded border-[#707070]/30 outline:border-[#f00] disabled:bg-[#ddd]/30 disabled:text-[#999]`,
-        (!isRadio && !isCheckbox && `w-full`),
+        !isRadio && !isCheckbox && `w-full`,
         {
           "py-3": isTextArea,
           "py-1": isInput || isSelect,

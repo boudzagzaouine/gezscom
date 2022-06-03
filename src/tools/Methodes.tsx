@@ -20,6 +20,6 @@ export const getFournisseur = (id: string, obj: Fournisseur[]): Fournisseur => {
   return apr || f0;
 };
 
-export const DateFormat = (date:Date) => {
-  return dateFormat(date, "dd-mm-yyyy")
-}
+export const DateFormat = (date: Date) => {
+  return dateFormat(date, "dd-mm-yyyy");
+};

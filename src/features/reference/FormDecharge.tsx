@@ -240,7 +240,11 @@ const FormDecharge = ({ decharge }: FormDechargeProps, ref: Ref<void>) => {
               })
             }
           </Table>
-          <Pagin load={loadPage} max={300} visible={decharges?.length ? true : false} />
+          <Pagin
+            load={loadPage}
+            max={300}
+            visible={decharges?.length ? true : false}
+          />
         </section>
       )}
       <Modal
@@ -268,7 +272,8 @@ const FormDecharge = ({ decharge }: FormDechargeProps, ref: Ref<void>) => {
                     name="client"
                     options={CLIENTS}
                     as="select"
-                    disabled={disabled} required={true}
+                    disabled={disabled}
+                    required={true}
                   />
                 </div>
                 <div className="float-left w-1/2">
@@ -277,7 +282,8 @@ const FormDecharge = ({ decharge }: FormDechargeProps, ref: Ref<void>) => {
                     name="declarant"
                     options={DECLARANTS}
                     as="select"
-                    disabled={disabled} required={true}
+                    disabled={disabled}
+                    required={true}
                   />
                 </div>
               </div>
@@ -287,7 +293,8 @@ const FormDecharge = ({ decharge }: FormDechargeProps, ref: Ref<void>) => {
                     label="Date"
                     name="date"
                     type="date"
-                    disabled={disabled} required={true}
+                    disabled={disabled}
+                    required={true}
                   />
                 </div>
                 <div className="float-left w-1/2">
@@ -296,7 +303,8 @@ const FormDecharge = ({ decharge }: FormDechargeProps, ref: Ref<void>) => {
                     name="transporteur"
                     options={TRANSPORTEURS}
                     as="select"
-                    disabled={disabled} required={true}
+                    disabled={disabled}
+                    required={true}
                   />
                 </div>
               </div>

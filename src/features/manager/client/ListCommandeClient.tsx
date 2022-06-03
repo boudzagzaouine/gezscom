@@ -8,7 +8,7 @@ import React from "react";
 import { style_icon, style_span } from "tools/constStyle";
 import { Client } from "tools/types";
 import NavTabs from "widgets/NavTabs";
-import {  MenuNavTabs } from "widgets/TypeWidgets";
+import { MenuNavTabs } from "widgets/TypeWidgets";
 import AdressLivraisons from "./ListAdressLivraisons";
 import ListArticleClients from "./ListArticleClients";
 import ListCommandes from "./ListCommandes";

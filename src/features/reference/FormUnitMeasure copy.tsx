@@ -1,7 +1,17 @@
 import classNames from "classnames";
-import { OpenUnitMeasureProp, openUnitMeasures } from "config/rtk/rtkUnitMeasure";
+import {
+  OpenUnitMeasureProp,
+  openUnitMeasures,
+} from "config/rtk/rtkUnitMeasure";
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
-import { ARCHIVE, DECIMAL, DEL, REQUEST_EDIT, REQUEST_SAVE, RESTORE } from "tools/consts";
+import {
+  ARCHIVE,
+  DECIMAL,
+  DEL,
+  REQUEST_EDIT,
+  REQUEST_SAVE,
+  RESTORE,
+} from "tools/consts";
 import { UnitMeasure, unitMeasure0, UnitMeasureJson } from "tools/types";
 import { Field, Form } from "widgets";
 import Action from "widgets/Action";
@@ -74,18 +84,38 @@ const FormUnitMeasure = (
     open(unitMeasure);
   };
 
-  const void_ = () => { };
+  const void_ = () => {};
 
   //const [updateUnitMeasure] = useEditUnitMeasureMutation();
-
 
   return (
     <>
       {!form && (
         <section className="bg-white float-left w-full h-full mp-8 shadow-lg">
-          <Action id="" path="unitMeasures" design="" type="Unité de Mesure" ref={del} action={DEL} />
-          <Action id="" path="unitMeasures" design="" type="Unité de Mesure" ref={archive} action={ARCHIVE} />
-          <Action id="" path="unitMeasures" design="" type="Unité de Mesure" ref={restore} action={RESTORE} />
+          <Action
+            id=""
+            path="unitMeasures"
+            design=""
+            type="Unité de Mesure"
+            ref={del}
+            action={DEL}
+          />
+          <Action
+            id=""
+            path="unitMeasures"
+            design=""
+            type="Unité de Mesure"
+            ref={archive}
+            action={ARCHIVE}
+          />
+          <Action
+            id=""
+            path="unitMeasures"
+            design=""
+            type="Unité de Mesure"
+            ref={restore}
+            action={RESTORE}
+          />
           <h1>Unités de Mesure</h1>
           <div className="float-left w-full">
             <button
@@ -173,7 +203,9 @@ const FormUnitMeasure = (
               })
             }
           </Table>
-          <Pagin load={loadPage} max={unitMeasures?.length}
+          <Pagin
+            load={loadPage}
+            max={unitMeasures?.length}
             visible={unitMeasures?.length > 0 ? true : false}
           />
         </section>
@@ -181,28 +213,30 @@ const FormUnitMeasure = (
 
       <ModalS
         show={show}
-        title={unitMeasure1.id == "" ? "Nouvelle Unité de Mesure" : "Modifier Unité de Mesure"}
+        title={
+          unitMeasure1.id == ""
+            ? "Nouvelle Unité de Mesure"
+            : "Modifier Unité de Mesure"
+        }
         format={+classNames("5")}
         close={closed}
       >
         <div className="float-left w-full">
-
           <Form
             defaultValues={unitMeasure1}
             onSubmit={
               request == REQUEST_SAVE
                 ? saveUnitMeasure
                 : request == REQUEST_EDIT
-                  ? editUnitMeasure
-                  : void_
+                ? editUnitMeasure
+                : void_
             }
           >
             <div className=" float-left w-1/2">
               <Field
                 label={<Required msg="Désignation" />}
                 name="design"
-                disabled={disabled}//required={true}
-
+                disabled={disabled} //required={true}
               />
             </div>
 
@@ -211,8 +245,7 @@ const FormUnitMeasure = (
                 <Field
                   label={<Required msg="Symbole" />}
                   name="symbole"
-                  disabled={disabled}//required={true}
-
+                  disabled={disabled} //required={true}
                 />
               </div>
               <div className="float-right w-1/2">
@@ -221,8 +254,7 @@ const FormUnitMeasure = (
                   name="decimal"
                   options={DECIMAL}
                   as="select"
-                  disabled={disabled}//required={true}
-
+                  disabled={disabled} //required={true}
                 />
               </div>
             </div>
@@ -236,25 +268,23 @@ const FormUnitMeasure = (
                   }, 500);
                 }}
               />
-              {unitMeasure1.id == "" && <BsavEndNew
-                className="ml-10 mr-2"
-                onClick={() => {
-                  setTimeout(() => {
-                    refetchUnitMeasure();
-                  }, 500);
-                }}
-              />}
-
+              {unitMeasure1.id == "" && (
+                <BsavEndNew
+                  className="ml-10 mr-2"
+                  onClick={() => {
+                    setTimeout(() => {
+                      refetchUnitMeasure();
+                    }, 500);
+                  }}
+                />
+              )}
             </div>
-
           </Form>
-
-
 
           <Bcancel
             className="float-right mt-5 b-ajust"
             onClick={() => {
-              setDisabled(false)
+              setDisabled(false);
               setShow(false);
             }}
           />

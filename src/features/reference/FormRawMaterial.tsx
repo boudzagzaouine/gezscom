@@ -1,9 +1,24 @@
 import classNames from "classnames";
-import { openFamilleF, OpenRawMaterialProp, openRawMaterials } from "config/rtk/rtkRawMaterial";
+import {
+  openFamilleF,
+  OpenRawMaterialProp,
+  openRawMaterials,
+} from "config/rtk/rtkRawMaterial";
 import { openUnitF } from "config/rtk/rtkUnitMeasure";
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
-import { ARCHIVE, DEL, REQUEST_EDIT, REQUEST_SAVE, RESTORE } from "tools/consts";
-import { RawMaterial, rawMaterial0, RawMaterialJson, UnitMeasure } from "tools/types";
+import {
+  ARCHIVE,
+  DEL,
+  REQUEST_EDIT,
+  REQUEST_SAVE,
+  RESTORE,
+} from "tools/consts";
+import {
+  RawMaterial,
+  rawMaterial0,
+  RawMaterialJson,
+  UnitMeasure,
+} from "tools/types";
 import { Field, Form } from "widgets";
 import Action from "widgets/Action";
 import Bcancel from "widgets/Bcancel";
@@ -86,14 +101,34 @@ const FormRawMaterial = (
   };
   const void_ = () => {};
 
-
   return (
     <>
       {!form && (
         <section className="bg-white float-left w-full h-full mp-8 shadow-lg">
-          <Action id="" path="rawMaterials" design="" type="Famille Matière Première" ref={del} action={DEL}/>
-          <Action id="" path="rawMaterials" design="" type="Famille Matière Première" ref={archive} action={ARCHIVE}/>
-          <Action id="" path="rawMaterials" design="" type="Famille Matière Première" ref={restore} action={RESTORE}/>
+          <Action
+            id=""
+            path="rawMaterials"
+            design=""
+            type="Famille Matière Première"
+            ref={del}
+            action={DEL}
+          />
+          <Action
+            id=""
+            path="rawMaterials"
+            design=""
+            type="Famille Matière Première"
+            ref={archive}
+            action={ARCHIVE}
+          />
+          <Action
+            id=""
+            path="rawMaterials"
+            design=""
+            type="Famille Matière Première"
+            ref={restore}
+            action={RESTORE}
+          />
           <h1>Familles Matière première</h1>
           <div className="float-left w-full">
             <button
@@ -164,24 +199,24 @@ const FormRawMaterial = (
                     </Table.td>
                     <Table.td>{rawMaterial.family}</Table.td>
                     <Table.td className="cursor-pointer">
-                    <MitemsRef
-                      archive={() => {
-                        //@ts-ignore
-                        archive.current(rawMaterial.id,rawMaterial.design);
-                      }}
-                    /*   restore={() => {
+                      <MitemsRef
+                        archive={() => {
+                          //@ts-ignore
+                          archive.current(rawMaterial.id, rawMaterial.design);
+                        }}
+                        /*   restore={() => {
                         //@ts-ignore
                         restore.current(client.id,client.design);
                       }} */
-                      del={() => {
-                        //@ts-ignore
-                        del.current(rawMaterial.id,rawMaterial.design);
-                      }}
-                      obj={rawMaterial}
-                      update={() => {
-                        FormAsUpdate(rawMaterial);
-                      }}
-                    />
+                        del={() => {
+                          //@ts-ignore
+                          del.current(rawMaterial.id, rawMaterial.design);
+                        }}
+                        obj={rawMaterial}
+                        update={() => {
+                          FormAsUpdate(rawMaterial);
+                        }}
+                      />
                     </Table.td>
                   </tr>
                 );
@@ -189,7 +224,8 @@ const FormRawMaterial = (
             }
           </Table>
           <Pagin
-           load={loadPage} max={rawMaterials?.length}
+            load={loadPage}
+            max={rawMaterials?.length}
             visible={rawMaterials?.length > 0 ? true : false}
           />
         </section>
@@ -197,12 +233,16 @@ const FormRawMaterial = (
 
       <ModalS
         show={show}
-        title={rawMaterial1.id==""?"Nouvelle Famille Matière première":"Modifier Famille Matière première"}
+        title={
+          rawMaterial1.id == ""
+            ? "Nouvelle Famille Matière première"
+            : "Modifier Famille Matière première"
+        }
         format={+classNames("5")}
         close={closed}
       >
         <div className="float-left w-full text-sm">
-              <Form
+          <Form
             defaultValues={rawMaterial1}
             onSubmit={
               request == REQUEST_SAVE
@@ -213,79 +253,79 @@ const FormRawMaterial = (
             }
           >
             <div className=" float-left w-1/2">
-               <Field
-                  label={<Required msg="Désignation"/>}
-                  name="design"
-                  disabled={disabled}//required={true}
-                />
+              <Field
+                label={<Required msg="Désignation" />}
+                name="design"
+                disabled={disabled} //required={true}
+              />
             </div>
             <div className="float-left w-full">
-            <div className="float-left w-1/2">
-               <Field
-                  label={<Required msg="Nomenclature"/>}
+              <div className="float-left w-1/2">
+                <Field
+                  label={<Required msg="Nomenclature" />}
                   name="nomenclature"
-                  disabled={disabled}//required={true}
+                  disabled={disabled} //required={true}
                 />
-                </div>
+              </div>
               <div className="float-right w-1/2">
-               <Field
+                <Field
                   label="Famille Mère"
                   name="family"
-                  options={["",...(Famille||[])]}
+                  options={["", ...(Famille || [])]}
                   as="select"
                   disabled={disabled}
                 />
-             </div>
-				      </div>
-              <div className="float-left w-full">
-             <div className="float-left w-1/2">
-                <Field
-                  label={<Required msg="Unité De Mesure"/>}
-                  name="measureUnit"
-                  options={["",...(Unit||[])]}
-                  as="select"
-                  disabled={disabled}//required={true}
-                />
-               </div>
-              <div className="float-right w-1/2">
-               <Field
-                  label={<Required msg="Taux de perte"/>}
-                  name="tauxPertes"
-				          disabled={disabled}//required={true}
-                />
+              </div>
             </div>
+            <div className="float-left w-full">
+              <div className="float-left w-1/2">
+                <Field
+                  label={<Required msg="Unité De Mesure" />}
+                  name="measureUnit"
+                  options={["", ...(Unit || [])]}
+                  as="select"
+                  disabled={disabled} //required={true}
+                />
+              </div>
+              <div className="float-right w-1/2">
+                <Field
+                  label={<Required msg="Taux de perte" />}
+                  name="tauxPertes"
+                  disabled={disabled} //required={true}
+                />
+              </div>
             </div>
             <div className="mt-5 b-ajust-r">
-                     <Bsave
-            className="float-right"
+              <Bsave
+                className="float-right"
+                onClick={() => {
+                  setTimeout(() => {
+                    refetchRawMaterial();
+                    closed();
+                  }, 500);
+                }}
+              />
+              {rawMaterial1.id == "" && (
+                <BsavEndNew
+                  className="ml-10 mr-2"
+                  onClick={() => {
+                    setTimeout(() => {
+                      refetchRawMaterial();
+                    }, 500);
+                  }}
+                />
+              )}
+            </div>
+          </Form>
+          <Bcancel
+            className="float-right mt-5 b-ajust"
             onClick={() => {
-              setTimeout(() => {
-                refetchRawMaterial();
-                      closed();
-              }, 500);
+              setDisabled(true);
+              setShow(false);
             }}
           />
-          {rawMaterial1.id=="" &&<BsavEndNew
-                   className="ml-10 mr-2"
-                   onClick={() => {
-                     setTimeout(() => {
-                      refetchRawMaterial();
-                       }, 500);
-                   }}
-                />}
-               
-              </div>
-        
-          </Form>
-               <Bcancel
-               className="float-right mt-5 b-ajust"
-               onClick={() => {
-                 setDisabled(true);
-                  setShow(false);
-               }}
-             />
-             </div>
-     </ModalS>
+        </div>
+      </ModalS>
     </>
   );
 };

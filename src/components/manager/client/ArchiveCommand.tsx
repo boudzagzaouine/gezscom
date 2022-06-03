@@ -38,39 +38,33 @@ const ArchiveCommand = ({ id }: ArchiveCommandPorp, ref: Ref<void>) => {
   });
   const archiveTemp = () => {
     axios
-      .patch(process.env.NEXT_PUBLIC_URL+"/commandes/" + id0 + "/archive")
+      .patch(process.env.NEXT_PUBLIC_URL + "/commandes/" + id0 + "/archive")
       .then(() => {});
   };
   return (
     <>
       <Modal title={"archivage"} show={showModal} format={5} close={close}>
-         <h2>archivage du command num: {id0}</h2>
-          <Form
-            defaultValues={code0}
-            onSubmit={archiveTemp}
-          >
-           <Field
-                type="hidden"
-                name="id"
-               />
+        <h2>archivage du command num: {id0}</h2>
+        <Form defaultValues={code0} onSubmit={archiveTemp}>
+          <Field type="hidden" name="id" />
 
-            <Barchive
-              type="submit"
-              className="float-right mt-5 b-ajust-r"
-              onClick={() => {
-                setTimeout(() => {
-                  close();
-                }, 500);
-              }}
-            />
-           </Form>
-          <Bcancel
-            className="float-right mt-5 b-ajust"
+          <Barchive
+            type="submit"
+            className="float-right mt-5 b-ajust-r"
             onClick={() => {
-              close();
+              setTimeout(() => {
+                close();
+              }, 500);
             }}
           />
-     </Modal>
+        </Form>
+        <Bcancel
+          className="float-right mt-5 b-ajust"
+          onClick={() => {
+            close();
+          }}
+        />
+      </Modal>
     </>
   );
 };

@@ -1,5 +1,7 @@
 import {
-  ArchiveIcon, PencilAltIcon, TrashIcon
+  ArchiveIcon,
+  PencilAltIcon,
+  TrashIcon,
 } from "@heroicons/react/outline";
 import classNames from "classnames";
 import { OpenDeclarantProp, openDeclarants } from "config/rtk/rtkDeclarant";
@@ -200,7 +202,8 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
             }
           </Table>
           <Pagin
-           load={loadPage} max={declarants?.length}
+            load={loadPage}
+            max={declarants?.length}
             visible={declarants?.length > 0 ? true : false}
           />
         </section>
@@ -208,12 +211,12 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
 
       <ModalS
         show={show}
-        title={declarant1.id=="" ? "Nouveau Déclarant":"Modifier Déclarant"}
+        title={declarant1.id == "" ? "Nouveau Déclarant" : "Modifier Déclarant"}
         format={+classNames("5")}
         close={closed}
       >
         <div className="float-left w-full">
-             <Form
+          <Form
             defaultValues={declarant1}
             onSubmit={
               request == REQUEST_SAVE
@@ -225,52 +228,50 @@ const FormDeclarant = ({ declarant }: FormDeclarantProps, ref: Ref<void>) => {
           >
             <div className=" float-left w-full">
               <Field
-               label={<Required msg="Désignation"/>}
+                label={<Required msg="Désignation" />}
                 name="design"
-                disabled={disabled}//required={true}
-                
+                disabled={disabled} //required={true}
               />
-                  <Field
-                    label={<Required msg="Ville"/>}
-                    name="ville"
-                    options={["",...(Ville||[])]}
-                    as="select"
-                    disabled={disabled}//required={true}
-                    
-                  />
-                </div>
-            
-             <div className="mt-5 b-ajust-r">
-                     <Bsave
-            className="float-right"
+              <Field
+                label={<Required msg="Ville" />}
+                name="ville"
+                options={["", ...(Ville || [])]}
+                as="select"
+                disabled={disabled} //required={true}
+              />
+            </div>
+
+            <div className="mt-5 b-ajust-r">
+              <Bsave
+                className="float-right"
+                onClick={() => {
+                  setTimeout(() => {
+                    refetchDeclarant();
+                    closed();
+                  }, 500);
+                }}
+              />
+              {declarant1.id == "" && (
+                <BsavEndNew
+                  className="ml-10 mr-2"
+                  onClick={() => {
+                    setTimeout(() => {
+                      refetchDeclarant();
+                    }, 500);
+                  }}
+                />
+              )}
+            </div>
+          </Form>
+          <Bcancel
+            className="float-right mt-5 b-ajust"
             onClick={() => {
-              setTimeout(() => {
-                refetchDeclarant();
-                      closed();
-              }, 500);
+              setDisabled(true);
+              setShow(false);
             }}
           />
-          {declarant1.id=="" &&<BsavEndNew
-                   className="ml-10 mr-2"
-                   onClick={() => {
-                     setTimeout(() => {
-                      refetchDeclarant();
-                       }, 500);
-                   }}
-                />}
-               
-              </div>
-        
-          </Form>
-               <Bcancel
-               className="float-right mt-5 b-ajust"
-               onClick={() => {
-                 setDisabled(true);
-                  setShow(false);
-               }}
-             />
-             </div> 
-             </ModalS>
+        </div>
+      </ModalS>
     </>
   );
 };

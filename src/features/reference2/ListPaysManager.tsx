@@ -1,8 +1,5 @@
 import { TrashIcon } from "@heroicons/react/outline";
-import {
-  ArchiveIcon,
-  PencilAltIcon
-} from "@heroicons/react/solid";
+import { ArchiveIcon, PencilAltIcon } from "@heroicons/react/solid";
 import ArchivePays from "components/reference2/ArchivePays";
 import DeletePays from "components/reference2/DeletePays";
 import RestorePays from "components/reference2/RestorePays";
@@ -23,17 +20,17 @@ function ListPaysManager() {
     setPage(p);
     refetch();
   };
- 
-   const paysToOpen: OpenPaysProp = openPays(page);
-   const paysJson: PaysJson = paysToOpen.data;
-   const pays: Pays[] = paysJson.content;
-   const refetch: () => void = paysToOpen.refetch;
-   const save = paysToOpen.save;
-   const edit = paysToOpen.edit;
-   const refCom = useRef(null);
-   const del = useRef(null);
-   const archive = useRef(null);
-   const restore = useRef(null);
+
+  const paysToOpen: OpenPaysProp = openPays(page);
+  const paysJson: PaysJson = paysToOpen.data;
+  const pays: Pays[] = paysJson.content;
+  const refetch: () => void = paysToOpen.refetch;
+  const save = paysToOpen.save;
+  const edit = paysToOpen.edit;
+  const refCom = useRef(null);
+  const del = useRef(null);
+  const archive = useRef(null);
+  const restore = useRef(null);
 
   const menu = (pays: Pays): MenuItems[] => {
     return [
@@ -46,8 +43,8 @@ function ListPaysManager() {
         ),
         text: "Modifier",
         action: () => {
-         //@ts-ignore
-           refCom.current(pays,false);
+          //@ts-ignore
+          refCom.current(pays, false);
         },
       },
       {
@@ -81,64 +78,62 @@ function ListPaysManager() {
 
   return (
     <>
-        <Section>
-          <DeletePays refetch={refetch} id={""} ref={del} />
-          <ArchivePays id={""} ref={archive} />
-          <RestorePays id={""} ref={restore} />
-          <h1>Pays</h1>
-          <div className="float-left w-full">
-            <Bcyan
-              className="float-left"
-              onClick={() => {
-                //@ts-ignore
-                refCom.current(pays0,false);
-              }}
-            >
-              Nouveau Pays
-            </Bcyan>
-              
-        <FormPaysManager
-          refetch={refetch}
-          save={save}
-          edit={edit}
-        Pays={pays0}
-       disable={false}
-        ref={refCom}
-        />
-            <div className="float-right">
-              <Button className="bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg">
-                <Icon i="search" cl="" />
-              </Button>
-              <input
-                type="text"
-                className="py-3 border outline-[#ddd] border-[#ddd] float-left border-l-0 rounded-r-lg w-96"
-              />
-            </div>
-          </div>
-          <Table
-            className="tab-list float-left w-full mt-8"
-            thead={
-              <tr>
-                <Table.th>Désignation</Table.th>
-                <Table.th></Table.th>
-              </tr>
-            }
+      <Section>
+        <DeletePays refetch={refetch} id={""} ref={del} />
+        <ArchivePays id={""} ref={archive} />
+        <RestorePays id={""} ref={restore} />
+        <h1>Pays</h1>
+        <div className="float-left w-full">
+          <Bcyan
+            className="float-left"
+            onClick={() => {
+              //@ts-ignore
+              refCom.current(pays0, false);
+            }}
           >
-            {
-              pays?.map((Pays) => (
-                <tr key={Pays.id}>
-                  <Table.td>{Pays.design}</Table.td>
+            Nouveau Pays
+          </Bcyan>
 
-                  <Table.td>
-                    <Mitems menu={menu(Pays)} />
-                  </Table.td>
-                </tr>
-              ))
-            }
-          </Table>
+          <FormPaysManager
+            refetch={refetch}
+            save={save}
+            edit={edit}
+            Pays={pays0}
+            disable={false}
+            ref={refCom}
+          />
+          <div className="float-right">
+            <Button className="bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg">
+              <Icon i="search" cl="" />
+            </Button>
+            <input
+              type="text"
+              className="py-3 border outline-[#ddd] border-[#ddd] float-left border-l-0 rounded-r-lg w-96"
+            />
+          </div>
+        </div>
+        <Table
+          className="tab-list float-left w-full mt-8"
+          thead={
+            <tr>
+              <Table.th>Désignation</Table.th>
+              <Table.th></Table.th>
+            </tr>
+          }
+        >
+          {pays?.map((Pays) => (
+            <tr key={Pays.id}>
+              <Table.td>{Pays.design}</Table.td>
 
-          <Pagin load={loadPage} max={pays?.length} visible={pays?.length > 0} />
-        </Section>
+              <Table.td>
+                <Mitems menu={menu(Pays)} />
+              </Table.td>
+            </tr>
+          ))}
+        </Table>
+
+        <Pagin load={loadPage} max={pays?.length} visible={pays?.length > 0} />
+      </Section>
     </>
   );
 }

@@ -103,7 +103,7 @@ export type OpenVilleProp = {
   save: () => void;
   edit: () => void;
 };
-export const openVilles = (page:number): OpenVilleProp => {
+export const openVilles = (page: number): OpenVilleProp => {
   const { data = [], refetch } = usePaginationVillesQuery(page);
   const [save] = useAddVilleMutation();
   const [edit] = useEditVilleMutation();

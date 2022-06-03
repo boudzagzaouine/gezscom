@@ -25,9 +25,9 @@ interface menuProp {
   update: (obj: any) => void;
   del: (id: string) => void;
   archive: (id: string) => void;
- //restore: (id: string) => void;
+  //restore: (id: string) => void;
 }
-const Mitems = ({ archive, del, edit, obj, update ,...props}: menuProp) => {
+const Mitems = ({ archive, del, edit, obj, update, ...props }: menuProp) => {
   const menu: MenuItems[] = [
     {
       icon: (
@@ -77,7 +77,7 @@ const Mitems = ({ archive, del, edit, obj, update ,...props}: menuProp) => {
         archive(obj.id);
       },
     },
-     {
+    {
       icon: (
         <ReplyIcon
           className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
@@ -88,7 +88,7 @@ const Mitems = ({ archive, del, edit, obj, update ,...props}: menuProp) => {
       action: () => {
         //restore(obj.id);
       },
-    }, 
+    },
   ];
   return (
     <>

@@ -4,7 +4,7 @@ import { ButtonProps } from "./TypeWidgets";
 import { DotsVerticalIcon } from "@heroicons/react/solid";
 import Bcyan from "./Bcyan";
 const calculClass = ({ className }: ButtonProps) => {
-  return cn(" w-60 ",className);
+  return cn(" w-60 ", className);
 };
 /*""*/
 

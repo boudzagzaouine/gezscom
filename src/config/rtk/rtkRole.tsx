@@ -101,7 +101,7 @@ export type OpenRoleProp = {
   save: () => void;
   edit: () => void;
 };
-export const openRoles = (page:number): OpenRoleProp => {
+export const openRoles = (page: number): OpenRoleProp => {
   const { data = [], refetch } = usePaginationRolesQuery(page);
   const [save] = useAddRoleMutation();
   const [edit] = useEditRoleMutation();

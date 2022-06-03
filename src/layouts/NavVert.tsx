@@ -21,6 +21,7 @@ import {
   TYPE_MANAGER,
   VILLE_MANAGER,
   USER_MANAGER,
+  COLISAGE_MANAGER
 } from "tools/consts";
 import Icon from "widgets/Icon";
 type NavVertProps = {
@@ -74,6 +75,14 @@ console.log("route = "+JSON.stringify(route))
       link: "/manager/purchase/Reception",
       active: route.pathname == "/manager/purchase/Reception"||route.pathname == "/manager/purchase/RightOfReturn"||route.pathname == "/manager/purchase/StockStatus"||route.pathname == "/manager/purchase/InputOutputHistory",
       sous: [],
+    },
+    {
+      id: COLISAGE_MANAGER,
+      icon: "shopping-bag",
+      text: "gestion de colisage",
+      link: "/manager/colisage/GestionColisage",
+      active: route.pathname == "/manager/colisage/GestionColisage",
+      sous: []
     },
     /* {
       id: 11,

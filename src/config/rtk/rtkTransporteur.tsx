@@ -107,7 +107,7 @@ export type OpenTransporteurProp = {
   edit: () => void;
 };
 
-export const openTransporteurs = (page:number): OpenTransporteurProp => {
+export const openTransporteurs = (page: number): OpenTransporteurProp => {
   const { data = [], refetch } = usePaginationTransporteursQuery(page);
   const [save] = useAddTransporteurMutation();
   const [edit] = useEditTransporteurMutation();

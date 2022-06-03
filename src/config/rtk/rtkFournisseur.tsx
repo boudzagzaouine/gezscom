@@ -385,181 +385,197 @@ export const {
   useRestoreLigneDeCommandeMutation,
   usePaginationLigneDeCommandeQuery,
 } = crudFournisseur;
-export interface FournisseurJson{
-  content:Fournisseur[]
-  }
-  export type OpenFournisseurProp = {
-    data: FournisseurJson;
-    refetch: () => void;
-    save: () => void;
-    edit: () => void;
-  };
-  //const fournisseursOpen:OpenFournisseurProp=openFournisseurs()
-  export const openFournisseurs = (): OpenFournisseurProp => {
-    const { data = [], refetch } = useFetchFournisseursQuery();
-    const [save] = useAddFournisseurMutation();
-    const [edit] = useEditFournisseurMutation();
-    //@ts-ignore
-    const out: OpenFournisseurProp = { data, refetch, save, edit };
-    return out;
-  };
-  export const openPaginationFournisseurs = (page:number): OpenFournisseurProp => {
-    const { data = [], refetch } = usePaginationFournisseursQuery(page);
-    const [save] = useAddFournisseurMutation();
-    const [edit] = useEditFournisseurMutation();
-    //@ts-ignore
-    const out: OpenFournisseurProp = { data, refetch, save, edit };
-    return out;
-  };
-  /********************************************/
-  
-  export interface CommandesFournisseurJson{
-  content:CommandeFournisseur[]
-  }
-  export type OpenCommandesFournisseurProp = {
-    data: CommandesFournisseurJson;
-    refetch: () => void;
-    save: () => void;
-    edit: () => void;
-  };
-  export type OpenCommandesFournisseurJoinProp = {
-    data: CommandeFournisseur[];
-    refetch: () => void;
-    save: () => void;
-    edit: () => void;
-  };
-  export const openCommandesFournisseurs = (): OpenCommandesFournisseurProp => {
-    const { data = [], refetch } = useFetchCommandesFournisseurQuery();
-    const [save] = useAddCommandeFournisseurMutation();
-    const [edit] = useEditCommandeFournisseurMutation();
-    //@ts-ignore
-    const out: OpenCommandesFournisseurProp = { data, refetch, save, edit };
-    return out;
-  };
-  /********************************************/
-  export const openPaginationCommandesFournisseurs = (page:number): OpenCommandesFournisseurProp => {
-    const { data = [], refetch } = usePaginationCommandesFournisseurQuery(page);
-    const [save] = useAddCommandeFournisseurMutation();
-    const [edit] = useEditCommandeFournisseurMutation();
-    //@ts-ignore
-    const out: OpenCommandesFournisseurProp = { data, refetch, save, edit };
-    return out;
-  };
-  /********************************************/
-  /*
+export interface FournisseurJson {
+  content: Fournisseur[];
+}
+export type OpenFournisseurProp = {
+  data: FournisseurJson;
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
+//const fournisseursOpen:OpenFournisseurProp=openFournisseurs()
+export const openFournisseurs = (): OpenFournisseurProp => {
+  const { data = [], refetch } = useFetchFournisseursQuery();
+  const [save] = useAddFournisseurMutation();
+  const [edit] = useEditFournisseurMutation();
+  //@ts-ignore
+  const out: OpenFournisseurProp = { data, refetch, save, edit };
+  return out;
+};
+export const openPaginationFournisseurs = (
+  page: number
+): OpenFournisseurProp => {
+  const { data = [], refetch } = usePaginationFournisseursQuery(page);
+  const [save] = useAddFournisseurMutation();
+  const [edit] = useEditFournisseurMutation();
+  //@ts-ignore
+  const out: OpenFournisseurProp = { data, refetch, save, edit };
+  return out;
+};
+/********************************************/
+
+export interface CommandesFournisseurJson {
+  content: CommandeFournisseur[];
+}
+export type OpenCommandesFournisseurProp = {
+  data: CommandesFournisseurJson;
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
+export type OpenCommandesFournisseurJoinProp = {
+  data: CommandeFournisseur[];
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
+export const openCommandesFournisseurs = (): OpenCommandesFournisseurProp => {
+  const { data = [], refetch } = useFetchCommandesFournisseurQuery();
+  const [save] = useAddCommandeFournisseurMutation();
+  const [edit] = useEditCommandeFournisseurMutation();
+  //@ts-ignore
+  const out: OpenCommandesFournisseurProp = { data, refetch, save, edit };
+  return out;
+};
+/********************************************/
+export const openPaginationCommandesFournisseurs = (
+  page: number
+): OpenCommandesFournisseurProp => {
+  const { data = [], refetch } = usePaginationCommandesFournisseurQuery(page);
+  const [save] = useAddCommandeFournisseurMutation();
+  const [edit] = useEditCommandeFournisseurMutation();
+  //@ts-ignore
+  const out: OpenCommandesFournisseurProp = { data, refetch, save, edit };
+  return out;
+};
+/********************************************/
+/*
 const commandesFournisseursByFounisseurOpen: OpenCommandesFournisseurJoinProp =openCommandesFournisseursByFounisseur(...)
 const commandesFournisseurs:CommandeFournisseur[]=commandesFournisseursByFounisseurOpen.data
 cosnt refetch=commandesFournisseursByFounisseurOpen.refetch
 const add=commandesFournisseursByFounisseurOpen.save
 const edit=commandesFournisseursByFounisseurOpen.edit
   */
-  export const openCommandesFournisseursByFounisseur = (idFournisseur:string): OpenCommandesFournisseurJoinProp => {
-    const { data = [], refetch } = useFetchCommandesFournisseurByIdFournisseurQuery(idFournisseur)
-    const [save] = useAddCommandeFournisseurMutation();
-    const [edit] = useEditCommandeFournisseurMutation();
-    //@ts-ignore
-    const out: OpenCommandesFournisseurJoinProp  = { data, refetch, save, edit };
-    return out;
-  };
-  /********************************************/
-  
-  export interface MatierePremiereJson{
-  content:MatierePremiere[]
-  }
-  export type OpenMatierePremiereProp = {
-    data: MatierePremiereJson;
-    refetch: () => void;
-    save: () => void;
-    edit: () => void;
-  };
-  export type OpenMatierePremiereJoinProp = {
-    data: MatierePremiere[];
-    refetch: () => void;
-    save: () => void;
-    edit: () => void;
-  };
-  /*
+export const openCommandesFournisseursByFounisseur = (
+  idFournisseur: string
+): OpenCommandesFournisseurJoinProp => {
+  const { data = [], refetch } =
+    useFetchCommandesFournisseurByIdFournisseurQuery(idFournisseur);
+  const [save] = useAddCommandeFournisseurMutation();
+  const [edit] = useEditCommandeFournisseurMutation();
+  //@ts-ignore
+  const out: OpenCommandesFournisseurJoinProp = { data, refetch, save, edit };
+  return out;
+};
+/********************************************/
+
+export interface MatierePremiereJson {
+  content: MatierePremiere[];
+}
+export type OpenMatierePremiereProp = {
+  data: MatierePremiereJson;
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
+export type OpenMatierePremiereJoinProp = {
+  data: MatierePremiere[];
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
+/*
   const matierePremieresOpen:OpenMatierePremiereProp=openMatierePremieres()
   */
-  export const openMatierePremieres = (): OpenMatierePremiereProp => {
-    const { data = [], refetch } = useFetchMatierePremiereQuery();
-    const [save] = useAddMatierePremiereMutation();
-    const [edit] = useEditMatierePremiereMutation();
-    //@ts-ignore
-    const out: OpenMatierePremiereProp = { data, refetch, save, edit };
-    return out;
-  };
-  /********************************************/
-   /*
+export const openMatierePremieres = (): OpenMatierePremiereProp => {
+  const { data = [], refetch } = useFetchMatierePremiereQuery();
+  const [save] = useAddMatierePremiereMutation();
+  const [edit] = useEditMatierePremiereMutation();
+  //@ts-ignore
+  const out: OpenMatierePremiereProp = { data, refetch, save, edit };
+  return out;
+};
+/********************************************/
+/*
   const matierePremieresOpen:OpenMatierePremiereProp=openMatierePremieresPagination(page)
   */
-  export const openMatierePremieresPagination = (page:number): OpenMatierePremiereProp => {
-    const { data = [], refetch } = usePaginationMatierePremiereQuery(page);
-    const [save] = useAddMatierePremiereMutation();
-    const [edit] = useEditMatierePremiereMutation();
-    //@ts-ignore
-    const out: OpenMatierePremiereProp = { data, refetch, save, edit };
-    return out;
-  };
-  /********************************************/
-  /*
+export const openMatierePremieresPagination = (
+  page: number
+): OpenMatierePremiereProp => {
+  const { data = [], refetch } = usePaginationMatierePremiereQuery(page);
+  const [save] = useAddMatierePremiereMutation();
+  const [edit] = useEditMatierePremiereMutation();
+  //@ts-ignore
+  const out: OpenMatierePremiereProp = { data, refetch, save, edit };
+  return out;
+};
+/********************************************/
+/*
   const matierePremiereByFournisseurOpen: OpenMatierePremiereJoinProp=openMatierePremiereByFournisseur(idfournisseur)
   const matierePremieres:MatierePremiere[]= matierePremiereByFournisseurOpen.data
   */
-  export const openMatierePremiereByFournisseur = (idfournisseur:string):  OpenMatierePremiereJoinProp => {
-    const { data = [], refetch } = useFetchMatierePremiereByIdFournisseurQuery(idfournisseur)
-    const [save] = useAddMatierePremiereMutation();
-    const [edit] = useEditMatierePremiereMutation();
-    //@ts-ignore
-    const out:  OpenMatierePremiereJoinProp = { data, refetch, save, edit };
-    return out;
-  };
-  /********************************************/
-  
-  export interface LigneDeCommandeJson{
-  content:LigneDeCommande[]
-  }
-  export type OpenLigneDeCommandeProp = {
-    data: LigneDeCommandeJson;
-    refetch: () => void;
-    save: () => void;
-    edit: () => void;
-  };
-  export type OpenLigneDeCommandeByJoinProp = {
-    data: LigneDeCommande[];
-    refetch: () => void;
-    save: () => void;
-    edit: () => void;
-  };
-  export const openLigneDeCommandes = (): OpenLigneDeCommandeProp => {
-    const { data = [], refetch } = useFetchLigneDeCommandeQuery();
-    const [save] = useAddLigneDeCommandeMutation();
-    const [edit] = useEditLigneDeCommandeMutation();
-    //@ts-ignore
-    const out: OpenLigneDeCommandeProp = { data, refetch, save, edit };
-    return out;
-  };
-  //const ligneDeCommandesOpen:OpenLigneDeCommandeByJoinProp=openLigneDeCommandesByFournisseur()
-  //const ligneDeCommandes:LigneDeCommande[]=ligneDeCommandesOpen.data
-  //const refetch=ligneDeCommandesOpen.refetch
-  //const add=ligneDeCommandesOpen.save
-  //const edit=ligneDeCommandesOpen.edit
-  export const openLigneDeCommandesByFournisseur = (idCommandeFournisseur:string): OpenLigneDeCommandeByJoinProp => {
-    const { data = [], refetch } = useFetchLigneDeCommandeByIdCommandeFournisseurQuery(idCommandeFournisseur)
-    const [save] = useAddLigneDeCommandeMutation();
-    const [edit] = useEditLigneDeCommandeMutation();
-    //@ts-ignore
-    const out: OpenLigneDeCommandeByJoinProp = { data, refetch, save, edit };
-    return out;
-  };
-  export const openLigneDeCommandesByMatierePremiere = (idMatierePremiere:string): OpenLigneDeCommandeByJoinProp => {
-    const { data = [], refetch } = useFetchLigneDeCommandeByIdMatierePremiereQuery(idMatierePremiere)
-    const [save] = useAddLigneDeCommandeMutation();
-    const [edit] = useEditLigneDeCommandeMutation();
-    //@ts-ignore
-    const out: OpenLigneDeCommandeByJoinProp = { data, refetch, save, edit };
-    return out;
-  };
-  /********************************************/
-  
-  
+export const openMatierePremiereByFournisseur = (
+  idfournisseur: string
+): OpenMatierePremiereJoinProp => {
+  const { data = [], refetch } =
+    useFetchMatierePremiereByIdFournisseurQuery(idfournisseur);
+  const [save] = useAddMatierePremiereMutation();
+  const [edit] = useEditMatierePremiereMutation();
+  //@ts-ignore
+  const out: OpenMatierePremiereJoinProp = { data, refetch, save, edit };
+  return out;
+};
+/********************************************/
+
+export interface LigneDeCommandeJson {
+  content: LigneDeCommande[];
+}
+export type OpenLigneDeCommandeProp = {
+  data: LigneDeCommandeJson;
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
+export type OpenLigneDeCommandeByJoinProp = {
+  data: LigneDeCommande[];
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
+export const openLigneDeCommandes = (): OpenLigneDeCommandeProp => {
+  const { data = [], refetch } = useFetchLigneDeCommandeQuery();
+  const [save] = useAddLigneDeCommandeMutation();
+  const [edit] = useEditLigneDeCommandeMutation();
+  //@ts-ignore
+  const out: OpenLigneDeCommandeProp = { data, refetch, save, edit };
+  return out;
+};
+//const ligneDeCommandesOpen:OpenLigneDeCommandeByJoinProp=openLigneDeCommandesByFournisseur()
+//const ligneDeCommandes:LigneDeCommande[]=ligneDeCommandesOpen.data
+//const refetch=ligneDeCommandesOpen.refetch
+//const add=ligneDeCommandesOpen.save
+//const edit=ligneDeCommandesOpen.edit
+export const openLigneDeCommandesByFournisseur = (
+  idCommandeFournisseur: string
+): OpenLigneDeCommandeByJoinProp => {
+  const { data = [], refetch } =
+    useFetchLigneDeCommandeByIdCommandeFournisseurQuery(idCommandeFournisseur);
+  const [save] = useAddLigneDeCommandeMutation();
+  const [edit] = useEditLigneDeCommandeMutation();
+  //@ts-ignore
+  const out: OpenLigneDeCommandeByJoinProp = { data, refetch, save, edit };
+  return out;
+};
+export const openLigneDeCommandesByMatierePremiere = (
+  idMatierePremiere: string
+): OpenLigneDeCommandeByJoinProp => {
+  const { data = [], refetch } =
+    useFetchLigneDeCommandeByIdMatierePremiereQuery(idMatierePremiere);
+  const [save] = useAddLigneDeCommandeMutation();
+  const [edit] = useEditLigneDeCommandeMutation();
+  //@ts-ignore
+  const out: OpenLigneDeCommandeByJoinProp = { data, refetch, save, edit };
+  return out;
+};
+/********************************************/

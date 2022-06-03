@@ -110,7 +110,9 @@ export type OpenCommandeByClientProp = {
   save: () => void;
   edit: () => void;
 };
-export const openCommandesByClient = (idclient:string): OpenCommandeByClientProp => {
+export const openCommandesByClient = (
+  idclient: string
+): OpenCommandeByClientProp => {
   const { data = [], refetch } = useFetchcommandesByIdClientQuery(idclient);
   const [save] = useAddCommandeMutation();
   const [edit] = useEditCommandeMutation();

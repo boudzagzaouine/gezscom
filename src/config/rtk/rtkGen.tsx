@@ -1,5 +1,5 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IdsObject, IdsObjectJson } from 'tools/types';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { IdsObject, IdsObjectJson } from "tools/types";
 
 export const crudGeneric = createApi({
   reducerPath: "crud-generic",
@@ -18,25 +18,28 @@ export const crudGeneric = createApi({
       fetch: builder.query<IdsObject[], string>({
         query: (path) => `/${path}`,
       }),
-     
-      add: builder.mutation<IdsObject,Partial<IdsObject> & Pick<IdsObject,"path">>({
+
+      add: builder.mutation<
+        IdsObject,
+        Partial<IdsObject> & Pick<IdsObject, "path">
+      >({
         query: (body) => ({
           url: `/${body.path}`,
           method: "POST",
           body,
         }),
       }),
-      edit: builder.mutation<IdsObject,Partial<IdsObject>& Pick<IdsObject,"path"> & Pick<IdsObject, "id">   >({
+      edit: builder.mutation<
+        IdsObject,
+        Partial<IdsObject> & Pick<IdsObject, "path"> & Pick<IdsObject, "id">
+      >({
         query: (body) => ({
           url: `/${body.path}/${body.id}`,
           method: "PUT",
           body,
         }),
       }),
-      delete: builder.mutation<
-        { success: boolean; id: number },
-        number
-      >({
+      delete: builder.mutation<{ success: boolean; id: number }, number>({
         //@ts-ignore
         query(id: Num) {
           return {
@@ -66,15 +69,11 @@ export const crudGeneric = createApi({
     };
   },
 });
-export const {
-  useFetchQuery,
-  useAddMutation,
-  useEditMutation
-} = crudGeneric;
+export const { useFetchQuery, useAddMutation, useEditMutation } = crudGeneric;
 
-export type OpenIdsObjectProp<E extends IdsObject,J extends IdsObjectJson> = {
+export type OpenIdsObjectProp<E extends IdsObject, J extends IdsObjectJson> = {
   data: J;
-  tab:E[];
+  tab: E[];
   refetch: () => void;
   save: () => void;
   edit: () => void;
@@ -86,34 +85,39 @@ export type OpenIdsObjectByIdClientProp<E extends IdsObject> = {
   edit: () => void;
 };
 
-export const openIdsObjects =<E extends IdsObject,J extends IdsObjectJson> (path:string): OpenIdsObjectProp<E,J> => {
+export const openIdsObjects = <E extends IdsObject, J extends IdsObjectJson>(
+  path: string
+): OpenIdsObjectProp<E, J> => {
   try {
-    const { data = [], refetch } = useFetchQuery(path+"?page=0&size=3000");
-  //@ts-ignore
-  const tab:E[]=data.content
-  const [save] = useAddMutation();
-  const [edit] = useEditMutation();
-  //@ts-ignore
-  const out: OpenIdsObjectProp = { tab,data, refetch, save, edit };
-  return out;
+    const { data = [], refetch } = useFetchQuery(path + "?page=0&size=3000");
+    //@ts-ignore
+    const tab: E[] = data.content;
+    const [save] = useAddMutation();
+    const [edit] = useEditMutation();
+    //@ts-ignore
+    const out: OpenIdsObjectProp = { tab, data, refetch, save, edit };
+    return out;
   } catch (error) {
     //@ts-ignore
     return null;
   }
 };
-export const openIdsObject =<E extends IdsObject,J extends IdsObjectJson> (path:string,id:string): OpenIdsObjectProp<E,J> => {
- try {
-  const { data = [], refetch } = useFetchQuery(path+"/"+id);
-  //@ts-ignore
-  const tab:E=data.content
-  const [save] = useAddMutation();
-  const [edit] = useEditMutation();
-  const pathh=path+"/"+id
-  //@ts-ignore
-  const out: OpenIdsObjectProp = { pathh,tab,data, refetch, save, edit };
-  return out; 
- } catch (error) {
-   //@ts-ignore
-   return null;
- }
+export const openIdsObject = <E extends IdsObject, J extends IdsObjectJson>(
+  path: string,
+  id: string
+): OpenIdsObjectProp<E, J> => {
+  try {
+    const { data = [], refetch } = useFetchQuery(path + "/" + id);
+    //@ts-ignore
+    const tab: E = data.content;
+    const [save] = useAddMutation();
+    const [edit] = useEditMutation();
+    const pathh = path + "/" + id;
+    //@ts-ignore
+    const out: OpenIdsObjectProp = { pathh, tab, data, refetch, save, edit };
+    return out;
+  } catch (error) {
+    //@ts-ignore
+    return null;
+  }
 };

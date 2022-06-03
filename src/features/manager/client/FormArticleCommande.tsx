@@ -1,14 +1,23 @@
 import React, { ChangeEvent, useState } from "react";
 import { Field, Form } from "widgets";
 import Bcyan from "widgets/Bcyan";
-import { arc0, Commande, ArticleCommande, ArticleClient, articleClient0 } from "tools/types";
+import {
+  arc0,
+  Commande,
+  ArticleCommande,
+  ArticleClient,
+  articleClient0,
+} from "tools/types";
 import Table from "widgets/Table";
 import Bcancel from "widgets/Bcancel";
 import Bsave from "widgets/Bsave";
-import { OpenArticleClientByClientProp, openArticleClientsByClient } from "config/rtk/RtkArticleClient";
+import {
+  OpenArticleClientByClientProp,
+  openArticleClientsByClient,
+} from "config/rtk/RtkArticleClient";
 type FormArticleCommandeProp = {
   articleCommande: ArticleCommande;
-  idClient:string
+  idClient: string;
   saveArticle: (art: ArticleCommande) => void;
   close: () => void;
   refetch: () => void;
@@ -20,27 +29,34 @@ const FormArticleCommande = ({
   close,
   refetch,
 }: FormArticleCommandeProp) => {
-  const articleClientsOpen: OpenArticleClientByClientProp = openArticleClientsByClient(idClient);
+  const articleClientsOpen: OpenArticleClientByClientProp =
+    openArticleClientsByClient(idClient);
   const articlesClients: ArticleClient[] = articleClientsOpen.data;
-  const [articleCommande1,setArticleCommande1]=useState<ArticleCommande>(articleCommande)
+  const [articleCommande1, setArticleCommande1] =
+    useState<ArticleCommande>(articleCommande);
   return (
     <>
       <tr className="relative">
         <div className="absolute left-0 top-0 bg-[#ccc]">
           <Form defaultValues={articleCommande1} onSubmit={saveArticle}>
             <Table.td>
-             <Field
-              label=""
-              name="design"
-              as="select"
-              onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                setArticleCommande1({...articleCommande1,design:e.target.value})
-               }}
-            >
-              {[articleClient0, ...(articlesClients || [])]?.map((c: ArticleClient) => (
-                  <option value={c.design}>{c.design}</option>
-                ))}
-            </Field>
+              <Field
+                label=""
+                name="design"
+                as="select"
+                onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                  setArticleCommande1({
+                    ...articleCommande1,
+                    design: e.target.value,
+                  });
+                }}
+              >
+                {[articleClient0, ...(articlesClients || [])]?.map(
+                  (c: ArticleClient) => (
+                    <option value={c.design}>{c.design}</option>
+                  )
+                )}
+              </Field>
             </Table.td>
             <Table.td>
               <Field name="qte" placeholder="qte" />

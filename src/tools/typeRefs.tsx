@@ -1,1 +1,1 @@
-export const REF_PAYMENT_MODE=1;
+export const REF_PAYMENT_MODE = 1;

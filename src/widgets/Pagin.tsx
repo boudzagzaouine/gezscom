@@ -4,14 +4,14 @@ import { PAGE_SIZE } from "tools/consts";
 type PaginProps = {
   load: (page: number) => void;
   visible: boolean;
-  max:number
+  max: number;
 };
-const Pagin = ({ load, visible ,max}: PaginProps) => {
-  const visible1:boolean =false 
+const Pagin = ({ load, visible, max }: PaginProps) => {
+  const visible1: boolean = false;
   const [init, setInit] = useState(0);
   const [page, setPage] = useState(init);
   let size: number = PAGE_SIZE;
-  let max1: number = max+2;
+  let max1: number = max + 2;
   const run = (p: number) => {
     try {
       setPage(p);
@@ -20,10 +20,9 @@ const Pagin = ({ load, visible ,max}: PaginProps) => {
       console.log("error pagination \n" + error);
     }
   };
-  const maxInit= Math.trunc(max1 / size) + (max1 % size) - 2;
+  const maxInit = Math.trunc(max1 / size) + (max1 % size) - 2;
 
   const next = () => {
-    
     setInit(init + 1);
     if (init > maxInit) setInit(maxInit);
   };
@@ -39,7 +38,7 @@ const Pagin = ({ load, visible ,max}: PaginProps) => {
             <li>
               <button
                 onClick={() => prev()}
-                disabled={init==0}
+                disabled={init == 0}
                 className={
                   "py-2 px-3 ml-0 leading-tight rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white disabled:bg-[#ccc] "
                 }
@@ -119,7 +118,7 @@ const Pagin = ({ load, visible ,max}: PaginProps) => {
             <li>
               <button
                 onClick={() => next()}
-                disabled={init==maxInit}
+                disabled={init == maxInit}
                 className={
                   "py-2 px-3 leading-tight rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white disabled:bg-[#ccc]"
                 }

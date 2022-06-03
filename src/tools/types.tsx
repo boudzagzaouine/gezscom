@@ -1,23 +1,23 @@
-export type Num ={
+export type Num = {
   id: number;
 };
-export type IdsObjectJson ={
-  content:IdsObject[]
-}
-export type IdsObject ={
-  id: string;
-  design:string;
-  path:string
+export type IdsObjectJson = {
+  content: IdsObject[];
 };
-export const ids0:IdsObject={
-  id:"",
-  design:"",
-  path:""
-}
-export interface ClientJson{
+export type IdsObject = {
+  id: string;
+  design: string;
+  path: string;
+};
+export const ids0: IdsObject = {
+  id: "",
+  design: "",
+  path: "",
+};
+export interface ClientJson {
   content: Client[];
 }
-export interface Client extends IdsObject{
+export interface Client extends IdsObject {
   contact: string;
   image: string;
   email: string;
@@ -32,7 +32,7 @@ export interface Client extends IdsObject{
   swift: string;
   adressLivs: AdressLiv[];
 }
-export const c0: Client ={
+export const c0: Client = {
   id: "",
   design: "",
   contact: "",
@@ -48,19 +48,19 @@ export const c0: Client ={
   rib: "",
   swift: "",
   adressLivs: [],
-  path: ""
+  path: "",
 };
-export interface CommandeJson{
+export interface CommandeJson {
   content: Commande[];
 }
-export interface Commande extends IdsObject{
+export interface Commande extends IdsObject {
   date: Date;
   season: string;
   amount: string;
   idClient: string;
   adrLiv: string;
 }
-export const cm0: Commande ={
+export const cm0: Commande = {
   id: "",
   date: new Date(),
   amount: "",
@@ -68,37 +68,37 @@ export const cm0: Commande ={
   idClient: "",
   adrLiv: "",
   design: "",
-  path: ""
+  path: "",
 };
 
-export interface AdressLivJson{
+export interface AdressLivJson {
   content: AdressLiv[];
 }
-export interface AdressLiv extends IdsObject{
+export interface AdressLiv extends IdsObject {
   adress: string;
   country: string;
   city: string;
   idClient: string;
 }
-export const adr0: AdressLiv ={
+export const adr0: AdressLiv = {
   id: "",
   adress: "",
   country: "",
   city: "",
   idClient: "",
   design: "",
-  path: ""
+  path: "",
 };
-export interface ArticleCommandeJson{
+export interface ArticleCommandeJson {
   content: ArticleCommande[];
 }
-export interface ArticleCommande extends IdsObject{
+export interface ArticleCommande extends IdsObject {
   qte: number;
   portion: string;
   pu: number;
   idCommande: string;
 }
-export const arc0: ArticleCommande ={
+export const arc0: ArticleCommande = {
   id: "",
   design: "",
   //@ts-ignore
@@ -108,145 +108,141 @@ export const arc0: ArticleCommande ={
   pu: "",
   idCommande: "",
 };
-export interface ArticleJson{
+export interface ArticleJson {
   content: Article[];
 }
 
-export interface Article extends IdsObject{
+export interface Article extends IdsObject {
   nomenclature: string;
   tauxPertes: number;
 }
 
-export const article0: Article ={
+export const article0: Article = {
   id: "",
   design: "",
   nomenclature: "",
   tauxPertes: 0,
-  path: ""
+  path: "",
 };
 
-export interface UnitMeasureJson{
+export interface UnitMeasureJson {
   content: UnitMeasure[];
 }
 
-export interface UnitMeasure extends IdsObject{
+export interface UnitMeasure extends IdsObject {
   symbole: string;
   decimal: number;
 }
 
-export const unitMeasure0: UnitMeasure ={
+export const unitMeasure0: UnitMeasure = {
   id: "",
   design: "",
   symbole: "",
   decimal: 0,
-  path: "unitMeasures"
+  path: "unitMeasures",
 };
 
-export interface BureauDouaneJson{
+export interface BureauDouaneJson {
   content: BureauDouane[];
 }
 
-export interface BureauDouane extends IdsObject{
+export interface BureauDouane extends IdsObject {
   code: string;
-  
 }
 
-export const bureauDouane0: BureauDouane ={
+export const bureauDouane0: BureauDouane = {
   id: "",
   code: "",
   design: "",
-  path: ""
+  path: "",
 };
 
-export interface DeclarantJson{
+export interface DeclarantJson {
   content: Declarant[];
 }
 
-export interface Declarant extends IdsObject{
+export interface Declarant extends IdsObject {
   ville: string;
 }
 
-export const declarant0: Declarant ={
+export const declarant0: Declarant = {
   id: "",
   design: "",
   ville: "",
-  path: ""
+  path: "",
 };
 
-export interface IncotermJson{
+export interface IncotermJson {
   content: Incoterm[];
 }
 
-export interface Incoterm extends IdsObject{
+export interface Incoterm extends IdsObject {
   code: string;
-  
 }
 
-export const incoterm0: Incoterm ={
+export const incoterm0: Incoterm = {
   id: "",
   code: "",
   design: "",
-  path: "incoterms"
+  path: "incoterms",
 };
 
-export interface PayementModeJson{
+export interface PayementModeJson {
   content: PayementMode[];
 }
 
-export interface PayementMode extends IdsObject{
+export interface PayementMode extends IdsObject {
   code: string;
-  
 }
 
-export const payementMode0: PayementMode ={
+export const payementMode0: PayementMode = {
   id: "",
   code: "",
   design: "",
-  path: "payementModes"
+  path: "payementModes",
 };
 
-export interface RegimeDouanierJson{
+export interface RegimeDouanierJson {
   content: RegimeDouanier[];
 }
 
-export interface RegimeDouanier extends IdsObject{
+export interface RegimeDouanier extends IdsObject {
   code: string;
-  
 }
 
-export const regimeDouanier0: RegimeDouanier ={
+export const regimeDouanier0: RegimeDouanier = {
   id: "",
   code: "",
   design: "",
-  path: ""
+  path: "",
 };
 
-export interface RawMaterialJson{
+export interface RawMaterialJson {
   content: RawMaterial[];
 }
 
-export interface RawMaterial extends IdsObject{
+export interface RawMaterial extends IdsObject {
   nomenclature: string;
   family: string;
   tauxPertes: number;
   measureUnit: string;
 }
 
-export const rawMaterial0: RawMaterial ={
+export const rawMaterial0: RawMaterial = {
   id: "",
   design: "",
   nomenclature: "",
   family: "",
   tauxPertes: 0,
   measureUnit: "",
-  path: "rawMaterials"
+  path: "rawMaterials",
 };
 
-export interface DumJson{
+export interface DumJson {
   content: Dum[];
 }
 
-export interface Dum extends IdsObject{
+export interface Dum extends IdsObject {
   numDum: number;
   date: Date;
   valeur: number;
@@ -256,7 +252,7 @@ export interface Dum extends IdsObject{
   regime: string;
 }
 
-export const dum0: Dum ={
+export const dum0: Dum = {
   id: "",
   numDum: 0,
   date: new Date(),
@@ -266,14 +262,14 @@ export const dum0: Dum ={
   declarant: "",
   regime: "",
   design: "",
-  path: ""
+  path: "",
 };
 
-export interface DechargeJson{
+export interface DechargeJson {
   content: Decharge[];
 }
 
-export interface Decharge extends IdsObject{
+export interface Decharge extends IdsObject {
   numDum: number;
   date: Date;
   valeur: number;
@@ -282,7 +278,7 @@ export interface Decharge extends IdsObject{
   declarant: string;
 }
 
-export const decharge0: Decharge ={
+export const decharge0: Decharge = {
   id: "",
   numDum: 0,
   date: new Date(),
@@ -291,129 +287,120 @@ export const decharge0: Decharge ={
   transporteur: "",
   declarant: "",
   design: "",
-  path: ""
+  path: "",
 };
 
-export interface TransporteurJson{
-  content:Transporteur[]
+export interface TransporteurJson {
+  content: Transporteur[];
 }
-export interface Transporteur extends IdsObject{
-  
-}
-export const transporteur0:Transporteur={
+export interface Transporteur extends IdsObject {}
+export const transporteur0: Transporteur = {
   id: "",
   design: "",
-  path: ""
-}
-export interface Document extends IdsObject{
-  
-}
-export const document0:Document={
+  path: "",
+};
+export interface Document extends IdsObject {}
+export const document0: Document = {
   id: "",
   design: "",
-  path: ""
+  path: "",
+};
+export interface DocumentJson {
+  content: Document[];
 }
-export interface DocumentJson{
-  content:Document[]
+export interface DeviseJson {
+  content: Devise[];
 }
-export interface DeviseJson{
-  content:Devise[]
-}
-export interface Devise extends IdsObject{
+export interface Devise extends IdsObject {
   code_iso: string;
   symbole: string;
-  
 }
-export const devise0: Devise={
+export const devise0: Devise = {
   id: "",
   code_iso: "",
   symbole: "",
   design: "",
-  path: ""
+  path: "",
+};
+export interface PaysJson {
+  content: Pays[];
 }
-export interface PaysJson{
-  content:Pays[]
-}
-export interface Pays extends IdsObject{
-  
-}
-export const pays0: Pays ={
+export interface Pays extends IdsObject {}
+export const pays0: Pays = {
   id: "",
   design: "",
-  path: ""
-}
-export interface Role extends IdsObject{
+  path: "",
+};
+export interface Role extends IdsObject {
   nbrUtilisateur: string;
 }
-export const role0: Role ={
+export const role0: Role = {
   id: "",
   design: "",
   nbrUtilisateur: "",
-  path: ""
-}
-export interface Ville extends IdsObject{
+  path: "",
+};
+export interface Ville extends IdsObject {
   pays: string;
 }
-export interface VilleJson{
-  content:Ville[]
+export interface VilleJson {
+  content: Ville[];
 }
-export interface Type extends IdsObject{
-  
-}
-export const type0: Type ={
+export interface Type extends IdsObject {}
+export const type0: Type = {
   id: "",
   design: "",
-  path: ""
-}
-export interface TypeJson{
-  content:Type[]
-}
-export const t0: Transporteur ={
-  id: "",
-  design: "",
-  path: ""
+  path: "",
 };
-export const d0: Document ={
+export interface TypeJson {
+  content: Type[];
+}
+export const t0: Transporteur = {
   id: "",
   design: "",
-  path: ""
+  path: "",
 };
-export const v0: Devise ={
+export const d0: Document = {
+  id: "",
+  design: "",
+  path: "",
+};
+export const v0: Devise = {
   id: "",
   code_iso: "",
   symbole: "",
   design: "",
-  path: ""
+  path: "",
 };
-export const p0: Pays ={
+export const p0: Pays = {
   id: "",
   design: "",
-  path: ""
+  path: "",
 };
-export const i0: Ville ={
+export const i0: Ville = {
   id: "",
   design: "",
   pays: "",
-  path: ""
+  path: "",
 };
-export const y0: Document ={
+export const y0: Document = {
   id: "",
   design: "",
-  path: ""
+  path: "",
 };
-export const r0: Role ={
+export const r0: Role = {
   id: "",
   design: "",
   nbrUtilisateur: "",
-  path: ""
+  path: "",
 };
-export interface RoleJson{
-  content:Role[]
+export interface RoleJson {
+  content: Role[];
 }
 //************************************************************ */
 //************************************************************ */
 //**********************Fournisseur*************************** */
-export interface Fournisseur extends IdsObject{
+export interface Fournisseur extends IdsObject {
   contact: string;
   tel: string;
   email: string;
@@ -429,7 +416,7 @@ export interface Fournisseur extends IdsObject{
   matiere: MatierePremiere[];
 }
 
-export const f0: Fournisseur ={
+export const f0: Fournisseur = {
   id: "",
   design: "",
   contact: "",
@@ -445,27 +432,27 @@ export const f0: Fournisseur ={
   image: "",
   commandes: [],
   matiere: [],
-  path: ""
+  path: "",
 };
 //************************************************************ */
 //************************************************************ */
 //*******************CommandeFournsieeur********************** */
-export interface CommandeFournisseur extends IdsObject{
+export interface CommandeFournisseur extends IdsObject {
   dateLivraison: Date;
   dateCommande: Date;
   montant: number;
   idFournisseur: string;
 }
-export const cf0: CommandeFournisseur ={
+export const cf0: CommandeFournisseur = {
   id: "",
   dateLivraison: new Date(),
   dateCommande: new Date(),
   //@ts-ignore
   montant: "",
-   idFournisseur: "",
+  idFournisseur: "",
 };
-export const getCf0 = (f: Fournisseur): CommandeFournisseur =>{
-  return{
+export const getCf0 = (f: Fournisseur): CommandeFournisseur => {
+  return {
     id: "",
     dateLivraison: new Date(),
     dateCommande: new Date(),
@@ -478,8 +465,8 @@ export const getCf0 = (f: Fournisseur): CommandeFournisseur =>{
 export const getFournisseur = (
   id: string,
   obj: Fournisseur[]
-): Fournisseur | undefined =>{
-  const apr = obj?.find((o: Fournisseur) =>{
+): Fournisseur | undefined => {
+  const apr = obj?.find((o: Fournisseur) => {
     return o.id === id;
   });
   return apr;
@@ -487,14 +474,14 @@ export const getFournisseur = (
 //************************************************************ */
 //************************************************************ */
 //********************MatierePremiere************************* */
-export interface MatierePremiere extends IdsObject{
+export interface MatierePremiere extends IdsObject {
   familleMatierePremiere: string;
   prix: number;
   origine: string;
   fournisseur: Fournisseur;
   idFournisseur: string;
 }
-export const mp0: MatierePremiere ={
+export const mp0: MatierePremiere = {
   id: "",
   design: "",
   familleMatierePremiere: "",
@@ -504,8 +491,8 @@ export const mp0: MatierePremiere ={
   fournisseur: f0,
   idFournisseur: "",
 };
-export const getMp0 = (f: Fournisseur): MatierePremiere =>{
-  return{
+export const getMp0 = (f: Fournisseur): MatierePremiere => {
+  return {
     id: "",
     design: "",
     familleMatierePremiere: "",
@@ -519,7 +506,7 @@ export const getMp0 = (f: Fournisseur): MatierePremiere =>{
 //************************************************************ */
 //************************************************************ */
 //********************LigneDeCommande************************* */
-export interface LigneDeCommande extends IdsObject{
+export interface LigneDeCommande extends IdsObject {
   quantite: number;
   prix: number;
   commandeFournisseur: CommandeFournisseur;
@@ -527,7 +514,7 @@ export interface LigneDeCommande extends IdsObject{
   idCommandeFournisseur: string;
   idMatierePremiere: string;
 }
-export const lc0: LigneDeCommande ={
+export const lc0: LigneDeCommande = {
   id: "",
   design: "",
   //@ts-ignore
@@ -542,8 +529,8 @@ export const lc0: LigneDeCommande ={
 export const getlc0 = (
   c: CommandeFournisseur,
   m: MatierePremiere
-): LigneDeCommande =>{
-  return{
+): LigneDeCommande => {
+  return {
     id: "",
     design: "",
     //@ts-ignore
@@ -570,7 +557,7 @@ export interface Users {
   phone: string;
   role: string[];
 }
-export const u0: Users ={
+export const u0: Users = {
   id: -1,
   nom: "",
   prenom: "",
@@ -591,14 +578,14 @@ export interface AccessUser {
   impersonate: boolean;
   manage: boolean;
 }
-export const access0: AccessUser ={
+export const access0: AccessUser = {
   manageGroupMembership: true,
   view: true,
   mapRoles: true,
   impersonate: true,
   manage: true,
 };
-export interface User extends IdsObject{
+export interface User extends IdsObject {
   createdTimestamp: number;
   username: string;
   enabled: boolean;
@@ -612,7 +599,7 @@ export interface User extends IdsObject{
   notBefore: number;
   access: AccessUser;
 }
-export const user0: User ={
+export const user0: User = {
   id: "",
   createdTimestamp: 0,
   username: "",
@@ -627,50 +614,53 @@ export const user0: User ={
   notBefore: 0,
   access: access0,
   design: "",
-  path: ""
+  path: "",
 };
-export interface UserSession{
-  name:string 
-  email:string
+export interface UserSession {
+  name: string;
+  email: string;
 }
-export const emptyUser:UserSession={"name":"","email":""}
-export interface SessionToken{
-  user:UserSession
-  expires:Date 
-  accessToken:string
+export const emptyUser: UserSession = { name: "", email: "" };
+export interface SessionToken {
+  user: UserSession;
+  expires: Date;
+  accessToken: string;
 }
-export const emptySession:SessionToken={"user":emptyUser,"expires":new Date(),"accessToken":""}
-export interface Chaine{
+export const emptySession: SessionToken = {
+  user: emptyUser,
+  expires: new Date(),
+  accessToken: "",
+};
+export interface Chaine {
   val: string;
 }
-export interface Id{
+export interface Id {
   id: string;
 }
-export interface ArticleClientJson{
-  content:ArticleClient[]
+export interface ArticleClientJson {
+  content: ArticleClient[];
 }
-export interface ArticleClient extends IdsObject{
-  id:string
-  design:string
-  poid:number
-  prix:number
-  date:Date
-  idClient:string
-  idFamilleArticle:string
-  idFournisseur:string
-  }
-  export const articleClient0:  ArticleClient={
-    id:"",
-    design:"",
-    poid:0,
-    prix:0,
-    //@ts-ignore
-    date:"",
-    idClient:"",
-    idFamilleArticle:"",
-    idFournisseur:"",
-    }
-export const code0: Id ={
-  id: ""
+export interface ArticleClient extends IdsObject {
+  id: string;
+  design: string;
+  poid: number;
+  prix: number;
+  date: Date;
+  idClient: string;
+  idFamilleArticle: string;
+  idFournisseur: string;
 }
-
+export const articleClient0: ArticleClient = {
+  id: "",
+  design: "",
+  poid: 0,
+  prix: 0,
+  //@ts-ignore
+  date: "",
+  idClient: "",
+  idFamilleArticle: "",
+  idFournisseur: "",
+};
+export const code0: Id = {
+  id: "",
+};

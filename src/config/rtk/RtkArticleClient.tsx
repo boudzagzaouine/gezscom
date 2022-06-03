@@ -21,10 +21,7 @@ export const crudArticleClient = createApi({
       paginationArticleClients: builder.query<ArticleClient[], number>({
         query: (page) => `/articleclients?page=${page}&size=${PAGE_SIZE}`,
       }),
-      fetchArticleClientsByIdClient: builder.query<
-        ArticleClient[],
-        string
-      >({
+      fetchArticleClientsByIdClient: builder.query<ArticleClient[], string>({
         query: (idclient) => `/articleclients/idclient/${idclient}`,
       }),
       fetchOneArticleClient: builder.query<ArticleClient, string>({
@@ -33,16 +30,15 @@ export const crudArticleClient = createApi({
       fetchMontantArticleClient: builder.query<number, string>({
         query: (idclient) => `/articleclients/${idclient}/montant`,
       }),
-      addArticleClient: builder.mutation<
-        ArticleClient,
-        Partial<ArticleClient>
-      >({
-        query: (body) => ({
-          url: `/articleclients`,
-          method: "POST",
-          body,
-        }),
-      }),
+      addArticleClient: builder.mutation<ArticleClient, Partial<ArticleClient>>(
+        {
+          query: (body) => ({
+            url: `/articleclients`,
+            method: "POST",
+            body,
+          }),
+        }
+      ),
       editArticleClient: builder.mutation<
         ArticleClient,
         Partial<ArticleClient> & Pick<ArticleClient, "id">
@@ -118,7 +114,7 @@ export type OpenArticleClientProp = {
 };
 export type OpenArticleClientByClientProp = {
   data: ArticleClient[];
- refetch: () => void;
+  refetch: () => void;
   save: () => void;
   edit: () => void;
 };
@@ -147,6 +143,6 @@ export const openArticleClientsByClient = (
     save,
     //@ts-ignore
     edit,
- };
+  };
   return out;
 };

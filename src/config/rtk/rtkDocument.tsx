@@ -103,7 +103,7 @@ export type OpenDocumentProp = {
   save: () => void;
   edit: () => void;
 };
-export const openDocuments = (page:number): OpenDocumentProp => {
+export const openDocuments = (page: number): OpenDocumentProp => {
   const { data = [], refetch } = usePaginationDocumentsQuery(page);
   const [save] = useAddDocumentMutation();
   const [edit] = useEditDocumentMutation();

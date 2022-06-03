@@ -23,8 +23,8 @@ import Bcyan from "widgets/Bcyan";
 import Pagin from "widgets/Pagin";
 import {
   OpenFournisseurProp,
-   openFournisseurs,
-   openPaginationFournisseurs
+  openFournisseurs,
+  openPaginationFournisseurs,
 } from "config/rtk/rtkFournisseur";
 const TestFournisseur = () => {
   const idcom = "e6ac48fc-b2c1-4f9b-9a26-b811bca498a1";
@@ -40,14 +40,14 @@ const TestFournisseur = () => {
           <tr>
             <th>id</th>
             <th>raisonSociale</th>
-            </tr>
+          </tr>
         </thead>
         <tbody>
           {fourns?.map((d: Fournisseur) => (
-           <tr key={d.id}>
+            <tr key={d.id}>
               <td>{d.id}</td>
               <td>{d.raisonSociale}</td>
-              </tr>
+            </tr>
           ))}
         </tbody>
       </table>

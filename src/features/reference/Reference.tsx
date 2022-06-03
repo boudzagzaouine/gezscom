@@ -1,31 +1,77 @@
-import React from 'react';
-import { incoterm0, payementMode0, rawMaterial0, unitMeasure0 } from 'tools/types';
-import List from 'widgets/List';
+import React from "react";
+import {
+  incoterm0,
+  payementMode0,
+  rawMaterial0,
+  unitMeasure0,
+} from "tools/types";
+import List from "widgets/List";
 
-type ReferenceProps={
-  type:string
-}
-const Reference = ({type}:ReferenceProps) => {
-  switch(type){
+type ReferenceProps = {
+  type: string;
+};
+const Reference = ({ type }: ReferenceProps) => {
+  switch (type) {
     case "unitMeasure":
-      return<List title="Unité de Mesure" mal={false} body={["Désignation#design#attr","Symbole#symbole#attr","Décimal#decimal#attr"]}  emptyObject={unitMeasure0} path="unitMeasures" />;  
+      return (
+        <List
+          title="Unité de Mesure"
+          mal={false}
+          body={[
+            "Désignation#design#attr",
+            "Symbole#symbole#attr",
+            "Décimal#decimal#attr",
+          ]}
+          emptyObject={unitMeasure0}
+          path="unitMeasures"
+        />
+      );
       /*id: "",
   design: "",
   symbole: "",
   decimal: 0,
   path: ""*/
-    break;
+      break;
     case "payementMode":
-      return<List title="mode de règlement" mal={true} body={["Désignation#design#attr","Code#code#attr"]}   emptyObject={payementMode0} path="payementModes" />;  
-    break;
+      return (
+        <List
+          title="mode de règlement"
+          mal={true}
+          body={["Désignation#design#attr", "Code#code#attr"]}
+          emptyObject={payementMode0}
+          path="payementModes"
+        />
+      );
+      break;
     case "rawMaterial":
-      return<List title="Famille Matière Première" mal={false} 
-      body={["Désignation#design#attr#.#required#w-full","Nom en clature#nomenclature#attr#.#required#w-1/2","Taux de perte#tauxPertes#attr#.#.#w-1/2","Famille Mère#family#select#rawMaterials#.#w-1/2","Unité de mesure#measureUnit#select#unitMeasures#.#w-1/2"]}   emptyObject={rawMaterial0} path="rawMaterials" />;  
-    break;
+      return (
+        <List
+          title="Famille Matière Première"
+          mal={false}
+          body={[
+            "Désignation#design#attr#.#required#w-full",
+            "Nom en clature#nomenclature#attr#.#required#w-1/2",
+            "Taux de perte#tauxPertes#attr#.#.#w-1/2",
+            "Famille Mère#family#select#rawMaterials#.#w-1/2",
+            "Unité de mesure#measureUnit#select#unitMeasures#.#w-1/2",
+          ]}
+          emptyObject={rawMaterial0}
+          path="rawMaterials"
+        />
+      );
+      break;
     case "incoterm":
-      return<List title="incoterm" mal={true} body={["Désignation#design#attr#.#required","Code#code#attr#.#."]}  emptyObject={incoterm0} path="incoterms" />;  
-    break;
-   /*  case "article":
+      return (
+        <List
+          title="incoterm"
+          mal={true}
+          body={["Désignation#design#attr#.#required", "Code#code#attr#.#."]}
+          emptyObject={incoterm0}
+          path="incoterms"
+        />
+      );
+      break;
+    /*  case "article":
       const articleToOpen: OpenArticleProp = openArticles();
      return<List title="Famille Article" mal={true} body={["Désignation#design#attr","Nomenclature#nomenclature#attr","Taux de perte#tauxPertes#attr"]}  list={articleToOpen.data.content} emptyObject={article0} save={articleToOpen.save} edit={articleToOpen.edit} refetch={articleToOpen.refetch} />;  
     break;
@@ -69,10 +115,9 @@ const Reference = ({type}:ReferenceProps) => {
       return<List title="Type" mal={true} body={["Désignation#design#attr"]}  list={TypeToOpen.data.content} emptyObject={type0} save={TypeToOpen.save} edit={TypeToOpen.edit} refetch={TypeToOpen.refetch} />;  
     break; */
     default:
-    return <></>  
-    break;
+      return <></>;
+      break;
   }
- 
 };
 
 export default Reference;

@@ -16,17 +16,23 @@ const NavTabs = ({ tab }: NatabsProps) => {
         {tab.map((t) => (
           <li className="float-left relative">
             <span
-            className={
-              "float-left cursor-pointer py-2 px-3 flex items-center " +
-              (selected == t.id && "border border-[#CECFD0] border-t border-r border-l")
-            }
-            onClick={() => {
-              setSelected(t.id);
-            }}
-          >
-            {t.name}
-          </span>
-          <hr  className={" float-left w-full border-3 border-[#fff] absolute bottom-0 "+(selected != t.id && "hidden")}/>
+              className={
+                "float-left cursor-pointer py-2 px-3 flex items-center " +
+                (selected == t.id &&
+                  "border border-[#CECFD0] border-t border-r border-l")
+              }
+              onClick={() => {
+                setSelected(t.id);
+              }}
+            >
+              {t.name}
+            </span>
+            <hr
+              className={
+                " float-left w-full border-3 border-[#fff] absolute bottom-0 " +
+                (selected != t.id && "hidden")
+              }
+            />
           </li>
         ))}
       </ul>

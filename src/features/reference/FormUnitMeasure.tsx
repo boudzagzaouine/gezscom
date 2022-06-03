@@ -1,15 +1,23 @@
-import { OpenUnitMeasureProp, openUnitMeasures } from 'config/rtk/rtkUnitMeasure';
-import React, { forwardRef, Ref, useEffect, useRef, useState } from 'react';
-import { REQUEST_EDIT, REQUEST_SAVE } from 'tools/consts';
-import { payementMode0, UnitMeasure, unitMeasure0, UnitMeasureJson } from 'tools/types';
-import List from 'widgets/List';
+import {
+  OpenUnitMeasureProp,
+  openUnitMeasures,
+} from "config/rtk/rtkUnitMeasure";
+import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
+import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
+import {
+  payementMode0,
+  UnitMeasure,
+  unitMeasure0,
+  UnitMeasureJson,
+} from "tools/types";
+import List from "widgets/List";
 
 type FormUnitMeasureProps = {
   unitMeasure: UnitMeasure;
 };
 const FormUnitMeasure = (
   { unitMeasure }: FormUnitMeasureProps,
-    ref: Ref<void>
+  ref: Ref<void>
 ) => {
   const unitMeasuresToOpen: OpenUnitMeasureProp = openUnitMeasures();
   const unitMeasureJson: UnitMeasureJson = unitMeasuresToOpen.data;
@@ -64,13 +72,18 @@ const FormUnitMeasure = (
     open(unitMeasure);
   };
 
-  const void_ = () => { };
+  const void_ = () => {};
 
   //const [updateUnitMeasure] = useEditUnitMeasureMutation();
 
-
-  return <List head={["Désignation","Symbole","Décimal"]} body={["design#attr","symbole#attr","date#date","decimal#attr"]}  list={unitMeasures} emptyObject={payementMode0} />
-  ;
+  return (
+    <List
+      head={["Désignation", "Symbole", "Décimal"]}
+      body={["design#attr", "symbole#attr", "date#date", "decimal#attr"]}
+      list={unitMeasures}
+      emptyObject={payementMode0}
+    />
+  );
 };
 
 export default forwardRef(FormUnitMeasure);

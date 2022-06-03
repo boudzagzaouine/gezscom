@@ -30,9 +30,10 @@ import {
 } from "config/rtk/RtkArticleClient";
 const TestArticleClient = () => {
   const idcom = "24aada24-6ab5-461b-89e6-a9be5fa14c82";
-  const articleClientsOpen: OpenArticleClientByClientProp = openArticleClientsByClient(idcom);
+  const articleClientsOpen: OpenArticleClientByClientProp =
+    openArticleClientsByClient(idcom);
   const articlesClients: ArticleClient[] = articleClientsOpen.data;
- const refetch = articleClientsOpen.refetch;
+  const refetch = articleClientsOpen.refetch;
   const save = articleClientsOpen.save;
   //openArticleClientsByClient = (idcom:string): OpenArticleClientProp
   return (
@@ -63,9 +64,9 @@ const TestArticleClient = () => {
       <Form defaultValues={adr0} onSubmit={save}>
         <Field label="id" name="id" />
         <Field label="design" name="design" />
-       <Field label="idFamilleArticle" name="idFamilleArticle" />
-       <Field label="idFournisseur" name="idFournisseur" />
-       <Field label="idClient" name="idClient" />
+        <Field label="idFamilleArticle" name="idFamilleArticle" />
+        <Field label="idFournisseur" name="idFournisseur" />
+        <Field label="idClient" name="idClient" />
         <Bsave
           onClick={() => {
             setTimeout(() => {

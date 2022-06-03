@@ -102,7 +102,7 @@ export type OpenPaysProp = {
   save: () => void;
   edit: () => void;
 };
-export const openPays = (page:number): OpenPaysProp => {
+export const openPays = (page: number): OpenPaysProp => {
   const { data = [], refetch } = usePaginationPaysQuery(page);
   const [save] = useAddPaysMutation();
   const [edit] = useEditPaysMutation();

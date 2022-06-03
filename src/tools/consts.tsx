@@ -16,6 +16,7 @@ export const HOME = 7;
 export const CLIENT_MANAGER = 8;
 export const VENDOR_MANAGER = 9;
 export const PURCHASE_MANAGER = 10;
+export const COLISAGE_MANAGER = 11;
 export const DECIMAL = [" ", "0.0", "0.00", "0.000", "0.0000"];
 export const VILLE = [" ", "Fes", "El Jadida", "Casa", "Rabat"];
 export const FAMILLE = [
@@ -52,11 +53,11 @@ export const LIST_FAMILLE_MATIERE_PREMIERE = [
   "metalliques",
   "minerales",
 ];
-export const ORIGINE = ["", "Manuelle","Genéré"];
+export const ORIGINE = ["", "Manuelle", "Genéré"];
 
 export const ROLE = ["", "Admin", "User"];
-export const SEASON = ["hiver","printemps","automne","été"];
+export const SEASON = ["hiver", "printemps", "automne", "été"];
 export const URL_API_SEC = process.env.NEXT_URL_API;
-export const ARCHIVE=31
-export const RESTORE=32
-export const DEL=33
+export const ARCHIVE = 31;
+export const RESTORE = 32;
+export const DEL = 33;

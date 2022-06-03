@@ -13,19 +13,24 @@ import FormArticleCommande from "./FormArticleCommande";
 
 type ListArticleCommandesProps = {
   idCommande: string;
-  idClient:string
-  refetchParent:()=>void
+  idClient: string;
+  refetchParent: () => void;
 };
-const ListArticleCommandes = ({ idCommande,idClient,refetchParent }: ListArticleCommandesProps) => {
-  const articleCommandesOpen: OpenArticleCommandeByCommandeProp=openArticleCommandesByCommande(idCommande)
-  const articleCommandes:ArticleCommande[]=articleCommandesOpen.data
-  const save= articleCommandesOpen.save;
+const ListArticleCommandes = ({
+  idCommande,
+  idClient,
+  refetchParent,
+}: ListArticleCommandesProps) => {
+  const articleCommandesOpen: OpenArticleCommandeByCommandeProp =
+    openArticleCommandesByCommande(idCommande);
+  const articleCommandes: ArticleCommande[] = articleCommandesOpen.data;
+  const save = articleCommandesOpen.save;
   const edit = articleCommandesOpen.edit;
-  const refetchArtCom=articleCommandesOpen.refetchArtCom
-  const refetch=()=>{
-    refetchParent()
-    refetchArtCom()
-  }
+  const refetchArtCom = articleCommandesOpen.refetchArtCom;
+  const refetch = () => {
+    refetchParent();
+    refetchArtCom();
+  };
   const [selectedIdCommande, setSelectedIdCommande] = useState("new");
   const [formArt, setFormArt] = useState(false);
   const arc1: ArticleCommande = arc0;
@@ -38,7 +43,7 @@ const ListArticleCommandes = ({ idCommande,idClient,refetchParent }: ListArticle
     setFormArt(true);
     setSelectedIdCommande(id);
   };
-  
+
   return (
     <div>
       <Table
@@ -55,36 +60,34 @@ const ListArticleCommandes = ({ idCommande,idClient,refetchParent }: ListArticle
           </tr>
         }
       >
-        {
-         articleCommandes?.map((article) => (
-           <>
-              <tr key={article.id}>
-                <Table.td>{article.id}</Table.td>
-                <Table.td>{article.idCommande} </Table.td>
-                <Table.td>{article.design} </Table.td>
-                <Table.td>{article.qte}</Table.td>
-                <Table.td>{article.portion}</Table.td>
-                <Table.td>{article.pu}</Table.td>
-                <Table.td>
-                  <Bedit
-                    onClick={() => {
-                      open(article.id);
-                    }}
-                  />
-                </Table.td>
-              </tr>
-              {selectedIdCommande == article.id && formArt && (
-                <FormArticleCommande
-                  articleCommande={article}
-                  idClient={idClient}
-                  close={close}
-                  saveArticle={edit}
-                  refetch={refetch}
+        {articleCommandes?.map((article) => (
+          <>
+            <tr key={article.id}>
+              <Table.td>{article.id}</Table.td>
+              <Table.td>{article.idCommande} </Table.td>
+              <Table.td>{article.design} </Table.td>
+              <Table.td>{article.qte}</Table.td>
+              <Table.td>{article.portion}</Table.td>
+              <Table.td>{article.pu}</Table.td>
+              <Table.td>
+                <Bedit
+                  onClick={() => {
+                    open(article.id);
+                  }}
                 />
-              )}
-            </>
-          ))
-        }
+              </Table.td>
+            </tr>
+            {selectedIdCommande == article.id && formArt && (
+              <FormArticleCommande
+                articleCommande={article}
+                idClient={idClient}
+                close={close}
+                saveArticle={edit}
+                refetch={refetch}
+              />
+            )}
+          </>
+        ))}
         {selectedIdCommande == "new" && formArt && (
           <FormArticleCommande
             articleCommande={arc1}

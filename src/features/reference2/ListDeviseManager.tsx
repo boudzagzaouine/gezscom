@@ -1,8 +1,5 @@
 import { TrashIcon } from "@heroicons/react/outline";
-import {
-  ArchiveIcon,
-  PencilAltIcon,
-} from "@heroicons/react/solid";
+import { ArchiveIcon, PencilAltIcon } from "@heroicons/react/solid";
 import ArchiveDevise from "components/reference2/ArchiveDevise";
 import DeleteDevise from "components/reference2/DeleteDevise";
 import { OpenDeviseProp } from "config/rtk/rtkDevise";
@@ -21,12 +18,11 @@ import FormDeviseManager from "./FormDevise";
 import Mitems from "widgets/Mitems";
 
 function ListDeviseManager() {
-  
- const [page, setPage] = useState(0);
- const loadPage = (p: number) => {
-   setPage(p);
-   refetch();
- };
+  const [page, setPage] = useState(0);
+  const loadPage = (p: number) => {
+    setPage(p);
+    refetch();
+  };
 
   const devisesToOpen: OpenDeviseProp = openDevises(page);
   const deviseJson: DeviseJson = devisesToOpen.data;
@@ -34,15 +30,12 @@ function ListDeviseManager() {
   const refetch: () => void = devisesToOpen.refetch;
   const save = devisesToOpen.save;
   const edit = devisesToOpen.edit;
- 
- 
+
   const refCom = useRef(null);
   const del = useRef(null);
   const archive = useRef(null);
   const restore = useRef(null);
 
-  
-  
   const menu = (devise: Devise): MenuItems[] => {
     return [
       {
@@ -55,7 +48,7 @@ function ListDeviseManager() {
         text: "Modifier",
         action: () => {
           //@ts-ignore
-           refCom.current(devise,false);
+          refCom.current(devise, false);
         },
       },
       {
@@ -87,73 +80,72 @@ function ListDeviseManager() {
     ];
   };
   const imputFocus = useRef();
- 
 
   return (
     <>
-        <Section>
-          <DeleteDevise refetch={refetch} id={""} ref={del} />
-          <ArchiveDevise id={""} ref={archive} />
-          <RestoreDevise id={""} ref={restore} />
-          <h1>Devise</h1>
-          <div className="float-left w-full">
-            <Bcyan
-              className="float-left"
-              onClick={() => {
-                //@ts-ignore
-                refCom.current(v0,false);
-                
-              }}
-            >
-              Novelle Devise
-            </Bcyan>
-            <FormDeviseManager
+      <Section>
+        <DeleteDevise refetch={refetch} id={""} ref={del} />
+        <ArchiveDevise id={""} ref={archive} />
+        <RestoreDevise id={""} ref={restore} />
+        <h1>Devise</h1>
+        <div className="float-left w-full">
+          <Bcyan
+            className="float-left"
+            onClick={() => {
+              //@ts-ignore
+              refCom.current(v0, false);
+            }}
+          >
+            Novelle Devise
+          </Bcyan>
+          <FormDeviseManager
             refetch={refetch}
             save={save}
             edit={edit}
-          Devise={v0}
-         disable={false}
-          ref={refCom}
-        />
+            Devise={v0}
+            disable={false}
+            ref={refCom}
+          />
 
-            <div className="float-right">
-              <Button className="bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg">
-                <Icon i="search" cl="" />
-              </Button>
-              <input
-                type="text"
-                className="py-3 border outline-[#ddd] border-[#ddd] float-left border-l-0 rounded-r-lg w-96"
-              />
-            </div>
+          <div className="float-right">
+            <Button className="bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg">
+              <Icon i="search" cl="" />
+            </Button>
+            <input
+              type="text"
+              className="py-3 border outline-[#ddd] border-[#ddd] float-left border-l-0 rounded-r-lg w-96"
+            />
           </div>
-          <Table
-            className="tab-list float-left w-full mt-8"
-            thead={
-              <tr>
-                <Table.th>Désignation</Table.th>
-                <Table.th>Code ISO</Table.th>
-                <Table.th>Symbole</Table.th>
-                <Table.th></Table.th>
-              </tr>
-            }
-          >
-            {
-             devises?.map((Devise) => (
-                      <tr key={Devise.id}>
-                  <Table.td>{Devise.design} </Table.td>
-                  <Table.td>{Devise.code_iso} </Table.td>
-                  <Table.td>{Devise.symbole} </Table.td>
-                  <Table.td>
-                    <Mitems key={Devise.id} menu={menu(Devise)} />
-                  </Table.td>
-                </tr>
-              ))
-            }
-          </Table>
+        </div>
+        <Table
+          className="tab-list float-left w-full mt-8"
+          thead={
+            <tr>
+              <Table.th>Désignation</Table.th>
+              <Table.th>Code ISO</Table.th>
+              <Table.th>Symbole</Table.th>
+              <Table.th></Table.th>
+            </tr>
+          }
+        >
+          {devises?.map((Devise) => (
+            <tr key={Devise.id}>
+              <Table.td>{Devise.design} </Table.td>
+              <Table.td>{Devise.code_iso} </Table.td>
+              <Table.td>{Devise.symbole} </Table.td>
+              <Table.td>
+                <Mitems key={Devise.id} menu={menu(Devise)} />
+              </Table.td>
+            </tr>
+          ))}
+        </Table>
 
-          <Pagin load={loadPage} max={devises?.length} visible={devises?.length > 0} />
-        </Section>
-      
+        <Pagin
+          load={loadPage}
+          max={devises?.length}
+          visible={devises?.length > 0}
+        />
+      </Section>
     </>
   );
 }

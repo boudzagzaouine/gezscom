@@ -1,7 +1,16 @@
 import classNames from "classnames";
-import { OpenBureauDouaneProp, openBureauDouanes } from "config/rtk/rtkBureauDouane";
+import {
+  OpenBureauDouaneProp,
+  openBureauDouanes,
+} from "config/rtk/rtkBureauDouane";
 import React, { forwardRef, Ref, useEffect, useRef, useState } from "react";
-import { ARCHIVE, DEL, REQUEST_EDIT, REQUEST_SAVE, RESTORE } from "tools/consts";
+import {
+  ARCHIVE,
+  DEL,
+  REQUEST_EDIT,
+  REQUEST_SAVE,
+  RESTORE,
+} from "tools/consts";
 import { BureauDouane, bureauDouane0, BureauDouaneJson } from "tools/types";
 import { Field, Form } from "widgets";
 import Action from "widgets/Action";
@@ -86,9 +95,30 @@ const FormBureauDouane = (
     <>
       {!form && (
         <section className="bg-white float-left w-full h-full mp-8 shadow-lg">
-          <Action id="" path="bureauDouanes" design="" type="Bureau Douane" ref={del} action={DEL}/>
-          <Action id="" path="bureauDouanes" design="" type="Bureau Douane" ref={archive} action={ARCHIVE}/>
-          <Action id="" path="bureauDouanes" design="" type="Bureau Douane" ref={restore} action={RESTORE}/>
+          <Action
+            id=""
+            path="bureauDouanes"
+            design=""
+            type="Bureau Douane"
+            ref={del}
+            action={DEL}
+          />
+          <Action
+            id=""
+            path="bureauDouanes"
+            design=""
+            type="Bureau Douane"
+            ref={archive}
+            action={ARCHIVE}
+          />
+          <Action
+            id=""
+            path="bureauDouanes"
+            design=""
+            type="Bureau Douane"
+            ref={restore}
+            action={RESTORE}
+          />
           <h1>Bureaux de Douane</h1>
           <div className="float-left w-full">
             <button
@@ -148,24 +178,24 @@ const FormBureauDouane = (
                     <Table.td>{bureauDouane.code}</Table.td>
                     <Table.td>{bureauDouane.design}</Table.td>
                     <Table.td className="cursor-pointer">
-                    <MitemsRef
-                      archive={() => {
-                        //@ts-ignore
-                        archive.current(bureauDouane.id,bureauDouane.design);
-                      }}
-                    /*   restore={() => {
+                      <MitemsRef
+                        archive={() => {
+                          //@ts-ignore
+                          archive.current(bureauDouane.id, bureauDouane.design);
+                        }}
+                        /*   restore={() => {
                         //@ts-ignore
                         restore.current(client.id,client.design);
                       }} */
-                      del={() => {
-                        //@ts-ignore
-                        del.current(bureauDouane.id,bureauDouane.design);
-                      }}
-                      obj={bureauDouane}
-                      update={() => {
-                        FormAsUpdate(bureauDouane);
-                      }}
-                    />
+                        del={() => {
+                          //@ts-ignore
+                          del.current(bureauDouane.id, bureauDouane.design);
+                        }}
+                        obj={bureauDouane}
+                        update={() => {
+                          FormAsUpdate(bureauDouane);
+                        }}
+                      />
                     </Table.td>
                   </tr>
                 );
@@ -173,7 +203,8 @@ const FormBureauDouane = (
             }
           </Table>
           <Pagin
-           load={loadPage} max={bureauDouanes?.length}
+            load={loadPage}
+            max={bureauDouanes?.length}
             visible={bureauDouanes?.length > 0 ? true : false}
           />
         </section>
@@ -181,12 +212,16 @@ const FormBureauDouane = (
 
       <ModalS
         show={show}
-        title={bureauDouane1.id==""?"Nouveau Bureau Douane":"Modifier Bureau Douane"}
+        title={
+          bureauDouane1.id == ""
+            ? "Nouveau Bureau Douane"
+            : "Modifier Bureau Douane"
+        }
         format={+classNames("5")}
         close={closed}
       >
         <div className="float-left w-full">
-             <Form
+          <Form
             defaultValues={bureauDouane1}
             onSubmit={
               request == REQUEST_SAVE
@@ -198,47 +233,47 @@ const FormBureauDouane = (
           >
             <div className="float-left w-full">
               <Field
-               label={<Required msg="Numéro"/>}
+                label={<Required msg="Numéro" />}
                 name="code"
-                disabled={disabled}//required={true}
+                disabled={disabled} //required={true}
               />
-                  <Field
-                    label={<Required msg="Désignation"/>}
-                    name="design"
-                    disabled={disabled}//required={true}
-                  />
+              <Field
+                label={<Required msg="Désignation" />}
+                name="design"
+                disabled={disabled} //required={true}
+              />
             </div>
             <div className="mt-5 b-ajust-r">
-                     <Bsave
-            className="float-right"
+              <Bsave
+                className="float-right"
+                onClick={() => {
+                  setTimeout(() => {
+                    refetchBureauDouane();
+                    closed();
+                  }, 500);
+                }}
+              />
+              {bureauDouane1.id == "" && (
+                <BsavEndNew
+                  className="ml-10 mr-2"
+                  onClick={() => {
+                    setTimeout(() => {
+                      refetchBureauDouane();
+                    }, 500);
+                  }}
+                />
+              )}
+            </div>
+          </Form>
+          <Bcancel
+            className="float-right mt-5 b-ajust"
             onClick={() => {
-              setTimeout(() => {
-                refetchBureauDouane();
-                      closed();
-              }, 500);
+              setDisabled(true);
+              setShow(false);
             }}
           />
-          {bureauDouane1.id=="" &&<BsavEndNew
-                   className="ml-10 mr-2"
-                   onClick={() => {
-                     setTimeout(() => {
-                      refetchBureauDouane();
-                       }, 500);
-                   }}
-                />}
-               
-              </div>
-        
-          </Form>
-               <Bcancel
-               className="float-right mt-5 b-ajust"
-               onClick={() => {
-                 setDisabled(true);
-                  setShow(false);
-               }}
-             />
-             </div>
-     </ModalS>
+        </div>
+      </ModalS>
     </>
   );
 };

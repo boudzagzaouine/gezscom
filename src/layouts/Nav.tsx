@@ -13,7 +13,13 @@ import {
 } from "tools/consts";
 import { signOut, signIn, getSession, useSession } from "next-auth/react";
 import axios from "axios";
-import { emptySession, emptyUser, SessionToken, user0, UserSession } from "tools/types";
+import {
+  emptySession,
+  emptyUser,
+  SessionToken,
+  user0,
+  UserSession,
+} from "tools/types";
 import { Session } from "next-auth";
 import { useRouter } from "next/router";
 
@@ -27,14 +33,14 @@ type NavProps = {
 export default function Nav({ selected, loading }: NavProps) {
   const { data: session, status } = useSession();
   //@ts-ignore
-  const [user,setUser]=useState<UserSession>(session?.user)
-  const route = useRouter()
-  useEffect(()=>{
-    if(!session)setUser(emptyUser)
+  const [user, setUser] = useState<UserSession>(session?.user);
+  const route = useRouter();
+  useEffect(() => {
+    if (!session) setUser(emptyUser);
     //@ts-ignore
-    else setUser(session?.user)
-  })
-  console.log("my user = "+JSON.stringify(user))
+    else setUser(session?.user);
+  });
+  console.log("my user = " + JSON.stringify(user));
   //selected==CLIENT_MANAGER?navClient:selected==VENDOR_MANAGER?navVendor:selected==PURCHASE_MANAGER?navPurchase:
   const navigation: NavType[] = [
     /*  { name: "Home", href: "/", current: true, visible: selected == HOME }, */
@@ -51,69 +57,110 @@ export default function Nav({ selected, loading }: NavProps) {
       name: "Clients",
       href: "/manager/client/ClientManager",
       current: route.pathname == "/manager/client/ClientManager",
-      visible: route.pathname == "/manager/client/ClientManager" ||route.pathname == "/manager/client/CommandeClientManager"||route.pathname == "/manager/client/SoldeCommandeClientManager",
+      visible:
+        route.pathname == "/manager/client/ClientManager" ||
+        route.pathname == "/manager/client/CommandeClientManager" ||
+        route.pathname == "/manager/client/SoldeCommandeClientManager",
     },
     {
       name: "Commandes Clients",
       href: "/manager/client/CommandeClientManager",
       current: route.pathname == "/manager/client/CommandeClientManager",
-      visible: route.pathname == "/manager/client/ClientManager" ||route.pathname == "/manager/client/CommandeClientManager"||route.pathname == "/manager/client/SoldeCommandeClientManager",
+      visible:
+        route.pathname == "/manager/client/ClientManager" ||
+        route.pathname == "/manager/client/CommandeClientManager" ||
+        route.pathname == "/manager/client/SoldeCommandeClientManager",
     },
     {
       name: "Soldes Commandes",
       href: "/manager/client/SoldeCommandeClientManager",
       current: route.pathname == "/manager/client/SoldeCommandeClientManager",
-      visible: route.pathname == "/manager/client/ClientManager" ||route.pathname == "/manager/client/CommandeClientManager"||route.pathname == "/manager/client/SoldeCommandeClientManager",
+      visible:
+        route.pathname == "/manager/client/ClientManager" ||
+        route.pathname == "/manager/client/CommandeClientManager" ||
+        route.pathname == "/manager/client/SoldeCommandeClientManager",
     },
 
     {
       name: "Fournisseurs",
       href: "/manager/vendor/VendorManager",
       current: route.pathname == "/manager/vendor/VendorManager",
-      visible: route.pathname == "/manager/vendor/VendorManager"||route.pathname == "/manager/vendor/CommandeVendor"||route.pathname == "/manager/vendor/RawMaterielManager"||route.pathname == "/manager/vendor/CommandeVendorManager",
+      visible:
+        route.pathname == "/manager/vendor/VendorManager" ||
+        route.pathname == "/manager/vendor/CommandeVendor" ||
+        route.pathname == "/manager/vendor/RawMaterielManager" ||
+        route.pathname == "/manager/vendor/CommandeVendorManager",
     },
     {
       name: "Commandes Fournisseur",
       href: "/manager/vendor/CommandeVendor",
       current: route.pathname == "/manager/vendor/CommandeVendor",
-      visible: route.pathname == "/manager/vendor/VendorManager"||route.pathname == "/manager/vendor/CommandeVendor"||route.pathname == "/manager/vendor/RawMaterielManager"||route.pathname == "/manager/vendor/CommandeVendorManager",
+      visible:
+        route.pathname == "/manager/vendor/VendorManager" ||
+        route.pathname == "/manager/vendor/CommandeVendor" ||
+        route.pathname == "/manager/vendor/RawMaterielManager" ||
+        route.pathname == "/manager/vendor/CommandeVendorManager",
     },
     {
       name: "Matières premières",
       href: "/manager/vendor/RawMaterielManager",
       current: route.pathname == "/manager/vendor/RawMaterielManager",
-      visible: route.pathname == "/manager/vendor/VendorManager"||route.pathname == "/manager/vendor/CommandeVendor"||route.pathname == "/manager/vendor/RawMaterielManager"||route.pathname == "/manager/vendor/CommandeVendorManager",
+      visible:
+        route.pathname == "/manager/vendor/VendorManager" ||
+        route.pathname == "/manager/vendor/CommandeVendor" ||
+        route.pathname == "/manager/vendor/RawMaterielManager" ||
+        route.pathname == "/manager/vendor/CommandeVendorManager",
     },
     {
       name: "Générer Commandes Fournisseur",
       href: "/manager/vendor/CommandeVendorManager",
       current: route.pathname == "/manager/vendor/CommandeVendorManager",
-      visible: route.pathname == "/manager/vendor/VendorManager"||route.pathname == "/manager/vendor/CommandeVendor"||route.pathname == "/manager/vendor/RawMaterielManager"||route.pathname == "/manager/vendor/CommandeVendorManager",
+      visible:
+        route.pathname == "/manager/vendor/VendorManager" ||
+        route.pathname == "/manager/vendor/CommandeVendor" ||
+        route.pathname == "/manager/vendor/RawMaterielManager" ||
+        route.pathname == "/manager/vendor/CommandeVendorManager",
     },
 
     {
       name: "Réception",
       href: "/manager/purchase/Reception",
       current: route.pathname == "/manager/purchase/Reception",
-      visible: route.pathname == "/manager/purchase/Reception"||route.pathname == "/manager/purchase/RightOfReturn"||route.pathname == "/manager/purchase/StockStatus"||route.pathname == "/manager/purchase/InputOutputHistory",
+      visible:
+        route.pathname == "/manager/purchase/Reception" ||
+        route.pathname == "/manager/purchase/RightOfReturn" ||
+        route.pathname == "/manager/purchase/StockStatus" ||
+        route.pathname == "/manager/purchase/InputOutputHistory",
     },
     {
       name: "Bon de retour",
       href: "/manager/purchase/RightOfReturn",
       current: route.pathname == "/manager/purchase/RightOfReturn",
-      visible: route.pathname == "/manager/purchase/Reception"||route.pathname == "/manager/purchase/RightOfReturn"||route.pathname == "/manager/purchase/StockStatus"||route.pathname == "/manager/purchase/InputOutputHistory",
+      visible:
+        route.pathname == "/manager/purchase/Reception" ||
+        route.pathname == "/manager/purchase/RightOfReturn" ||
+        route.pathname == "/manager/purchase/StockStatus" ||
+        route.pathname == "/manager/purchase/InputOutputHistory",
     },
     {
       name: "état du stock",
       href: "/manager/purchase/StockStatus",
       current: route.pathname == "/manager/purchase/StockStatus",
-      visible: route.pathname == "/manager/purchase/Reception"||route.pathname == "/manager/purchase/RightOfReturn"||route.pathname == "/manager/purchase/StockStatus"||route.pathname == "/manager/purchase/InputOutputHistory",
+      visible:
+        route.pathname == "/manager/purchase/Reception" ||
+        route.pathname == "/manager/purchase/RightOfReturn" ||
+        route.pathname == "/manager/purchase/StockStatus" ||
+        route.pathname == "/manager/purchase/InputOutputHistory",
     },
     {
       name: "historique des entrées sorties",
       href: "/manager/purchase/InputOutputHistory",
       current: route.pathname == "/manager/purchase/InputOutputHistory",
-      visible: route.pathname == "/manager/purchase/Reception"||route.pathname == "/manager/purchase/RightOfReturn"||route.pathname == "/manager/purchase/StockStatus"||route.pathname == "/manager/purchase/InputOutputHistory",
+      visible:
+        route.pathname == "/manager/purchase/Reception" ||
+        route.pathname == "/manager/purchase/RightOfReturn" ||
+        route.pathname == "/manager/purchase/StockStatus" ||
+        route.pathname == "/manager/purchase/InputOutputHistory",
     },
   ];
 
@@ -123,7 +170,6 @@ export default function Nav({ selected, loading }: NavProps) {
         <>
           <div className="w-5/6 float-right px-2 sm:px-6 lg:px-8 bg-[#fff]">
             <div className="relative flex items-center justify-between h-16">
-            
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
                 <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
@@ -138,7 +184,6 @@ export default function Nav({ selected, loading }: NavProps) {
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
-                   
                     {navigation.map((item) =>
                       item.visible ? (
                         <Link
@@ -209,48 +254,51 @@ export default function Nav({ selected, loading }: NavProps) {
                           </a>
                         )}
                       </Menu.Item>
-                      {!session && <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="/api/auth/signin"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                            onClick={(e: any) => {
-                              //api/auth/signin
-                              e.preventDefault()
-                              //signIn("keycloak")
-                              signIn("keycloak");
-                              
-                            }}
-                          >
-                            sign in
-                          </a>
-                        )}
-                      </Menu.Item>}
-                      {session &&<Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="/api/auth/federated-logout"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                            onClick={(e: any) => {
-                              //      e.preventDefault()
-                              // signOut()
-                              /*  logout()
+                      {!session && (
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a
+                              href="/api/auth/signin"
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700"
+                              )}
+                              onClick={(e: any) => {
+                                //api/auth/signin
+                                e.preventDefault();
+                                //signIn("keycloak")
+                                signIn("keycloak");
+                              }}
+                            >
+                              sign in
+                            </a>
+                          )}
+                        </Menu.Item>
+                      )}
+                      {session && (
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a
+                              href="/api/auth/federated-logout"
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700"
+                              )}
+                              onClick={(e: any) => {
+                                //      e.preventDefault()
+                                // signOut()
+                                /*  logout()
                             setTimeout(() => {
                               window.location.href='/'
                             }, 500);*/
-                              signOut({ callbackUrl: "/", redirect: true });
-                            }}
-                          >
-                            Sign out
-                          </a>
-                        )}
-                      </Menu.Item>}
+                                signOut({ callbackUrl: "/", redirect: true });
+                              }}
+                            >
+                              Sign out
+                            </a>
+                          )}
+                        </Menu.Item>
+                      )}
                     </Menu.Items>
                   </Transition>
                 </Menu>
