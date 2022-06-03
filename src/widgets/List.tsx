@@ -1,15 +1,11 @@
-import { OpenIdsObjectProp, openIdsObjects } from 'config/rtk/rtkGen';
-import { openpaysv } from 'config/rtk/rtkPays';
-import { openFamilleF } from 'config/rtk/rtkRawMaterial';
-import { openUnitF } from 'config/rtk/rtkUnitMeasure';
-import { openVilleD } from 'config/rtk/rtkVille';
-import React, { useRef, useState } from 'react';
+import { openIdsObject, OpenIdsObjectProp, openIdsObjects } from 'config/rtk/rtkGen';
+import React, { ChangeEvent, FC, useRef, useState } from 'react';
 import { ARCHIVE, DEL, RESTORE } from 'tools/consts';
 import { DateFormat } from 'tools/Methodes';
 import { IdsObject, IdsObjectJson } from 'tools/types';
 import Bcyan from 'widgets/Bcyan';
 import Table from 'widgets/Table';
-
+import classNames from "classnames";
 import Action from './Action';
 import Bcancel from './Bcancel';
 import Bsave from './Bsave';
@@ -18,35 +14,19 @@ import { Field } from './Field';
 import { Form } from './Form';
 import MitemsRef from './MitemsRef';
 import ModalS from './ModalS';
+import Required from './Required';
 import Section from './Section';
 
-
-/*
- const tabUnit: UnitMeasure[] = openUnitF().data.content;
-  const Unit = tabUnit?.map((d) => d.symbole);
-  const tabFamille: RawMaterial[] = openFamilleF().data.content;
-  const Famille = tabFamille?.map((d) => d.design);
-*/
-const tabSelect=(type:string)=>{
-  
-  switch(type){
-    case "UnitMeasure":
-      return openUnitF().data.content 
-    break;
-    case "FamilleRawMaterial":
-      return openFamilleF().data.content
-    break;
-    case "Ville":
-      return openVilleD().data.content 
-    break;
-    case "Pays":
-      return openpaysv().data.content 
-    break;
-    default:
-      return [{id:"zz",design:"toto"},{id:"cc",design:"coco"},{id:"ff",design:"fofo"},]
-      break;
-  }
+const tabSelect=(path:string)=>{
+  return openIdsObjects(path).tab
 }
+const getDesign=(id:string,path:string)=>{
+  if(id!=""){
+    //@ts-ignore
+   return openIdsObject(path,id).data.design
+  }
+  else return ""
+  }
 type ListProp<E extends IdsObject,J extends IdsObjectJson> = {
   title:string
   mal:boolean
@@ -54,10 +34,11 @@ type ListProp<E extends IdsObject,J extends IdsObjectJson> = {
   emptyObject:E
   path:string 
 };
-const List = ({title, mal,body,emptyObject ,path}: ListProp<IdsObject,IdsObjectJson>) => {
-  const open: OpenIdsObjectProp<IdsObjectJson>=openIdsObjects(path)
-  
-  const list: IdsObject[] = open.data.content;
+
+const List = <E extends IdsObject,J extends IdsObjectJson>({title, mal,body,emptyObject ,path}: ListProp<E,J>) => {
+  const open: OpenIdsObjectProp<E,J>=openIdsObjects(path)
+  const objJson:J=open.data
+  const list: E[] = open.tab;
   const refetch: () => void = open.refetch;
   const save = open.save;
   const edit = open.edit;
@@ -66,13 +47,14 @@ const List = ({title, mal,body,emptyObject ,path}: ListProp<IdsObject,IdsObjectJ
   const archive = useRef(null);
   const restore = useRef(null);
   const [show,setShow]=useState(false)
-  const [object,setObject]=useState(emptyObject)
+  const [object,setObject]=useState({...emptyObject ,path:path})
+ 
   const close=()=>{
     setShow(false)
   }
-  const load = (u: IdsObject) => {
+  const load = (u: E) => {
     setShow(true)
-    setObject(u)
+    setObject({...u ,path:path})
    };
   
   return (
@@ -89,17 +71,7 @@ const List = ({title, mal,body,emptyObject ,path}: ListProp<IdsObject,IdsObjectJ
       >
        {(mal?"Nouveau ":"Nouvelle ")+title}
       </Bcyan>
-     {/*  <FormCommande
-add={save}
-edit={edit}
-        command={cm1}
-        ref={refCom}
-        client={client}
-        clients={[]}
-        refetchList={refetchAll}
-        disabled={false}
-      /> */}
-      <Table
+         <Table
         className="tab-list float-left w-full mt-2"
         thead={
           <tr>
@@ -111,13 +83,13 @@ edit={edit}
       >
         {list?.map((l)=>(<tr key={l.id}>{
           //@ts-ignore
-        body?.map((b:string)=>(<Table.td>{b.split("#")[2]=="attr"?l[b.split("#")[1]]:b.split("#")[2]=="date"?DateFormat(l[b.split("#")[1]]):b.split("#")[2]=="select"?l[b.split("#")[1]]:b.split("#")[2]=="join"?b.split("#")[3]:""}</Table.td>)
+        body?.map((b:string)=>(<Table.td>{b.split("#")[2]=="attr"?l[b.split("#")[1]]:b.split("#")[2]=="date"?DateFormat(l[b.split("#")[1]]):b.split("#")[2]=="select"?getDesign(l[b.split("#")[1]],b.split("#")[3]):b.split("#")[2]=="join"?b.split("#")[3]:""}</Table.td>)
         )
         }
         <Table.td>
         <MitemsRef
                         archive={() => {
-                          //@ts-ignore
+                          //@ts-ignoregetDesign(l[b.split("#")[1]],l[b.split("#")[3]])
                           archive.current(l.id, l.design);
                         }}
                         del={() => {
@@ -138,26 +110,52 @@ edit={edit}
         format={5}
         close={close}
       >
-        <div className="float-left w-full text-sm">
-                  <Form
-            defaultValues={object}
-            onSubmit={object.id==""?save:edit}
+        <div className="float-left w-full text-xs">
+                 <Form
+                  //@ts-ignore
+            defaultValues={object}            
+            onSubmit={object?.id==""?save:edit}
           >
-           {body?.map((b:string)=>(
-             b.split("#")[2]=="attr"?<Field label={b.split("#")[0]} name={b.split("#")[1]} disabled={false} />:
+          <div className="w-full float-left" >
+          {body?.map((b:string)=>(
+            <div className={classNames("float-left",b.split("#")[5])}>
+              { b.split("#")[2]=="attr"?<Field 
+             label={b.split("#")[4]=="required"?<Required msg={b.split("#")[0]}/>:b.split("#")[0]} name={b.split("#")[1]} 
+             disabled={false} 
+             onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+              let o:E={...object} 
+              let key:string=b.split("#")[1]
+              //@ts-ignore
+              o[key] =e.target.value
+               setObject(o)
+             }}
+             />:
              b.split("#")[2]=="select"?
-             <Field
-                  label={b.split("#")[0]}
-                  name={b.split("#")[1]}
-                  options={["",...(tabSelect(b.split("#")[3])||[])]}
-                  as="select"
-                  disabled={false}
-                  optionKeyName = "id"
-                  
-                  optionLabelName = "design"
-                />:
-             <></>
+              <>
+              <Field disabled={false} 
+               label={b.split("#")[4]=="required"?<Required msg={b.split("#")[0]}/>:b.split("#")[0]}
+               name={b.split("#")[1]}
+                as="select"
+                onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                 let o:E={...object} 
+                 let key:string=b.split("#")[1]
+                 //@ts-ignore
+                 o[key] =e.target.value
+                  setObject(o)
+                }}
+              >
+                {
+                //@ts-ignore
+                ["",...(tabSelect(b.split("#")[3])||[])]?.map((c: E) => (
+                  <option value={c.id}>{c.design}</option>
+                ))}
+              </Field>
+              </>
+                 :
+              <></>}
+            </div>
              ))}  
+          </div>
             
             <div className="mt-5 b-ajust-r">
                      <Bsave

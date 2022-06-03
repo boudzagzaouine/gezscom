@@ -26,7 +26,7 @@ export const crudGeneric = createApi({
           body,
         }),
       }),
-      edit: builder.mutation<IdsObject,Partial<IdsObject> & Pick<IdsObject,"path"> & Pick<IdsObject, "id"> >({
+      edit: builder.mutation<IdsObject,Partial<IdsObject>& Pick<IdsObject,"path"> & Pick<IdsObject, "id">   >({
         query: (body) => ({
           url: `/${body.path}/${body.id}`,
           method: "PUT",
@@ -72,8 +72,9 @@ export const {
   useEditMutation
 } = crudGeneric;
 
-export type OpenIdsObjectProp<E extends IdsObjectJson> = {
-  data: E;
+export type OpenIdsObjectProp<E extends IdsObject,J extends IdsObjectJson> = {
+  data: J;
+  tab:E[];
   refetch: () => void;
   save: () => void;
   edit: () => void;
@@ -84,12 +85,35 @@ export type OpenIdsObjectByIdClientProp<E extends IdsObject> = {
   save: () => void;
   edit: () => void;
 };
-//@ts-ignore
-export const openIdsObjects = (path:string): OpenIdsObjectProp<> => {
-  const { data = [], refetch } = useFetchQuery(path);
+
+export const openIdsObjects =<E extends IdsObject,J extends IdsObjectJson> (path:string): OpenIdsObjectProp<E,J> => {
+  try {
+    const { data = [], refetch } = useFetchQuery(path+"?page=0&size=3000");
+  //@ts-ignore
+  const tab:E[]=data.content
   const [save] = useAddMutation();
   const [edit] = useEditMutation();
   //@ts-ignore
-  const out: OpenIdsObjectProp = { data, refetch, save, edit };
+  const out: OpenIdsObjectProp = { tab,data, refetch, save, edit };
   return out;
+  } catch (error) {
+    //@ts-ignore
+    return null;
+  }
+};
+export const openIdsObject =<E extends IdsObject,J extends IdsObjectJson> (path:string,id:string): OpenIdsObjectProp<E,J> => {
+ try {
+  const { data = [], refetch } = useFetchQuery(path+"/"+id);
+  //@ts-ignore
+  const tab:E=data.content
+  const [save] = useAddMutation();
+  const [edit] = useEditMutation();
+  const pathh=path+"/"+id
+  //@ts-ignore
+  const out: OpenIdsObjectProp = { pathh,tab,data, refetch, save, edit };
+  return out; 
+ } catch (error) {
+   //@ts-ignore
+   return null;
+ }
 };

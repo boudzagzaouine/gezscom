@@ -139,7 +139,7 @@ export const unitMeasure0: UnitMeasure ={
   design: "",
   symbole: "",
   decimal: 0,
-  path: ""
+  path: "unitMeasures"
 };
 
 export interface BureauDouaneJson{
@@ -186,7 +186,7 @@ export const incoterm0: Incoterm ={
   id: "",
   code: "",
   design: "",
-  path: ""
+  path: "incoterms"
 };
 
 export interface PayementModeJson{
@@ -239,7 +239,7 @@ export const rawMaterial0: RawMaterial ={
   family: "",
   tauxPertes: 0,
   measureUnit: "",
-  path: ""
+  path: "rawMaterials"
 };
 
 export interface DumJson{

@@ -1,19 +1,5 @@
-import { OpenArticleProp, openArticles } from 'config/rtk/rtkArticle';
-import { OpenBureauDouaneProp, openBureauDouanes } from 'config/rtk/rtkBureauDouane';
-import { OpenDeclarantProp, openDeclarants } from 'config/rtk/rtkDeclarant';
-import { OpenDeviseProp, openDevises } from 'config/rtk/rtkDevise';
-import { OpenDocumentProp, openDocuments } from 'config/rtk/rtkDocument';
-import { OpenIncotermProp, openIncoterms } from 'config/rtk/rtkIncoterm';
-import { OpenPayementModeProp, openPayementModes } from 'config/rtk/rtkPayementMode';
-import { openPays, OpenPaysProp } from 'config/rtk/rtkPays';
-import { OpenRawMaterialProp, openRawMaterials } from 'config/rtk/rtkRawMaterial';
-import { OpenRegimeDouanierProp, openRegimeDouaniers } from 'config/rtk/rtkRegimeDouanier';
-import { OpenTransporteurProp, openTransporteurs } from 'config/rtk/rtkTransporteur';
-import { OpenTypeProp, openTypes } from 'config/rtk/rtkType';
-import { OpenUnitMeasureProp, openUnitMeasures } from 'config/rtk/rtkUnitMeasure';
-import { OpenVilleProp, openVilles } from 'config/rtk/rtkVille';
 import React from 'react';
-import { article0, bureauDouane0, declarant0, devise0, document0, i0, incoterm0, payementMode0, pays0, rawMaterial0, regimeDouanier0, transporteur0, type0, unitMeasure0 } from 'tools/types';
+import { incoterm0, payementMode0, rawMaterial0, unitMeasure0 } from 'tools/types';
 import List from 'widgets/List';
 
 type ReferenceProps={
@@ -22,17 +8,28 @@ type ReferenceProps={
 const Reference = ({type}:ReferenceProps) => {
   switch(type){
     case "unitMeasure":
-      const UnitmesureToOpen: OpenUnitMeasureProp = openUnitMeasures();
-      return<List title="Unité de Mesure" mal={false} body={["Désignation#design#attr","Symbole#symbole#attr","Décimal#decimal#attr"]}  list={UnitmesureToOpen.data.content} emptyObject={unitMeasure0} save={UnitmesureToOpen.save} edit={UnitmesureToOpen.edit} refetch={UnitmesureToOpen.refetch} />;  
+      return<List title="Unité de Mesure" mal={false} body={["Désignation#design#attr","Symbole#symbole#attr","Décimal#decimal#attr"]}  emptyObject={unitMeasure0} path="unitMeasures" />;  
+      /*id: "",
+  design: "",
+  symbole: "",
+  decimal: 0,
+  path: ""*/
+    break;
+    case "payementMode":
+      return<List title="mode de règlement" mal={true} body={["Désignation#design#attr","Code#code#attr"]}   emptyObject={payementMode0} path="payementModes" />;  
+    break;
+    case "rawMaterial":
+      return<List title="Famille Matière Première" mal={false} 
+      body={["Désignation#design#attr#.#required#w-full","Nom en clature#nomenclature#attr#.#required#w-1/2","Taux de perte#tauxPertes#attr#.#.#w-1/2","Famille Mère#family#select#rawMaterials#.#w-1/2","Unité de mesure#measureUnit#select#unitMeasures#.#w-1/2"]}   emptyObject={rawMaterial0} path="rawMaterials" />;  
+    break;
+    case "incoterm":
+      return<List title="incoterm" mal={true} body={["Désignation#design#attr#.#required","Code#code#attr#.#."]}  emptyObject={incoterm0} path="incoterms" />;  
     break;
    /*  case "article":
       const articleToOpen: OpenArticleProp = openArticles();
      return<List title="Famille Article" mal={true} body={["Désignation#design#attr","Nomenclature#nomenclature#attr","Taux de perte#tauxPertes#attr"]}  list={articleToOpen.data.content} emptyObject={article0} save={articleToOpen.save} edit={articleToOpen.edit} refetch={articleToOpen.refetch} />;  
     break;
-    case "rawMaterial":
-      const rawMaterialToOpen: OpenRawMaterialProp = openRawMaterials();
-      return<List title="Famille Matière Première" mal={false} body={["Désignation#design#attr","Nomenclature#nomenclature#attr","Taux de perte#tauxPertes#attr","Famille Mère#family#select#FamilleRawMaterial","Unité de mesure#measureUnit#select#UnitMeasure"]}  list={rawMaterialToOpen.data.content} emptyObject={rawMaterial0} save={rawMaterialToOpen.save} edit={rawMaterialToOpen.edit} refetch={rawMaterialToOpen.refetch} />;  
-    break;
+   
     case "bureauDouane":
       const bureauDouaneToOpen: OpenBureauDouaneProp = openBureauDouanes();
       return<List title="Bureau Douanier" mal={true} body={["Numéro#code#attr","Désignation#design#attr"]}  list={bureauDouaneToOpen.data.content} emptyObject={bureauDouane0} save={bureauDouaneToOpen.save} edit={bureauDouaneToOpen.edit} refetch={bureauDouaneToOpen.refetch} />;  
@@ -41,14 +38,8 @@ const Reference = ({type}:ReferenceProps) => {
       const regimeDouanierToOpen: OpenRegimeDouanierProp = openRegimeDouaniers();
       return<List title="Régime Douanier" mal={true} body={["Numéro#code#attr","Désignation#design#attr"]}  list={regimeDouanierToOpen.data.content} emptyObject={regimeDouanier0} save={regimeDouanierToOpen.save} edit={regimeDouanierToOpen.edit} refetch={regimeDouanierToOpen.refetch} />;  
     break;
-    case "payementMode":
-      const payementModesToOpen: OpenPayementModeProp = openPayementModes();
-      return<List title="mode de règlement" mal={true} body={["Désignation#design#attr","Code#code#attr"]}  list={payementModesToOpen.data.content} emptyObject={payementMode0} save={payementModesToOpen.save} edit={payementModesToOpen.edit} refetch={payementModesToOpen.refetch} />;  
-    break;
-    case "incoterm":
-      const incotermsToOpen: OpenIncotermProp = openIncoterms();
-      return<List title="incoterm" mal={true} body={["Désignation#design#attr","Code#code#attr"]}  list={incotermsToOpen.data.content} emptyObject={payementMode0} save={incotermsToOpen.save} edit={incotermsToOpen.edit} refetch={incotermsToOpen.refetch} />;  
-    break;
+    
+    
     case "declarant":
       const declarantToOpen: OpenDeclarantProp = openDeclarants();
       return<List title="Déclarant" mal={true} body={["Désignation#design#attr","Ville#ville#select#Ville"]}  list={declarantToOpen.data.content} emptyObject={declarant0} save={declarantToOpen.save} edit={declarantToOpen.edit} refetch={declarantToOpen.refetch} />;  
