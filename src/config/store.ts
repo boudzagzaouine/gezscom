@@ -7,6 +7,7 @@ import {
   StoreEnhancer,
   ThunkAction,
 } from "@reduxjs/toolkit";
+import { crudColis } from "components/colisage/rtk/rtk_colisage";
 import counterReducer from "features/counter/counterSlice";
 import {
   FLUSH,
@@ -87,6 +88,7 @@ export function makeStore() {
     [crudArticleClient.reducerPath]: crudArticleClient.reducer,
     [crudPayementMode.reducerPath]: crudPayementMode.reducer,
     [crudGeneric.reducerPath]: crudGeneric.reducer,
+    [crudColis.reducerPath]: crudColis.reducer,
   });
   const persistedReducer = persistReducer(
     persistConfig,
@@ -123,6 +125,7 @@ export function makeStore() {
         .concat([crudArticleCommande.middleware, offlineMiddleware])
         .concat([crudArticleClient.middleware, offlineMiddleware])
         .concat([crudPayementMode.middleware, offlineMiddleware])
+        .concat([crudColis.middleware, offlineMiddleware])
         .concat([crudGeneric.middleware, offlineMiddleware]),
   });
   return store;
