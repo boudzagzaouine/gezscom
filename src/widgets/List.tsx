@@ -18,14 +18,18 @@ import Required from './Required';
 import Section from './Section';
 
 const tabSelect=(path:string)=>{
-  return openIdsObjects(path).tab
+  return openIdsObjects(path)?.tab
 }
 const getDesign=(id:string,path:string)=>{
+ try {
   if(id!=""){
     //@ts-ignore
    return openIdsObject(path,id).data.design
   }
   else return ""
+ } catch (error) {
+  return ""
+ }
   }
 type ListProp<E extends IdsObject,J extends IdsObjectJson> = {
   title:string
@@ -106,7 +110,7 @@ const List = <E extends IdsObject,J extends IdsObjectJson>({title, mal,body,empt
       </Table>
       <ModalS
         show={show}
-        title={""}
+        title={object.id==""?(mal?"Nouveau ":"Nouvelle ")+title:"Modifier "+title}
         format={5}
         close={close}
       >
@@ -118,7 +122,7 @@ const List = <E extends IdsObject,J extends IdsObjectJson>({title, mal,body,empt
           >
           <div className="w-full float-left" >
           {body?.map((b:string)=>(
-            <div className={classNames("float-left",b.split("#")[5])}>
+            <div className={classNames(b.split("#")[5])}>
               { b.split("#")[2]=="attr"?<Field 
              label={b.split("#")[4]=="required"?<Required msg={b.split("#")[0]}/>:b.split("#")[0]} name={b.split("#")[1]} 
              disabled={false} 

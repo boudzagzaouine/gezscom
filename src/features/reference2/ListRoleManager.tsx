@@ -1,18 +1,12 @@
-import { TrashIcon } from "@heroicons/react/outline";
-import {
-  ArchiveIcon,
-  ClipboardListIcon,
-  PencilAltIcon
-} from "@heroicons/react/solid";
-import ArchiveRole from "components/reference2/ArchiveRole";
-import DeleteRole from "components/reference2/DeleteRole";
-import RestoreRole from "components/reference2/RestoreRole";
 import { OpenRoleProp, openRoles } from "config/rtk/rtkRole";
 import React, { useRef, useState } from "react";
+import { ARCHIVE, DEL, RESTORE } from "tools/consts";
 import { r0, Role, RoleJson } from "tools/types";
+import Action from "widgets/Action";
 import Bcyan from "widgets/Bcyan";
 import { Button } from "widgets/Button";
 import Icon from "widgets/Icon";
+import Mitems from "widgets/Mitems";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
 import Table from "widgets/Table";
@@ -36,70 +30,13 @@ function ListRoleManager() {
    const archive = useRef(null);
    const restore = useRef(null);
 
-  const menu = (role: Role): MenuItems[] => {
-    return [
-      {
-        icon: (
-          <ClipboardListIcon
-            className="mr-3 h-8 w-8 text-green-300 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Détail",
-        action: () => {
-          //@ts-ignore
-          refCom.current(role,true);
-        },
-      },
-      {
-        icon: (
-          <PencilAltIcon
-            className="mr-3 h-8 w-8 text-green-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Modifier",
-        action: () => {
-          //@ts-ignore
-          refCom.current(role,false);
-        },
-      },
-      {
-        icon: (
-          <TrashIcon
-            className="mr-3 h-8 w-8 text-rose-900 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Supprimer",
-        action: () => {
-          //@ts-ignore
-          del.current(role.id);
-        },
-      },
-      {
-        icon: (
-          <ArchiveIcon
-            className="mr-3 h-8 w-8 text-gray-800 group-hover:text-gray-500"
-            aria-hidden="true"
-          />
-        ),
-        text: "Archiver",
-        action: () => {
-          //@ts-ignore
-          archive.current(role.id);
-        },
-      },
-    ];
-  };
-
   return (
     <>
 
         <Section>
-          <DeleteRole refetch={refetch} id={""} ref={del} />
-          <ArchiveRole id={""} ref={archive} />
-          <RestoreRole id={""} ref={restore} />
+        <Action id="" path="roles" design="" type="Rôle" ref={del} action={DEL}/>
+          <Action id="" path="roles" design="" type="Rôle" ref={archive} action={ARCHIVE}/>
+          <Action id="" path="roles" design="" type="Rôle" ref={restore} action={RESTORE}/>
           <h1>Rôles</h1>
           <div className="float-left w-full">
             <Bcyan
@@ -149,7 +86,29 @@ function ListRoleManager() {
                 </Table.td>
 
                 <Table.td>
-                  <Mitems menu={menu(Role)} />
+                  <Mitems                      
+                     archive={() => {
+                        //@ts-ignore
+                        archive.current(Role.id,Role.design);
+                      }}
+                    /*   restore={() => {
+                        //@ts-ignore
+                        restore.current(client.id,client.design);
+                      }} */
+                      del={() => {
+                        //@ts-ignore
+                        del.current(Role.id,Role.design);
+                      }}
+                      edit={() => {
+                        //@ts-ignore
+                        refCom.current(role,true);
+                      }}
+                      obj={Role}
+                      update={() => {
+                        //@ts-ignore
+                        refCom.current(Role,false);
+                      }}
+                    /> 
                 </Table.td>
               </tr>
             ))}
