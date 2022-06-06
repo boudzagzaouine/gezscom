@@ -1,24 +1,28 @@
 import "react-datepicker/dist/react-datepicker.css";
 
-import { openIdsObject } from "config/rtk/rtkGen";
+import { openIdsObject, openIdsObjects } from "config/rtk/rtkGen";
 import React, { useState } from "react";
+import Bcyan from "widgets/Bcyan";
+import Section from "widgets/Section";
 
 const Test = () => {
-  const x = openIdsObject(
-    "unitMeasures",
-    "a53c4a64-e3a2-405e-858c-bd784fceb528"
-  );
+  const x = openIdsObjects("pays");
   const y = x.data;
-  console.log(
-    "gener : data=" +
-      JSON.stringify(x.data) +
-      " tab = " +
-      x.tab +
-      " path = " +
-      x.pathh
-  );
-  return (
-    <>
+  console.log("avant : isSuccess = "+x.isSuccess+" , isFetching = "+x.isFetching+" , isError = "+x.isError+" , isLoading = "+x.isLoading+" , isUninitialized = "+x.isUninitialized+" , status = "+x.status+" , currentData = "+JSON.stringify(x.currentData)+" , endpointName = "+x.endpointName+" , error = "+x.error+" , fulfilledTimeStamp = "+x.fulfilledTimeStamp+" , originalArgs = "+x.originalArgs+" , requestId = "+x.requestId+" , startedTimeStamp = "+x.startedTimeStamp)
+ /*  setTimeout(() => {
+    console.log("après : isSuccess = "+x.isSuccess+" , isFetching = "+x.isFetching+" , isError = "+x.isError+" , isLoading = "+x.isLoading+" , isUninitialized = "+x.isUninitialized+" , status = "+x.status+" , currentData = "+x.currentData+" , endpointName = "+x.endpointName+" , error = "+x.error+" , fulfilledTimeStamp = "+x.fulfilledTimeStamp+" , originalArgs = "+x.originalArgs+" , requestId = "+x.requestId+" , startedTimeStamp = "+x.startedTimeStamp)
+  }, 600);
+   */return (
+    <Section>
+    <Bcyan onClick={()=>{
+      console.clear()
+ console.log(
+  "gener : data=" +
+    JSON.stringify(x.isSuccess?x.tab:[]) );
+
+    }} >
+test
+    </Bcyan>
       {/* <h1>{ff}</h1> */}
       {/* <TestClient /> */}
       {/* <TestCommande /> */}
@@ -32,7 +36,7 @@ const Test = () => {
       {/* <TestFournisseur /> */}
       {/* <TestArticleClient/> */}
       {/* <TestOpengeneral />  */}
-    </>
+    </Section>
   );
 };
 

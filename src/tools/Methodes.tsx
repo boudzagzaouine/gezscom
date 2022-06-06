@@ -1,4 +1,4 @@
-import { Article, article0, c0, Client, f0, Fournisseur } from "./types";
+import { Article, article0, c0, Client, f0, Fournisseur, IdsObject, tabProp } from "./types";
 //@ts-ignore
 import dateFormat from "dateformat";
 export const getClient = (id: string, obj: Client[]): Client => {
@@ -22,4 +22,16 @@ export const getFournisseur = (id: string, obj: Fournisseur[]): Fournisseur => {
 
 export const DateFormat = (date: Date) => {
   return dateFormat(date, "dd-mm-yyyy");
+};
+export const getList = <E extends IdsObject>(path: string, obj: tabProp<E>[]): E[] | undefined => {
+  const apr = obj?.find((o: tabProp<E>) => {
+    return o.path === path;
+  });
+  return apr?.tab;
+};
+export const getLine = <E extends IdsObject>(id: string, obj: E[]): E | undefined=> {
+  const apr = obj?.find((o: E) => {
+    return o.id === id;
+  });
+  return apr;
 };

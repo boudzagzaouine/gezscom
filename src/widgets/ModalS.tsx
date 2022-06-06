@@ -6,7 +6,7 @@ type ModalProps = {
   children: ReactNode;
   title: string;
   show: boolean;
-  format: number;
+  modal:boolean;
   close: () => void;
 };
 const calculClass = ({ className }: any) => {
@@ -15,7 +15,7 @@ const calculClass = ({ className }: any) => {
     className
   );
 };
-const ModalS = ({ children, title, show, format, close }: ModalProps) => {
+const ModalS = ({ children, title, show, modal, close }: ModalProps) => {
   const [showModal, setShowModal] = React.useState(show);
   const open = () => {
     //setShowModal(true);
@@ -32,7 +32,8 @@ lg	1024px	@media (min-width: 1024px) { ... }
 xl	1280px	@media (min-width: 1280px) { ... }
 2xl	1536px	@media (min-width: 1536px) { ... }*/
   return (
-    <>
+   <>
+   {modal? <>
       {showModal && (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
@@ -58,7 +59,10 @@ xl	1280px	@media (min-width: 1280px) { ... }
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       )}
-    </>
+    </>:<>
+    {children}
+    </>}
+   </>
   );
 };
 export default ModalS;

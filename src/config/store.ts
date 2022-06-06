@@ -146,3 +146,4 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 >;
 
 export default store;
+export type RootState = ReturnType<typeof store.getState>

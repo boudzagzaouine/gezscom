@@ -1,12 +1,12 @@
-import ListClientManager from "features/manager/client/ListClientManager";
-import React from "react";
+import ListClientManager from 'features/manager/client/ListClientManager';
+import React from 'react';
 
 const ClientManager = () => {
-  return (
-    <>
-      <ListClientManager />
-    </>
-  );
+	return (
+		<>
+			<ListClientManager />
+		</>
+	);
 };
 
 export default ClientManager;

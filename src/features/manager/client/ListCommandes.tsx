@@ -1,67 +1,34 @@
-import {
-  OpenCommandeByClientProp,
-  openCommandesByClient,
-  useFetchcommandesByIdClientQuery,
-} from "config/rtk/RtkCommande";
-import React, { useRef, useState } from "react";
-import { DateFormat } from "tools/Methodes";
-import { Client, cm0, Commande } from "tools/types";
-import Bcyan from "widgets/Bcyan";
-import Bedit from "widgets/Bedit";
-import Table from "widgets/Table";
-import List from "widgets/List";
-import FormCommande from "./FormCommande";
-type ListCommandesProp = {
-  client: Client;
-  refetchParent: () => void;
+import React, { useState } from 'react';
+import { Client, Commande, commande0 } from 'tools/types';
+import List from 'widgets/List';
+
+type CommandesProp = {
+	client: Client;
+	refetchParent: () => void;
 };
-const ListCommandes = ({ client, refetchParent }: ListCommandesProp) => {
-  const commandesOpen: OpenCommandeByClientProp = openCommandesByClient(
-    client.id
-  );
-  const commandes: Commande[] = commandesOpen.data;
-  const save = commandesOpen.save;
-  const edit = commandesOpen.edit;
-  const refetch = commandesOpen.refetch;
-  const cm1: Commande = cm0;
-  cm1.idClient = client.id;
-  const refCom = useRef(null);
-  const refetchAll = () => {
-    refetch();
-    refetchParent();
-  };
-  return (
-    <>
-      <List
-        head={["N° BC", "Client", "Date", "Saison", "Montant"]}
-        body={[
-          "id#attr",
-          "idClient#join#" + client.design,
-          "date#date",
-          "season#attr",
-          "amount#attr",
-        ]}
-        list={commandes}
-      />
-    </>
-  );
+var refetch = () => {};
+const ListCommandes = ({ client, refetchParent }: CommandesProp) => {
+	const [commande, setCommande] = useState(commande0);
+	const init = (c: Commande, r: () => void) => {
+		setCommande(c);
+		refetch = r;
+	};
+	return (
+		<>
+			<List
+				avatar={false}
+				body={[]}
+				detailObjects={[]}
+				displayedIncheck={{ css: "", msg: "", tab: [] }}
+				emptyObject={commande0}
+				init={init}
+				mal={true}
+				path={""}
+				rectoVerso={false}
+				title={""}
+			/>
+		</>
+	);
 };
-/*    <tr>
-            <Table.th>N° BC</Table.th>
-            <Table.th>Client</Table.th>
-            <Table.th>Date</Table.th>
-            <Table.th>Saison</Table.th>
-            <Table.th>Montant</Table.th>
-            <Table.th></Table.th>
-          </tr>
-        }
-      >
-        {commandes?.map((commande) => (
-          <tr key={commande.id}>
-            <Table.td>{commande.id}</Table.td>
-            <Table.td>{client.design}</Table.td>
-            <Table.td>{DateFormat(commande.date)}</Table.td>
-            <Table.td>{commande.season}</Table.td>
-            <Table.td>{commande.amount}</Table.td>
-            <Table.td>*/
+
 export default ListCommandes;

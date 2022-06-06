@@ -28,7 +28,7 @@ const IndexPage: NextPage = () => {
       <View as="main">
         <h1 className="center">La Page d'accueil en cours de construction</h1>
       </View>
-   </Col>
+    </Col>
   );
 };
 

@@ -40,7 +40,7 @@ export default function Nav({ selected, loading }: NavProps) {
     //@ts-ignore
     else setUser(session?.user);
   });
-  console.log("my user = " + JSON.stringify(user));
+  //console.log("my user = " + JSON.stringify(user));
   //selected==CLIENT_MANAGER?navClient:selected==VENDOR_MANAGER?navVendor:selected==PURCHASE_MANAGER?navPurchase:
   const navigation: NavType[] = [
     /*  { name: "Home", href: "/", current: true, visible: selected == HOME }, */

@@ -69,7 +69,6 @@ const App: FC<AppPropsWithLayout> = ({ Component, pageProps }) => {
               <meta name="description" content="Description" />
               <meta name="keywords" content="Keywords" />
               <title>GESCOM</title>
-             
 
               <link rel="manifest" href="/manifest.json" />
               <link
@@ -86,7 +85,6 @@ const App: FC<AppPropsWithLayout> = ({ Component, pageProps }) => {
               />
               <link rel="apple-touch-icon" href="/logo-5.png"></link>
               <meta name="theme-color" content="#317EFB" />
-           
             </Head>
             {getLayout(
               <>

@@ -74,30 +74,58 @@ export const { useFetchQuery, useAddMutation, useEditMutation } = crudGeneric;
 export type OpenIdsObjectProp<E extends IdsObject, J extends IdsObjectJson> = {
   data: J;
   tab: E[];
+  isFetching:boolean
   refetch: () => void;
   save: () => void;
   edit: () => void;
+  isSuccess:boolean
+ isError:any
+  isLoading:any
+  isUninitialized:any
+  status:any
+  currentData:any
+  endpointName:any
+  error:any
+  fulfilledTimeStamp:any
+  originalArgs:any
+  requestId:any
+  startedTimeStamp:any
+  
 };
 export type OpenIdsObjectByIdClientProp<E extends IdsObject> = {
   data: E[];
+  isSuccess:boolean
   refetch: () => void;
   save: () => void;
   edit: () => void;
+  isFetching:any
+isError:any
+isLoading:any
+isUninitialized:any
+status:any
+currentData:any
+endpointName:any
+error:any
+fulfilledTimeStamp:any
+originalArgs:any
+requestId:any
+startedTimeStamp:any
 };
 
 export const openIdsObjects = <E extends IdsObject, J extends IdsObjectJson>(
   path: string
 ): OpenIdsObjectProp<E, J> => {
   try {
-    const { data = [], refetch } = useFetchQuery(path + "?page=0&size=3000");
+    const { data = [], refetch,isSuccess,isFetching,isError,isLoading,isUninitialized,status,currentData,endpointName,error,fulfilledTimeStamp,originalArgs,requestId,startedTimeStamp } = useFetchQuery(path);
     //@ts-ignore
     const tab: E[] = data.content;
     const [save] = useAddMutation();
     const [edit] = useEditMutation();
     //@ts-ignore
-    const out: OpenIdsObjectProp = { tab, data, refetch, save, edit };
+    const out: OpenIdsObjectProp = { tab, data, refetch, save, edit,isSuccess,isFetching,isError,isLoading,isUninitialized,status,currentData,endpointName,error,fulfilledTimeStamp,originalArgs,requestId,startedTimeStamp };
     return out;
-  } catch (error) {
+  } catch (Error) {
+    console.log("Eror rtk "+Error)
     //@ts-ignore
     return null;
   }
@@ -107,14 +135,14 @@ export const openIdsObject = <E extends IdsObject, J extends IdsObjectJson>(
   id: string
 ): OpenIdsObjectProp<E, J> => {
   try {
-    const { data = [], refetch } = useFetchQuery(path + "/" + id);
+    const { data = [], refetch,isFetching } = useFetchQuery(path + "/" + id);
     //@ts-ignore
     const tab: E = data.content;
     const [save] = useAddMutation();
     const [edit] = useEditMutation();
     const pathh = path + "/" + id;
     //@ts-ignore
-    const out: OpenIdsObjectProp = { pathh, tab, data, refetch, save, edit };
+    const out: OpenIdsObjectProp = { pathh, tab, data, refetch, save, edit,isFetching };
     return out;
   } catch (error) {
     //@ts-ignore
